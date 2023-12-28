@@ -5,6 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
@@ -29,6 +33,23 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 
 
 Auth::routes();
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/user-registration', [ApplicationController::class, 'userRegistration'])->name('userRegistration');
+Route::post('/user-store', [ApplicationController::class, 'userStore'])->name('userStore');
+Route::get('captcha', [ApplicationController::class, 'captcha'])->name('captcha');
+Route::post('/check-aadhar-number', [ApplicationController::class, 'checkAadharNumber']);
+
+Route::get('/reload-captcha', [ApplicationController::class, 'reloadCaptcha']);
+
+
+
+Route::get('/filter-words', function () {
+    $inputString = "lorem ipsum dolor sit amet bcd";
+    $wordController = new ApplicationController();
+    $output = $wordController->filterAndCountWords($inputString);
+
+    return response()->json($output);
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -16,13 +16,13 @@
                     
                         <div class="p-5 wd-md-50p"> 
                             <div class="main-signin-header"> 
-                                <h3 style="font-size: 18px;">Welcome to SHA Data Entry Portal</h3> 
+                                <h3 style="font-size: 18px;">Welcome to SC/ST</h3> 
                                 <h4>Please sign in to continue</h4> 
                                 <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                     <div class="form-group"> 
                                         <label>Email</label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                        <input  type="text" class="form-control"  name="email" required autofocus>
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">

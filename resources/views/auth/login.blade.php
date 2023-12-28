@@ -8,22 +8,21 @@
                 <div class="main-card-signin d-md-flex wd-100p"> 
                     <div class="wd-md-50p login d-none d-md-block page-signin-style p-5 text-black"> 
                         <div class="my-auto authentication-pages"> 
-                            <div> <br><br><br><br>
-<br>
-                                <img src="img//logo.png" class="main-logo" alt="logo"> <h5 class="mb-4 mt-4"></h5>   
+                            <div>  <br><br><br><br>
+                                <img src="img//logo.png" class="main-logo" alt="logo"> 
                             </div> 
                         </div> 
                     </div> 
                     
                         <div class="p-5 wd-md-50p"> 
                             <div class="main-signin-header"> 
-                                <h3 style="font-size: 18px;">Welcome to SHA Data Entry Portal</h3> 
+                                <h3 style="font-size: 18px;">Welcome to SC/ST</h3> 
                                 <h4>Please sign in to continue</h4> 
                                 <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                     <div class="form-group"> 
                                         <label>Email</label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                        <input  type="text" class="form-control"  name="email" required autofocus>
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -47,7 +46,7 @@
                                 </form> 
                             </div>
 
-                           
+                            
                         </div> 
                    
                 </div> 

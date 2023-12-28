@@ -170,10 +170,10 @@
 				<div class="sticky is-expanded" style="margin-bottom:0px;">
 					<aside class="app-sidebar ps ps--active-y open">
 						<div class="main-sidebar-header active">
-							<a class="desktop-logo logo-light active" href="/home">
+							{{-- <a class="desktop-logo logo-light active" href="/home">
 								<img src="/img//logo.png" class="main-logo" alt="logo" />
 							</a>
-							<a class="desktop-logo logo-dark active" href="/home">
+							<a class="desktop-logo logo-dark active" href="/home" style="height:20px;">
 								<img src="../img//logo-white.png" class="main-logo" alt="logo" />
 							</a>
 							<a class="logo-icon mobile-logo icon-light active" href="/home">
@@ -181,8 +181,8 @@
 							</a>
 							<a class="logo-icon mobile-logo icon-dark active" href="/home">
 								<img src="../img//favicon-white.png" alt="logo" />
-							</a>
-						</div>
+							</a> --}}
+						</div> 
 						<div class="main-sidemenu is-expanded">
 							<div class="main-sidebar-loggedin"> <div class="user-info text-center w-100">
 								<h6 class="mb-0 text-dark">{{Auth::user()->role }}</h6>
