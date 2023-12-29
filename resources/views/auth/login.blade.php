@@ -4,54 +4,54 @@
 
 
 <div class="my-auto page page-h"> 
-            <div class="main-signin-wrapper"> 
-                <div class="main-card-signin d-md-flex wd-100p"> 
-                    <div class="wd-md-50p login d-none d-md-block page-signin-style p-5 text-black"> 
-                        <div class="my-auto authentication-pages"> 
-                            <div>  <br><br><br><br>
-                                <img src="img//logo.png" class="main-logo" alt="logo"> 
-                            </div> 
-                        </div> 
+    <div class="main-signin-wrapper"> 
+        <div class="main-card-signin d-md-flex wd-100p"> 
+            <div class="wd-md-50p login d-none d-md-block page-signin-style p-5 text-black"> 
+                <div class="my-auto authentication-pages"> 
+                    <div>  <br><br><br><br>
+                        <img src="img//logo.png" class="main-logo" alt="logo"> 
                     </div> 
-                    
-                        <div class="p-5 wd-md-50p"> 
-                            <div class="main-signin-header"> 
-                                <h3 style="font-size: 18px;">Welcome to SC/ST</h3> 
-                                <h4>Please sign in to continue</h4> 
-                                <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                    <div class="form-group"> 
-                                        <label>Email</label>
-                                        <input  type="text" class="form-control"  name="email" required autofocus>
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div> 
-                                    <div class="form-group"> 
-                                        <label>Password</label> 
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                    </button>
-                                </form> 
-                            </div>
-
-                            
-                        </div> 
-                   
                 </div> 
             </div> 
+            
+                <div class="p-5 wd-md-50p"> 
+                    <div class="main-signin-header"> 
+                        <h3 style="font-size: 18px;">Welcome to SC/ST</h3> 
+                        <h4>Please sign in to continue</h4> 
+                        <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                            <div class="form-group"> 
+                                <label>Email</label>
+                                <input  type="text" class="form-control"  name="email" required autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div> 
+                            <div class="form-group"> 
+                                <label>Password</label> 
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                            {{ __('Login') }}
+                            </button>
+                        </form> 
+                    </div>
+
+                    
+                </div> 
+            
         </div> 
+    </div> 
+</div> 
 
 
 

@@ -16,7 +16,10 @@ use App\Hospital;
 use App\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth; // Make sure to include this line
+
 class HomeController extends Controller
+
 {
     /**
      * Create a new controller instance.
@@ -36,8 +39,12 @@ class HomeController extends Controller
      public function index()
     {
 
+       if (auth()->user()->role =='User'){
+            return view('user.dashboard');
+       }else{
+            return view('admin.dashboard');
+       }
         
-        return view('admin.dashboard');
     }
 
    public function profile()

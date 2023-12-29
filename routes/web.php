@@ -40,16 +40,10 @@ Route::get('captcha', [ApplicationController::class, 'captcha'])->name('captcha'
 Route::post('/check-aadhar-number', [ApplicationController::class, 'checkAadharNumber']);
 
 Route::get('/reload-captcha', [ApplicationController::class, 'reloadCaptcha']);
+Route::post('/user-registration/save', [ApplicationController::class, 'userRegisterSave']);
 
 
-
-Route::get('/filter-words', function () {
-    $inputString = "lorem ipsum dolor sit amet bcd";
-    $wordController = new ApplicationController();
-    $output = $wordController->filterAndCountWords($inputString);
-
-    return response()->json($output);
-});
+Route::get('/filter-words', [App\Http\Controllers\ApplicationController::class, 'filterAndCountWords']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
