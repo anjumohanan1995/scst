@@ -15,4 +15,6 @@ class SliderCategory extends Eloquent
     protected $fillable = [
         'category_name', 'category_position', 'category_status',
     ];
+
+    
 }

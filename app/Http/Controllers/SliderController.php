@@ -24,7 +24,7 @@ class SliderController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->sid);
+     //dd($request->sid);
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -185,8 +185,7 @@ class SliderController extends Controller
     public function destroy(Slider $slider)
     {
         $slider->delete();
-        return redirect()->route('slidercategories.edit', $slider->slider_category_id)
-        > with('success', 'Slider deleted successfully');
+        return redirect()->route('slidercategories.edit', $slider->slider_category_id) -> with('success', 'Slider deleted successfully');
     }
     public function codeofethics()
     {

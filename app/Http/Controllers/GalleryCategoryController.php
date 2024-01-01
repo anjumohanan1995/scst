@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GalleryCategory;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class GalleryCategoryController extends Controller
@@ -70,7 +71,7 @@ class GalleryCategoryController extends Controller
     {
         $gallery_category = GalleryCategory::find($id);
         //$gallery=getCategoryGallery($id);
-        $gallery = GalleryCategory::where('gallery_category_id', $id)->get();
+        $gallery = Gallery::where('gallery_category_id', $id)->get();
         return view('gallery.edit', compact('gallery_category', 'gallery'));
     }
 

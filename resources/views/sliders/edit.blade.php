@@ -1,10 +1,10 @@
-@extends('layouts.adminLayout')
+@extends('layouts.app')
 
 @section('content')
 <div class="main-content">
     <!-- container -->
     <div class="container-fluid">
-         <!-- main-conten<!-- breadcrumb -->
+         <!-- main-conte breadcrumb -->
         <div class="breadcrumb-header justify-content-between">
             <div>
                 <h4 class="content-title mb-2">Manage Slider <a href="{{ route('slidercategories.edit',$slider->slider_category_id) }}" class="btn btn-primary btn-sm">Back</a></h4>
@@ -83,7 +83,7 @@
 
                                         <div class="form-group">
                                             <strong>{{__('Description')}}:</strong>
-                                            <input type="hidden" name="cposition"  value="{{$sc->category_position}}">
+                                            <input type="hidden" name="cposition"  value="{{@$sc->category_position}}">
                                             <textarea name="description" class="form-control contentDetail">{{$slider->description??''}}</textarea>
                                         </div>
                                     </div>

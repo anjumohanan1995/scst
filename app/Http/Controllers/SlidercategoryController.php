@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SliderCategory;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class SlidercategoryController extends Controller
@@ -10,7 +11,7 @@ class SlidercategoryController extends Controller
     {
         $categories = SliderCategory::all();
         return view('slider_category.index', compact('categories'));
-    }
+    } 
 /**
 
  * Show the form for creating a new resource.
@@ -91,7 +92,10 @@ class SlidercategoryController extends Controller
     public function edit($id)
     {
         $category = SliderCategory::find($id);
-        $sliders = SliderCategory::where('slider_category_id', $id)->get();
+        $sliders = Slider::where('slider_category_id', $id)->where('deleted_at',null)->get();
+
+        //dd($id);
+        //dd($sliders);
         return view('slider_category.edit', compact('category', 'sliders'));
     }
 

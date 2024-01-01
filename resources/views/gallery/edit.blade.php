@@ -83,7 +83,7 @@
                                 <br>
                                 <input type="hidden" name="cat_id" value="{{ $gallery_category->id }}">
                                 <h4 class="header-title">
-                                    <b>Add Sliders to {{ $gallery_category->name }}</b>
+                                    <b>Add Gallery to {{ $gallery_category->name }}</b>
                                     <button type="button" class="btn btn-info btn-sm waves-effect waves-light pull-right"
                                         data-toggle="modal" data-target="#">
                                         <a href="{{ route('gallery.create', ['id' => $gallery_category->id]) }}">Add</a>
@@ -94,7 +94,7 @@
                                     <br>
                                     <div class="alert alert-warning text-white">
                                         <strong>{{ __('Whoops') }}!</strong>
-                                        {{ __('No Sliders Added For this Category Yet') }}
+                                        {{ __('No Gallery Added For this Category Yet') }}
                                     </div>
                                 @else
                                     <div class="row">

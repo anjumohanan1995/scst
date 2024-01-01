@@ -255,10 +255,35 @@
 										</a>
 
 									</li>
-										<li class="slide">
+									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'settings.index') )? 'active' : '' }}"  href="{{url('settings')}}">
 											<i class="side-menu__icon fe fe-settings"> </i>
 											<span class="side-menu__label">Settings</span>
+
+										</a>
+
+									</li>
+
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'silder_catrgory.index') )? 'active' : '' }}"  href="{{url('slidercategories')}}">
+											<i class="side-menu__icon fe fe-layers"> </i>
+											<span class="side-menu__label">Sliders</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'gallery.index') )? 'active' : '' }}"  href="{{url('gallery_category')}}">
+											<i class="side-menu__icon fe fe-package"> </i>
+											<span class="side-menu__label">Gallery</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'newslist.index') )? 'active' : '' }}"  href="{{url('newslist')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">News</span>
 
 										</a>
 
@@ -275,30 +300,7 @@
 									</li>
 								@endif
 								
-								<li class="slide">
-									<a class="side-menu__item {{ ((\Request::route()->getName() == 'silder_catrgory.index') )? 'active' : '' }}"  href="{{url('slidercategories')}}">
-										<i class="side-menu__icon fe fe-layers"> </i>
-										<span class="side-menu__label">Sliders</span>
-
-									</a>
-
-								</li>
-								<li class="slide">
-									<a class="side-menu__item {{ ((\Request::route()->getName() == 'gallery.index') )? 'active' : '' }}"  href="{{url('gallery_category')}}">
-										<i class="side-menu__icon fe fe-package"> </i>
-										<span class="side-menu__label">Gallery</span>
-
-									</a>
-
-								</li>
-								<li class="slide">
-									<a class="side-menu__item {{ ((\Request::route()->getName() == 'newslist.index') )? 'active' : '' }}"  href="{{url('newslist')}}">
-										<i class="side-menu__icon fe fe-menu"> </i>
-										<span class="side-menu__label">News</span>
-
-									</a>
-
-								</li>
+								
 							
 								
 							</ul>
