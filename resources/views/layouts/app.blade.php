@@ -236,31 +236,43 @@
 									</a>
 								</li>
 								</li>
+								@if(Auth::user()->role=='Super Admin' || Auth::user()->role=='Admin')
 								
-								<li class="slide">
-									<a class="side-menu__item {{ ((\Request::route()->getName() == 'users.index')||(\Request::route()->getName() == 'users.create')||(\Request::route()->getName() == 'users.edit')) ? 'active' : '' }}"  href="{{url('users')}}">
-										<i class="side-menu__icon fe fe-users"> </i>
-										<span class="side-menu__label">Users</span>
-
-									</a>
-
-								</li>
-								<li class="slide">
-									<a class="side-menu__item {{ ((\Request::route()->getName() == 'roles.index')||(\Request::route()->getName() == 'roles.create')||(\Request::route()->getName() == 'roles.edit')) ? 'active' : '' }}"  href="{{url('roles')}}">
-										<i class="side-menu__icon fe fe-file-plus"> </i>
-										<span class="side-menu__label">Role</span>
-
-									</a>
-
-								</li>
 									<li class="slide">
-									<a class="side-menu__item {{ ((\Request::route()->getName() == 'settings.index') )? 'active' : '' }}"  href="{{url('settings')}}">
-										<i class="side-menu__icon fe fe-settings"> </i>
-										<span class="side-menu__label">Settings</span>
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'users.index')||(\Request::route()->getName() == 'users.create')||(\Request::route()->getName() == 'users.edit')) ? 'active' : '' }}"  href="{{url('users')}}">
+											<i class="side-menu__icon fe fe-users"> </i>
+											<span class="side-menu__label">Users</span>
 
-									</a>
+										</a>
 
-								</li>
+									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'roles.index')||(\Request::route()->getName() == 'roles.create')||(\Request::route()->getName() == 'roles.edit')) ? 'active' : '' }}"  href="{{url('roles')}}">
+											<i class="side-menu__icon fe fe-file-plus"> </i>
+											<span class="side-menu__label">Role</span>
+
+										</a>
+
+									</li>
+										<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'settings.index') )? 'active' : '' }}"  href="{{url('settings')}}">
+											<i class="side-menu__icon fe fe-settings"> </i>
+											<span class="side-menu__label">Settings</span>
+
+										</a>
+
+									</li>
+								@endif
+								@if(Auth::user()->role=='User')
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'user-profile')) ? 'active' : '' }}"  href="{{url('user-profile')}}">
+											<i class="side-menu__icon fe fe-users"> </i>
+											<span class="side-menu__label">Profile Details</span>
+
+										</a>
+
+									</li>
+								@endif
 							
 								
 							</ul>

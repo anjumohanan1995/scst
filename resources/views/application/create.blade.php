@@ -283,8 +283,10 @@
             // Email validation logic
             if (!isValidEmail(email)) {
                 $('#emailError').text('Invalid email format.');
+                $("#submit").prop("disabled", true);
             } else {
                 $('#emailError').text('');
+                $("#submit").prop("disabled", false);
             }
         }
 
@@ -307,8 +309,10 @@
             var nameConfirmation = $('#name_confirmation').val();
 			  if (name != nameConfirmation) {
 				 $('#nameError').text('Names do not match.');
+                 $("#submit").prop("disabled", true);
 			  }else{
 				$('#nameError').text('Names match.');
+                $("#submit").prop("disabled", false);
 			  }
 
            
@@ -324,8 +328,10 @@
 
             if (dob === dob1) {
                 $('#dobError').text('Dates of birth match.');
+                $("#submit").prop("disabled", false);
             } else {
                 $('#dobError').text('Dates of birth do not match.');
+                $("#submit").prop("disabled", true);
             }
         }
 		$('#mobile').on('blur', function () {
@@ -338,8 +344,10 @@
 
             if (mobileRegex.test(mobileNumber)) {
                 $('#mobileError').text('');
+                $("#submit").prop("disabled", false);
             } else {
                 $('#mobileError').text('Invalid mobile number. Please enter a 10-digit number.');
+                $("#submit").prop("disabled", true);
             }
         }
 
@@ -360,8 +368,10 @@
                 success: function (response) {
                     if (response.message == 'true') {
                         $('#aadharError').text('Aadhar number already exists.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#aadharError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -390,8 +400,10 @@
                     // Example: Validate Aadhar Number
                     if (!isValidAadharNumber(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid Aadhar Number.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -399,8 +411,10 @@
                     // Example: Validate Account Number for Bank
                     if (!isValidBankAccountNumber(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid Bank Account Number.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -408,22 +422,27 @@
                     // Example: Validate Conductor Licence
                     if (!isValidConductorLicence(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid Conductor Licence.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 				case 'Driving Licence':
                     // Example: Validate Driving Licence
                     if (!isValidDrivingLicence(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid Driving Licence.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 				case 'e-SHRAM Card':
                     // Example: Validate e-SHRAM Card
                     if (!isValidEShramCard(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid e-SHRAM Card.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
                     }
@@ -433,8 +452,10 @@
                     // Example: Validate ID for Central Employee
                     if (!isValidCentralEmployeeId(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid ID for Central Employee.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -442,8 +463,10 @@
                     // Example: Validate ID for PH issued by SW Dept
                     if (!isValidPHIdSWDept(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid ID for PH issued by SW Dept.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -451,8 +474,10 @@
                     // Example: Validate ID for Uty instc etc
                     if (!isValidUtyInstcId(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid ID for Uty instc etc.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -460,40 +485,50 @@
                     // Example: Validate ID for BAR Council
                     if (!isValidBARCouncilId(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid ID for BAR Council.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 				case 'ID for Ex-Servicemen':
                     // Example: Validate ID for Ex-Servicemen
                     if (!isValidExServicemenId(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid ID for Ex-Servicemen.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 				case 'National Health Authority ID Card':
                     // Example: Validate National Health Authority ID Card
                     if (!isValidNHAIdCard(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid National Health Authority ID Card.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 				case 'PAN card':
                     // Example: Validate PAN card
                     if (!isValidPANCard(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid PAN card.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 				case 'Passport':
                     // Example: Validate Passport
                     if (!isValidPassport(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid Passport.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -501,8 +536,10 @@
                     // Example: Validate PEN for State Employees
                     if (!isValidPENForStateEmployees(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid PEN for State Employees.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -510,16 +547,20 @@
                     // Example: Validate Voters Identity Card
                     if (!isValidVotersIdentityCard(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid Voters Identity Card.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 				case 'National Population Register/Multipurpose National Identity Card':
                     // Example: Validate National Population Register/Multipurpose National Identity Card
                     if (!isValidNPRIdCard(idProofDetails)) {
                         $('#idProofDetailsError').text('Invalid NPR/Multipurpose ID Card.');
+                        $("#submit").prop("disabled", true);
                     } else {
                         $('#idProofDetailsError').text('');
+                        $("#submit").prop("disabled", false);
                     }
                     break;
 
@@ -633,15 +674,19 @@
             // Check if the password meets the criteria
             if (!passwordRegex.test(password)) {
                 $('#passwordError').text('Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 symbol, and 1 number.');
+                $("#submit").prop("disabled", true);
             } else {
                 $('#passwordError').text('');
+                $("#submit").prop("disabled", false);
             }
 
             // Check if the confirm password matches the original password
             if (password !== confirm_password) {
                 $('#confirmPasswordError').text('Passwords do not match.');
+                $("#submit").prop("disabled", true);
             } else {
                 $('#confirmPasswordError').text('');
+                $("#submit").prop("disabled", false);
             }
         }
 

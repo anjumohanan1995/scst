@@ -88,19 +88,26 @@
                                     </table>
                                 
 
+                                <div class="row">
+                                    <div class="col-md-3">
 
-                                <form action="{{ url('user-registration/save') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
+                                        <form action="{{ url('user-registration/save') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
 
-                                    <button type="submit" class="btn-block  btn btn-success"
-                                        onclick="return confirm('Do you want to continue?')">Submit</button>
-                                </form><br>
+                                            <button type="submit" class="btn-block  btn btn-success"
+                                                onclick="return confirm('Do you want to continue?')">Submit</button>
+                                        </form><br>
+                                    </div>
+                                    <div class="col-md-3">
 
-                                {{-- edit button using to go back to form and edit  --}}
-                                <div class="btn_wrapper">
-                                    <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
+                                        {{-- edit button using to go back to form and edit  --}}
+                                        <div class="btn_wrapper">
+                                            <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
+                                        </div>
+                                    </div>
                                 </div>
+
                         </div>
                     </div>
                 </div>

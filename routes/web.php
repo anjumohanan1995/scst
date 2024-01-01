@@ -39,6 +39,8 @@ Route::post('/user-store', [ApplicationController::class, 'userStore'])->name('u
 Route::get('captcha', [ApplicationController::class, 'captcha'])->name('captcha');
 Route::post('/check-aadhar-number', [ApplicationController::class, 'checkAadharNumber']);
 
+Route::get('/user-profile', [ApplicationController::class, 'userProfile']);
+
 Route::get('/reload-captcha', [ApplicationController::class, 'reloadCaptcha']);
 Route::post('/user-registration/save', [ApplicationController::class, 'userRegisterSave']);
 

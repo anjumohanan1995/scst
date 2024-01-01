@@ -12,6 +12,8 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use MongoDB\BSON\UTCDateTime;
+use Illuminate\Support\Facades\Auth; // Make sure to include this line
+
 
 class ApplicationController extends Controller
 {
@@ -96,6 +98,7 @@ class ApplicationController extends Controller
             'dob' => $data['dob'],
             'gender' => $data['gender'],
             'mobile' => $data['mobile'],
+            'caste' => $data['mobile'],
             'father_name' => $data['father_name'],
             'mother_name' => $data['mother_name'],
             'aadhar_number' => $data['aadhar_number'],
@@ -159,6 +162,15 @@ class ApplicationController extends Controller
 
 
     }
+    public function userProfile(Request $request)
+    {  
+
+        $formData =Auth::user();
+        return view('user.profile',compact('formData'));
+    }
+        
+
+    
 
     
 
