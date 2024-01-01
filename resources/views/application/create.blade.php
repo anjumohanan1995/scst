@@ -142,11 +142,12 @@
 											<div class="col-md-6 mb-6">
 												<label class="form-label">Aadhar Number</label>
 												<input type="text" class="form-control" placeholder="Aadhar Number" name="aadhar_number" id="aadhar_number" value="{{ old('aadhar_number') }}"  />
-												<span id="aadharError" class="text-danger"></span>												
-											</div>
-											@error('aadhar_number')
+												<span id="aadharError" class="text-danger"></span>	
+                                                @error('aadhar_number')
 														<span class="text-danger">{{$message}}</span>
-											@enderror
+											    @enderror											
+											</div>
+											
 
 											
 										</div><br>
