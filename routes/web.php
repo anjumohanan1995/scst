@@ -7,6 +7,12 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SlidercategoryController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\GalleryCategoryController;
+use App\Http\Controllers\NewslistController;
+
+
 
 
 /*
@@ -71,3 +77,21 @@ Route::post('/roles/edit/{id}', [RoleController::class, 'update'])->name('update
 
 Route::resource('/settings', SettingsController::class);
 Route::post('setting/store',[SettingsController::class,'store'])->name('setting.store');
+
+Route::resource('/slidercategories', SlidercategoryController::class);
+
+Route::resource('/sliders', SliderController::class);
+Route::get('/slider/{id?}',[App\Http\Controllers\SliderController::class, 'createSlider'])->name('slider.createSlider');
+
+Route::resource('/gallery_category', App\Http\Controllers\GalleryCategoryController::class);
+
+Route::resource('/gallery', App\Http\Controllers\GalleryController::class);
+Route::post('/gallery/{id}', [App\Http\Controllers\GalleryController::class, 'store'])->name('store');
+Route::get('/galleries/{id}', [App\Http\Controllers\GalleryController::class, 'galleryList'])->name('gallery_list');
+
+Route::resource('/newslist', NewslistController::class);
+Route::get('/page/news', [App\Http\Controllers\NewslistController::class, 'newsdisplay'])->name('newsdisplay');
+Route::get('/newsdetails/{slug}', [App\Http\Controllers\NewslistController::class, 'newsdetails'])->name('newsdetails');
+Route::post('/featured_status', [App\Http\Controllers\NewslistController::class, 'changeNewsStatus'])->name('featured_status');
+Route::get('/sharenewsmail/{id}', [App\Http\Controllers\NewslistController::class, 'shareNewsMail'])->name('share.news.mail');
+Route::delete('/newslist/{id}', 'NewsListController@destroy')->name('newslist.destroy');
