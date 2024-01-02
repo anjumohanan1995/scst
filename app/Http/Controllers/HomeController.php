@@ -46,6 +46,12 @@ class HomeController extends Controller
        }
         
     }
+    public function applicationForms()
+    {
+        return view('application.form');
+    }
+
+    
 
    public function profile()
     {

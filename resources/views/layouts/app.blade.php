@@ -298,6 +298,15 @@
 										</a>
 
 									</li>
+
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'application-forms')) ? 'active' : '' }}"  href="{{url('application-forms')}}">
+											<i class="side-menu__icon fe fe-users"> </i>
+											<span class="side-menu__label">Application Forms</span>
+
+										</a>
+
+									</li>
 								@endif
 								
 								

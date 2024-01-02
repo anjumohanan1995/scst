@@ -55,6 +55,10 @@ Route::get('/filter-words', [App\Http\Controllers\ApplicationController::class, 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+Route::get('/application-forms', [App\Http\Controllers\HomeController::class, 'applicationForms'])->name('applicationForms');
+
+
 Route::resource('/users', UserController::class);
 Route::get('/getUsers', [UserController::class, 'getUsers'])->name('getUsers');
 Route::post('/users/delete/{id}', [UserController::class, 'destroy'])->name('delete-user');
