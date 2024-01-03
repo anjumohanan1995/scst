@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MotherChildScheme;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
@@ -474,5 +475,63 @@ class ApplicationController extends Controller
          );
 
          return response()->json($response);
+    }
+
+    public function motherChildProtectionSchemeStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required']
+           
+        );
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/applications'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = '';
+        }
+      
+        $formData = $data;
+       
+      $formData['signature']= $signature;
+        return view('application.mother_child_preview', compact('formData'));
+
+
+
+    }
+    public function motherChildStoreDetails(Request $request)
+    {
+
+        $data = json_decode($request->input('formData'), true);
+     
+
+        $datainsert = MotherChildScheme::create([
+            'name' => $data['name'],
+            'address' => @$data['address'],
+            'age' => $data['age'],
+            'dob' => $data['dob'],
+            'hus_name' => $data['hus_name'],
+            'caste' => $data['caste'],
+            'village' => $data['village'],
+            'births' => $data['births'],
+            'expected_date_of_delivery' => $data['expected_date_of_delivery'],
+            'dependent_hospital' =>$data['dependent_hospital'],
+            'place' => $data['place'],
+            'date' => $data['date'],
+            'signature' => @$data['signature'],
+            'user_id' =>Auth::user()->id, 
+            'status' =>0
+        ]);
+
+        return redirect()->route('home')->with('success','Application Submitted Successfully.');
     }
 }

@@ -145,10 +145,9 @@ a.btn-card {
                 <div class="card-content">
                   
                     <div class="card-desc">
-                        <h3>Heading2</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolor quo, perspiciatis
-                            voluptas totam</p>
-                            <a href="#" class="btn-card">Read</a>   
+                        <h3>Application 2</h3>
+                        <p>ജനനി-ജനനി -ജന്മരക്ഷ  പ്രസവാനുകുല്യം - മാതൃശിശു  സംരക്ഷണ പദ്ധതി  അപേക്ഷഫോറം </p>
+                            <a href="{{ route('applicationForm2') }}"" class="btn-card">Apply Now</a>   
                     </div>
                 </div>
             </div>
