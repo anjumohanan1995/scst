@@ -58,6 +58,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/application-forms', [App\Http\Controllers\HomeController::class, 'applicationForms'])->name('applicationForms');
 
+Route::get('/couples-financial-help', [App\Http\Controllers\ApplicationController::class, 'coupleFinancialHelp'])->name('coupleFinancialHelp');
+Route::post('/financialHelpStore', [App\Http\Controllers\ApplicationController::class, 'financialHelpStore'])->name('financialHelpStore');
+Route::post('/financialHelpStoreDetails', [App\Http\Controllers\ApplicationController::class, 'financialHelpStoreDetails'])->name('financialHelpStoreDetails');
+Route::get('/couplefinancialList', [App\Http\Controllers\ApplicationController::class, 'couplefinancialList'])->name('couplefinancialList');
+Route::get('/getCoupleList', [App\Http\Controllers\ApplicationController::class, 'getCoupleList'])->name('getCoupleList');
+
+
+
+
+
 
 Route::resource('/users', UserController::class);
 Route::get('/getUsers', [UserController::class, 'getUsers'])->name('getUsers');

@@ -33,7 +33,7 @@
 					<div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="button" class="btn btn-link">Link1</button>
+                                <a href="{{url('couples-financial-help')}}"><button type="button" class="btn btn-link">മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം </button></a>
                             </div>
                         </div>
                         <div class="row">

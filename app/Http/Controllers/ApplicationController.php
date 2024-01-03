@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
 use App\User;
+
+use App\Models\FinancialHelp;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
@@ -240,26 +242,232 @@ class ApplicationController extends Controller
 
         return response()->json(['message' => $message]);
     }
-    
-   
 
-   
+    public function coupleFinancialHelp(Request $request)
+    {
+
+        $data =Auth::user();
+        return view('application.financial-help',compact('data'));
+
+    }
+
+    public function financialHelpStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'husband_address' => 'required']
+           
+        );
+        if ($validator->fails()) {
+            // Captcha validation failed
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+
+        $formData = $data;
+
+        return view('application.financial_preview', compact('formData'));
 
 
 
+    }
+    public function financialHelpStoreDetails(Request $request)
+    {
+
+        $data = json_decode($request->input('formData'), true);
+        if ($request->hasfile('husband_sign')) {
+
+            $image = $request->husband_sign;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/huband'), $imgfileName);
+
+            $husband_sign = $imgfileName;
+
+        }else{
+            $husband_sign = '';
+        }
 
 
-    
+        if ($request->hasfile('wife_sign')) {
+
+            $image = $request->wife_sign;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/wife'), $imgfileName);
+
+            $wife_sign = $imgfileName;
+
+        }else{
+            $wife_sign = '';
+        }
 
 
 
+        $datainsert = FinancialHelp::create([
+            'husband_address' => $data['husband_address'],
+            'wife_address' => @$data['wife_address'],
+            'husband_address_old' => $data['husband_address_old'],
+            'wife_address_old' => $data['wife_address_old'],
+            'husband_caste' => $data['husband_caste'],
+            'wife_caste' => $data['wife_caste'],
+            'hus_work_before_marriage' => $data['hus_work_before_marriage'],
+            'hus_work_after_marriage' => $data['hus_work_after_marriage'],
+            'husband_age' => $data['husband_age'],
+            'wife_age' =>$data['wife_age'],
+            'register_details' => $data['register_details'],
+            'certificate_details' => $data['certificate_details'],
+            'apart_for_any_period' => $data['apart_for_any_period'],
+            'duration' => $data['duration'],
+            'reason' => $data['reason'],
+            'financial_assistance' => $data['financial_assistance'],
+            'difficulties' => $data['difficulties'],
+            'user_id' =>Auth::user()->id, 
+            'husband_name' =>$request->input('husband_name'), 
+            'wife_name' =>$request->input('wife_name'), 
+            'agree' =>$request->input('agree'), 
+            'wife_sign' =>@$wife_sign,
+            'husband_sign' =>@$husband_sign,
+            'status' =>0
+        ]);
+
+        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+    }
+
+    public function couplefinancialList(Request $request)
+    {
+        $data  = FinancialHelp::with('User')->get();
+        //dd($data);
+        return view('admin.financial_list', compact('data'));
+
+    }
+    public function getCoupleList(Request $request)
+    {
+        $name = $request->name;
+        $mobile = $request->mobile;
+        $role = $request->role;
+
+
+         if($request->from_date !=''){
+
+             $from_date  = date("M d,Y",strtotime($request->from_date));
+             $stDate = new Carbon($from_date);
+         }
+         if($request->to_date !=''){
+             $to_date  =   date("Y-m-d",strtotime($request->to_date));
+             $edDate = new Carbon($to_date);
+         }
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = FinancialHelp::where('deleted_at',null);
+             if($mobile != ""){
+                 $totalRecord->where('mobile',$mobile);
+             }
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+             if($role != ""){
+                $totalRecord->where('role',$role);
+            }
+             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
+                 //echo "khk";exit;
+                 $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
+             }
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null);
+
+             if($mobile != ""){
+                 $totalRecordswithFilte->where('mobile',$mobile);
+             }
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+            if($role != ""){
+               $totalRecordswithFilte->where('role',$role);
+           }
+             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
+                 //echo "khk";exit;
+                 $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
+             }
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = FinancialHelp::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             if($mobile != ""){
+                 $items->where('mobile',$mobile);
+             }
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+            if($role != ""){
+               $items->where('role',$role);
+           }
+             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
+                 //echo "khk";exit;
+                 $items->whereBetween('created_at', [$stDate, $edDate]);
+             }
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
 
 
 
+         $data_arr = array();
 
+         foreach($records as $record){
+             $id = $record->id;
+             $husband_address = $record->husband_address;
+             $wife_address = $record->wife_address;
+             $register_details = $record->register_details;
+             $certificate_details = $record->certificate_details;
+             $husband_caste = $record->husband_caste;
+              $wife_caste =  $record->wife_caste;
+              $created_at =  $record->created_at;
 
+            $data_arr[] = array(
+                "id" => $id,
+                "husband_address" => $husband_address,
+                "wife_address" => $wife_address,
+                "register_details" => $register_details,
+                "certificate_details" => $certificate_details,
+                "husband_caste" => $husband_caste,
+                "wife_caste" => $wife_caste,
+                "created_at" => $created_at,
 
+               //  "more"=>'<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal'.$id.'" data-bs-whatever="@mdo">More Details</button><div class="modal fade" id="exampleModal'.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">'.$name.'('.$age.')  </h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="eva eva-close-outline header-icons"><g data-name="Layer 2"><g data-name="close"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"></path></g></g></svg></button></div><div class="modal-body"><table id="example" class="table table-striped table-bordered" style="width:100%"><tbody><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Name</h6></div></td><td><div class="image-grouped"> '.$name.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Name</h6></div></td><td><div class="image-grouped">'.$gname.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Relationship</h6></div></td><td><div class="image-grouped">'.$g_relation.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Age</h6></div></td><td><div class="image-grouped"> '.$age.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Gender</h6></div></td><td><div class="image-grouped">'.$gender.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Mobile Number</h6></div></td><td><div class="image-grouped"> '.$mobile.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Adhar Number</h6></div></td><td><div class="image-grouped"> '.$adhar.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Scheme Id</h6></div></td><td><div class="image-grouped">  '.$sc_id.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Email Id</h6></div></td><td><div class="image-grouped"> '.$email.' </div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Abha Number</h6></div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Ration card Number</h6></div></td><td><div class="image-grouped"> '.$ration_card.' </div></td></tr></tbody></table></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div></div></div></div>',
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('users/'.$id.'/edit') . '"><i class="fe fe-edit-2 bg-info me-1"></i></a></div>'
 
+            );
+         }
 
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
 
+         return response()->json($response);
+    }
 }

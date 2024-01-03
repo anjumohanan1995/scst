@@ -288,6 +288,15 @@
 										</a>
 
 									</li>
+
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'couplefinancialList') )? 'active' : '' }}"  href="{{url('couplefinancialList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Couple Financial Applications</span>
+
+										</a>
+
+									</li>
 								@endif
 								@if(Auth::user()->role=='User')
 									<li class="slide">
