@@ -241,7 +241,10 @@ class ApplicationController extends Controller
         return response()->json(['message' => $message]);
     }
     
-   
+    public function applicationForm2()
+    {
+        return view('application.form2');
+    }
 
    
 

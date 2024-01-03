@@ -38,7 +38,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="button" class="btn btn-link">Link2</button>
+                                <a href="{{ route('applicationForm2') }}">
+                                    <button type="button" class="btn btn-link">Link2</button>
+                                </a>
+                               
                             </div>
                         </div>
                         <div class="row">
