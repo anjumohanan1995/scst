@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MotherChildScheme;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
@@ -475,13 +476,4 @@ class ApplicationController extends Controller
 
          return response()->json($response);
     }
-    public function coupleApplicationView($id)
-    {
-        
-        $formData = FinancialHelp::where('_id',$id)->first();
-        return view('admin.financial_view', compact('formData'));
-    }
-
-
-    
 }
