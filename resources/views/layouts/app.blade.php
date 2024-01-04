@@ -305,6 +305,14 @@
 										</a>
 
 									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'marriageGrantList') )? 'active' : '' }}"  href="{{url('marriageGrantList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Marriage Grant Applications</span>
+
+										</a>
+
+									</li>
 								@endif
 								@if(Auth::user()->role=='User')
 									<li class="slide">
