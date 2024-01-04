@@ -480,9 +480,13 @@ class ApplicationController extends Controller
     public function motherChildProtectionSchemeStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required']
-           
-        );
+            'name' => 'required',
+            'age' => 'required|numeric',
+            'dob' => 'required',
+            'births' => 'required|numeric',
+            // Add more fields and their validation rules as needed
+        ]);
+        
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -533,5 +537,154 @@ class ApplicationController extends Controller
         ]);
 
         return redirect()->route('home')->with('success','Application Submitted Successfully.');
+    }
+
+    public function motherChildSchemeList(Request $request)
+    {
+        $data  = FinancialHelp::with('User')->get();
+        //dd($data);
+        return view('admin.motherchild_list', compact('data'));
+
+    }
+    public function getMotherChildList(Request $request)
+    {
+        
+        $name = $request->name;
+        $mobile = $request->mobile;
+        $role = $request->role;
+
+
+         if($request->from_date !=''){
+
+             $from_date  = date("M d,Y",strtotime($request->from_date));
+             $stDate = new Carbon($from_date);
+         }
+         if($request->to_date !=''){
+             $to_date  =   date("Y-m-d",strtotime($request->to_date));
+             $edDate = new Carbon($to_date);
+         }
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = MotherChildScheme::where('deleted_at',null);
+             if($mobile != ""){
+                 $totalRecord->where('mobile',$mobile);
+             }
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+             if($role != ""){
+                $totalRecord->where('role',$role);
+            }
+             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
+                 //echo "khk";exit;
+                 $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
+             }
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null);
+
+             if($mobile != ""){
+                 $totalRecordswithFilte->where('mobile',$mobile);
+             }
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+            if($role != ""){
+               $totalRecordswithFilte->where('role',$role);
+           }
+             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
+                 //echo "khk";exit;
+                 $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
+             }
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = MotherChildScheme::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             if($mobile != ""){
+                 $items->where('mobile',$mobile);
+             }
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+            if($role != ""){
+               $items->where('role',$role);
+           }
+             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
+                 //echo "khk";exit;
+                 $items->whereBetween('created_at', [$stDate, $edDate]);
+             }
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $age = $record->age;
+             $dob = $record->dob;
+             $hus_name = $record->hus_name;
+             $caste = $record->caste;
+              $village =  $record->village;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "dob" => $age.'/'.$dob,
+                "caste" => $caste,
+                "village" => $village,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    
+    public function motherChildSchemeView(Request $request, $id)
+    {
+     
+      
+        $formData = MotherChildScheme::where('_id',$id)->first();
+       
+        return view('application.application_view', compact('formData'));
+
+
+
     }
 }

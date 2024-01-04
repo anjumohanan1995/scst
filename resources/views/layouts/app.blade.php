@@ -297,6 +297,14 @@
 										</a>
 
 									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'motherChildSchemeList') )? 'active' : '' }}"  href="{{url('motherChildSchemeList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Mother Child Protection Scheme Applications</span>
+
+										</a>
+
+									</li>
 								@endif
 								@if(Auth::user()->role=='User')
 									<li class="slide">
