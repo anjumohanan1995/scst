@@ -87,6 +87,12 @@ Route::get('/motherChildSchemeList', [App\Http\Controllers\ApplicationController
 Route::get('/getMotherChildList', [App\Http\Controllers\ApplicationController::class, 'getMotherChildList'])->name('getMotherChildList');
 Route::get('/motherChildScheme/{id}/view', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeView'])->name('motherChildSchemeView');
 
+Route::get('/marriageGrantForm', [App\Http\Controllers\ApplicationController::class, 'marriageGrantForm'])->name('marriageGrantForm');
+Route::post('/marriageGrantFormStore', [App\Http\Controllers\ApplicationController::class, 'marriageGrantFormStore'])->name('marriageGrantFormStore');
+Route::post('/marriageGrantStoreDetails', [App\Http\Controllers\ApplicationController::class, 'marriageGrantStoreDetails'])->name('marriageGrantStoreDetails');
+Route::get('/marriageGrantList', [App\Http\Controllers\ApplicationController::class, 'marriageGrantList'])->name('marriageGrantList');
+Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController::class, 'getmarriageGrantList'])->name('getmarriageGrantList');
+Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
 
 
 

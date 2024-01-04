@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
 use Illuminate\Http\Request;
 use App\Role;
@@ -920,12 +921,218 @@ class ApplicationController extends Controller
     }
     
     public function motherChildSchemeView(Request $request, $id)
-    {
-     
+    {     
       
         $formData = MotherChildScheme::where('_id',$id)->first();
        
         return view('application.application_view', compact('formData'));
+
+
+
+    }
+    public function marriageGrantForm()
+    {
+        return view('application.marriage_grant_form');
+    }
+    public function marriageGrantFormStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'age' => 'required|numeric',           
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+        if ($request->hasfile('caste_certificate')) {
+
+            $image = $request->caste_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/applications/marriage_grant_certificates'), $imgfileName);
+
+            $caste_certificate = $imgfileName;
+
+        }else{
+            $caste_certificate = '';
+        }
+        if ($request->hasfile('income_certificate')) {
+
+            $image = $request->income_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/applications/marriage_grant_certificates'), $imgfileName);
+
+            $income_certificate = $imgfileName;
+
+        }else{
+            $income_certificate = '';
+        }
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/applications/marriage_grant_certificates'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = '';
+        }
+      
+        $formData = $data;
+       
+      $formData['caste_certificate']= $caste_certificate;
+      $formData['income_certificate']= $income_certificate;
+      $formData['signature']= $signature;
+        return view('application.marriage_grant_preview', compact('formData'));
+    }
+    public function marriageGrantStoreDetails(Request $request)
+    {
+
+        $data = json_decode($request->input('formData'), true);
+     
+
+        $datainsert = MarriageGrant::create([
+            'name' => $data['name'],
+            'current_address' => @$data['current_address'],
+            'age' => $data['age'],
+            'permanent_address' => $data['permanent_address'],
+            'family_details' => $data['family_details'],
+            'caste' => $data['caste'],
+            'caste_certificate' => $data['caste_certificate'],
+            'name_and_address_fiancee' => $data['name_and_address_fiancee'],
+            'relation_with_applicant' => $data['relation_with_applicant'],
+            'marriage_count' =>$data['marriage_count'],
+            'is_widow' => $data['is_widow'],
+            'parent_occupation' => $data['parent_occupation'],
+            'annual_income' => $data['annual_income'],
+            'income_certificate' => $data['income_certificate'],
+            'marriage_place' => $data['marriage_place'],
+            'marriage_date' => $data['marriage_date'],
+            'fiancee_family_details' => $data['fiancee_family_details'],
+            'disabled_parent_info' => $data['disabled_parent_info'],
+            'freedmen_parent_details' => $data['freedmen_parent_details'],
+            'violence_by_non_scheduled_tribes_info' => $data['violence_by_non_scheduled_tribes_info'],
+            'land_alienated_details' => $data['land_alienated_details'],
+            'outcast_parent_details' => $data['outcast_parent_details'],
+            'remarried_parent_details' => $data['remarried_parent_details'],
+            'groom_name_and_address' => $data['groom_name_and_address'],
+            'name_and_address_groom_parent' => $data['name_and_address_groom_parent'],
+            'financial_assistance_details' => $data['financial_assistance_details'],
+            'place' => $data['place'],
+            'date' => $data['date'],
+            'signature' => @$data['signature'],
+            'user_id' =>Auth::user()->id, 
+            'status' =>0
+        ]);
+
+        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+    }
+    public function marriageGrantList(Request $request)
+    {
+        return view('admin.marriage_grant_list');
+
+    }
+    public function getmarriageGrantList(Request $request)
+    {
+        
+        $name = $request->name;
+
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = MarriageGrant::where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = MarriageGrant::where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = MarriageGrant::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $current_address = $record->current_address;
+             $age = $record->age;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "current_address" => $current_address,
+                "age" => $age,
+                "caste" => $caste,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('marriageGrant/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function marriageGrantView(Request $request, $id)
+    {     
+      
+        $formData = MarriageGrant::where('_id',$id)->first();
+       
+        return view('application.marriage_grant_view', compact('formData'));
 
 
 

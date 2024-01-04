@@ -130,6 +130,7 @@ a.btn-card {
 
 	<section class="details-card">
     <div class="container">
+        <br>
         <div class="row">
             <div class="col-md-4">
                 <div class="card-content">
@@ -161,6 +162,19 @@ a.btn-card {
                     </div>
                 </div>
             </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 4</h3>
+                        <p>പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട  പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം </p>
+                             <a href="{{url('marriageGrantForm')}}" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
+         
         </div>
     </div>
 </section>
