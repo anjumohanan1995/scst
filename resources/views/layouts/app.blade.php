@@ -186,10 +186,10 @@
 						</div> 
 						<div class="main-sidemenu is-expanded">
 							<div class="main-sidebar-loggedin"> <div class="user-info text-center w-100">
-								<h6 class="mb-0 text-dark">{{Auth::user()->role }}</h6>
-								@if(Auth::user()->role != "Super Admin" && Auth::user()->role != "Verifier" && Auth::user()->role != "Approver")
-								<label class="btn btn-success">{{Auth::user()->hospital_name }}</label>
-								@endif
+								<h6 class="mb-0 text-dark">{{Auth::user()->name }}</h6>
+								
+								<label class="btn btn-success">{{Auth::user()->role }}</label>
+								
 							</div>
 
 							</div>

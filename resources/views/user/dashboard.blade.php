@@ -147,7 +147,7 @@ a.btn-card {
                     <div class="card-desc">
                         <h3>Application 2</h3>
                         <p>ജനനി-ജനനി -ജന്മരക്ഷ  പ്രസവാനുകുല്യം - മാതൃശിശു  സംരക്ഷണ പദ്ധതി  അപേക്ഷഫോറം </p>
-                            <a href="{{ route('applicationForm2') }}"" class="btn-card">Apply Now</a>   
+                            <a href="{{ route('applicationForm2') }}" class="btn-card">Apply Now</a>   
                     </div>
                 </div>
             </div>
@@ -155,10 +155,9 @@ a.btn-card {
                 <div class="card-content">
                     
                     <div class="card-desc">
-                        <h3>Heading3</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolor quo, perspiciatis
-                            voluptas totam</p>
-                            <a href="#" class="btn-card">Read</a>   
+                        <h3>Application 3</h3>
+                        <p>അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ്  സ്‌കീം  പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ</p>
+                            <a href="{{ route('exam-application') }}" class="btn-card">Apply Now</a>   
                     </div>
                 </div>
             </div>
