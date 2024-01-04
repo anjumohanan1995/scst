@@ -25,7 +25,7 @@
                                     <div class="col-lg mg-t-10 mg-lg-t-0">
                                         <input class="form-control" placeholder="Phone Number" type="text" name="mobile" id="mobile">
                                     </div>
-                                   
+                                    
                                     <div class="col-lg mg-t-10 mg-lg-t-0">
                                         <select class="form-control"  name="role" id="role">
                                             <option value="">Select</option>
@@ -36,7 +36,7 @@
                                         </select>
                                     </div>
 
-                                    
+                                  
 
                                     <div class="col-lg mg-t-10 mg-lg-t-0">
                                         <button class="btn ripple btn-success btn-block" type="submit" id="submit" >Search</button>
@@ -96,12 +96,12 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Husband Name and Address</th>
-                                            <th>Wife Name and Address</th>
-                                            <th>Marriage Registration Details </th>
-                                            <th>Marriage Certification </th>
-                                            <th>Husband Caste</th>
-                                            <th>Wife Caste</th> 
+                                            <th>School Name</th>
+                                            <th>Student Name</th>
+                                            <th>Gender </th>
+                                            <th>Parent's Name & Address </th>
+                                            <th>Relation</th>
+                                            <th>Mothers'Name</th> 
                                             <th>Created Date</th>
                                             <th >Action</th>
 
@@ -141,37 +141,6 @@ $(document).on("click",".deleteItem",function() {
 });
 
 
-         function ownRequest() {
-
-            var reqId = $('#requestId').val();
-            console.log(reqId);
-            $.ajax({
-            	headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-                url: '{{ url("users/delete") }}'+'/'+reqId,
-                method: 'post',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-
-                    },
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response.success);
-
-                        $('#confirmation-popup').modal('hide');
-                        $('#success_message').fadeIn().html(response.success);
-							setTimeout(function() {
-								$('#success_message').fadeOut("slow");
-							}, 2000 );
-
-                        $('#example').DataTable().ajax.reload();
-
-
-
-                }
-            })
-        }
-
 
 
      $(document).ready(function(){
@@ -188,7 +157,7 @@ $(document).on("click",".deleteItem",function() {
 	        ],
              "ajax": {
 
-			       	"url": "{{route('getCoupleList')}}",
+			       	"url": "{{route('getExamList')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {
@@ -204,12 +173,12 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
-                { data: 'husband_address' },
-                { data: 'wife_address' },
-				{ data: 'register_details' },
-				{ data: 'certificate_details' },
-                { data: 'husband_caste' },
-				{ data: 'wife_caste' },
+                { data: 'school_name' },
+                { data: 'student_name' },
+				{ data: 'gender' },
+				{ data: 'address' },
+                { data: 'relation' },
+				{ data: 'mother_name' },
                 { data: 'created_at', visible: false },
 
                 { data: 'edit' }

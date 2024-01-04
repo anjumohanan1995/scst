@@ -60,7 +60,6 @@ Route::get('/application-forms', [App\Http\Controllers\HomeController::class, 'a
 Route::get('/application-form2', [App\Http\Controllers\ApplicationController::class, 'applicationForm2'])->name('applicationForm2');
 Route::post('/motherChildProtectionSchemeStore', [App\Http\Controllers\ApplicationController::class, 'motherChildProtectionSchemeStore'])->name('motherChildProtectionSchemeStore');
 Route::post('/motherChildStoreDetails', [App\Http\Controllers\ApplicationController::class, 'motherChildStoreDetails'])->name('motherChildStoreDetails');
-Route::get('/exam-application', [App\Http\Controllers\ApplicationController::class, 'examApplication'])->name('exam-application');
 
 Route::get('/couples-financial-help', [App\Http\Controllers\ApplicationController::class, 'coupleFinancialHelp'])->name('coupleFinancialHelp');
 Route::post('/financialHelpStore', [App\Http\Controllers\ApplicationController::class, 'financialHelpStore'])->name('financialHelpStore');
@@ -68,6 +67,21 @@ Route::post('/financialHelpStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/couplefinancialList', [App\Http\Controllers\ApplicationController::class, 'couplefinancialList'])->name('couplefinancialList');
 Route::get('/getCoupleList', [App\Http\Controllers\ApplicationController::class, 'getCoupleList'])->name('getCoupleList');
 Route::get('/couple-application/{id}', [App\Http\Controllers\ApplicationController::class, 'coupleApplicationView'])->name('coupleApplicationView');
+
+Route::get('/exam-application', [App\Http\Controllers\ApplicationController::class, 'examApplication'])->name('exam-application');
+Route::post('/examApplicationPreview', [App\Http\Controllers\ApplicationController::class, 'examApplicationPreview'])->name('examApplicationPreview');
+Route::post('/examApplicationStore', [App\Http\Controllers\ApplicationController::class, 'examApplicationStore'])->name('examApplicationStore');
+Route::get('/examApplicationList', [App\Http\Controllers\ApplicationController::class, 'examApplicationList'])->name('examApplicationList');
+Route::get('/getExamList', [App\Http\Controllers\ApplicationController::class, 'getExamList'])->name('getExamList');
+Route::get('/exam-application/{id}', [App\Http\Controllers\ApplicationController::class, 'examApplicationView'])->name('examApplicationView');
+
+
+
+
+
+
+
+
 
 Route::get('/motherChildSchemeList', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeList'])->name('motherChildSchemeList');
 Route::get('/getMotherChildList', [App\Http\Controllers\ApplicationController::class, 'getMotherChildList'])->name('getMotherChildList');

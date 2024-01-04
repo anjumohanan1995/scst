@@ -33,7 +33,7 @@
 				<div class="card">
 					<div class="card-body">
 
-                        <form name="userForm" id="userForm" method="post" action="{{route('financialHelpStore')}}">
+                        <form name="userForm" id="userForm" method="post" action="{{route('examApplicationPreview')}}">
                             @csrf
                             {{-- <div class="mb-4 main-content-label">User Details</div> --}}
                             <div class="form-group">
@@ -175,6 +175,27 @@
                                         <input type="text" value="{{ old('mother_tonge') }}" class="form-control" placeholder="Mother Tounge" name="mother_tonge" />
                                        
                                         @error('mother_tonge')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                       
+                                    </div>
+                                    
+                                </div><br>
+
+                                 <div class="row">
+                                   <div class="col-md-6 mb-6">
+                                        <label class="form-label">Place/സ്ഥലം </label>
+                                        <input type="text" value="{{ old('place') }}" class="form-control" placeholder="Place" name="place" />
+                                       
+                                        @error('place')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">Date/തിയതി</label>
+                                        <input type="date" value="{{ old('date') }}" class="form-control" placeholder="Date" name="date" />
+                                       
+                                        @error('date')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                        
