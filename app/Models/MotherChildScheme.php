@@ -24,6 +24,7 @@ class MotherChildScheme extends Eloquent
         'expected_date_of_delivery',
         'dependent_hospital',
         'place',
+        'date',
         'signature','user_id','status'
 
 
