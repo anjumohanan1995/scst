@@ -46,33 +46,6 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">ജില്ല :</label>
-                                </div>
-                                <div class="col-md-8 mb-8">
-                                    <input type="text" class="form-control"  name="district" id="district" value="{{ $formData['districtRelation']['name'] }}" placeholder="" readonly/>
-                                 
-                                </div>
-                            </div><br>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label">താലൂക്ക് :</label>
-                                </div>
-                                <div class="col-md-8 mb-8">
-                                    <input type="text" class="form-control"  name="taluk" id="taluk" value="{{ $formData['talukName']['taluk'] }}" placeholder="" readonly/>
-                                 
-                                </div>
-                            </div><br>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label">പിൻകോഡ് :</label>
-                                </div>
-                                <div class="col-md-8 mb-8">
-                                    <input type="text" class="form-control"  name="pincode" id="pincode" value="{{ $formData['pincode'] }}" placeholder="" readonly/>
-                                 
-                                </div>
-                            </div><br>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
                                     <label class="form-label">വയസ് :</label>
                                     
                                         </div>

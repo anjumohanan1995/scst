@@ -15,6 +15,9 @@ class MotherChildScheme extends Eloquent
     protected $fillable = [
         'name',
         'address',
+        'district',
+        'taluk',
+        'pincode',
         'age',
         'dob',
         'hus_name',
@@ -33,6 +36,12 @@ class MotherChildScheme extends Eloquent
     public function User()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function districtRelation() {
+        return $this->belongsTo('App\Models\District', 'district');
+    }
+    public function talukName() {
+        return $this->belongsTo('App\Models\Taluk', 'taluk');
     }
 
     

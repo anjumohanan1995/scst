@@ -1,4 +1,6 @@
 <?php
+use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\TalukController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\UserController;
@@ -95,6 +97,21 @@ Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController:
 Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
 
 
+Route::get('/userCoupleFinanceList', [App\Http\Controllers\UserHomeController::class, 'userCoupleFinanceList'])->name('userCoupleFinanceList');
+Route::get('/getUserCoupleList', [App\Http\Controllers\UserHomeController::class, 'getUserCoupleList'])->name('getUserCoupleList');
+Route::get('/user-couple-application/{id}', [App\Http\Controllers\UserHomeController::class, 'userCoupleApplicationView'])->name('userCoupleApplicationView');
+
+Route::get('/userMotherChildList', [App\Http\Controllers\UserHomeController::class, 'userMotherChildList'])->name('userMotherChildList');
+Route::get('/getUserMotherChildList', [App\Http\Controllers\UserHomeController::class, 'getUserMotherChildList'])->name('getUserMotherChildList');
+Route::get('/userMotherChildScheme/{id}/view', [App\Http\Controllers\UserHomeController::class, 'userMotherChildSchemeView'])->name('userMotherChildSchemeView');
+
+Route::get('/userExamList', [App\Http\Controllers\UserHomeController::class, 'userExamList'])->name('userExamList');
+Route::get('/getUserExamList', [App\Http\Controllers\UserHomeController::class, 'getUserExamList'])->name('getUserExamList');
+Route::get('/user-exam-application/{id}', [App\Http\Controllers\UserHomeController::class, 'userExamApplicationView'])->name('userExamApplicationView');
+
+Route::get('/userMarriageGrantList', [App\Http\Controllers\UserHomeController::class, 'userMarriageGrantList'])->name('userMarriageGrantList');
+Route::get('/getUserMarriageGrantList', [App\Http\Controllers\UserHomeController::class, 'getUserMarriageGrantList'])->name('getUserMarriageGrantList');
+Route::get('/userMarriageGrant/{id}/view', [App\Http\Controllers\UserHomeController::class, 'userMarriageGrantView'])->name('userMarriageGrantView');
 
 
 Route::resource('/users', UserController::class);
@@ -103,7 +120,17 @@ Route::post('/users/delete/{id}', [UserController::class, 'destroy'])->name('del
 Route::post('/users/edit/{id}', [UserController::class, 'update'])->name('update-user');
 Route::get('status/change', [App\Http\Controllers\HomeController::class, 'changeStatus'])->name('changeStatus');
 
+Route::resource('/districts', DistrictController::class);
+Route::get('/getDistricts', [DistrictController::class, 'getDistricts'])->name('getDistricts');
+Route::post('/districts/update/{id}', [DistrictController::class, 'update'])->name('update-district');
+Route::post('/districts/delete/{id}', [DistrictController::class, 'destroy'])->name('delete-district');
 
+Route::resource('/taluks', TalukController::class);
+Route::get('/getTaluks', [TalukController::class, 'getTaluks'])->name('getTaluks');
+Route::post('/taluks/update/{id}', [TalukController::class, 'update'])->name('update-taluk');
+Route::post('/taluks/delete/{id}', [TalukController::class, 'destroy'])->name('delete-taluk');
+
+Route::post('/district/fetch-taluk', [TalukController::class, 'fetchTaluk'])->name('fetch-taluk');
 
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');

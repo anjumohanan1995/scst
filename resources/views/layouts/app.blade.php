@@ -256,6 +256,22 @@
 
 									</li>
 									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'districts.index')||(\Request::route()->getName() == 'districts.create')||(\Request::route()->getName() == 'districts.edit')) ? 'active' : '' }}"  href="{{url('districts')}}">
+											<i class="side-menu__icon fe fe-users"> </i>
+											<span class="side-menu__label">Districts</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'taluks.index')||(\Request::route()->getName() == 'taluks.create')||(\Request::route()->getName() == 'taluks.edit')) ? 'active' : '' }}"  href="{{url('taluks')}}">
+											<i class="side-menu__icon fas fa-city"> </i>
+											<span class="side-menu__label">Taluks</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'settings.index') )? 'active' : '' }}"  href="{{url('settings')}}">
 											<i class="side-menu__icon fe fe-settings"> </i>
 											<span class="side-menu__label">Settings</span>

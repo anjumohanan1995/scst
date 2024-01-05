@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExamApplication;
+use App\Models\FinancialHelp;
+use App\Models\MarriageGrant;
+use App\Models\MotherChildScheme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -40,7 +44,11 @@ class HomeController extends Controller
     {
 
        if (auth()->user()->role =='User'){
-            return view('user.dashboard');
+        $data['coupleFinanceCount'] = FinancialHelp::count();
+        $data['examCount'] = ExamApplication::count();
+        $data['motherChildCount'] = MotherChildScheme::count();
+        $data['marriageGrantCount'] = MarriageGrant::count();
+            return view('user.dashboard',compact('data'));
        }else{
             return view('admin.dashboard');
        }

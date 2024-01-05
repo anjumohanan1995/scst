@@ -54,6 +54,27 @@
                                             <td colspan=""><label class="form-control"><b>{{ @$formData['address'] }} </b>
                                             </label></td>
                                         </tr>
+                                        <tr>
+                                            <td >
+                                                ജില്ല
+                                            </td>
+                                            <td colspan=""><label class="form-control"> <b>{{ @$formData['district_name'] }} </b>
+                                            </label></td>
+                                        </tr>
+                                        <tr>
+                                            <td >
+                                                താലൂക്ക്
+                                            </td>
+                                            <td colspan=""><label class="form-control"> <b>{{ @$formData['taluk_name'] }} </b>
+                                            </label></td>
+                                        </tr>
+                                        <tr>
+                                            <td >
+                                                പിൻകോഡ്
+                                            </td>
+                                            <td colspan=""><label class="form-control"> <b>{{ @$formData['pincode'] }} </b>
+                                            </label></td>
+                                        </tr>
                                  
                                         <tr>
                                             <td >

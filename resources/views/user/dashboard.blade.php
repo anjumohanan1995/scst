@@ -136,7 +136,7 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-                        <h3>Application 1</h3>
+                        <h3>Application 1 - <a href="{{ route('userCoupleFinanceList') }}">Applied({{ $data['coupleFinanceCount'] }})</a></h3>
                         <p>മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം </p>
                              <a href="{{url('couples-financial-help')}}" class="btn-card">Apply Now</a>   
                     </div>
@@ -146,7 +146,7 @@ a.btn-card {
                 <div class="card-content">
                   
                     <div class="card-desc">
-                        <h3>Application 2</h3>
+                        <h3>Application 2 - <a href="{{ route('userMotherChildList') }}">Applied({{ $data['motherChildCount'] }})</a></h3>
                         <p>ജനനി-ജനനി -ജന്മരക്ഷ  പ്രസവാനുകുല്യം - മാതൃശിശു  സംരക്ഷണ പദ്ധതി  അപേക്ഷഫോറം </p>
                             <a href="{{ route('applicationForm2') }}" class="btn-card">Apply Now</a>   
                     </div>
@@ -156,7 +156,7 @@ a.btn-card {
                 <div class="card-content">
                     
                     <div class="card-desc">
-                        <h3>Application 3</h3>
+                        <h3>Application 3 -<a href="{{ route('userExamList') }}">Applied({{ $data['examCount'] }})</a></h3>
                         <p>അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ്  സ്‌കീം  പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ</p>
                             <a href="{{ route('exam-application') }}" class="btn-card">Apply Now</a>   
                     </div>
@@ -168,7 +168,7 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-                        <h3>Application 4</h3>
+                        <h3>Application 4 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
                         <p>പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട  പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം </p>
                              <a href="{{url('marriageGrantForm')}}" class="btn-card">Apply Now</a>   
                     </div>
