@@ -272,6 +272,14 @@
 
 									</li>
 									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'teo.index')||(\Request::route()->getName() == 'teo.create')||(\Request::route()->getName() == 'teo.edit')) ? 'active' : '' }}"  href="{{url('teo')}}">
+											<i class="side-menu__icon fas fa-city"> </i>
+											<span class="side-menu__label">TEO</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'settings.index') )? 'active' : '' }}"  href="{{url('settings')}}">
 											<i class="side-menu__icon fe fe-settings"> </i>
 											<span class="side-menu__label">Settings</span>

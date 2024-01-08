@@ -28,6 +28,8 @@ class MotherChildScheme extends Eloquent
         'dependent_hospital',
         'place',
         'date',
+        'submitted_district',
+        'submitted_teo',
         'signature','user_id','status'
 
 

@@ -733,6 +733,8 @@ class ApplicationController extends Controller
             'age' => 'required|numeric',
             'dob' => 'required',
             'births' => 'required|numeric',
+            'submitted_district' => 'required',
+        
             // Add more fields and their validation rules as needed
         ]);
         
@@ -782,6 +784,8 @@ class ApplicationController extends Controller
             'expected_date_of_delivery' => $data['expected_date_of_delivery'],
             'dependent_hospital' =>$data['dependent_hospital'],
             'place' => $data['place'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
             'date' => date('d-m-Y'),
             'signature' => @$data['signature'],
             'user_id' =>Auth::user()->id, 
@@ -940,13 +944,16 @@ class ApplicationController extends Controller
     }
     public function marriageGrantForm()
     {
-        return view('application.marriage_grant_form');
+        $districts = District::get();
+        return view('application.marriage_grant_form',compact('districts'));
     }
     public function marriageGrantFormStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'age' => 'required|numeric',           
+            'age' => 'required|numeric', 
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',          
         ]);
         
         if ($validator->fails()) {
@@ -1006,8 +1013,14 @@ class ApplicationController extends Controller
         $datainsert = MarriageGrant::create([
             'name' => $data['name'],
             'current_address' => @$data['current_address'],
+            'current_district' => @$data['current_district'],
+            'current_taluk' => @$data['current_taluk'],
+            'current_pincode' => @$data['current_pincode'],
             'age' => $data['age'],
             'permanent_address' => $data['permanent_address'],
+            'permanent_district' => @$data['permanent_district'],
+            'permanent_taluk' => @$data['permanent_taluk'],
+            'permanent_pincode' => @$data['permanent_pincode'],
             'family_details' => $data['family_details'],
             'caste' => $data['caste'],
             'caste_certificate' => $data['caste_certificate'],
@@ -1032,6 +1045,8 @@ class ApplicationController extends Controller
             'financial_assistance_details' => $data['financial_assistance_details'],
             'place' => $data['place'],
             'date' => $data['date'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
             'signature' => @$data['signature'],
             'user_id' =>Auth::user()->id, 
             'status' =>0

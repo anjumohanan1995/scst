@@ -16,7 +16,13 @@ class MarriageGrant extends Eloquent
         'name',
         'age',
         'current_address',
+        'current_district',
+        'current_taluk',
+        'current_pincode',
         'permanent_address',
+        'permanent_district',
+        'permanent_taluk',
+        'permanent_pincode',
         'family_details',
         'caste',
         'caste_certificate',
@@ -41,6 +47,8 @@ class MarriageGrant extends Eloquent
         'financial_assistance_details',
         'place',
         'date',
+        'submitted_district',
+        'submitted_teo',
         'signature','user_id','status'
 
 

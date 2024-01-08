@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\TalukController;
+use App\Http\Controllers\TeoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\UserController;
@@ -130,7 +131,13 @@ Route::get('/getTaluks', [TalukController::class, 'getTaluks'])->name('getTaluks
 Route::post('/taluks/update/{id}', [TalukController::class, 'update'])->name('update-taluk');
 Route::post('/taluks/delete/{id}', [TalukController::class, 'destroy'])->name('delete-taluk');
 
+Route::resource('/teo', TeoController::class);
+Route::get('/getTeo', [TeoController::class, 'getTeo'])->name('getTeo');
+Route::post('/teo/update/{id}', [TeoController::class, 'update'])->name('update-teo');
+Route::post('/teo/delete/{id}', [TeoController::class, 'destroy'])->name('delete-teo');
+
 Route::post('/district/fetch-taluk', [TalukController::class, 'fetchTaluk'])->name('fetch-taluk');
+Route::post('/district/fetch-teo', [TeoController::class, 'fetchTeo'])->name('fetch-fetchTeo');
 
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');

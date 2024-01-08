@@ -23,10 +23,12 @@
 <div class="main-content-body">
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-            <div class="card">
-                <div class="card-body">
+          
+               
                     <form name="patientForm" id="patientForm" method="post" action="{{route('motherChildProtectionSchemeStore')}}" enctype="multipart/form-data">
                         @csrf
+                        <div class="card">
+                        <div class="card-body">
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
@@ -156,7 +158,39 @@
                                     @enderror
                                 </div>
                             </div><br>
+                        </div>
+                    </div>
+                </div>
 
+                    <div class="card">
+                            <div class="card-body">
+                                <div class="row">   
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">ജില്ല  </label>
+                                        <select id="submitted_district" name="submitted_district" class="form-control" >
+                                            <option value="">Select</option>
+                                                @foreach($districts as $district)
+                                                    <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                @endforeach
+                                        </select>
+                                         @error('dist')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                        <input type="hidden" name="dist_name" id="dist_name" value="">
+                                    </div>
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">TEO  </label>
+                                        <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                            <option value="">Choose TEO</option>
+                                        </select>                                 
+                                        @error('teo')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                        <input type="hidden" name="teo_name" id="teo_name" value="">
+                                    </div>                                 
+                                </div><br>
+                            </div>
+                        </div>
                             <div class="row">
                                 <div class="col-md-3 mb-3">                                    
                                 </div>
@@ -166,12 +200,11 @@
                             </div><br>
                                   
                                  
-                            </div>
-
+                          
                    
                         </form>
-                </div>
-            </div>
+              
+          
         </div>
     </div>
 </div>
@@ -210,6 +243,39 @@
     $('#taluk').change(function(){
         var talukName = this.options[this.selectedIndex].text;
     document.getElementById('taluk_name').value = talukName;
+    });
+
+    $('#submitted_district').change(function(){
+        var submitted_district = this.options[this.selectedIndex].text;
+    document.getElementById('dist_name').value = submitted_district;
+        var val = document.getElementById("submitted_district").value;
+      
+        $.ajax({
+                    url: "{{url('district/fetch-teo')}}",
+                    type: "POST",
+                    data: {
+                        district_id: val,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#submitted_teo").find('option').remove();
+                          $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+                        $.each(result.teos, function (key, value) {
+                            var $opt = $('<option>');
+                            $opt.val(value._id).text(value.teo_name);
+                            $opt.appendTo('#submitted_teo');
+                          
+
+                        });
+
+                    }
+                });
+
+    });
+    $('#submitted_teo').change(function(){
+        var submitted_teo = this.options[this.selectedIndex].text;
+    document.getElementById('teo_name').value = submitted_teo;
     });
 
 	$(document).ready(function() {

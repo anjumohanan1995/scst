@@ -44,10 +44,11 @@ class HomeController extends Controller
     {
 
        if (auth()->user()->role =='User'){
-        $data['coupleFinanceCount'] = FinancialHelp::count();
-        $data['examCount'] = ExamApplication::count();
-        $data['motherChildCount'] = MotherChildScheme::count();
-        $data['marriageGrantCount'] = MarriageGrant::count();
+        $user_id=Auth::user()->id;
+        $data['coupleFinanceCount'] = FinancialHelp::where('user_id',$user_id)->count();
+        $data['examCount'] = ExamApplication::where('user_id',$user_id)->count();
+        $data['motherChildCount'] = MotherChildScheme::where('user_id',$user_id)->count();
+        $data['marriageGrantCount'] = MarriageGrant::where('user_id',$user_id)->count();
             return view('user.dashboard',compact('data'));
        }else{
             return view('admin.dashboard');

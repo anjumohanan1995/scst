@@ -47,7 +47,7 @@ class UserHomeController extends Controller
         $name = $request->name;
         $mobile = $request->mobile;
         $role = $request->role;
-
+        $user_id=Auth::user()->id;
 
          if($request->from_date !=''){
 
@@ -78,7 +78,7 @@ class UserHomeController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null);
+             $totalRecord = FinancialHelp::where('user_id',$user_id)->where('deleted_at',null);
              if($mobile != ""){
                  $totalRecord->where('mobile',$mobile);
              }
@@ -96,7 +96,7 @@ class UserHomeController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null);
+             $totalRecordswithFilte = FinancialHelp::where('user_id',$user_id)->where('deleted_at',null);
 
              if($mobile != ""){
                  $totalRecordswithFilte->where('mobile',$mobile);
@@ -115,7 +115,7 @@ class UserHomeController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = FinancialHelp::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = FinancialHelp::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
              if($mobile != ""){
                  $items->where('mobile',$mobile);
              }
@@ -193,7 +193,7 @@ class UserHomeController extends Controller
         $name = $request->name;
         $mobile = $request->mobile;
         $role = $request->role;
-
+        $user_id=Auth::user()->id;
 
          if($request->from_date !=''){
 
@@ -224,7 +224,7 @@ class UserHomeController extends Controller
          
 
              // Total records
-             $totalRecord = ExamApplication::where('deleted_at',null);
+             $totalRecord = ExamApplication::where('user_id',$user_id)->where('deleted_at',null);
              if($mobile != ""){
                  $totalRecord->where('mobile',$mobile);
              }
@@ -242,7 +242,7 @@ class UserHomeController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = ExamApplication::where('deleted_at',null);
+             $totalRecordswithFilte = ExamApplication::where('user_id',$user_id)->where('deleted_at',null);
 
              if($mobile != ""){
                  $totalRecordswithFilte->where('mobile',$mobile);
@@ -261,7 +261,7 @@ class UserHomeController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = ExamApplication::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = ExamApplication::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
              if($mobile != ""){
                  $items->where('mobile',$mobile);
              }
@@ -341,7 +341,7 @@ class UserHomeController extends Controller
         $name = $request->name;
         $mobile = $request->mobile;
         $role = $request->role;
-
+        $user_id=Auth::user()->id;
 
          if($request->from_date !=''){
 
@@ -372,7 +372,7 @@ class UserHomeController extends Controller
          
 
              // Total records
-             $totalRecord = MotherChildScheme::where('deleted_at',null);
+             $totalRecord = MotherChildScheme::where('user_id',$user_id)->where('deleted_at',null);
              if($mobile != ""){
                  $totalRecord->where('mobile',$mobile);
              }
@@ -390,7 +390,7 @@ class UserHomeController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null);
+             $totalRecordswithFilte = MotherChildScheme::where('user_id',$user_id)->where('deleted_at',null);
 
              if($mobile != ""){
                  $totalRecordswithFilte->where('mobile',$mobile);
@@ -409,7 +409,7 @@ class UserHomeController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = MotherChildScheme::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = MotherChildScheme::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
              if($mobile != ""){
                  $items->where('mobile',$mobile);
              }
@@ -485,7 +485,7 @@ class UserHomeController extends Controller
     {
         
         $name = $request->name;
-
+        $user_id=Auth::user()->id;
 
 
          ## Read value
@@ -507,7 +507,7 @@ class UserHomeController extends Controller
          
 
              // Total records
-             $totalRecord = MarriageGrant::where('deleted_at',null);
+             $totalRecord = MarriageGrant::where('user_id',$user_id)->where('deleted_at',null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -517,7 +517,7 @@ class UserHomeController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = MarriageGrant::where('deleted_at',null);
+             $totalRecordswithFilte = MarriageGrant::where('user_id',$user_id)->where('deleted_at',null);
 
           
              if($name != ""){
@@ -529,7 +529,7 @@ class UserHomeController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = MarriageGrant::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = MarriageGrant::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");

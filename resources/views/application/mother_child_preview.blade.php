@@ -159,7 +159,20 @@
                                             <td colspan=""><label class="form-control"><img src="{{ url('/') }}/applications/{{ $formData['signature'] }}" alt="Preview" width="300" height="200">
                                             </label></td>
                                         </tr>
-                                 
+                                        <tr>
+                                            <td >
+                                                ജില്ല
+                                            </td>
+                                            <td colspan=""><label class="form-control"> <b>{{ @$formData['dist_name'] }} </b>
+                                            </label></td>
+                                        </tr>
+                                        <tr>
+                                            <td >
+                                                TEO
+                                            </td>
+                                            <td colspan=""><label class="form-control"> <b>{{ @$formData['teo_name'] }} </b>
+                                            </label></td>
+                                        </tr>
 
                                         
                                     </table>

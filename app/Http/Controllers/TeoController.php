@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Taluk;
+use App\Models\Teo;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Role;
 
 
-class TalukController extends Controller
+class TeoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +26,7 @@ class TalukController extends Controller
      */
     public function index()
     {   
-        return view('taluks.index');     
+        return view('teos.index');     
        
     }
 
@@ -34,8 +35,8 @@ class TalukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getTaluks(Request $request){
-        $taluk_name = $request->name;
+    public function getTeo(Request $request){
+        $teo_name = $request->name;
 
 
          if($request->from_date !=''){
@@ -65,29 +66,29 @@ class TalukController extends Controller
 
 
              // Total records
-             $totalRecord = Taluk::with('district')->where('deleted_at',null);
+             $totalRecord = Teo::with('districts')->where('deleted_at',null);
           
-             if($taluk_name != ""){
-                 $totalRecord->where('taluk_name','like',"%".$taluk_name."%");
+             if($teo_name != ""){
+                 $totalRecord->where('teo_name','like',"%".$teo_name."%");
              }
              
             
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = Taluk::with('district')->where('deleted_at',null);
+             $totalRecordswithFilte = Teo::with('districts')->where('deleted_at',null);
          
-             if($taluk_name != ""){
-                $totalRecordswithFilte->where('taluk_name','like',"%".$taluk_name."%");
+             if($teo_name != ""){
+                $totalRecordswithFilte->where('teo_name','like',"%".$teo_name."%");
             }          
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = Taluk::with('district')->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = Teo::with('districts')->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
             
-             if($taluk_name != ""){
-                $items->where('taluk_name','like',"%".$taluk_name."%");
+             if($teo_name != ""){
+                $items->where('teo_name','like',"%".$teo_name."%");
             }
           
              $records = $items->skip($start)->take($rowperpage)->get();
@@ -99,16 +100,16 @@ class TalukController extends Controller
          foreach($records as $record){
            // dd($record);
              $id = $record->id;
-             $taluk_name = $record->taluk_name;
-             $district_name = $record->district->name;
+             $teo_name = $record->teo_name;
+             $district_name = $record->districts->name;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
                 "id" => $id,
-                "taluk_name" => $taluk_name,
+                "teo_name" => $teo_name,
                 "district_name" => $district_name,
                 "created_at" => $created_at,
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('taluks/'.$id.'/edit') . '"><i class="fe fe-edit-2 bg-info me-1"></i></a>&nbsp;&nbsp;<a class="deleteItem" data-id="'.$id.'"><i class="si si-trash bg-danger "></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('teo/'.$id.'/edit') . '"><i class="fe fe-edit-2 bg-info me-1"></i></a>&nbsp;&nbsp;<a class="deleteItem" data-id="'.$id.'"><i class="si si-trash bg-danger "></i></a></div>'
 
             );
          }
@@ -125,7 +126,7 @@ class TalukController extends Controller
     public function create()
     {
         $districts = District::get();
-            return view('taluks.create',compact('districts'));
+            return view('teos.create',compact('districts'));
         
     }
 
@@ -141,7 +142,7 @@ class TalukController extends Controller
            $validate = Validator::make($request->all(),
             [
                 'district_id' => 'required',
-                'taluk_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50'
+                'teo_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50'
             ]);
             if($validate->fails())
             {
@@ -153,15 +154,15 @@ class TalukController extends Controller
 
                
 
-            Taluk::create([
+            Teo::create([
                 'district_id' => $data['district_id'],
-                'taluk_name' => $data['taluk_name'],
+                'teo_name' => $data['teo_name'],
             ]);
 
 
-           return redirect()->route('taluks.index')
+           return redirect()->route('teo.index')
 
-           ->with('success','Taluk Added Successfully');
+           ->with('success','TEO Added Successfully');
 
     }
 
@@ -185,8 +186,8 @@ class TalukController extends Controller
     public function edit($id)
     {
             $districts = District::get();
-            $data=Taluk::with('district')->find($id);
-            return view('taluks.edit', compact('data','districts'));
+            $data=Teo::with('districts')->find($id);
+            return view('teos.edit', compact('data','districts'));
         
     }
 
@@ -201,24 +202,22 @@ class TalukController extends Controller
     {     
         request()->validate([
             'district_id' => 'required',
-            'taluk_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50',
+            'teo_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50',
         ]);
 
 
-        $book=Taluk::findOrFail($id);
+        $book=Teo::findOrFail($id);
         $data = $request->all();
        
 
         $book->update([
             'district_id' => $data['district_id'],
-            'taluk_name' => $data['taluk_name'],
+            'teo_name' => $data['teo_name'],
         ]);
 
-       return redirect()->route('taluks.index')
-                       ->with('success','Taluk updated successfully');
-        //  return response()->json([
-        //                 'success' => 'User updated successfully.'
-        //             ]);
+       return redirect()->route('teo.index')
+                       ->with('success','TEO updated successfully');
+      
     }
 
     /**
@@ -229,17 +228,17 @@ class TalukController extends Controller
      */
     public function destroy($id)
     {
-        $data= Taluk::find($id)->delete();
+        $data= Teo::find($id)->delete();
 
         return response()->json([
-                        'success' => 'Taluk Deleted successfully.'
+                        'success' => 'TEO Deleted successfully.'
                     ]);
 
     }
-    public function fetchTaluk(Request $request)
+    public function fetchTeo(Request $request)
     {
-        $data['taluks'] = Taluk::where('district_id',$request->district_id)->where('deleted_at',null)->get(["taluk_name"]);
-       //dd( $data['taluks']);
+        $data['teos'] = Teo::where('district_id',$request->district_id)->where('deleted_at',null)->get(["teo_name"]);
         return response()->json($data);
     }
+   
 }
