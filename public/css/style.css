@@ -98323,3 +98323,8 @@ select.form-control:before {
     opacity: 1;
     padding: 1.25rem 1rem;
 }
+
+
+.single__income__earner--add--imputbox{
+    width: 340px;
+}
