@@ -51,10 +51,16 @@
                                          
                                             <td><label class="form-control">Gender / ആൺകുട്ടിയോ/ പെൺകുട്ടിയോ : <b>{{ @$formData['gender'] }} </b>
                                             </td>
-                                            <td><label class="form-control">Parent Name & Address With Pincode / രക്ഷിതാവിന്റെ പേരും വിലാസവും (പിൻകോഡ് സഹിതം ) : <b>{{ @$formData['address'] }}</b>
+                                            <td><label class="form-control">Parent Name : <b>{{ @$formData['parent_name'] }}</b>
                                                 </label></td>
                                         </tr>
+                                        <tr>
                                         
+                                            <td><label class="form-control">Parent Address : <b>{{ @$formData['address'] }} </b>
+                                            </td>
+                                            <td><label class="form-control">District/Taluk/Pincode: <b>{{ @$formData['district'] }} {{ @$formData['taluk'] }}{{ @$formData['pincode'] }}</b>
+                                                </label></td>
+                                        </tr>
 
                                         <tr>
                                         
@@ -110,8 +116,12 @@
                                            
                                             <td><label class="form-control">Place/സ്ഥലം : <b>{{ @$formData['place'] }} </b>
                                             </td>
-                                            <td><label class="form-control">Date/തിയതി : <b>{{ @$formData['date'] }} </b>
-                                            </td>
+                                            <td>
+                                                Parent's Sign/രക്ഷിതാവിന്റെ ഒപ്പും
+                                                    @if($formData['signature'])
+                                                    <iframe src="{{ asset('signature/' . @$formData['signature']) }}" width="400" height="200"></iframe>
+                                                    @endif
+                                                </td>
                                            
                                         </tr>
                                     
@@ -124,22 +134,7 @@
                                 
                                 <form action="{{ url('examApplicationStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
-                                    <div class="row">
-                                        <div class="col-md-6 mb-6">
-												<label class="form-label">Parent's Name/രക്ഷിതാവിന്റെ പേരു</label>
-												<input type="text" class="form-control"  name="parent_name" required />
-												@error('parent_name')
-														<span class="text-danger">{{$message}}</span>
-												@enderror
-										</div>
-                                        <div class="col-md-6 mb-6">
-												<label class="form-label">Parent's Sign/രക്ഷിതാവിന്റെ ഒപ്പും</label>
-												<input type="file" class="form-control"  name="signature" required />
-												@error('signature')
-														<span class="text-danger">{{$message}}</span>
-												@enderror
-										</div>
-                                    </div>
+                                   
                                     <br>
                                     <div class="row">
                                        <div class="col-md-1 mb-1">
@@ -147,7 +142,7 @@
                                         </div>
                                         <div class="col-md-11 mb-11">
                                         മുകളിൽ പറഞ്ഞിട്ടുള്ള വിവരങ്ങൾ എല്ലാം എന്റെ അറിവിൽപെട്ടിടത്തോളം  സത്യവും ശരിയുമെന്നെന്നും ഇതിനാൽ ബോധിപ്പിച്ചുകൊള്ളുന്നു.
-                                              മുകളിൽ പറഞ്ഞിട്ടുള്ള സ്കൂളിൽ എന്റെ മകൻ/മകൾ <input type="text" class="form-control"  name="student_name" required /> പ്രവേശനം ലഭിക്കുന്ന പക്ഷം പഠനം പൂർത്തിയാക്കുന്നതിനു മുൻപായി എന്റെ സ്വന്തം താല്പര്യപ്രകാരം പഠിത്തം നിർത്തുകയോ കുട്ടിയെ പിന്വലിക്കുകയോ ചെയ്യുകയില്ല  എന്നു ഇതിനാൽ ഉറപ്പുതന്നുകുള്ളുന്നു.
+                                              മുകളിൽ പറഞ്ഞിട്ടുള്ള സ്കൂളിൽ എന്റെ മകൻ/മകൾ <input type="text" class="form-control" value="{{ @$formData['student_name'] }}"  name="student_name" required /> പ്രവേശനം ലഭിക്കുന്ന പക്ഷം പഠനം പൂർത്തിയാക്കുന്നതിനു മുൻപായി എന്റെ സ്വന്തം താല്പര്യപ്രകാരം പഠിത്തം നിർത്തുകയോ കുട്ടിയെ പിന്വലിക്കുകയോ ചെയ്യുകയില്ല  എന്നു ഇതിനാൽ ഉറപ്പുതന്നുകുള്ളുന്നു.
 
                                         </div>
                                     </div>

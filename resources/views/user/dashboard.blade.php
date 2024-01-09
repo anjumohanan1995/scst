@@ -190,7 +190,11 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
+<<<<<<< HEAD
                         <h3>Application 6 - <a href="{{ route('userHouseGrantList') }}">Applied({{ $data['houseGrantCount'] }})</a></h3>
+=======
+                        <h3>Application 6 - <a href="{{ route('userHouseGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+>>>>>>> 4754f342e0ac301fb0eaf8c0350356ea035856a3
                         <p>പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
                             ധനസഹായത്തിനുള്ള അപേക്ഷ 
                          </p>
@@ -212,6 +216,7 @@ a.btn-card {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
 
         </div>
     </div>
@@ -219,6 +224,25 @@ a.btn-card {
         
         
     </div>
+=======
+            <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 8 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <p>സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി </p>
+                             <a href="{{url('anemia-financial-assistance')}}" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </section>
+		
+		
+	</div>
+>>>>>>> 4754f342e0ac301fb0eaf8c0350356ea035856a3
 </div>
 <script>
 

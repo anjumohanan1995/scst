@@ -14,7 +14,13 @@ class FinancialHelp extends Eloquent
 
     protected $fillable = [
         'husband_address',
+        'hus_district',
+        'hus_taluk',
+        'hus_pincode',
         'wife_address',
+        'wife_district',
+        'wife_taluk',
+        'wife_pincode',
         'husband_address_old',
         'wife_address_old',
         'husband_caste',
@@ -24,7 +30,9 @@ class FinancialHelp extends Eloquent
         'husband_age',
         'wife_age','register_details','certificate_details','apart_for_any_period',
         'duration','reason','financial_assistance',
-        'difficulties','user_id','status','husband_sign','wife_sign','husband_name','wife_name','agree'
+        'difficulties','user_id','status','husband_sign','wife_sign','husband_name','wife_name','agree',
+        'submitted_district',
+        'submitted_teo',
 
 
     ];

@@ -1,8 +1,9 @@
 <?php
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\TalukController;
 use App\Http\Controllers\TeoController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
@@ -15,7 +16,8 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\GalleryCategoryController;
 use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
-
+use App\Http\Controllers\SingleIncomeEarnerController;
+use App\Http\Controllers\AnemiaFinanceController;
 
 
 
@@ -80,6 +82,9 @@ Route::get('/getExamList', [App\Http\Controllers\ApplicationController::class, '
 Route::get('/exam-application/{id}', [App\Http\Controllers\ApplicationController::class, 'examApplicationView'])->name('examApplicationView');
 
 
+Route::get('/childFinancialAssistanceForm', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceForm'])->name('childFinancialAssistanceForm');
+Route::post('/childFinancialAssistanceStore', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceStore'])->name('childFinancialAssistanceStore');
+Route::post('/childFinancialStoreDetails', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialStoreDetails'])->name('childFinancialStoreDetails');
 
 
 
@@ -97,6 +102,10 @@ Route::post('/marriageGrantStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/marriageGrantList', [App\Http\Controllers\ApplicationController::class, 'marriageGrantList'])->name('marriageGrantList');
 Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController::class, 'getmarriageGrantList'])->name('getmarriageGrantList');
 Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
+
+Route::get('/anemia-financial-assistance', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancialAssistance'])->name('anemia-financial-assistance');
+Route::post('/anemiaFinancePreview', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancePreview'])->name('anemiaFinancePreview');
+Route::post('/anemiaFinanceStore', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceStore'])->name('anemiaFinanceStore');
 
 
 Route::get('/userCoupleFinanceList', [App\Http\Controllers\UserHomeController::class, 'userCoupleFinanceList'])->name('userCoupleFinanceList');
@@ -172,6 +181,14 @@ Route::get('/newsdetails/{slug}', [App\Http\Controllers\NewslistController::clas
 Route::post('/featured_status', [App\Http\Controllers\NewslistController::class, 'changeNewsStatus'])->name('featured_status');
 Route::get('/sharenewsmail/{id}', [App\Http\Controllers\NewslistController::class, 'shareNewsMail'])->name('share.news.mail');
 Route::delete('/newslist/{id}', 'NewsListController@destroy')->name('newslist.destroy');
+
+
+
+//single income earner controller starts here 
+
+Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
+
+//single income earner controller ends  here 
 
 
 //house Management 

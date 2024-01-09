@@ -8,7 +8,7 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			<div class="col-md-12">
-				<h4 > Application Form</h4><br>
+				
                 <h2>അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ്  സ്‌കീം  പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ  </h2>
 				{{-- <nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
@@ -30,13 +30,13 @@
 	<div class="main-content-body">
         <div class="row row-sm mt-4">
 			<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-				<div class="card">
-					<div class="card-body">
+			
 
-                        <form name="userForm" id="userForm" method="post" action="{{route('examApplicationPreview')}}">
+                        <form name="userForm" id="userForm" method="post" action="{{route('examApplicationPreview')}}"  enctype="multipart/form-data">
                             @csrf
-                            {{-- <div class="mb-4 main-content-label">User Details</div> --}}
-                            <div class="form-group">
+                            <div class="card">
+                                <div class="card-body">
+                          
                                 <br>
                                 <div class="row">
                                      
@@ -74,13 +74,57 @@
                                     </div>
 
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">Parent Name & Address With Pincode / രക്ഷിതാവിന്റെ പേരും വിലാസവും (പിൻകോഡ് സഹിതം )  </label>
-                                        <textarea  class="form-control" placeholder="Parent Name & Address With Pincode " name="address" ></textarea>
+                                        <label class="form-label">Parent Name </label>
+                                        <input class="form-control" placeholder="Parent Name" name="parent_name" />
+                                        <span id="nameError" class="text-danger"></span>
+                                        @error('parent_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    
+                                </div><br>
+                                <div class="row">                               
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">Address </label>
+                                        <textarea  class="form-control" placeholder="Address" name="address" ></textarea>
                                         <span id="nameError" class="text-danger"></span>
                                         @error('address')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
+                                    <div class="col-md-6 mb-6">   
+                                        <div class="row">            
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">ജില്ല  </label>
+                                            <select id="district" name="district" class="form-control" >
+                                                <option value="">Select</option>
+                                                    @foreach($districts as $district)
+                                                        <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                    @endforeach
+                                            </select>
+                                             @error('district')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                            <input type="hidden" name="district_name" id="district_name" value="">
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">താലൂക്ക്  </label>
+                                            <select id="taluk" name="taluk" class="form-control">
+                                                <option value="">Choose Taluk</option>
+                                            </select>                                 
+                                            @error('taluk')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                            <input type="hidden" name="taluk_name" id="taluk_name" value="">
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">പിൻകോഡ്  </label>
+                                            <input type="text" value="{{ old('pincode') }}"  class="form-control"  name="pincode" />
+                                            @error('pincode')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div> </div>
                                     
                                 </div><br>
                                 <div class="row">
@@ -192,20 +236,53 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">Date/തിയതി</label>
-                                        <input type="date" value="{{ old('date') }}" class="form-control" placeholder="Date" name="date" />
-                                       
-                                        @error('date')
-                                            <span class="text-danger">{{$message}}</span>
+                                        <label class="form-label">Parent's Sign/രക്ഷിതാവിന്റെ ഒപ്പും</label>
+                                        <input type="file" class="form-control"  name="signature" required />
+                                        @error('signature')
+                                                <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                       
-                                    </div>
+                                </div>
                                     
                                 </div><br>
                             </div>
-                            <br><br><br>
-                            <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light float-end">Save</button>
-						</form>
+                        </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">   
+                                            <div class="col-md-6 mb-6">
+                                                <label class="form-label">ജില്ല  </label>
+                                                <select id="submitted_district" name="submitted_district" class="form-control" required >
+                                                    <option value="">Select</option>
+                                                        @foreach($districts as $district)
+                                                            <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                        @endforeach
+                                                </select>
+                                                 @error('dist')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                <input type="hidden" name="dist_name" id="dist_name" value="">
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label class="form-label">TEO  </label>
+                                                <select id="submitted_teo" name="submitted_teo" class="form-control" required>
+                                                    <option value="">Choose TEO</option>
+                                                </select>                                 
+                                                @error('teo')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                <input type="hidden" name="teo_name" id="teo_name" value="">
+                                            </div>                                 
+                                        </div><br>
+                                    </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">                                    
+                                        </div>
+                                        <div class="col-md-8 mb-8">
+                                            <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                                        </div>
+                                    </div><br>
+                                </form>
                     </div>
                 </div>
             </div>
@@ -224,6 +301,72 @@
             }
         });
 	});
+
+    $('#district').change(function(){
+        var districtName = this.options[this.selectedIndex].text;
+    document.getElementById('district_name').value = districtName;
+        var val = document.getElementById("district").value;
+      
+        $.ajax({
+                    url: "{{url('district/fetch-taluk')}}",
+                    type: "POST",
+                    data: {
+                        district_id: val,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#taluk").find('option').remove();
+                          $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+                        $.each(result.taluks, function (key, value) {
+                            var $opt = $('<option>');
+                            $opt.val(value._id).text(value.taluk_name);
+                            $opt.appendTo('#taluk');
+                          
+
+                        });
+
+                    }
+                });
+
+    });
+    $('#taluk').change(function(){
+        var talukName = this.options[this.selectedIndex].text;
+    document.getElementById('taluk_name').value = talukName;
+    });
+
+    $('#submitted_district').change(function(){
+        var submitted_district = this.options[this.selectedIndex].text;
+    document.getElementById('dist_name').value = submitted_district;
+        var val = document.getElementById("submitted_district").value;
+      
+        $.ajax({
+                    url: "{{url('district/fetch-teo')}}",
+                    type: "POST",
+                    data: {
+                        district_id: val,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#submitted_teo").find('option').remove();
+                          $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+                        $.each(result.teos, function (key, value) {
+                            var $opt = $('<option>');
+                            $opt.val(value._id).text(value.teo_name);
+                            $opt.appendTo('#submitted_teo');
+                          
+
+                        });
+
+                    }
+                });
+
+    });
+    $('#submitted_teo').change(function(){
+        var submitted_teo = this.options[this.selectedIndex].text;
+    document.getElementById('teo_name').value = submitted_teo;
+    });
   </script>
 <!-- main-content-body -->
 @endsection

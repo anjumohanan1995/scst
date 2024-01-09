@@ -41,8 +41,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-     public function index()
+    public function index()
     {
+
 
        if (auth()->user()->role =='User'){
         $user_id=Auth::user()->id;
@@ -53,73 +54,75 @@ class HomeController extends Controller
         $data['houseGrantCount'] = HouseManagement::where('user_id',$user_id)->count();
             return view('user.dashboard',compact('data'));
        }else{
+
+      
             return view('admin.dashboard');
-       }
-        
+        }
     }
     public function applicationForms()
     {
         return view('application.form');
     }
 
-    
 
-   public function profile()
+
+    public function profile()
     {
-        $user =User::where('_id',auth()->user()->id)->where('deleted_at',null)->first();
-        return view('profile.view_profile',compact('user'));
+        $user = User::where('_id', auth()->user()->id)->where('deleted_at', null)->first();
+        return view('profile.view_profile', compact('user'));
     }
     public function password()
     {
-        $user =User::where('_id',auth()->user()->id)->where('deleted_at',null)->first();
-        return view('profile.edit_profile',compact('user'));
+        $user = User::where('_id', auth()->user()->id)->where('deleted_at', null)->first();
+        return view('profile.edit_profile', compact('user'));
     }
     public function changePassword(Request $request)
     {
-        $validate = Validator::make($request->all(),
-        [
-            'password' => ['required', Password::min(8)
-            ->mixedCase()
-            ->letters()
-            ->numbers()
-            ->symbols()
-            ->uncompromised(),
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'password' => [
+                    'required', Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised(),
                 ],
-        ]);
-        if($validate->fails())
-        {
+            ]
+        );
+        if ($validate->fails()) {
             $messages = $validate->getMessageBag();
             return redirect()->back()->withErrors($validate);
         }
         $id = $request->password;
         $pass = $request->current_password;
-        $user =User::where('_id',auth()->user()->id)->where('deleted_at',null)->first();
+        $user = User::where('_id', auth()->user()->id)->where('deleted_at', null)->first();
 
-       if(strcmp($request->current_password, $request->password) == 0){
-        return redirect()->back()->with('error','New Password cannot be same as your current password. Please choose a different password..');
-       }
+        if (strcmp($request->current_password, $request->password) == 0) {
+            return redirect()->back()->with('error', 'New Password cannot be same as your current password. Please choose a different password..');
+        }
 
-       if($request->password!=$request->c_password){
-        return redirect()->back()->with('error','Retype Password Mismatch,Try Again');
-       }
+        if ($request->password != $request->c_password) {
+            return redirect()->back()->with('error', 'Retype Password Mismatch,Try Again');
+        }
 
-        if (Hash::check($pass,auth()->user()->password )) {
+        if (Hash::check($pass, auth()->user()->password)) {
             $user->update([
                 'password' =>  Hash::make($id),
             ]);
-            return redirect()->back()->with('success','Password changed successfully.');
+            return redirect()->back()->with('success', 'Password changed successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Your current password does not matches with the password you provided. Please try again.');
         }
-        else{
-            return redirect()->back()->with('error','Your current password does not matches with the password you provided. Please try again.');
-        }
-
     }
-    public function changeStatus(Request $request){
-       // $request =Request::all();
+    public function changeStatus(Request $request)
+    {
+        // $request =Request::all();
         //dd($request['status']);
-        $status="aone";
-        if($request['status']){
-            $status=$request['status'];
+        $status = "aone";
+        if ($request['status']) {
+            $status = $request['status'];
         }
         session()->put('style_status', $status);
         return redirect()->back();
@@ -128,66 +131,65 @@ class HomeController extends Controller
     {
 
         $datas = Patient::get();
-      //  dd($datas);
-        $pid='P0001';
-foreach($datas as $collect) {
-    $score = Patient::find($collect['_id']);
-    $score->update([
-        'patient_id' => $pid++
-    ]);
-}
-    //     DB::table('users')
-    // ->whereNotNull('deleted_at') // Specify the condition: deleted_at is not null
-    // ->delete();
+        //  dd($datas);
+        $pid = 'P0001';
+        foreach ($datas as $collect) {
+            $score = Patient::find($collect['_id']);
+            $score->update([
+                'patient_id' => $pid++
+            ]);
+        }
+        //     DB::table('users')
+        // ->whereNotNull('deleted_at') // Specify the condition: deleted_at is not null
+        // ->delete();
         // User::where('email','sruthi@kawikatechnologies.com')->delete();
         // $users = User::where('role','Data Entry')->delete();
-       // $users = User::where('email','cheruvadichcqq@gmail.com')->first();
+        // $users = User::where('email','cheruvadichcqq@gmail.com')->first();
         // $users = User::get();
         //  dd($users);
         // Patient::where('name',null)->delete();
 
         // Hospital::truncate();
-         // Patient::truncate();
-         // Pharmacy::truncate();
-         // Miscellaneous::truncate();
-         // Laboratory::truncate();
+        // Patient::truncate();
+        // Pharmacy::truncate();
+        // Miscellaneous::truncate();
+        // Laboratory::truncate();
 
     }
-       public function ajaxList(Request $request)
+    public function ajaxList(Request $request)
     {
-    // Simulated data (replace with your actual data retrieval logic)
-    $term = $request['q'];
-    $patients =Patient::orderBy('id','desc')
-             ->where(function ($query) use ($term) {       
-              $query->orWhere('name', 'like', '%'.$term.'%')   
-              ->orWhere('patient_id', 'like', '%'.$term.'%')
-                     ->orWhere('mobile', 'like', '%'.$term.'%');
-
-                      })->limit(20)->get();
-
-   
-
-    $array = [];
-
-// Iterate through the data using a foreach loop
-foreach ($patients as $patient) {
-    // Insert each row into the associative array with a custom key
-    $array =
-        ['value' => $patient->id, 'text' => $patient->name.'-'.$patient->patient_id.'-'.$patient->mobile];
-        // Add more fields as needed
-   $data[] = $array;
-}
+        // Simulated data (replace with your actual data retrieval logic)
+        $term = $request['q'];
+        $patients = Patient::orderBy('id', 'desc')
+            ->where(function ($query) use ($term) {
+                $query->orWhere('name', 'like', '%' . $term . '%')
+                    ->orWhere('patient_id', 'like', '%' . $term . '%')
+                    ->orWhere('mobile', 'like', '%' . $term . '%');
+            })->limit(20)->get();
 
 
-    $results = [];
 
-    foreach ($data as $item) {
+        $array = [];
 
-        if (stripos($item['text'], $term) !== false) {
-            $results[] = $item;
+        // Iterate through the data using a foreach loop
+        foreach ($patients as $patient) {
+            // Insert each row into the associative array with a custom key
+            $array =
+                ['value' => $patient->id, 'text' => $patient->name . '-' . $patient->patient_id . '-' . $patient->mobile];
+            // Add more fields as needed
+            $data[] = $array;
         }
-    }
 
-    echo json_encode($results);
-}
+
+        $results = [];
+
+        foreach ($data as $item) {
+
+            if (stripos($item['text'], $term) !== false) {
+                $results[] = $item;
+            }
+        }
+
+        echo json_encode($results);
+    }
 }

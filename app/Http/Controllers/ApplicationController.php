@@ -257,33 +257,25 @@ class ApplicationController extends Controller
     {
 
         $data =Auth::user();
-        return view('application.financial-help',compact('data'));
+        $districts = District::get();
+        return view('application.financial-help',compact('data','districts'));
 
     }
 
     public function financialHelpStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'husband_address' => 'required']
+            'husband_address' => 'required',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',  
+            ]
            
         );
         if ($validator->fails()) {
             // Captcha validation failed
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $data = $request->all();
-
-        $formData = $data;
-
-        return view('application.financial_preview', compact('formData'));
-
-
-
-    }
-    public function financialHelpStoreDetails(Request $request)
-    {
-
-        $data = json_decode($request->input('formData'), true);
+       
         if ($request->hasfile('husband_sign')) {
 
             $image = $request->husband_sign;
@@ -310,12 +302,34 @@ class ApplicationController extends Controller
         }else{
             $wife_sign = '';
         }
+        $data = $request->all();
+
+        $formData = $data;
+        $formData['husband_sign']= $husband_sign;
+        $formData['wife_sign']= $wife_sign;
+
+        return view('application.financial_preview', compact('formData'));
+
+
+
+    }
+    public function financialHelpStoreDetails(Request $request)
+    {
+
+        $data = json_decode($request->input('formData'), true);
+
 
 
 
         $datainsert = FinancialHelp::create([
             'husband_address' => $data['husband_address'],
+            'hus_district' => @$data['hus_district'],
+            'hus_taluk' => @$data['hus_taluk'],
+            'hus_pincode' => @$data['hus_pincode'],
             'wife_address' => @$data['wife_address'],
+            'wife_district' => @$data['wife_district'],
+            'wife_taluk' => @$data['wife_taluk'],
+            'wife_pincode' => @$data['wife_pincode'],
             'husband_address_old' => $data['husband_address_old'],
             'wife_address_old' => $data['wife_address_old'],
             'husband_caste' => $data['husband_caste'],
@@ -326,17 +340,19 @@ class ApplicationController extends Controller
             'wife_age' =>$data['wife_age'],
             'register_details' => $data['register_details'],
             'certificate_details' => $data['certificate_details'],
-            'apart_for_any_period' => $data['apart_for_any_period'],
+            'apart_for_any_period' => @$data['apart_for_any_period'],
             'duration' => $data['duration'],
             'reason' => $data['reason'],
             'financial_assistance' => $data['financial_assistance'],
             'difficulties' => $data['difficulties'],
             'user_id' =>Auth::user()->id, 
-            'husband_name' =>$request->input('husband_name'), 
-            'wife_name' =>$request->input('wife_name'), 
-            'agree' =>$request->input('agree'), 
-            'wife_sign' =>@$wife_sign,
-            'husband_sign' =>@$husband_sign,
+            'husband_name' =>@$data['husband_name'], 
+            'wife_name' =>@$data['wife_name'], 
+            'agree' =>@$data['agree'], 
+            'wife_sign' =>@$data['wife_sign'],
+            'husband_sign' =>@$data['husband_sign'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
             'status' =>0
         ]);
 
@@ -490,8 +506,8 @@ class ApplicationController extends Controller
 
     public function examApplication(Request $request)
     {
-       
-        return view('application.exam_application');
+       $districts = District::get();
+        return view('application.exam_application',compact('districts'));
 
 
 
@@ -510,19 +526,6 @@ class ApplicationController extends Controller
         }
         $data = $request->all();
 
-        $formData = $data;
-
-        return view('application.exam_application_preview', compact('formData'));
-
-
-
-        
-    }
-    public function examApplicationStore(Request $request)
-    {
-        $data = json_decode($request->input('formData'), true);
-       
-
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
@@ -535,13 +538,30 @@ class ApplicationController extends Controller
         }else{
             $signature = '';
         }
+        $formData = $data;
+        $formData['signature']= $signature;
+
+        return view('application.exam_application_preview', compact('formData'));
+
+
+
+        
+    }
+    public function examApplicationStore(Request $request)
+    {
+        $data = json_decode($request->input('formData'), true);
+       
+
 
 
 
         $datainsert = ExamApplication::create([
             'school_name' => $data['school_name'],
             'student_name' => @$data['student_name'],
-            'gender' => $data['gender'],
+            'gender' => @$data['gender'],
+            'district' => @$data['district'],
+            'taluk' => @$data['taluk'],
+            'pincode' => @$data['pincode'],
             'address' => $data['address'],
             'relation' => $data['relation'],
             'mother_name' => $data['mother_name'],
@@ -554,14 +574,14 @@ class ApplicationController extends Controller
             'school_address' =>$data['school_address'],
             'birth_place' => $data['birth_place'],
             'mother_tonge' => $data['mother_tonge'],
-            'date' => $data['date'],
-            'place' => $data['place'],
-            
+            'date' => date('d-m-Y'),
+            'place' => $data['place'],            
             'user_id' =>Auth::user()->id, 
             'agree' =>$request->input('agree'),
-            'parent_name'  =>$request->input('parent_name'),
-            'signature' =>@$signature,
-           
+            'parent_name'  =>@$data['parent_name'],
+            'signature' =>@$data['signature'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
             'status' =>0
         ]);
 
@@ -1044,7 +1064,7 @@ class ApplicationController extends Controller
             'name_and_address_groom_parent' => $data['name_and_address_groom_parent'],
             'financial_assistance_details' => $data['financial_assistance_details'],
             'place' => $data['place'],
-            'date' => $data['date'],
+            'date' => date('d-m-Y'),
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
             'signature' => @$data['signature'],
