@@ -17,6 +17,9 @@ class ExamApplication extends Eloquent
         'student_name',
         'gender',
         'address',
+        'district',
+        'taluk',
+        'pincode',
         'relation',
         'mother_name',
         'annual_income',
@@ -29,7 +32,9 @@ class ExamApplication extends Eloquent
         'mother_tonge',
         'user_id','status',
         'agree','signature','parent_name',
-        'date','place'
+        'date','place',
+        'submitted_district',
+        'submitted_teo',
 
     ];
 

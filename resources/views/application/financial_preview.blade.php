@@ -63,6 +63,14 @@
                                                 </label></td>
                                         </tr>
                                         <tr>
+
+                                           
+                                            <td>District, Taluk, Pincode<label class="form-control"> <b>{{ @$formData['hus_district_name'] }} {{ @$formData['hus_taluk_name'] }} {{ @$formData['hus_pincode'] }} </b>
+                                                </label></td>
+                                            <td>District, Taluk, Pincode<label class="form-control"> <b>{{ @$formData['wife_district_name'] }} {{ @$formData['wife_taluk_name'] }} {{ @$formData['wife_pincode'] }} </b></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2">
                                                  സമുദായം
                                             </td>
@@ -183,60 +191,36 @@
                                                 </td>
                                           
                                         </tr>
-
+                                        <tr>
+                                        <td>
+                                            Husband's Sign/ഭർത്താവിന്റെ ഒപ്പ് 
+                                                @if($formData['husband_sign'])
+                                                <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe>
+                                                @endif
+                                          </td><td>
+                                            Wife's Sign/ ഭാര്യയുടെ ഒപ്പ്
+                                                @if($formData['wife_sign'])
+                                                <iframe src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="400" height="200"></iframe>
+                                                @endif
+                                            </td>
+                                        </tr><br>
+                                        <tr>
+                                           
+                                            <td>ശ്രീമാൻ: 
+                                                <label class="form-control"><b>{{ @$formData['husband_name'] }} </b>
+                                            </td>
+                                            <td>ശ്രീമതി: 
+                                                <label class="form-control"><b>{{ @$formData['wife_name'] }} </b>
+                                            </td>
+                                           
+                                    </tr>
                                         
                                     </table>
-                                
+                                    എന്നിവരായ ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.
                                 <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
-                                    <div class="row">
-                                    <div class="col-md-6 mb-6">
-												<label class="form-label">Husband's Sign/ഭർത്താവിന്റെ ഒപ്പ് </label>
-												<input type="file" class="form-control"  name="husband_sign" required />
-												@error('husband_sign')
-														<span class="text-danger">{{$message}}</span>
-												@enderror
-											</div>
-
-											<div class="col-md-6 mb-6">
-												<label class="form-label">Wife's Sign/ ഭാര്യയുടെ ഒപ്പ് </label>
-												<input type="file" class="form-control"  name="wife_sign" required />
-												@error('wife_sign')
-														<span class="text-danger">{{$message}}</span>
-												@enderror
-											</div>
-
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                       <div class="col-md-1 mb-1">
-                                            <input type="checkbox" id="wifeCheckbox" name="agree" value="Yes" required>
-                                        </div>
-                                        <div class="col-md-11 mb-11">
-                                            ശ്രീമാൻ <input type="text" class="form-control"  name="husband_name" required />ശ്രീമതി 
-                                             <input type="text" class="form-control"  name="wife_name" required />
-                                            എന്നിവരായ ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.
-                                        </div>
-                                    </div>
-
-                                    {{-- <div class="row">
-                                        <div class="col-md-3">
-
-                                            <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
-
-                                            <button type="submit" class="btn-block  btn btn-success"
-                                                    onclick="return confirm('Do you want to continue?')">Submit</button>
-                                            
-                                        </div>
-                                        <div class="col-md-3">
-
-                                          
-                                            <div class="btn_wrapper">
-                                                <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
+                                   
+                                   
                                     <div class="row">
                                         <div class="col-md-3">
                                             <input type="hidden" name="formData" value="{{ json_encode($formData) }}">

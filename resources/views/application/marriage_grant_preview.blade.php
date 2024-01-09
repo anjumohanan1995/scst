@@ -208,23 +208,15 @@
                     <td> 
                         {{ @$formData['place'] }} 
                     </td>
-                    <td>
-                        തീയതി  </td><td> @if($formData['date'])
-                            {{ date('d-m-Y', strtotime(@$formData['date'])) }}
-                        @endif
-                    </td>
-                 
-                </tr>
-                <tr>
-               
+                   
                     <td>
                         അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം   </td><td>
                             @if($formData['signature'])
                             <iframe src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}" width="400" height="200"></iframe>
                             @endif
                         </td>
-                    </tr>
-      
+                </tr>
+               
              
                
            </table>

@@ -1,8 +1,9 @@
 <?php
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\TalukController;
 use App\Http\Controllers\TeoController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
@@ -13,7 +14,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SlidercategoryController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\GalleryCategoryController;
+use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
+use App\Http\Controllers\SingleIncomeEarnerController;
 
 
 
@@ -174,3 +177,21 @@ Route::get('/newsdetails/{slug}', [App\Http\Controllers\NewslistController::clas
 Route::post('/featured_status', [App\Http\Controllers\NewslistController::class, 'changeNewsStatus'])->name('featured_status');
 Route::get('/sharenewsmail/{id}', [App\Http\Controllers\NewslistController::class, 'shareNewsMail'])->name('share.news.mail');
 Route::delete('/newslist/{id}', 'NewsListController@destroy')->name('newslist.destroy');
+
+
+
+//single income earner controller starts here 
+
+Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
+
+//single income earner controller ends  here 
+
+
+//house Management 
+    Route::resource('houseGrant', HouseManagementController::class);
+    Route::get('/show/{id}', [HouseManagementController::class, 'show'])->name('examples.show');
+    Route::get('/', [HouseManagementController::class, 'index'])->name('examples.index');
+    Route::get('/show/{id}', [HouseManagementController::class, 'show'])->name('examples.show');
+    Route::get('/userHouseGrantList', [HouseManagementController::class, 'userHouseGrantList'])->name('userHouseGrantList');
+    Route::get('/getUserHouseGrantList', [HouseManagementController::class, 'getUserHouseGrantList'])->name('getUserHouseGrantList');
+   
