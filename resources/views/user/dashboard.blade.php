@@ -1,30 +1,30 @@
 @extends('layouts.app')
 <style>
 .details-card {
-	background: #ecf0f1;
+    background: #ecf0f1;
 }
 
 .card-content {
-	background: #ffffff;
-	border: 4px;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    background: #ffffff;
+    border: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
 
 .card-img {
-	position: relative;
-	overflow: hidden;
-	border-radius: 0;
-	z-index: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+    z-index: 1;
 }
 
 .card-img img {
-	width: 100%;
-	height: auto;
-	display: block;
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .card-img span {
-	position: absolute;
+    position: absolute;
     top: 15%;
     left: 12%;
     background: #1ABC9C;
@@ -45,11 +45,11 @@
          line-height: 0;
 }
 .card-desc {
-	padding: 1.25rem;
+    padding: 1.25rem;
 }
 
 .card-desc h3 {
-	color: #000000;
+    color: #000000;
     font-weight: 600;
     font-size: 1.5em;
     line-height: 1.3em;
@@ -59,20 +59,20 @@
 }
 
 .card-desc p {
-	color: #747373;
+    color: #747373;
     font-size: 14px;
-	font-weight: 400;
-	font-size: 1em;
-	line-height: 1.5;
-	margin: 0px;
-	margin-bottom: 20px;
-	padding: 0;
-	font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.5;
+    margin: 0px;
+    margin-bottom: 20px;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
 }
 .btn-card{
-	background-color: #1ABC9C;
-	color: #fff;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    background-color: #1ABC9C;
+    color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     padding: .84rem 2.14rem;
     font-size: .81rem;
     -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
@@ -102,19 +102,19 @@ a.btn-card {
 @section('content')
 <!-- main-content -->
 <div class="main-content app-content">
-	<!-- container -->
-	<div class="main-container container-fluid">
-		<!-- breadcrumb -->
-		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-			<div class="col-xl-3">
-				<h4 class="content-title mb-2"> User Dashboard</h4>
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - Dashboard
-						</li>
-					</ol>
-				</nav>
-			</div>
+    <!-- container -->
+    <div class="main-container container-fluid">
+        <!-- breadcrumb -->
+        <div class="breadcrumb-header justify-content-between row me-0 ms-0" >
+            <div class="col-xl-3">
+                <h4 class="content-title mb-2"> User Dashboard</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - Dashboard
+                        </li>
+                    </ol>
+                </nav>
+            </div>
 
             @if ($message = Session::get('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -122,13 +122,13 @@ a.btn-card {
             </div>
 
         @endif
-		</div>
-		<!-- /breadcrumb -->
+        </div>
+        <!-- /breadcrumb -->
 
-	</div>
-	<div class="main-content-body">
+    </div>
+    <div class="main-content-body">
 
-	<section class="details-card">
+    <section class="details-card">
     <div class="container">
         <br>
         <div class="row">
@@ -174,20 +174,58 @@ a.btn-card {
                     </div>
                 </div>
             </div>
+
+             <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 5 -</h3>
+                        <p>അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
+                             <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 6 - <a href="{{ route('userHouseGrantList') }}">Applied({{ $data['houseGrantCount'] }})</a></h3>
+                        <p>പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
+                            ധനസഹായത്തിനുള്ള അപേക്ഷ 
+                         </p>
+                             <a href="/houseGrant/create" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
          
         </div>
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 7 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <p>ഏകവരുമാനദായകന്റെ മരണം തെളിയിക്കുന അപേക്ഷഫോറം </p>
+                             <a href="{{url('single-income-earner')}}" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</section>
-		
-		
-	</div>
+    </section>
+        
+        
+    </div>
 </div>
 <script>
 
 
-	$(document).ready(function() {
-     	$('#example').DataTable();
-	});
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
   </script>
 <!-- main-content-body -->
 @endsection
