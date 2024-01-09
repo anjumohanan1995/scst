@@ -320,21 +320,14 @@
                                                             
                             </div><br>  
                             <div class="row">   
-                                <div class="col-md-4 mb-4">
+                                <div class="col-md-6 mb-6">
                                     <label class="form-label">സ്ഥലം</label>
                                     <input type="text" value="{{ old('place') }}" class="form-control" placeholder="സ്ഥലം" name="place" />
                                     @error('place')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-4">
-                                    <label class="form-label">തീയതി </label>
-                                    <input type="date" value="{{ old('date') }}"  class="form-control" placeholder="തീയതി" name="date" />
-                                    @error('date')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div> 
-                                <div class="col-md-4 mb-4">
+                                <div class="col-md-6 mb-6">
                                     <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </label>
                                     <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" />
                                     @error('signature')
