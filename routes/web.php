@@ -1,8 +1,9 @@
 <?php
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\TalukController;
 use App\Http\Controllers\TeoController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\SlidercategoryController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\GalleryCategoryController;
 use App\Http\Controllers\NewslistController;
+use App\Http\Controllers\SingleIncomeEarnerController;
 
 
 
@@ -171,3 +173,11 @@ Route::get('/newsdetails/{slug}', [App\Http\Controllers\NewslistController::clas
 Route::post('/featured_status', [App\Http\Controllers\NewslistController::class, 'changeNewsStatus'])->name('featured_status');
 Route::get('/sharenewsmail/{id}', [App\Http\Controllers\NewslistController::class, 'shareNewsMail'])->name('share.news.mail');
 Route::delete('/newslist/{id}', 'NewsListController@destroy')->name('newslist.destroy');
+
+
+
+//single income earner controller starts here 
+
+Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
+
+//single income earner controller ends  here 
