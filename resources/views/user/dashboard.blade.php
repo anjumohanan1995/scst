@@ -174,10 +174,48 @@ a.btn-card {
                     </div>
                 </div>
             </div>
+
+             <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 5 -</h3>
+                        <p>അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
+                             <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 6 - <a href="{{ route('userHouseGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <p>പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
+                            ധനസഹായത്തിനുള്ള അപേക്ഷ 
+                         </p>
+                             <a href="/houseGrant/create" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
          
         </div>
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 7 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <p>ഏകവരുമാനദായകന്റെ മരണം തെളിയിക്കുന അപേക്ഷഫോറം </p>
+                             <a href="{{url('single-income-earner')}}" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</section>
+    </section>
 		
 		
 	</div>

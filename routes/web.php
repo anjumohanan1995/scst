@@ -79,6 +79,9 @@ Route::get('/getExamList', [App\Http\Controllers\ApplicationController::class, '
 Route::get('/exam-application/{id}', [App\Http\Controllers\ApplicationController::class, 'examApplicationView'])->name('examApplicationView');
 
 
+Route::get('/childFinancialAssistanceForm', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceForm'])->name('childFinancialAssistanceForm');
+Route::post('/childFinancialAssistanceStore', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceStore'])->name('childFinancialAssistanceStore');
+Route::post('/childFinancialStoreDetails', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialStoreDetails'])->name('childFinancialStoreDetails');
 
 
 
