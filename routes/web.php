@@ -17,7 +17,7 @@ use App\Http\Controllers\GalleryCategoryController;
 use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
-
+use App\Http\Controllers\AnemiaFinanceController;
 
 
 
@@ -102,6 +102,10 @@ Route::post('/marriageGrantStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/marriageGrantList', [App\Http\Controllers\ApplicationController::class, 'marriageGrantList'])->name('marriageGrantList');
 Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController::class, 'getmarriageGrantList'])->name('getmarriageGrantList');
 Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
+
+Route::get('/anemia-financial-assistance', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancialAssistance'])->name('anemia-financial-assistance');
+Route::post('/anemiaFinancePreview', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancePreview'])->name('anemiaFinancePreview');
+Route::post('/anemiaFinanceStore', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceStore'])->name('anemiaFinanceStore');
 
 
 Route::get('/userCoupleFinanceList', [App\Http\Controllers\UserHomeController::class, 'userCoupleFinanceList'])->name('userCoupleFinanceList');
