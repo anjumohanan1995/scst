@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MedEngStudentFund;
-use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class MedEngStudentFundController extends Controller
@@ -47,7 +47,7 @@ class MedEngStudentFundController extends Controller
          
 
              // Total records
-             $totalRecord = HouseManagement::where('user_id',$user_id)->where('deleted_at',null);
+             $totalRecord = MedEngStudentFund::where('user_id',$user_id)->where('deleted_at',null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -57,7 +57,7 @@ class MedEngStudentFundController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = HouseManagement::where('user_id',$user_id)->where('deleted_at',null);
+             $totalRecordswithFilte = MedEngStudentFund::where('user_id',$user_id)->where('deleted_at',null);
 
           
              if($name != ""){
@@ -69,7 +69,7 @@ class MedEngStudentFundController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = HouseManagement::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = MedEngStudentFund::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
            
              if($name != ""){
                 $items->where('name','like',"%".$name."%");

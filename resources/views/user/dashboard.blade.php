@@ -232,6 +232,23 @@ a.btn-card {
                     </div>
                 </div>
             </div>
+                      
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="card-content">
+                               
+                                <div class="card-desc">
+                                    <h3>Application 10 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                                    <p>മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo </p>
+                                         <a href="{{url('student-award')}}" class="btn-card">Apply Now</a>     
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
         </div>
     </div>
     </section>

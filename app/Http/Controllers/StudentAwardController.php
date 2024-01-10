@@ -6,6 +6,7 @@ use App\Models\AnemiaFinance;
 use App\Models\District;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
+use App\Models\StudentAward;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
@@ -22,7 +23,7 @@ use MongoDB\BSON\UTCDateTime;
 use Illuminate\Support\Facades\Auth; // Make sure to include this line
 
 
-class AnemiaFinanceController extends Controller
+class StudentAwardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -37,15 +38,15 @@ class AnemiaFinanceController extends Controller
      */
 
 
-     public function anemiaFinancialAssistance()
+     public function studentAward()
      {
         
          $districts = District::get();
-         return view('application.anemia_finance',compact('districts'));
+         return view('application.student_award',compact('districts'));
      }
 
     
-    public function anemiaFinancePreview(Request $request)
+    public function studentAwardPreview(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required']
@@ -57,73 +58,13 @@ class AnemiaFinanceController extends Controller
         }
         $data = $request->all();
 
-        if ($request->hasfile('caste_certificate')) {
-
-            $image = $request->caste_certificate;
-            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
-
-            $image->move(public_path('/applications/anemia_finance'), $imgfileName);
-
-            $caste_certificate = $imgfileName;
-
-        }else{
-            $caste_certificate = '';
-        }
-        if ($request->hasfile('adhaar_copy')) {
-
-            $adhar = $request->adhaar_copy;
-            $imgfileName1 = time() . rand(100, 999) . '.' . $adhar->extension();
-
-            $adhar->move(public_path('/applications/anemia_finance'), $imgfileName1);
-
-            $adhaar_copy = $imgfileName1;
-
-        }else{
-            $adhaar_copy = '';
-        }
-        if ($request->hasfile('passbook_copy')) {
-
-            $passbook = $request->passbook_copy;
-            $imgfileName2 = time() . rand(100, 999) . '.' . $passbook->extension();
-
-            $passbook->move(public_path('/applications/anemia_finance'), $imgfileName2);
-
-            $passbook_copy = $imgfileName2;
-
-        }else{
-            $passbook_copy = '';
-        }
-        if ($request->hasfile('ration_card')) {
-
-            $ration = $request->passbook_copy;
-            $imgfileName3 = time() . rand(100, 999) . '.' . $ration->extension();
-
-            $ration->move(public_path('/applications/anemia_finance'), $imgfileName3);
-
-            $ration_card = $imgfileName3;
-
-        }else{
-            $ration_card = '';
-        }
-
-        if ($request->hasfile('medical_certificate')) {
-
-            $medical = $request->passbook_copy;
-            $imgfileName4 = time() . rand(100, 999) . '.' . $medical->extension();
-
-            $medical->move(public_path('/applications/anemia_finance'), $imgfileName4);
-
-            $medical_certificate = $imgfileName4;
-
-        }else{
-            $medical_certificate = '';
-        }
+     
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
             $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
 
-            $image->move(public_path('applications/anemia_finance'), $imgfileName);
+            $image->move(public_path('applications/student_award'), $imgfileName);
 
             $signature = $imgfileName;
 
@@ -131,46 +72,40 @@ class AnemiaFinanceController extends Controller
             $signature = '';
         }
         $formData = $data;
-        $formData['caste_certificate']= $caste_certificate;
-        $formData['adhaar_copy']= $adhaar_copy;
-        $formData['passbook_copy']= $passbook_copy;
-        $formData['ration_card']= $ration_card;
-        $formData['medical_certificate']= $medical_certificate;
+      
         $formData['signature']= $signature;
 
-        return view('application.anemia_finance_preview', compact('formData'));
+        return view('application.student_award_preview', compact('formData'));
 
 
 
         
     }
-    public function anemiaFinanceStore(Request $request)
+    public function studentAwardStore(Request $request)
     {
         $data = json_decode($request->input('formData'), true);
        
       
 
-        $datainsert = AnemiaFinance::create([
+        $datainsert = StudentAward::create([
             'name' => $data['name'],
             'dob' => $data['dob'],
-            'age' => $data['age'],
-            'caste' => $data['caste'],
-            'caste_certificate' => $data['caste_certificate'],
-            'phone' => $data['phone'],
             'district' => @$data['district'],
             'taluk' => @$data['taluk'],
             'pincode' => @$data['pincode'],
-            'adhaar_number' => @$data['adhaar_number'],
-            'adhaar_copy' => @$data['adhaar_copy'],
-            'bank_account_details' => @$data['bank_account_details'],
-            'passbook_copy' => @$data['passbook_copy'],
-            'ration_card_type' => @$data['ration_card_type'],
-            'ration_card' => $data['ration_card'],
-            'is_medical_certificate_submitted' => @$data['is_medical_certificate_submitted'],
-            'medical_certificate' => $data['medical_certificate'],  
+            'examination_passed' => @$data['examination_passed'],
+            'guardian_name' => @$data['guardian_name'],
+            'community' => @$data['community'],
+            'panchayath_name' => @$data['panchayath_name'],
+            'institution_name' => @$data['institution_name'],
+            'pass_month' => $data['pass_month'],
+            'pass_year' => @$data['pass_year'],
+            'phone' => $data['phone'],  
+            'account_number' => $data['account_number'],  
+            'ifsc_code' => $data['ifsc_code'],  
+            'aadhar_number' => $data['aadhar_number'],  
             'signature' => $data['signature'],  
-            'date' => date('d-m-Y'),
-            'place' => $data['place'],            
+            'date' => date('d-m-Y'),         
             'user_id' =>Auth::user()->id, 
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
