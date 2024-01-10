@@ -108,6 +108,11 @@ Route::post('/anemiaFinancePreview', [App\Http\Controllers\AnemiaFinanceControll
 Route::post('/anemiaFinanceStore', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceStore'])->name('anemiaFinanceStore');
 
 
+Route::get('/student-award', [App\Http\Controllers\StudentAwardController::class, 'studentAward'])->name('studentAward');
+Route::post('/studentAwardPreview', [App\Http\Controllers\StudentAwardController::class, 'studentAwardPreview'])->name('studentAwardPreview');
+Route::post('/studentAwardStore', [App\Http\Controllers\StudentAwardController::class, 'studentAwardStore'])->name('studentAwardStore');
+
+
 Route::get('/userCoupleFinanceList', [App\Http\Controllers\UserHomeController::class, 'userCoupleFinanceList'])->name('userCoupleFinanceList');
 Route::get('/getUserCoupleList', [App\Http\Controllers\UserHomeController::class, 'getUserCoupleList'])->name('getUserCoupleList');
 Route::get('/user-couple-application/{id}', [App\Http\Controllers\UserHomeController::class, 'userCoupleApplicationView'])->name('userCoupleApplicationView');
