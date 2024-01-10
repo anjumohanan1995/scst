@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class TuitionFee extends Eloquent
 {
-    use HasFactory;
+
 
     use SoftDeletes;
 

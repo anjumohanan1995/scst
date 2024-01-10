@@ -246,6 +246,16 @@ a.btn-card {
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="card-content">
+                               
+                                <div class="card-desc">
+                                    <h3>Application 11 - <a href="TuitionFee">Applied({{ $data['tuitionFeeCount'] }})</a></h3>
+                                    <p>പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11 ,12  ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ </p>
+                                         <a href="TuitionFee/create" class="btn-card">Apply Now</a>   
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
 
