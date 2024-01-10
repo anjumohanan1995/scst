@@ -86,7 +86,13 @@ Route::get('/exam-application/{id}', [App\Http\Controllers\ApplicationController
 Route::get('/childFinancialAssistanceForm', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceForm'])->name('childFinancialAssistanceForm');
 Route::post('/childFinancialAssistanceStore', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceStore'])->name('childFinancialAssistanceStore');
 Route::post('/childFinancialStoreDetails', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialStoreDetails'])->name('childFinancialStoreDetails');
+Route::get('/ChildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'ChildFinanceList'])->name('ChildFinanceList');
+Route::get('/getchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getchildFinanceList'])->name('getchildFinanceList');
+Route::get('/childFinance/{id}/view', [App\Http\Controllers\ChildFinanceController::class, 'childFinanceView'])->name('childFinanceView');
 
+Route::get('/userchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceList'])->name('userchildFinanceList');
+Route::get('/getUserchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getUserchildFinanceList'])->name('getUserchildFinanceList');
+Route::get('/userchildFinance/{id}/view', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceView'])->name('userchildFinanceView');
 
 
 

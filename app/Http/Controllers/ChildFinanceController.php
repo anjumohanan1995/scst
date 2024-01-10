@@ -113,7 +113,7 @@ class ChildFinanceController extends Controller
 
         $datainsert = ChildFinance::create([
             'name' => $data['name'],
-            'age' => @$data['currentage_address'],
+            'age' => @$data['age'],
             'dob' => @$data['dob'],
             'birth_certificate' => @$data['birth_certificate'],
             'father_name' => @$data['father_name'],
@@ -149,68 +149,13 @@ class ChildFinanceController extends Controller
 
 
 
-    public function marriageGrantForm()
-    {
-        $districts = District::get();
-        return view('application.marriage_grant_form',compact('districts'));
-    }
    
-    public function marriageGrantStoreDetails(Request $request)
+    public function ChildFinanceList(Request $request)
     {
-
-        $data = json_decode($request->input('formData'), true);
-     
-
-        $datainsert = MarriageGrant::create([
-            'name' => $data['name'],
-            'current_address' => @$data['current_address'],
-            'current_district' => @$data['current_district'],
-            'current_taluk' => @$data['current_taluk'],
-            'current_pincode' => @$data['current_pincode'],
-            'age' => $data['age'],
-            'permanent_address' => $data['permanent_address'],
-            'permanent_district' => @$data['permanent_district'],
-            'permanent_taluk' => @$data['permanent_taluk'],
-            'permanent_pincode' => @$data['permanent_pincode'],
-            'family_details' => $data['family_details'],
-            'caste' => $data['caste'],
-            'caste_certificate' => $data['caste_certificate'],
-            'name_and_address_fiancee' => $data['name_and_address_fiancee'],
-            'relation_with_applicant' => $data['relation_with_applicant'],
-            'marriage_count' =>$data['marriage_count'],
-            'is_widow' => $data['is_widow'],
-            'parent_occupation' => $data['parent_occupation'],
-            'annual_income' => $data['annual_income'],
-            'income_certificate' => $data['income_certificate'],
-            'marriage_place' => $data['marriage_place'],
-            'marriage_date' => $data['marriage_date'],
-            'fiancee_family_details' => $data['fiancee_family_details'],
-            'disabled_parent_info' => $data['disabled_parent_info'],
-            'freedmen_parent_details' => $data['freedmen_parent_details'],
-            'violence_by_non_scheduled_tribes_info' => $data['violence_by_non_scheduled_tribes_info'],
-            'land_alienated_details' => $data['land_alienated_details'],
-            'outcast_parent_details' => $data['outcast_parent_details'],
-            'remarried_parent_details' => $data['remarried_parent_details'],
-            'groom_name_and_address' => $data['groom_name_and_address'],
-            'name_and_address_groom_parent' => $data['name_and_address_groom_parent'],
-            'financial_assistance_details' => $data['financial_assistance_details'],
-            'place' => $data['place'],
-            'date' => $data['date'],
-            'submitted_district' => $data['submitted_district'],
-            'submitted_teo' => $data['submitted_teo'],
-            'signature' => @$data['signature'],
-            'user_id' =>Auth::user()->id, 
-            'status' =>0
-        ]);
-
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
-    }
-    public function marriageGrantList(Request $request)
-    {
-        return view('admin.marriage_grant_list');
+        return view('admin.child_finance_list');
 
     }
-    public function getmarriageGrantList(Request $request)
+    public function getchildFinanceList(Request $request)
     {
         
         $name = $request->name;
@@ -236,7 +181,7 @@ class ChildFinanceController extends Controller
          
 
              // Total records
-             $totalRecord = MarriageGrant::where('deleted_at',null);
+             $totalRecord = ChildFinance::where('deleted_at',null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -246,7 +191,7 @@ class ChildFinanceController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = MarriageGrant::where('deleted_at',null);
+             $totalRecordswithFilte = ChildFinance::where('deleted_at',null);
 
           
              if($name != ""){
@@ -258,7 +203,7 @@ class ChildFinanceController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = MarriageGrant::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = ChildFinance::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -275,7 +220,7 @@ class ChildFinanceController extends Controller
          foreach($records as $record){
              $id = $record->id;
              $name = $record->name;
-             $current_address = $record->current_address;
+             $address = $record->address;
              $age = $record->age;
              $caste = $record->caste;
               $created_at =  $record->created_at;
@@ -283,11 +228,11 @@ class ChildFinanceController extends Controller
             $data_arr[] = array(
                 "id" => $id,
                 "name" => $name,
-                "current_address" => $current_address,
+                "address" => $address,
                 "age" => $age,
                 "caste" => $caste,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('marriageGrant/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }
@@ -301,14 +246,135 @@ class ChildFinanceController extends Controller
 
          return response()->json($response);
     }
-    public function marriageGrantView(Request $request, $id)
+    public function childFinanceView(Request $request, $id)
     {     
       
-        $formData = MarriageGrant::where('_id',$id)->first();
+        $formData = ChildFinance::where('_id',$id)->first();
        
-        return view('application.marriage_grant_view', compact('formData'));
+        return view('admin.child_finance_view', compact('formData'));
 
 
 
     }
+
+    public function userchildFinanceList(Request $request)
+    {     
+      
+        return view('child.user_child_finance_list');
+
+
+
+    }
+
+    public function getUserchildFinanceList(Request $request)
+    {
+        
+        $name = $request->name;
+
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = ChildFinance::where('deleted_at',null)->where('user_id',Auth::user()->id);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = ChildFinance::where('deleted_at',null)->where('user_id',Auth::user()->id);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = ChildFinance::where('deleted_at',null)->where('user_id',Auth::user()->id)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $age = $record->age;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "age" => $age,
+                "caste" => $caste,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userchildFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
+    public function userchildFinanceView(Request $request, $id)
+    {     
+      
+        $formData = ChildFinance::where('_id',$id)->first();
+       
+        return view('child.user_child_finance_view', compact('formData'));
+
+
+
+    }
+
+    
+
+    
+
+    
+
+
+
 }
