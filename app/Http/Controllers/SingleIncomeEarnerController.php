@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use Illuminate\Http\Request;
 
 class SingleIncomeEarnerController extends Controller
@@ -14,8 +15,8 @@ class SingleIncomeEarnerController extends Controller
     public function index()
     {
 
-
-        return view('application.single_income_earner_application');
+        $districts = District::get();
+        return view('application.single_income_earner_application',compact('districts'));
     }
 
     /**
@@ -36,7 +37,7 @@ class SingleIncomeEarnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            dd($request->all());
     }
 
     /**

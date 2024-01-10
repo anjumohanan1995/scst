@@ -9,7 +9,8 @@
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
                 <div class="col-md-12">
                     <h4> Application Form</h4><br>
-                    <h2>മരണപെട്ടയാളുടെ കുടുംബ വിവരങ്ങൾ </h2>
+                    <h2>ഏക വരുമാന ദായകൻ മരണപ്പെട്ട പട്ടിക വർഗ്ഗ വിഭാഗ കുടുംബങ്ങൾക്കുള്ള ധനസഹായം
+                        അപേക്ഷ ഫോറം </h2>
 
                 </div>
 
@@ -29,21 +30,314 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form name="userForm" id="userForm" method="post" action="{{ route('financialHelpStore') }}">
+                            <form name="userForm" id="userForm" method="post" action="{{ url('single-income-earner') }}">
                                 @csrf
-                                {{-- <div class="mb-4 main-content-label">User Details</div> --}}
+
                                 <div class="form-group">
-                                    ആകെ കുടുംബാഗങ്ങൾ ( റേഷൻ കാർഡിന്റെ പകർപ്പ് ഹാജരാക്കണം ) <br>
+
+                                    <h5 class="form-label">part 1</h5>
+                                    <br>
+                                    <h4>അപേക്ഷകനെ യെ സംബന്ധിച്ച വിവരങ്ങൾ </h4>
+                                    <br>
+                                    <label class="form-label">പേര്
+                                    </label>
                                     <div class="row">
-
-
                                         <div class="col-md-12">
-                                            {{-- <label class="form-label">Total Members (submit the copy of ration card) / ആകെ
-                                                കുടുംബാഗങ്ങൾ ( റേഷൻ കാർഡിന്റെ പകർപ്പ് ഹാജരാക്കണം )
-                                            </label> --}}
-                                            <input type="text" value="{{ old('total_members') }}" class="form-control"
-                                                placeholder="Total Members in family" name="total_members" />
+
+                                            <input type="text" value="{{ old('applicant_name') }}" class="form-control"
+                                                placeholder="Total Members in family" name="applicant_name" />
+                                            @error('applicant_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <label class="form-label">ജാതി, ( തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം ഹാജരാക്കണം )
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            ജാതി
+                                            <input type="text" value="{{ old('applicant_caste') }}" class="form-control"
+                                                placeholder="ജാതി" name="applicant_caste" />
+                                            @error('applicant_caste')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം അപ്‌ലോഡ് ചെയുക
+                                            <input type="file" value="{{ old('applicant_caste_image') }}"
+                                                class="form-control" placeholder="" name="applicant_caste_image" />
+                                            @error('applicant_caste_image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <label class="form-label">മേൽവിലാസം </label>
+                                            <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="മേൽവിലാസം" name="address"></textarea>
+                                            @error('address')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+                                    </div><br>
+
+                                    <div class="row">
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">ജില്ല </label>
+                                            <select id="district" name="district" class="form-control">
+                                                <option value="">Select</option>
+                                                @foreach ($districts as $district)
+                                                    <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('district')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <input type="hidden" name="district_name" id="district_name" value="">
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">താലൂക്ക് </label>
+                                            <select id="taluk" name="taluk" class="form-control">
+                                                <option value="">Choose Taluk</option>
+                                            </select>
+                                            @error('taluk')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <input type="hidden" name="taluk_name" id="taluk_name" value="">
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">പിൻകോഡ് </label>
+                                            <input type="text" value="{{ old('pincode') }}" class="form-control"
+                                                name="pincode" />
+                                            @error('pincode')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div><br>
+
+                                    <label class="form-label">അയാളും ഉള്ള ബന്ധം മരണപ്പെട്ടയാളുമായുള്ള ബന്ധം
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" value="{{ old('relation_with_person') }}"
+                                                class="form-control"
+                                                placeholder="അയാളും ഉള്ള ബന്ധം മരണപ്പെട്ടയാളുമായുള്ള ബന്ധം"
+                                                name="relation_with_person" />
+                                            @error('relation_with_person')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <label class="form-label">ആധാർ നം (പകർപ്പ് സഹിതം)
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            ആധാർ നം
+                                            <input type="text" value="{{ old('applicant_aadhar_no') }}"
+                                                class="form-control" placeholder="ആധാർ നം" name="applicant_aadhar_no" />
+                                            @error('applicant_aadhar_no')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            പകർപ്പ് സഹിതം അപ്‌ലോഡ് ചെയുക
+                                            <input type="file" value="{{ old('applicant_aadhar_image') }}"
+                                                class="form-control" placeholder="ആധാർ നം"
+                                                name="applicant_aadhar_image" />
+                                            @error('applicant_aadhar_image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <label class="form-label">
+                                        ഫോൺ നമ്പർ
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" value="{{ old('applicant_phone') }}"
+                                                class="form-control" placeholder="ഫോൺ നമ്പർ" name="applicant_phone" />
+                                            @error('applicant_phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <label class="form-label">ബാങ്ക് അക്കൗണ്ട് വിവരങ്ങൾ (പകർപ്പ് സഹിതം)
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label class="">ബാങ്ക് അക്കൗണ്ട് നം </label>
+                                            <input type="text" value="{{ old('bank_account_no') }}"
+                                                class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട്  "
+                                                name="bank_account_no" />
+                                            @error('bank_account_no')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="">ബാങ്ക് അക്കൗണ്ട് IFSC നം</label>
+                                            <input type="text" value="{{ old('bank_account_ifsc') }}"
+                                                class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
+                                                name="bank_account_ifsc" />
+                                            @error('bank_account_ifsc')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="">ബാങ്ക് അക്കൗണ്ട് പകർപ്പ് അപ്‌ലോഡ് ചെയുക </label>
+                                            <input type="file" value="{{ old('bank_account_image') }}"
+                                                class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
+                                                name="bank_account_image" />
+                                            @error('bank_account_image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+
+                                    <h5 class="form-label">part 2</h5>
+
+                                    <br>
+                                    <h4>മരണപ്പെട്ടയാളെ സംബന്ധിച്ചു വിവരങ്ങൾ</h4>
+                                    <br>
+
+                                    <label class="form-label">പേര്
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <input type="text" value="{{ old('deceased_person_name') }}"
+                                                class="form-control" placeholder="Total Members in family"
+                                                name="deceased_person_name" />
+                                            @error('deceased_person_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <label class="form-label">ജാതി
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" value="{{ old('deceased_person_caste') }}"
+                                                class="form-control" placeholder="ജാതി" name="deceased_person_caste" />
+                                            @error('deceased_person_caste')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+
+                                    <label class="form-label">ജനന തീയതി
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="date" value="{{ old('date_of_birth') }}"
+                                                class="form-control" placeholder="ജനന തീയതി" name="date_of_birth" />
+                                            @error('date_of_birth')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <label class="form-label">മരണ തീയതി (മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് ഹാജരാക്കുക )
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            മരണ തീയതി
+                                            <input type="date" value="{{ old('date_of_death') }}"
+                                                class="form-control" placeholder="മരണ തീയതി " name="date_of_death" />
+                                            @error('date_of_death')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            വയസ്സ്
+                                            <input type="text" value="{{ old('deceased_person_age') }}"
+                                                class="form-control" placeholder="വയസ്സ് " name="deceased_person_age" />
+                                            @error('deceased_person_age')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
+                                            <input type="file" value="{{ old('death_certificate_image') }}"
+                                                class="form-control" placeholder="വയസ്സ് "
+                                                name="death_certificate_image" />
+                                            @error('death_certificate_image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <label class="form-label">മരണ കാരണം
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" value="{{ old('cause_of_death') }}"
+                                                class="form-control" placeholder="മരണ കാരണം " name="cause_of_death" />
+                                            @error('cause_of_death')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+
+                                    <label class="form-label">ചെയ്തിരുന്ന തൊഴിൽ ( ഏക വരുമാന ദായകനായിരുന്നു എന്നത്
+                                        സംബന്ധിച്ച് തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം ഹാജരാക്കണം)
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" value="{{ old('past_job') }}" class="form-control"
+                                                placeholder="ചെയ്തിരുന്ന തൊഴിൽ " name="past_job" />
+                                            @error('past_job')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+
+
+
+
+                                    <h5 class="form-label">part 3</h5>
+                                    <br>
+                                    <h4>മരണപെട്ടയാളുടെ കുടുംബ വിവരങ്ങൾ</h4>
+                                    <br>
+                                    <label class="form-label"> ആകെ കുടുംബാഗങ്ങൾ ( റേഷൻ കാർഡിന്റെ പകർപ്പ് ഹാജരാക്കണം )
+                                    </label>
+
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            ആകെ കുടുംബാഗങ്ങൾ
+                                            <input type="text" value="{{ old('total_members') }}"
+                                                class="form-control" placeholder="Total Members in family"
+                                                name="total_members" />
                                             @error('total_members')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            റേഷൻ കാർഡിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
+                                            <input type="file" value="{{ old('ration_card_image') }}"
+                                                class="form-control" placeholder="Total Members in family"
+                                                name="ration_card_image" />
+                                            @error('ration_card_image')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -52,6 +346,9 @@
                                     <br>
 
 
+
+                                    <label class="form-label"> കടുബാംഗങ്ങളിൽ 18 നും 70 നും മദ്ധ്യേ പ്രയമായവരുടെ പേരും
+                                        തൊഴിലും വരുമാനവും</label>
 
                                     <div class="row">
                                         <div class="row">
@@ -68,28 +365,30 @@
 
                                         <div class="row addRow">
                                             <div class="col-md-3">
-                                                <input type="text" value="{{ old('husband_address') }}"
-                                                    class="form-control single__income__earner--add--imputbox " placeholder="Husband Address"
-                                                    name="husband_address" />
-                                                @error('husband_address')
+                                                <input type="text" value="{{ old('name') }}"
+                                                    class="form-control single__income__earner--add--imputbox "
+                                                    placeholder="പേര്" name="name[]" />
+                                                @error('name')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
                                             <div class="col-md-3">
-                                                <input type="text" value="{{ old('wife_address') }}" class="form-control single__income__earner--add--imputbox "
-                                                    placeholder="Wife Address" name="wife_address" />
+                                                <input type="text" value="{{ old('job') }}"
+                                                    class="form-control single__income__earner--add--imputbox "
+                                                    placeholder="തൊഴിൽ" name="job[]" />
                                                 <span id="nameError" class="text-danger"></span>
-                                                @error('wife_address')
+                                                @error('job')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
                                             <div class="col-md-3">
-                                                <input type="text" value="{{ old('wife_address') }}" class="form-control single__income__earner--add--imputbox "
-                                                    placeholder="Wife Address" name="wife_address" />
+                                                <input type="text" value="{{ old('salary') }}"
+                                                    class="form-control single__income__earner--add--imputbox "
+                                                    placeholder="വരുമാനം" name="salary[]" />
                                                 <span id="nameError" class="text-danger"></span>
-                                                @error('wife_address')
+                                                @error('salary')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -100,265 +399,101 @@
                                             </div>
                                         </div>
 
-                                        <div id="items">
-
-                                        </div>
-
-                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                        <script type="text/javascript">
-                                            $(document).ready(function() {
-                                                $(".add").click(function(e) {
-                                                    // Build the HTML using jQuery
-                                                    var html = '<div class="row addRow">' +
-                                                        '<div class="col-md-3">' +
-                                                        '<input type="text" value="{{ old('husband_address') }}" class="form-control single__income__earner--add--imputbox" placeholder="Husband Address" name="husband_address" />' +
-                                                        '@error('husband_address')' +
-                                                        '<span class="text-danger">{{ $message }}</span>' +
-                                                        '@enderror' +
-                                                        '</div>' +
-
-                                                        '<div class="col-md-3">' +
-                                                        '<input type="text" value="{{ old('wife_address') }}" class="form-control single__income__earner--add--imputbox" placeholder="Wife Address" name="wife_address" />' +
-                                                        '<span id="nameError" class="text-danger"></span>' +
-                                                        '@error('wife_address')' +
-                                                        '<span class="text-danger">{{ $message }}</span>' +
-                                                        '@enderror' +
-                                                        '</div>' +
-
-                                                        '<div class="col-md-3">' +
-                                                        '<input type="text" value="{{ old('wife_address') }}" class="form-control single__income__earner--add--imputbox" placeholder="Wife Address" name="wife_address" />' +
-                                                        '<span id="nameError" class="text-danger"></span>' +
-                                                        '@error('wife_address')' +
-                                                        '<span class="text-danger">{{ $message }}</span>' +
-                                                        '@enderror' +
-                                                        '</div>' +
-
-                                                        '<div class="col-md-3">' +
-                                                        '<a class="btn btn-danger delete">-</a>' +
-
-                                                        '</div>' +
-                                                        '</div>';
-
-                                                    // Append the newly built HTML to the "#items" div
-                                                    $("#items").append(html);
-                                                });
-
-                                                $("body").on("click", ".delete", function(e) {
-                                                    $(this).closest(".addRow").remove();
-                                                });
-                                            });
-                                        </script>
-
-
-                                        വിവാഹത്തിനുമുമ്പുള്ള പൂർണ്ണ മേൽവിലാസം
-                                        <div class="row">
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Husband / ഭർത്താവ് </label>
-                                                <input type="text" value="{{ old('husband_address_old') }}"
-                                                    class="form-control" placeholder="Husband Address"
-                                                    name="husband_address_old" />
-                                                @error('husband_address_old')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Wife / ഭാര്യ </label>
-                                                <input type="text" value="{{ old('wife_address_old') }}"
-                                                    class="form-control" placeholder="Wife Address"
-                                                    name="wife_address_old" />
-                                                <span id="nameError" class="text-danger"></span>
-                                                @error('wife_address_old')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                        </div><br>
-                                        സമുദായം
-                                        <div class="row">
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Husband / ഭർത്താവ് </label>
-                                                <input type="text" value="{{ old('husband_caste') }}"
-                                                    class="form-control" placeholder="Husband Caste" name="husband_caste" />
-                                                @error('husband_caste')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Wife / ഭാര്യ </label>
-                                                <input type="text" value="{{ old('wife_caste') }}" class="form-control"
-                                                    placeholder="Wife Caste" name="wife_caste" />
-                                                <span id="nameError" class="text-danger"></span>
-                                                @error('wife_caste')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div><br>
-                                        വിവാഹത്തിനുമുമ്പുള്ള തൊഴിലും മാസ വരുമാനവും
-                                        <div class="row">
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Husband / ഭർത്താവ് </label>
-                                                <input type="text" value="{{ old('hus_work_before_marriage') }}"
-                                                    class="form-control"
-                                                    placeholder="വിവാഹത്തിനുമുമ്പുള്ള തൊഴിലും മാസ വരുമാനവും"
-                                                    name="hus_work_before_marriage" />
-                                                @error('hus_work_before_marriage')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Wife / ഭാര്യ </label>
-                                                <input type="text" value="{{ old('wife_work_before_marriage') }}"
-                                                    class="form-control"
-                                                    placeholder="വിവാഹത്തിനുമുമ്പുള്ള തൊഴിലും മാസ വരുമാനവും "
-                                                    name="wife_work_before_marriage" />
-                                                <span id="nameError" class="text-danger"></span>
-                                                @error('wife_work_before_marriage')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-
-                                        </div><br>
-
-                                        അപേക്ഷ സമർപ്പിക്കുമ്പോഴത്തെ തൊഴിലും മാസാവരുമാനവും
-                                        <div class="row">
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Husband / ഭർത്താവ് </label>
-                                                <input type="text" value="{{ old('hus_work_after_marriage') }}"
-                                                    class="form-control"
-                                                    placeholder="അപേക്ഷ സമർപ്പിക്കുമ്പോഴത്തെ തൊഴിലും മാസാവരുമാനവും"
-                                                    name="hus_work_after_marriage" />
-                                                @error('hus_work_after_marriage')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Wife / ഭാര്യ </label>
-                                                <input type="text" value="{{ old('wife_work_after_marriage') }}"
-                                                    class="form-control"
-                                                    placeholder="അപേക്ഷ സമർപ്പിക്കുമ്പോഴത്തെ തൊഴിലും മാസാവരുമാനവും"
-                                                    name="wife_work_after_marriage" />
-                                                <span id="nameError" class="text-danger"></span>
-                                                @error('wife_work_after_marriage')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-
-                                        </div><br>
-
-                                        വിവാഹത്തിന്റെ വിശദ വിവരങ്ങൾ <br>
-                                        എ)വിവാഹ സമയത്തെ പ്രായം
-                                        <div class="row">
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Husband / ഭർത്താവ് </label>
-                                                <input type="text" value="{{ old('husband_age') }}"
-                                                    class="form-control" placeholder="വിവാഹ സമയത്തെ പ്രായം"
-                                                    name="husband_age" />
-                                                @error('husband_age')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">Wife / ഭാര്യ </label>
-                                                <input type="text" value="{{ old('wife_age') }}" class="form-control"
-                                                    placeholder="വിവാഹ സമയത്തെ പ്രായം" name="wife_age" />
-                                                <span id="nameError" class="text-danger"></span>
-                                                @error('wife_age')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-
-                                        </div><br>
-
-                                        ബി)രജിസ്റ്റർ വിവാഹം ആയിരുന്നുവോ എങ്കിൽ രെജിസ്റ്ററേഷൻ നമ്പരും തിയതിയും,
-                                        റെജിസ്റ്ററോഫീസിന്റെ പേരും
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label">Details</label>
-                                                <textarea class="form-control" placeholder="Details" name="register_details">{{ old('register_details') }}</textarea>
-
-                                            </div>
-
-                                        </div><br>
-                                        സി)വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ ഹാജരാക്കിയിട്ടുണ്ടെങ്കിൽ അതിന്റെ വിവരം
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label">Details</label>
-                                                <textarea class="form-control" placeholder="Details" name="certificate_details">{{ old('certificate_details') }}</textarea>
-
-                                            </div>
-
-                                        </div><br>
-                                        വിവാഹത്തിനുശേഷം ദമ്പതികൾ ഏതെങ്കിലും കാലയളവിൽ വേർപിരിഞ്ഞ് താമസിച്ചിട്ടുണ്ടോ?
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label class="form-label">Yes</label>
-                                                <input class="form-control" type="radio" name="apart_for_any_period"
-                                                    value="Yes">
-
-                                                <label class="form-label">No</label>
-                                                <input class="form-control" type="radio" name="apart_for_any_period"
-                                                    value="No">
-                                            </div>
-                                        </div><br>
-                                        <div id="additionalDiv" style="display:none;">
-                                            വേർപിരിഞ്ഞ് താമസിച്ച കാലയളവ്
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label">Duration</label>
-                                                    <input type="text" class="form-control" placeholder="Duration"
-                                                        name="duration" />
-
-                                                </div>
-
-                                            </div><br>
-                                            വേർപിരിഞ്ഞ് താമസിക്കാനുണ്ടായ കാരണം
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label">Reason</label>
-                                                    <input type="text" class="form-control" placeholder="Reason"
-                                                        name="reason" />
-
-                                                </div>
-
-                                            </div><br>
-
-
-                                        </div>
-
-                                        ധനസഹായം ലഭിക്കുന്ന പക്ഷം എന്തു കാര്യത്തിനുവേണ്ടി ചെലവഴിക്കാനാണ് ഉദ്ദേശിക്കുന്നത്
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label">Details</label>
-                                                <textarea class="form-control" placeholder="Details" name="financial_assistance">{{ old('financial_assistance') }}</textarea>
-
-                                            </div>
-
-                                        </div><br>
-
-                                        മിശ്രവിവാഹം മൂലം ദമ്പതികൾക്ക് അനുഭവിക്കേണ്ടി വന്നിട്ടുള്ള കഷ്ടതകളും പ്രയാസങ്ങളും
-                                        എന്തെല്ലാം
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="form-label">Details</label>
-                                                <textarea class="form-control" placeholder="Details" name="difficulties">{{ old('difficulties') }}</textarea>
-
-                                            </div>
-
-                                        </div><br>
+                                        <div id="items"></div>
 
                                     </div>
-                                    <br><br><br>
-                                    <button type="submit" id="submit"
-                                        class="btn btn-warning waves-effect waves-light float-end">Save</button>
+                                    <br>
+
+
+
+                                    <label class="form-label"> കുടുംബ വാർഷിക വരുമാനം ( വില്ലജ് ഓഫീസറിൽ
+                                        നിന്നുള്ള
+                                        സാക്ഷ്യപത്രം ഹാജരാകണം ) </label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            കുടുംബ വാർഷിക വരുമാനം
+                                            <input type="text" value="{{ old('annual_income') }}"
+                                                class="form-control" placeholder="വാർഷിക വരുമാനം" name="annual_income" />
+                                            @error('annual_income')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            വില്ലജ് ഓഫീസറിൽ
+                                            നിന്നുള്ള
+                                            സാക്ഷ്യപത്രം ഹാജരാകണം അപ്‌ലോഡ് ചെയുക
+                                            <input type="file" value="{{ old('income_certificate_image') }}"
+                                                class="form-control" placeholder="വാർഷിക വരുമാനം"
+                                                name="income_certificate_image" />
+                                            @error('income_certificate_image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+
+                                    </div><br>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="form-label"> നിലവിൽ കുടുംബത്തിന്റെ വരുമാന സ്രോതസ്സ് </label>
+                                            <input type="text" value="{{ old('income_source') }}"
+                                                class="form-control" placeholder="വരുമാന സ്രോതസ്സ്"
+                                                name="income_source" />
+                                            @error('income_source')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+
+                                    </div>
+
+                                    <br>
+                                    <br>
+
+
+
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-6">
+                                                    <label class="form-label">ജില്ല </label>
+                                                    <select id="submitted_district" name="submitted_district"
+                                                        class="form-control">
+                                                        <option value="">Select</option>
+                                                        @foreach ($districts as $district)
+                                                            <option value="{{ $district->id }}">{{ $district->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('dist')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                    <input type="hidden" name="dist_name" id="dist_name"
+                                                        value="">
+                                                </div>
+                                                <div class="col-md-6 mb-6">
+                                                    <label class="form-label">TEO </label>
+                                                    <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                                        <option value="">Choose TEO</option>
+                                                    </select>
+                                                    @error('teo')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                    <input type="hidden" name="teo_name" id="teo_name" value="">
+                                                </div>
+                                            </div><br>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                                <br><br><br>
+
+                                <button type="submit" id="submit"
+                                    class="btn btn-warning waves-effect waves-light float-end">Save</button>
                             </form>
                         </div>
                     </div>
@@ -366,7 +501,54 @@
             </div>
         </div>
     </div>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        //duplication code starts here.
+        $(document).ready(function() {
+            $(".add").click(function(e) {
+                // Build the HTML using jQuery
+                var html = '<div class="row addRow">' +
+                    '<div class="col-md-3">' +
+                    '<input type="text" value="{{ old('name') }}" class="form-control single__income__earner--add--imputbox" placeholder="പേര്" name="name[]" />' +
+                    '@error('name')' +
+                    '<span class="text-danger">{{ $message }}</span>' +
+                    '@enderror' +
+                    '</div>' +
+
+                    '<div class="col-md-3">' +
+                    '<input type="text" value="{{ old('job') }}" class="form-control single__income__earner--add--imputbox" placeholder="തൊഴിൽ" name="job[]" />' +
+                    '<span id="nameError" class="text-danger"></span>' +
+                    '@error('job')' +
+                    '<span class="text-danger">{{ $message }}</span>' +
+                    '@enderror' +
+                    '</div>' +
+
+                    '<div class="col-md-3">' +
+                    '<input type="text" value="{{ old('salary') }}" class="form-control single__income__earner--add--imputbox" placeholder="വരുമാനം" name="salary[]" />' +
+                    '<span id="nameError" class="text-danger"></span>' +
+                    '@error('salary')' +
+                    '<span class="text-danger">{{ $message }}</span>' +
+                    '@enderror' +
+                    '</div>' +
+
+                    '<div class="col-md-3">' +
+                    '<a class="btn btn-danger delete">-</a>' +
+
+                    '</div>' +
+                    '</div>';
+
+                // Append the newly built HTML to the "#items" div
+                $("#items").append(html);
+            });
+
+            $("body").on("click", ".delete", function(e) {
+                $(this).closest(".addRow").remove();
+            });
+        });
+        //duplication code ends here.
+
+
+
         $(document).ready(function() {
             $('input[name="apart_for_any_period"]').change(function() {
                 if ($(this).val() === 'Yes') {
@@ -376,6 +558,79 @@
                 }
             });
         });
+
+
+        //alll the rest code.
+        $('#district').change(function() {
+            var districtName = this.options[this.selectedIndex].text;
+            document.getElementById('district_name').value = districtName;
+            var val = document.getElementById("district").value;
+
+            $.ajax({
+                url: "{{ url('district/fetch-taluk') }}",
+                type: "POST",
+                data: {
+                    district_id: val,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#taluk").find('option').remove();
+                    $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+                    $.each(result.taluks, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.taluk_name);
+                        $opt.appendTo('#taluk');
+
+
+                    });
+
+                }
+            });
+
+        });
+        $('#taluk').change(function() {
+            var talukName = this.options[this.selectedIndex].text;
+            document.getElementById('taluk_name').value = talukName;
+        });
+
+        $('#submitted_district').change(function() {
+            var submitted_district = this.options[this.selectedIndex].text;
+            document.getElementById('dist_name').value = submitted_district;
+            var val = document.getElementById("submitted_district").value;
+
+            $.ajax({
+                url: "{{ url('district/fetch-teo') }}",
+                type: "POST",
+                data: {
+                    district_id: val,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#submitted_teo").find('option').remove();
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+                    $.each(result.teos, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.teo_name);
+                        $opt.appendTo('#submitted_teo');
+
+
+                    });
+
+                }
+            });
+
+        });
+        $('#submitted_teo').change(function() {
+            var submitted_teo = this.options[this.selectedIndex].text;
+            document.getElementById('teo_name').value = submitted_teo;
+        });
+
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
     </script>
+
     <!-- main-content-body -->
 @endsection
