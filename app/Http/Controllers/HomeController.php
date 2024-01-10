@@ -6,6 +6,8 @@ use App\Models\ExamApplication;
 use App\Models\FinancialHelp;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
+use App\Models\MedEngStudentFund;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -13,6 +15,7 @@ use App\Models\ChildFinance;
 use App\Count;
 use Carbon\Carbon;
 use App\Hospital;
+use App\Models\HouseManagement;
 use App\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +46,7 @@ class HomeController extends Controller
             $user_id = Auth::user()->id;
             $data['coupleFinanceCount'] = FinancialHelp::where('user_id', $user_id)->count();
             $data['childFinanceCount'] = ChildFinance::where('user_id', $user_id)->count();
+            $data['studentFundCount'] = MedEngStudentFund::where('user_id',$user_id)->count();
             $data['examCount'] = ExamApplication::where('user_id', $user_id)->count();
             $data['motherChildCount'] = MotherChildScheme::where('user_id', $user_id)->count();
             $data['marriageGrantCount'] = MarriageGrant::where('user_id', $user_id)->count();

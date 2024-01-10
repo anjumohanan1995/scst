@@ -7,7 +7,9 @@
 		    <!-- breadcrumb -->
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 				<div class="col-xl-6">
-					<h4 class="content-title mb-2">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട  പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം</h4>
+					<h4 class="content-title mb-2">പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
+                        ധനസഹായത്തിനുള്ള അപേക്ഷ 
+  </h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - Application List</li>
@@ -67,12 +69,15 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Age </th>
-                                            <th>Current Address </th>
-                                            <th>Caste</th>
-                                            <th>Created Date</th>
-                                            <th >Action</th>
+                                            <th>അപേക്ഷകന്റെ പേര് </th>
+                                            <th>മേൽവിലാസം 
+                                            </th>
+                                            <th>ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ 
+                                            </th>
+                                            <th>ജാതി </th>
+                                            <th>സ്ഥലം    </th>
+                                            <th>തീയതി   </th>
+                                            <th >ആക്ഷൻ</th>
 
 
 
@@ -157,7 +162,7 @@ $(document).on("click",".deleteItem",function() {
 	        ],
              "ajax": {
 
-			       	"url": "{{route('houseMng.getUserHouseGrantList')}}",
+			       	"url": "{{route('getUserHouseGrantList')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {
@@ -174,9 +179,10 @@ $(document).on("click",".deleteItem",function() {
 
              columns: [
                 { data: 'name' },
-                { data: 'age' },
-				{ data: 'current_address' },
+                { data: 'address' },
+				{ data: 'panchayath' },
 				{ data: 'caste' },
+                { data: 'place' },
                 { data: 'created_at', visible: false },
 
                 { data: 'edit' }
