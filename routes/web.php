@@ -198,9 +198,11 @@ Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
 
 //house Management 
     Route::resource('houseGrant', HouseManagementController::class);
-    Route::get('/show/{id}', [HouseManagementController::class, 'show'])->name('examples.show');
-    Route::get('/', [HouseManagementController::class, 'index'])->name('examples.index');
-    Route::get('/show/{id}', [HouseManagementController::class, 'show'])->name('examples.show');
+
+    
     Route::get('/userHouseGrantList', [HouseManagementController::class, 'userHouseGrantList'])->name('userHouseGrantList');
     Route::get('/getUserHouseGrantList', [HouseManagementController::class, 'getUserHouseGrantList'])->name('getUserHouseGrantList');
-   
+    Route::post('/HouseGrantStoreDetails', [HouseManagementController::class, 'HouseGrantStoreDetails'])->name('HouseGrantStoreDetails');
+    Route::get('/houseGrantApplications', [HouseManagementController::class, 'adminHouseGrantList'])->name('adminHouseGrantList');
+    Route::get('/getAdminHouseGrantList', [HouseManagementController::class, 'getAdminHouseGrantList'])->name('getAdminHouseGrantList');
+    

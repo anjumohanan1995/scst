@@ -150,7 +150,7 @@
                                         <label for="Additional convenience">അധിക സൗകര്യം</label>&nbsp; &nbsp;
                                       
                                         <input type="radio" id="option3" name="nature_payment" value="Completion">
-                                        <label for="പൂർത്തീകരണം">പൂർത്തീകരണം</label>&nbsp; &nbsp;
+                                        <label for="Completion">പൂർത്തീകരണം</label>&nbsp; &nbsp;
                                     </div>
                                     @error('marriage_count')
                                         <span class="text-danger">{{$message}}</span>
@@ -173,7 +173,7 @@
                               
                             </div><br> 
                             <div class="row">   
-                                <div class="col-md-6 mb-6">
+                                <div class="col-md-3 mb-3">
                                     <label class="form-label">മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
                                         മറ്റു സംഗതികൾ
                                   
@@ -183,6 +183,18 @@
                                           <textarea type="text" value="{{ old('prove_eligibility ') }}"  class="form-control" placeholder="" name="prove_eligibility" ></textarea>
                                     
                                     @error('prove_eligibility')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">
+                                  
+                                        &nbsp;  &nbsp;  &nbsp;
+                                        
+                                          </label>
+                                          <input type="file" class="form-control" accept="pdf/doc"  name="prove_eligibility_file" id="prove_eligibility_file" value="" placeholder=" " />
+                                  
+                                    @error('prove_eligibility_file')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>

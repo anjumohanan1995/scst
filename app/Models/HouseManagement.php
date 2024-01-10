@@ -26,7 +26,10 @@ class HouseManagement extends Eloquent
         'prove_eligibility',
         'place',
         'date',
-        'signature'
+        'signature',
+        'status',
+        'user_id',
+        'prove_eligibility_file'
 
     ];
 

@@ -50,20 +50,17 @@
  
             </td>
             </tr>
-            <tr>
-             <td >
+            <tr> <td>
  
-                ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ </td><td colspan="3"> {{ @$formData['panchayath'] }}
+                ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ </td><td><strong> {{ @$formData['panchayath'] }} </strong></td>
+             <td>
  
-                </td>
-                    </tr>
-                    <tr>
-                        <td>
+                അപേക്ഷകന്റെ ജാതി </td><td> <strong> {{ @$formData['caste'] }}</strong> 
  
-                            അപേക്ഷകന്റെ ജാതി   </td>
-                            <td> {{ @$formData['caste'] }}  </td>
-                     
-                     </tr>
+            </td>
+            </tr>
+           
+                 
                 <tr>
                     <td>
                         വാർഷിക വരുമാനം 
@@ -72,152 +69,94 @@
                         {{ @$formData['anual_income'] }} 
                     </td>
                     <td>
-                        ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും   </td><td> {{ @$formData['relation_with_applicant'] }}
+                        ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും   </td><td> {{ @$formData['house_details'] }}
                     </td>
                 </tr>
                 <tr>
                       <td>
  
-                        പെൺകുട്ടിയുടെ ആദ്യവിവാഹമോ പുനർവിവാഹമോ? </td><td> {{ @$formData['marriage_count'] }}
+                        വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം </td><td> {{ @$formData['last_payment_year'] }}
  
                 </td>
                 <td>
-                    ഗുണഭോക്താവ് വിധവയാണോ?
+                    കുടുംബത്തിന്റെ അവസ്ഥ  (അവിവാഹിതരായ :
+                    അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
+                    വിധവയാകേണ്ടി വന്നവർ , ശാരീരിക മാനസിക
+                    വേല്ലുവിളി നേരിടുന്നവർ , തീരാവ്യാധി പിടിപ്പെട്ടവർ ,
+                    അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ )
                     </td>
                     <td> 
-                        {{ @$formData['is_widow'] }} 
+                        {{ @$formData['family_details'] }} 
                     </td>
                
              </tr><tr>
                       <td>
  
-                        അച്ഛൻ/അമ്മ/ രക്ഷാകർത്താവിന്റെ തൊഴിൽ </td><td> {{ ucwords(@$formData['parent_occupation']) }}
- 
-                </td>
-                     </tr><tr>
-                      <td>
- 
-                        കുടുംബത്തിൽ എല്ലാ മാർഗത്തിൽ നിന്നുമുള്ള ആകെ വാർഷിക വരുമാനം (വില്ലേജ് ആഫീസറിൽ നിന്നും ലഭിച്ച സർട്ടിഫിക്കറ്റ് (അസൽ) ഹാജരാക്കണം ) </td><td> {{ ucwords(@$formData['gender']) }}
+                        ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം 
+                                        (നവീകരണം ,അധിക സൗകര്യം / പൂർത്തീകരണം ) </td>
+                    <td>@if(@$formData['nature_payment'] == 'innovation') 
+                        
+                        നവീകരണം
+                        @elseif(@$formData['nature_payment'] == 'Additional convenience') 
+                        അധിക സൗകര്യം
+                        @elseif(@$formData['nature_payment'] == 'Completion') 
+                        പൂർത്തീകരണം
+                        @endif
+                       
  
                 </td>
                 <td>
  
-                    വാർഷിക വരുമാനം  -വില്ലേജ് ആഫീസറിൽ നിന്നും ലഭിച്ച സർട്ടിഫിക്കറ്റ് (അസൽ ) </td>
-                     <td>
-                        @if($formData['income_certificate'])
-                        <iframe src="{{ asset('applications/marriage_grant_certificates/' . @$formData['income_certificate']) }}" width="400" height="200"></iframe>
-                   @endif
-                    </td></tr><tr>
-                      <td>
- 
-                     നിശ്ചയിച്ചിരിക്കുന്ന വിവഹ സ്ഥലം  </td><td> {{ ucwords(@$formData['marriage_place']) }}
- 
-                </td>
-                      <td>
- 
-                    നിശ്ചയിച്ചിരിക്കുന്ന വിവഹ തീയതി </td><td> {{ @$formData['marriage_date'] }}
- 
-                </td></tr>
-                <tr>
-                    <td colspan="3">
- 
-                        വിവാഹിതയാകാൻ പോകുന്ന പെൺകുട്ടിയുടെ മാതാവ് / പിതാവ് മരിച്ചുപോയിട്ടുടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ: </td>
-                        <td> {{ @$formData['fiancee_family_details'] }}
- 
-                </td>
-                   </tr><tr>
-                    <td colspan="3">
- 
-                        മാതാപിതാക്കളിലാർക്കെങ്കിലും തൊഴിലിൽ ഏർപ്പെടാൻ  കഴിയാത്തവിധം അംഗവൈകല്യം സംഭവിച്ചിട്ടുണ്ടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ
-                    </td><td>    {{ @$formData['disabled_parent_info'] }}
- 
-                </td>
-            </tr>
-                <tr>
-                    <td colspan="3">
-                    വിവാഹം കഴിക്കുന്ന പെണ്കുട്ടിയോ മാതാപിതാക്കളോ അടിമപ്പണിയിൽ നിന്നും വിമുക്തരാക്കപ്പെട്ടവരാണെങ്കിൽ ആയതിന്റെ വിശദവിവരം
-                    </td>
-                    <td> {{ @$formData['freedmen_parent_details'] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
- 
-                        വിവാഹിതയാകുന്ന പെൺക്കുട്ടിയോ മാതാപിതാക്കളോ പട്ടികവർഗക്കാരല്ലാത്തവരുടെ അതിക്രമങ്ങൾക്കിരയായിട്ടുള്ളവരാണെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ
-                       </td>    <td>  {{ @$formData['violence_by_non_scheduled_tribes_info'] }}
- 
-                </td>
+                    നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
+                    ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
+                    ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ എന്നുള്ള  വിവരം  
+                    (ഉണ്ടെങ്കിൽ എത്ര തുക ,ലഭിച്ച തീയതി )</td><td> {{ @$formData['payment_details'] }}
+
+            </td>
                      </tr><tr>
-                        <td colspan="3">
+                   
+                <td>
  
-                        വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെയോ ഭൂമി അന്യാധീനപ്പെട്ട് നിർദ്ധനരായിട്ടുള്ളപക്ഷം ആയതിന്റെ വിവരങ്ങൾ </td>
-                        <td> {{ @$formData['land_alienated_details'] }}
- 
-                </td></tr><tr>
+                    മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
+                    മറ്റു സംഗതികൾ </td>
+                    
+                        <td> {{ @$formData['prove_eligibility'] }}
+                            @if($formData['prove_eligibility_file'])
+                            <iframe src="{{ asset('homeMng/' . @$formData['prove_eligibility_file']) }}" width="400" height="200"></iframe>
+                            @endif
                       
-                    <td colspan="3">
- 
-                        വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ സമുദായഭ്രഷ്ടരാണെങ്കിൽ ആയതിന്റെ പൂർണവിവരം </td>
-                     <td> {{ @$formData['outcast_parent_details'] }}
- 
-                </td></tr><tr>
-                    <td colspan="3">
- 
-                        വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ പുനർവിവാഹം ചെയ്ത് ജീവിക്കുന്നുവെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ  </td>
-                        <td> {{ @$formData['remarried_parent_details'] }}
- 
-                </td>
-                    </tr><tr>
- 
-                        <td colspan="3">
- 
-                        വരന്റെ പേരും മേൽവിലാസവും </td>
-                        <td> {{ @$formData['groom_name_and_address'] }}
- 
-                </td></tr><tr>
-                    <td colspan="3">
- 
-                        വരന്റെ അച്ഛന്റെ / അമ്മയുടെ /രക്ഷാകർത്താവിന്റെ പേരും മേൽവിലാസവും </td>
-                        <td> {{ @$formData['name_and_address_groom_parent'] }}
- 
-                </td>
-                     </tr><tr>
-               
-                        <td colspan="3">
- 
-                    ഈ ആവശ്യത്തിന് സർക്കാരിൽനിന്നോ സംഘടനകളിൽനിന്നോ ഏജൻസികളിൽനിന്നോ ധനസഹായം ലഭിച്ചിട്ടുണ്ടെങ്കിൽ ആയതിന്റെ പൂർണവിവരം </td>
-                    <td> {{ @$formData['financial_assistance_details'] }}
- 
-                </td></tr>
-                <tr>
+                    </td>
                     <td>
                         സ്ഥലം
                     </td>
                     <td> 
                         {{ @$formData['place'] }} 
                     </td>
+                </tr>
+             
+               
+              
+                <tr>
+                   
                     <td>
                         തീയതി  </td><td> @if($formData['date'])
                             {{ date('d-m-Y', strtotime(@$formData['date'])) }}
                         @endif
                     </td>
-                 
-                </tr>
-                <tr>
-               
                     <td>
-                        അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം   </td><td>
-                            @if($formData['signature'])
-                            <iframe src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}" width="400" height="200"></iframe>
+                        അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </td><td>  @if($formData['signature'])
+                            <iframe src="{{ asset('homeMng/' . @$formData['signature']) }}" width="400" height="200"></iframe>
                             @endif
-                        </td>
-                    </tr>
+                    </td>
+                  
+                </tr>
+               
       
              
                
            </table>
                                 
-                                <form action="{{ url('marriageGrantStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                <form action="{{ url('HouseGrantStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                   
                                
