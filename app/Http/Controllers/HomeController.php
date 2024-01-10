@@ -43,7 +43,6 @@ class HomeController extends Controller
     public function index()
     {
 
-<<<<<<< HEAD
 
        if (auth()->user()->role =='User'){
         $user_id=Auth::user()->id;
@@ -57,18 +56,6 @@ class HomeController extends Controller
        }else{
 
       
-=======
-        if (auth()->user()->role == 'User') {
-            $user_id = Auth::user()->id;
-            $data['coupleFinanceCount'] = FinancialHelp::where('user_id', $user_id)->count();
-            $data['childFinanceCount'] = ChildFinance::where('user_id', $user_id)->count();
-            $data['studentFundCount'] = MedEngStudentFund::where('user_id',$user_id)->count();
-            $data['examCount'] = ExamApplication::where('user_id', $user_id)->count();
-            $data['motherChildCount'] = MotherChildScheme::where('user_id', $user_id)->count();
-            $data['marriageGrantCount'] = MarriageGrant::where('user_id', $user_id)->count();
-            return view('user.dashboard', compact('data'));
-        } else {
->>>>>>> ba691a91bd60ca1b68e2a6c7412c7fe0d291a670
             return view('admin.dashboard');
         }
     }
