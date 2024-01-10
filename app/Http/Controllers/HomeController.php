@@ -9,11 +9,7 @@ use App\Models\MotherChildScheme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
-use App\Patient;
-use App\Pharmacy;
-use App\Diagonosis;
-use App\Miscellaneous;
-use App\Laboratory;
+use App\Models\ChildFinance;
 use App\Count;
 use Carbon\Carbon;
 use App\Hospital;
@@ -46,6 +42,7 @@ class HomeController extends Controller
         if (auth()->user()->role == 'User') {
             $user_id = Auth::user()->id;
             $data['coupleFinanceCount'] = FinancialHelp::where('user_id', $user_id)->count();
+            $data['childFinanceCount'] = ChildFinance::where('user_id', $user_id)->count();
             $data['examCount'] = ExamApplication::where('user_id', $user_id)->count();
             $data['motherChildCount'] = MotherChildScheme::where('user_id', $user_id)->count();
             $data['marriageGrantCount'] = MarriageGrant::where('user_id', $user_id)->count();
