@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form name="userForm" id="userForm" method="post" action="{{ url('single-income-earner') }}">
+                            <form name="userForm" id="userForm" method="post" action="{{ url('singleIncomeEarnerPreview') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group">
@@ -45,7 +45,7 @@
                                         <div class="col-md-12">
 
                                             <input type="text" value="{{ old('applicant_name') }}" class="form-control"
-                                                placeholder="Total Members in family" name="applicant_name" />
+                                                placeholder="" name="applicant_name" />
                                             @error('applicant_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -65,9 +65,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('applicant_caste_image') }}"
-                                                class="form-control" placeholder="" name="applicant_caste_image" />
-                                            @error('applicant_caste_image')
+                                            <input type="file" value="{{ old('caste_certificate') }}"
+                                                class="form-control" placeholder="" name="caste_certificate" />
+                                            @error('caste_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -147,10 +147,10 @@
                                         </div>
                                         <div class="col-md-6">
                                             പകർപ്പ് സഹിതം അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('applicant_aadhar_image') }}"
+                                            <input type="file" value="{{ old('adhaar_copy') }}"
                                                 class="form-control" placeholder="ആധാർ നം"
-                                                name="applicant_aadhar_image" />
-                                            @error('applicant_aadhar_image')
+                                                name="adhaar_copy" />
+                                            @error('adhaar_copy')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -194,10 +194,10 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label class="">ബാങ്ക് അക്കൗണ്ട് പകർപ്പ് അപ്‌ലോഡ് ചെയുക </label>
-                                            <input type="file" value="{{ old('bank_account_image') }}"
+                                            <input type="file" value="{{ old('passbook_copy') }}"
                                                 class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
-                                                name="bank_account_image" />
-                                            @error('bank_account_image')
+                                                name="passbook_copy" />
+                                            @error('passbook_copy')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -273,10 +273,10 @@
                                         </div>
                                         <div class="col-md-4">
                                             മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('death_certificate_image') }}"
+                                            <input type="file" value="{{ old('death_certificate') }}"
                                                 class="form-control" placeholder="വയസ്സ് "
-                                                name="death_certificate_image" />
-                                            @error('death_certificate_image')
+                                                name="death_certificate" />
+                                            @error('death_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -334,10 +334,10 @@
 
                                         <div class="col-md-6">
                                             റേഷൻ കാർഡിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('ration_card_image') }}"
+                                            <input type="file" value="{{ old('ration_card') }}"
                                                 class="form-control" placeholder="Total Members in family"
-                                                name="ration_card_image" />
-                                            @error('ration_card_image')
+                                                name="ration_card" />
+                                            @error('ration_card')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -422,10 +422,10 @@
                                             വില്ലജ് ഓഫീസറിൽ
                                             നിന്നുള്ള
                                             സാക്ഷ്യപത്രം ഹാജരാകണം അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('income_certificate_image') }}"
+                                            <input type="file" value="{{ old('income_certificate') }}"
                                                 class="form-control" placeholder="വാർഷിക വരുമാനം"
-                                                name="income_certificate_image" />
-                                            @error('income_certificate_image')
+                                                name="income_certificate" />
+                                            @error('income_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

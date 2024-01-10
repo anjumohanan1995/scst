@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnemiaFinance;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
+use App\Models\SingleIncomeEarner;
+use App\Models\StudentAward;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
@@ -580,6 +583,315 @@ class UserHomeController extends Controller
         return view('user.marriage_grant_view', compact('formData'));
 
 
+
+    }
+    public function userStudentAwardList(Request $request)
+    {
+        return view('user.student_award_list');
+
+    }
+    public function getUserStudentAwardList(Request $request)
+    {
+        
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = StudentAward::where('user_id',$user_id)->where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = StudentAward::where('user_id',$user_id)->where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = StudentAward::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $dob = $record->dob;
+             $district = @$record->districtRelation->name;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "dob" => $dob,
+                "district" => $district,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userStudentAward/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function userStudentAwardView(Request $request, $id)
+    {           
+        $formData = StudentAward::where('_id',$id)->first();
+       
+        return view('user.student_award_view', compact('formData'));
+
+    }
+
+    public function userAnemiaFinanceList(Request $request)
+    {
+        return view('user.anemia_finance_list');
+    }
+    public function getUserAnemiaFinanceList(Request $request)
+    {
+        
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = AnemiaFinance::where('user_id',$user_id)->where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = AnemiaFinance::where('user_id',$user_id)->where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = AnemiaFinance::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $dob = $record->dob;
+             $district = @$record->districtRelation->name;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "dob" => $dob,
+                "district" => $district,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userAnemiaFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function userAnemiaFinanceView(Request $request, $id)
+    {           
+        $formData = AnemiaFinance::where('_id',$id)->first();
+       
+        return view('user.anemia_finance_view', compact('formData'));
+
+    }
+    public function userSingleEarnerList(Request $request)
+    {
+        return view('user.single_earner_list');
+    }
+    public function getUserSingleEarnerList(Request $request)
+    {
+        
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = SingleIncomeEarner::where('user_id',$user_id)->where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('applicant_name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = SingleIncomeEarner::where('user_id',$user_id)->where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('applicant_name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = SingleIncomeEarner::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('applicant_name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->applicant_name;
+             $address = $record->address;
+             $applicant_caste = $record->applicant_caste;
+             $district = @$record->districtRelation->name;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "caste" => $applicant_caste,
+                "district" => $district,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userSingleEarner/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
+    public function userSingleEarnerView(Request $request, $id)
+    {           
+        $formData = SingleIncomeEarner::where('_id',$id)->first();
+       
+        return view('user.single_earner_view', compact('formData'));
 
     }
 }

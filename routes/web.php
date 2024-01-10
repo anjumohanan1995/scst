@@ -128,6 +128,19 @@ Route::get('/userMarriageGrantList', [App\Http\Controllers\UserHomeController::c
 Route::get('/getUserMarriageGrantList', [App\Http\Controllers\UserHomeController::class, 'getUserMarriageGrantList'])->name('getUserMarriageGrantList');
 Route::get('/userMarriageGrant/{id}/view', [App\Http\Controllers\UserHomeController::class, 'userMarriageGrantView'])->name('userMarriageGrantView');
 
+Route::get('/userStudentAwardList', [App\Http\Controllers\UserHomeController::class, 'userStudentAwardList'])->name('userStudentAwardList');
+Route::get('/getUserStudentAwardList', [App\Http\Controllers\UserHomeController::class, 'getUserStudentAwardList'])->name('getUserStudentAwardList');
+Route::get('/userStudentAward/{id}/view', [App\Http\Controllers\UserHomeController::class, 'userStudentAwardView'])->name('userStudentAwardView');
+
+Route::get('/userAnemiaFinanceList', [App\Http\Controllers\UserHomeController::class, 'userAnemiaFinanceList'])->name('userAnemiaFinanceList');
+Route::get('/getUserAnemiaFinanceList', [App\Http\Controllers\UserHomeController::class, 'getUserAnemiaFinanceList'])->name('getUserAnemiaFinanceList');
+Route::get('/userAnemiaFinance/{id}/view', [App\Http\Controllers\UserHomeController::class, 'userAnemiaFinanceView'])->name('userAnemiaFinanceView');
+
+Route::get('/userSingleEarnerList', [App\Http\Controllers\UserHomeController::class, 'userSingleEarnerList'])->name('userSingleEarnerList');
+Route::get('/getUserSingleEarnerList', [App\Http\Controllers\UserHomeController::class, 'getUserSingleEarnerList'])->name('getUserSingleEarnerList');
+Route::get('/userSingleEarner/{id}/view', [App\Http\Controllers\UserHomeController::class, 'userSingleEarnerView'])->name('userSingleEarnerView');
+
+
 
 Route::resource('/users', UserController::class);
 Route::get('/getUsers', [UserController::class, 'getUsers'])->name('getUsers');
@@ -191,6 +204,8 @@ Route::delete('/newslist/{id}', 'NewsListController@destroy')->name('newslist.de
 //single income earner controller starts here 
 
 Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
+Route::post('/singleIncomeEarnerPreview', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleIncomeEarnerPreview'])->name('singleIncomeEarnerPreview');
+Route::post('/singleEarnerStore', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerStore'])->name('singleEarnerStore');
 
 //single income earner controller ends  here 
 

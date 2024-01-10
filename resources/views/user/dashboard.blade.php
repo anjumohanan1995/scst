@@ -206,7 +206,7 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-                        <h3>Application 7 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <h3>Application 7 - <a href="{{ route('userSingleEarnerList') }}">Applied({{ $data['singleEarnerCount'] }})</a></h3>
                         <p>ഏകവരുമാനദായകന്റെ മരണം തെളിയിക്കുന അപേക്ഷഫോറം </p>
                              <a href="{{url('single-income-earner')}}" class="btn-card">Apply Now</a>   
                     </div>
@@ -216,7 +216,7 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-                        <h3>Application 8 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <h3>Application 8 - <a href="{{ route('userAnemiaFinanceList') }}">Applied({{ $data['anemiaFinanceCount'] }})</a></h3>
                         <p>സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി </p>
                              <a href="{{url('anemia-financial-assistance')}}" class="btn-card">Apply Now</a>   
                     </div>
@@ -240,7 +240,7 @@ a.btn-card {
                             <div class="card-content">
                                
                                 <div class="card-desc">
-                                    <h3>Application 10 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                                    <h3>Application 10 - <a href="{{ route('userStudentAwardList') }}">Applied({{ $data['studentAwardCount'] }})</a></h3>
                                     <p>മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo </p>
                                          <a href="{{url('student-award')}}" class="btn-card">Apply Now</a>     
                                 </div>

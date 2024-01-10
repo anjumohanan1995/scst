@@ -157,6 +157,7 @@ class AnemiaFinanceController extends Controller
             'caste' => $data['caste'],
             'caste_certificate' => $data['caste_certificate'],
             'phone' => $data['phone'],
+            'address' => $data['address'],
             'district' => @$data['district'],
             'taluk' => @$data['taluk'],
             'pincode' => @$data['pincode'],

@@ -21,5 +21,10 @@ class SingleIncomeEarner extends Eloquent
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+    public function districtRelation() {
+        return $this->belongsTo('App\Models\District', 'district');
+    }
+    public function talukName() {
+        return $this->belongsTo('App\Models\Taluk', 'taluk');
+    }
 }
