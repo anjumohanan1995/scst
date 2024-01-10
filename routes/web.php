@@ -17,9 +17,8 @@ use App\Http\Controllers\GalleryCategoryController;
 use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
-
-
-
+use App\Http\Controllers\AnemiaFinanceController;
+use App\Models\MedEngStudentFund;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +101,15 @@ Route::post('/marriageGrantStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/marriageGrantList', [App\Http\Controllers\ApplicationController::class, 'marriageGrantList'])->name('marriageGrantList');
 Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController::class, 'getmarriageGrantList'])->name('getmarriageGrantList');
 Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
+
+Route::get('/anemia-financial-assistance', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancialAssistance'])->name('anemia-financial-assistance');
+Route::post('/anemiaFinancePreview', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancePreview'])->name('anemiaFinancePreview');
+Route::post('/anemiaFinanceStore', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceStore'])->name('anemiaFinanceStore');
+
+
+Route::get('/student-award', [App\Http\Controllers\StudentAwardController::class, 'studentAward'])->name('studentAward');
+Route::post('/studentAwardPreview', [App\Http\Controllers\StudentAwardController::class, 'studentAwardPreview'])->name('studentAwardPreview');
+Route::post('/studentAwardStore', [App\Http\Controllers\StudentAwardController::class, 'studentAwardStore'])->name('studentAwardStore');
 
 
 Route::get('/userCoupleFinanceList', [App\Http\Controllers\UserHomeController::class, 'userCoupleFinanceList'])->name('userCoupleFinanceList');
@@ -187,11 +195,20 @@ Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
 //single income earner controller ends  here 
 
 
-//house Management 
+//house Grant Scheme 
     Route::resource('houseGrant', HouseManagementController::class);
-    Route::get('/show/{id}', [HouseManagementController::class, 'show'])->name('examples.show');
-    Route::get('/', [HouseManagementController::class, 'index'])->name('examples.index');
-    Route::get('/show/{id}', [HouseManagementController::class, 'show'])->name('examples.show');
     Route::get('/userHouseGrantList', [HouseManagementController::class, 'userHouseGrantList'])->name('userHouseGrantList');
     Route::get('/getUserHouseGrantList', [HouseManagementController::class, 'getUserHouseGrantList'])->name('getUserHouseGrantList');
-   
+    Route::post('/HouseGrantStoreDetails', [HouseManagementController::class, 'HouseGrantStoreDetails'])->name('HouseGrantStoreDetails');
+    Route::get('/houseGrantApplications', [HouseManagementController::class, 'adminHouseGrantList'])->name('adminHouseGrantList');
+    Route::get('/getAdminHouseGrantList', [HouseManagementController::class, 'getAdminHouseGrantList'])->name('getAdminHouseGrantList');
+    Route::get('/HouseGrantDetails/{id}', [HouseManagementController::class, 'getAdminHouseGrantDetails'])->name('getAdminHouseGrantDetails');
+
+//Medical / Engineering student fund scheme
+Route::resource('/Medical/Engineering/StudentFund', MedEngStudentFund::class);
+Route::get('/getStudentFundList', [MedEngStudentFund::class, 'getStudentFundList'])->name('getStudentFundList');
+Route::post('/Medical/Engineering/StudentFundDetails', [MedEngStudentFund::class, 'StudentFundDetails'])->name('StudentFundDetails');
+Route::get('/Medical/Engineering/StudentFundList', [MedEngStudentFund::class, 'adminStudentFundList'])->name('adminStudentFundList');
+Route::get('/getAdminStudentFundList', [MedEngStudentFund::class, 'getAdminStudentFundList'])->name('getAdminStudentFundList');
+Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFund::class, 'adminStudentFundDetails'])->name('adminStudentFundDetails');
+
