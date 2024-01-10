@@ -16,7 +16,7 @@ use App\Count;
 use Carbon\Carbon;
 use App\Hospital;
 use App\Models\HouseManagement;
-use App\Models\MedEngStudentFund;
+
 use App\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
