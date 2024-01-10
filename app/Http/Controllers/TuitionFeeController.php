@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\TuitionFee;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class TuitionFeeController extends Controller
      */
     public function create()
     {
-        //
+        $districts=District::all();
+        return view("user.tuitionFee.create",compact('districts'));
     }
 
     /**
