@@ -146,7 +146,11 @@
                                             </div>
                                             <div class="col-md-8 mb-8">
                                                 <input type="text" class="form-control" value="{{ isset($houseManagement['nature_payment']) ? (
-                                                    $houseManagement['nature_payment'] == 'Additional convenience' ? 'അധിക സൗകര്യം' : ''
+                                                    $houseManagement['nature_payment'] == 'innovation' ? 'നവീകരണം' : (
+                                                        $houseManagement['nature_payment'] == 'Additional convenience' ? 'അധിക സൗകര്യം' : (
+                                                            $houseManagement['nature_payment'] == 'Completion' ? 'പൂർത്തീകരണം' : ''
+                                                        )
+                                                    )
                                                 ) : '' }}" name="nature_payment" id="nature_payment" readonly="">
                                             
                                             </div>

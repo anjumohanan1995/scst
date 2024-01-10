@@ -52,7 +52,36 @@
                             </div><br>
                             <div class="row">   
                                
-                             
+                                <div class="col-md-2 mb-2">
+                                    <label class="form-label">ജില്ല  </label>
+                                    <select id="current_district" name="current_district" class="form-control" >
+                                        <option value="">Select</option>
+                                            @foreach($districts as $district)
+                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                            @endforeach
+                                    </select>
+                                     @error('current_district')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                    <input type="hidden" name="current_district_name" id="current_district_name" value="">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label class="form-label">താലൂക്ക്  </label>
+                                    <select id="current_taluk" name="current_taluk" class="form-control">
+                                        <option value="">Choose Taluk</option>
+                                    </select>                                 
+                                    @error('current_taluk')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                    <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label class="form-label">പിൻകോഡ്  </label>
+                                    <input type="text" value="{{ old('current_pincode') }}"  class="form-control"  name="current_pincode" />
+                                    @error('current_pincode')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ 
                                     </label>
@@ -62,6 +91,9 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                               
+                            </div><br>
+                               <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ജാതി 
                                     </label>
@@ -71,9 +103,6 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                       </div>
-                            </div><br>
-                               <div class="row">   
-                               
                                           <div class="col-md-6 mb-6">
                                         <label class="form-label">വാർഷിക വരുമാനം 
                                         </label>
@@ -85,27 +114,27 @@
                                        
                                     </div>
                                     
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label">ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും 
-                                        </label>
-                                        <textarea type="text" value="{{ old('house_details') }}"  class="form-control" placeholder="" name="house_details" ></textarea>
-                                     @error('house_details')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label">അനുവദിച്ച ഏജൻസി/ വകുപ്പ് 
-                                        </label>
-                                        <input type="text" value="{{ old('agency') }}" class="form-control" placeholder="" name="agency" />
-                                        @error('agency')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                    </div>
+                                    
                                    
                                   
                                 </div><br>
                             <div class="row">   
-                               
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും 
+                                    </label>
+                                    <textarea type="text" value="{{ old('house_details') }}"  class="form-control" placeholder="" name="house_details" ></textarea>
+                                 @error('house_details')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">അനുവദിച്ച ഏജൻസി/ വകുപ്പ് 
+                                    </label>
+                                    <input type="text" value="{{ old('agency') }}" class="form-control" placeholder="" name="agency" />
+                                    @error('agency')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                                </div>
                                
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം 
@@ -115,6 +144,10 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                            
+                            </div><br>   
+            
+                            <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">കുടുംബത്തിന്റെ അവസ്ഥ  (അവിവാഹിതരായ :
                                         അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
@@ -129,13 +162,6 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                            </div><br>   
-                            <div class="row">   
-                               
-
-                              
-                            </div><br> 
-                            <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം 
                                         (നവീകരണം ,അധിക സൗകര്യം / പൂർത്തീകരണം )
@@ -156,6 +182,10 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                               
+                              
+                            </div><br> 
+                            <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
                                         ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
@@ -170,9 +200,6 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                              
-                            </div><br> 
-                            <div class="row">   
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
                                         മറ്റു സംഗതികൾ
@@ -198,13 +225,7 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്  </label>
-                                    <input type="file" class="form-control" accept="image/*"  name="signature" id="signature" value="" placeholder="അപേക്ഷകന്റെ ഒപ്പ് " />
-                                    @error('signature')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
+                               
                                
                               
                             </div><br> 
@@ -220,17 +241,56 @@
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
+                            <div class="col-md-6 mb-6">
+                                <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്  </label>
+                                <input type="file" class="form-control" accept="image/*"  name="signature" id="signature" value="" placeholder="അപേക്ഷകന്റെ ഒപ്പ് " />
+                                @error('signature')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
                           </div><br>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
+                          <br>
+                          <hr>
+                          <br>
+                          <div class="card">
+                            <div class="card-body">
+                                <div class="row">   
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">ജില്ല  </label>
+                                        <select id="submitted_district" name="submitted_district" class="form-control" >
+                                            <option value="">Select</option>
+                                                @foreach($districts as $district)
+                                                    <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                @endforeach
+                                        </select>
+                                         @error('submitted_district')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                        <input type="hidden" name="dist_name" id="dist_name" value="">
+                                    </div>
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">TEO  </label>
+                                        <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                            <option value="">Choose TEO</option>
+                                        </select>                                 
+                                        @error('submitted_teo')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                        <input type="hidden" name="teo_name" id="teo_name" value="">
+                                    </div>                                 
+                                </div><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                
+                                    </div>
+                                    <div class="col-md-8 mb-8">
+                                        <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                                    </div>
                                     
-                                        </div>
-                                        <div class="col-md-8 mb-8">
-                                            <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
-                                        </div>
-                                        
-            
-                                    </div><br>
+        
+                                </div><br>
                            
                         </div>
                     </div>

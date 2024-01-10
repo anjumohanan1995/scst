@@ -226,9 +226,9 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-                        <h3>Application 9 - <a href="/Medical/Engineering/StudentFund">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <h3>Application 9 - <a href="MedicalEngineeringStudentFund">Applied({{ $data['studentFundCount'] }})</a></h3>
                         <p>മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ </p>
-                             <a href="/Medical/Engineering/StudentFund/create" class="btn-card">Apply Now</a>   
+                             <a href="MedicalEngineeringStudentFund/create" class="btn-card">Apply Now</a>   
                     </div>
                 </div>
             </div>

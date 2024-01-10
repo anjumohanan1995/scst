@@ -173,7 +173,7 @@ $(document).on("click",".deleteItem",function() {
 	        ],
              "ajax": {
 
-			       	"url": "{{route('getStudentFundList')}}",
+			       	"url": "{{route('getAdminStudentFundList')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {

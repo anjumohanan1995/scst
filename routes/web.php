@@ -18,6 +18,8 @@ use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
+use App\Http\Controllers\MedEngStudentFundController;
+use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
 
 /*
@@ -205,10 +207,12 @@ Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
     Route::get('/HouseGrantDetails/{id}', [HouseManagementController::class, 'getAdminHouseGrantDetails'])->name('getAdminHouseGrantDetails');
 
 //Medical / Engineering student fund scheme
-Route::resource('/Medical/Engineering/StudentFund', MedEngStudentFund::class);
-Route::get('/getStudentFundList', [MedEngStudentFund::class, 'getStudentFundList'])->name('getStudentFundList');
-Route::post('/Medical/Engineering/StudentFundDetails', [MedEngStudentFund::class, 'StudentFundDetails'])->name('StudentFundDetails');
-Route::get('/Medical/Engineering/StudentFundList', [MedEngStudentFund::class, 'adminStudentFundList'])->name('adminStudentFundList');
-Route::get('/getAdminStudentFundList', [MedEngStudentFund::class, 'getAdminStudentFundList'])->name('getAdminStudentFundList');
-Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFund::class, 'adminStudentFundDetails'])->name('adminStudentFundDetails');
+Route::resource('/MedicalEngineeringStudentFund', MedEngStudentFundController::class);
+Route::get('/getStudentFundList', [MedEngStudentFundController::class, 'getStudentFundList'])->name('getStudentFundList');
+Route::post('/Medical/Engineering/StudentFundStore', [MedEngStudentFundController::class, 'StudentFundStore'])->name('StudentFundStore');
+Route::get('/Medical/Engineering/StudentFundList', [MedEngStudentFundController::class, 'adminStudentFundList'])->name('adminStudentFundList');
+Route::get('/getAdminStudentFundList', [MedEngStudentFundController::class, 'getAdminStudentFundList'])->name('getAdminStudentFundList');
+Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFundController::class, 'adminStudentFundDetails'])->name('adminStudentFundDetails');
 
+//Tuition fee
+Route::resource('/TuitionFee', TuitionFeeController::class);

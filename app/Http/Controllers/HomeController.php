@@ -18,6 +18,7 @@ use App\Count;
 use Carbon\Carbon;
 use App\Hospital;
 use App\Models\HouseManagement;
+use App\Models\MedEngStudentFund;
 use App\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
@@ -52,6 +53,7 @@ class HomeController extends Controller
         $data['motherChildCount'] = MotherChildScheme::where('user_id',$user_id)->count();
         $data['marriageGrantCount'] = MarriageGrant::where('user_id',$user_id)->count();
         $data['houseGrantCount'] = HouseManagement::where('user_id',$user_id)->count();
+        $data['studentFundCount'] = MedEngStudentFund::where('user_id',$user_id)->count();
             return view('user.dashboard',compact('data'));
        }else{
 

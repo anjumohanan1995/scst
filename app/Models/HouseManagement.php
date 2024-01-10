@@ -29,7 +29,14 @@ class HouseManagement extends Eloquent
         'signature',
         'status',
         'user_id',
-        'prove_eligibility_file'
+        'prove_eligibility_file',
+        'current_district_name',
+        'current_taluk_name',
+        'current_pincode',
+        'submitted_district',
+        'submitted_teo',
+        'current_district',
+        'current_taluk',
 
     ];
 
