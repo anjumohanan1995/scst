@@ -179,7 +179,7 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-                        <h3>Application 5 -</h3>
+                        <h3>Application 5 -<a href="{{ route('userchildFinanceList') }}">Applied({{ $data['childFinanceCount'] }})</h3>
                         <p>അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
                              <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>   
                     </div>
@@ -226,9 +226,9 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-                        <h3>Application 9 - <a href="/Medical/Engineering/StudentFund">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <h3>Application 9 - <a href="MedicalEngineeringStudentFund">Applied({{ $data['studentFundCount'] }})</a></h3>
                         <p>മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ </p>
-                             <a href="/Medical/Engineering/StudentFund/create" class="btn-card">Apply Now</a>   
+                             <a href="MedicalEngineeringStudentFund/create" class="btn-card">Apply Now</a>   
                     </div>
                 </div>
             </div>
@@ -243,6 +243,16 @@ a.btn-card {
                                     <h3>Application 10 - <a href="{{ route('userStudentAwardList') }}">Applied({{ $data['studentAwardCount'] }})</a></h3>
                                     <p>മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo </p>
                                          <a href="{{url('student-award')}}" class="btn-card">Apply Now</a>     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-content">
+                               
+                                <div class="card-desc">
+                                    <h3>Application 11 - <a href="TuitionFee">Applied({{ $data['tuitionFeeCount'] }})</a></h3>
+                                    <p>പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11 ,12  ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ </p>
+                                         <a href="TuitionFee/create" class="btn-card">Apply Now</a>   
                                 </div>
                             </div>
                         </div>

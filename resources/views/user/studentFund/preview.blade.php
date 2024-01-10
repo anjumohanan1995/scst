@@ -8,8 +8,8 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			<div class="col-xl-9">
-				<h4 class="content-title mb-2">പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
-                    ധനസഹായത്തിനുള്ള അപേക്ഷ </h4>
+				<h4 class="content-title mb-2">മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
+                </h4>
 			</div>
 			<div class="col-xl-3">
 			</div>
@@ -52,10 +52,10 @@
             </tr>
             <tr> <td>
  
-                ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ </td><td><strong> {{ @$formData['panchayath'] }} </strong></td>
+                കോഴ്‌സിന്റെ പേര് </td><td><strong> {{ @$formData['course_name'] }} </strong></td>
              <td>
  
-                അപേക്ഷകന്റെ ജാതി </td><td> <strong> {{ @$formData['caste'] }}</strong> 
+                നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി </td><td> <strong> {{ @$formData['class_start_date'] }}</strong> 
  
             </td>
             </tr>
@@ -63,76 +63,61 @@
                  
                 <tr>
                     <td>
-                        വാർഷിക വരുമാനം 
+                        അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത് 
+ 
                     </td>
                     <td> 
-                        {{ @$formData['anual_income'] }} 
+                        @if(@$formData['admission_type'] == 'merit') 
+                        
+                        മെരിറ്റ്
+                        @elseif(@$formData['nature_payment'] == 'innovation') 
+                        സംവരണം
+                        @elseif(@$formData['nature_payment'] == 'management') 
+                        മാനേജ്‌മന്റ്
+                        @elseif(@$formData['nature_payment'] == 'others') 
+                        മറ്റുള്ളവ
+                        @endif
+                     
                     </td>
                     <td>
-                        ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും   </td><td> {{ @$formData['house_details'] }}
+                        അപേക്ഷകന്റെ ജാതി/ മതം 
+   </td><td> {{ @$formData['caste'] }}
                     </td>
                 </tr>
                 <tr>
                       <td>
  
-                        വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം </td><td> {{ @$formData['last_payment_year'] }}
+                        ജാതി/ മതം സർട്ടിഫിക്കറ്റ് </td><td>  @if($formData['caste_certificate'])
+                            <iframe src="{{ asset('medEngStudentFund/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
+                            @endif
  
                 </td>
                 <td>
-                    കുടുംബത്തിന്റെ അവസ്ഥ  (അവിവാഹിതരായ :
-                    അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
-                    വിധവയാകേണ്ടി വന്നവർ , ശാരീരിക മാനസിക
-                    വേല്ലുവിളി നേരിടുന്നവർ , തീരാവ്യാധി പിടിപ്പെട്ടവർ ,
-                    അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ )
+                    അപേക്ഷകന്റെ വരുമാനം
                     </td>
                     <td> 
-                        {{ @$formData['family_details'] }} 
+                        {{ @$formData['income'] }} 
                     </td>
                
              </tr><tr>
                       <td>
  
-                        ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം 
-                                        (നവീകരണം ,അധിക സൗകര്യം / പൂർത്തീകരണം ) </td>
-                    <td>@if(@$formData['nature_payment'] == 'innovation') 
-                        
-                        നവീകരണം
-                        @elseif(@$formData['nature_payment'] == 'Additional convenience') 
-                        അധിക സൗകര്യം
-                        @elseif(@$formData['nature_payment'] == 'Completion') 
-                        പൂർത്തീകരണം
+                        വരുമാന സർട്ടിഫിക്കറ്റ് </td>
+                    <td>
+                        @if($formData['income_certificate'])
+                        <iframe src="{{ asset('medEngStudentFund/' . @$formData['income_certificate']) }}" width="400" height="200"></iframe>
                         @endif
+                        
+                      
                        
  
                 </td>
                 <td>
  
-                    നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
-                    ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
-                    ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ എന്നുള്ള  വിവരം  
-                    (ഉണ്ടെങ്കിൽ എത്ര തുക ,ലഭിച്ച തീയതി )</td><td> {{ @$formData['payment_details'] }}
+                    വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം</td><td> {{ @$formData['account_details'] }}
 
             </td>
-                     </tr><tr>
-                   
-                <td>
- 
-                    മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
-                    മറ്റു സംഗതികൾ </td>
-                    
-                        <td> {{ @$formData['prove_eligibility'] }}
-                            @if($formData['prove_eligibility_file'])
-                            <iframe src="{{ asset('homeMng/' . @$formData['prove_eligibility_file']) }}" width="400" height="200"></iframe>
-                            @endif
-                      
-                    </td>
-                    <td>
-                        സ്ഥലം
-                    </td>
-                    <td> 
-                        {{ @$formData['place'] }} 
-                    </td>
-                </tr>
+                     </tr>
              
                
               
@@ -145,18 +130,29 @@
                     </td>
                     <td>
                         അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </td><td>  @if($formData['signature'])
-                            <iframe src="{{ asset('homeMng/' . @$formData['signature']) }}" width="400" height="200"></iframe>
+                            <iframe src="{{ asset('medEngStudentFund/' . @$formData['signature']) }}" width="400" height="200"></iframe>
                             @endif
                     </td>
                   
                 </tr>
                
-      
+                <tr>
+                   
+                    <td>
+                        രക്ഷാകർത്താവിന്റെ പേര്  </td><td>  {{ @$formData['parent_name'] }}
+                    </td>
+                    <td>
+                        രക്ഷാകർത്താവിന്റെ ഒപ്പ്/വിരലടയാളം </td><td>  @if($formData['parent_signature'])
+                            <iframe src="{{ asset('medEngStudentFund/' . @$formData['parent_signature']) }}" width="400" height="200"></iframe>
+                            @endif
+                    </td>
+                  
+                </tr>
              
                
            </table>
                                 
-                                <form action="{{ url('HouseGrantStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                <form action="{{ route('StudentFundStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                   
                                
@@ -206,6 +202,7 @@
             window.history.back();
         }
         return
+    
     }
 </script>
 @endsection

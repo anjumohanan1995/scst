@@ -8,14 +8,14 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			
-				<h4 class="content-title mb-2"> പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
-                    ധനസഹായത്തിനുള്ള അപേക്ഷ 
+				<h4 class="content-title mb-2"> മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
+
 </h4>
 				
 
             @if ($message = Session::get('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fa fa-window-close"></i></button>                                {{ $message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fa fa-window-close"></i></button> {{ $message }}
                 </div>
             @endif
 		</div>
@@ -31,10 +31,10 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">പേര് :</label>
+                                    <label class="form-label">അപേക്ഷകന്റെ പേര് :</label>
                                 </div>
                                 <div class="col-md-8 mb-8">
-                                    <input type="text" class="form-control"  name="name" id="name" value="{{ @$houseManagement->name }}" placeholder="പേര്" readonly/>
+                                    <input type="text" class="form-control"  name="name" id="name" value="{{ @$studentFund->name }}" placeholder="" readonly/>
                                  
                                 </div>
                             </div><br>
@@ -43,16 +43,17 @@
                                     <label class="form-label">മേൽവിലാസം:</label>                                    
                                 </div>
                                 <div class="col-md-8 mb-8">
-                                    <input type="text" class="form-control"  name="address" id="address" value="{{ @$houseManagement['address'] }}" placeholder="മേൽവിലാസം (പിൻകോഡ് സഹിതം)"  readonly/>
+                                    <input type="text" class="form-control"  name="address" id="address" value="{{ @$studentFund['address'] }}" placeholder=""  readonly/>
                                 </div>
                             </div><br>
                             <div class="row">
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ  :</label>
+                                    <label class="form-label">കോഴ്‌സിന്റെ പേര് 
+                                        :</label>
                                     
                                         </div>
                                         <div class="col-md-8 mb-8">
-                                            <input type="text" class="form-control"  name="age" id="age" value="{{ @$houseManagement['panchayath'] }}" placeholder="" readonly />
+                                            <input type="text" class="form-control"  name="age" id="age" value="{{ @$studentFund['course_name'] }}" placeholder="" readonly />
                                          
                                         </div>
                                         
@@ -60,11 +61,12 @@
                                     </div><br>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label"> ജാതി  :</label>
+                                        <label class="form-label"> നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി 
+                                            :</label>
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="caste" id="caste" value="{{ @$houseManagement['caste'] }}" placeholder="വയസ്, ജനനതീയതി" readonly/>
+                                                <input type="text" class="form-control"  name="class_start_date" id="class_start_date" value="{{ @$studentFund['class_start_date'] }}" placeholder="" readonly/>
                                               
                                             </div>
                                             
@@ -72,12 +74,21 @@
                                         </div><br>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">വാർഷിക വരുമാനം 
+                                        <label class="form-label">അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത് 
+ 
                                             :</label>
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="anual_income" id="anual_income" value="{{ @$houseManagement['anual_income'] }}" placeholder=" " readonly />
+                                                <input type="text" class="form-control" value="{{ isset($studentFund['admission_type']) ? (
+                                                    $studentFund['admission_type'] == 'merit' ? 'മെരിറ്റ്' : (
+                                                        $studentFund['admission_type'] == 'innovation' ? 'സംവരണം' : (
+                                                            $studentFund['admission_type'] == 'management' ? 'മാനേജ്‌മന്റ്' : (
+                                                                $studentFund['admission_type'] == 'others' ? 'മറ്റുള്ളവ' : ''
+                                                            )
+                                                        )
+                                                    )
+                                                ) : '' }}" name="admission_type" id="admission_type" readonly="">
                                                 
                                             </div>
                                             
@@ -85,11 +96,11 @@
                                         </div><br>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും   :</label>
+                                        <label class="form-label">അപേക്ഷകന്റെ ജാതി/ മതം   :</label>
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="house_details" id="house_details" value="{{ @$houseManagement['house_details'] }}" placeholder="" readonly />
+                                                <input type="text" class="form-control"  name="caste" id="caste" value="{{ @$studentFund['caste'] }}" placeholder="" readonly />
                                                 
                                             </div>
                                             
@@ -97,121 +108,69 @@
                                         </div><br>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">അനുവദിച്ച ഏജൻസി/ വകുപ്പ് 
+                                        <label class="form-label">ജാതി/ മതം സർട്ടിഫിക്കറ്റ്
                                             :</label>
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="agency" id="agency" value="{{ @$houseManagement['agency'] }}" placeholder="" readonly/>
-                                              
+                                                @if($studentFund['caste_certificate'])
+                                                                <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                                @endif
                                             </div>
                                             
 
                                         </div><br>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">അപേക്ഷകന്റെ വരുമാനം :</label>
+                                                
+                                                    </div>
+                                                    <div class="col-md-8 mb-8">
+                                                        <input type="text" class="form-control"  name="income" id="income" value="{{ @$studentFund['income'] }}" placeholder="" readonly />
+                                               
+                                                    </div>
+                                                    
+            
+                                                </div><br>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം :</label>
+                                        <label class="form-label">വരുമാന സർട്ടിഫിക്കറ്റ് :</label>
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="last_payment_year" id="last_payment_year" value="{{ @$houseManagement['last_payment_year'] }}" placeholder="" readonly />
-                                                
+                                                @if($studentFund['income_certificate'])
+                                                <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" width="400" height="200"></iframe>
+                                                @endif
                                             </div>
                                             
     
                                         </div><br>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">കുടുംബത്തിന്റെ അവസ്ഥ  (അവിവാഹിതരായ :
-                                            അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
-                                            വിധവയാകേണ്ടി വന്നവർ , ശാരീരിക മാനസിക
-                                            വേല്ലുവിളി നേരിടുന്നവർ , തീരാവ്യാധി പിടിപ്പെട്ടവർ ,
-                                            അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ )
+                                        <label class="form-label">വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം
                                              :</label>
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="family_details" id="family_details" value="{{ @$houseManagement['family_details'] }}" placeholder="" readonly />
+                                                <input type="text" class="form-control"  name="account_details" id="account_details" value="{{ @$studentFund['account_details'] }}" placeholder="" readonly />
                                                
                                             </div>
                                             
     
                                         </div><br>
-                                <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label">ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം 
-                                            (നവീകരണം ,അധിക സൗകര്യം / പൂർത്തീകരണം )
-                                             :</label>
-                                        
-                                            </div>
-                                            <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control" value="{{ isset($houseManagement['nature_payment']) ? (
-                                                    $houseManagement['nature_payment'] == 'Additional convenience' ? 'അധിക സൗകര്യം' : ''
-                                                ) : '' }}" name="nature_payment" id="nature_payment" readonly="">
-                                            
-                                            </div>
-                                            
-    
-                                        </div><br>
-                                        <div class="row">
-                                            <div class="col-md-3 mb-3">
-                                                <label class="form-label">നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
-                                                    ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
-                                                    ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ എന്നുള്ള  വിവരം  
-                                                    (ഉണ്ടെങ്കിൽ എത്ര തുക ,ലഭിച്ച തീയതി )
-                                                    
-                                                     :</label>
-                                                
-                                                    </div>
-                                                    <div class="col-md-8 mb-8">
-                                                        <input type="text" class="form-control" value="{{ @$houseManagement['payment_details']}}" name="payment_details" id="payment_details" readonly="">
-                                                    
-                                                    </div>
-                                                    
-            
-                                                </div><br>
-                                                 <div class="row">
-                                                    <div class="col-md-3 mb-3">
-                                                        <label class="form-label">മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
-                                                            മറ്റു സംഗതികൾ
-                                                      
-                                                            
-                                                             :</label>
-                                                        
-                                                            </div>
-                                                            <div class="col-md-4 mb-4">
-                                                                <input type="text" class="form-control" value="{{ @$houseManagement['prove_eligibility']}}" name="prove_eligibility" id="prove_eligibility" readonly="">
-                                                            
-                                                            </div>
-                                                            <div class="col-md-4 mb-4">
-                                                                @if($houseManagement['prove_eligibility_file'])
-                                                                <iframe src="{{ asset('homeMng/' . @$houseManagement['prove_eligibility_file']) }}" width="400" height="200"></iframe>
-                                                                @endif
-                                                          
-                                                             </div>
-                                                            
-                    
-                                                        </div><br>
-                                <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label">സ്ഥലം :</label>
-                                        
-                                            </div>
-                                            <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="place" id="place" value="{{ @$houseManagement['place'] }}" placeholder="സ്ഥലം" readonly />
-                                                
-                                            </div>
-                                            
-
-                                        </div><br>
+                             
+                                        @php
+                                        use Carbon\Carbon;
+                                    @endphp
+                                                 
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">തീയതി :</label>
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="date" id="date" value="{{ @$houseManagement['date'] }}" placeholder="തീയതി" readonly />
-                                                
+                                                <input type="text" class="form-control" name="date" id="date" value="{{ @$studentFund['date'] ? Carbon::parse($studentFund['date'])->format('d-m-Y') : '' }}" placeholder="" readonly />
+ 
                                             </div>
                                             
     
@@ -222,8 +181,8 @@
                                                 
                                                     </div>
                                                     <div class="col-md-8 mb-8">
-                                                        @if(@$houseManagement['signature'] !="")
-                                                       <img src="{{ url('/') }}/homeMng/{{ @$houseManagement['signature'] }}" alt="Preview" width="300" height="200">
+                                                        @if(@$studentFund['signature'] !="")
+                                                       <img src="{{ url('/') }}/medEngStudentFund/{{ @$studentFund['signature'] }}" alt="Preview" width="300" height="200">
 
                                                        @endif
                                                     </div>
@@ -231,12 +190,38 @@
             
                                                 </div><br>
                                                 <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                        <label class="form-label">രക്ഷാകർത്താവിന്റെ  പേര്   :</label>
+                                                        
+                                                            </div>
+                                                            <div class="col-md-8 mb-8">
+                                                                <input type="text" class="form-control"  name="parent_name" id="parent_name" value="{{ @$studentFund['parent_name'] }}" placeholder="തീയതി" readonly />
+                                                
+                                                            </div>
+                                                            
+                    
+                                                        </div><br>
+                                                        <div class="row">
+                                                            <div class="col-md-3 mb-3">
+                                                                <label class="form-label">രക്ഷാകർത്താവിന്റെ  ഒപ്പ്  :</label>
+                                                                
+                                                                    </div>
+                                                                    <div class="col-md-8 mb-8">
+                                                                        @if(@$studentFund['signature'] !="")
+                                                                       <img src="{{ url('/') }}/medEngStudentFund/{{ @$studentFund['signature'] }}" alt="Preview" width="300" height="200">
+                
+                                                                       @endif
+                                                                    </div>
+                                                                    
+                            
+                                                                </div><br>
+                                                <div class="row">
                                                     <div class="col-md-4 mb-4">
                                                       
                                                          
                                                              </div>
                                                     <div class="col-md-6 mb-6">
-                                                     <a href="{{ route('userHouseGrantList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                                     <a href="{{ route('MedicalEngineeringStudentFund.index') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
                                                      </a>  </div>
                                                             
                                                             

@@ -18,6 +18,8 @@ use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
+use App\Http\Controllers\MedEngStudentFundController;
+use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
 
 /*
@@ -84,7 +86,13 @@ Route::get('/exam-application/{id}', [App\Http\Controllers\ApplicationController
 Route::get('/childFinancialAssistanceForm', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceForm'])->name('childFinancialAssistanceForm');
 Route::post('/childFinancialAssistanceStore', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceStore'])->name('childFinancialAssistanceStore');
 Route::post('/childFinancialStoreDetails', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialStoreDetails'])->name('childFinancialStoreDetails');
+Route::get('/ChildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'ChildFinanceList'])->name('ChildFinanceList');
+Route::get('/getchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getchildFinanceList'])->name('getchildFinanceList');
+Route::get('/childFinance/{id}/view', [App\Http\Controllers\ChildFinanceController::class, 'childFinanceView'])->name('childFinanceView');
 
+Route::get('/userchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceList'])->name('userchildFinanceList');
+Route::get('/getUserchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getUserchildFinanceList'])->name('getUserchildFinanceList');
+Route::get('/userchildFinance/{id}/view', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceView'])->name('userchildFinanceView');
 
 
 
@@ -220,10 +228,12 @@ Route::post('/singleEarnerStore', [App\Http\Controllers\SingleIncomeEarnerContro
     Route::get('/HouseGrantDetails/{id}', [HouseManagementController::class, 'getAdminHouseGrantDetails'])->name('getAdminHouseGrantDetails');
 
 //Medical / Engineering student fund scheme
-Route::resource('/Medical/Engineering/StudentFund', MedEngStudentFund::class);
-Route::get('/getStudentFundList', [MedEngStudentFund::class, 'getStudentFundList'])->name('getStudentFundList');
-Route::post('/Medical/Engineering/StudentFundDetails', [MedEngStudentFund::class, 'StudentFundDetails'])->name('StudentFundDetails');
-Route::get('/Medical/Engineering/StudentFundList', [MedEngStudentFund::class, 'adminStudentFundList'])->name('adminStudentFundList');
-Route::get('/getAdminStudentFundList', [MedEngStudentFund::class, 'getAdminStudentFundList'])->name('getAdminStudentFundList');
-Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFund::class, 'adminStudentFundDetails'])->name('adminStudentFundDetails');
+Route::resource('/MedicalEngineeringStudentFund', MedEngStudentFundController::class);
+Route::get('/getStudentFundList', [MedEngStudentFundController::class, 'getStudentFundList'])->name('getStudentFundList');
+Route::post('/Medical/Engineering/StudentFundStore', [MedEngStudentFundController::class, 'StudentFundStore'])->name('StudentFundStore');
+Route::get('/Medical/Engineering/StudentFundList', [MedEngStudentFundController::class, 'adminStudentFundList'])->name('adminStudentFundList');
+Route::get('/getAdminStudentFundList', [MedEngStudentFundController::class, 'getAdminStudentFundList'])->name('getAdminStudentFundList');
+Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFundController::class, 'adminStudentFundDetails'])->name('adminStudentFundDetails');
 
+//Tuition fee
+Route::resource('/TuitionFee', TuitionFeeController::class);

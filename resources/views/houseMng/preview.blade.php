@@ -46,7 +46,7 @@
                 അപേക്ഷകന്റെ  പേര് </td><td><strong> {{ @$formData['name'] }} </strong></td>
              <td>
  
-                മേൽവിലാസം </td><td> <strong> {{ @$formData['address'] }}</strong> 
+                മേൽവിലാസം </td><td> <strong> {{ @$formData['address'] }} , {{ @$formData['address'] }}</strong> 
  
             </td>
             </tr>

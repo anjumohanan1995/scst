@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\HouseManagement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class HouseManagementController extends Controller
      */
     public function create()
     {
-    return view("houseMng.create");
+        $districts=District::all();
+    return view("houseMng.create",compact('districts'));
     }
 
     /**
@@ -38,8 +40,11 @@ class HouseManagementController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->current_taluk);
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required', 
                  
         ]);
         
@@ -254,7 +259,16 @@ $formattedDate = $currentDate->toDateString();
             'date' => $data['date'],
             'signature' => @$data['signature'],
             'user_id' =>Auth::user()->id, 
-            'status' =>0
+            'status' =>0,
+            'current_district_name' => $data['current_district_name'],
+            'current_taluk_name' => $data['current_taluk_name'],
+            'current_pincode' => $data['current_pincode'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => @$data['submitted_teo'],
+            'current_district' => $data['current_district'],
+            'current_taluk' => @$data['current_taluk'],
+            
+
         ]);
 
         return redirect()->route('home')->with('success','Application Submitted Successfully.');
