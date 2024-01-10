@@ -190,12 +190,8 @@ a.btn-card {
                 <div class="card-content">
                    
                     <div class="card-desc">
-<<<<<<< HEAD
                         <h3>Application 6 - <a href="{{ route('userHouseGrantList') }}">Applied({{ $data['houseGrantCount'] }})</a></h3>
-=======
-                        <h3>Application 6 - <a href="{{ route('userHouseGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
->>>>>>> 4754f342e0ac301fb0eaf8c0350356ea035856a3
-                        <p>പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
+                        <p>പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
                             ധനസഹായത്തിനുള്ള അപേക്ഷ 
                          </p>
                              <a href="/houseGrant/create" class="btn-card">Apply Now</a>   
@@ -216,15 +212,6 @@ a.btn-card {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-
-        </div>
-    </div>
-    </section>
-        
-        
-    </div>
-=======
             <div class="col-md-4">
                 <div class="card-content">
                    
@@ -235,14 +222,22 @@ a.btn-card {
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-4">
+                <div class="card-content">
+                   
+                    <div class="card-desc">
+                        <h3>Application 9 - <a href="/Medical/Engineering/StudentFund">Applied({{ $data['marriageGrantCount'] }})</a></h3>
+                        <p>മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ </p>
+                             <a href="/Medical/Engineering/StudentFund/create" class="btn-card">Apply Now</a>   
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     </section>
 		
 		
 	</div>
->>>>>>> 4754f342e0ac301fb0eaf8c0350356ea035856a3
 </div>
 <script>
 

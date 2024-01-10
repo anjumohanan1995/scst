@@ -343,7 +343,7 @@ $formattedDate = $currentDate->toDateString();
                 "panchayath" => $panchayath,
                 "caste" => $caste,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . route('houseGrant.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }
@@ -356,5 +356,9 @@ $formattedDate = $currentDate->toDateString();
          );
 
          return response()->json($response);
+    }
+    public function getAdminHouseGrantDetails($id){
+        $houseManagement=HouseManagement::find($id);
+        return view('admin.houseMng.details', compact('houseManagement'));
     }
 }
