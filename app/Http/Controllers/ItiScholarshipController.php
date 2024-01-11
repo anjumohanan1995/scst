@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
-use App\Models\TuitionFee;
+use App\Models\ItiFund;
+use App\Models\Institution;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class TuitionFeeController extends Controller
+class ItiScholarshipController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,43 +43,84 @@ class TuitionFeeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-         
-            'submitted_district' => 'required',
-            'submitted_teo' => 'required',          
+            'income' => 'required',
+            'income_certificate' => 'required',
+            'caste' => 'required',
+            'caste_certificate' => 'required',
+            'signature' => 'required',
+            'parent_name' => 'required',
+            'parent_signature' => 'required',
+            
+                 
         ]);
         
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
-
-      
-
        
-
+      
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
             $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
 
-            $image->move(public_path('/tuition'), $imgfileName);
+            $image->move(public_path('/itiStudentFund'), $imgfileName);
 
             $signature = $imgfileName;
 
         }else{
             $signature = '';
         }
+        if ($request->hasfile('parent_signature')) {
+
+            $image1 = $request->parent_signature;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $image1->extension();
+
+            $image1->move(public_path('/itiStudentFund'), $imgfileName1);
+
+            $parent_signature = $imgfileName1;
+
+        }else{
+            $parent_signature = '';
+        }
+        if ($request->hasfile('income_certificate')) {
+
+            $image2 = $request->income_certificate;
+            $imgfileName2 = time() . rand(100, 999) . '.' . $image2->extension();
+
+            $image2->move(public_path('/itiStudentFund'), $imgfileName2);
+
+            $income_certificate = $imgfileName2;
+
+        }else{
+            $income_certificate = '';
+        }
+        if ($request->hasfile('caste_certificate')) {
+
+            $image3 = $request->caste_certificate;
+            $imgfileName3 = time() . rand(100, 999) . '.' . $image3->extension();
+
+            $image3->move(public_path('/itiStudentFund'), $imgfileName3);
+
+            $caste_certificate = $imgfileName3;
+
+        }else{
+            $caste_certificate = '';
+        }
       
         $formData = $data;
        
-        
-        $formData['signature']= $signature;
-        $currentDate = Carbon::now();
+      $formData['signature']= $signature;
+      $formData['parent_signature']= $parent_signature;
+      $formData['caste_certificate']= $caste_certificate;
+      $formData['income_certificate']= $income_certificate;
+      $currentDate = Carbon::now();
 
         // Format the date if needed
         $formattedDate = $currentDate->toDateString();
         $formData['date']= $formattedDate;
-        return view('user.tuitionFee.preview', compact('formData'));
+        return view('user.itiFund.preview', compact('formData'));
     }
 
     /**
@@ -126,41 +168,53 @@ class TuitionFeeController extends Controller
         //
     }
 
+
+    public function itiScholarshipForm(Request $request)
+    {
+
+        $districts=District::all();
+        $institutions=Institution::all();
+        return view("user.itiFund.create",compact('districts','institutions'));
+
+       
+    }
+    
+
    
 
-    public function TuitionFeeStore(Request $request)
+    public function itiFundStore(Request $request)
     {
         $data = json_decode($request->input('formData'), true);
+     
 
-        $datainsert = TuitionFee::create([
+        $datainsert = ItiFund::create([
             'name' => $data['name'],
             'address' => @$data['address'],
-            'current_district' => @$data['current_district'],
-            'current_district_name' => @$data['current_district_name'],
-            'current_taluk' => @$data['current_taluk'],
-            'current_taluk_name' => @$data['current_taluk_name'],
-            'current_pincode' => @$data['current_pincode'],
-            'mobile' => @$data['mobile'],
-            'caste' => @$data['caste'], 
-            'relegion' => @$data['relegion'],
-            'annual_income' => @$data['annual_income'],
-
-            'student_name' => @$data['student_name'],
-            'relation' => @$data['relation'],
-            'school_name' => @$data['school_name'],
-            'class_number' => @$data['class_number'],
-            'tuition_center' => @$data['tuition_center'],
-            'place' => @$data['place'],
-
-            'signature' => @$data['signature'],
-            'submitted_district' => @$data['submitted_district'],
-            'submitted_teo' => @$data['submitted_teo'],
-            'dist_name' => @$data['dist_name'],
-            'teo_name' => @$data['dob'],
-            'date' => @$data['dob'],
+            'course_name' => @$data['course_name'],
+            'class_start_date' => @$data['class_start_date'],
+            'admission_type' => @$data['admission_type'],
+            'caste' => $data['caste'],
+            'caste_certificate' => $data['caste_certificate'],
+            'income' => @$data['income'],
+            'income_certificate' => @$data['income_certificate'],
+            'account_details' => @$data['account_details'],
+            'signature' => $data['signature'],
+            'parent_name' => $data['parent_name'],
+            'parent_signature' => $data['parent_signature'],
+            'date' => $data['date'],
             'user_id' =>Auth::user()->id, 
-            'status' =>0
+            'status' =>0,
+            'current_district_name' => $data['current_district_name'],
+            'current_taluk_name' => $data['current_taluk_name'],
+            'current_pincode' => $data['current_pincode'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => @$data['submitted_teo'],
+            'current_district' => $data['current_district'],
+            'current_taluk' => @$data['current_taluk'],
+            'institution_name' => $data['institution_name'],
+            'current_institution' => @$data['current_institution'],
         ]);
+
 
         return redirect()->route('home')->with('success','Application Submitted Successfully.');
 
