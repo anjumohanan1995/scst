@@ -253,3 +253,5 @@ Route::get('/tuitionAdminFeeView/{id}/view', [TuitionFeeController::class, 'tuit
 //Institution
 Route::resource('/institution', InstitutionController::class);
 Route::get('/getInstitution', [InstitutionController::class, 'getInstitution'])->name('getInstitution');
+Route::get('/adminInstitutionList', [InstitutionController::class, 'adminInstitutionList'])->name('adminInstitutionList');
+Route::get('/getAdminInstitutionList', [InstitutionController::class, 'getAdminInstitutionList'])->name('getAdminInstitutionList');

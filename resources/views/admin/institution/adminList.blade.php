@@ -213,7 +213,7 @@ url = url.replace(':reqId', reqId);
 	        ],
              "ajax": {
 
-			       	"url": "{{route('getInstitution')}}",
+			       	"url": "{{route('getAdminInstitutionList')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {
