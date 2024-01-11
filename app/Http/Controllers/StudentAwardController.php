@@ -90,6 +90,7 @@ class StudentAwardController extends Controller
         $datainsert = StudentAward::create([
             'name' => $data['name'],
             'dob' => $data['dob'],
+            'address' => $data['address'],
             'district' => @$data['district'],
             'taluk' => @$data['taluk'],
             'pincode' => @$data['pincode'],
