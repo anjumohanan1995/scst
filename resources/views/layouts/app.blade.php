@@ -237,8 +237,8 @@
 									</a>
 								</li>
 								</li>
-								@if(Auth::user()->role=='Super Admin' || Auth::user()->role=='Admin')
-								
+								@if(Auth::user()->role=='Super Admin' || Auth::user()->role=='Admin' || Auth::user()->role=='TEO')
+								@if(Auth::user()->role!='TEO')
 									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'users.index')||(\Request::route()->getName() == 'users.create')||(\Request::route()->getName() == 'users.edit')) ? 'active' : '' }}"  href="{{url('users')}}">
 											<i class="side-menu__icon fe fe-users"> </i>
@@ -312,6 +312,7 @@
 										</a>
 
 									</li>
+									@endif
 									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'ChildFinanceList') )? 'active' : '' }}"  href="{{url('ChildFinanceList')}}">
 											<i class="side-menu__icon fe fe-menu"> </i>
@@ -321,7 +322,7 @@
 
 									</li>
 									<li class="slide">
-										<a class="side-menu__item {{ ((\Request::route()->getName() == 'couplefinanciaexamApplicationListlList') )? 'active' : '' }}"  href="{{url('examApplicationList')}}">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'examApplicationList') )? 'active' : '' }}"  href="{{url('examApplicationList')}}">
 											<i class="side-menu__icon fe fe-menu"> </i>
 											<span class="side-menu__label">Exam Applications</span>
 
@@ -369,7 +370,32 @@
 										</a>
 
 									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'singleEarnerList') )? 'active' : '' }}"  href="{{route('singleEarnerList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Proving death of sole earner applications</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'anemiaFinanceList') )? 'active' : '' }}"  href="{{route('anemiaFinanceList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Sickle-cell anemia patients finance applications</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'studentAwardList') )? 'active' : '' }}"  href="{{route('studentAwardList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Student Award applications</span>
+
+										</a>
+
+									</li>
 								@endif
+							
 								@if(Auth::user()->role=='User')
 									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'user-profile')) ? 'active' : '' }}"  href="{{url('user-profile')}}">

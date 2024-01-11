@@ -157,7 +157,9 @@ class ChildFinanceController extends Controller
     }
     public function getchildFinanceList(Request $request)
     {
-        
+       $role =  Auth::user()->role;       
+       $teo =  Auth::user()->teo_name;
+
         $name = $request->name;
 
 
@@ -182,7 +184,9 @@ class ChildFinanceController extends Controller
 
              // Total records
              $totalRecord = ChildFinance::where('deleted_at',null);
-           
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
@@ -193,7 +197,9 @@ class ChildFinanceController extends Controller
 
              $totalRecordswithFilte = ChildFinance::where('deleted_at',null);
 
-          
+             if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
@@ -204,7 +210,9 @@ class ChildFinanceController extends Controller
 
              // Fetch records
              $items = ChildFinance::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
-            
+             if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
