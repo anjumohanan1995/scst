@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\TuitionFee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TuitionFeeController extends Controller
 {
@@ -37,7 +40,45 @@ class TuitionFeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+         
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',          
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+
+      
+
+       
+
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/tuition'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = '';
+        }
+      
+        $formData = $data;
+       
+        
+        $formData['signature']= $signature;
+        $currentDate = Carbon::now();
+
+        // Format the date if needed
+        $formattedDate = $currentDate->toDateString();
+        $formData['date']= $formattedDate;
+        return view('user.tuitionFee.preview', compact('formData'));
     }
 
     /**
@@ -85,45 +126,9 @@ class TuitionFeeController extends Controller
         //
     }
 
-    public function  tuitionFeeStore(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-         
-            'submitted_district' => 'required',
-            'submitted_teo' => 'required',          
-        ]);
-        
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        $data = $request->all();
+   
 
-      
-
-       
-
-        if ($request->hasfile('signature')) {
-
-            $image = $request->signature;
-            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
-
-            $image->move(public_path('/tuition/signature'), $imgfileName);
-
-            $signature = $imgfileName;
-
-        }else{
-            $signature = '';
-        }
-      
-        $formData = $data;
-       
-        
-        $formData['signature']= $signature;
-        return view('child.child_form_preview', compact('formData'));
-    }
-
-    public function tuitionFeeStoreDetails(Request $request)
+    public function TuitionFeeStore(Request $request)
     {
         $data = json_decode($request->input('formData'), true);
 
@@ -161,7 +166,125 @@ class TuitionFeeController extends Controller
 
     }
 
-    public function gettuitionFeeList(Request $request)
+    public function userTuitionFeeList(Request $request)
+    {
+        return view('user.tuitionFee.index');
+
+    }
+
+
+    public function getUserTuitionFeeList(Request $request)
+    {
+        
+        $name = $request->name;
+
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $student_name = $record->student_name;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "student_name" => $student_name,
+                "caste" => $caste,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionUserFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function tuitionUserFeeView(Request $request, $id)
+    {     
+      
+        $formData = TuitionFee::where('_id',$id)->first();
+       
+        return view('user.tuitionFee.details', compact('formData'));
+
+
+
+    }
+
+    public function adminTuitionFeeList(Request $request)
+    {
+        return view('admin.tuitionFee.index');
+
+    }
+
+
+
+    
+    public function getTuitionFeeList(Request $request)
     {
         
         $name = $request->name;
@@ -227,7 +350,7 @@ class TuitionFeeController extends Controller
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
-             
+             $student_name = $record->student_name;
              $caste = $record->caste;
               $created_at =  $record->created_at;
 
@@ -235,10 +358,10 @@ class TuitionFeeController extends Controller
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,
-               
+                "student_name" => $student_name,
                 "caste" => $caste,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionAdminFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }
@@ -252,16 +375,15 @@ class TuitionFeeController extends Controller
 
          return response()->json($response);
     }
-    public function tuitionFeeView(Request $request, $id)
-    {     
-      
+
+    public function tuitionAdminFeeView(Request $request)
+    {
         $formData = TuitionFee::where('_id',$id)->first();
        
-        return view('admin.child_finance_view', compact('formData'));
-
-
-
+        return view('admin.tuitionFee.details', compact('formData'));
     }
+
+    
 
 
 

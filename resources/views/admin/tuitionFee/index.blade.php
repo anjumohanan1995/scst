@@ -137,7 +137,7 @@
 	        ],
              "ajax": {
 
-			       	"url": "{{route('getUserTuitionFeeList')}}",
+			       	"url": "{{route('getTuitionFeeList')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {

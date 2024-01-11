@@ -77,7 +77,7 @@
                                         
                                             </div>
                                             <div class="col-md-8 mb-8">
-                                                <input type="text" class="form-control"  name="anual_income" id="anual_income" value="{{ @$houseManagement['anual_income'] }}" placeholder=" " readonly />
+                                                <input type="text" class="form-control"  name="annual_income" id="annual_income" value="{{ @$houseManagement['annual_income'] }}" placeholder=" " readonly />
                                                 
                                             </div>
                                             

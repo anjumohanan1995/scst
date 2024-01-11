@@ -18,6 +18,7 @@ use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
+use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\MedEngStudentFundController;
 use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
@@ -93,6 +94,13 @@ Route::get('/childFinance/{id}/view', [App\Http\Controllers\ChildFinanceControll
 Route::get('/userchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceList'])->name('userchildFinanceList');
 Route::get('/getUserchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getUserchildFinanceList'])->name('getUserchildFinanceList');
 Route::get('/userchildFinance/{id}/view', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceView'])->name('userchildFinanceView');
+
+Route::get('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiScholarshipForm'])->name('iti-scholarship');
+Route::Post('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'store'])->name('iti-scholarship.store');
+Route::Post('/iti-fund-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundStore'])->name('itiFundStore');
+
+
+
 
 
 
@@ -251,3 +259,20 @@ Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFundCon
 //Tuition fee
 Route::resource('/TuitionFee', TuitionFeeController::class);
 
+Route::post('/TuitionFeeStore', [TuitionFeeController::class, 'TuitionFeeStore'])->name('TuitionFeeStore');
+Route::get('/userTuitionFeeList', [TuitionFeeController::class, 'userTuitionFeeList'])->name('userTuitionFeeList');
+
+Route::get('/getUserTuitionFeeList', [TuitionFeeController::class, 'getUserTuitionFeeList'])->name('getUserTuitionFeeList');
+Route::get('/tuitionUserFeeView/{id}/view', [TuitionFeeController::class, 'tuitionUserFeeView'])->name('tuitionUserFeeView');
+Route::get('/adminTuitionFeeList', [TuitionFeeController::class, 'adminTuitionFeeList'])->name('adminTuitionFeeList');
+Route::get('/getTuitionFeeList', [TuitionFeeController::class, 'getTuitionFeeList'])->name('getTuitionFeeList');
+Route::get('/tuitionAdminFeeView/{id}/view', [TuitionFeeController::class, 'tuitionAdminFeeView'])->name('tuitionAdminFeeView');
+
+
+
+
+//Institution
+Route::resource('/institution', InstitutionController::class);
+Route::get('/getInstitution', [InstitutionController::class, 'getInstitution'])->name('getInstitution');
+Route::get('/adminInstitutionList', [InstitutionController::class, 'adminInstitutionList'])->name('adminInstitutionList');
+Route::get('/getAdminInstitutionList', [InstitutionController::class, 'getAdminInstitutionList'])->name('getAdminInstitutionList');

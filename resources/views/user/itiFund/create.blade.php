@@ -8,7 +8,7 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			
-				<h4 class="content-title mb-2">പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11 ,12  ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ
+				<h4 class="content-title mb-2">ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്
 
 </h4>
 				
@@ -26,7 +26,7 @@
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
            
-                    <form name="patientForm" id="patientForm" method="post" action="{{route('TuitionFee.store')}}" enctype="multipart/form-data">
+                    <form name="patientForm" id="patientForm" method="post" action="{{route('iti-scholarship.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -83,13 +83,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ഫോൺ നമ്പർ 
-
+                                    <label class="form-label">കോഴ്‌സിന്റെ പേര് 
 
                                     </label>
-                                    <input type="tel" value="{{ old('mobile') }}"  class="form-control" placeholder="ഫോൺ നമ്പർ " name="mobile" />
+                                    <input type="text" value="{{ old('course_name') }}"  class="form-control" placeholder="കോഴ്‌സിന്റെ പേര് " name="course_name" />
                                    
-                                    @error('mobile')
+                                    @error('course_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
@@ -97,22 +96,33 @@
                             </div><br>
                                <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ജാതി /മതം 
+                                    <label class="form-label">നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി  
                                     </label>
-                                    <input type="text" value="{{ old('caste') }}"  class="form-control" placeholder="ജാതി /മതം" name="caste" />
+                                    <input type="date" value="{{ old('class_start_date') }}"  class="form-control" placeholder="നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി  " name="class_start_date" />
                                
-                                    @error('caste')
+                                    @error('class_start_date')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                       </div>
                                           <div class="col-md-6 mb-6">
-                                        <label class="form-label">വരുമാനം 
-
+                                        <label class="form-label">അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത് 
 
                                         </label>
-                                        <input type="text" value="{{ old('annual_income') }}"  class="form-control" placeholder="വരുമാനം" name="annual_income" />
-                               
-                                        @error('annual_income')
+                                        <div style="border: 1px solid black" class="form-control">
+
+                                     
+                                            <input type="radio" id="merit" name="admission_type" value="merit">
+                                            <label for="merit">മെരിറ്റ് </label> &nbsp; &nbsp;
+                                            <input type="radio" id="reservation" name="admission_type" value="innovation">
+                                            <label for="innovation">സംവരണം </label> &nbsp; &nbsp;
+                                            
+                                            <input type="radio" id="management" name="admission_type" value="management">
+                                            <label for="management">മാനേജ്‌മന്റ്</label>&nbsp; &nbsp;
+                                          
+                                            <input type="radio" id="option3" name="admission_type" value="others">
+                                            <label for="others">മറ്റുള്ളവ</label>&nbsp; &nbsp;
+                                        </div>
+                                        @error('admission_type')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                        
@@ -124,102 +134,105 @@
                                 </div><br>
                             <div class="row">   
                                
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിദ്യാർത്ഥിയുടെ പേര് 
-
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">അപേക്ഷകന്റെ ജാതി/ മതം 
+                                        (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
                                         
                                     </label>
-                                    <input type="text" class="form-control" value="{{ old('student_name') }}"   name="student_name" id="student_name" value="" placeholder="വിദ്യാർത്ഥിയുടെ പേര് " />
-
-
-                 
-                                 @error('student_name')
+                                    <textarea type="text" value="{{ old('caste') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ജാതി/ മതം" name="caste" ></textarea>
+                                 @error('caste')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">
+                                    </label>
+                                    <input type="file" class="form-control"   name="caste_certificate" id="caste_certificate" value="" placeholder=" സർട്ടിഫിക്കറ്റ്" />
+                                @error('caste_certificate')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                                </div>
                               
-                              
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകനുമായുള്ള ബന്ധം 
-
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">അപേക്ഷകന്റെ വരുമാനം 
+                                        (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
                                         
                                         
                                           </label>
-                                           <input type="text" class="form-control" value="{{ old('relation') }}"   name="relation" id="relation" value="" placeholder="അപേക്ഷകനുമായുള്ള ബന്ധം " />
-
+                                          <textarea type="text" value="{{ old('income') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം " name="income" ></textarea>
                                     
-                                    @error('relation')
+                                    @error('income')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                               
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label"> 
+                                    </label>
+                                    <input type="file" class="form-control"   name="income_certificate" id="income_certificate" value="" placeholder=" സർട്ടിഫിക്കറ്റ്" />
+                                @error('caste_certificate')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                                </div>
                                
                             </div><br>   
                            
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
- 
+                                    <label class="form-label">വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം 
                                         </label>
-
-                                        
-                                        <input type="text" class="form-control"   name="school_name" id="school_name" value="" placeholder="പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര്" />
-                                    @error('school_name')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label">ക്ലാസ് 
- 
-                                        </label>
-                                        <input type="text" class="form-control"   name="class_number" id="class_number" value="" placeholder="ക്ലാസ് " />
-                                    @error('class_number')
+                                        <input type="text" class="form-control"   name="account_details" id="account_details" value="" placeholder="വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം" />
+                                    @error('account_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 
-                               
-                             
-                            </div><br> 
-
- 
-
-
-                           
-                            <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ട്യുഷൻ സെന്ററിന്റെ പേര്  
- 
-                                        </label>
-                                        <input type="text" class="form-control"   name="tuition_center" id="tuition_center" value="" placeholder="ട്യുഷൻ സെന്ററിന്റെ പേര് " />
-                                    @error('tuition_center')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label">സ്ഥലം  
- 
-                                        </label>
-                                        <input type="text" class="form-control"   name="place" id="place" value="" placeholder="സ്ഥലം " />
-                                    @error('place')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                
-                               
-                             
-                            </div><br> 
-                            <div class="row"> 
-
-                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </label>
-                                    <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" />
+                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്  </label>
+                                    <input type="file" class="form-control" accept="image/*"  name="signature" id="signature" value="" placeholder="അപേക്ഷകന്റെ ഒപ്പ് " />
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                </div>   
-                            </div>  
-                            
+                                </div>
+                             
+                            </div><br> 
+                            <div class="row">   
+                              
+                               
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label"> രക്ഷാകർത്താവിന്റെ പേര് 
+
+                                        </label>
+                                        <input type="text" class="form-control"   name="parent_name" id="parent_name" value="" placeholder="രക്ഷാകർത്താവിന്റെ പേര് " />
+                                    @error('parent_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">രക്ഷാകർത്താവിന്റെ ഒപ്പ്  </label>
+                                    <input type="file" class="form-control" accept="image/*"  name="parent_signature" id="parent_signature" value="" placeholder="രക്ഷാകർത്താവിന്റെ ഒപ്പ് " />
+                                    @error('parent_signature')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                               
+                              
+                            </div><br> 
+                            <div class="row">   
+                                <div class="col-md-6 mb-6">
+                                 <label class="form-label">Institution  </label>
+                                    <select id="current_institution" name="current_institution" class="form-control" >
+                                        <option value="">Select</option>
+                                            @foreach($institutions as $institution)
+                                                <option value="{{$institution->id}}"  >{{$institution->name}}</option>
+                                            @endforeach
+                                    </select>
+                                    @error('current_institution')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                    <input type="hidden" name="institution_name" id="institution_name" >
+                                </div>
+                            </div><br> 
+                           
                             <br>
                             <hr>
                             <br>
@@ -279,6 +292,12 @@
 </div>
 
 <script>
+
+$('#current_institution').change(function(){
+    var current_institution = this.options[this.selectedIndex].text;
+    document.getElementById('institution_name').value = current_institution;
+});
+
 	$('#current_district').change(function(){
         var current_district = this.options[this.selectedIndex].text;
     document.getElementById('current_district_name').value = current_district;

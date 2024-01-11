@@ -5,31 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class HouseManagement extends Eloquent
+class ItiFund extends Eloquent
 {
     use HasFactory;
     protected $connection = 'mongodb';
-    protected $collection = 'house_scheme';
+    protected $collection = 'iti_fund_scheme';
 
     protected $fillable = [
         'name',
         'address',
-        'panchayath',
+        'course_name',
+        'class_start_date',
+        'admission_type',
+        //'house_details',
         'caste',
-        'annual_income',
-        'house_details',
-        'agency',
-        'last_payment_year',
-        'family_details',
-        'nature_payment',
-        'payment_details',
-        'prove_eligibility',
-        'place',
-        'date',
+        'caste_certificate',
+        'income',
+        'income_certificate',
+        'account_details',
         'signature',
+        'parent_name',
+        'date',
+        'parent_signature',
         'status',
         'user_id',
-        'prove_eligibility_file',
         'current_district_name',
         'current_taluk_name',
         'current_pincode',
@@ -37,6 +36,9 @@ class HouseManagement extends Eloquent
         'submitted_teo',
         'current_district',
         'current_taluk',
+        'institution_name',
+        'current_institution'
+        
 
     ];
 
