@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\ItiFund;
 use App\Models\AnemiaFinance;
 use App\Models\ExamApplication;
 use App\Models\FinancialHelp;
@@ -57,6 +57,7 @@ class HomeController extends Controller
         $data['motherChildCount'] = MotherChildScheme::where('user_id',$user_id)->count();
         $data['marriageGrantCount'] = MarriageGrant::where('user_id',$user_id)->count();
         $data['houseGrantCount'] = HouseManagement::where('user_id',$user_id)->count();
+        $data['itiFundCount'] = ItiFund::where('user_id',$user_id)->count();
 
         $data['studentAwardCount'] = StudentAward::where('user_id',$user_id)->count();
         $data['anemiaFinanceCount'] = AnemiaFinance::where('user_id',$user_id)->count();
