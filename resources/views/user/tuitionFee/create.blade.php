@@ -26,7 +26,7 @@
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
            
-                    <form name="patientForm" id="patientForm" method="post" action="{{route('MedicalEngineeringStudentFund.store')}}" enctype="multipart/form-data">
+                    <form name="patientForm" id="patientForm" method="post" action="{{route('TuitionFee.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -87,7 +87,7 @@
 
 
                                     </label>
-                                    <input type="text" value="{{ old('mobile') }}"  class="form-control" placeholder="ഫോൺ നമ്പർ " name="mobile" />
+                                    <input type="tel" value="{{ old('mobile') }}"  class="form-control" placeholder="ഫോൺ നമ്പർ " name="mobile" />
                                    
                                     @error('mobile')
                                         <span class="text-danger">{{$message}}</span>
@@ -99,7 +99,7 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ജാതി /മതം 
                                     </label>
-                                    <input type="date" value="{{ old('caste') }}"  class="form-control" placeholder="ജാതി /മതം" name="caste" />
+                                    <input type="text" value="{{ old('caste') }}"  class="form-control" placeholder="ജാതി /മതം" name="caste" />
                                
                                     @error('caste')
                                         <span class="text-danger">{{$message}}</span>
@@ -110,7 +110,7 @@
 
 
                                         </label>
-                                        <input type="date" value="{{ old('annual_income') }}"  class="form-control" placeholder="വരുമാനം" name="annual_income" />
+                                        <input type="text" value="{{ old('annual_income') }}"  class="form-control" placeholder="വരുമാനം" name="annual_income" />
                                
                                         @error('annual_income')
                                             <span class="text-danger">{{$message}}</span>

@@ -8,7 +8,8 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			<div class="col-xl-9">
-				<h4 class="content-title mb-2">മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
+				<h4 class="content-title mb-2">പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11 ,12  ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ 
+ 
                 </h4>
 			</div>
 			<div class="col-xl-3">
@@ -52,10 +53,11 @@
             </tr>
             <tr> <td>
  
-                കോഴ്‌സിന്റെ പേര് </td><td><strong> {{ @$formData['course_name'] }} </strong></td>
+                ഫോൺ നമ്പർ 
+            </td><td><strong> {{ @$formData['mobile'] }} </strong></td>
              <td>
  
-                നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി </td><td> <strong> {{ @$formData['class_start_date'] }}</strong> 
+                ജാതി /മതം  </td><td> <strong> {{ @$formData['caste'] }}</strong> 
  
             </td>
             </tr>
@@ -63,96 +65,78 @@
                  
                 <tr>
                     <td>
-                        അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത് 
+                        വരുമാനം 
  
                     </td>
-                    <td> 
-                        @if(@$formData['admission_type'] == 'merit') 
-                        
-                        മെരിറ്റ്
-                        @elseif(@$formData['nature_payment'] == 'innovation') 
-                        സംവരണം
-                        @elseif(@$formData['nature_payment'] == 'management') 
-                        മാനേജ്‌മന്റ്
-                        @elseif(@$formData['nature_payment'] == 'others') 
-                        മറ്റുള്ളവ
-                        @endif
-                     
+                    <td> <strong> {{ @$formData['annual_income'] }}</strong> 
+ 
                     </td>
                     <td>
-                        അപേക്ഷകന്റെ ജാതി/ മതം 
-   </td><td> {{ @$formData['caste'] }}
+                        വിദ്യാർത്ഥിയുടെ പേര് 
+
+   </td><td> {{ @$formData['student_name'] }}
                     </td>
                 </tr>
                 <tr>
                       <td>
  
-                        ജാതി/ മതം സർട്ടിഫിക്കറ്റ് </td><td>  @if($formData['caste_certificate'])
-                            <iframe src="{{ asset('medEngStudentFund/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
-                            @endif
- 
+                        അപേക്ഷകനുമായുള്ള ബന്ധം </td><td>  {{ @$formData['relation'] }}
                 </td>
                 <td>
-                    അപേക്ഷകന്റെ വരുമാനം
+                    പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
+
                     </td>
                     <td> 
-                        {{ @$formData['income'] }} 
+                        {{ @$formData['school_name'] }} 
                     </td>
                
              </tr><tr>
                       <td>
  
-                        വരുമാന സർട്ടിഫിക്കറ്റ് </td>
-                    <td>
-                        @if($formData['income_certificate'])
-                        <iframe src="{{ asset('medEngStudentFund/' . @$formData['income_certificate']) }}" width="400" height="200"></iframe>
-                        @endif
-                        
-                      
-                       
- 
-                </td>
+                        ക്ലാസ് </td>
+                        <td> 
+                            {{ @$formData['class_number'] }} 
+                        </td>
                 <td>
  
-                    വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം</td><td> {{ @$formData['account_details'] }}
+                    ട്യുഷൻ സെന്ററിന്റെ പേര് </td><td> {{ @$formData['tuition_center'] }}
 
             </td>
                      </tr>
              
-               
+                     <tr>
+                   
+                        <td>
+                            സ്ഥലം   </td><td> @if($formData['date'])
+                                {{ date('d-m-Y', strtotime(@$formData['date'])) }}
+                            @endif
+                        </td>
+                        <td>
+                            തീയതി  </td><td> @if($formData['date'])
+                                {{ date('d-m-Y', strtotime(@$formData['date'])) }}
+                            @endif
+                        </td>
+                       
+                      
+                    </tr>
               
                 <tr>
                    
+                   
                     <td>
-                        തീയതി  </td><td> @if($formData['date'])
-                            {{ date('d-m-Y', strtotime(@$formData['date'])) }}
-                        @endif
-                    </td>
-                    <td>
-                        അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </td><td>  @if($formData['signature'])
-                            <iframe src="{{ asset('medEngStudentFund/' . @$formData['signature']) }}" width="400" height="200"></iframe>
+                        അപേക്ഷകന്റെ ഒപ്പ് </td><td>  @if($formData['signature'])
+                            <iframe src="{{ asset('tuition/' . @$formData['signature']) }}" width="400" height="200"></iframe>
                             @endif
                     </td>
                   
                 </tr>
                
-                <tr>
-                   
-                    <td>
-                        രക്ഷാകർത്താവിന്റെ പേര്  </td><td>  {{ @$formData['parent_name'] }}
-                    </td>
-                    <td>
-                        രക്ഷാകർത്താവിന്റെ ഒപ്പ്/വിരലടയാളം </td><td>  @if($formData['parent_signature'])
-                            <iframe src="{{ asset('medEngStudentFund/' . @$formData['parent_signature']) }}" width="400" height="200"></iframe>
-                            @endif
-                    </td>
-                  
-                </tr>
+           
              
                
            </table>
                                 
-                                <form action="{{ route('StudentFundStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                <form action="{{ route('TuitionFeeStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                   
                                

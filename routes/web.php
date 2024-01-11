@@ -222,3 +222,5 @@ Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFundCon
 
 //Tuition fee
 Route::resource('/TuitionFee', TuitionFeeController::class);
+Route::get('/getTuitionFeeList', [TuitionFeeController::class, 'getTuitionFeeList'])->name('getTuitionFeeList');
+Route::post('/TuitionFeeStore', [TuitionFeeController::class, 'TuitionFeeStore'])->name('TuitionFeeStore');

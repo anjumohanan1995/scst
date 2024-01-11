@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\TuitionFee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TuitionFeeController extends Controller
 {
@@ -37,7 +40,45 @@ class TuitionFeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+         
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',          
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+
+      
+
+       
+
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/tuition'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = '';
+        }
+      
+        $formData = $data;
+       
+        
+        $formData['signature']= $signature;
+        $currentDate = Carbon::now();
+
+// Format the date if needed
+$formattedDate = $currentDate->toDateString();
+      $formData['date']= $formattedDate;
+        return view('user.tuitionFee.preview', compact('formData'));
     }
 
     /**
@@ -85,45 +126,9 @@ class TuitionFeeController extends Controller
         //
     }
 
-    public function  tuitionFeeStore(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-         
-            'submitted_district' => 'required',
-            'submitted_teo' => 'required',          
-        ]);
-        
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        $data = $request->all();
+   
 
-      
-
-       
-
-        if ($request->hasfile('signature')) {
-
-            $image = $request->signature;
-            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
-
-            $image->move(public_path('/tuition/signature'), $imgfileName);
-
-            $signature = $imgfileName;
-
-        }else{
-            $signature = '';
-        }
-      
-        $formData = $data;
-       
-        
-        $formData['signature']= $signature;
-        return view('child.child_form_preview', compact('formData'));
-    }
-
-    public function tuitionFeeStoreDetails(Request $request)
+    public function TuitionFeeStore(Request $request)
     {
         $data = json_decode($request->input('formData'), true);
 
@@ -161,7 +166,7 @@ class TuitionFeeController extends Controller
 
     }
 
-    public function gettuitionFeeList(Request $request)
+    public function getTuitionFeeList(Request $request)
     {
         
         $name = $request->name;
