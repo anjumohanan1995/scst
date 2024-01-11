@@ -16,7 +16,7 @@ class HouseManagement extends Eloquent
         'address',
         'panchayath',
         'caste',
-        'anual_income',
+        'annual_income',
         'house_details',
         'agency',
         'last_payment_year',

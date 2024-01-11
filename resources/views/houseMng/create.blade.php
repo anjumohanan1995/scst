@@ -106,9 +106,9 @@
                                           <div class="col-md-6 mb-6">
                                         <label class="form-label">വാർഷിക വരുമാനം 
                                         </label>
-                                        <input type="number" value="{{ old('anual_income') }}"  class="form-control" placeholder="" name="anual_income" />
+                                        <input type="number" value="{{ old('annual_income') }}"  class="form-control" placeholder="" name="annual_income" />
                                    
-                                        @error('anual_income')
+                                        @error('annual_income')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                        
