@@ -362,6 +362,14 @@
 
 									</li>
 									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'adminTuitionFeeList') )? 'active' : '' }}"  href="{{route('adminTuitionFeeList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Tuition Fee Applications</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'adminStudentFundList') )? 'active' : '' }}"  href="{{route('adminStudentFundList')}}">
 											<i class="side-menu__icon fe fe-menu"> </i>
 											<span class="side-menu__label">Medical /Engineering Student Fund Scheme Applications</span>

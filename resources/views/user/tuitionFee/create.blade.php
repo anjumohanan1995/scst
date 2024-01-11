@@ -129,7 +129,10 @@
 
                                         
                                     </label>
-                                    <textarea type="text" value="{{ old('student_name') }}"  class="form-control" placeholder="വിദ്യാർത്ഥിയുടെ പേര് " name="student_name" ></textarea>
+                                    <input type="text" class="form-control" value="{{ old('student_name') }}"   name="student_name" id="student_name" value="" placeholder="വിദ്യാർത്ഥിയുടെ പേര് " />
+
+
+                 
                                  @error('student_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -142,7 +145,8 @@
                                         
                                         
                                           </label>
-                                          <textarea type="text" value="{{ old('relation') }}"  class="form-control" placeholder="അപേക്ഷകനുമായുള്ള ബന്ധം" name="relation" ></textarea>
+                                           <input type="text" class="form-control" value="{{ old('relation') }}"   name="relation" id="relation" value="" placeholder="അപേക്ഷകനുമായുള്ള ബന്ധം " />
+
                                     
                                     @error('relation')
                                         <span class="text-danger">{{$message}}</span>
@@ -157,6 +161,8 @@
                                     <label class="form-label">പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
  
                                         </label>
+
+                                        
                                         <input type="text" class="form-control"   name="school_name" id="school_name" value="" placeholder="പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര്" />
                                     @error('school_name')
                                         <span class="text-danger">{{$message}}</span>
@@ -203,6 +209,16 @@
                                
                              
                             </div><br> 
+                            <div class="row"> 
+
+                                 <div class="col-md-6 mb-4">
+                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </label>
+                                    <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" />
+                                    @error('signature')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>   
+                            </div>  
                             
                             <br>
                             <hr>

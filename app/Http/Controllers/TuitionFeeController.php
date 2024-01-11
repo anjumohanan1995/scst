@@ -166,6 +166,124 @@ $formattedDate = $currentDate->toDateString();
 
     }
 
+    public function userTuitionFeeList(Request $request)
+    {
+        return view('user.tuitionFee.index');
+
+    }
+
+
+    public function getUserTuitionFeeList(Request $request)
+    {
+        
+        $name = $request->name;
+
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $student_name = $record->student_name;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "student_name" => $student_name,
+                "caste" => $caste,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionUserFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function tuitionUserFeeView(Request $request, $id)
+    {     
+      
+        $formData = TuitionFee::where('_id',$id)->first();
+       
+        return view('user.tuitionFee.details', compact('formData'));
+
+
+
+    }
+
+    public function adminTuitionFeeList(Request $request)
+    {
+        return view('admin.tuitionFee.index');
+
+    }
+
+
+
+    
     public function getTuitionFeeList(Request $request)
     {
         
@@ -232,7 +350,7 @@ $formattedDate = $currentDate->toDateString();
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
-             
+             $student_name = $record->student_name;
              $caste = $record->caste;
               $created_at =  $record->created_at;
 
@@ -240,10 +358,10 @@ $formattedDate = $currentDate->toDateString();
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,
-               
+                "student_name" => $student_name,
                 "caste" => $caste,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionAdminFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }
@@ -257,16 +375,15 @@ $formattedDate = $currentDate->toDateString();
 
          return response()->json($response);
     }
-    public function tuitionFeeView(Request $request, $id)
-    {     
-      
+
+    public function tuitionAdminFeeView(Request $request)
+    {
         $formData = TuitionFee::where('_id',$id)->first();
        
-        return view('admin.child_finance_view', compact('formData'));
-
-
-
+        return view('admin.tuitionFee.details', compact('formData'));
     }
+
+    
 
 
 

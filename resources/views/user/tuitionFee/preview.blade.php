@@ -38,105 +38,121 @@
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
 								<div class="mb-4 main-content-label">
                                     അപ്ലിക്കേഷൻ പ്രിവ്യൂ
-                                    </div>
-								
-                                   
-          <table border="1" class="table">
-            <tr> <td>
- 
-                അപേക്ഷകന്റെ  പേര് </td><td><strong> {{ @$formData['name'] }} </strong></td>
-             <td>
- 
-                മേൽവിലാസം </td><td> <strong> {{ @$formData['address'] }}</strong> 
- 
-            </td>
-            </tr>
-            <tr> <td>
- 
-                ഫോൺ നമ്പർ 
-            </td><td><strong> {{ @$formData['mobile'] }} </strong></td>
-             <td>
- 
-                ജാതി /മതം  </td><td> <strong> {{ @$formData['caste'] }}</strong> 
- 
-            </td>
-            </tr>
-           
-                 
-                <tr>
-                    <td>
-                        വരുമാനം 
- 
-                    </td>
-                    <td> <strong> {{ @$formData['annual_income'] }}</strong> 
- 
-                    </td>
-                    <td>
-                        വിദ്യാർത്ഥിയുടെ പേര് 
-
-   </td><td> {{ @$formData['student_name'] }}
-                    </td>
-                </tr>
-                <tr>
-                      <td>
- 
-                        അപേക്ഷകനുമായുള്ള ബന്ധം </td><td>  {{ @$formData['relation'] }}
-                </td>
-                <td>
-                    പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
-
-                    </td>
-                    <td> 
-                        {{ @$formData['school_name'] }} 
-                    </td>
-               
-             </tr><tr>
-                      <td>
- 
-                        ക്ലാസ് </td>
-                        <td> 
-                            {{ @$formData['class_number'] }} 
-                        </td>
-                <td>
- 
-                    ട്യുഷൻ സെന്ററിന്റെ പേര് </td><td> {{ @$formData['tuition_center'] }}
-
-            </td>
-                     </tr>
-             
-                     <tr>
-                   
-                        <td>
-                            സ്ഥലം   </td><td> @if($formData['date'])
-                                {{ date('d-m-Y', strtotime(@$formData['date'])) }}
-                            @endif
-                        </td>
-                        <td>
-                            തീയതി  </td><td> @if($formData['date'])
-                                {{ date('d-m-Y', strtotime(@$formData['date'])) }}
-                            @endif
-                        </td>
-                       
-                      
-                    </tr>
-              
-                <tr>
-                   
-                   
-                    <td>
-                        അപേക്ഷകന്റെ ഒപ്പ് </td><td>  @if($formData['signature'])
-                            <iframe src="{{ asset('tuition/' . @$formData['signature']) }}" width="400" height="200"></iframe>
-                            @endif
-                    </td>
-                  
-                </tr>
-               
-           
-             
-               
-           </table>
-                                
-                                <form action="{{ route('TuitionFeeStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                </div>
+                                <table border="1" class="table">
+                                    <tr>
+                                        <td>
+                                            അപേക്ഷകന്റെ  പേര് 
+                                        </td>
+                                        <td><strong> {{ @$formData['name'] }} </strong></td>
+                                        <td>
+                                            മേൽവിലാസം 
+                                        </td>
+                                        <td> <strong> {{ @$formData['address'] }}</strong> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            ജില്ല
+                                        </td>
+                                        <td> 
+                                            {{ @$formData['current_district_name'] }} 
+                                        </td>
+                                        <td>
+                                            താലൂക്ക്
+                                        </td>
+                                        <td> 
+                                            {{ @$formData['current_taluk_name'] }} 
+                                        </td>
+                                  
+                                    <tr>
+                                        <td>
+                                            പിൻകോഡ്
+                                        </td>
+                                        <td> 
+                                            {{ @$formData['current_pincode'] }} 
+                                        </td>
+                                        <td>
+                                            ഫോൺ നമ്പർ 
+                                        </td>
+                                        <td><strong> {{ @$formData['mobile'] }} </strong></td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>
+                                            ജാതി /മതം  
+                                        </td>
+                                        <td> <strong> {{ @$formData['caste'] }}</strong> 
+                                        </td>
+                                        <td>
+                                            വരുമാനം 
+                                        </td>
+                                        <td> <strong> {{ @$formData['annual_income'] }}</strong> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                       
+                                        <td>
+                                            വിദ്യാർത്ഥിയുടെ പേര് 
+                                        </td>
+                                        <td> {{ @$formData['student_name'] }}
+                                        </td>
+                                        <td>
+                                            അപേക്ഷകനുമായുള്ള ബന്ധം 
+                                        </td>
+                                        <td>  {{ @$formData['relation'] }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>
+                                            പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
+                                        </td>
+                                        <td> 
+                                            {{ @$formData['school_name'] }} 
+                                        </td>
+                                        <td>
+                                            ക്ലാസ് 
+                                        </td>
+                                        <td> 
+                                            {{ @$formData['class_number'] }} 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>
+                                            ട്യുഷൻ സെന്ററിന്റെ പേര് 
+                                        </td>
+                                        <td> {{ @$formData['tuition_center'] }}
+                                        </td>
+                                         <td>
+                                            സ്ഥലം   
+                                        </td>
+                                        <td> @if($formData['date'])
+                                            {{ date('d-m-Y', strtotime(@$formData['date'])) }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                       
+                                        <td>
+                                            തീയതി  
+                                        </td>
+                                        <td> @if($formData['date'])
+                                            {{ date('d-m-Y', strtotime(@$formData['date'])) }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            അപേക്ഷകന്റെ ഒപ്പ് 
+                                        </td>
+                                        <td>  @if($formData['signature'])
+                                            <iframe src="{{ asset('tuition/' . @$formData['signature']) }}" width="400" height="200"></iframe>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+								<form action="{{ route('TuitionFeeStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                   
                                
