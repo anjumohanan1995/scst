@@ -66,7 +66,7 @@
                         വാർഷിക വരുമാനം 
                     </td>
                     <td> 
-                        {{ @$formData['anual_income'] }} 
+                        {{ @$formData['annual_income'] }} 
                     </td>
                     <td>
                         ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും   </td><td> {{ @$formData['house_details'] }}

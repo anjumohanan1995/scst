@@ -280,6 +280,14 @@
 
 									</li>
 									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'institution.index')||(\Request::route()->getName() == 'institution.create')||(\Request::route()->getName() == 'institution.edit')) ? 'active' : '' }}"  href="{{url('institution')}}">
+											<i class="side-menu__icon fas fa-city"> </i>
+											<span class="side-menu__label">Institution</span>
+
+										</a>
+
+									</li>
+									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'settings.index') )? 'active' : '' }}"  href="{{url('settings')}}">
 											<i class="side-menu__icon fe fe-settings"> </i>
 											<span class="side-menu__label">Settings</span>
@@ -377,7 +385,17 @@
 										</a>
 
 									</li>
+									@elseif(Auth::user()->role=='Principal')
+									<li class="slide">
+										<a class="side-menu__item {{ ((\Request::route()->getName() == 'adminStudentFundList') )? 'active' : '' }}"  href="{{route('adminStudentFundList')}}">
+											<i class="side-menu__icon fe fe-menu"> </i>
+											<span class="side-menu__label">Medical /Engineering Student Fund Scheme Applications</span>
+
+										</a>
+
+									</li>
 								@endif
+								
 								@if(Auth::user()->role=='User')
 									<li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'user-profile')) ? 'active' : '' }}"  href="{{url('user-profile')}}">

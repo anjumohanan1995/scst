@@ -18,6 +18,7 @@ use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
+use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\MedEngStudentFundController;
 use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
@@ -246,3 +247,9 @@ Route::get('/adminTuitionFeeList', [TuitionFeeController::class, 'adminTuitionFe
 Route::get('/getTuitionFeeList', [TuitionFeeController::class, 'getTuitionFeeList'])->name('getTuitionFeeList');
 Route::get('/tuitionAdminFeeView/{id}/view', [TuitionFeeController::class, 'tuitionAdminFeeView'])->name('tuitionAdminFeeView');
 
+
+
+
+//Institution
+Route::resource('/institution', InstitutionController::class);
+Route::get('/getInstitution', [InstitutionController::class, 'getInstitution'])->name('getInstitution');
