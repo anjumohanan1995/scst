@@ -98,6 +98,17 @@ Route::get('/userchildFinance/{id}/view', [App\Http\Controllers\ChildFinanceCont
 Route::get('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiScholarshipForm'])->name('iti-scholarship');
 Route::Post('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'store'])->name('iti-scholarship.store');
 Route::Post('/iti-fund-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundStore'])->name('itiFundStore');
+Route::get('/userItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'userItiFundList'])->name('userItiFundList');
+Route::get('/getUserItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'getUserItiFundList'])->name('getUserItiFundList');
+Route::get('/getUserItiFundList/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'show'])->name('userItiFundList.show');
+
+Route::get('/adminItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'adminItiFundList'])->name('adminItiFundList');
+Route::get('/getAdminItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'getAdminItiFundList'])->name('getAdminItiFundList');
+Route::get('/itiAdminFeeView/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'itiAdminFeeView'])->name('adminItiFundList.show');
+
+
+
+
 
 
 

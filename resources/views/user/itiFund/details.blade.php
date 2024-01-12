@@ -8,7 +8,7 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			
-				<h4 class="content-title mb-2"> മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
+				<h4 class="content-title mb-2"> ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്
 
 </h4>
 				
@@ -114,7 +114,7 @@
                                             </div>
                                             <div class="col-md-8 mb-8">
                                                 @if($studentFund['caste_certificate'])
-                                                                <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                                <iframe src="{{ asset('itiStudentFund/' . @$studentFund['caste_certificate']) }}" width="400" height="200"></iframe>
                                                                 @endif
                                             </div>
                                             
@@ -139,7 +139,7 @@
                                             </div>
                                             <div class="col-md-8 mb-8">
                                                 @if($studentFund['income_certificate'])
-                                                <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" width="400" height="200"></iframe>
+                                                <iframe src="{{ asset('itiStudentFund/' . @$studentFund['income_certificate']) }}" width="400" height="200"></iframe>
                                                 @endif
                                             </div>
                                             
@@ -182,7 +182,7 @@
                                                     </div>
                                                     <div class="col-md-8 mb-8">
                                                         @if(@$studentFund['signature'] !="")
-                                                       <img src="{{ url('/') }}/medEngStudentFund/{{ @$studentFund['signature'] }}" alt="Preview" width="300" height="200">
+                                                       <img src="{{ url('/') }}/itiStudentFund/{{ @$studentFund['signature'] }}" alt="Preview" width="300" height="200">
 
                                                        @endif
                                                     </div>
@@ -208,7 +208,7 @@
                                                                     </div>
                                                                     <div class="col-md-8 mb-8">
                                                                         @if(@$studentFund['signature'] !="")
-                                                                       <img src="{{ url('/') }}/medEngStudentFund/{{ @$studentFund['signature'] }}" alt="Preview" width="300" height="200">
+                                                                       <img src="{{ url('/') }}/itiStudentFund/{{ @$studentFund['signature'] }}" alt="Preview" width="300" height="200">
                 
                                                                        @endif
                                                                     </div>
@@ -216,12 +216,21 @@
                             
                                                                 </div><br>
                                                 <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                     <label class="form-label">Institution :</label>
+                                                    </div>
+                                                    <div class="col-md-8 mb-8">
+                                                    <input type="text" class="form-control"  name="institution_name" id="institution_name" value="{{ @$studentFund['institution_name'] }}" placeholder="" readonly />
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-md-4 mb-4">
                                                       
                                                          
                                                              </div>
                                                     <div class="col-md-6 mb-6">
-                                                     <a href="{{ route('MedicalEngineeringStudentFund.index') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                                     <a href="{{ route('adminItiFundList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
                                                      </a>  </div>
                                                             
                                                             

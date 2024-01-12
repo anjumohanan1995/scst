@@ -129,21 +129,13 @@ class ItiScholarshipController extends Controller
      * @param  \App\Models\TuitionFee  $tuitionFee
      * @return \Illuminate\Http\Response
      */
-    public function show(TuitionFee $tuitionFee)
+    public function show($id)
     {
-        //
+        $studentFund=ItiFund::find($id);
+        return view('user.itiFund.details', compact('studentFund'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TuitionFee  $tuitionFee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TuitionFee $tuitionFee)
-    {
-        //
-    }
+  
 
     /**
      * Update the specified resource in storage.
@@ -173,7 +165,7 @@ class ItiScholarshipController extends Controller
     {
 
         $districts=District::all();
-        $institutions=Institution::all();
+        $institutions=Institution::where('deleted_at',null)->get();
         return view("user.itiFund.create",compact('districts','institutions'));
 
        
@@ -220,18 +212,18 @@ class ItiScholarshipController extends Controller
 
     }
 
-    public function userTuitionFeeList(Request $request)
+    public function userItiFundList(Request $request)
     {
-        return view('user.tuitionFee.index');
+        return view("user.itiFund.index");
 
     }
 
 
-    public function getUserTuitionFeeList(Request $request)
+    public function getUserItiFundList(Request $request)
     {
         
         $name = $request->name;
-
+        $user_id=Auth::user()->id;
 
 
          ## Read value
@@ -253,7 +245,7 @@ class ItiScholarshipController extends Controller
          
 
              // Total records
-             $totalRecord = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null);
+             $totalRecord = ItiFund::where('user_id',$user_id)->where('deleted_at',null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -263,7 +255,7 @@ class ItiScholarshipController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null);
+             $totalRecordswithFilte = ItiFund::where('user_id',$user_id)->where('deleted_at',null);
 
           
              if($name != ""){
@@ -275,8 +267,8 @@ class ItiScholarshipController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = TuitionFee::where('user_id',Auth::user()->id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
-            
+             $items = ItiFund::where('user_id',$user_id)->where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+           
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
@@ -293,18 +285,23 @@ class ItiScholarshipController extends Controller
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
-             $student_name = $record->student_name;
+             $course_name = $record->course_name;
+             $place = $record->place;
+             $date=$record->date;
+             $income=$record->income;
              $caste = $record->caste;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
                 "id" => $id,
+               
                 "name" => $name,
                 "address" => $address,
-                "student_name" => $student_name,
+                "course_name" => $course_name,
                 "caste" => $caste,
+                "income" =>$income,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionUserFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }
@@ -318,31 +315,22 @@ class ItiScholarshipController extends Controller
 
          return response()->json($response);
     }
-    public function tuitionUserFeeView(Request $request, $id)
-    {     
-      
-        $formData = TuitionFee::where('_id',$id)->first();
-       
-        return view('user.tuitionFee.details', compact('formData'));
+   
 
-
-
-    }
-
-    public function adminTuitionFeeList(Request $request)
+    public function adminItiFundList(Request $request)
     {
-        return view('admin.tuitionFee.index');
+        return view('admin.itiFund.index');
 
     }
 
 
 
     
-    public function getTuitionFeeList(Request $request)
+    public function getAdminItiFundList(Request $request)
     {
         
         $name = $request->name;
-
+        $user_id=Auth::user()->id;
 
 
          ## Read value
@@ -364,7 +352,7 @@ class ItiScholarshipController extends Controller
          
 
              // Total records
-             $totalRecord = TuitionFee::where('deleted_at',null);
+             $totalRecord = ItiFund::where('deleted_at',null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -374,7 +362,7 @@ class ItiScholarshipController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = TuitionFee::where('deleted_at',null);
+             $totalRecordswithFilte = ItiFund::where('deleted_at',null);
 
           
              if($name != ""){
@@ -386,8 +374,8 @@ class ItiScholarshipController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = TuitionFee::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
-            
+             $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+           
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
@@ -404,18 +392,23 @@ class ItiScholarshipController extends Controller
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
-             $student_name = $record->student_name;
+             $course_name = $record->course_name;
+             $place = $record->place;
+             $date=$record->date;
+             $income=$record->income;
              $caste = $record->caste;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
                 "id" => $id,
+               
                 "name" => $name,
                 "address" => $address,
-                "student_name" => $student_name,
+                "course_name" => $course_name,
                 "caste" => $caste,
+                "income" =>$income,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionAdminFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . route('userItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }
@@ -430,11 +423,12 @@ class ItiScholarshipController extends Controller
          return response()->json($response);
     }
 
-    public function tuitionAdminFeeView(Request $request)
+    public function itiAdminFeeView(Request $request,$id)
     {
-        $formData = TuitionFee::where('_id',$id)->first();
        
-        return view('admin.tuitionFee.details', compact('formData'));
+       
+        $studentFund=ItiFund::find($id);
+        return view('admin.itiFund.details', compact('studentFund'));
     }
 
     
