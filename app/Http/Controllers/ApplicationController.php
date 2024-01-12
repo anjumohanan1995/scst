@@ -522,7 +522,7 @@ class ApplicationController extends Controller
            
         );
         if ($validator->fails()) {
-            // Captcha validation failed
+        
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
@@ -543,9 +543,6 @@ class ApplicationController extends Controller
         $formData['signature']= $signature;
 
         return view('application.exam_application_preview', compact('formData'));
-
-
-
         
     }
     public function examApplicationStore(Request $request)
@@ -563,9 +560,12 @@ class ApplicationController extends Controller
             'district' => @$data['district'],
             'taluk' => @$data['taluk'],
             'pincode' => @$data['pincode'],
-            'address' => $data['address'],
-            'relation' => $data['relation'],
-            'mother_name' => $data['mother_name'],
+            'address' => @$data['address'],
+            'relation' => @$data['relation'],
+            'mother_name' => @$data['mother_name'],
+
+            'birth_district' => $data['birth_district'],
+            'age' => $data['age'],
             
             'annual_income' => $data['annual_income'],
             'occupation_parent' => $data['occupation_parent'],

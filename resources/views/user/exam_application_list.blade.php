@@ -14,38 +14,8 @@
                         </ol>
                     </nav>
 				</div>
-				{{-- <div class="d-flex my-auto col-xl-9 pe-0">
-					<div class="card">
-                        <div class="main-content-body main-content-body-mail card-body p-0">
-                            <div class="card-body pt-2 pb-2">
-                                <div class="row row-sm">
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <input class="form-control" placeholder="Name" type="text" name="name" id="name">
-                                    </div>
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <input class="form-control" placeholder="Phone Number" type="text" name="mobile" id="mobile">
-                                    </div>
-                                    
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <select class="form-control"  name="role" id="role">
-                                            <option value="">Select</option>
-                                            <option value="Data Entry">Data Entry</option>
-                                            <option value="Verifier">Verifier</option>
-                                            <option value="Approver">Approver</option>
-                                            <option value="Super Admin">Super Admin</option>
-                                        </select>
-                                    </div>
-
-                                  
-
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <button class="btn ripple btn-success btn-block" type="submit" id="submit" >Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				</div> --}}
+				
+		
 			</div>
 			<!-- /breadcrumb -->
 			<!-- main-content-body -->
