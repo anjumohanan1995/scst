@@ -258,16 +258,18 @@ class ApplicationController extends Controller
 
         $data =Auth::user();
         $districts = District::get();
-        return view('application.financial-help',compact('data','districts'));
+        return view('application.financial-help',compact('data','districts')); 
 
     }
 
     public function financialHelpStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'husband_address' => 'required',
+            'husband_name' => 'required',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',  
+            'wife_name' => 'required',
+            
             ]
            
         );
@@ -302,9 +304,27 @@ class ApplicationController extends Controller
         }else{
             $wife_sign = '';
         }
-        $data = $request->all();
 
+
+        if ($request->hasfile('marriage_certificate')) {
+
+            $image = $request->marriage_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/marriage_certificate'), $imgfileName);
+
+            $marriage_certificate = $imgfileName;
+
+        }else{
+            $marriage_certificate = '';
+        }
+
+
+
+        
+        $data = $request->all();
         $formData = $data;
+        $formData['marriage_certificate']= $marriage_certificate;
         $formData['husband_sign']= $husband_sign;
         $formData['wife_sign']= $wife_sign;
 
@@ -338,7 +358,7 @@ class ApplicationController extends Controller
             'hus_work_after_marriage' => $data['hus_work_after_marriage'],
             'husband_age' => $data['husband_age'],
             'wife_age' =>$data['wife_age'],
-            'register_details' => $data['register_details'],
+           'register_details' => $data['register_details'],
             'certificate_details' => $data['certificate_details'],
             'apart_for_any_period' => @$data['apart_for_any_period'],
             'duration' => $data['duration'],
@@ -353,6 +373,15 @@ class ApplicationController extends Controller
             'husband_sign' =>@$data['husband_sign'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
+            'hus_income_before_marriage' => $data['hus_income_before_marriage'],
+            'wife_income_before_marriage' => $data['wife_income_before_marriage'],
+            'hus_income_after_marriage' => $data['hus_income_after_marriage'],
+            'wife_income_after_marriage' => $data['wife_income_after_marriage'],
+            'register_marriage' => $data['register_marriage'],
+           // 'register_number' => $data['register_number'],
+            'register_date' => $data['register_date'],
+            'register_office_name' => $data['register_office_name'],
+            'marriage_certificate' => $data['marriage_certificate'],
             'status' =>0
         ]);
 
