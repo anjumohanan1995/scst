@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Institution;
+use App\Models\ItiFund;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -171,9 +173,11 @@ class InstitutionController extends Controller
      * @param  \App\Models\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function show(Institution $institution)
+    public function show($id)
     {
-        //
+        $itiFund =ItiFund::find($id);
+        $districts =District::where('deleted_at',null)->get();
+        return view("admin.institution.ItiDetails",compact("itiFund","districts"));
     }
 
     /**
@@ -267,7 +271,7 @@ class InstitutionController extends Controller
 
 
             // Total records
-            $totalRecord = Institution::where('deleted_at',null);
+            $totalRecord = ItiFund::where('deleted_at',null);
          
             if($name != ""){
                 $totalRecord->where('name','like',"%".$name."%");
@@ -277,7 +281,7 @@ class InstitutionController extends Controller
             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-            $totalRecordswithFilte = Institution::where('deleted_at',null);
+            $totalRecordswithFilte = ItiFund::where('deleted_at',null);
         
             if($name != ""){
                $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -286,7 +290,7 @@ class InstitutionController extends Controller
             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
             // Fetch records
-            $items = Institution::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
            
             if($name != ""){
                $items->where('name','like',"%".$name."%");
@@ -304,8 +308,9 @@ class InstitutionController extends Controller
             $id = $record->id;
             $name = $record->name;
             $address = $record->address;
-            $email =$record->email;
-            $contact_no=$record->phone_no;
+            $course_name =$record->course_name;
+            $income=$record->income;
+            $caste=$record->caste;
              $created_at =  $record->created_at;
 
            $data_arr[] = array(
@@ -313,10 +318,11 @@ class InstitutionController extends Controller
                "id" => $id,
                "name" => $name,
                "address" => $address,
-               "email" => $email,
-               "contact_no" => $contact_no,
+               "course_name" => $course_name,
+               "income" => $income,
+               "caste" => $caste,
                "created_at" => $created_at,
-               "edit" => '<div class="settings-main-icon"><a  href="' .  route('institution.edit',$id)  . '"><i class="fe fe-edit-2 bg-info me-1"></i></a>&nbsp;&nbsp;<a class="deleteItem" data-id="'.$id.'"><i class="si si-trash bg-danger "></i></a></div>'
+               "edit" => '<div class="settings-main-icon"><a  href="' . route('institution.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
            );
         }
