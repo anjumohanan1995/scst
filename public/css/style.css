@@ -10255,7 +10255,7 @@ a.text-dark:focus {
     }
 
     abbr[title]::after {
-        content: " ("attr(title) ")";
+        content: " (" attr(title) ")";
     }
 
     pre {
@@ -22860,18 +22860,24 @@ body {
 .table.table-clean tr:first-child td {
     border-top: none;
 }
-.table-new .dataTables_filter {display:none}
+
+.table-new .dataTables_filter {
+    display: none
+}
+
 .table.table-clean td {
     padding-left: 0px;
     padding-right: 0px;
     border-top-color: rgba(0, 0, 0, 0.05);
 }
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
     border: 0;
     background-image: none;
     background-color: #3858f9;
     color: #fff !important;
 }
+
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     background-color: #dedcfb;
     padding: 5px 10px;
@@ -22880,6 +22886,7 @@ body {
     border-radius: 1px;
     transition: all 0.2s ease-in-out;
 }
+
 .table.table-clean th,
 .table.table-clean td {
     padding: 7px 20px !important;
@@ -23122,18 +23129,21 @@ body {
     border-radius: 5px;
     box-shadow: 0 7px 30px rgba(250, 106, 130, 0.5);
 }
+
 .task-box.success {
-        background: linear-gradient(45deg, #0ba360, #15f290);
+    background: linear-gradient(45deg, #0ba360, #15f290);
     color: #fff !important;
     border-radius: 5px;
     box-shadow: 0 7px 30px rgb(0 249 145 / 39%);
 }
+
 .task-box.secondary {
     background: linear-gradient(45deg, #434446, #6095a0);
     color: #fff !important;
     border-radius: 5px;
     box-shadow: 0 7px 30px rgb(133 133 133 / 39%);
 }
+
 .task-stat .tasks {
     color: #031b4e;
     padding: 0.65rem 1.25rem;
@@ -39236,7 +39246,7 @@ slide is-expanded side-menu__item {
 }
 
 .slide-menu {
-    display: none ;
+    display: none;
     padding-left: 29px;
     list-style: none;
     padding: 0;
@@ -39763,7 +39773,8 @@ slide is-expanded side-menu__item {
 }
 
 .app-sidebar .slide-menu .sub-slide-menu a:before {
-    left: 25px;color: #ff0000;
+    left: 25px;
+    color: #ff0000;
 }
 
 .side-menu .slid.active .sub-slide.is-expanded .sub-slide-menu {
@@ -40122,9 +40133,11 @@ slide is-expanded side-menu__item {
         margin-top: 40px;
     }
 }
+
 .sidebar-navs {
     /* display: none; */
 }
+
 .side-menu__label1 a {
     display: none !important;
 }
@@ -98260,6 +98273,7 @@ button.bg-purple-gradient:focus {
         width: auto !important;
     }
 }
+
 select.form-control:before {
     border-color: #ebecf1 transparent transparent transparent;
     border-style: solid;
@@ -98274,26 +98288,35 @@ select.form-control:before {
     right: 0;
     width: 3px;
 }
+
 .wd-100v {
     width: 100vw;
 }
-.task-box a{
-	color: #fff;
+
+.task-box a {
+    color: #fff;
 }
-.table div#example_filter,.table  .dataTables_length,.table  .dataTables_info,.table  .dataTables_paginate {
+
+.table div#example_filter,
+.table .dataTables_length,
+.table .dataTables_info,
+.table .dataTables_paginate {
     display: none !important;
 }
-.border-radius{
-	border-radius: 100% !important;
+
+.border-radius {
+    border-radius: 100% !important;
 }
+
 .table-new .settings-main-icon i {
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
     display: inline-block;
 }
-.modal .header-icons{
-	fill: #000;
+
+.modal .header-icons {
+    fill: #000;
 }
 
 .modal-dialog .table-striped tbody tr:nth-of-type(odd) {
@@ -98303,17 +98326,22 @@ select.form-control:before {
 .modal-dialog .table-striped tbody tr td:nth-of-type(odd) {
     background-color: #f0eeff;
 }
- table .settings-main-icon button {
+
+table .settings-main-icon button {
     border: none;
     background: none;
 }
+
 .error {
     color: #ff0000;
-}div#success_message {
+}
+
+div#success_message {
     background: #8bc34a26;
     padding: 20px;
     margin-bottom: 10px;
 }
+
 .alert-dismissible .btn-close {
     position: absolute;
     top: 0;
@@ -98325,6 +98353,19 @@ select.form-control:before {
 }
 
 
-.single__income__earner--add--imputbox{
+.single__income__earner--add--imputbox {
     width: 340px;
+}
+
+
+/* sonu's view page style  */
+
+.text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paper-1 {
+    display: flex;
+    justify-content: space-between;
 }
