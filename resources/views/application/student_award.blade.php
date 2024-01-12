@@ -19,7 +19,7 @@
 		</div>
 		<!-- /breadcrumb -->
 
-	</div>
+
 <div class="main-content-body">
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
@@ -32,21 +32,21 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Name  </label>
+                                    <label class="form-label">പേര് / Name </label>
                                     <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="" name="name" />
                                     @error('name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Date of Birth   </label>
+                                    <label class="form-label">ജനനത്തീയതി / Date of Birth   </label>
                                     <input type="date" class="form-control"  name="dob" id="dob" value=""  />
                                     @error('dob')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Address  </label>
+                                    <label class="form-label">മേൽവിലാസം / Address  </label>
                                     <textarea type="text" value="{{ old('address') }}" class="form-control" name="address" ></textarea>
                                     @error('address')
                                         <span class="text-danger">{{$message}}</span>
@@ -57,7 +57,7 @@
                           
                             <div class="row">                               
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">District  </label>
+                                    <label class="form-label">ജില്ല / District  </label>
                                     <select id="district" name="district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
@@ -70,7 +70,7 @@
                                     <input type="hidden" name="district_name" id="district_name" value="">
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Taluk  </label>
+                                    <label class="form-label">താലൂക്ക് / Taluk  </label>
                                     <select id="taluk" name="taluk" class="form-control">
                                         <option value="">Choose Taluk</option>
                                     </select>                                 
@@ -80,7 +80,7 @@
                                     <input type="hidden" name="taluk_name" id="taluk_name" value="">
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Pincode  </label>
+                                    <label class="form-label">പിൻകോഡ് / Pincode  </label>
                                     <input type="text" value="{{ old('pincode') }}"  class="form-control"  name="pincode" />
                                     @error('pincode')
                                         <span class="text-danger">{{$message}}</span>
@@ -89,7 +89,7 @@
                             </div>
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Examination Passed </label>
+                                    <label class="form-label">പാസ്സായ പരീക്ഷ  / Examination Passed </label>
                                     <div class="row">   
                                         <div class="col-md-6 mb-6">
                                             <div>
@@ -118,14 +118,14 @@
                                 </div>
                                
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Name of the Guardian</label>
+                                    <label class="form-label">സംരക്ഷകന്റെ പേര് / Name of the Guardian</label>
                                     <input type="text" class="form-control"  name="guardian_name" id="guardian_name" value="" placeholder="" />
                                     @error('guardian_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Community</label>
+                                    <label class="form-label">സമുദായം / Community</label>
                                     <input type="text" class="form-control"  name="community" id="community" value="" placeholder="" />
                                     @error('community')
                                         <span class="text-danger">{{$message}}</span>
@@ -134,28 +134,28 @@
                             </div>
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Name of the Panchayath</label>
+                                    <label class="form-label">പഞ്ചായത്തിന്റെ പേര് / Name of the Panchayath</label>
                                     <input type="text" class="form-control"  name="panchayath_name" id="panchayath_name" value="" placeholder="" />
                                     @error('panchayath_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Name of the Institution</label>
+                                    <label class="form-label">സ്ഥാപനത്തിന്റെ പേര് / Name of the Institution</label>
                                     <input type="text" class="form-control"  name="institution_name" id="institution_name" value="" placeholder="" />
                                     @error('institution_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">Month of Pass</label>
+                                    <label class="form-label">പാസ് ആയ മാസം / Month of Pass</label>
                                     <input type="text" class="form-control"  name="pass_month" id="pass_month" value="" placeholder="" />
                                     @error('pass_month')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">Year of Pass</label>
+                                    <label class="form-label">പാസ് ആയ വര്ഷം / Year of Pass</label>
                                     <input type="number" class="form-control"  name="pass_year" id="pass_year" value="" placeholder="" />
                                     @error('pass_year')
                                         <span class="text-danger">{{$message}}</span>
@@ -164,21 +164,21 @@
                             </div><br>
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Phone No.</label>
+                                    <label class="form-label">ഫോൺ നമ്പർ / Phone No.</label>
                                     <input type="number" class="form-control"  name="phone" id="phone" value="" placeholder="" />
                                     @error('phone')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">Account No.</label>
+                                    <label class="form-label">അക്കൗണ്ട് നമ്പർ / Account No.</label>
                                     <input type="number" class="form-control"  name="account_number" id="account_number" value="" placeholder="" />
                                     @error('account_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">IFSC Code </label>
+                                    <label class="form-label">IFSC കോഡ് / IFSC Code </label>
                                     <input type="number" class="form-control"  name="ifsc_code" id="ifsc_code" value="" placeholder="" />
                                     @error('ifsc_code')
                                         <span class="text-danger">{{$message}}</span>
@@ -187,14 +187,14 @@
                             </div><br>
                             <div class="row">                                
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Aadhar No.	 </label>
+                                    <label class="form-label">ആധാർ നമ്പർ / Aadhar No.	 </label>
                                     <input type="number" class="form-control"  name="aadhar_number" id="aadhar_number" value="" placeholder="" />
                                     @error('aadhar_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>                           
                             <div class="col-md-6 mb-6">
-                                <label class="form-label">ഒപ്പ്</label>
+                                <label class="form-label">ഒപ്പ് / Signature</label>
                                 <input type="file" class="form-control"  name="signature" id="signature" value="" placeholder="" />
                                 @error('signature')
                                     <span class="text-danger">{{$message}}</span>
@@ -209,7 +209,7 @@
                             <div class="card-body">
                                 <div class="row">   
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">District  </label>
+                                        <label class="form-label">ജില്ല / District  </label>
                                         <select id="submitted_district" name="submitted_district" class="form-control" >
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
@@ -222,7 +222,7 @@
                                         <input type="hidden" name="dist_name" id="dist_name" value="">
                                     </div>
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">TEO  </label>
+                                        <label class="form-label">ടി.ഇ.ഒ / TEO  </label>
                                         <select id="submitted_teo" name="submitted_teo" class="form-control">
                                             <option value="">Choose TEO</option>
                                         </select>                                 
@@ -252,7 +252,7 @@
     </div>
 </div>
 </div>
-
+</div>
 <script>
    
 	$('#district').change(function(){

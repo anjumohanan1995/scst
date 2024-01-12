@@ -31,11 +31,13 @@ class ExamApplication extends Eloquent
         'birth_place',
         'mother_tonge',
         'user_id','status',
-        'agree','signature','parent_name',
+        'agree','signature',
+        'parent_name',
         'date','place',
         'submitted_district',
         'submitted_teo',
-
+        'age',
+        'birth_district',
     ];
 
     public function User()
