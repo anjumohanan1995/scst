@@ -98,6 +98,17 @@ Route::get('/userchildFinance/{id}/view', [App\Http\Controllers\ChildFinanceCont
 Route::get('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiScholarshipForm'])->name('iti-scholarship');
 Route::Post('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'store'])->name('iti-scholarship.store');
 Route::Post('/iti-fund-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundStore'])->name('itiFundStore');
+Route::get('/userItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'userItiFundList'])->name('userItiFundList');
+Route::get('/getUserItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'getUserItiFundList'])->name('getUserItiFundList');
+Route::get('/getUserItiFundList/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'show'])->name('userItiFundList.show');
+
+Route::get('/adminItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'adminItiFundList'])->name('adminItiFundList');
+Route::get('/getAdminItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'getAdminItiFundList'])->name('getAdminItiFundList');
+Route::get('/itiAdminFeeView/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'itiAdminFeeView'])->name('adminItiFundList.show');
+
+
+
+
 
 
 
@@ -117,6 +128,19 @@ Route::post('/marriageGrantStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/marriageGrantList', [App\Http\Controllers\ApplicationController::class, 'marriageGrantList'])->name('marriageGrantList');
 Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController::class, 'getmarriageGrantList'])->name('getmarriageGrantList');
 Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
+
+Route::get('/singleEarnerList', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerList'])->name('singleEarnerList');
+Route::get('/getSingleEarnerList', [App\Http\Controllers\SingleIncomeEarnerController::class, 'getSingleEarnerList'])->name('getSingleEarnerList');
+Route::get('/singleEarner/{id}/view', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerView'])->name('singleEarnerView');
+
+Route::get('/anemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceList'])->name('anemiaFinanceList');
+Route::get('/getAnemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceList'])->name('getAnemiaFinanceList');
+Route::get('/anemiaFinance/{id}/view', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceView'])->name('anemiaFinanceView');
+
+Route::get('/studentAwardList', [App\Http\Controllers\StudentAwardController::class, 'studentAwardList'])->name('studentAwardList');
+Route::get('/getStudentAwardList', [App\Http\Controllers\StudentAwardController::class, 'getStudentAwardList'])->name('getStudentAwardList');
+Route::get('/studentAward/{id}/view', [App\Http\Controllers\StudentAwardController::class, 'studentAwardView'])->name('studentAwardView');
+
 
 Route::get('/anemia-financial-assistance', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancialAssistance'])->name('anemia-financial-assistance');
 Route::post('/anemiaFinancePreview', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancePreview'])->name('anemiaFinancePreview');
@@ -245,6 +269,7 @@ Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFundCon
 
 //Tuition fee
 Route::resource('/TuitionFee', TuitionFeeController::class);
+
 Route::post('/TuitionFeeStore', [TuitionFeeController::class, 'TuitionFeeStore'])->name('TuitionFeeStore');
 Route::get('/userTuitionFeeList', [TuitionFeeController::class, 'userTuitionFeeList'])->name('userTuitionFeeList');
 
@@ -263,6 +288,5 @@ Route::get('/getInstitution', [InstitutionController::class, 'getInstitution'])-
 Route::get('/adminInstitutionList', [InstitutionController::class, 'adminInstitutionList'])->name('adminInstitutionList');
 Route::get('/getAdminInstitutionList', [InstitutionController::class, 'getAdminInstitutionList'])->name('getAdminInstitutionList');
 Route::post('/updateItiDetails', [InstitutionController::class, 'updateItiDetails'])->name('updateItiDetails');
-
-
-
+Route::get('/child_finance/approve/{id}', [App\Http\Controllers\ChildFinanceController::class, 'approve'])->name('approve-verify');
+Route::get('/child_finance/reject/{id}', [App\Http\Controllers\ChildFinanceController::class, 'reject'])->name('reject-verify');

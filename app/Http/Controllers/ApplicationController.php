@@ -370,8 +370,9 @@ class ApplicationController extends Controller
     {
         $name = $request->name;
         $mobile = $request->mobile;
-        $role = $request->role;
 
+        $role =  Auth::user()->role;       
+       $teo =  Auth::user()->teo_name;
 
          if($request->from_date !=''){
 
@@ -409,8 +410,8 @@ class ApplicationController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-             if($role != ""){
-                $totalRecord->where('role',$role);
+              if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
             }
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
@@ -428,9 +429,9 @@ class ApplicationController extends Controller
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $totalRecordswithFilte->where('role',$role);
-           }
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
                  $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
@@ -446,9 +447,9 @@ class ApplicationController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $items->where('role',$role);
-           }
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
                  $items->whereBetween('created_at', [$stDate, $edDate]);
@@ -597,11 +598,13 @@ class ApplicationController extends Controller
 
     public function getExamList(Request $request)
     {
+        $role =  Auth::user()->role;
+       
+        $teo =  Auth::user()->teo_name;
+ 
         $name = $request->name;
         $mobile = $request->mobile;
-        $role = $request->role;
-
-
+      
          if($request->from_date !=''){
 
              $from_date  = date("M d,Y",strtotime($request->from_date));
@@ -632,15 +635,16 @@ class ApplicationController extends Controller
 
              // Total records
              $totalRecord = ExamApplication::where('deleted_at',null);
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
              if($mobile != ""){
                  $totalRecord->where('mobile',$mobile);
              }
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-             if($role != ""){
-                $totalRecord->where('role',$role);
-            }
+            
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
                  $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
@@ -650,6 +654,9 @@ class ApplicationController extends Controller
 
 
              $totalRecordswithFilte = ExamApplication::where('deleted_at',null);
+             if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
 
              if($mobile != ""){
                  $totalRecordswithFilte->where('mobile',$mobile);
@@ -657,9 +664,7 @@ class ApplicationController extends Controller
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $totalRecordswithFilte->where('role',$role);
-           }
+           
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
                  $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
@@ -669,15 +674,16 @@ class ApplicationController extends Controller
 
              // Fetch records
              $items = ExamApplication::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
              if($mobile != ""){
                  $items->where('mobile',$mobile);
              }
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $items->where('role',$role);
-           }
+           
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
                  $items->whereBetween('created_at', [$stDate, $edDate]);
@@ -827,8 +833,9 @@ class ApplicationController extends Controller
         
         $name = $request->name;
         $mobile = $request->mobile;
-        $role = $request->role;
 
+        $role =  Auth::user()->role;       
+       $teo =  Auth::user()->teo_name;
 
          if($request->from_date !=''){
 
@@ -866,8 +873,8 @@ class ApplicationController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-             if($role != ""){
-                $totalRecord->where('role',$role);
+              if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
             }
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
@@ -885,9 +892,9 @@ class ApplicationController extends Controller
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $totalRecordswithFilte->where('role',$role);
-           }
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
                  $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
@@ -903,9 +910,9 @@ class ApplicationController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $items->where('role',$role);
-           }
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
              if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
                  //echo "khk";exit;
                  $items->whereBetween('created_at', [$stDate, $edDate]);
@@ -1083,7 +1090,8 @@ class ApplicationController extends Controller
     {
         
         $name = $request->name;
-
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
 
 
          ## Read value
@@ -1110,7 +1118,9 @@ class ApplicationController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-            
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -1121,7 +1131,9 @@ class ApplicationController extends Controller
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
-           
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
            
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
@@ -1132,7 +1144,9 @@ class ApplicationController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-           
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
 
              $records = $items->skip($start)->take($rowperpage)->get();
          

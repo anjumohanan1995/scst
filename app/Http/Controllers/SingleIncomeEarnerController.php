@@ -178,5 +178,116 @@ class SingleIncomeEarnerController extends Controller
 
         return redirect()->route('home')->with('success','Application Submitted Successfully.');
     }
+
+    public function singleEarnerList(Request $request)
+    {
+        return view('admin.single_earner_list');
+    }
+    public function getSingleEarnerList(Request $request)
+    {
+        
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = SingleIncomeEarner::where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('applicant_name','like',"%".$name."%");
+             }
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = SingleIncomeEarner::where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('applicant_name','like',"%".$name."%");
+            }
+           
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = SingleIncomeEarner::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('applicant_name','like',"%".$name."%");
+            }
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->applicant_name;
+             $address = $record->address;
+             $applicant_caste = $record->applicant_caste;
+             $district = @$record->districtRelation->name;
+              $created_at =  $record->created_at;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "caste" => $applicant_caste,
+                "district" => $district,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('singleEarner/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
+    public function singleEarnerView(Request $request, $id)
+    {           
+        $formData = SingleIncomeEarner::where('_id',$id)->first();
+       
+        return view('admin.single_earner_view', compact('formData'));
+
+    }
    
 }

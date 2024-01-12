@@ -131,12 +131,35 @@
 																@enderror
 															</div>
 
-                                                        </div>
+                                                        </div><br>
                                                        
-
+														<div class="row" id="teo_div" style="display:none">
+															<div class="col-md-6 mb-6">
+																<label class="form-label">District</label>
+																<select id="dist" name="district" class="form-control">
+																	<option value="">Choose District</option>
+																	@foreach($districts as $district)
+																	<option value="{{$district->id}}"  >{{$district->name}}</option>
+																@endforeach	
+														   </select>
+																@error('role')
+																   <span class="text-danger">{{$message}}</span>
+																@enderror
+															</div>
+	
+															<div class="col-md-6 mb-6" >
+																<label class="form-label">TEO</label>
+																<select id="teo_name" name="teo_name" class="form-control">
+																	<option value="">Choose TEO</option>
+																</select>                                 
+																@error('teo_name')
+																	<span class="text-danger">{{$message}}</span>
+																@enderror
+															</div>
+														</div>
                                                        
                                                     </div>
-														<br><br><br>
+														
                                                         <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light float-end">Save</button>
 
 														</div>
@@ -169,17 +192,44 @@
 <script src="{{ asset('js/jquery.validate.min.js')}}"></script>
 <script>
 
-$("#role").change(function () {
-   var category= $('option:selected', this).text();// Here we can get the value of selected item
-   //alert(category);
-   if(category == "Verifier" || category == "Approver"){
-    $('#hospital_div').hide();
-	$("#hospital_name").removeAttr('required');
-    }
-       else{
-        $('#hospital_div').show();
-       }
-});
+	$("#role").change(function () {
+		var category = $(this).val(); // Get the value of the selected item
+		
+		if (category === "TEO") {
+			$('#teo_div').show();
+		} else {
+			$('#teo_div').hide();
+		}
+	});
+
+   
+
+	$('#dist').change(function(){
+        var val = document.getElementById("dist").value;
+      
+        $.ajax({
+                    url: "{{url('district/fetch-teo')}}",
+                    type: "POST",
+                    data: {
+                        district_id: val,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#teo_name").find('option').remove();
+                          $("#teo_name").append('<option value="" selected>Choose TEO</option>');
+                        $.each(result.teos, function (key, value) {
+                            var $opt = $('<option>');
+                            $opt.val(value._id).text(value.teo_name);
+                            $opt.appendTo('#teo_name');
+                          
+
+                        });
+
+                    }
+                });
+
+    });
 
 </script>
 

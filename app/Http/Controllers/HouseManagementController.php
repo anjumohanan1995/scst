@@ -283,7 +283,8 @@ $formattedDate = $currentDate->toDateString();
         
         $name = $request->name;
         $user_id=Auth::user()->id;
-
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
 
          ## Read value
          $draw = $request->get('draw');
@@ -309,7 +310,9 @@ $formattedDate = $currentDate->toDateString();
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-            
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -320,7 +323,9 @@ $formattedDate = $currentDate->toDateString();
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
-           
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
            
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
@@ -331,7 +336,9 @@ $formattedDate = $currentDate->toDateString();
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-           
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
 
              $records = $items->skip($start)->take($rowperpage)->get();
          

@@ -72,6 +72,7 @@
                                             <th> Address </th>
                                             <th>Caste</th>
                                             <th>Created Date</th>
+                                            <th >View</th>
                                             <th >Action</th>
 
 
@@ -93,6 +94,56 @@
 
                 </div>
                 <!-- /row -->
+                <div class="modal fade" id="approve-popup">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content country-select-modal border-0">
+                            <div class="modal-header offcanvas-header">
+                                <h6 class="modal-title">Are you sure?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body p-5">
+                                <div class="text-center">
+                                    <h4>Are you sure to Approve this Application?</h4>
+                                </div>
+                                <form id="ownForm">
+            
+                                    @csrf
+                                <input type="hidden" id="requestId" name="requestId" value="" />
+                                <div class="text-center">
+                                    <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="rejection-popup">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content country-select-modal border-0">
+                            <div class="modal-header offcanvas-header">
+                                <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body p-5">
+                                <form id="ownForm">
+                                    @csrf
+                                <div class="text-center">
+                                    <h5>Reason for Rejection</h5>
+                                    <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                                    <span id="rejection"></span>
+                                </div>
+            
+                                <input type="hidden" id="requestId2" name="requestId2" value="" />
+                                <div class="text-center">
+                                    <button type="button" onclick="reject()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 			</div>
 		<!-- /row -->
 		</div>
@@ -143,7 +194,8 @@
 				{ data: 'caste' },
                 { data: 'created_at', visible: false },
 
-                { data: 'edit' }
+                { data: 'edit' },
+                { data: 'action' }
 
 
 			],
@@ -180,6 +232,79 @@
 
 
       });
+
+      $(document).on("click",".approveItem",function() {
+        var id =$(this).attr('data-id');
+        $('#requestId').val($(this).attr('data-id') );
+        $('#approve-popup').modal('show');
+       });
+       $(document).on("click",".rejectItem",function() {
+   
+        var id =$(this).attr('data-id');
+        $('#requestId2').val($(this).attr('data-id') );
+        $('#rejection-popup').modal('show');
+       });
+
+       function approve() {
+
+        var reqId = $('#requestId').val();
+         $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
+            url: '{{ url("child_finance/approve") }}'+'/'+reqId,
+           // type: 'PATCH',
+            method: 'get',
+            data: {status:"1",application_id:reqId},
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function(response) {
+                console.log(response.success);
+
+                    $('#approve-popup').modal('hide');
+                    $('#success_message').fadeIn().html(response.success);
+                        setTimeout(function() {
+                            $('#success_message').fadeOut("slow");
+                        }, 2000 );
+
+                    $('#example').DataTable().ajax.reload();
+
+
+
+            }
+        })
+      }
+      function reject() {
+        var reason = $('#reason').val();
+      
+        if($('#reason').val() == ""){
+            rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+        }
+        else{
+            rejection.innerHTML ="";
+            var reqId = $('#requestId2').val();
+        console.log(reqId);
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
+            url: '{{ url("child_finance/reject") }}'+'/'+reqId,
+            method: 'get',
+            data: {status:"1",reason:reason},
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function(response) {
+                console.log(response.success);
+
+                    $('#rejection-popup').modal('hide');
+                    $('#success_message').fadeIn().html(response.success);
+                        setTimeout(function() {
+                            $('#success_message').fadeOut("slow");
+                        }, 2000 );
+
+                    $('#example').DataTable().ajax.reload();
+
+            }
+        })
+
+        }
+     }
       </script>
 
 
