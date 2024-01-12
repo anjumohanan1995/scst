@@ -27,7 +27,12 @@ class ChildFinance extends Eloquent
         'aadhar_number','voter_id','ration_card_number','place','signature','child_signature','submitted_district','dist_name',
         'submitted_teo',
         'teo_name',
-        'date','user_id','status'
+        'date','user_id','status',
+        'approved_by',
+        'approved_date',
+        'rejected_by',
+        'rejected_date',
+        'rejected_reason'
 
     ];
 

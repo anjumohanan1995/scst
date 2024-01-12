@@ -110,7 +110,31 @@
 																@enderror
 															</div>
 
-                                                        </div>
+                                                        </div><br>
+														<div class="row" id="teo_div" style="display:none">
+															<div class="col-md-6 mb-6">
+																<label class="form-label">District</label>
+																<select id="dist" name="district" class="form-control">
+																	<option value="">Choose District</option>
+																	@foreach($districts as $district)
+																	<option value="{{$district->id}}" {{$patient['district']==$district->id ? 'selected' : ''}} >{{$district->name}}</option>
+																@endforeach	
+														   </select>
+																@error('role')
+																   <span class="text-danger">{{$message}}</span>
+																@enderror
+															</div>
+	
+															<div class="col-md-6 mb-6" >
+																<label class="form-label">TEO</label>
+																<select id="teo_name" name="teo_name" class="form-control">
+																	<option value="">Choose TEO</option>
+																</select>                                 
+																@error('teo_name')
+																	<span class="text-danger">{{$message}}</span>
+																@enderror
+															</div>
+														</div><br>
                                                         
 
 												 <button type="submit" class="btn btn-warning waves-effect waves-light float-end" id="submit">Save</button>
@@ -201,79 +225,75 @@ $("#patientForm").validate({
 })
 }
 $( document ).ready(function() {
-var category= $('#role option:selected').val();// Here we can get the value of selected item
-//alert(category);
-if(category == "Verifier" || category == "Approver"){
- $('#hospital_div').hide();
- $("#hospital_name").removeAttr('required');
- }
-    else{
-     $('#hospital_div').show();
-    }
-});
-$("#role").change(function () {
-   var category= $('option:selected', this).text();// Here we can get the value of selected item
-   //alert(category);
-   if(category == "Verifier"){
-    $('#hospital_div').hide();
-	//$('#hospital_name').val()=null;
-       }
-       else{
-        $('#hospital_div').show();
-       }
-});
+	var category= $('#role option:selected').val();// Here we can get the value of selected item
+	//alert(category);
+	if(category == "TEO"){
+		$('#teo_div').show();
+	 }
+		else{
+			$('#teo_div').hide();
+		}
+	});
+
+	$("#role").change(function () {
+		var category = $(this).val(); // Get the value of the selected item
+		
+		if (category === "TEO") {
+			$('#teo_div').show();
+		} else {
+			$('#teo_div').hide();
+		}
+	});
 
     var val = document.getElementById("dist").value;
-    //$('#hospital').find('option').remove();
-    //alert(val);
+   // alert(val);
     $.ajax({
-                url: "{{url('district/fetch-hospital')}}",
-                type: "POST",
-                data: {
-                    name: val,
-                    _token: '{{csrf_token()}}'
-                },
-                dataType: 'json',
-                success: function (result) {
-                  //  alert(result);
-                  var user =  {{ Js::from($patient['hospital_id']) }};
-                    $("#hospital").find('option').remove();
-                      $("#hospital").append('<option value="" >Choose Hospital</option>');
-                    $.each(result.mobile, function (key, value) {
+		url: "{{url('district/fetch-teo')}}",
+		type: "POST",
+		data: {
+			district_id: val,
+			_token: '{{csrf_token()}}'
+		},
+		dataType: 'json',
+		success: function (result) {
+			var user =  {{ Js::from($patient['teo_name']) }};
+			$("#teo_name").find('option').remove();
+			  $("#teo_name").append('<option value="" selected>Choose TEO</option>');
+			$.each(result.teos, function (key, value) {
                         if(value._id == user)
-                        $('#hospital').append('<option value="'+value._id+'" selected>'+ value.name +'</option>');
+                        $('#teo_name').append('<option value="'+value._id+'" selected>'+ value.teo_name +'</option>');
                         else
-                        $('#hospital').append('<option value="'+value._id+'">'+ value.name +'</option>');
+                        $('#teo_name').append('<option value="'+value._id+'">'+ value.teo_name +'</option>');
                     });
 
                 }
             });
+ 
 
 $('#dist').change(function(){
-    var val = document.getElementById("dist").value;
-    //$('#hospital').find('option').remove();
-    //alert(val);
-    $.ajax({
-                url: "{{url('district/fetch-hospital')}}",
-                type: "POST",
-                data: {
-                    name: val,
-                    _token: '{{csrf_token()}}'
-                },
-                dataType: 'json',
-                success: function (result) {
-                  //  alert(result);
-                    $("#hospital").find('option').remove();
-                      $("#hospital").append('<option value="" selected>Choose Hospital</option>');
-                    $.each(result.mobile, function (key, value) {
-                        var $opt = $('<option>');
-                        $opt.val(value._id).text(value.name);
-                        $opt.appendTo('#hospital');
+	var val = document.getElementById("dist").value;
+      
+	$.ajax({
+				url: "{{url('district/fetch-teo')}}",
+				type: "POST",
+				data: {
+					district_id: val,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (result) {
+					$("#teo_name").find('option').remove();
+					  $("#teo_name").append('<option value="" selected>Choose TEO</option>');
+					$.each(result.teos, function (key, value) {
+						var $opt = $('<option>');
+						$opt.val(value._id).text(value.teo_name);
+						$opt.appendTo('#teo_name');
+					  
 
-                    });
+					});
 
-                }
-            });
+				}
+			});
 
 });
 </script>

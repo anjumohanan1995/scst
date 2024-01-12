@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
@@ -182,8 +183,8 @@ class UserController extends Controller
     public function create()
     {
         $role = Role::where('deleted_at', null)->get();
-       
-            return view('user.create',compact('role'));
+        $districts = District::get();
+            return view('user.create',compact('role','districts'));
         
     }
 
@@ -220,13 +221,14 @@ class UserController extends Controller
             $data = $request->all();
 
 
-               
 
             User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'role' => $data['role'],
                 'mobile' => $data['mobile'],
+                'district' => $data['district'],
+                'teo_name' => $data['teo_name'],
                 'password' => Hash::make($data['password']),
             ]);
 
@@ -259,7 +261,8 @@ class UserController extends Controller
        
             $patient=User::find($id);
             $role =Role::where('deleted_at', null)->get();
-            return view('user.edit', compact('patient','role'));
+            $districts = District::get();
+            return view('user.edit', compact('patient','role','districts'));
         
     }
 
@@ -298,6 +301,8 @@ class UserController extends Controller
             'email' => $data['email'],
             'role' => $data['role'],
             'mobile' => $data['mobile'],
+            'district' => $data['district'],
+            'teo_name' => $data['teo_name'],
             //'password' => Hash::make($data['password']),
         ]);
 

@@ -85,9 +85,10 @@ class InstitutionController extends Controller
 
 
          $data_arr = array();
-
+        $i=$start;
          foreach($records as $record){
            // dd($record);
+           $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -96,6 +97,7 @@ class InstitutionController extends Controller
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
+                "sl_no"=>$i,
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,
@@ -193,9 +195,23 @@ class InstitutionController extends Controller
      * @param  \App\Models\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Institution $institution)
+    public function update(Request $request,$id)
     {
-        //
+        $inst=Institution::find($id);
+        $this->validate($request, [
+            'email' => 'unique:users,email,'.$inst->user_id.',_id,deleted_at,NULL',
+        //    / 'email'=>'required|unique:users,email,'.$inst->user_id.',_id,deleted,0',
+        ]);
+        $data=$request->all();
+        $user=  User::where('_id',$inst->user_id)->first();
+        $user->name=$data['name'];
+        $user->email=$data['email'];
+        $user->mobile=$data['phone_no'];
+      $user->update();
+      $data['user_id']=$user->id;
+      $inst->update($data);
+       return redirect()->route('institution.index')->with('status','Institution Updated Successfully.');
+        
     }
 
     /**
@@ -214,5 +230,104 @@ class InstitutionController extends Controller
         return response()->json([
                         'success' => 'Institution Deleted successfully.'
                     ]);
+    }
+
+    public function adminInstitutionList(){
+        return view ('admin.institution.adminList');
+    }
+
+    public function getAdminInstitutionList(Request $request){
+        $name = $request->name;
+
+
+        if($request->from_date !=''){
+
+            $from_date  = date("M d,Y",strtotime($request->from_date));
+            $stDate = new Carbon($from_date);
+        }
+        if($request->to_date !=''){
+            $to_date  =   date("Y-m-d",strtotime($request->to_date));
+            $edDate = new Carbon($to_date);
+        }
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+
+            // Total records
+            $totalRecord = Institution::where('deleted_at',null);
+         
+            if($name != ""){
+                $totalRecord->where('name','like',"%".$name."%");
+            }
+            
+           
+            $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+            $totalRecordswithFilte = Institution::where('deleted_at',null);
+        
+            if($name != ""){
+               $totalRecordswithFilte->where('name','like',"%".$name."%");
+           }          
+
+            $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+            // Fetch records
+            $items = Institution::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+           
+            if($name != ""){
+               $items->where('name','like',"%".$name."%");
+           }
+         
+            $records = $items->skip($start)->take($rowperpage)->get();
+     
+
+
+        $data_arr = array();
+       $i=$start;
+        foreach($records as $record){
+          // dd($record);
+          $i++;
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $email =$record->email;
+            $contact_no=$record->phone_no;
+             $created_at =  $record->created_at;
+
+           $data_arr[] = array(
+               "sl_no"=>$i,
+               "id" => $id,
+               "name" => $name,
+               "address" => $address,
+               "email" => $email,
+               "contact_no" => $contact_no,
+               "created_at" => $created_at,
+               "edit" => '<div class="settings-main-icon"><a  href="' .  route('institution.edit',$id)  . '"><i class="fe fe-edit-2 bg-info me-1"></i></a>&nbsp;&nbsp;<a class="deleteItem" data-id="'.$id.'"><i class="si si-trash bg-danger "></i></a></div>'
+
+           );
+        }
+
+        $response = array(
+           "draw" => intval($draw),
+           "iTotalRecords" => $totalRecords,
+           "iTotalDisplayRecords" => $totalRecordswithFilter,
+           "aaData" => $data_arr
+        );
+
+        return response()->json($response);
     }
 }

@@ -116,29 +116,18 @@ class StudentAwardController extends Controller
         return redirect()->route('home')->with('success','Application Submitted Successfully.');
     }
 
-    public function examApplicationList(Request $request)
+    public function studentAwardList(Request $request)
     {
-       
-        return view('admin.exam_application_list');
+        return view('admin.student_award_list');
 
     }
-
-    public function getExamList(Request $request)
+    public function getStudentAwardList(Request $request)
     {
+        
         $name = $request->name;
-        $mobile = $request->mobile;
-        $role = $request->role;
-
-
-         if($request->from_date !=''){
-
-             $from_date  = date("M d,Y",strtotime($request->from_date));
-             $stDate = new Carbon($from_date);
-         }
-         if($request->to_date !=''){
-             $to_date  =   date("Y-m-d",strtotime($request->to_date));
-             $edDate = new Carbon($to_date);
-         }
+        $user_id=Auth::user()->id;
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
 
          ## Read value
          $draw = $request->get('draw');
@@ -159,57 +148,43 @@ class StudentAwardController extends Controller
          
 
              // Total records
-             $totalRecord = ExamApplication::where('deleted_at',null);
-             if($mobile != ""){
-                 $totalRecord->where('mobile',$mobile);
-             }
+             $totalRecord = StudentAward::where('deleted_at',null);
+           
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-             if($role != ""){
-                $totalRecord->where('role',$role);
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
             }
-             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
-                 //echo "khk";exit;
-                 $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
-             }
+
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = ExamApplication::where('deleted_at',null);
+             $totalRecordswithFilte = StudentAward::where('deleted_at',null);
 
-             if($mobile != ""){
-                 $totalRecordswithFilte->where('mobile',$mobile);
-             }
+          
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $totalRecordswithFilte->where('role',$role);
-           }
-             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
-                 //echo "khk";exit;
-                 $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
-             }
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
+
+           
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = ExamApplication::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
-             if($mobile != ""){
-                 $items->where('mobile',$mobile);
-             }
+             $items = StudentAward::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            if($role != ""){
-               $items->where('role',$role);
-           }
-             if($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "" ){
-                 //echo "khk";exit;
-                 $items->whereBetween('created_at', [$stDate, $edDate]);
-             }
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
+
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -220,26 +195,20 @@ class StudentAwardController extends Controller
 
          foreach($records as $record){
              $id = $record->id;
-             $school_name = $record->school_name;
-             $student_name = $record->student_name;
-             $gender = $record->gender;
+             $name = $record->name;
              $address = $record->address;
-             $relation = $record->relation;
-              $mother_name =  $record->mother_name;
+             $dob = $record->dob;
+             $district = @$record->districtRelation->name;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
                 "id" => $id,
-                "school_name" => $school_name,
-                "student_name" => $student_name,
-                "gender" => $gender,
+                "name" => $name,
                 "address" => $address,
-                "relation" => $relation,
-                "mother_name" => $mother_name,
-                "created_at" => $created_at,
-
-               //  "more"=>'<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal'.$id.'" data-bs-whatever="@mdo">More Details</button><div class="modal fade" id="exampleModal'.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">'.$name.'('.$age.')  </h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="eva eva-close-outline header-icons"><g data-name="Layer 2"><g data-name="close"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"></path></g></g></svg></button></div><div class="modal-body"><table id="example" class="table table-striped table-bordered" style="width:100%"><tbody><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Name</h6></div></td><td><div class="image-grouped"> '.$name.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Name</h6></div></td><td><div class="image-grouped">'.$gname.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Relationship</h6></div></td><td><div class="image-grouped">'.$g_relation.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Age</h6></div></td><td><div class="image-grouped"> '.$age.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Gender</h6></div></td><td><div class="image-grouped">'.$gender.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Mobile Number</h6></div></td><td><div class="image-grouped"> '.$mobile.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Adhar Number</h6></div></td><td><div class="image-grouped"> '.$adhar.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Scheme Id</h6></div></td><td><div class="image-grouped">  '.$sc_id.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Email Id</h6></div></td><td><div class="image-grouped"> '.$email.' </div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Abha Number</h6></div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Ration card Number</h6></div></td><td><div class="image-grouped"> '.$ration_card.' </div></td></tr></tbody></table></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div></div></div></div>',
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('exam-application/'.$id) . '"><i class="fe fe-eye bg-info me-1"></i></a></div>'
+                "dob" => $dob,
+                "district" => $district,
+                "created_at" => $created_at,                  
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('studentAward/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }
@@ -253,17 +222,13 @@ class StudentAwardController extends Controller
 
          return response()->json($response);
     }
-
-
-    public function examApplicationView($id)
-    { 
-        $formData = ExamApplication::where('_id',$id)->first();
-        return view('admin.exam_application_view', compact('formData'));
+    public function studentAwardView(Request $request, $id)
+    {           
+        $formData = StudentAward::where('_id',$id)->first();
+       
+        return view('admin.student_award_view', compact('formData'));
 
     }
-    
-
-
     
 
 

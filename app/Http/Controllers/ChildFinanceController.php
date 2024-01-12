@@ -157,7 +157,9 @@ class ChildFinanceController extends Controller
     }
     public function getchildFinanceList(Request $request)
     {
-        
+       $role =  Auth::user()->role;       
+       $teo =  Auth::user()->teo_name;
+
         $name = $request->name;
 
 
@@ -182,7 +184,9 @@ class ChildFinanceController extends Controller
 
              // Total records
              $totalRecord = ChildFinance::where('deleted_at',null);
-           
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
@@ -193,7 +197,9 @@ class ChildFinanceController extends Controller
 
              $totalRecordswithFilte = ChildFinance::where('deleted_at',null);
 
-          
+             if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
@@ -204,7 +210,9 @@ class ChildFinanceController extends Controller
 
              // Fetch records
              $items = ChildFinance::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
-            
+             if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
@@ -232,7 +240,8 @@ class ChildFinanceController extends Controller
                 "age" => $age,
                 "caste" => $caste,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>',
+                "action" => '<div class="settings-main-icon"><a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>'
 
             );
          }
@@ -370,7 +379,43 @@ class ChildFinanceController extends Controller
     }
 
     
+    public function approve(Request $request, $id)
+    {
+        $application_id = $request->application_id;
+     
+        $verify =ChildFinance::where('_id',$application_id)->first();
+        $verify->status = 1;
+        $verify->approved_by = Auth::user()->id;
+        $verify->approved_date = date('Y-m-d');
+        $verify->update();
 
+
+            return response()->json([
+                'success' => 'Application Approved successfully.'
+           ]);
+
+
+    }
+
+
+    public function reject(Request $request, $id)
+    {
+        $reason = $request->reason;
+     
+        $verify =ChildFinance::where('_id',$id)->first();
+        $verify->status = 2;
+        $verify->rejected_by = Auth::user()->id;
+        $verify->rejected_date = date('Y-m-d');
+        $verify->rejected_reason = $reason;
+        $verify->update();
+
+
+            return response()->json([
+                'success' => 'Application Approved successfully.'
+           ]);
+
+
+    }
     
 
     

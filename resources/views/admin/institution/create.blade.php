@@ -13,7 +13,7 @@
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 
-										<li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - New Institution 
+										<li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> -  Institution 
 </li>
 									</ol>
 								</nav>
@@ -115,7 +115,7 @@
 														</div>
                                                     </div>
 													</div>
-</div>
+                                                    </div>
 
 												</form>
 
