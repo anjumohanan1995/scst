@@ -276,3 +276,7 @@ Route::resource('/institution', InstitutionController::class);
 Route::get('/getInstitution', [InstitutionController::class, 'getInstitution'])->name('getInstitution');
 Route::get('/adminInstitutionList', [InstitutionController::class, 'adminInstitutionList'])->name('adminInstitutionList');
 Route::get('/getAdminInstitutionList', [InstitutionController::class, 'getAdminInstitutionList'])->name('getAdminInstitutionList');
+
+
+Route::get('/child_finance/approve/{id}', [App\Http\Controllers\ChildFinanceController::class, 'approve'])->name('approve-verify');
+Route::get('/child_finance/reject/{id}', [App\Http\Controllers\ChildFinanceController::class, 'reject'])->name('reject-verify');

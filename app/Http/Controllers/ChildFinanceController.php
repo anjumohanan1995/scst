@@ -240,7 +240,8 @@ class ChildFinanceController extends Controller
                 "age" => $age,
                 "caste" => $caste,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>',
+                "action" => '<div class="settings-main-icon"><a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>'
 
             );
          }
@@ -378,7 +379,43 @@ class ChildFinanceController extends Controller
     }
 
     
+    public function approve(Request $request, $id)
+    {
+        $application_id = $request->application_id;
+     
+        $verify =ChildFinance::where('_id',$application_id)->first();
+        $verify->status = 1;
+        $verify->approved_by = Auth::user()->id;
+        $verify->approved_date = date('Y-m-d');
+        $verify->update();
 
+
+            return response()->json([
+                'success' => 'Application Approved successfully.'
+           ]);
+
+
+    }
+
+
+    public function reject(Request $request, $id)
+    {
+        $reason = $request->reason;
+     
+        $verify =ChildFinance::where('_id',$id)->first();
+        $verify->status = 2;
+        $verify->rejected_by = Auth::user()->id;
+        $verify->rejected_date = date('Y-m-d');
+        $verify->rejected_reason = $reason;
+        $verify->update();
+
+
+            return response()->json([
+                'success' => 'Application Approved successfully.'
+           ]);
+
+
+    }
     
 
     
