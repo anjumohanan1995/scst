@@ -1,4 +1,8 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 <style>
 .details-card {
     background: #ecf0f1;
@@ -148,8 +152,9 @@ a.btn-card {
                     <div class="card-desc">
                         <h3>Application 2 - <a href="{{ route('userMotherChildList') }}">Applied({{ $data['motherChildCount'] }})</a></h3>
                         <p>ജനനി-ജനനി -ജന്മരക്ഷ  പ്രസവാനുകുല്യം - മാതൃശിശു  സംരക്ഷണ പദ്ധതി  അപേക്ഷഫോറം </p>
-                            <a href="{{ route('applicationForm2') }}" class="btn-card">Apply Now</a>   
-                    </div>
+                            {{--  <a href="{{ route('applicationForm2') }}" class="btn-card">Apply Now</a>     --}}
+                            <a href="#" class="btn-card" data-toggle="modal" data-target="#applicationModal">Apply Now</a>
+                        </div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -170,8 +175,10 @@ a.btn-card {
                     <div class="card-desc">
                         <h3>Application 4 - <a href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a></h3>
                         <p>പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട  പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം </p>
-                             <a href="{{url('marriageGrantForm')}}" class="btn-card">Apply Now</a>   
-                    </div>
+                             {{--  <a href="{{url('marriageGrantForm')}}" class="btn-card">Apply Now</a>     --}}
+                             <a href="#" class="btn-card" data-toggle="modal" data-target="#marriageGrant">Apply Now</a>
+
+                            </div>
                 </div>
             </div>
 
@@ -242,7 +249,9 @@ a.btn-card {
                                 <div class="card-desc">
                                     <h3>Application 10 - <a href="{{ route('userStudentAwardList') }}">Applied({{ $data['studentAwardCount'] }})</a></h3>
                                     <p>മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo </p>
-                                         <a href="{{url('student-award')}}" class="btn-card">Apply Now</a>     
+                                         {{--  <a href="{{url('student-award')}}" class="btn-card">Apply Now</a>   --}}
+                                         <a href="#" class="btn-card" data-toggle="modal" data-target="#studentAward">Apply Now</a>
+    
                                 </div>
                             </div>
                         </div>
@@ -271,6 +280,120 @@ a.btn-card {
 
         </div>
     </div>
+
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="applicationModal" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            ജനനി-ജനനി -ജന്മരക്ഷ പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി അപേക്ഷഫോറം 
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ul>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{ route('applicationForm2') }}" <button type="submit" class="btn btn-primary">Continue</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="marriageGrant" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക് വിവാഹധനസഹായം നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ol>
+                            <li>
+                                തഹസിൽദാരിൽനിന്നും ജാതി തെളിയിക്കുന്ന സാക്ഷ്യപത്രം (അസൽ )ഹാജരാക്കണം
+                            </li>
+                            <li>
+                                കുടുംബത്തിൽ എല്ലാ മാർഗത്തിൽ നിന്നുമുള്ള ആകെ വാർഷിക വരുമാനം (വില്ലേജ് ആഫീസറിൽ നിന്നും ലഭിച്ച സർട്ടിഫിക്കറ്റ് (അസൽ) ഹാജരാക്കണം ) 
+                            </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ol>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{url('marriageGrantForm')}}" <button type="submit" class="btn btn-primary">Continue</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="studentAward" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ol>
+                            <li>
+                                പരീക്ഷാ വിവരങ്ങൾ 
+                            </li>
+                            <li>
+                                ആധാർ വിവരങ്ങൾ
+                            </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ol>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{url('student-award')}}" <button type="submit" class="btn btn-primary">Continue</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     </section>
 		
 		
