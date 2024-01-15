@@ -57,7 +57,7 @@
                                             <select id="district" name="district" class="form-control">
                                                 <option value="">Select</option>
                                                 @foreach ($districts as $district)
-                                                    <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                    <option value="{{ $district->id }}" @if($district->id == old('district')) selected @endif>{{ $district->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('district')
@@ -186,10 +186,10 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ജില്ല / District </label>
-                                        <select id="submitted_district" name="submitted_district" class="form-control">
+                                        <select id="submitted_district" name="submitted_district" class="form-control" required />
                                             <option value="">Select</option>
                                             @foreach ($districts as $district)
-                                                <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                <option value="{{ $district->id }}" @if($district->id == old('submitted_district')) selected @endif>{{ $district->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('dist')
@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ടി.ഇ.ഒ / TEO </label>
-                                        <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                        <select id="submitted_teo" name="submitted_teo" class="form-control" required />
                                             <option value="">Choose TEO</option>
                                         </select>
                                         @error('teo')
@@ -232,6 +232,37 @@
 </div>
 
     <script>
+        var selectElement = document.getElementById("district");
+        var districtName = selectElement.options[selectElement.selectedIndex].text;
+        document.getElementById('district_name').value = districtName;
+        var val = document.getElementById("district").value;
+
+        $.ajax({
+            url: "{{ url('district/fetch-taluk') }}",
+            type: "POST",
+            data: {
+                district_id: val,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(result) {
+                var permanentTalukValue = "{{ old('taluk') }}";
+              
+                $("#taluk").find('option').remove();
+                $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+                $.each(result.taluks, function (key, value) {
+                    if(value._id == permanentTalukValue)
+                    $('#taluk').append('<option value="'+value._id+'" selected>'+ value.taluk_name +'</option>');
+                    else
+                    $('#taluk').append('<option value="'+value._id+'">'+ value.taluk_name +'</option>');
+                });
+             
+
+            }
+        });
+
+      
+
         $('#district').change(function() {
             var districtName = this.options[this.selectedIndex].text;
             document.getElementById('district_name').value = districtName;
@@ -264,6 +295,37 @@
             var talukName = this.options[this.selectedIndex].text;
             document.getElementById('taluk_name').value = talukName;
         });
+
+
+        var selectElement = document.getElementById("submitted_district");
+        var submitted_district = selectElement.options[selectElement.selectedIndex].text;
+        document.getElementById('dist_name').value = submitted_district;
+        var val = document.getElementById("submitted_district").value;
+
+        $.ajax({
+            url: "{{ url('district/fetch-teo') }}",
+            type: "POST",
+            data: {
+                district_id: val,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(result) {
+                var permanentTalukValue = "{{ old('submitted_teo') }}";
+              
+                $("#submitted_teo").find('option').remove();
+                $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+                $.each(result.teos, function (key, value) {
+                    if(value._id == permanentTalukValue)
+                    $('#submitted_teo').append('<option value="'+value._id+'" selected>'+ value.teo_name +'</option>');
+                    else
+                    $('#submitted_teo').append('<option value="'+value._id+'">'+ value.teo_name +'</option>');
+                });
+             
+
+            }
+        });
+
 
         $('#submitted_district').change(function() {
             var submitted_district = this.options[this.selectedIndex].text;

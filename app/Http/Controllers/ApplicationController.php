@@ -782,13 +782,8 @@ class ApplicationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'district' => 'required',
-            'taluk' => 'required',
-            'pincode' => 'required',
-            'age' => 'required|numeric',
-            'dob' => 'required',
-            'births' => 'required|numeric',
             'submitted_district' => 'required',
+            'submitted_teo' => 'required',    
         
             // Add more fields and their validation rules as needed
         ]);
