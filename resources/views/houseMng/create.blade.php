@@ -45,7 +45,7 @@
                                     <label class="form-label">
                                         Address (മേൽവിലാസം )
                                     </label>
-                                    <textarea type="text" value="{{ old('address') }}"  class="form-control" placeholder="Address" name="address" ></textarea>
+                                    <textarea type="text" value="{{ old('address') }}"  class="form-control" placeholder="Address" name="address" >{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -64,7 +64,7 @@
                                      @error('current_district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="current_district_name" id="current_district_name" value="">
+                                    <input type="hidden" name="current_district_name" id="current_district_name" value="{{ old('current_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">Taluk (താലൂക്ക്)  </label>
@@ -74,7 +74,7 @@
                                     @error('current_taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="">
+                                    <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="{{ old('current_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">Pincode ( പിൻകോഡ് ) </label>
@@ -132,7 +132,7 @@
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും 
                                     </label>
-                                    <textarea type="text" value="{{ old('house_details') }}"  class="form-control" placeholder="Condition of the house for which financing is applied for and the year of sanction" name="house_details" ></textarea>
+                                    <textarea type="text" value="{{ old('house_details') }}"  class="form-control" placeholder="Condition of the house for which financing is applied for and the year of sanction" name="house_details" >{{ old('house_details') }}</textarea>
                                  @error('house_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -149,7 +149,8 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം 
                                     </label>
-                                    <textarea type="text" value="{{ old('last_payment_year') }}"  class="form-control" placeholder="Year of completion of house work and receipt of final installment" name="last_payment_year" ></textarea>
+                                    <input type="number" id="last_payment_year" class="form-control" name="last_payment_year" min="1000" max="9999" value="{{ old('last_payment_year') }}">
+                              
                                     @error('last_payment_year')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -166,7 +167,7 @@
                                         അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ )
                                         
                                           </label>
-                                          <textarea type="text" value="{{ old('family_details') }}"  class="form-control" placeholder="Family status (unmarried: mother, female headed family, premature widows, physically and mentally challenged, terminally ill, abused women, etc.)" name="family_details" ></textarea>
+                                          <textarea type="text" value="{{ old('family_details') }}"  class="form-control" placeholder="Family status (unmarried: mother, female headed family, premature widows, physically and mentally challenged, terminally ill, abused women, etc.)" name="family_details" >{{ old('family_details') }}</textarea>
                                     
                                     @error('family_details')
                                         <span class="text-danger">{{$message}}</span>
@@ -181,13 +182,13 @@
                                         <div style="border: 1px solid black" class="form-control">
 
                                      
-                                        <input type="radio" id="innovation" name="nature_payment" value="innovation">
+                                        <input type="radio" id="innovation" name="nature_payment" value="innovation" {{ old('nature_payment') == 'innovation' ? 'checked' : '' }}>
                                         <label for="innovation">Innovation (നവീകരണം)</label> &nbsp; &nbsp;
                                       
-                                        <input type="radio" id="option2" name="nature_payment" value="Additional convenience">
+                                        <input type="radio" id="option2" name="nature_payment" value="Additional convenience" {{ old('nature_payment') == 'Additional convenience' ? 'checked' : '' }}>
                                         <label for="Additional convenience">Additional convenience (അധിക സൗകര്യം)</label>&nbsp; &nbsp;
                                       
-                                        <input type="radio" id="option3" name="nature_payment" value="Completion">
+                                        <input type="radio" id="option3" name="nature_payment" value="Completion" {{ old('nature_payment') == 'Completion' ? 'checked' : '' }}>>
                                         <label for="Completion">Completion (പൂർത്തീകരണം)</label>&nbsp; &nbsp;
                                     </div>
                                     @error('marriage_count')
@@ -221,7 +222,7 @@
                                         
                                         
                                           
-                                          <textarea type="text" value="{{ old('payment_amount') }}"  class="form-control" placeholder="How much amount" name="payment_amount" ></textarea>
+                                          <textarea type="text" value="{{ old('payment_amount') }}"  class="form-control" placeholder="How much amount" name="payment_amount" >{{ old('payment_amount') }}</textarea>
                                           @error('payment_amount')
                                               <span class="text-danger">{{$message}}</span>
                                           @enderror
@@ -246,7 +247,7 @@
                                         
                                         
                                           </label>
-                                          <textarea type="text" value="{{ old('prove_eligibility ') }}"  class="form-control" placeholder="Other matters to prove eligibility for preference" name="prove_eligibility" ></textarea>
+                                          <textarea type="text" value="{{ old('prove_eligibility ') }}"  class="form-control" placeholder="Other matters to prove eligibility for preference" name="prove_eligibility" >{{ old('prove_eligibility ') }}</textarea>
                                     
                                     @error('prove_eligibility')
                                         <span class="text-danger">{{$message}}</span>
@@ -258,8 +259,10 @@
                                         &nbsp;  &nbsp;  &nbsp;
                                         
                                           </label>
-                                          <input type="file" class="form-control" accept="pdf/doc"  name="prove_eligibility_file" id="prove_eligibility_file" value="" placeholder=" " />
-                                  
+                                          <input type="file" class="form-control" accept="pdf/doc"  name="prove_eligibility_file" id="prove_eligibility_file" value="{{ old('prove_eligibility_file') }}" placeholder=" " />
+                                          @if(old('prove_eligibility_file'))
+                                          <p>Old File: {{ old('prove_eligibility_file') }}</p>
+                                      @endif
                                     @error('prove_eligibility_file')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -305,7 +308,7 @@
                                          @error('submitted_district')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="dist_name" id="dist_name" value="">
+                                        <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
                                     </div>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">TEO  </label>
@@ -315,7 +318,7 @@
                                         @error('submitted_teo')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="teo_name" id="teo_name" value="">
+                                        <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
                                     </div>                                 
                                 </div><br>
                             </div>
@@ -348,6 +351,21 @@
 </div>
 </div>
 <script type="text/javascript">
+ 
+ $(function() {
+    
+  
+    //   $("#last_payment_year").datepicker({
+    //     dateFormat: 'yy',
+    //     changeMonth: false,
+    //     changeYear: true,
+    //     onSelect: function (dateText, inst) {
+    //       var year = inst.selectedYear;
+    //       $(this).val(year);
+    //     }
+    //   });
+    });
+
     @if(!empty(old('current_district')))
     var val = document.getElementById("current_district").value;
     $.ajax({
@@ -396,7 +414,7 @@
             $("#submitted_teo").find('option').remove();
             $("#submitted_teo").append('<option value="" selected>Choose Teo</option>');
 
-            $.each(data.taluks, function (key, value) {
+            $.each(data.teos, function (key, value) {
                 var $opt = $('<option>');
                 $opt.val(value._id).text(value.teo_name);
                 $opt.appendTo('#submitted_teo');
@@ -454,7 +472,8 @@ $(document).ready(function() {
                           
 
                         });
-
+                        var oldValue = "{{ old('current_taluk') }}";
+                       $("#current_taluk").val(oldValue);
                     }
                 });
 
