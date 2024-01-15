@@ -136,7 +136,7 @@ class MedEngStudentFundController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'income' => 'required',
+           // 'income' => 'required',
             // 'income_certificate' => 'required',
             // 'caste' => 'required',
             // 'caste_certificate' => 'required',

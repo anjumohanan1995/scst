@@ -149,8 +149,13 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം 
                                     </label>
-                                    <input type="number" id="last_payment_year" class="form-control" name="last_payment_year" min="1000" max="9999" value="{{ old('last_payment_year') }}">
-                              
+                                    {{-- <input type="number" id="last_payment_year" class="form-control" name="last_payment_year" min="1000" max="9999" value="{{ old('last_payment_year') }}"> --}}
+                                    <select class="form-control last_payment_year" id="last_payment_year" name="last_payment_year" data-live-search="true" >
+                                        <option value="">Select Year</option>
+                                        @for ($year = date('Y'); $year >= date('Y') - 30; $year--)
+                                            <option value="{{ $year }}" {{ old('last_payment_year') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                                        @endfor
+                                    </select>
                                     @error('last_payment_year')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -222,7 +227,7 @@
                                         
                                         
                                           
-                                          <textarea type="text" value="{{ old('payment_amount') }}"  class="form-control" placeholder="How much amount" name="payment_amount" >{{ old('payment_amount') }}</textarea>
+                                          <input type="number" value="{{ old('payment_amount') }}"  class="form-control" placeholder="How much amount" name="payment_amount" >
                                           @error('payment_amount')
                                               <span class="text-danger">{{$message}}</span>
                                           @enderror
@@ -434,8 +439,9 @@
 
 
 $(document).ready(function() {
-   
+    // $('.selectpicker').selectpicker();
     $('input[name="payment_details"]').change(function() {
+        // alert('djhfggj');
       
         if ($(this).val() === 'yes') {
             $('#paymentDiv').show();

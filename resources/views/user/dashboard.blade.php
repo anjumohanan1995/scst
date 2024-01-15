@@ -239,7 +239,9 @@ a.btn-card {
                                                 <div class="card-desc">
                                                     <h3>Application 9 - <a href="MedicalEngineeringStudentFund">Applied({{ $data['studentFundCount'] }})</a></h3>
                                                     <p>മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ </p>
-                                                         <a href="MedicalEngineeringStudentFund/create" class="btn-card">Apply Now</a>   
+                                                         {{-- <a href="MedicalEngineeringStudentFund/create" class="btn-card">Apply Now</a>    --}}
+                                                         <a href="#" class="btn-card" data-toggle="modal" data-target="#studentFundModal">Apply Now</a>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -322,7 +324,38 @@ a.btn-card {
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="studentFundModal" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ul>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="MedicalEngineeringStudentFund/create" class="btn btn-primary"> Continue</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 

@@ -21,7 +21,7 @@
 		</div>
 		<!-- /breadcrumb -->
 
-	</div>
+
 <div class="main-content-body">
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
@@ -321,6 +321,7 @@
                    
                         </form>
                     </div>
+                </div>
         </div>
     </div>
 </div>
