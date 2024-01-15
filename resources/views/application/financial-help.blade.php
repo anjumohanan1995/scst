@@ -9,7 +9,9 @@
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			<div class="col-md-12">
 				
-                <h2>മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം </h2>
+                <h4 class="content-title mb-2">മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം </h4>
+               
+                <h4 class="content-title mb-2">Application form for grant of financial assistance from the Scheduled Tribes Development Department to Scheduled Tribe couples suffering hardships due to mixed marriages</h4>
 			
 			</div>
 
@@ -106,13 +108,13 @@
                                             <select id="hus_district" name="hus_district" class="form-control" >
                                                 <option value="">Select</option>
                                                     @foreach($districts as $district)
-                                                        <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                        <option value="{{$district->id}}" @if(old('hus_district') == $district->id) selected @endif >{{$district->name}}</option>
                                                     @endforeach
                                             </select>
                                             @error('hus_district')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
-                                            <input type="hidden" name="hus_district_name" id="hus_district_name" value="">
+                                            <input type="hidden" name="hus_district_name" id="hus_district_name" value="{{ old('hus_district_name') }}">
                                         </div>
                                         <div class="col-md-2 mb-2">
                                             <label class="form-label">Taluk/താലൂക്ക്  </label>
@@ -122,7 +124,7 @@
                                             @error('hus_taluk')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
-                                            <input type="hidden" name="hus_taluk_name" id="hus_taluk_name" value="">
+                                            <input type="hidden" name="hus_taluk_name" id="hus_taluk_name" value="{{ old('hus_taluk_name') }}" >
                                         </div>
                                         <div class="col-md-2 mb-2">
                                             <label class="form-label">Pincode/പിൻകോഡ്  </label>
@@ -136,13 +138,13 @@
                                             <select id="wife_district" name="wife_district" class="form-control" >
                                                 <option value="">Select</option>
                                                     @foreach($districts as $district)
-                                                        <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                        <option value="{{$district->id}}" @if(old('wife_district') == $district->id) selected @endif >{{$district->name}}</option>
                                                     @endforeach
                                             </select>
                                             @error('wife_district')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
-                                            <input type="hidden" name="wife_district_name" id="wife_district_name" value="">
+                                            <input type="hidden" name="wife_district_name" id="wife_district_name" value="{{ old('wife_district_name') }}">
                                         </div>
                                         <div class="col-md-2 mb-2">
                                             <label class="form-label">Taluk/താലൂക്ക്  </label>
@@ -152,7 +154,7 @@
                                             @error('wife_taluk')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
-                                            <input type="hidden" name="wife_taluk_name" id="wife_taluk_name" value="">
+                                            <input type="hidden" name="wife_taluk_name" id="wife_taluk_name"  value="{{ old('wife_taluk_name') }}">
                                         </div>
                                         <div class="col-md-2 mb-2">
                                             <label class="form-label">Pincode/പിൻകോഡ്  </label>
@@ -266,15 +268,15 @@
                                         
                                     </div><br>
 
-                                Marriage Details / വിവാഹത്തിന്റെ വിശദ വിവരങ്ങൾ <br>
+                                    Marriage Details / വിവാഹത്തിന്റെ വിശദ വിവരങ്ങൾ <br>
                                     
                                     <div class="row">
-                                    <div class="col-md-6 mb-6">
-                                            <label class="form-label">Age at Marriage/വിവാഹ സമയത്തെ പ്രായം (Husband / ഭർത്താവ് )</label>
-                                            <input type="number" value="{{ old('husband_age') }}"  class="form-control" placeholder="വിവാഹ സമയത്തെ പ്രായം" name="husband_age" />
-                                            @error('husband_age')
-                                                <span class="text-danger">{{$message}}</span>
-                                            @enderror
+                                        <div class="col-md-6 mb-6">
+                                                <label class="form-label">Age at Marriage/വിവാഹ സമയത്തെ പ്രായം (Husband / ഭർത്താവ് )</label>
+                                                <input type="number" value="{{ old('husband_age') }}"  class="form-control" placeholder="വിവാഹ സമയത്തെ പ്രായം" name="husband_age" />
+                                                @error('husband_age')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
 
                                         <div class="col-md-6 mb-6">
@@ -286,13 +288,11 @@
                                             @enderror
                                         </div>
 
-                                        
                                     </div><br>
 
                                     
                                     Was it a registered marriage/രജിസ്റ്റർ വിവാഹം ആയിരുന്നുവോ?
                                     <div class="row">
-
                                         <div class="col-md-6">
                                                 <label class="form-label">Yes/അതെ</label>
                                                 <input class="form-control" type="radio" name="register_marriage" value="Yes" {{ old('register_marriage') === 'Yes' ? 'checked' : '' }}>
@@ -334,7 +334,7 @@
                                 
                                 
                                     <div class="row">
-                                    <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <label class="form-label">Information on the document, if any, has been produced to prove the possibility of marriage/വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ ഹാജരാക്കിയിട്ടുണ്ടെങ്കിൽ അതിന്റെ വിവരം</label>
                                             <textarea class="form-control" placeholder="Details" name="certificate_details" >{{ old('certificate_details') }}</textarea>
                                         
@@ -382,9 +382,9 @@
                                     </div>
                                     
                                     <div class="row">
-                                    <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <label class="form-label">If the financial assistance is received, for what purpose it is intended to be spent/
-                                    ധനസഹായം ലഭിക്കുന്ന പക്ഷം എന്തു കാര്യത്തിനുവേണ്ടി ചെലവഴിക്കാനാണ് ഉദ്ദേശിക്കുന്നത് </label>
+                                            ധനസഹായം ലഭിക്കുന്ന പക്ഷം എന്തു കാര്യത്തിനുവേണ്ടി ചെലവഴിക്കാനാണ് ഉദ്ദേശിക്കുന്നത് </label>
                                             <textarea class="form-control" placeholder="Details" name="financial_assistance" >{{ old('financial_assistance') }}</textarea>
                                         
                                         </div>
@@ -398,45 +398,51 @@
                                         </div>
                                         
                                     </div><br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="form-label"> Place/സ്ഥലം</label>
+                                            <input type="text" class="form-control" placeholder="Place" name="place"  value="{{ old('place') }}"/>
+                                        </div>
+                                    </div><br>
 
                                 
                                     
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                                    <label class="form-label">Husband's Sign/ഭർത്താവിന്റെ ഒപ്പ് </label>
-                                                    <input type="file" class="form-control"  name="husband_sign" required />
-                                                    @error('husband_sign')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="col-md-6 mb-6">
-                                                    <label class="form-label">Wife's Sign/ ഭാര്യയുടെ ഒപ്പ് </label>
-                                                    <input type="file" class="form-control"  name="wife_sign" required />
-                                                    @error('wife_sign')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                    @enderror
-                                                </div>
-
+                                            <label class="form-label">Husband's Sign/ഭർത്താവിന്റെ ഒപ്പ് </label>
+                                            <input type="file" class="form-control"  name="husband_sign"  />
+                                            @error('husband_sign')
+                                                    <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-1 mb-1">
-                                                <input type="checkbox" id="wifeCheckbox" name="agree" value="Yes" required>
-                                            </div>
-                                            <div class="col-md-11 mb-11">
-                                                ശ്രീമാൻ <input type="text" class="form-control"  id="husband_name_new" required   value="{{ old('husband_name_new') }}"/> 
-                                                @error('husband_name_new')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                    @enderror
-                                                    ശ്രീമതി 
-                                                <input type="text" class="form-control"  id="wife_name_new" required value="{{ old('wife_name_new') }}"/>
-                                                @error('wife_name_new')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                    @enderror
-                                                എന്നിവരായ ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.
-                                            </div>
+
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Wife's Sign/ ഭാര്യയുടെ ഒപ്പ് </label>
+                                            <input type="file" class="form-control"  name="wife_sign"  />
+                                            @error('wife_sign')
+                                                    <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-1 mb-1">
+                                            <input type="checkbox" id="wifeCheckbox" name="agree" value="Yes" required>
+                                        </div>
+                                        <div class="col-md-11 mb-11">
+                                            {{-- ശ്രീമാൻ <input type="text" class="form-control"  id="husband_name_new" required   value="{{ old('husband_name_new') }}"/> 
+                                            @error('husband_name_new')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                ശ്രീമതി 
+                                            <input type="text" class="form-control"  id="wife_name_new" required value="{{ old('wife_name_new') }}"/>
+                                            @error('wife_name_new')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                @enderror   എന്നിവരായ --}}
+                                            ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.
+                                        </div>
+                                    </div>
     
                                 </div>
                             </div>
@@ -448,7 +454,7 @@
                                                     <select id="submitted_district" name="submitted_district" class="form-control" required>
                                                         <option value="">Select</option>
                                                             @foreach($districts as $district)
-                                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                                <option value="{{$district->id}}"  @if(old('submitted_district') == $district->id) selected @endif>{{$district->name}}</option>
                                                             @endforeach
                                                     </select>
                                                     @error('submitted_district')
@@ -457,7 +463,7 @@
                                                     <input type="hidden" name="dist_name" id="dist_name" value="">
                                                 </div>
                                                 <div class="col-md-6 mb-6">
-                                                    <label class="form-label">TEO  </label>
+                                                    <label class="form-label">TEO /ടി.ഇ.ഒ </label>
                                                     <select id="submitted_teo" name="submitted_teo" class="form-control" required>
                                                         <option value="">Choose TEO</option>
                                                     </select>                                 
@@ -488,7 +494,104 @@
         </div>
     </div>
 </div>
-<script>
+<script type="text/javascript">
+
+@if(!empty(old('hus_district')))
+    var val = document.getElementById("hus_district").value;
+    //alert(val);
+    $.ajax({
+        url: "{{url('district/fetch-taluk')}}",
+        type: "POST",
+        data: {
+            district_id: val,
+            _token: '{{csrf_token()}}'
+        },
+        success: function (data) {
+            $("#hus_taluk").find('option').remove();
+            $("#hus_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(data.taluks, function (key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+                $opt.appendTo('#hus_taluk');
+            });
+
+            // Set the selected value for permanent_taluk
+            var permanentTalukValue = "{{ old('hus_taluk') }}";
+            if (permanentTalukValue) {
+                $('#hus_taluk').val(permanentTalukValue);
+            }
+
+            // Refresh the selectpicker (if you are using it)
+            $('#hus_taluk').selectpicker('refresh');
+        }
+    });
+@endif
+
+@if(!empty(old('wife_district')))
+    var val = document.getElementById("wife_district").value;
+    //alert(val);
+    $.ajax({
+        url: "{{url('district/fetch-taluk')}}",
+        type: "POST",
+        data: {
+            district_id: val,
+            _token: '{{csrf_token()}}'
+        },
+        success: function (data) {
+            $("#wife_taluk").find('option').remove();
+            $("#wife_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(data.taluks, function (key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+                $opt.appendTo('#wife_taluk');
+            });
+
+            // Set the selected value for permanent_taluk
+            var permanentTalukValue = "{{ old('wife_taluk') }}";
+            if (permanentTalukValue) {
+                $('#wife_taluk').val(permanentTalukValue);
+            }
+
+            // Refresh the selectpicker (if you are using it)
+            $('#wife_taluk').selectpicker('refresh');
+        }
+    });
+@endif
+
+
+@if(!empty(old('submitted_district')))
+    var val = document.getElementById("submitted_district").value;
+    //alert(val);
+    $.ajax({
+        url: "{{url('district/fetch-taluk')}}",
+        type: "POST",
+        data: {
+            district_id: val,
+            _token: '{{csrf_token()}}'
+        },
+        success: function (data) {
+            $("#submitted_teo").find('option').remove();
+            $("#submitted_teo").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(data.taluks, function (key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+                $opt.appendTo('#submitted_teo');
+            });
+
+            // Set the selected value for permanent_taluk
+            var permanentTalukValue = "{{ old('submitted_teo') }}";
+            if (permanentTalukValue) {
+                $('#submitted_teo').val(permanentTalukValue);
+            }
+
+            // Refresh the selectpicker (if you are using it)
+            $('#submitted_teo').selectpicker('refresh');
+        }
+    });
+@endif
 $(document).ready(function() {
         // Attach an input event listener to the first textbox
         $('#husband_name').on('input', function() {
@@ -535,7 +638,7 @@ $(document).ready(function() {
 
     $('#hus_district').change(function(){
         var hus_district = this.options[this.selectedIndex].text;
-    document.getElementById('hus_district_name').value = hus_district;
+        document.getElementById('hus_district_name').value = hus_district;
         var val = document.getElementById("hus_district").value;
       
         $.ajax({
