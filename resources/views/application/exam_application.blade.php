@@ -125,7 +125,7 @@
                                             </div>
                                             <div class="col-md-4 mb-4">
                                                 <label class="form-label">Pincode / പിൻകോഡ് </label>
-                                                <input type="text" value="{{ old('pincode') }}" class="form-control"
+                                                <input type="number" value="{{ old('pincode') }}" class="form-control"
                                                     name="pincode" />
                                                 @error('pincode')
                                                     <span class="text-danger">{{ $message }}</span>
