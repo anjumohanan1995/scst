@@ -42,12 +42,21 @@ class HouseManagementController extends Controller
     {
         // dd($request->current_taluk);
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'name' => 'required|regex:/^[a-zA-Z]+$/',
             'submitted_district' => 'required',
             'submitted_teo' => 'required', 
+           
                  
         ]);
+        if ($request->input('payment_details') == 'yes') {
+            $validator->sometimes('payment_amount', 'required', function ($input) {
+                return $input->payment_details == 'yes';
+            });
         
+            $validator->sometimes('date_received', 'required', function ($input) {
+                return $input->payment_details == 'yes';
+            });
+        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -78,7 +87,9 @@ class HouseManagementController extends Controller
         }else{
             $eligibility_file = '';
         }
-      
+      if($request->payment_details==''){
+        $formData['payment_details']="no";
+      }
         $formData = $data;
        
       $formData['signature']= $signature;
@@ -245,6 +256,7 @@ $formattedDate = $currentDate->toDateString();
             'name' => $data['name'],
             'address' => @$data['address'],
             'panchayath' => @$data['panchayath'],
+            'ward_no' => @$data['ward_no'],
             'caste' => @$data['caste'],
             'annual_income' => @$data['annual_income'],
             'house_details' => $data['house_details'],
@@ -252,7 +264,9 @@ $formattedDate = $currentDate->toDateString();
             'last_payment_year' => @$data['last_payment_year'],
             'family_details' => @$data['family_details'],
             'nature_payment' => @$data['nature_payment'],
-            'payment_details' => $data['payment_details'],
+            'payment_details' => @$data['payment_details'],
+            'payment_amount' => $data['payment_amount'],
+            'date_received' => $data['date_received'],
             'prove_eligibility_file' => $data['prove_eligibility_file'],
             'prove_eligibility' => $data['prove_eligibility'],
             'place' => $data['place'],

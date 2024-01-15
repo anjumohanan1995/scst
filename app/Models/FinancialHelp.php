@@ -35,6 +35,23 @@ class FinancialHelp extends Eloquent
         'submitted_teo',
 
 
+      
+        'hus_income_before_marriage',
+        'wife_income_before_marriage',
+        'hus_income_after_marriage',
+        'wife_income_after_marriage',
+        'register_marriage',
+
+        'register_number',
+        'register_date',
+        'register_office_name',
+        'marriage_certificate',
+        
+        
+        
+
+
+
     ];
 
     public function User()

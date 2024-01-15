@@ -7,8 +7,9 @@
 		    <!-- breadcrumb -->
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 				<div class="col-xl-6">
-					<h4 class="content-title mb-2">പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
-                        ധനസഹായത്തിനുള്ള അപേക്ഷ 
+					<h4 class="content-title mb-2"> From the Scheduled Tribes Development Department for renovation of houses and provision and completion of additional facilities
+                        Application for financial assistance (പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
+                        ധനസഹായത്തിനുള്ള അപേക്ഷ) 
   </h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
