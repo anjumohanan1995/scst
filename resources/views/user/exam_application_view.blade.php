@@ -40,11 +40,16 @@
 
 
 
-                                    <h1
+                                    {{-- <h1
                                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
                                         പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ
                                         നവീകരണത്തിനും<br>അധികസൗകര്യങ്ങൾ ഏർപ്പെടുത്തുന്നതിനും പൂർത്തീകരണത്തിനുമുള്ള
                                         <br>ധനസഹായത്തിനുള്ള അപേക്ഷ
+
+                                    </h1> --}}
+                                    <h1
+                                        style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                        അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ
 
                                     </h1>
 
@@ -341,7 +346,7 @@
                             </div>
                         </div>
 
-            
+
 
                         @if (Auth::user()->role !== 'User')
                             <div class="col-sm-12 col-md-12 col-lg-4">
@@ -445,9 +450,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
-
-                            @endif
+                        @endif
 
 
 

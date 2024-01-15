@@ -8,6 +8,7 @@ use App\Models\ItiFund;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 class InstitutionController extends Controller
@@ -271,8 +272,10 @@ class InstitutionController extends Controller
 
 
             // Total records
-            $totalRecord = ItiFund::where('deleted_at',null);
-         
+            $inst=Institution::where('user_id',Auth::user()->id)->first();
+
+            $totalRecord = ItiFund::where('deleted_at',null)->where('current_institution',$inst->id);
+           // dd( $inst->id);
             if($name != ""){
                 $totalRecord->where('name','like',"%".$name."%");
             }
@@ -281,7 +284,7 @@ class InstitutionController extends Controller
             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-            $totalRecordswithFilte = ItiFund::where('deleted_at',null);
+            $totalRecordswithFilte = ItiFund::where('deleted_at',null)->where('current_institution',$inst->id);
         
             if($name != ""){
                $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -290,7 +293,7 @@ class InstitutionController extends Controller
             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
             // Fetch records
-            $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            $items = ItiFund::where('deleted_at',null)->where('current_institution',$inst->id)->orderBy($columnName,$columnSortOrder);
            
             if($name != ""){
                $items->where('name','like',"%".$name."%");
@@ -322,7 +325,7 @@ class InstitutionController extends Controller
                "income" => $income,
                "caste" => $caste,
                "created_at" => $created_at,
-               "edit" => '<div class="settings-main-icon"><a  href="' . route('institution.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+               "edit" => '<div class="settings-main-icon"><a  href="' . route('institution.show',$id) . '"><i class="fa fa-edit bg-info me-1"></i></a></div>'
 
            );
         }
@@ -335,5 +338,15 @@ class InstitutionController extends Controller
         );
 
         return response()->json($response);
+    }
+    public function updateItiDetails(Request $request,$id){
+      // dd($request->all());
+       $data=ItiFund::find($id);
+       $data->update([
+        "submitted_district" =>$request->submitted_district,
+        "submitted_teo" =>$request->submitted_teo,
+       ]);
+       return redirect()->route('adminInstitutionList')->with('status','Updated Successfully.');
+      
     }
 }

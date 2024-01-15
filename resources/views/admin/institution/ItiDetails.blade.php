@@ -218,7 +218,8 @@
                                                                 </div><br>
                                                
                                                     
-                                                        <form method="post" action="{{ route('updateItiDetails') }}">
+                                                        <form method="post" action="{{ route('updateItiDetails',@$itiFund->id) }}">
+                                                            @csrf
                                                             <div class="row">   
                                                                 <div class="col-md-6 mb-6">
                                                                     <label class="form-label">ജില്ല  </label>
@@ -244,9 +245,15 @@
                                                                     <input type="hidden" name="teo_name" id="teo_name" value="">
                                                                 </div>                                 
                                                             </div><br>
-                                                            <input type="submit" name="submit" value="update" class="btn btn-warning waves-effect waves-light float-end">>
-                                                            <a href="{{ route('adminInstitutionList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
-                                                  
+                                                            <div class="row">
+                                                       
+                                                                <div class="col-md-6 mb-6"><br>
+                                                                    <input type="submit" name="submit" value="update" class="btn btn-warning waves-effect waves-light ">
+                                                                    <a href="{{ route('adminInstitutionList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                                          
+                                                                </div>
+                                                                    </div>
+                                                        
                                                         </form>
                                                      </a>  
                                                             

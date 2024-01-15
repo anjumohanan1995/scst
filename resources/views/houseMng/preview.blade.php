@@ -8,8 +8,10 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			<div class="col-xl-9">
-				<h4 class="content-title mb-2">പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ                                     ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
-                    ധനസഹായത്തിനുള്ള അപേക്ഷ </h4>
+				<h4 class="content-title mb-2">
+                    Application for financial assistance from the Department of Scheduled Tribes Development for renovation and addition of facilities and completion of houses
+                  (  പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
+                    ധനസഹായത്തിനുള്ള അപേക്ഷ) </h4>
 			</div>
 			<div class="col-xl-3">
 			</div>
@@ -36,49 +38,63 @@
 						<div class="card-body">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
 								<div class="mb-4 main-content-label">
-                                    അപ്ലിക്കേഷൻ പ്രിവ്യൂ
+                                   Application Preview (അപ്ലിക്കേഷൻ പ്രിവ്യൂ)
                                     </div>
 								
                                    
           <table border="1" class="table">
             <tr> <td>
  
-                അപേക്ഷകന്റെ  പേര് </td><td><strong> {{ @$formData['name'] }} </strong></td>
+                Applicant's Name  (അപേക്ഷകന്റെ പേര്) </td><td><strong> {{ @$formData['name'] }} </strong></td>
              <td>
  
-                മേൽവിലാസം </td><td> <strong> {{ @$formData['address'] }} , {{ @$formData['address'] }}</strong> 
+               Address (മേൽവിലാസം) </td><td> <strong> {{ @$formData['address'] }} , {{ @$formData['address'] }}</strong> 
  
             </td>
             </tr>
             <tr> <td>
  
-                ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ </td><td><strong> {{ @$formData['panchayath'] }} </strong></td>
-             <td>
+                Grama Panchayat  (ഗ്രാമപഞ്ചായത്ത്)‌/ വാർഡ് നമ്പർ </td><td><strong> {{ @$formData['panchayath'] }} </strong></td>
+                <td>
  
-                അപേക്ഷകന്റെ ജാതി </td><td> <strong> {{ @$formData['caste'] }}</strong> 
- 
-            </td>
+                Ward No (വാർഡ് നമ്പർ )</td><td><strong> {{ @$formData['ward_no'] }} </strong></td>
+          
+               
             </tr>
            
                  
                 <tr>
                     <td>
-                        വാർഷിക വരുമാനം 
+ 
+                        Caste  (ജാതി) </td><td> <strong> {{ @$formData['caste'] }}</strong> 
+         
+                    </td>
+                    <td>
+                      Annual Income  (വാർഷിക വരുമാനം )
                     </td>
                     <td> 
                         {{ @$formData['annual_income'] }} 
                     </td>
-                    <td>
-                        ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും   </td><td> {{ @$formData['house_details'] }}
-                    </td>
+                    
                 </tr>
                 <tr>
+                    <td>
+                        Condition of the house for which financing is applied for and the year of sanction   (ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും )  </td><td> {{ @$formData['house_details'] }}
+                    </td>
                       <td>
  
-                        വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം </td><td> {{ @$formData['last_payment_year'] }}
+                        Year of completion of house work and receipt of final installment  ( വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം) </td><td> {{ @$formData['last_payment_year'] }}
  
                 </td>
+               
+               
+             </tr><tr>
                 <td>
+                    Family Status (Unmarried :
+                    Mother, female headed family, premature
+                    Those who had to become a widow, physically and mentally
+                    Those who are facing challenges, those who are terminally ill,
+                    women victims of atrocities etc.)<br>
                     കുടുംബത്തിന്റെ അവസ്ഥ  (അവിവാഹിതരായ :
                     അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
                     വിധവയാകേണ്ടി വന്നവർ , ശാരീരിക മാനസിക
@@ -88,37 +104,53 @@
                     <td> 
                         {{ @$formData['family_details'] }} 
                     </td>
-               
-             </tr><tr>
                       <td>
- 
+                        Nature of work for which financial assistance is sought (Innovation / Additional convenience / Completion)<br>
                         ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം 
-                                        (നവീകരണം ,അധിക സൗകര്യം / പൂർത്തീകരണം ) </td>
+                                        (നവീകരണം /അധിക സൗകര്യം / പൂർത്തീകരണം ) </td>
                     <td>@if(@$formData['nature_payment'] == 'innovation') 
                         
-                        നവീകരണം
+                        Innovation (നവീകരണം)
                         @elseif(@$formData['nature_payment'] == 'Additional convenience') 
-                        അധിക സൗകര്യം
+                        Additional convenience (അധിക സൗകര്യം)
                         @elseif(@$formData['nature_payment'] == 'Completion') 
-                        പൂർത്തീകരണം
+                        Completion (പൂർത്തീകരണം)
                         @endif
                        
  
                 </td>
-                <td>
+                
+                     </tr>
+                     
+                     <tr>
+                        <td>
+                            Has funding been received from other government departments/agencies or local self-government bodies for the specified purpose ?<br>
+                            നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
+                            ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
+                            ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ ?   
+                            </td><td>  
+                                @if(@$formData['payment_details'] =='yes')Yes ( അതെ)
+                                 @else 
+                                 No (ഇല്ല)
+                                 @endif 
+        
+                    </td>
+                    @if(@$formData['payment_details'] =='yes')
+                    <td>
  
-                    നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
-                    ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
-                    ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ എന്നുള്ള  വിവരം  
-                    (ഉണ്ടെങ്കിൽ എത്ര തുക ,ലഭിച്ച തീയതി )</td><td> {{ @$formData['payment_details'] }}
-
-            </td>
-                     </tr><tr>
+                        Amount and date of receipt (എത്ര തുക ,ലഭിച്ച തീയതി )</td><td>  
+                           {{ @$formData['payment_amount'] }} , {{ @$formData['date_received'] }}
+                           
+    
+                </td>  @endif 
+                     </tr>
+                     <tr>
                    
                 <td>
- 
-                    മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
-                    മറ്റു സംഗതികൾ </td>
+                    Other matters to prove eligibility for preference
+
+                   ( മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
+                    മറ്റു സംഗതികൾ) </td>
                     
                         <td> {{ @$formData['prove_eligibility'] }}
                             @if($formData['prove_eligibility_file'])
@@ -127,7 +159,7 @@
                       
                     </td>
                     <td>
-                        സ്ഥലം
+                      Place  (സ്ഥലം)
                     </td>
                     <td> 
                         {{ @$formData['place'] }} 
@@ -139,12 +171,12 @@
                 <tr>
                    
                     <td>
-                        തീയതി  </td><td> @if($formData['date'])
+                      Date  (തീയതി)  </td><td> @if($formData['date'])
                             {{ date('d-m-Y', strtotime(@$formData['date'])) }}
                         @endif
                     </td>
                     <td>
-                        അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </td><td>  @if($formData['signature'])
+                        Applicant's Signature/Fingerprint ( അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം) </td><td>  @if($formData['signature'])
                             <iframe src="{{ asset('homeMng/' . @$formData['signature']) }}" width="400" height="200"></iframe>
                             @endif
                     </td>
