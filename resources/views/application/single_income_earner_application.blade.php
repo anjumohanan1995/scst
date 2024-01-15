@@ -37,9 +37,9 @@
 
                                     <h5 class="form-label">part 1</h5>
                                     <br>
-                                    <h4>അപേക്ഷകനെ യെ സംബന്ധിച്ച വിവരങ്ങൾ </h4>
+                                    <h4> Information about the applicant / അപേക്ഷകനെ യെ സംബന്ധിച്ച വിവരങ്ങൾ </h4>
                                     <br>
-                                    <label class="form-label">പേര്
+                                    <label class="form-label"> Name / പേര് 
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -52,11 +52,11 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <label class="form-label">ജാതി, ( തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം ഹാജരാക്കണം )
+                                    <label class="form-label"> caste (Certificate from Tehsildar should be produced) /  ജാതി, ( തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം ഹാജരാക്കണം )
                                     </label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            ജാതി
+                                            caste / ജാതി
                                             <input type="text" value="{{ old('applicant_caste') }}" class="form-control"
                                                 placeholder="ജാതി" name="applicant_caste" />
                                             @error('applicant_caste')
@@ -64,7 +64,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6">
-                                            തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം അപ്‌ലോഡ് ചെയുക
+                                            Certificate from Tehsildar / തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('caste_certificate') }}"
                                                 class="form-control" placeholder="" name="caste_certificate" />
                                             @error('caste_certificate')
@@ -77,7 +77,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
 
-                                            <label class="form-label">മേൽവിലാസം </label>
+                                            <label class="form-label"> Address / മേൽവിലാസം </label>
                                             <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="മേൽവിലാസം" name="address"></textarea>
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -88,7 +88,7 @@
 
                                     <div class="row">
                                         <div class="col-md-4 mb-4">
-                                            <label class="form-label">ജില്ല </label>
+                                            <label class="form-label">District / ജില്ല </label>
                                             <select id="district" name="district" class="form-control">
                                                 <option value="">Select</option>
                                                 @foreach ($districts as $district)
@@ -101,7 +101,7 @@
                                             <input type="hidden" name="district_name" id="district_name" value="">
                                         </div>
                                         <div class="col-md-4 mb-4">
-                                            <label class="form-label">താലൂക്ക് </label>
+                                            <label class="form-label">Taluk / താലൂക്ക് </label>
                                             <select id="taluk" name="taluk" class="form-control">
                                                 <option value="">Choose Taluk</option>
                                             </select>
@@ -111,7 +111,7 @@
                                             <input type="hidden" name="taluk_name" id="taluk_name" value="">
                                         </div>
                                         <div class="col-md-4 mb-4">
-                                            <label class="form-label">പിൻകോഡ് </label>
+                                            <label class="form-label">Pincode / പിൻകോഡ് </label>
                                             <input type="text" value="{{ old('pincode') }}" class="form-control"
                                                 name="pincode" />
                                             @error('pincode')
@@ -120,7 +120,7 @@
                                         </div>
                                     </div><br>
 
-                                    <label class="form-label">അയാളും ഉള്ള ബന്ധം മരണപ്പെട്ടയാളുമായുള്ള ബന്ധം
+                                    <label class="form-label">relation to the deceased person / മരണപ്പെട്ടയാളുമായുള്ള ബന്ധം
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -134,11 +134,11 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <label class="form-label">ആധാർ നം (പകർപ്പ് സഹിതം)
+                                    <label class="form-label"> Aadhar No. (submit the copy) / ആധാർ നം (പകർപ്പ് സഹിതം)
                                     </label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            ആധാർ നം
+                                            Aadhar No. / ആധാർ നം
                                             <input type="text" value="{{ old('applicant_aadhar_no') }}"
                                                 class="form-control" placeholder="ആധാർ നം" name="applicant_aadhar_no" />
                                             @error('applicant_aadhar_no')
@@ -146,7 +146,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6">
-                                            പകർപ്പ് സഹിതം അപ്‌ലോഡ് ചെയുക
+                                            Upload Aadhar card image / പകർപ്പ് സഹിതം അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('adhaar_copy') }}"
                                                 class="form-control" placeholder="ആധാർ നം"
                                                 name="adhaar_copy" />
@@ -158,7 +158,7 @@
                                     <br>
 
                                     <label class="form-label">
-                                        ഫോൺ നമ്പർ
+                                        Phone No. / ഫോൺ നമ്പർ
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -171,11 +171,11 @@
                                     </div>
                                     <br>
 
-                                    <label class="form-label">ബാങ്ക് അക്കൗണ്ട് വിവരങ്ങൾ (പകർപ്പ് സഹിതം)
+                                    <label class="form-label">Bank account details / ബാങ്ക് അക്കൗണ്ട് വിവരങ്ങൾ (പകർപ്പ് സഹിതം)
                                     </label>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label class="">ബാങ്ക് അക്കൗണ്ട് നം </label>
+                                            <label class=""> Account number / ബാങ്ക് അക്കൗണ്ട് നം </label>
                                             <input type="text" value="{{ old('bank_account_no') }}"
                                                 class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട്  "
                                                 name="bank_account_no" />
@@ -184,7 +184,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="">ബാങ്ക് അക്കൗണ്ട് IFSC നം</label>
+                                            <label class="">Branch IFSC code / ബാങ്ക് അക്കൗണ്ട് IFSC നം</label>
                                             <input type="text" value="{{ old('bank_account_ifsc') }}"
                                                 class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
                                                 name="bank_account_ifsc" />
@@ -193,7 +193,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="">ബാങ്ക് അക്കൗണ്ട് പകർപ്പ് അപ്‌ലോഡ് ചെയുക </label>
+                                            <label class="">Upload the copy of passbook / ബാങ്ക് അക്കൗണ്ട് പകർപ്പ് അപ്‌ലോഡ് ചെയുക </label>
                                             <input type="file" value="{{ old('passbook_copy') }}"
                                                 class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
                                                 name="passbook_copy" />
@@ -208,10 +208,10 @@
                                     <h5 class="form-label">part 2</h5>
 
                                     <br>
-                                    <h4>മരണപ്പെട്ടയാളെ സംബന്ധിച്ചു വിവരങ്ങൾ</h4>
+                                    <h4> Information about the deceased / മരണപ്പെട്ടയാളെ സംബന്ധിച്ചു വിവരങ്ങൾ</h4>
                                     <br>
 
-                                    <label class="form-label">പേര്
+                                    <label class="form-label"> Name / പേര്
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -226,7 +226,7 @@
                                     </div>
                                     <br>
 
-                                    <label class="form-label">ജാതി
+                                    <label class="form-label">Caste / ജാതി
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -240,7 +240,7 @@
                                     <br>
 
 
-                                    <label class="form-label">ജനന തീയതി
+                                    <label class="form-label"> Date of birth / ജനന തീയതി
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -252,11 +252,11 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <label class="form-label">മരണ തീയതി (മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് ഹാജരാക്കുക )
+                                    <label class="form-label">Date of Death (submit the death certificate) / മരണ തീയതി (മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് ഹാജരാക്കുക )
                                     </label>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            മരണ തീയതി
+                                            Date of death / മരണ തീയതി
                                             <input type="date" value="{{ old('date_of_death') }}"
                                                 class="form-control" placeholder="മരണ തീയതി " name="date_of_death" />
                                             @error('date_of_death')
@@ -264,7 +264,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
-                                            വയസ്സ്
+                                           Age / വയസ്സ്
                                             <input type="text" value="{{ old('deceased_person_age') }}"
                                                 class="form-control" placeholder="വയസ്സ് " name="deceased_person_age" />
                                             @error('deceased_person_age')
@@ -272,7 +272,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
-                                            മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
+                                           Upload the death certificate image / മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('death_certificate') }}"
                                                 class="form-control" placeholder="വയസ്സ് "
                                                 name="death_certificate" />
@@ -282,7 +282,7 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <label class="form-label">മരണ കാരണം
+                                    <label class="form-label"> Reason of death / മരണ കാരണം
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">

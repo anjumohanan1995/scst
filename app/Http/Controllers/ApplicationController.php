@@ -547,7 +547,10 @@ class ApplicationController extends Controller
     public function examApplicationPreview(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'student_name' => 'required']
+            'student_name' => 'required',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required'
+            ]
            
         );
         if ($validator->fails()) {
