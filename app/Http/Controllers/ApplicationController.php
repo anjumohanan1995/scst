@@ -258,16 +258,18 @@ class ApplicationController extends Controller
 
         $data =Auth::user();
         $districts = District::get();
-        return view('application.financial-help',compact('data','districts'));
+        return view('application.financial-help',compact('data','districts')); 
 
     }
 
     public function financialHelpStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'husband_address' => 'required',
+            'husband_name' => 'required',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',  
+            'wife_name' => 'required',
+            
             ]
            
         );
@@ -302,9 +304,27 @@ class ApplicationController extends Controller
         }else{
             $wife_sign = '';
         }
-        $data = $request->all();
 
+
+        if ($request->hasfile('marriage_certificate')) {
+
+            $image = $request->marriage_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/marriage_certificate'), $imgfileName);
+
+            $marriage_certificate = $imgfileName;
+
+        }else{
+            $marriage_certificate = '';
+        }
+
+
+
+        
+        $data = $request->all();
         $formData = $data;
+        $formData['marriage_certificate']= $marriage_certificate;
         $formData['husband_sign']= $husband_sign;
         $formData['wife_sign']= $wife_sign;
 
@@ -338,7 +358,7 @@ class ApplicationController extends Controller
             'hus_work_after_marriage' => $data['hus_work_after_marriage'],
             'husband_age' => $data['husband_age'],
             'wife_age' =>$data['wife_age'],
-            'register_details' => $data['register_details'],
+           'register_details' => $data['register_details'],
             'certificate_details' => $data['certificate_details'],
             'apart_for_any_period' => @$data['apart_for_any_period'],
             'duration' => $data['duration'],
@@ -353,6 +373,15 @@ class ApplicationController extends Controller
             'husband_sign' =>@$data['husband_sign'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
+            'hus_income_before_marriage' => $data['hus_income_before_marriage'],
+            'wife_income_before_marriage' => $data['wife_income_before_marriage'],
+            'hus_income_after_marriage' => $data['hus_income_after_marriage'],
+            'wife_income_after_marriage' => $data['wife_income_after_marriage'],
+            'register_marriage' => $data['register_marriage'],
+           // 'register_number' => $data['register_number'],
+            'register_date' => $data['register_date'],
+            'register_office_name' => $data['register_office_name'],
+            'marriage_certificate' => $data['marriage_certificate'],
             'status' =>0
         ]);
 
@@ -522,7 +551,7 @@ class ApplicationController extends Controller
            
         );
         if ($validator->fails()) {
-            // Captcha validation failed
+        
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
@@ -543,9 +572,6 @@ class ApplicationController extends Controller
         $formData['signature']= $signature;
 
         return view('application.exam_application_preview', compact('formData'));
-
-
-
         
     }
     public function examApplicationStore(Request $request)
@@ -563,9 +589,12 @@ class ApplicationController extends Controller
             'district' => @$data['district'],
             'taluk' => @$data['taluk'],
             'pincode' => @$data['pincode'],
-            'address' => $data['address'],
-            'relation' => $data['relation'],
-            'mother_name' => $data['mother_name'],
+            'address' => @$data['address'],
+            'relation' => @$data['relation'],
+            'mother_name' => @$data['mother_name'],
+
+            'birth_district' => $data['birth_district'],
+            'age' => $data['age'],
             
             'annual_income' => $data['annual_income'],
             'occupation_parent' => $data['occupation_parent'],
@@ -1051,10 +1080,14 @@ class ApplicationController extends Controller
             'family_details' => $data['family_details'],
             'caste' => $data['caste'],
             'caste_certificate' => $data['caste_certificate'],
-            'name_and_address_fiancee' => $data['name_and_address_fiancee'],
-            'relation_with_applicant' => $data['relation_with_applicant'],
-            'marriage_count' =>$data['marriage_count'],
-            'is_widow' => $data['is_widow'],
+            'fiancee_name' => @$data['fiancee_name'],
+            'fiancee_address' => @$data['fiancee_address'],
+            'fiancee_district' => @$data['fiancee_district'],
+            'fiancee_taluk' => @$data['fiancee_taluk'],
+            'fiancee_pincode' => @$data['fiancee_pincode'],
+            'relation_with_applicant' => @$data['relation_with_applicant'],
+            'marriage_type' =>@$data['marriage_type'],
+            'is_widow' => @$data['is_widow'],
             'parent_occupation' => $data['parent_occupation'],
             'annual_income' => $data['annual_income'],
             'income_certificate' => $data['income_certificate'],
@@ -1067,8 +1100,16 @@ class ApplicationController extends Controller
             'land_alienated_details' => $data['land_alienated_details'],
             'outcast_parent_details' => $data['outcast_parent_details'],
             'remarried_parent_details' => $data['remarried_parent_details'],
-            'groom_name_and_address' => $data['groom_name_and_address'],
-            'name_and_address_groom_parent' => $data['name_and_address_groom_parent'],
+            'groom_name' => @$data['groom_name'],
+            'groom_address' => @$data['groom_address'],
+            'groom_district' => @$data['groom_district'],
+            'groom_taluk' => @$data['groom_taluk'],
+            'groom_pincode' => @$data['groom_pincode'],
+            'groom_parent_name' => @$data['groom_parent_name'],
+            'groom_parent_address' => @$data['groom_parent_address'],
+            'groom_parent_district' => @$data['groom_parent_district'],
+            'groom_parent_taluk' => @$data['groom_parent_taluk'],
+            'groom_parent_pincode' => @$data['groom_parent_pincode'],
             'financial_assistance_details' => $data['financial_assistance_details'],
             'place' => $data['place'],
             'date' => date('d-m-Y'),

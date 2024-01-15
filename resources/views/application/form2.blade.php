@@ -8,7 +8,9 @@
             <!-- breadcrumb -->
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
 
-                <h4 class="content-title mb-2"> ജനനി-ജനനി -ജന്മരക്ഷ പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി അപേക്ഷഫോറം</h4>
+                <h4 class="content-title mb-2"> ജനനി-ജനനി -ജന്മരക്ഷ പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി അപേക്ഷഫോറം <br>
+                    Janani-Janani -Janamraksha Matrishukulyam -Maternal Child Protection Scheme Application Form
+                </h4>
 
 
                 @if ($message = Session::get('error'))
@@ -20,7 +22,7 @@
             </div>
             <!-- /breadcrumb -->
 
-        </div>
+        
         <div class="main-content-body">
             <div class="row row-sm mt-4">
                 <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
@@ -34,7 +36,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">പേര് </label>
+                                            <label class="form-label">പേര് / Name </label>
                                             <input type="text" value="{{ old('name') }}" class="form-control"
                                                 placeholder="പേര്" name="name" />
                                             @error('name')
@@ -42,7 +44,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">മേൽവിലാസം </label>
+                                            <label class="form-label">മേൽവിലാസം / Address </label>
                                             <textarea type="text" value="{{ old('address') }}" class="form-control" name="address"></textarea>
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -51,7 +53,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-4">
-                                            <label class="form-label">ജില്ല </label>
+                                            <label class="form-label">ജില്ല / District</label>
                                             <select id="district" name="district" class="form-control">
                                                 <option value="">Select</option>
                                                 @foreach ($districts as $district)
@@ -64,7 +66,7 @@
                                             <input type="hidden" name="district_name" id="district_name" value="">
                                         </div>
                                         <div class="col-md-4 mb-4">
-                                            <label class="form-label">താലൂക്ക് </label>
+                                            <label class="form-label">താലൂക്ക് / Taluk </label>
                                             <select id="taluk" name="taluk" class="form-control">
                                                 <option value="">Choose Taluk</option>
                                             </select>
@@ -74,7 +76,7 @@
                                             <input type="hidden" name="taluk_name" id="taluk_name" value="">
                                         </div>
                                         <div class="col-md-4 mb-4">
-                                            <label class="form-label">പിൻകോഡ് </label>
+                                            <label class="form-label">പിൻകോഡ് / Pincode</label>
                                             <input type="text" value="{{ old('pincode') }}" class="form-control"
                                                 name="pincode" />
                                             @error('pincode')
@@ -84,7 +86,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">വയസ് </label>
+                                            <label class="form-label">വയസ് / Age </label>
                                             <input type="number" value="{{ old('age') }}" class="form-control"
                                                 name="age" />
                                             @error('age')
@@ -92,7 +94,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">ജനനതീയതി </label>
+                                            <label class="form-label">ജനനതീയതി /Date Of Birth </label>
                                             <input type="date" class="form-control" name="dob" id="dob"
                                                 value="" />
                                             @error('dob')
@@ -102,7 +104,7 @@
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">ഭർത്താവിന്റെ പേര് </label>
+                                            <label class="form-label">ഭർത്താവിന്റെ പേര് / Husband's Name</label>
                                             <input type="text" class="form-control" name="hus_name" id="hus_name"
                                                 value="" placeholder="ഭർത്താവിന്റെ പേര് " />
                                             @error('hus_name')
@@ -110,7 +112,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">സമുദായം / ജാതി </label>
+                                            <label class="form-label">സമുദായം / ജാതി (Community / Caste) </label>
                                             <input type="text" class="form-control" name="caste" id="caste"
                                                 value="" placeholder="സമുദായം / ജാതി " />
                                             @error('Caste')
@@ -120,7 +122,7 @@
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">വില്ലേജ് </label>
+                                            <label class="form-label">വില്ലേജ് / Village </label>
                                             <input type="text" class="form-control" name="village" id="village"
                                                 value="" placeholder="വില്ലേജ്" />
                                             @error('village')
@@ -128,7 +130,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">എത്രാമത്തെ പ്രസവം </label>
+                                            <label class="form-label">എത്രാമത്തെ പ്രസവം / How many births? </label>
                                             <input type="number" class="form-control" name="births" id="births"
                                                 value="" placeholder="എത്രാമത്തെ പ്രസവം" />
                                             @error('births')
@@ -138,20 +140,20 @@
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി </label>
+                                            <label class="form-label">പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി / Expected date of delivery </label>
                                             <input type="date" class="form-control" name="expected_date_of_delivery"
                                                 id="expected_date_of_delivery" value=""
-                                                placeholder="പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി" />
+                                                placeholder="" />
                                             @error('expected_date_of_delivery')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">ഗർഭ /പ്രസവ ശുശ്രുഷക്ക് ആശ്രയിക്കുന്ന ആശുപത്രി
-                                                /കുടുംബക്ഷേമ കേന്ദ്രം </label>
+                                                /കുടുംബക്ഷേമ കേന്ദ്രം / Dependent hospital/family welfare center for pregnancy/antenatal care</label>
                                             <input type="text" class="form-control" name="dependent_hospital"
                                                 id="dependent_hospital" value=""
-                                                placeholder="ഗർഭ /പ്രസവ ശുശ്രുഷക്ക് ആശ്രയിക്കുന്ന ആശുപത്രി /കുടുംബക്ഷേമ കേന്ദ്രം" />
+                                                placeholder="" />
                                             @error('dependent_hospital')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -159,17 +161,17 @@
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">സ്ഥലം </label>
+                                            <label class="form-label">സ്ഥലം / Place </label>
                                             <input type="text" class="form-control" name="place" id="place"
-                                                value="" placeholder="സ്ഥലം" />
+                                                value="" placeholder="" />
                                             @error('place')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ് </label>
+                                            <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ് / Applicant's signature</label>
                                             <input type="file" class="form-control" name="signature" id="signature"
-                                                value="" placeholder="അപേക്ഷകന്റെ ഒപ്പ് " />
+                                                value="" placeholder="" />
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -183,7 +185,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">ജില്ല </label>
+                                        <label class="form-label">ജില്ല / District </label>
                                         <select id="submitted_district" name="submitted_district" class="form-control">
                                             <option value="">Select</option>
                                             @foreach ($districts as $district)
@@ -196,7 +198,7 @@
                                         <input type="hidden" name="dist_name" id="dist_name" value="">
                                     </div>
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">TEO </label>
+                                        <label class="form-label">ടി.ഇ.ഒ / TEO </label>
                                         <select id="submitted_teo" name="submitted_teo" class="form-control">
                                             <option value="">Choose TEO</option>
                                         </select>
@@ -227,6 +229,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <script>
         $('#district').change(function() {
