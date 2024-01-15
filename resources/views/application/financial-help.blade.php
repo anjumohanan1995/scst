@@ -39,7 +39,7 @@
                                         
                                         
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label"> അപേക്ഷകന്റെ പേര് (Husband / ഭർത്താവ്) </label>
+                                            <label class="form-label">Applicant's Name/ അപേക്ഷകന്റെ പേര് (Husband / ഭർത്താവ്) </label>
                                             <input type="text" value="{{ old('husband_name') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ പേര് (Husband / ഭർത്താവ്)" name="husband_name" id="husband_name" />
                                             @error('husband_name')
                                                 <span class="text-danger">{{$message}}</span>
@@ -47,7 +47,7 @@
                                         </div>
 
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label"> അപേക്ഷകന്റെ പേര് (Wife / ഭാര്യ ) </label>
+                                            <label class="form-label">Applicant's Name/ അപേക്ഷകന്റെ പേര് (Wife / ഭാര്യ ) </label>
                                             <input type="text" value="{{ old('wife_name') }}" class="form-control" placeholder="അപേക്ഷകന്റെ പേര് (Wife / ഭാര്യ )" name="wife_name" id="wife_name" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('wife_name')
@@ -62,7 +62,7 @@
                                         
                                         
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">അപേക്ഷകന്റെ പൂർണ്ണമേൽവിലാസം (Husband / ഭർത്താവ്) </label>
+                                            <label class="form-label">Applicant's full Address/അപേക്ഷകന്റെ പൂർണ്ണമേൽവിലാസം (Husband / ഭർത്താവ്) </label>
                                             <textarea value="{{ old('husband_address') }}"  class="form-control" placeholder="Husband Address" name="husband_address" ></textarea>
                                             @error('husband_address')
                                                 <span class="text-danger">{{$message}}</span>
@@ -70,7 +70,7 @@
                                         </div>
 
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">അപേക്ഷകന്റെ പൂർണ്ണമേൽവിലാസം (Wife / ഭാര്യ)  </label>
+                                            <label class="form-label">Applicant's full Address/അപേക്ഷകന്റെ പൂർണ്ണമേൽവിലാസം (Wife / ഭാര്യ)  </label>
                                             <textarea value="{{ old('wife_address') }}" class="form-control" placeholder="Wife Address" name="wife_address" ></textarea>
                                             <span id="nameError" class="text-danger"></span>
                                             @error('wife_address')
@@ -83,7 +83,7 @@
                                     
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">വിവാഹത്തിനുമുമ്പുള്ള പൂർണ്ണ  മേൽവിലാസം (Husband / ഭർത്താവ് )</label>
+                                            <label class="form-label">Full Address Before Marriage/വിവാഹത്തിനുമുമ്പുള്ള പൂർണ്ണ  മേൽവിലാസം (Husband / ഭർത്താവ് )</label>
                                             <textarea value="{{ old('husband_address_old') }}"  class="form-control" placeholder="Husband Address" name="husband_address_old"  ></textarea>
                                             @error('husband_address_old')
                                                 <span class="text-danger">{{$message}}</span>
@@ -91,7 +91,7 @@
                                         </div>
 
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">വിവാഹത്തിനുമുമ്പുള്ള പൂർണ്ണ  മേൽവിലാസം(Wife / ഭാര്യ) </label>
+                                            <label class="form-label">Full Address Before Marriage/വിവാഹത്തിനുമുമ്പുള്ള പൂർണ്ണ  മേൽവിലാസം(Wife / ഭാര്യ) </label>
                                             <textarea value="{{ old('wife_address_old') }}" class="form-control" placeholder="Wife Address" name="wife_address_old" ></textarea>
                                             <span id="nameError" class="text-danger"></span>
                                             @error('wife_address_old')
@@ -203,7 +203,7 @@
                                     <div class="row">
 
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">വിവാഹത്തിനുമുമ്പുള്ള തൊഴിൽ /Employment before marriage (Wife / ഭാര്യ) </label>
+                                            <label class="form-label">Employment before marriage/വിവാഹത്തിനുമുമ്പുള്ള തൊഴിൽ  (Wife / ഭാര്യ) </label>
                                             <input type="text" value="{{ old('wife_work_before_marriage') }}" class="form-control" placeholder="വിവാഹത്തിനുമുമ്പുള്ള തൊഴിൽ " name="wife_work_before_marriage" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('wife_work_before_marriage')
@@ -212,7 +212,7 @@
                                         </div>
 
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">വിവാഹത്തിനുമുമ്പുള്ള മാസവരുമാനം/Monthly income before marriage (Wife / ഭാര്യ) </label>
+                                            <label class="form-label">Monthly income before marriage/വിവാഹത്തിനുമുമ്പുള്ള മാസവരുമാനം(Wife / ഭാര്യ) </label>
                                             <input type="number" value="{{ old('wife_income_before_marriage') }}" class="form-control" placeholder="വിവാഹത്തിനുമുമ്പുള്ള മാസവരുമാനം " name="wife_income_before_marriage" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('wife_income_before_marriage')
@@ -444,7 +444,7 @@
                                         <div class="card-body">
                                             <div class="row">   
                                                 <div class="col-md-6 mb-6">
-                                                    <label class="form-label">ജില്ല  </label>
+                                                    <label class="form-label">District/ജില്ല  </label>
                                                     <select id="submitted_district" name="submitted_district" class="form-control" required>
                                                         <option value="">Select</option>
                                                             @foreach($districts as $district)
