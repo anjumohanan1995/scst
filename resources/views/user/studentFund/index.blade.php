@@ -7,7 +7,7 @@
 		    <!-- breadcrumb -->
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 				<div class="col-xl-6">
-					<h4 class="content-title mb-2">മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
+					<h4 class="content-title mb-2">Application for grant of financial assistance towards initial expenses for Scheduled Caste students in Medical / Engineering Courses<br>മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
 
   </h4>
                     <nav aria-label="breadcrumb">
@@ -84,7 +84,8 @@
                                             </th>
                                             <th>ജാതി/ മതം 
                                             </th>
-                                            <th>തീയതി   </th>
+                                            <th>തീയതി      </th>
+                                            <th>സമയം</th>
                                             <th >ആക്ഷൻ</th>
 
 
@@ -200,8 +201,9 @@ $(document).on("click",".deleteItem",function() {
 				{ data: 'course_name' },
                 { data: 'income' },
 				{ data: 'caste' },
-                
-                { data: 'created_at', visible: false },
+                { data: 'date' },
+                { data: 'time' },
+                // { data: 'created_at', visible: false },
 
                 { data: 'edit' }
 

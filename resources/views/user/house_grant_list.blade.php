@@ -77,7 +77,8 @@
                                             </th>
                                             <th>ജാതി </th>
                                             <th>സ്ഥലം    </th>
-                                            <th>തീയതി   </th>
+                                            <th>തീയതി      </th>
+                                            <th>സമയം</th>
                                             <th >ആക്ഷൻ</th>
 
 
@@ -184,8 +185,8 @@ $(document).on("click",".deleteItem",function() {
 				{ data: 'panchayath' },
 				{ data: 'caste' },
                 { data: 'place' },
-                { data: 'created_at', visible: false },
-
+                { data: 'date'},
+                { data: 'time'},
                 { data: 'edit' }
 
 

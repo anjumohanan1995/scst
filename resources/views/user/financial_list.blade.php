@@ -102,6 +102,7 @@
                                             <th>Marriage Certification </th>
                                             <th>Husband Caste</th>
                                             <th>Wife Caste</th> 
+                                             <th> Date & Time</th>
                                             <th>Created Date</th>
                                             <th >Action</th>
 
@@ -211,7 +212,7 @@ $(document).on("click",".deleteItem",function() {
                 { data: 'husband_caste' },
 				{ data: 'wife_caste' },
                 { data: 'created_at', visible: false },
-
+                 { data: 'date' },
                 { data: 'edit' }
 
 
