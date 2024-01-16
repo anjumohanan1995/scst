@@ -24,7 +24,16 @@ class SingleIncomeEarnerController extends Controller
     public function singleIncomeEarnerPreview(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'applicant_name' => 'required']
+            'applicant_name' => 'required',
+            'caste_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'adhaar_copy' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'passbook_copy' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'death_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'ration_card' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'income_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'signature' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'past_job_document' => 'nullable|file|mimes:jpg,pdf|max:2048'
+            ]
            
         );
         if ($validator->fails()) {
@@ -118,6 +127,19 @@ class SingleIncomeEarnerController extends Controller
         }else{
             $signature = '';
         }
+        if ($request->hasfile('past_job_document')) {
+
+            $image = $request->past_job_document;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('applications/past_job_document'), $imgfileName);
+
+            $past_job_document = $imgfileName;
+
+        }else{
+            $past_job_document = '';
+        }
+
         $formData = $data;
         $formData['caste_certificate']= $caste_certificate;
         $formData['adhaar_copy']= $adhaar_copy;
@@ -125,6 +147,7 @@ class SingleIncomeEarnerController extends Controller
         $formData['ration_card']= $ration_card;
         $formData['income_certificate']= $income_certificate;
         $formData['signature']= $signature;
+        $formData['past_job_document']= $past_job_document;
 
         return view('application.single_income_earner_preview', compact('formData'));
 

@@ -33,7 +33,7 @@ class FinancialHelp extends Eloquent
         'difficulties','user_id','status','husband_sign','wife_sign','husband_name','wife_name','agree',
         'submitted_district',
         'submitted_teo',
-        'place','date',
+        'place','date','time',
 
 
       
