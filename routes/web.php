@@ -258,8 +258,9 @@ Route::post('/singleEarnerStore', [App\Http\Controllers\SingleIncomeEarnerContro
     Route::get('/houseGrantApplications', [HouseManagementController::class, 'adminHouseGrantList'])->name('adminHouseGrantList');
     Route::get('/getAdminHouseGrantList', [HouseManagementController::class, 'getAdminHouseGrantList'])->name('getAdminHouseGrantList');
     Route::get('/HouseGrantDetails/{id}', [HouseManagementController::class, 'getAdminHouseGrantDetails'])->name('getAdminHouseGrantDetails');
+    Route::get('/redirect/back', [HouseManagementController::class, 'redirectBack'])->name('redirectBack');
 
-//Medical / Engineering student fund scheme
+    //Medical / Engineering student fund scheme
 Route::resource('/MedicalEngineeringStudentFund', MedEngStudentFundController::class);
 Route::get('/getStudentFundList', [MedEngStudentFundController::class, 'getStudentFundList'])->name('getStudentFundList');
 Route::post('/Medical/Engineering/StudentFundStore', [MedEngStudentFundController::class, 'StudentFundStore'])->name('StudentFundStore');

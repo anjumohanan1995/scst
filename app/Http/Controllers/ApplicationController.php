@@ -382,6 +382,8 @@ class ApplicationController extends Controller
             'register_date' => $data['register_date'],
             'register_office_name' => $data['register_office_name'],
             'marriage_certificate' => $data['marriage_certificate'],
+            'place' => $data['place'],
+            'date'=> date("Y-m-d"),
             'status' =>0
         ]);
 
@@ -785,13 +787,8 @@ class ApplicationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'district' => 'required',
-            'taluk' => 'required',
-            'pincode' => 'required',
-            'age' => 'required|numeric',
-            'dob' => 'required',
-            'births' => 'required|numeric',
             'submitted_district' => 'required',
+            'submitted_teo' => 'required',    
         
             // Add more fields and their validation rules as needed
         ]);

@@ -136,17 +136,30 @@ class MedEngStudentFundController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'income' => 'required',
-            'income_certificate' => 'required',
-            'caste' => 'required',
-            'caste_certificate' => 'required',
-            'signature' => 'required',
-            'parent_name' => 'required',
-            'parent_signature' => 'required',
+           // 'income' => 'required',
+            // 'income_certificate' => 'required',
+            // 'caste' => 'required',
+            // 'caste_certificate' => 'required',
+            // 'signature' => 'required',
+            // 'parent_name' => 'required',
+            // 'parent_signature' => 'required',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',
             
                  
         ]);
+        if ($request->input('account_details') == 'yes') {
+            $validator->sometimes('account_no', 'required', function ($input) {
+                return $input->account_details == 'yes';
+            });
         
+            $validator->sometimes('ifsc_code', 'required', function ($input) {
+                return $input->account_details == 'yes';
+            });
+            $validator->sometimes('bank_branch', 'required', function ($input) {
+                return $input->account_details == 'yes';
+            });
+        }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -203,7 +216,9 @@ class MedEngStudentFundController extends Controller
         }
       
         $formData = $data;
-       
+        if($request->account_details==''){
+            $formData['account_details']="no";
+          }
       $formData['signature']= $signature;
       $formData['parent_signature']= $parent_signature;
       $formData['caste_certificate']= $caste_certificate;
@@ -213,6 +228,7 @@ class MedEngStudentFundController extends Controller
 // Format the date if needed
 $formattedDate = $currentDate->toDateString();
       $formData['date']= $formattedDate;
+      $request->flash();
         return view('user.studentFund.preview', compact('formData'));
     }
 
@@ -231,6 +247,9 @@ $formattedDate = $currentDate->toDateString();
             'income' => @$data['income'],
             'income_certificate' => @$data['income_certificate'],
             'account_details' => @$data['account_details'],
+            'account_no' => @$data['account_no'],
+            'ifsc_code' => @$data['ifsc_code'],
+            'bank_branch' => $data['bank_branch'],
             'signature' => $data['signature'],
             'parent_name' => $data['parent_name'],
             'parent_signature' => $data['parent_signature'],

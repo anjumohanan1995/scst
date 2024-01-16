@@ -199,12 +199,12 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="btn_wrapper">
-                                                <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
+                                                <button type="button" onclick="goback()" class="btn btn-primary w-100">Edit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
-                                
+                            
                                 <br>
 
                         </div>
@@ -233,11 +233,16 @@
 
 <script>
     // edit button function
+    // function goback() {
+    //     if (confirm('Are you sure ? Do you want to edit this form!. ')) {
+    //         window.history.back();
+    //     }
+    //     return
+    // }
     function goback() {
-        if (confirm('Are you sure ? Do you want to edit this form!. ')) {
-            window.history.back();
-        }
-        return
+    if (confirm('Are you sure? Do you want to edit this form?')) {
+        window.location.href = "{{ url()->previous() }}";
     }
+}
 </script>
 @endsection

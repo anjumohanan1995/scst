@@ -99,6 +99,7 @@ class HouseManagementController extends Controller
 // Format the date if needed
 $formattedDate = $currentDate->toDateString();
       $formData['date']= $formattedDate;
+      $request->flash();
         return view('houseMng.preview', compact('formData'));
     }
     
@@ -395,5 +396,11 @@ $formattedDate = $currentDate->toDateString();
     public function getAdminHouseGrantDetails($id){
         $houseManagement=HouseManagement::find($id);
         return view('admin.houseMng.details', compact('houseManagement'));
+    }
+   
+    public function redirectBack(){
+        //dd("fkhsdfjh");
+        //return redirect()->route('houseGrant.create')->withInput();
+        return redirect()->route('houseGrant.create')->withInput();
     }
 }
