@@ -146,7 +146,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">Caste/Religion Certificate  (ജാതി/ മതം സർട്ടിഫിക്കറ്റ് )
+                                    <label class="form-label">Caste/Religion Certificate (Max Size : 2 MB)  (ജാതി/ മതം സർട്ടിഫിക്കറ്റ് )
                                     </label>
                                     <input type="file" class="form-control"   name="caste_certificate" id="caste_certificate" value="" placeholder=" സർട്ടിഫിക്കറ്റ്" />
                                 @error('caste_certificate')
@@ -167,10 +167,10 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label"> Income Certificate (വരുമാന സർട്ടിഫിക്കറ്റ്)
+                                    <label class="form-label"> Income Certificate (Max Size : 2 MB) (വരുമാന സർട്ടിഫിക്കറ്റ്)
                                     </label>
                                     <input type="file" class="form-control"   name="income_certificate" id="income_certificate" value="" placeholder=" സർട്ടിഫിക്കറ്റ്" />
-                                @error('caste_certificate')
+                                @error('income_certificate')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                                 </div>
@@ -180,7 +180,8 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">
-                                        വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടോ ?</label>
+                                        Do students have an e-grand account number?
+                                        (വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടോ ?)</label>
                                         <div style="border: 1px solid black" class="form-control">
 
                                             <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
@@ -236,7 +237,7 @@
                                 </div> --}}
                                 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്  </label>
+                                    <label class="form-label">Applicant's signature (Max Size : 2 MB) (അപേക്ഷകന്റെ ഒപ്പ്)  </label>
                                     <input type="file" class="form-control" accept="image/*"  name="signature" id="signature" value="" placeholder="അപേക്ഷകന്റെ ഒപ്പ് " />
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
@@ -248,7 +249,7 @@
                               
                                
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label"> രക്ഷാകർത്താവിന്റെ പേര് 
+                                    <label class="form-label">Parent Name  (രക്ഷാകർത്താവിന്റെ പേര് )
 
                                         </label>
                                         <input type="text" class="form-control"   name="parent_name" id="parent_name" value="{{ old('parent_name') }}" placeholder="രക്ഷാകർത്താവിന്റെ പേര് " />
@@ -257,7 +258,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">രക്ഷാകർത്താവിന്റെ ഒപ്പ്  </label>
+                                    <label class="form-label">Parent Signature (Max Size : 2 MB)  (രക്ഷാകർത്താവിന്റെ ഒപ്പ് ) </label>
                                     <input type="file" class="form-control" accept="image/*"  name="parent_signature" id="parent_signature" value="" placeholder="രക്ഷാകർത്താവിന്റെ ഒപ്പ് " />
                                     @error('parent_signature')
                                         <span class="text-danger">{{$message}}</span>
@@ -266,7 +267,18 @@
                                
                               
                             </div><br> 
-                           
+                            <hr>
+                          <div class="row">
+                            <div class="col-md-1 mb-1">
+                                 </div>
+                            <div class="col-md-1 mb-1">
+                                <input type="checkbox" id="agree" name="agree" value="Yes" required>
+                            </div>
+                            <div class="col-md-9 mb-9">
+                                We hereby pledge that all the information we have added above is true and correct.
+                              (  ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.)
+                            </div>
+                        </div>
                             <br>
                             <hr>
                             <br>
