@@ -229,7 +229,8 @@ a.btn-card {
                                                 <div class="card-desc">
                                                     <h3>Application 8 - <a href="{{ route('userAnemiaFinanceList') }}">Applied({{ $data['anemiaFinanceCount'] }})</a></h3>
                                                     <p>സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി </p>
-                                                         <a href="{{url('anemia-financial-assistance')}}" class="btn-card">Apply Now</a>   
+                                                    <a href="#" class="btn-card" data-toggle="modal" data-target="#anemiaFinanceModal">Apply Now</a>
+                                                         {{--  <a href="{{url('anemia-financial-assistance')}}" class="btn-card">Apply Now</a>anemiaFinanceModal     --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -465,6 +466,51 @@ a.btn-card {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                        <a href="{{url('student-award')}}" <button type="submit" class="btn btn-primary">Continue</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="anemiaFinanceModal" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി 
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ: </p>
+                        <p style="font-size: 11px;">(Max. filesize: 2 MB • Format: JPG, PNG, PDF) </p>
+
+                        <ul>
+                            <li>
+                                ജാതി സർട്ടിഫിക്കറ്റ്
+                            </li>
+                            <li>
+                                ആധാർ പകർപ്പ്
+                            </li>
+                            <li>
+                                ബാങ്ക് അക്കൗണ്ട് പാസ്സ് ബുക്കിന്റെ പകർപ്പ്
+                            </li>
+                            <li>
+                                മെഡിക്കൽ സർട്ടിഫിക്കറ്റ് 
+                            </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{url('anemia-financial-assistance')}}" class="btn btn-primary"> Continue</a>
                     </div>
                 </form>
             </div>

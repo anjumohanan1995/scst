@@ -177,13 +177,14 @@ $(document).on("click",".deleteItem",function() {
                 { data: 'age' },
 				{ data: 'current_address' },
 				{ data: 'caste' },
-                { data: 'created_at', visible: false },
+                { data: 'created_at' },
+                {{--  { data: 'created_at', visible: false },  --}}
 
                 { data: 'edit' }
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [4, 'desc'],
             'ordering': true,
          });
 
