@@ -24,7 +24,16 @@ class SingleIncomeEarnerController extends Controller
     public function singleIncomeEarnerPreview(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'applicant_name' => 'required']
+            'applicant_name' => 'required',
+            'caste_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'adhaar_copy' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'passbook_copy' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'death_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'ration_card' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'income_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'signature' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'past_job_document' => 'nullable|file|mimes:jpg,pdf|max:2048'
+            ]
            
         );
         if ($validator->fails()) {

@@ -69,6 +69,8 @@
                                             Certificate from Tehsildar / തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('caste_certificate') }}"
                                                 class="form-control" placeholder="" name="caste_certificate" />
+                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                മാത്രം.)</span>
                                             @error('caste_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -78,7 +80,6 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-
                                             <label class="form-label"> Address / മേൽവിലാസം </label>
                                             <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="മേൽവിലാസം" name="address"></textarea>
                                             @error('address')
@@ -151,6 +152,8 @@
                                             Upload Aadhar card image / പകർപ്പ് സഹിതം അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('adhaar_copy') }}" class="form-control"
                                                 placeholder="ആധാർ നം" name="adhaar_copy" />
+                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                മാത്രം.)</span>
                                             @error('adhaar_copy')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -200,6 +203,8 @@
                                             <input type="file" value="{{ old('passbook_copy') }}"
                                                 class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
                                                 name="passbook_copy" />
+                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                    മാത്രം.)</span>
                                             @error('passbook_copy')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -280,6 +285,8 @@
                                             ചെയുക
                                             <input type="file" value="{{ old('death_certificate') }}"
                                                 class="form-control" placeholder="വയസ്സ് " name="death_certificate" />
+                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                    മാത്രം.)</span>
                                             @error('death_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -320,6 +327,8 @@
 
                                             <input type="file" value="{{ old('past_job_document') }}"
                                                 class="form-control" name="past_job_document" />
+                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                    മാത്രം.)</span>
                                             @error('past_job_document')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -354,6 +363,8 @@
                                             Upload the ration card image / റേഷൻ കാർഡിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('ration_card') }}" class="form-control"
                                                 placeholder="Total Members in family" name="ration_card" />
+                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                    മാത്രം.)</span>
                                             @error('ration_card')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -484,7 +495,7 @@
                                         സാക്ഷ്യപത്രം ഹാജരാകണം ) </label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            കുടുംബ വാർഷിക വരുമാനം
+                                            Annual family income / കുടുംബ വാർഷിക വരുമാനം
                                             <input type="text" value="{{ old('annual_income') }}"
                                                 class="form-control" placeholder="വാർഷിക വരുമാനം" name="annual_income" />
                                             @error('annual_income')
@@ -492,12 +503,14 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6">
-                                            വില്ലജ് ഓഫീസറിൽ
+                                            Upload Certificate of Attendance from Village Officer / വില്ലജ് ഓഫീസറിൽ
                                             നിന്നുള്ള
                                             സാക്ഷ്യപത്രം ഹാജരാകണം അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('income_certificate') }}"
                                                 class="form-control" placeholder="വാർഷിക വരുമാനം"
                                                 name="income_certificate" />
+                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                    മാത്രം.)</span>
                                             @error('income_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
