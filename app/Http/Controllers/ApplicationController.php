@@ -382,6 +382,8 @@ class ApplicationController extends Controller
             'register_date' => $data['register_date'],
             'register_office_name' => $data['register_office_name'],
             'marriage_certificate' => $data['marriage_certificate'],
+            'place' => $data['place'],
+            'date'=> date("Y-m-d"),
             'status' =>0
         ]);
 

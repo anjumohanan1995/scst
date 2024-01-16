@@ -8,7 +8,7 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			
-				<h4 class="content-title mb-2">മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം  അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
+				<h4 class="content-title mb-2">Application for grant of financial assistance towards initial expenses for Scheduled Caste students in Medical / Engineering Courses (മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം  അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ )
 
 </h4>
 				
@@ -21,7 +21,7 @@
 		</div>
 		<!-- /breadcrumb -->
 
-	</div>
+
 <div class="main-content-body">
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
@@ -33,7 +33,8 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകന്റെ പേര് 
+                                    <label class="form-label">
+                                        Applicant's Name ( അപേക്ഷകന്റെ പേര് )
                                     </label>
                                     <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ പേര് " name="name" />
                                     @error('name')
@@ -42,9 +43,8 @@
                                 </div>
 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">മേൽവിലാസം 
-                                    </label>
-                                    <textarea type="text" value="{{ old('address') }}"  class="form-control" placeholder="മേൽവിലാസം" name="address" ></textarea>
+                                    <label class="form-label">Address (മേൽവിലാസം)                                   </label>
+                                    <textarea type="text" value="{{ old('address') }}"  class="form-control" placeholder="മേൽവിലാസം" name="address" >{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -53,37 +53,37 @@
                             <div class="row">   
                                
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">ജില്ല  </label>
+                                    <label class="form-label">District (ജില്ല)  </label>
                                     <select id="current_district" name="current_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}"  {{ old('current_district') == $district->id ? 'selected' : '' }}>{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('current_district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="current_district_name" id="current_district_name" value="">
+                                    <input type="hidden" name="current_district_name" id="current_district_name" value="{{ old('current_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">താലൂക്ക്  </label>
+                                    <label class="form-label">Taluk (താലൂക്ക്)  </label>
                                     <select id="current_taluk" name="current_taluk" class="form-control">
                                         <option value="">Choose Taluk</option>
                                     </select>                                 
                                     @error('current_taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="">
+                                    <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="{{ old('current_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">പിൻകോഡ്  </label>
+                                    <label class="form-label">Pincode (പിൻകോഡ്)  </label>
                                     <input type="text" value="{{ old('current_pincode') }}"  class="form-control"  name="current_pincode" />
                                     @error('current_pincode')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">കോഴ്‌സിന്റെ പേര് 
+                                    <label class="form-label">Course Name (കോഴ്‌സിന്റെ പേര് )
 
                                     </label>
                                     <input type="text" value="{{ old('course_name') }}"  class="form-control" placeholder="കോഴ്‌സിന്റെ പേര് " name="course_name" />
@@ -96,7 +96,7 @@
                             </div><br>
                                <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി  
+                                    <label class="form-label">Current Academic Year Class Commencement Date (നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി  )
                                     </label>
                                     <input type="date" value="{{ old('class_start_date') }}"  class="form-control" placeholder="നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി  " name="class_start_date" />
                                
@@ -105,21 +105,22 @@
                                     @enderror
                                       </div>
                                           <div class="col-md-6 mb-6">
-                                        <label class="form-label">അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത് 
+                                        <label class="form-label"> Applicant is admitted
+                                            (അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത് )
 
                                         </label>
                                         <div style="border: 1px solid black" class="form-control">
 
                                      
-                                            <input type="radio" id="merit" name="admission_type" value="merit">
+                                            <input type="radio" id="merit" name="admission_type" value="merit" {{ old('admission_type') == 'merit' ? 'checked' : '' }}>
                                             <label for="merit">മെരിറ്റ് </label> &nbsp; &nbsp;
-                                            <input type="radio" id="reservation" name="admission_type" value="innovation">
-                                            <label for="innovation">സംവരണം </label> &nbsp; &nbsp;
+                                            <input type="radio" id="reservation" name="admission_type" value="reservation" {{ old('admission_type') == 'reservation' ? 'checked' : '' }}>
+                                            <label for="reservation">സംവരണം </label> &nbsp; &nbsp;
                                             
-                                            <input type="radio" id="management" name="admission_type" value="management">
+                                            <input type="radio" id="management" name="admission_type" value="management" {{ old('admission_type') == 'management' ? 'checked' : '' }}>
                                             <label for="management">മാനേജ്‌മന്റ്</label>&nbsp; &nbsp;
                                           
-                                            <input type="radio" id="option3" name="admission_type" value="others">
+                                            <input type="radio" id="option3" name="admission_type" value="others" {{ old('admission_type') == 'others' ? 'checked' : '' }}>
                                             <label for="others">മറ്റുള്ളവ</label>&nbsp; &nbsp;
                                         </div>
                                         @error('admission_type')
@@ -135,17 +136,17 @@
                             <div class="row">   
                                
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">അപേക്ഷകന്റെ ജാതി/ മതം 
+                                    <label class="form-label">Caste/Religion of Applicant (Certificate to be produced) <br>അപേക്ഷകന്റെ ജാതി/ മതം 
                                         (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
                                         
                                     </label>
-                                    <textarea type="text" value="{{ old('caste') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ജാതി/ മതം" name="caste" ></textarea>
+                                    <input  type="text" value="{{ old('caste') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ജാതി/ മതം" name="caste" >
                                  @error('caste')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">
+                                    <label class="form-label">Caste/Religion Certificate  (ജാതി/ മതം സർട്ടിഫിക്കറ്റ് )
                                     </label>
                                     <input type="file" class="form-control"   name="caste_certificate" id="caste_certificate" value="" placeholder=" സർട്ടിഫിക്കറ്റ്" />
                                 @error('caste_certificate')
@@ -154,19 +155,19 @@
                                 </div>
                               
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">അപേക്ഷകന്റെ വരുമാനം 
+                                    <label class="form-label">Applicant's Income (certificate to be produced) <br>അപേക്ഷകന്റെ വരുമാനം 
                                         (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
                                         
                                         
                                           </label>
-                                          <textarea type="text" value="{{ old('income') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം " name="income" ></textarea>
+                                          <input type="text" value="{{ old('income') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം " name="income" >
                                     
                                     @error('income')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label"> 
+                                    <label class="form-label"> Income Certificate (വരുമാന സർട്ടിഫിക്കറ്റ്)
                                     </label>
                                     <input type="file" class="form-control"   name="income_certificate" id="income_certificate" value="" placeholder=" സർട്ടിഫിക്കറ്റ്" />
                                 @error('caste_certificate')
@@ -178,13 +179,61 @@
                            
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
+                                    <label class="form-label">
+                                        വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടോ ?</label>
+                                        <div style="border: 1px solid black" class="form-control">
+
+                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
+                                          
+                                            <input type="radio" id="yes" name="account_details" value="yes"  {{ old('account_details') == 'yes' ? 'checked' : '' }}>&nbsp; &nbsp;
+                                            <label for="No">No (ഇല്ല)</label>&nbsp; &nbsp;
+                                          
+                                            <input type="radio" id="no" name="account_details" value="no" {{ old('account_details') == 'no' ? 'checked' : '' }}>
+                                           
+                                           
+                                        </div><br>
+                                        <div class="row" style="display:none" id="accountDiv">
+                                        <div class="col-md-4 mb-4">
+                                            Bank Branch  (ബാങ്ക് ശാഖ)
+                                        
+                                            <input type="text" value="{{ old('bank_branch') }}"  class="form-control" placeholder="ബാങ്ക് ശാഖ" name="bank_branch" value="{{ old('bank_branch') }}">
+                                           
+                                        
+                                          @error('bank_branch')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            E-Grand Account no (ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം  )
+                                            
+                                            
+                                              
+                                              <input type="number" value="{{ old('account_no') }}"  class="form-control" placeholder="ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം " name="account_no" >
+                                              @error('account_no')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                IFSC Code  (IFSC കോഡ്  )
+                                                
+                                                
+                                                  
+                                                  <input type="text" value="{{ old('ifsc_code') }}"  class="form-control" placeholder="IFSC കോഡ്" name="ifsc_code" >
+                                                  @error('ifsc_code')
+                                                  <span class="text-danger">{{$message}}</span>
+                                              @enderror
+                                                </div>
+                                        </div>
+
+                                </div>
+                                {{-- <div class="col-md-6 mb-6">
                                     <label class="form-label">വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം 
                                         </label>
                                         <input type="text" class="form-control"   name="account_details" id="account_details" value="" placeholder="വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം" />
                                     @error('account_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്  </label>
@@ -202,7 +251,7 @@
                                     <label class="form-label"> രക്ഷാകർത്താവിന്റെ പേര് 
 
                                         </label>
-                                        <input type="text" class="form-control"   name="parent_name" id="parent_name" value="" placeholder="രക്ഷാകർത്താവിന്റെ പേര് " />
+                                        <input type="text" class="form-control"   name="parent_name" id="parent_name" value="{{ old('parent_name') }}" placeholder="രക്ഷാകർത്താവിന്റെ പേര് " />
                                     @error('parent_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -229,7 +278,7 @@
                                           <select id="submitted_district" name="submitted_district" class="form-control" >
                                               <option value="">Select</option>
                                                   @foreach($districts as $district)
-                                                      <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                      <option value="{{$district->id}}"  {{ old('submitted_district') == $district->id ? 'selected' : '' }}>{{$district->name}}</option>
                                                   @endforeach
                                           </select>
                                            @error('submitted_district')
@@ -245,7 +294,7 @@
                                           @error('submitted_teo')
                                               <span class="text-danger">{{$message}}</span>
                                           @enderror
-                                          <input type="hidden" name="teo_name" id="teo_name" value="">
+                                          <input type="hidden" name="teo_name" id="teo_name" value="{{old('teo_name') }}">
                                       </div>                                 
                                   </div><br>
                               </div>
@@ -272,10 +321,81 @@
                    
                         </form>
                     </div>
+                </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
 
+
+    @if(!empty(old('current_district')))
+    var val = document.getElementById("current_district").value;
+    $.ajax({
+        url: "{{url('district/fetch-taluk')}}",
+        type: "POST",
+        data: {
+            district_id: val,
+            _token: '{{csrf_token()}}'
+        },
+        success: function (data) {
+            $("#current_taluk").find('option').remove();
+            $("#current_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(data.taluks, function (key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+                $opt.appendTo('#current_taluk');
+            });
+
+            // Set the selected value for permanent_taluk
+            var permanentTalukValue = "{{ old('current_taluk') }}";
+            if (permanentTalukValue) {
+                $('#current_taluk').val(permanentTalukValue);
+            }
+
+            // Refresh the selectpicker (if you are using it)
+           
+            var currentTalukName = $("#current_taluk option:selected").text();
+            console.log(currentTalukName); // Check if it prints the correct text
+            $('#current_taluk_name').val(currentTalukName);
+        }
+    });
+@endif
+
+@if(!empty(old('submitted_district')))
+    var val = document.getElementById("submitted_district").value;
+    $.ajax({
+        url: "{{url('district/fetch-teo')}}",
+        type: "POST",
+        data: {
+            district_id: val,
+            _token: '{{csrf_token()}}'
+        },
+        success: function (data) {
+          
+            $("#submitted_teo").find('option').remove();
+            $("#submitted_teo").append('<option value="" selected>Choose Teo</option>');
+
+            $.each(data.teos, function (key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.teo_name);
+                $opt.appendTo('#submitted_teo');
+            });
+
+            // Set the selected value for permanent_taluk
+            var permanentTeoValue = "{{ old('submitted_teo') }}";
+            if (permanentTeoValue) {
+                $('#submitted_teo').val(permanentTeoValue);
+            }
+
+            // Refresh the selectpicker (if you are using it)
+            
+        }
+    });
+@endif
+
+
+</script>
 <script>
 	$('#current_district').change(function(){
         var current_district = this.options[this.selectedIndex].text;
@@ -376,6 +496,17 @@
     });
 
 	$(document).ready(function() {
+        $('input[name="account_details"]').change(function() {
+      
+      if ($(this).val() === 'yes') {
+          $('#accountDiv').show();
+      } else {
+          $('#accountDiv').hide();
+      }
+  }).change();
+  $('input[name="account_details"]:checked').change();
+// Trigger the change event initially
+
      	$('#example').DataTable();
 	});
   </script>
