@@ -391,7 +391,14 @@
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-
+                                            {{-- <div class="col-md-3">
+                                                <input type="text"  value="{{old(name[])}}"
+                                                    class="form-control single__income__earner--add--imputbox "
+                                                    placeholder="പേര്" name="name[]" />
+                                                @error('name')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div> --}}
 
                                             <div class="col-md-3">
                                                 <input type="text" value="{{ htmlspecialchars(old('job')[0] ?? '') }}"
@@ -523,72 +530,60 @@
                 </div>
             </div>
         </div>
-        @php
-            $oldValues = old() ? json_encode(old()) : json_encode([]);
-        @endphp
-
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-        var oldValues = @json($oldValues);
-
-
-
         //duplication code starts here.
-
         $(document).ready(function() {
-            let count = 1;
+        let count = 0;
 
-            $(".add").click(function(e) {
-                e.preventDefault();
+        $(".add").click(function(e) {
+            e.preventDefault();
 
-                // Increment the count for each new row.
-                count++;
+            // Increment the count for each new row
+            count++;
 
-                // Access old input values.
-                var nameValue = oldValues['name'] ? oldValues['name'][count] : '';
-                var jobValue = oldValues['job'] ? oldValues['job'][count] : '';
-                var salaryValue = oldValues['salary'] ? oldValues['salary'][count] : '';
+            // Access data attributes
+            var nameValue = $(this).closest(".addRow").data('name');
+            var jobValue = $(this).closest(".addRow").data('job');
+            var salaryValue = $(this).closest(".addRow").data('salary');
 
-                // alert('alert');
+            // Build the HTML using jQuery
+            var html = '<div class="row addRow">' +
+                '<div class="col-md-3">' +
+                '<input type="text" value="' + nameValue +
+                '" class="form-control single__income__earner--add--inputbox" placeholder="പേര്" name="name[]" />' +
+                '<span class="text-danger error-message" id="nameError' + count + '"></span>' +
+                '</div>' +
 
-                // Build the HTML using jQuery.
-                var html = '<div class="row addRow">' +
-                    '<div class="col-md-3">' +
-                    '<input type="text" value="' + nameValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="പേര്" name="name[]" />' +
-                    '<span class="text-danger error-message" id="nameError' + count +
-                    '"></span>' +
-                    '</div>' +
+                '<div class="col-md-3">' +
+                '<input type="text" value="' + jobValue +
+                '" class="form-control single__income__earner--add--inputbox" placeholder="തൊഴിൽ" name="job[]" />' +
+                '<span class="text-danger error-message" id="jobError' + count + '"></span>' +
+                '</div>' +
 
-                    '<div class="col-md-3">' +
-                    '<input type="text" value="' + jobValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="തൊഴിൽ" name="job[]" />' +
-                    '<span class="text-danger error-message" id="jobError' + count +
-                    '"></span>' +
-                    '</div>' +
+                '<div class="col-md-3">' +
+                '<input type="text" value="' + salaryValue +
+                '" class="form-control single__income__earner--add--inputbox" placeholder="വരുമാനം" name="salary[]" />' +
+                '<span class="text-danger error-message" id="salaryError' + count + '"></span>' +
+                '</div>' +
 
-                    '<div class="col-md-3">' +
-                    '<input type="text" value="' + salaryValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="വരുമാനം" name="salary[]" />' +
-                    '<span class="text-danger error-message" id="salaryError' + count +
-                    '"></span>' +
-                    '</div>' +
+                '<div class="col-md-3">' +
+                '<a class="btn btn-danger delete">-</a>' +
+                '</div>' +
+                '</div>';
 
-                    '<div class="col-md-3">' +
-                    '<a class="btn btn-danger delete">-</a>' +
-                    '</div>' +
-                    '</div>';
-
-                // Append the newly built HTML to the "#items" div
-                $("#items").append(html);
-            });
-
-            $("body").on("click", ".delete", function(e) {
-                $(this).closest(".addRow").remove();
-            });
+            // Append the newly built HTML to the "#items" div
+            $("#items").append(html);
         });
 
+        $("body").on("click", ".delete", function(e) {
+            $(this).closest(".addRow").remove();
+        });
+    });
+
+
+    
 
         //duplication code ends here.
 
@@ -654,8 +649,7 @@
                 dataType: 'json',
                 success: function(result) {
                     $("#submitted_teo").find('option').remove();
-                    $("#submitted_teo").append(
-                        '<option value="" selected>Choose TEO</option>');
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
                     $.each(result.teos, function(key, value) {
                         var $opt = $('<option>');
                         $opt.val(value._id).text(value.teo_name);

@@ -383,8 +383,7 @@
 
                                         <div class="row addRow">
                                             <div class="col-md-3">
-                                                <input type="text"
-                                                    value="{{ htmlspecialchars(old('name')[0] ?? '') }}"
+                                                <input type="text" value="{{ old('name') }}"
                                                     class="form-control single__income__earner--add--imputbox "
                                                     placeholder="പേര്" name="name[]" />
                                                 @error('name')
@@ -392,9 +391,8 @@
                                                 @enderror
                                             </div>
 
-
                                             <div class="col-md-3">
-                                                <input type="text" value="{{ htmlspecialchars(old('job')[0] ?? '') }}"
+                                                <input type="text" value="{{ old('job') }}"
                                                     class="form-control single__income__earner--add--imputbox "
                                                     placeholder="തൊഴിൽ" name="job[]" />
                                                 <span id="nameError" class="text-danger"></span>
@@ -404,8 +402,7 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <input type="text"
-                                                    value="{{ htmlspecialchars(old('salary')[0] ?? '') }}"
+                                                <input type="text" value="{{ old('salary') }}"
                                                     class="form-control single__income__earner--add--imputbox "
                                                     placeholder="വരുമാനം" name="salary[]" />
                                                 <span id="nameError" class="text-danger"></span>
@@ -427,8 +424,7 @@
 
 
 
-                                    <label class="form-label"> Annual income of the family (Upload income certificate ) /
-                                        കുടുംബ വാർഷിക വരുമാനം ( വില്ലജ് ഓഫീസറിൽ
+                                    <label class="form-label"> Annual income of the family (Upload income certificate ) / കുടുംബ വാർഷിക വരുമാനം ( വില്ലജ് ഓഫീസറിൽ
                                         നിന്നുള്ള
                                         സാക്ഷ്യപത്രം ഹാജരാകണം ) </label>
                                     <div class="row">
@@ -457,8 +453,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label class="form-label"> Current source of income for the family / നിലവിൽ
-                                                കുടുംബത്തിന്റെ വരുമാന സ്രോതസ്സ് </label>
+                                            <label class="form-label"> Current source of income for the family / നിലവിൽ കുടുംബത്തിന്റെ വരുമാന സ്രോതസ്സ് </label>
                                             <input type="text" value="{{ old('income_source') }}"
                                                 class="form-control" placeholder="വരുമാന സ്രോതസ്സ്"
                                                 name="income_source" />
@@ -496,7 +491,7 @@
                                                         value="">
                                                 </div>
                                                 <div class="col-md-6 mb-6">
-                                                    <label class="form-label">TEO / ടി ഇ ഓ </label>
+                                                    <label class="form-label">TEO / ടി ഇ ഓ  </label>
                                                     <select id="submitted_teo" name="submitted_teo" class="form-control">
                                                         <option value="">Choose TEO</option>
                                                     </select>
@@ -523,72 +518,59 @@
                 </div>
             </div>
         </div>
-        @php
-            $oldValues = old() ? json_encode(old()) : json_encode([]);
-        @endphp
-
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-        var oldValues = @json($oldValues);
-
-
-
         //duplication code starts here.
-
         $(document).ready(function() {
-            let count = 1;
+    let count = 0;
 
-            $(".add").click(function(e) {
-                e.preventDefault();
+    $(".add").click(function(e) {
+        e.preventDefault();
 
-                // Increment the count for each new row.
-                count++;
+        // Increment the count for each new row
+        count++;
 
-                // Access old input values.
-                var nameValue = oldValues['name'] ? oldValues['name'][count] : '';
-                var jobValue = oldValues['job'] ? oldValues['job'][count] : '';
-                var salaryValue = oldValues['salary'] ? oldValues['salary'][count] : '';
+        // Access old input values
+        var nameValue = "{{ old('name.' + count, '') }}";
+        var jobValue = "{{ old('job.' + count, '') }}";
+        var salaryValue = "{{ old('salary.' + count, '') }}";
 
-                // alert('alert');
+        // alert(nameValue);
 
-                // Build the HTML using jQuery.
-                var html = '<div class="row addRow">' +
-                    '<div class="col-md-3">' +
-                    '<input type="text" value="' + nameValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="പേര്" name="name[]" />' +
-                    '<span class="text-danger error-message" id="nameError' + count +
-                    '"></span>' +
-                    '</div>' +
+        // Build the HTML using jQuery
+        var html = '<div class="row addRow">' +
+            '<div class="col-md-3">' +
+            '<input type="text" value="' + nameValue +
+            '" class="form-control single__income__earner--add--inputbox" placeholder="പേര്" name="name[]" />' +
+            '<span class="text-danger error-message" id="nameError' + count + '"></span>' +
+            '</div>' +
 
-                    '<div class="col-md-3">' +
-                    '<input type="text" value="' + jobValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="തൊഴിൽ" name="job[]" />' +
-                    '<span class="text-danger error-message" id="jobError' + count +
-                    '"></span>' +
-                    '</div>' +
+            '<div class="col-md-3">' +
+            '<input type="text" value="' + jobValue +
+            '" class="form-control single__income__earner--add--inputbox" placeholder="തൊഴിൽ" name="job[]" />' +
+            '<span class="text-danger error-message" id="jobError' + count + '"></span>' +
+            '</div>' +
 
-                    '<div class="col-md-3">' +
-                    '<input type="text" value="' + salaryValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="വരുമാനം" name="salary[]" />' +
-                    '<span class="text-danger error-message" id="salaryError' + count +
-                    '"></span>' +
-                    '</div>' +
+            '<div class="col-md-3">' +
+            '<input type="text" value="' + salaryValue +
+            '" class="form-control single__income__earner--add--inputbox" placeholder="വരുമാനം" name="salary[]" />' +
+            '<span class="text-danger error-message" id="salaryError' + count + '"></span>' +
+            '</div>' +
 
-                    '<div class="col-md-3">' +
-                    '<a class="btn btn-danger delete">-</a>' +
-                    '</div>' +
-                    '</div>';
+            '<div class="col-md-3">' +
+            '<a class="btn btn-danger delete">-</a>' +
+            '</div>' +
+            '</div>';
 
-                // Append the newly built HTML to the "#items" div
-                $("#items").append(html);
-            });
+        // Append the newly built HTML to the "#items" div
+        $("#items").append(html);
+    });
 
-            $("body").on("click", ".delete", function(e) {
-                $(this).closest(".addRow").remove();
-            });
-        });
-
+    $("body").on("click", ".delete", function(e) {
+        $(this).closest(".addRow").remove();
+    });
+});
 
         //duplication code ends here.
 
@@ -654,27 +636,19 @@
                 dataType: 'json',
                 success: function(result) {
                     $("#submitted_teo").find('option').remove();
-                    $("#submitted_teo").append(
-                        '<option value="" selected>Choose TEO</option>');
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
                     $.each(result.teos, function(key, value) {
                         var $opt = $('<option>');
                         $opt.val(value._id).text(value.teo_name);
-
-                        // Set the selected attribute based on the old submitted value
-                        if ('{{ old('submitted_teo') }}' == value._id) {
-                            $opt.attr('selected', 'selected');
-                        }
-
                         $opt.appendTo('#submitted_teo');
                     });
+
                 }
             });
+
         });
 
-
-
-
-
+        
         $('#submitted_teo').change(function() {
             var submitted_teo = this.options[this.selectedIndex].text;
             document.getElementById('teo_name').value = submitted_teo;
