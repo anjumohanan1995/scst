@@ -420,6 +420,57 @@
                                             </div>
                                         </div>
 
+
+                                        @php
+                                            $i = 0;
+                                            // $oldValues = old() ? json_decode(json_encode(old()), true) : [];
+                                        @endphp
+
+                                        @if (!empty(old('name')))
+                                            @foreach (old('name') as $item)
+                                                @php
+                                                    $i++;
+                                                @endphp
+
+                                                <div class="row addRow">
+                                                    <div class="col-md-3">
+                                                        <input type="text" value="{{ old('name')[$i] ?? '' }}"
+                                                            class="form-control single__income__earner--add--inputbox"
+                                                            placeholder="പേര്" name="name[]" />
+                                                        @error('name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <input type="text" value="{{ old('job')[$i] ?? '' }}"
+                                                            class="form-control single__income__earner--add--inputbox"
+                                                            placeholder="തൊഴിൽ" name="job[]" />
+                                                        @error('job')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <input type="text" value="{{ old('salary')[$i] ?? '' }}"
+                                                            class="form-control single__income__earner--add--inputbox"
+                                                            placeholder="വരുമാനം" name="salary[]" />
+                                                        @error('salary')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        {{-- <a class="btn btn-success add">+</a> --}}
+                                                        <a class="btn btn-danger delete">-</a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+
+
+
+
                                         <div id="items"></div>
 
                                     </div>
@@ -485,7 +536,9 @@
                                                         class="form-control">
                                                         <option value="">Select</option>
                                                         @foreach ($districts as $district)
-                                                            <option value="{{ $district->id }}">{{ $district->name }}
+                                                            <option value="{{ $district->id }}"
+                                                                {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
+                                                                {{ $district->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -523,17 +576,11 @@
                 </div>
             </div>
         </div>
-        @php
-            $oldValues = old() ? json_encode(old()) : json_encode([]);
-        @endphp
+
 
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-        var oldValues = @json($oldValues);
-
-
-
         //duplication code starts here.
 
         $(document).ready(function() {
@@ -546,31 +593,26 @@
                 count++;
 
                 // Access old input values.
-                var nameValue = oldValues['name'] ? oldValues['name'][count] : '';
-                var jobValue = oldValues['job'] ? oldValues['job'][count] : '';
-                var salaryValue = oldValues['salary'] ? oldValues['salary'][count] : '';
-
-                // alert('alert');
+                var nameValue = $(this).closest(".addRow").data('name') || '';
+                var jobValue = $(this).closest(".addRow").data('job') || '';
+                var salaryValue = $(this).closest(".addRow").data('salary') || '';
 
                 // Build the HTML using jQuery.
                 var html = '<div class="row addRow">' +
                     '<div class="col-md-3">' +
-                    '<input type="text" value="' + nameValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="പേര്" name="name[]" />' +
+                    '<input type="text" class="form-control single__income__earner--add--inputbox" placeholder="പേര്" name="name[]" />' +
                     '<span class="text-danger error-message" id="nameError' + count +
                     '"></span>' +
                     '</div>' +
 
                     '<div class="col-md-3">' +
-                    '<input type="text" value="' + jobValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="തൊഴിൽ" name="job[]" />' +
+                    '<input type="text" class="form-control single__income__earner--add--inputbox" placeholder="തൊഴിൽ" name="job[]" />' +
                     '<span class="text-danger error-message" id="jobError' + count +
                     '"></span>' +
                     '</div>' +
 
                     '<div class="col-md-3">' +
-                    '<input type="text" value="' + salaryValue +
-                    '" class="form-control single__income__earner--add--inputbox" placeholder="വരുമാനം" name="salary[]" />' +
+                    '<input type="text" class="form-control single__income__earner--add--inputbox" placeholder="വരുമാനം" name="salary[]" />' +
                     '<span class="text-danger error-message" id="salaryError' + count +
                     '"></span>' +
                     '</div>' +
@@ -582,12 +624,18 @@
 
                 // Append the newly built HTML to the "#items" div
                 $("#items").append(html);
+
+                // Set the values after appending the HTML if needed
+                // $(".addRow:last-child input[name='name[]']").val(nameValue);
+                // $(".addRow:last-child input[name='job[]']").val(jobValue);
+                // $(".addRow:last-child input[name='salary[]']").val(salaryValue);
             });
 
             $("body").on("click", ".delete", function(e) {
                 $(this).closest(".addRow").remove();
             });
         });
+
 
 
         //duplication code ends here.
@@ -639,6 +687,8 @@
             document.getElementById('taluk_name').value = talukName;
         });
 
+
+
         $('#submitted_district').change(function() {
             var submitted_district = this.options[this.selectedIndex].text;
             document.getElementById('dist_name').value = submitted_district;
@@ -670,6 +720,45 @@
                 }
             });
         });
+
+
+
+        function fetchTeo() {
+            var val = document.getElementById("submitted_district").value;
+
+            $.ajax({
+                url: "{{ url('district/fetch-teo') }}",
+                type: "POST",
+                data: {
+                    district_id: val,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#submitted_teo").find('option').remove();
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+
+                    $.each(result.teos, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.teo_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('submitted_teo') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#submitted_teo');
+                    });
+                }
+            });
+        }
+
+
+        // Call the function on page load
+        $(document).ready(function() {
+            fetchTeo();
+        });
+
 
 
 
