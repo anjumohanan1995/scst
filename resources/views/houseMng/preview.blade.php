@@ -1,248 +1,400 @@
 @extends('layouts.app')
 @section('content')
-
 <!-- main-content -->
 <div class="main-content app-content">
-	<!-- container -->
-	<div class="main-container container-fluid">
-		<!-- breadcrumb -->
-		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-			<div class="col-xl-9">
-				<h4 class="content-title mb-2">
-                    Application for financial assistance from the Department of Scheduled Tribes Development for renovation and addition of facilities and completion of houses
-                  (  പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
-                    ധനസഹായത്തിനുള്ള അപേക്ഷ) </h4>
-			</div>
-			<div class="col-xl-3">
-			</div>
-		</div>
-		<!-- /breadcrumb -->
-		<!-- main-content-body -->
-		<div class="main-content-body">
-			
-
-			@if (session('success'))
-				<div class="alert alert-success alert-dismissible fade show" role="alert">
-					{{ session('success') }}
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-			@endif  
-
-			<!-- row -->
-			<!-- row -->
-			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-					<div class="card">
-						<div class="card-body">
-							    <div id="success_message" class="ajax_response" style="display: none;"></div>
-								<div class="mb-4 main-content-label">
-                                   Application Preview (അപ്ലിക്കേഷൻ പ്രിവ്യൂ)
-                                    </div>
-								
-                                   
-          <table border="1" class="table">
-            <tr> <td>
- 
-                Applicant's Name  (അപേക്ഷകന്റെ പേര്) </td><td><strong> {{ @$formData['name'] }} </strong></td>
-             <td>
- 
-               Address (മേൽവിലാസം) </td><td> <strong> {{ @$formData['address'] }} , {{ @$formData['address'] }}</strong> 
- 
-            </td>
-            </tr>
-            <tr> <td>
- 
-                Grama Panchayat  (ഗ്രാമപഞ്ചായത്ത്)‌/ വാർഡ് നമ്പർ </td><td><strong> {{ @$formData['panchayath'] }} </strong></td>
-                <td>
- 
-                Ward No (വാർഡ് നമ്പർ )</td><td><strong> {{ @$formData['ward_no'] }} </strong></td>
-          
-               
-            </tr>
-           
-                 
-                <tr>
-                    <td>
- 
-                        Caste  (ജാതി) </td><td> <strong> {{ @$formData['caste'] }}</strong> 
-         
-                    </td>
-                    <td>
-                      Annual Income  (വാർഷിക വരുമാനം )
-                    </td>
-                    <td> 
-                        {{ @$formData['annual_income'] }} 
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td>
-                        Condition of the house for which financing is applied for and the year of sanction   (ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും )  </td><td> {{ @$formData['house_details'] }}
-                    </td>
-                      <td>
- 
-                        Year of completion of house work and receipt of final installment  ( വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം) </td><td> {{ @$formData['last_payment_year'] }}
- 
-                </td>
-               
-               
-             </tr><tr>
-                <td>
-                    Family Status (Unmarried :
-                    Mother, female headed family, premature
-                    Those who had to become a widow, physically and mentally
-                    Those who are facing challenges, those who are terminally ill,
-                    women victims of atrocities etc.)<br>
-                    കുടുംബത്തിന്റെ അവസ്ഥ  (അവിവാഹിതരായ :
-                    അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
-                    വിധവയാകേണ്ടി വന്നവർ , ശാരീരിക മാനസിക
-                    വേല്ലുവിളി നേരിടുന്നവർ , തീരാവ്യാധി പിടിപ്പെട്ടവർ ,
-                    അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ )
-                    </td>
-                    <td> 
-                        {{ @$formData['family_details'] }} 
-                    </td>
-                      <td>
-                        Nature of work for which financial assistance is sought (Innovation / Additional convenience / Completion)<br>
-                        ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം 
-                                        (നവീകരണം /അധിക സൗകര്യം / പൂർത്തീകരണം ) </td>
-                    <td>@if(@$formData['nature_payment'] == 'innovation') 
-                        
-                        Innovation (നവീകരണം)
-                        @elseif(@$formData['nature_payment'] == 'Additional convenience') 
-                        Additional convenience (അധിക സൗകര്യം)
-                        @elseif(@$formData['nature_payment'] == 'Completion') 
-                        Completion (പൂർത്തീകരണം)
-                        @endif
-                       
- 
-                </td>
-                
-                     </tr>
-                     
-                     <tr>
-                        <td>
-                            Has funding been received from other government departments/agencies or local self-government bodies for the specified purpose ?<br>
-                            നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
-                            ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
-                            ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ ?   
-                            </td><td>  
-                                @if(@$formData['payment_details'] =='yes')Yes ( അതെ)
-                                 @else 
-                                 No (ഇല്ല)
-                                 @endif 
-        
-                    </td>
-                    @if(@$formData['payment_details'] =='yes')
-                    <td>
- 
-                        Amount and date of receipt (എത്ര തുക ,ലഭിച്ച തീയതി )</td><td>  
-                           {{ @$formData['payment_amount'] }} , {{ @$formData['date_received'] }}
-                           
-    
-                </td>  @endif 
-                     </tr>
-                     <tr>
-                   
-                <td>
-                    Other matters to prove eligibility for preference
-
-                   ( മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള 
-                    മറ്റു സംഗതികൾ) </td>
-                    
-                        <td> {{ @$formData['prove_eligibility'] }}
-                            @if($formData['prove_eligibility_file'])
-                            <iframe src="{{ asset('homeMng/' . @$formData['prove_eligibility_file']) }}" width="400" height="200"></iframe>
-                            @endif
-                      
-                    </td>
-                    <td>
-                      Place  (സ്ഥലം)
-                    </td>
-                    <td> 
-                        {{ @$formData['place'] }} 
-                    </td>
-                </tr>
-             
-               
-              
-                <tr>
-                   
-                    <td>
-                      Date  (തീയതി)  </td><td> @if($formData['date'])
-                            {{ date('d-m-Y', strtotime(@$formData['date'])) }}
-                        @endif
-                    </td>
-                    <td>
-                        Applicant's Signature/Fingerprint ( അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം) </td><td>  @if($formData['signature'])
-                            <iframe src="{{ asset('homeMng/' . @$formData['signature']) }}" width="400" height="200"></iframe>
-                            @endif
-                    </td>
-                  
-                </tr>
-               
-      
-             
-               
-           </table>
-                                
-                                <form action="{{ url('HouseGrantStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
-                                    @csrf
-                                  
-                               
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
-                                            <button type="submit" class="btn-block btn btn-success" onclick="return confirm('Do you want to continue?')">Submit</button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="btn_wrapper">
-                                                <button type="button" onclick="goback()" class="btn btn-primary w-100">Edit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            
-                                <br>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+   <!-- container -->
+   <div class="main-container container-fluid">
+      <!-- breadcrumb -->
+      <div class="breadcrumb-header justify-content-between row me-0 ms-0">
+         <div class="col-xl-9">
+            <h4 class="content-title mb-2"></h4>
+         </div>
+         <div class="col-xl-3">
+         </div>
+      </div>
+      <!-- /breadcrumb -->
+      <!-- main-content-body -->
+      <div class="main-content-body">
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+           {{ session('success') }}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
         </div>
-    </div>
+        @endif
+        <!-- row -->
+        <!-- row -->
+        <div class="row row-sm">
+           <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
+              <div class="card overflow-hidden" style="width: 113%;">
+                 <div class="card-body pd-y-7">
+                    <h1
+                       style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;"><ul>
+                       പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
+                       ധനസഹായത്തിനുള്ള അപേക്ഷ</ul>
+                    </h1>
+                    <br>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>1. അപേക്ഷകന്റെ പേര്  </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['name'] }}
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>2. മേൽവിലാസം  </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['address'] }} , {{ @$formData['current_district_name'] }} , {{ @$formData['current_taluk_name'] }} , {{ @$formData['pincode'] }}
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>3. ഗ്രാമപഞ്ചായത്ത്‌/ വാർഡ് നമ്പർ 
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['panchayath'] }} /  {{ @$formData['ward_no'] }}
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>4. ജാതി 
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['caste'] }} 
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>5. വാർഷിക വരുമാനം 
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['income'] }} 
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>6. 
+                                ധനസഹായത്തിനപേക്ഷിക്കുന്ന  വീടിന്റ അവസ്ഥയും അനുവദിച്ച വർഷവും 
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['house_details'] }} 
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>7. അനുവദിച്ച ഏജൻസി/ വകുപ്പ് 
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['agency'] }}
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>8. വീടുപണി പൂർത്തിയായി അവസാന ഗഡു കൈപ്പറ്റിയ വർഷം  
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['last_payment_year'] }} 
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>9. കുടുംബത്തിന്റെ അവസ്ഥ  (അവിവാഹിതരായ :
+                                അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
+                                വിധവയാകേണ്ടി വന്നവർ , ശാരീരിക മാനസിക
+                                വേല്ലുവിളി നേരിടുന്നവർ , തീരാവ്യാധി പിടിപ്പെട്ടവർ ,
+                                അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['family_details'] }} 
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>10. 
+                                ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം 
+                                (നവീകരണം  / അധിക സൗകര്യം / പൂർത്തീകരണം )
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                @if(@$formData['nature_payment'] == 'innovation') 
+                                നവീകരണം
+                                @elseif(@$formData['nature_payment'] == 'Additional convenience') 
+                                അധിക സൗകര്യം
+                                @elseif(@$formData['nature_payment'] == 'Completion') 
+                                പൂർത്തീകരണം
+                                @endif
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>11. നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് / 
+                                ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
+                                ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ എന്നുള്ള  വിവരം  
+                                (ഉണ്ടെങ്കിൽ എത്ര തുക ,ലഭിച്ച തീയതി )
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                @if(@$formData['payment_details'] =='yes')Yes ,
+                                @else 
+                                No 
+                                @endif 
+                                @if(@$formData['payment_details'] =='yes')
+                                {{ @$formData['payment_amount'] }} , {{ @$formData['date_received'] }}
+                                @endif 
+                                </label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br> 
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള
+                                </label><br>
+                             </div>
+                             <div class="col-1 w-100">
+                                <label> :  
+                                </label>
+                             </div>
+                             <div class="col-6">
+                                <label> 
+                                {{ @$formData['prove_eligibility'] }}    </label>
+                                <br>
+                                @if($formData['prove_eligibility_file'])
+                                <iframe src="{{ asset('homeMng/' . @$formData['prove_eligibility_file']) }}" width="400" height="200"></iframe>
+                                @endif
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                  
+                    <br><br>
+                    <div class="paper-1">
+                       <div class="w-100">
+                          <div class="row w-100">
+                             <div class="col-5">
+                                <label>സ്ഥലം
+                                </label>: {{ @$formData['place'] }}<br>
+                                <label>thiyathi
+                                </label>: {{date('d-m-Y')}}
+                             </div>
+                             <div class="col-6">
+                                <label> അപേക്ഷകന്റെ ഒപ്പ് /
+                                </label> :  @if($formData['signature'])
+                                <img src="{{ asset('homeMng/' . @$formData['signature']) }}" width="150px" height="70px">
+                                @endif
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="text-justify text">
+                        <p>രണ്ടായിരത്തി ...........................വർഷം ...................മാസം കേരള ഗവർണ്ണർക്കുവേണ്ടി ..............സംയോജിത പട്ടികവർഗ്ഗ വികസന 
+                            പ്രൊജക്ട്ട് ഓഫിസർ / ട്രൈബൽ ഡെവലപ്മെന്റ്  ഓഫിസർ മുമ്പാകെ .......................ജില്ലയിൽ ..........താലൂക്കിൽ .......................
+                            വില്ലേജിൽ ..................പഞ്ചായത്തിൽ  സെറ്റിൽമെന്റ് / കോളനിയിൽ  വീട്ടിൽ ...................താമസം .............മകൻ /മകൾ /ഭാര്യ .....
+                            ..........എഴുതി നൽകുന്ന കരാർ ഉടമ്പടി .
+               ....................ഐ.റ്റി.ഡി പ്രൊജക്റ്റ് ഓഫിസർ /ട്രൈബൽ ഡെവലപ്മെന്റ് ഓഫിസർ ...............തീയതിയിലെ ..............നമ്പർ ഉത്തരവ് 
+                            പ്രകാരം എന്റെ വീടിന്റെ നവീകരണത്തിനെ /അധികസൗകര്യത്തിനെ / പൂർത്തീകരണത്തിന് ................രൂപ (................................)
+                            ധനസഹായം അനുവദിക്കുന്നുണ്ട് .ടി തുക വിനയോഗിച്  നിർദിഷ്ട എസ്റ്റിമേറ്റ് അനുസരിച്പ്രവർത്തി  ഒന്നാം ഗഡു കൈപറ്റി 3 
+                            മാസത്തിനകം പൂർത്തീകരിക്കുന്നതാണെന്നും, പ്രസ്തുത വീടും സ്ഥലവും യാതൊരു കാരണവശാലും അന്യാധീനപ്പെടുത്തുന്നതല്ലെന്നും ,
+                            ടി ധനസഹായ തുക നിർദിഷ്ട വീടിന്റെ അറ്റുകുറ്റപണിക്ക് മാത്രമേ വിനയോഗിക്കുള്ളുവെന്നും ടി പ്രവർത്തി പൂർത്തീകരിച്ചു സർക്കാർ സർവീസിലെ അസിസ്റ്റന്റ് എഞ്ചിനീർയറിൽ നിന്നും പൂർത്തീകരണ/ വാലുവേഷൻ സർട്ടിഫിക്കറ്റ് വാങ്ങി ഹാജരാക്കുന്നതാന്നെനും അല്ലാത്തപക്ഷം കൈപ്പറ്റുന്ന തുക ഞാൻ സർക്കാരില്ലേക്ക് തിരിച്ചടക്കുന്നതാന്നെന്നും അപ്രകാരം കഴിഞ്ഞില്ലെങ്കിൽ മേൽപടി   തുക റവന്യൂറികവറിയിലൂടെയോ സർക്കാർ തീരുമാനിക്കുന്ന മറ്റു മാർഗങ്ങളിലൂടെയോ എന്റെയൊ ,എന്റെ കുടുംബങ്ങളുടെയോ സ്ഥാവരജംഗമ വസ്തുക്കളിൽ നിന്നും വസൂലാക്കുന്നതിനും  സ്വമനസാലെ സമ്മതിച് ഇതിനാൽ കരാർ ഒപ്പു വെക്കുന്നു . 
+                            </p>
+                    </div>
+                    <br><br>
+                    <div class="paper-1">
+                        <div class="w-100">
+                           <div class="row w-100">
+                              <div class="col-5">
+                                 <label>സ്ഥലം
+                                 </label>: {{ @$formData['place'] }}<br>
+                                 <label>thiyathi
+                                 </label>: {{date('d-m-Y')}}
+                              </div>
+                              <div class="col-6">
+                                 <label> അപേക്ഷകന്റെ ഒപ്പ് /
+                                 </label> :  @if($formData['signature'])
+                                 <img src="{{ asset('homeMng/' . @$formData['signature']) }}" width="150px" height="70px">
+                                 @endif
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                    <form action="{{ url('HouseGrantStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                       @csrf
+                       <div class="row">
+                          <div class="col-md-3">
+                             <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
+                             <button type="submit" class="btn-block btn btn-success" onclick="return confirm('Do you want to continue?')">Submit</button>
+                          </div>
+                          <div class="col-md-3">
+                             <div class="btn_wrapper">
+                                <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
+                             </div>
+                          </div>
+                       </div>
+                    </form>
+                   
+              </div>
+           </div>
+        </div>
+     </div>
+   </div>
+</div>
 </div>
 <script>
-    function validateForm() {
-        // Check if the required fields are filled
-        var husbandSign = document.getElementsByName('husband_sign')[0].value;
-        var wifeSign = document.getElementsByName('wife_sign')[0].value;
-        var husbandName = document.getElementsByName('husband_name')[0].value;
-        var wifeName = document.getElementsByName('wife_name')[0].value;
-
-        if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
-            alert('Please fill in all required fields.');
-            return false; // Prevent form submission
-        }
-
-        return true; // Allow form submission
-    }
+   function validateForm() {
+       // Check if the required fields are filled
+       var husbandSign = document.getElementsByName('husband_sign')[0].value;
+       var wifeSign = document.getElementsByName('wife_sign')[0].value;
+       var husbandName = document.getElementsByName('husband_name')[0].value;
+       var wifeName = document.getElementsByName('wife_name')[0].value;
+   
+       if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
+           alert('Please fill in all required fields.');
+           return false; // Prevent form submission
+       }
+   
+       return true; // Allow form submission
+   }
 </script>
-
 <script>
-    // edit button function
-    // function goback() {
-    //     if (confirm('Are you sure ? Do you want to edit this form!. ')) {
-    //         window.history.back();
-    //     }
-    //     return
-    // }
-    function goback() {
-    if (confirm('Are you sure? Do you want to edit this form?')) {
-        window.location.href = "{{ url()->previous() }}";
-    }
-}
+   // edit button function
+   function goback() {
+       if (confirm('Are you sure? Do you want to edit this form?')) {
+           window.location.href = "{{ url()->previous() }}";
+       }
+   }
 </script>
 @endsection

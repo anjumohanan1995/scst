@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\HouseManagement;
+use App\Models\Taluk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +46,9 @@ class HouseManagementController extends Controller
             'name' => 'required|regex:/^[a-zA-Z]+$/',
             'submitted_district' => 'required',
             'submitted_teo' => 'required', 
+            'signature' => 'max:2048',
+            'prove_eligibility_file' => 'max:2048',
+            
            
                  
         ]);
@@ -87,10 +91,19 @@ class HouseManagementController extends Controller
         }else{
             $eligibility_file = '';
         }
+        $formData = $data;
       if($request->payment_details==''){
         $formData['payment_details']="no";
       }
-        $formData = $data;
+      if($request->current_district!=''){
+       $dis=District::where('_id',$request->current_district)->first();
+       $formData['current_district_name']= $dis->name;
+      }
+      if($request->current_taluk!=''){
+        $taluk=Taluk::where('_id',$request->current_taluk)->first();
+        $formData['current_taluk_name']= $taluk->taluk_name;
+       }
+       
        
       $formData['signature']= $signature;
       $formData['prove_eligibility_file']= $signature;
@@ -224,7 +237,13 @@ $formattedDate = $currentDate->toDateString();
              $place = $record->place;
              $caste = $record->caste;
               $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
 
+              // Extract date
+              $date = $carbonDate->format('d-m-Y');
+              
+              // Extract time
+              $time = $carbonDate->format('H:i a');
             $data_arr[] = array(
                 "id" => $id,
                 "place" => $place,
@@ -232,7 +251,8 @@ $formattedDate = $currentDate->toDateString();
                 "address" => $address,
                 "panchayath" => $panchayath,
                 "caste" => $caste,
-                "created_at" => $created_at,                  
+                "date" => $date,      
+                "time" => $time,                  
                 "edit" => '<div class="settings-main-icon"><a  href="' . route('houseGrant.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
@@ -282,6 +302,8 @@ $formattedDate = $currentDate->toDateString();
             'submitted_teo' => @$data['submitted_teo'],
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
+            'time' =>date('h:i:s a'),
+            
             
 
         ]);

@@ -193,7 +193,7 @@
                                         <input type="radio" id="option2" name="nature_payment" value="Additional convenience" {{ old('nature_payment') == 'Additional convenience' ? 'checked' : '' }}>
                                         <label for="Additional convenience">Additional convenience (അധിക സൗകര്യം)</label>&nbsp; &nbsp;
                                       
-                                        <input type="radio" id="option3" name="nature_payment" value="Completion" {{ old('nature_payment') == 'Completion' ? 'checked' : '' }}>>
+                                        <input type="radio" id="option3" name="nature_payment" value="Completion" {{ old('nature_payment') == 'Completion' ? 'checked' : '' }}>
                                         <label for="Completion">Completion (പൂർത്തീകരണം)</label>&nbsp; &nbsp;
                                     </div>
                                     @error('marriage_count')
@@ -260,14 +260,12 @@
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">
-                                  
+                                        ( Max size: 2 MB)
                                         &nbsp;  &nbsp;  &nbsp;
                                         
                                           </label>
                                           <input type="file" class="form-control" accept="pdf/doc"  name="prove_eligibility_file" id="prove_eligibility_file" value="{{ old('prove_eligibility_file') }}" placeholder=" " />
-                                          @if(old('prove_eligibility_file'))
-                                          <p>Old File: {{ old('prove_eligibility_file') }}</p>
-                                      @endif
+                                       
                                     @error('prove_eligibility_file')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -289,7 +287,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-6">
-                                <label class="form-label">Applicant's signature (അപേക്ഷകന്റെ ഒപ്പ്  )</label>
+                                <label class="form-label">Applicant's signature( Max size: 2 MB) (അപേക്ഷകന്റെ ഒപ്പ്  )</label>
                                 <input type="file" class="form-control" accept="image/*"  name="signature" id="signature" value="" placeholder="Applicant's signature " />
                                 @error('signature')
                                     <span class="text-danger">{{$message}}</span>
@@ -297,7 +295,17 @@
                             </div>
                           </div><br>
                           <br>
-                         
+                          <hr>
+                          <div class="row">
+                            <div class="col-md-1 mb-1">
+                                 </div>
+                            <div class="col-md-1 mb-1">
+                                <input type="checkbox" id="agree" name="agree" value="Yes" required>
+                            </div>
+                            <div class="col-md-9 mb-9">
+                                ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.
+                            </div>
+                        </div>
                           <br>
                           <div class="card">
                             <div class="card-body">
