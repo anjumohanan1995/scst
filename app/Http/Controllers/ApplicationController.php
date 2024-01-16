@@ -328,6 +328,8 @@ class ApplicationController extends Controller
         $formData['husband_sign']= $husband_sign;
         $formData['wife_sign']= $wife_sign;
 
+        $request->flash();
+
         return view('application.financial_preview', compact('formData'));
 
 

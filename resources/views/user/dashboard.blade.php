@@ -195,7 +195,10 @@ a.btn-card {
                                                 <div class="card-desc">
                                                     <h3>Application 5 -<a href="{{ route('userchildFinanceList') }}">Applied({{ $data['childFinanceCount'] }})</h3>
                                                     <p class="ctm-height">അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
-                                                         <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>   
+                                                         
+                                                        {{-- <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>    --}}
+
+                                                          <a href="#" class="btn-card" data-toggle="modal" data-target="#childFinancialAssistance">Apply Now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -502,6 +505,41 @@ a.btn-card {
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                        
                        <a  href="{{url('couples-financial-help')}}"   class="btn btn-primary"> Continue</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="childFinancialAssistance" tabindex="-1" role="dialog" aria-labelledby="childFinancialAssistanceLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                          അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് 
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ul>
+                            <li>
+                               കുട്ടിയുടെ ഫോട്ടോ
+ 
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       
+                       <a  href="{{url('childFinancialAssistanceForm')}}"   class="btn btn-primary"> Continue</a>
                     </div>
                 </form>
             </div>
