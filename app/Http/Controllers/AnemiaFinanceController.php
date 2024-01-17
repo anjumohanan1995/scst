@@ -269,7 +269,7 @@ class AnemiaFinanceController extends Controller
                 "address" => $address,
                 "dob" => $dob,
                 "district" => $district,
-                "created_at" => $created_at,                  
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                   
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('anemiaFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );

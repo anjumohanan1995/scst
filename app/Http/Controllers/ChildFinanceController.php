@@ -104,6 +104,8 @@ class ChildFinanceController extends Controller
         $formData['birth_certificate']= $birth_certificate;
         $formData['child_signature']= $child_signature;
         $formData['signature']= $signature;
+        $request->flash();
+
         return view('child.child_form_preview', compact('formData'));
     }
 
@@ -137,8 +139,9 @@ class ChildFinanceController extends Controller
             'submitted_district' => @$data['dist_name'],
             'submitted_teo' => @$data['submitted_teo'],
             'dist_name' => @$data['dist_name'],
-            'teo_name' => @$data['dob'],
-            'date' => @$data['dob'],
+            'teo_name' => @$data['teo_name'],
+            'date'=> date("Y-m-d"),
+            'time'=> date("H:i:s"),
             'user_id' =>Auth::user()->id, 
             'status' =>0
         ]);

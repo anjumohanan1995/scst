@@ -5,34 +5,19 @@
 		<!-- container -->
 		<div class="main-container container-fluid">
 		    <!-- breadcrumb -->
-			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-				<div class="col-xl-3">
-					<h4 class="content-title mb-2">Application List</h4>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - User</li>
-                        </ol>
-                    </nav>
-				</div>
-				<div class="d-flex my-auto col-xl-9 pe-0">
-					<div class="card">
-                        <div class="main-content-body main-content-body-mail card-body p-0">
-                            <div class="card-body pt-2 pb-2">
-                                <div class="row row-sm">
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <input class="form-control" placeholder="Name" type="text" name="name" id="name">
-                                    </div>
-                                    
+            <div class="breadcrumb-header justify-content-between row me-0 ms-0">
 
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <button class="btn ripple btn-success btn-block" type="submit" id="submit" >Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <h4 class="content-title mb-2"> ജനനി-ജനനി -ജന്മരക്ഷ പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി അപേക്ഷഫോറം <br>
+                </h4>
+
+
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                                class="fa fa-window-close"></i></button> {{ $message }}
                     </div>
-				</div>
-			</div>
+                @endif
+            </div>
 			<!-- /breadcrumb -->
 			<!-- main-content-body -->
 			<div class="main-content-body">
@@ -48,33 +33,7 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
-                                <div class="row mb-3">
-                                {{-- <div class="col-md-1 col-6 text-center">
-                                    <div class="task-box primary mb-0">
-                                        <a href="{{route('users.create')}}">
-                                            <p class="mb-0 tx-12">Add </p>
-                                            <h3 class="mb-0"><i class="fa fa-plus"></i></h3>
-                                        </a>
-                                    </div>
-                                </div> --}}
-                                {{--  <div class="col-md-1 col-6 text-center" id="delete">
-                                        <input type="hidden" id="delete_ctm">
-
-                                    <div class="task-box danger  mb-0">
-                                            <p class="mb-0 tx-12">Delete  </p>
-                                            <h3 class="mb-0"><i class="fa fa-recycle"></i></h3>
-                                    </div>
-                                </div>  --}}
-                                <div class="col-md-1 col-6 text-center" id="refresh">
-                                    <div class="task-box success  mb-0">
-                                            <p class="mb-0 tx-12">Refresh  </p>
-                                            <h3 class="mb-0"><i class="fa fa-spinner"></i></h3>
-                                    </div>
-                                </div>
                                 
-
-
-                            </div>
 
 
 
@@ -194,13 +153,13 @@ $(document).on("click",".deleteItem",function() {
 				{ data: 'dob' },
 				{ data: 'caste' },
                 { data: 'village' },
-                { data: 'created_at', visible: false },
+                { data: 'created_at'},
 
                 { data: 'edit' }
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [5, 'desc'],
             'ordering': true,
          });
 

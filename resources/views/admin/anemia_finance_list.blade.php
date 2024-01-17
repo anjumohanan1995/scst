@@ -176,13 +176,13 @@ $(document).on("click",".deleteItem",function() {
                 { data: 'dob' },
 				{ data: 'address' },
                 { data: 'district' },
-                { data: 'created_at', visible: false },
+                { data: 'created_at' },
 
                 { data: 'edit' }
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [4, 'desc'],
             'ordering': true,
          });
 

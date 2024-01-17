@@ -2,64 +2,68 @@
 @section('content')
     <!-- main-content -->
     <div class="main-content app-content">
-		<!-- container -->
-		<div class="main-container container-fluid">
-		    <!-- breadcrumb -->
-			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-				<div class="col-xl-6">
-					<h4 class="content-title mb-2">സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി </h4>
+        <!-- container -->
+        <div class="main-container container-fluid">
+            <!-- breadcrumb -->
+            <div class="breadcrumb-header justify-content-between row me-0 ms-0">
+                <div class="col-xl-6">
+                    <h4 class="content-title mb-2">ഏകവരുമാനദായകന്റെ മരണം തെളിയിക്കുന അപേക്ഷഫോറം </h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - Application List</li>
+                            <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> -
+                                Application List</li>
                         </ol>
                     </nav>
-				</div>
-				<div class="d-flex my-auto col-xl-6 pe-0">
-					<div class="card">
+                </div>
+                <div class="d-flex my-auto col-xl-6 pe-0">
+                    <div class="card">
                         <div class="main-content-body main-content-body-mail card-body p-0">
                             <div class="card-body pt-2 pb-2">
                                 <div class="row row-sm">
                                     <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <input class="form-control" placeholder="Name" type="text" name="name" id="name">
+                                        <input class="form-control" placeholder="Name" type="text" name="name"
+                                            id="name">
                                     </div>
-                                    
+
 
                                     <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <button class="btn ripple btn-success btn-block" type="submit" id="submit" >Search</button>
+                                        <button class="btn ripple btn-success btn-block" type="submit"
+                                            id="submit">Search</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-				</div>
-			</div>
-			<!-- /breadcrumb -->
-			<!-- main-content-body -->
-			<div class="main-content-body">
+                </div>
+            </div>
+            <!-- /breadcrumb -->
+            <!-- main-content-body -->
+            <div class="main-content-body">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fa fa-window-close"></i></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                                class="fa fa-window-close"></i></button>
                         {{ $message }}
                     </div>
-
                 @endif
                 <!-- row -->
                 <div class="row row-sm">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-                        <div class="card"><div class="card-body  table-new">
+                        <div class="card">
+                            <div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
                                 <div class="row mb-3">
-                            
-                                <div class="col-md-1 col-6 text-center" id="refresh">
-                                    <div class="task-box success  mb-0">
-                                            <p class="mb-0 tx-12">Refresh  </p>
+
+                                    <div class="col-md-1 col-6 text-center" id="refresh">
+                                        <div class="task-box success  mb-0">
+                                            <p class="mb-0 tx-12">Refresh </p>
                                             <h3 class="mb-0"><i class="fa fa-spinner"></i></h3>
+                                        </div>
                                     </div>
+
+
+
                                 </div>
-                                
-
-
-                            </div>
 
 
 
@@ -72,7 +76,7 @@
                                             <th>Address </th>
                                             <th>District</th>
                                             <th>Created Date</th>
-                                            <th >Action</th>
+                                            <th>Action</th>
 
 
 
@@ -93,47 +97,48 @@
 
                 </div>
                 <!-- /row -->
-			</div>
-		<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
     <!-- /main-content -->
-<meta name="csrf_token" content="{{ csrf_token() }}" />
-<script type="text/javascript">
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
+    <script type="text/javascript">
+        $(document).on("click", ".deleteItem", function() {
 
-$(document).on("click",".deleteItem",function() {
-
-     var id =$(this).attr('data-id');
-     $('#requestId').val($(this).attr('data-id') );
-     $('#confirmation-popup').modal('show');
-});
+            var id = $(this).attr('data-id');
+            $('#requestId').val($(this).attr('data-id'));
+            $('#confirmation-popup').modal('show');
+        });
 
 
-         function ownRequest() {
+        function ownRequest() {
 
             var reqId = $('#requestId').val();
             console.log(reqId);
             $.ajax({
-            	headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-                url: '{{ url("users/delete") }}'+'/'+reqId,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                },
+                url: '{{ url('users/delete') }}' + '/' + reqId,
                 method: 'post',
                 data: {
                     "_token": "{{ csrf_token() }}",
 
-                    },
+                },
                 contentType: false,
                 processData: false,
                 success: function(response) {
                     console.log(response.success);
 
-                        $('#confirmation-popup').modal('hide');
-                        $('#success_message').fadeIn().html(response.success);
-							setTimeout(function() {
-								$('#success_message').fadeOut("slow");
-							}, 2000 );
+                    $('#confirmation-popup').modal('hide');
+                    $('#success_message').fadeIn().html(response.success);
+                    setTimeout(function() {
+                        $('#success_message').fadeOut("slow");
+                    }, 2000);
 
-                        $('#example').DataTable().ajax.reload();
+                    $('#example').DataTable().ajax.reload();
 
 
 
@@ -143,79 +148,88 @@ $(document).on("click",".deleteItem",function() {
 
 
 
-     $(document).ready(function(){
+        $(document).ready(function() {
 
-     	   var table = $('#example').DataTable({
-            processing: true,
-            serverSide: true,
+            var table = $('#example').DataTable({
+                processing: true,
+                serverSide: true,
 
-	        buttons: [
-	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5'
-	        ],
-             "ajax": {
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ],
+                "ajax": {
 
-			       	"url": "{{route('getUserSingleEarnerList')}}",
-			       	// "data": { mobile: $("#mobile").val()}
-			       	"data": function ( d ) {
-			        	return $.extend( {}, d, {
-				          
-				            "name": $("#name").val(),
-				            //"from_date": $("#datepicker").val(),
-				            "delete_ctm": $("#delete_ctm").val(),
+                    "url": "{{ route('getUserSingleEarnerList') }}",
+                    // "data": { mobile: $("#mobile").val()}
+                    "data": function(d) {
+                        return $.extend({}, d, {
 
-
-			          	});
-       				}
-       			},
-
-             columns: [
-                { data: 'name' },
-                { data: 'caste' },
-				{ data: 'address' },
-                { data: 'district' },
-                { data: 'created_at', visible: false },
-
-                { data: 'edit' }
+                            "name": $("#name").val(),
+                            //"from_date": $("#datepicker").val(),
+                            "delete_ctm": $("#delete_ctm").val(),
 
 
-			],
-            "order": [1, 'desc'],
-            'ordering': true,
-         });
+                        });
+                    }
+                },
+
+                columns: [{
+                        data: 'name'
+                    },
+                    {
+                        data: 'caste'
+                    },
+                    {
+                        data: 'address'
+                    },
+                    {
+                        data: 'district'
+                    },
+                    {
+                        data: 'date',
+                        visible: true
+                    },
+                    {
+                        data: 'edit'
+                    }
 
 
-
-      	 table.draw();
-
-      	$('#submit').click(function(){
-
-        	table.draw();
-    	});
-    	$('#refresh').click(function(){
-      		$("#delete_ctm").val('');
-        	table.draw();
-    	});
+                ],
+                "order": [1, 'desc'],
+                'ordering': true,
+            });
 
 
 
+            table.draw();
 
-    	$('#delete').click(function(){
-    		$("#delete_ctm").val(1);
-        	table.draw();
-    	});
+            $('#submit').click(function() {
 
-
-
-
-
-         // DataTable
-
-
-      });
-      </script>
+                table.draw();
+            });
+            $('#refresh').click(function() {
+                $("#delete_ctm").val('');
+                table.draw();
+            });
 
 
+
+
+            $('#delete').click(function() {
+                $("#delete_ctm").val(1);
+                table.draw();
+            });
+
+
+
+
+
+            // DataTable
+
+
+        });
+    </script>
 @endsection

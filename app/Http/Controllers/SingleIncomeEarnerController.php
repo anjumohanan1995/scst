@@ -31,7 +31,7 @@ class SingleIncomeEarnerController extends Controller
             'death_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
             'ration_card' => 'nullable|file|mimes:jpg,pdf|max:2048',
             'income_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
-            'signature' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            // 'signature' => 'nullable|file|mimes:jpg,pdf|max:2048',
             'past_job_document' => 'nullable|file|mimes:jpg,pdf|max:2048'
             ]
            
@@ -192,10 +192,11 @@ class SingleIncomeEarnerController extends Controller
             'annual_income' => @$data['annual_income'],
             'income_certificate' => @$data['income_certificate'],
             'income_source' => @$data['income_source'],
-            'date' => date('d-m-Y'),
             'user_id' =>Auth::user()->id, 
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
+            'date'=> date("Y-m-d"),
+            'time'=> date("H:i:s"),
             'status' =>0
         ]);
 

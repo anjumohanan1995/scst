@@ -33,7 +33,7 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">അപേക്ഷകന്റെ പൂർണ്ണമായ പേര് / Applicant's full name </label>
-                                    <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="" name="name" />
+                                    <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="" name="name" required />
                                     @error('name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -149,6 +149,7 @@
                                 </div>
                                     <div class="col-md-6 mb-6">
                                         <input type="file" value="{{ old('caste_certificate') }}" class="form-control" placeholder="" name="caste_certificate" />
+                                        <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
                                         @error('caste_certificate')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -264,6 +265,7 @@
                                 </div>
                                     <div class="col-md-6 mb-6">
                                         <input type="file" value="{{ old('income_certificate') }}" class="form-control" placeholder="" name="income_certificate" />
+                                        <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
                                         @error('income_certificate')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -462,6 +464,7 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം / Applicant's Signature/Fingerprint </label>
                                     <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" />
+                                    <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -475,7 +478,7 @@
                         <div class="row">   
                             <div class="col-md-6 mb-6">
                                 <label class="form-label">ജില്ല / District </label>
-                                <select id="submitted_district" name="submitted_district" class="form-control" >
+                                <select id="submitted_district" name="submitted_district" class="form-control" required />
                                     <option value="">Select</option>
                                         @foreach($districts as $district)
                                             <option value="{{$district->id}}"  >{{$district->name}}</option>
@@ -488,7 +491,7 @@
                             </div>
                             <div class="col-md-6 mb-6">
                                 <label class="form-label">ടി.ഇ.ഒ / TEO  </label>
-                                <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                <select id="submitted_teo" name="submitted_teo" class="form-control" required />
                                     <option value="">Choose TEO</option>
                                 </select>                                 
                                 @error('submitted_teo')
