@@ -29,163 +29,521 @@
 
 			<!-- row -->
 			<!-- row -->
-			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-					<div class="card">
-						<div class="card-body">
-							    <div id="success_message" class="ajax_response" style="display: none;"></div>
-								<div class="mb-4 main-content-label">
-                                 Application Preview
-                                </div>
-                                <table border="1" class="table">
-                                    <tr>
-                                        <td>
-                                            കുട്ടിയുടെ പേര് 
-                                        </td>
-                                        <td><strong> {{ @$formData['name'] }} </strong></td>
-                                        <td>
-                                            കുട്ടിയുടെ വയസ്സ് 
-                                        </td>
-                                        <td> <strong> {{ @$formData['age'] }}</strong> 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            കുട്ടിയുടെ ജനന തീയതി
-                                        </td>
-                                        <td> {{ @$formData['dob'] }}
-                                        </td>
-                                        <td>
-                                            കുട്ടിയുടെ ജനന സർട്ടിഫിക്കറ്റ്  
-                                        </td>
-                                        <td> 
-                                            @if($formData['birth_certificate'])
-                                                <iframe src="{{ asset('child/birth_certificate/' . @$formData['birth_certificate']) }}" width="400" height="200"></iframe>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td >
-                                            അച്ഛന്റെ പേര്  
-                                        </td>
-                                        <td > {{ @$formData['father_name'] }}
-                                        </td>
-                                         <td>
-                                            അമ്മയുടെ പേര്    
-                                        </td>
-                                        <td> {{ @$formData['mother_name'] }}  </td>
-                                    </tr>
-                                    <tr>
-                                       
-                                        <td>
-                                            കുട്ടിയെ നിലവിൽ സംരക്ഷിക്കുന്ന രക്ഷിതാവിന്റെ പേര് 
-                                        </td>
-                                        <td>
-                                           {{ @$formData['guardian_name'] }}
-                                        </td>
-                                         <td>
-                                           രക്ഷിതാവിന്റെ മേൽവിലാസം
-                                        </td>
-                                        <td> 
-                                            {{ @$formData['address'] }} 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                       
-                                        <td>
-                                           ജില്ല
-                                        </td>
-                                        <td> 
-                                            {{ @$formData['current_district_name'] }} 
-                                        </td>
-                                        <td>
-                                           താലൂക്ക്
-                                        </td>
-                                        <td> 
-                                            {{ @$formData['current_taluk_name'] }} 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                           പിൻകോഡ്
-                                        </td>
-                                        <td> 
-                                            {{ @$formData['current_pincode'] }} 
-                                        </td>
-                                      
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            രക്ഷിതാവിന്റെ സമുദായം 
-                                        </td>
-                                        <td> {{ @$formData['caste'] }}
-                                        </td>
-                                        <td>
-                                            ഫോൺ നമ്പർ 
-                                        </td>
-                                        <td> 
-                                            {{ @$formData['mobile'] }} 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                           രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ 
-                                        </td>
-                                        <td> {{@$formData['account_number'] }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            ആധാർ ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ 
-                                        </td>
-                                        <td> {{ @$formData['aadhar_number'] }}
-                                        </td>
-                                        <td>
-                                            വോട്ടർ ഐ.ഡി. കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ 
-                                        </td>
-                                        <td>
-                                            {{ @$formData['voter_id'] }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            റേഷൻ കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ 
-                                        </td>
-                                        <td> {{ @$formData['ration_card_number'] }}
-                                        </td>
-                                        <td>
-                                            സ്ഥലം
-                                        </td>
-                                        <td> {{ @$formData['place'] }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td >
-                                            അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം
-                                        </td>
-                                        <td>@if($formData['signature'])
-                                                <iframe src="{{ asset('child/signature/' . @$formData['signature']) }}" width="400" height="200"></iframe>
-                                            @endif
-                                        </td>
-                                    </tr>
+			<div class="row row-sm">
+                        <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
 
 
-                                    <tr>
-                                        <td >
-                                            കുട്ടിയുടെ ഫോട്ടോ
-                                        </td>
-                                        <td>@if($formData['child_signature'])
-                                                <iframe src="{{ asset('child/child_signature/' . @$formData['child_signature']) }}" width="400" height="200"></iframe>
-                                            @endif
-                                        </td>
-                                    </tr>
+                            <div class="card overflow-hidden" style="width: 113%;">
+
+                                <div class="card-body pd-y-7">
+
+
+
+                                    <h4 class="medical__form--h1 text-center m-3">
+                                        <u><b>കൈത്താങ്ങ് <br>അർഹരാരായ പട്ടികവർഗ്ഗ കുട്ടികൾക്ക് ധനസഹായം ലഭിക്കുന്നതിനുള്ള
+                                                അപേക്ഷ ഫോറം </b></u>
+
+                                        </b>
+                                    </h4>
+                                    <p class="text-center">(ഓരോ കുട്ടിയ്ക്കും പ്രത്യേകം അപേക്ഷ സമർപ്പിക്കണം )
+
+
+
                                     
-                                    
-                                </table>
-								
+
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>1. കുട്ടിയുടെ പേര്</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['name'] }} <br>
+                                                               </label>
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>2. കുട്ടിയുടെ വയസ്സ്</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['age'] }} <br>
+                                                               </label>
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>3.കുട്ടിയുടെ ജനന തിയതി (സർട്ടിഫിക്കറ്റ് ഉണ്ടെങ്കിൽ മാത്രം എഴുതുക )</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['dob'] }} <br>
+                                                               </label>
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>4.കുട്ടിയുടെ ജനന സർട്ടിഫിക്കറ്റ്</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                        @if($formData['birth_certificate'])
+                                                            <iframe src="{{ asset('birth_certificate/' . @$formData['birth_certificate']) }}" width="400" height="200"></iframe>
+                                                        @endif 
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>5. അച്ഛന്റെ പേര് </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['father_name'] }} <br>
+                                                               </label>
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>6.അമ്മയുടെ പേര്</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['mother_name'] }} <br>
+                                                               </label>
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>7.കുട്ടിയെ നിലവിൽ സംരക്ഷിക്കുന്ന രക്ഷിതാവിന്റെ പേര്</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['guardian_name'] }} <br>
+                                                               </label>
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>8.രക്ഷിതാവിന്റെ മേൽവിലാസം</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['address'] }} <br>
+                                                    {{ @$formData['current_district_name'] }} {{ @$formData['current_taluk_name'] }} {{ @$formData['current_pincode'] }}
+                                                               </label>
+
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>9. രക്ഷിതാവിന്റെ സമുദായം</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['caste'] }} </label>
+
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>10. ഫോൺ നമ്പർ</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['mobile'] }} </label>
+
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>11. രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['account_number'] }} </label>
+
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>12. ആധാർ ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['aadhar_number'] }} </label>
+
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>13.വോട്ടർ ഐ.ഡി. കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['voter_id'] }} </label>
+
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>14. റേഷൻ കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ  </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['ration_card_number'] }} </label>
+
+
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+
+                                    </div>
+
                                    
-                  
-                                <form action="{{ url('childFinancialStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+
+
+
+
+                                       
+
+
+
+
+
+                                        
+
+                                      
+                                       
+
+                                       
+
+
+                                        
+
+
+                                   
+
+
+
+
+                                        
+
+
+                                       
+                                        
+
+                                       
+                                        <br>
+                                        <div class="m-5">
+                                            <h6 class="text-center"><u><b>രക്ഷിതാവിന്റെ സമ്മതപത്രം</b>
+                                                </u>
+                                            </h6>
+                                        </div>
+                                        <div>
+                                            <p>ഞാൻ ശ്രീ ....................ന്റെ മകൻ/മകൾ ആയ കുമാരി/കുമാരൻ
+                                                ..............................എന്റെ സംരക്ഷണയിൽ കഴിഞ്ഞു വരുന്നതിനാൽ ഈ
+                                                പദ്ധതി പ്രകാരം അനുവദിക്കുന്ന തുക ഈ കുട്ടിയുടെ സംരക്ഷണത്തിനായി
+                                                ചിലവാകുന്നതാണെന്നും
+                                                ഇതിനാൽ ഉറപ്പു നൽകുന്നു.
+                                            </p>
+                                        </div>
+
+                                        <div class="row d-flex justify-content-end">
+                                            <div class="col-6 d-flex ">
+                                                <span class="col-6">രക്ഷാകർത്താവിന്റെ പേര്</span>
+                                                <span class="col-1"> :</span>
+                                                <span class="col-5"> </span>
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="m-5">
+                                            <h6 class="text-center">
+                                                <u><b>ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫിസറുടെ സർട്ടിഫിക്കറ്റ് </b></u>
+                                            </h6>
+                                        </div>
+                                        <div>
+                                            <p>എന്റെ അന്വേഷണത്തിൽ ശ്രീ ......................എന്ന കുട്ടി ശ്രീ
+                                                ...........................ന്റെ സംരക്ഷണയിലാണ് കഴിഞ്ഞു വരുന്നതെന്നും
+                                                ,ബാങ്ക് അക്കൗണ്ട് നമ്പർ കുട്ടിയുടെ രക്ഷിതാവിന്റെതാണെന്ന്
+                                                സാക്ഷ്യപ്പെടുത്തുന്നു.
+
+                                            </p>
+                                        </div>
+
+                                        <div class="row d-flex justify-content-end">
+                                            <div class="col-6 d-flex ">
+                                                <span class="col-6"> ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫിസർ
+                                                </span>
+                                                <span class="col-1"> :</span>
+                                                <span class="col-5"> </span>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                      <form action="{{ url('childFinancialStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                   
                                
@@ -201,13 +559,18 @@
                                         </div>
                                     </div>
                                 </form>
-                                
-                                <br>
 
+
+                                </div>
+
+                                
+                            </div>
+                            <!-- /row -->
+                            <!-- row -->
+                           
                         </div>
+                        <!-- /row -->
                     </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

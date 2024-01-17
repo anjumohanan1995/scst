@@ -234,6 +234,8 @@ class ChildFinanceController extends Controller
              $address = $record->address;
              $age = $record->age;
              $caste = $record->caste;
+            $date = $record->date;
+            $time = $record->time;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
@@ -242,6 +244,7 @@ class ChildFinanceController extends Controller
                 "address" => $address,
                 "age" => $age,
                 "caste" => $caste,
+                "date" => $date." ".$time,  
                 "created_at" => $created_at,                  
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>',
                 "action" => '<div class="settings-main-icon"><a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>'
@@ -346,6 +349,8 @@ class ChildFinanceController extends Controller
              $address = $record->address;
              $age = $record->age;
              $caste = $record->caste;
+             $date = $record->date;
+             $time = $record->time;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
@@ -354,6 +359,7 @@ class ChildFinanceController extends Controller
                 "address" => $address,
                 "age" => $age,
                 "caste" => $caste,
+                'date'=>$date." ".$time,
                 "created_at" => $created_at,                  
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('userchildFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 

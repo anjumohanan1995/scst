@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകന്റെ പേര് 
+                                    <label class="form-label">Applicant's Name/അപേക്ഷകന്റെ പേര് 
                                     </label>
                                     <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ പേര് " name="name" />
                                     @error('name')
@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">മേൽവിലാസം 
+                                    <label class="form-label">Address/മേൽവിലാസം 
                                     </label>
                                     <textarea type="text" value="{{ old('address') }}"  class="form-control" placeholder="മേൽവിലാസം" name="address" ></textarea>
                                     @error('address')
@@ -53,37 +53,37 @@
                             <div class="row">   
                                
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">ജില്ല  </label>
+                                    <label class="form-label">District/ജില്ല  </label>
                                     <select id="current_district" name="current_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}" {{ (old('current_district') == $district->id) ? 'selected' : '' }} >{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('current_district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="current_district_name" id="current_district_name" value="">
+                                    <input type="hidden" name="current_district_name" id="current_district_name" value="{{ old('current_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">താലൂക്ക്  </label>
+                                    <label class="form-label">Taluk/താലൂക്ക്  </label>
                                     <select id="current_taluk" name="current_taluk" class="form-control">
                                         <option value="">Choose Taluk</option>
                                     </select>                                 
                                     @error('current_taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="">
+                                    <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="{{ old('current_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">പിൻകോഡ്  </label>
+                                    <label class="form-label">Pincode/പിൻകോഡ്  </label>
                                     <input type="text" value="{{ old('current_pincode') }}"  class="form-control"  name="current_pincode" />
                                     @error('current_pincode')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ഫോൺ നമ്പർ 
+                                    <label class="form-label">Mobile/ഫോൺ നമ്പർ 
 
 
                                     </label>
@@ -97,7 +97,7 @@
                             </div><br>
                                <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ജാതി /മതം 
+                                    <label class="form-label">Caste/Religion/ജാതി /മതം 
                                     </label>
                                     <input type="text" value="{{ old('caste') }}"  class="form-control" placeholder="ജാതി /മതം" name="caste" />
                                
@@ -106,7 +106,7 @@
                                     @enderror
                                       </div>
                                           <div class="col-md-6 mb-6">
-                                        <label class="form-label">വരുമാനം 
+                                        <label class="form-label">Income/വരുമാനം 
 
 
                                         </label>
@@ -125,7 +125,7 @@
                             <div class="row">   
                                
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിദ്യാർത്ഥിയുടെ പേര് 
+                                    <label class="form-label">Name of the student / വിദ്യാർത്ഥിയുടെ പേര് 
 
                                         
                                     </label>
@@ -140,7 +140,7 @@
                               
                               
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകനുമായുള്ള ബന്ധം 
+                                    <label class="form-label">Relationship with the Applicant/അപേക്ഷകനുമായുള്ള ബന്ധം 
 
                                         
                                         
@@ -158,7 +158,7 @@
                            
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
+                                    <label class="form-label">Name of school Attended/പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
  
                                         </label>
 
@@ -169,10 +169,10 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ക്ലാസ് 
+                                    <label class="form-label"> Class/ ക്ലാസ് 
  
                                         </label>
-                                        <input type="text" class="form-control"   name="class_number" id="class_number" value="" placeholder="ക്ലാസ് " />
+                                        <input type="number" class="form-control"   name="class_number" id="class_number" value="" placeholder="ക്ലാസ് " />
                                     @error('class_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -188,7 +188,7 @@
                            
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ട്യുഷൻ സെന്ററിന്റെ പേര്  
+                                    <label class="form-label">Name of Tuition Centre/ട്യുഷൻ സെന്ററിന്റെ പേര്  
  
                                         </label>
                                         <input type="text" class="form-control"   name="tuition_center" id="tuition_center" value="" placeholder="ട്യുഷൻ സെന്ററിന്റെ പേര് " />
@@ -197,7 +197,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">സ്ഥലം  
+                                    <label class="form-label">Place/ സ്ഥലം  
  
                                         </label>
                                         <input type="text" class="form-control"   name="place" id="place" value="" placeholder="സ്ഥലം " />
@@ -212,11 +212,12 @@
                             <div class="row"> 
 
                                  <div class="col-md-6 mb-4">
-                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </label>
-                                    <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" />
+                                    <label class="form-label">Applicant's Signature/Fingerprint/അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </label>
+                                    <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature"  id="signature" onchange="validateImage()"    accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorMessage" style="color:red;"></div>
                                 </div>   
                             </div>  
                             
@@ -227,27 +228,27 @@
                               <div class="card-body">
                                   <div class="row">   
                                       <div class="col-md-6 mb-6">
-                                          <label class="form-label">ജില്ല  </label>
+                                          <label class="form-label"> District/ജില്ല  </label>
                                           <select id="submitted_district" name="submitted_district" class="form-control" >
                                               <option value="">Select</option>
                                                   @foreach($districts as $district)
-                                                      <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                      <option value="{{$district->id}}"  {{ (old('submitted_district') == $district->id) ? 'selected' : '' }} >{{$district->name}}</option>
                                                   @endforeach
                                           </select>
                                            @error('submitted_district')
                                               <span class="text-danger">{{$message}}</span>
                                           @enderror
-                                          <input type="hidden" name="dist_name" id="dist_name" value="">
+                                          <input type="hidden" name="dist_name" id="dist_name"  value="{{ old('dist_name') }}">
                                       </div>
                                       <div class="col-md-6 mb-6">
-                                          <label class="form-label">TEO  </label>
-                                          <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                            <label class="form-label">TEO /ടി.ഇ.ഒ  </label>
+                                            <select id="submitted_teo" name="submitted_teo" class="form-control">
                                               <option value="">Choose TEO</option>
-                                          </select>                                 
-                                          @error('submitted_teo')
-                                              <span class="text-danger">{{$message}}</span>
-                                          @enderror
-                                          <input type="hidden" name="teo_name" id="teo_name" value="">
+                                            </select>                                 
+                                            @error('submitted_teo')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                          <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
                                       </div>                                 
                                   </div><br>
                               </div>
@@ -279,6 +280,27 @@
 </div>
 
 <script>
+function validateImage() {
+    var input = document.getElementById('signature');
+    var errorMessage = document.getElementById('errorMessage');
+
+    if (input.files.length > 0) {
+        var fileSize = input.files[0].size; // in bytes
+        var maxSize = 2 * 1024 * 1024; // 2MB
+
+        if (fileSize > maxSize) {
+            errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+            input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+        } else {
+            errorMessage.innerText = '';
+                $("#submit").prop("disabled", false);
+        }
+    }
+}
+
+
+
 	$('#current_district').change(function(){
         var current_district = this.options[this.selectedIndex].text;
     document.getElementById('current_district_name').value = current_district;
@@ -377,9 +399,77 @@
     document.getElementById('teo_name').value = submitted_teo;
     });
 
-	$(document).ready(function() {
-     	$('#example').DataTable();
-	});
+	   $(document).ready(function() {
+            
+            fetchTeo();
+            fetchDistrict();
+            //fetchWifeDistrict();
+        });
+
+        function fetchTeo() {
+            var val1 = $("#submitted_district").val();
+            
+           
+
+
+            $.ajax({
+                url: "{{ url('district/fetch-teo') }}",
+                type: "POST",
+                data: {
+                    district_id: val1,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#submitted_teo").find('option').remove();
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+
+                    $.each(result.teos, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.teo_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('submitted_teo') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#submitted_teo');
+                    });
+                }
+            });
+        }
+
+    function fetchDistrict() {
+         var val = document.getElementById("current_district").value;
+
+
+         $.ajax({
+            url: "{{url('district/fetch-taluk')}}",
+             type: "POST",
+             data: {
+                 district_id: val,
+                 _token: '{{ csrf_token() }}'
+             },
+             dataType: 'json',
+             success: function(result) {
+                 $("#current_taluk").find('option').remove();
+                 $("#current_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+                 $.each(result.taluks, function(key, value) {
+                     var $opt = $('<option>');
+                     $opt.val(value._id).text(value.taluk_name);
+
+                     // Set the selected attribute based on the old submitted value
+                     if ('{{ old('current_taluk') }}' == value._id) {
+                         $opt.attr('selected', 'selected');
+                     }
+
+                     $opt.appendTo('#current_taluk');
+                 });
+             }
+         });
+     }
+
   </script>
 <!-- main-content-body -->
 @endsection

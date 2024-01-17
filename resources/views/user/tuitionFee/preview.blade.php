@@ -199,7 +199,9 @@
     // edit button function
     function goback() {
         if (confirm('Are you sure ? Do you want to edit this form!. ')) {
-            window.history.back();
+            //window.history.back();
+             window.location.href = "{{ url()->previous() }}";
+
         }
         return
     

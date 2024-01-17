@@ -60,8 +60,8 @@
                                             <label class="form-label"> Child's birth certificate/കുട്ടിയുടെ ജനന സർട്ടിഫിക്കറ്റ്   </label>
                                             <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                         മാത്രം.)</label>
-                                            <input type="file" value="{{ old('birth_certificate') }}" class="form-control" placeholder="" name="birth_certificate" />
-                                            
+                                            <input type="file" value="{{ old('birth_certificate') }}" class="form-control" id="birth_certificate" onchange="validateImage()"   name="birth_certificate" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                                            <div id="errorMessage" style="color:red;"></div>
                                         
                                         </div>
                                     </div><br>
@@ -114,9 +114,9 @@
                                                 <option value="">Select</option>
                                                     @foreach($districts as $district)
                                                         {{-- <option value="{{$district->id}}"  >{{$district->name}}</option> --}}
-                                                         <option value="{{ $district->id }}" {{ (old('current_district') == $district->id) ? 'selected' : '' }}>
-    {{ $district->name }}
-</option>
+                                                        <option value="{{ $district->id }}" {{ (old('current_district') == $district->id) ? 'selected' : '' }}>
+                                                            {{ $district->name }}
+                                                        </option>
                                                     @endforeach
                                             </select>
                                                 @error('current_district')
@@ -213,10 +213,11 @@
                                             <label class="form-label">Applicant's Signature/അപേക്ഷകന്റെ ഒപ്പ്(വിരലടയാളം) </label>
                                             <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                         മാത്രം.)</label>
-                                            <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" />
+                                            <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" id="signature" onchange="validateImageOne()"    accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"  />
                                             @error('signature')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
+                                             <div id="errorMessageone" style="color:red;"></div>
                                         </div>                                
                                     </div><br>  
                                     <div class="row">   
@@ -224,10 +225,12 @@
                                             <label class="form-label">Child's photo / കുട്ടിയുടെ ഫോട്ടോ </label>
                                             <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                         മാത്രം.)</label>
-                                            <input type="file" value="{{ old('child_signature') }}"  class="form-control" placeholder="കുട്ടിയുടെ ഫോട്ടോ" name="child_signature" />
+                                            <input type="file" value="{{ old('child_signature') }}"  class="form-control" placeholder="കുട്ടിയുടെ ഫോട്ടോ" name="child_signature" id="child_signature" onchange="validateImageTwo()"    accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
                                             @error('child_signature')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
+                                            <div id="errorMessagetwo" style="color:red;"></div>
+                                            
                                         </div>     
                                     </div>
 
@@ -293,6 +296,66 @@
 </div>
 
 <script type="text/javascript">
+function validateImage() {
+        var input = document.getElementById('birth_certificate');
+        var errorMessage = document.getElementById('errorMessage');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                  $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+}
+function validateImageOne() {
+    var input = document.getElementById('signature');
+    var errorMessage = document.getElementById('errorMessageone');
+
+    if (input.files.length > 0) {
+        var fileSize = input.files[0].size; // in bytes
+        var maxSize = 2 * 1024 * 1024; // 2MB
+
+        if (fileSize > maxSize) {
+            errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+            input.value = ''; // Clear the file input
+            $("#submit").prop("disabled", true);
+        } else {
+            errorMessage.innerText = '';
+                $("#submit").prop("disabled", false);
+        }
+    }
+
+    
+}
+
+function validateImageTwo() {
+    var input = document.getElementById('child_signature');
+    var errorMessage = document.getElementById('errorMessagetwo');
+
+    if (input.files.length > 0) {
+        var fileSize = input.files[0].size; // in bytes
+        var maxSize = 2 * 1024 * 1024; // 2MB
+
+        if (fileSize > maxSize) {
+            errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+            input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+        } else {
+            errorMessage.innerText = '';
+                $("#submit").prop("disabled", false);
+        }
+    }
+
+    
+}
+    
 	$('#current_district').change(function(){
         var current_district = this.options[this.selectedIndex].text;
         document.getElementById('current_district_name').value = current_district;

@@ -343,10 +343,13 @@
                                             <label class="form-label">Document to prove the possibility of marriage/വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ</label>
                                             <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</label>
-                                            <input type="file" class="form-control"  name="marriage_certificate"  value="{{ old('marriage_certificate') }}" />
+                                            <input type="file" class="form-control" id="marriage_certificate" onchange="validateImagetwo()"  name="marriage_certificate"  value="{{ old('marriage_certificate') }}"  accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
                                                 @error('marriage_certificate')
-                                                        <span class="text-danger">{{$message}}</span>
+                                                    <span class="text-danger">{{$message}}</span>
                                                 @enderror
+
+                                                
+                                            <div id="errorMessagetwo" style="color:red;"></div>
                                     </div>
 
                                 </div><br>
@@ -414,20 +417,22 @@
                                         <label class="form-label">Husband's Sign/ഭർത്താവിന്റെ ഒപ്പ് </label>
                                         <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</label>
-                                        <input type="file" class="form-control"  name="husband_sign"  />
+                                        <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
                                         @error('husband_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
+                                        <div id="errorMessage" style="color:red;"></div>
                                     </div>
 
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">Wife's Sign/ ഭാര്യയുടെ ഒപ്പ് </label>
                                         <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</label>
-                                        <input type="file" class="form-control"  name="wife_sign"  />
+                                        <input type="file"   accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()" />
                                         @error('wife_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
+                                        <div id="errorMessageone" style="color:red;"></div>
                                     </div>
 
                                 </div>
@@ -504,7 +509,68 @@
     </div>
 </div>
 <script type="text/javascript">
+function validateImage() {
+        var input = document.getElementById('husband_sign');
+        var errorMessage = document.getElementById('errorMessage');
 
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                  $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+}
+
+    function validateImageOne() {
+        var input = document.getElementById('wife_sign');
+        var errorMessage = document.getElementById('errorMessageone');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+
+     function validateImagetwo() {
+        var input = document.getElementById('marriage_certificate');
+        var errorMessage = document.getElementById('errorMessagetwo');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                 $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+    
+    
 
 
 
