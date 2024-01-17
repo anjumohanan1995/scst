@@ -98372,3 +98372,17 @@ div#success_message {
 .ctm-height{
     min-height: 70px;
 }
+
+#preview_student_fund{
+
+ 
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    
+    #preview_student_fund th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }

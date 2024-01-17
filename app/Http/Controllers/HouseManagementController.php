@@ -243,7 +243,7 @@ $formattedDate = $currentDate->toDateString();
               $date = $carbonDate->format('d-m-Y');
               
               // Extract time
-              $time = $carbonDate->format('H:i a');
+              $time =@$record->time;
             $data_arr[] = array(
                 "id" => $id,
                 "place" => $place,
