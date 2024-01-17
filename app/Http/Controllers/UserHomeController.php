@@ -452,8 +452,9 @@ class UserHomeController extends Controller
                 "dob" => $age . '/' . $dob,
                 "caste" => $caste,
                 "village" => $village,
-                "created_at" => $created_at,
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMotherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                        
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMotherChildScheme/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
         }
@@ -556,8 +557,9 @@ class UserHomeController extends Controller
                 "current_address" => $current_address,
                 "age" => $age,
                 "caste" => $caste,
-                "created_at" => $created_at,
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMarriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                 
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMarriageGrant/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
 
             );
         }
@@ -760,8 +762,9 @@ class UserHomeController extends Controller
                 "address" => $address,
                 "dob" => $dob,
                 "district" => $district,
-                "created_at" => $created_at,
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('userAnemiaFinance/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                    
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userAnemiaFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+
 
             );
         }

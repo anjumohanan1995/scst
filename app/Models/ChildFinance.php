@@ -32,7 +32,9 @@ class ChildFinance extends Eloquent
         'approved_date',
         'rejected_by',
         'rejected_date',
-        'rejected_reason'
+        'rejected_reason',
+        'date','time',
+
 
     ];
 

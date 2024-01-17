@@ -583,6 +583,68 @@
                                         </div>
 
                                     </div>
+                                     <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>10. ജില്ല </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                      {{ @$formData['dist_name'] }}
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+
+                                     <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>11.ടി.ഇ.ഒ</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                      {{ @$formData['teo_name'] }}
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+
+
+
                                    
                                     <div>
                                         <p>ശ്രീമാൻ{{ @$formData['husband_name'] }} ശ്രീമതി {{ @$formData['wife_name'] }}
@@ -687,8 +749,8 @@
         // edit button function
         function goback() {
             if (confirm('Are you sure? Do you want to edit this form?')) {
-               // window.location.href = "{{ url()->previous() }}";
-                window.history.back();
+                window.location.href = "{{ url()->previous() }}";
+                //window.history.back();
                
             }
         }

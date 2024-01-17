@@ -194,13 +194,13 @@ $(document).on("click",".deleteItem",function() {
 				{ data: 'dob' },
 				{ data: 'caste' },
                 { data: 'village' },
-                { data: 'created_at', visible: false },
+                { data: 'created_at' },
 
                 { data: 'edit' }
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [5, 'desc'],
             'ordering': true,
          });
 

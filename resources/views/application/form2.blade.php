@@ -172,6 +172,7 @@
                                             <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ് / Applicant's signature</label>
                                             <input type="file" class="form-control" name="signature" id="signature"
                                                 value="" placeholder="" />
+                                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

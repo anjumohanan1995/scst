@@ -217,13 +217,12 @@
                                             <div class="card-content">
 
                                                 <div class="card-desc">
-                                                    <h3>Application 5 -<a
-                                                            href="{{ route('userchildFinanceList') }}">Applied({{ $data['childFinanceCount'] }})
-                                                    </h3>
-                                                    <p class="ctm-height">അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന
-                                                        പദ്ധതി കൈത്താങ്ങ് </p>
-                                                    <a href="{{ url('childFinancialAssistanceForm') }}"
-                                                        class="btn-card">Apply Now</a>
+                                                    <h3>Application 5 -<a href="{{ route('userchildFinanceList') }}">Applied({{ $data['childFinanceCount'] }})</h3>
+                                                    <p class="ctm-height">അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
+                                                         
+                                                        {{-- <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>    --}}
+
+                                                          <a href="#" class="btn-card" data-toggle="modal" data-target="#childFinancialAssistance">Apply Now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -268,13 +267,10 @@
                                             <div class="card-content">
 
                                                 <div class="card-desc">
-                                                    <h3>Application 8 - <a
-                                                            href="{{ route('userAnemiaFinanceList') }}">Applied({{ $data['anemiaFinanceCount'] }})</a>
-                                                    </h3>
-                                                    <p class="ctm-height">സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം
-                                                        നൽകുന്ന പദ്ധതി </p>
-                                                    <a href="{{ url('anemia-financial-assistance') }}"
-                                                        class="btn-card">Apply Now</a>
+                                                    <h3>Application 8 - <a href="{{ route('userAnemiaFinanceList') }}">Applied({{ $data['anemiaFinanceCount'] }})</a></h3>
+                                                    <p>സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി </p>
+                                                    <a href="#" class="btn-card" data-toggle="modal" data-target="#anemiaFinanceModal">Apply Now</a>
+                                                         {{--  <a href="{{url('anemia-financial-assistance')}}" class="btn-card">Apply Now</a>anemiaFinanceModal     --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -522,7 +518,7 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                              <a href="{{ url('single-income-earner') }}" class="btn btn-primary"> Continue</a>
                         </div>
-                    </form>
+                   </form>
                 </div>
             </div>
         </div>
@@ -691,6 +687,208 @@
 
 
     </div>
+<<<<<<< HEAD
+
+    <div class="modal fade" id="childFinancialAssistance" tabindex="-1" role="dialog" aria-labelledby="childFinancialAssistanceLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                          അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് 
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ul>
+                            <li>
+                               കുട്ടിയുടെ ഫോട്ടോ
+ 
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       
+                       <a  href="{{url('childFinancialAssistanceForm')}}"   class="btn btn-primary"> Continue</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+
+<<<<<<< HEAD
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="applicationModal" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            ജനനി-ജനനി -ജന്മരക്ഷ പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി അപേക്ഷഫോറം 
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ul>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{ route('applicationForm2') }}" <button type="submit" class="btn btn-primary">Continue</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="marriageGrant" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക് വിവാഹധനസഹായം നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ol>
+                            <li>
+                                തഹസിൽദാരിൽനിന്നും ജാതി തെളിയിക്കുന്ന സാക്ഷ്യപത്രം (അസൽ )ഹാജരാക്കണം
+                            </li>
+                            <li>
+                                കുടുംബത്തിൽ എല്ലാ മാർഗത്തിൽ നിന്നുമുള്ള ആകെ വാർഷിക വരുമാനം (വില്ലേജ് ആഫീസറിൽ നിന്നും ലഭിച്ച സർട്ടിഫിക്കറ്റ് (അസൽ) ഹാജരാക്കണം ) 
+                            </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ol>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{url('marriageGrantForm')}}" <button type="submit" class="btn btn-primary">Continue</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="studentAward" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                      
+                        <ol>
+                            <li>
+                                പരീക്ഷാ വിവരങ്ങൾ 
+                            </li>
+                            <li>
+                                ആധാർ വിവരങ്ങൾ
+                            </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ol>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{url('student-award')}}" <button type="submit" class="btn btn-primary">Continue</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="anemiaFinanceModal" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി 
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ: </p>
+                        <p style="font-size: 11px;">(Max. filesize: 2 MB • Format: JPG, PNG, PDF) </p>
+
+                        <ul>
+                            <li>
+                                ജാതി സർട്ടിഫിക്കറ്റ്
+                            </li>
+                            <li>
+                                ആധാർ പകർപ്പ്
+                            </li>
+                            <li>
+                                ബാങ്ക് അക്കൗണ്ട് പാസ്സ് ബുക്കിന്റെ പകർപ്പ്
+                            </li>
+                            <li>
+                                മെഡിക്കൽ സർട്ടിഫിക്കറ്റ് 
+                            </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{url('anemia-financial-assistance')}}" class="btn btn-primary"> Continue</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
     </section>
 
 

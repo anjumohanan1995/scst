@@ -70,6 +70,43 @@ class MarriageGrant extends Eloquent
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function CurrentDistrict() {
+        return $this->belongsTo('App\Models\District', 'current_district');
+    }
+    public function CurrentTaluk() {
+        return $this->belongsTo('App\Models\Taluk', 'current_taluk');
+    }
+    public function PermanentDistrict() {
+        return $this->belongsTo('App\Models\District', 'permanent_district');
+    }
+    public function PermanentTaluk() {
+        return $this->belongsTo('App\Models\Taluk', 'permanent_taluk');
+    }
+
+    public function FinanceeDistrict() {
+        return $this->belongsTo('App\Models\District', 'fiancee_district');
+    }
+    public function FinanceeTaluk() {
+        return $this->belongsTo('App\Models\Taluk', 'fiancee_taluk');
+    }
+    public function GroomDistrict() {
+        return $this->belongsTo('App\Models\District', 'groom_district');
+    }
+    public function GroomTaluk() {
+        return $this->belongsTo('App\Models\Taluk', 'groom_taluk');
+    }
+    public function GroomParentDistrict() {
+        return $this->belongsTo('App\Models\District', 'groom_parent_district');
+    }
+    public function GroomParentTaluk() {
+        return $this->belongsTo('App\Models\Taluk', 'groom_parent_taluk');
+    }
+    public function submittedDistrict() {
+        return $this->belongsTo('App\Models\District', 'submitted_district');
+    }
+    public function submittedTeo() {
+        return $this->belongsTo('App\Models\Teo', 'submitted_teo');
+    }
 
     
 }

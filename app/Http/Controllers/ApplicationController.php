@@ -328,6 +328,8 @@ class ApplicationController extends Controller
         $formData['husband_sign']= $husband_sign;
         $formData['wife_sign']= $wife_sign;
 
+        $request->flash();
+
         return view('application.financial_preview', compact('formData'));
 
 
@@ -976,7 +978,7 @@ class ApplicationController extends Controller
                 "dob" => $age.'/'.$dob,
                 "caste" => $caste,
                 "village" => $village,
-                "created_at" => $created_at,                  
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,            
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
@@ -1010,8 +1012,7 @@ class ApplicationController extends Controller
     public function marriageGrantFormStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'age' => 'required|numeric', 
+            'name' => 'required', 
             'submitted_district' => 'required',
             'submitted_teo' => 'required',          
         ]);
@@ -1214,7 +1215,7 @@ class ApplicationController extends Controller
                 "current_address" => $current_address,
                 "age" => $age,
                 "caste" => $caste,
-                "created_at" => $created_at,                  
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                  
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('marriageGrant/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
