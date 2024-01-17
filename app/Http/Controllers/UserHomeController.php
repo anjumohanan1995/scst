@@ -886,4 +886,6 @@ class UserHomeController extends Controller
 
         return view('user.single_earner_view', compact('formData'));
     }
+
+    
 }

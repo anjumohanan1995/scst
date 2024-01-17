@@ -78,6 +78,9 @@ class TuitionFeeController extends Controller
         // Format the date if needed
         $formattedDate = $currentDate->toDateString();
         $formData['date']= $formattedDate;
+        $request->flash();
+
+
         return view('user.tuitionFee.preview', compact('formData'));
     }
 

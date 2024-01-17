@@ -104,7 +104,10 @@
                                                 <select id="district" name="district" class="form-control">
                                                     <option value="">Select</option>
                                                     @foreach ($districts as $district)
-                                                        <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                        <option value="{{ $district->id }}"
+                                                            {{ old('district') == $district->id ? 'selected' : '' }}>
+                                                            {{ $district->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                                 @error('district')
@@ -262,11 +265,13 @@
                                             </div>
                                             <div class="col-6">
                                                 <label class="form-label">Birth District / ജനിച്ച ജില്ല </label>
-                                                <select id="" name="birth_district"
-                                                    class="form-control" required>
+                                                <select id="" name="birth_district" class="form-control"
+                                                    required>
                                                     <option value="">Select</option>
                                                     @foreach ($districts as $district)
-                                                        <option value="{{ $district->id }}">{{ $district->name }}
+                                                        <option value="{{ $district->id }}"
+                                                            {{ old('birth_district') == $district->id ? 'selected' : '' }}>
+                                                            {{ $district->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -275,7 +280,7 @@
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-6">
@@ -322,7 +327,10 @@
                                             required>
                                             <option value="">Select</option>
                                             @foreach ($districts as $district)
-                                                <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                <option value="{{ $district->id }}"
+                                                    {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
+                                                    {{ $district->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('dist')
@@ -369,6 +377,13 @@
             });
         });
 
+        $(document).ready(function() {
+            fetchTeo();
+            fetchTaluk();
+        });
+
+
+        //selection of district 
         $('#district').change(function() {
             var districtName = this.options[this.selectedIndex].text;
             document.getElementById('district_name').value = districtName;
@@ -385,23 +400,65 @@
                 success: function(result) {
                     $("#taluk").find('option').remove();
                     $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+
                     $.each(result.taluks, function(key, value) {
                         var $opt = $('<option>');
                         $opt.val(value._id).text(value.taluk_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('taluk') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
                         $opt.appendTo('#taluk');
-
-
                     });
-
                 }
             });
-
         });
+
+        function fetchTaluk() {
+            var val = document.getElementById("district").value;
+
+
+            $.ajax({
+                url: "{{ url('district/fetch-taluk') }}",
+                type: "POST",
+                data: {
+                    district_id: val,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#taluk").find('option').remove();
+                    $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+
+                    $.each(result.taluks, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.taluk_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('taluk') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#taluk');
+                    });
+                }
+            });
+        }
+
+
+
+
         $('#taluk').change(function() {
             var talukName = this.options[this.selectedIndex].text;
             document.getElementById('taluk_name').value = talukName;
         });
 
+
+
+
+        //selection of teo.
         $('#submitted_district').change(function() {
             var submitted_district = this.options[this.selectedIndex].text;
             document.getElementById('dist_name').value = submitted_district;
@@ -417,19 +474,56 @@
                 dataType: 'json',
                 success: function(result) {
                     $("#submitted_teo").find('option').remove();
-                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+                    $("#submitted_teo").append(
+                        '<option value="" selected>Choose TEO</option>');
                     $.each(result.teos, function(key, value) {
                         var $opt = $('<option>');
                         $opt.val(value._id).text(value.teo_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('submitted_teo') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
                         $opt.appendTo('#submitted_teo');
-
-
                     });
-
                 }
             });
-
         });
+
+
+
+        function fetchTeo() {
+            var val = document.getElementById("submitted_district").value;
+
+            $.ajax({
+                url: "{{ url('district/fetch-teo') }}",
+                type: "POST",
+                data: {
+                    district_id: val,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#submitted_teo").find('option').remove();
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+
+                    $.each(result.teos, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.teo_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('submitted_teo') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#submitted_teo');
+                    });
+                }
+            });
+        }
+
+
         $('#submitted_teo').change(function() {
             var submitted_teo = this.options[this.selectedIndex].text;
             document.getElementById('teo_name').value = submitted_teo;
