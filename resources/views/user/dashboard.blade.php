@@ -186,9 +186,9 @@
                                                     </h3>
                                                     <p class="ctm-height">അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം
                                                         പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ</p>
-                                                    <a href="{{ route('exam-application') }}" class="btn-card">Apply Now</a>
-                                                    {{-- <a href="#" class="btn-card" data-toggle="modal"
-                                                    data-target="#userSingleEarnerListModel">Apply Now</a> --}}
+                                                    {{-- <a href="{{ route('exam-application') }}" class="btn-card">Apply Now</a> --}}
+                                                    <a href="#" class="btn-card" data-toggle="modal"
+                                                    data-target="#examApplication">Apply Now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -690,7 +690,6 @@
 
 
 
-
     <div class="modal fade" id="childFinancialAssistance" tabindex="-1" role="dialog" aria-labelledby="childFinancialAssistanceLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -883,6 +882,40 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                        <a href="{{url('anemia-financial-assistance')}}" class="btn btn-primary"> Continue</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="examApplication" tabindex="-1" role="dialog" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി 
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                        <p>  ഹാജരാക്കേണ്ട രേഖകൾ: </p>
+                        <p style="font-size: 11px;">(Max. filesize: 2 MB • Format: JPG, PNG, PDF) </p>
+
+                        <ul>
+                     
+                            <li>
+                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                            </li>
+                        </ul>
+                    </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <a href="{{ route('exam-application') }}" class="btn btn-primary"> Continue</a>
                     </div>
                 </form>
             </div>
