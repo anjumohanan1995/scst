@@ -46,7 +46,7 @@
                                         <div class="col-md-12">
 
                                             <input type="text" value="{{ old('applicant_name') }}" class="form-control"
-                                                placeholder="" name="applicant_name" />
+                                                 name="applicant_name" placeholder="പേര്" />
                                             @error('applicant_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -95,7 +95,10 @@
                                             <select id="district" name="district" class="form-control">
                                                 <option value="">Select</option>
                                                 @foreach ($districts as $district)
-                                                    <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                    <option value="{{ $district->id }}"
+                                                        {{ old('district') == $district->id ? 'selected' : '' }}>
+                                                        {{ $district->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('district')
@@ -115,13 +118,14 @@
                                         </div>
                                         <div class="col-md-4 mb-4">
                                             <label class="form-label">Pincode / പിൻകോഡ് </label>
-                                            <input type="text" value="{{ old('pincode') }}" class="form-control"
-                                                name="pincode" />
+                                            <input type="number" value="{{ old('pincode') }}" class="form-control"
+                                                name="pincode" placeholder="പിൻകോഡ്" />
                                             @error('pincode')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div><br>
+                                    </div>
+                                    <br>
 
                                     <label class="form-label">relation to the deceased person / മരണപ്പെട്ടയാളുമായുള്ള ബന്ധം
                                     </label>
@@ -203,8 +207,8 @@
                                             <input type="file" value="{{ old('passbook_copy') }}"
                                                 class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
                                                 name="passbook_copy" />
-                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
-                                                    മാത്രം.)</span>
+                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                മാത്രം.)</span>
                                             @error('passbook_copy')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -285,8 +289,8 @@
                                             ചെയുക
                                             <input type="file" value="{{ old('death_certificate') }}"
                                                 class="form-control" placeholder="വയസ്സ് " name="death_certificate" />
-                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
-                                                    മാത്രം.)</span>
+                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                മാത്രം.)</span>
                                             @error('death_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -327,8 +331,8 @@
 
                                             <input type="file" value="{{ old('past_job_document') }}"
                                                 class="form-control" name="past_job_document" />
-                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
-                                                    മാത്രം.)</span>
+                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                മാത്രം.)</span>
                                             @error('past_job_document')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -363,8 +367,8 @@
                                             Upload the ration card image / റേഷൻ കാർഡിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('ration_card') }}" class="form-control"
                                                 placeholder="Total Members in family" name="ration_card" />
-                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
-                                                    മാത്രം.)</span>
+                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                മാത്രം.)</span>
                                             @error('ration_card')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -509,8 +513,8 @@
                                             <input type="file" value="{{ old('income_certificate') }}"
                                                 class="form-control" placeholder="വാർഷിക വരുമാനം"
                                                 name="income_certificate" />
-                                                <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
-                                                    മാത്രം.)</span>
+                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                മാത്രം.)</span>
                                             @error('income_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -683,22 +687,59 @@
                 success: function(result) {
                     $("#taluk").find('option').remove();
                     $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+
                     $.each(result.taluks, function(key, value) {
                         var $opt = $('<option>');
                         $opt.val(value._id).text(value.taluk_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('taluk') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
                         $opt.appendTo('#taluk');
-
-
                     });
-
                 }
             });
-
         });
+
+        function fetchTaluk() {
+            var val = document.getElementById("district").value;
+
+
+            $.ajax({
+                url: "{{ url('district/fetch-taluk') }}",
+                type: "POST",
+                data: {
+                    district_id: val,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#taluk").find('option').remove();
+                    $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+
+                    $.each(result.taluks, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.taluk_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('taluk') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#taluk');
+                    });
+                }
+            });
+        }
+
+
         $('#taluk').change(function() {
             var talukName = this.options[this.selectedIndex].text;
             document.getElementById('taluk_name').value = talukName;
         });
+
 
 
 
@@ -767,9 +808,13 @@
         }
 
 
+ 
+
+
         // Call the function on page load
         $(document).ready(function() {
             fetchTeo();
+            fetchTaluk();
         });
 
 
