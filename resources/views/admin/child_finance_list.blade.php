@@ -73,6 +73,7 @@
                                             <th>Caste</th>
                                             <th>Created Date</th>
                                             <th >View</th>
+                                            <th >Date & Time</th>
                                             <th >Action</th>
 
 
@@ -195,6 +196,8 @@
                 { data: 'created_at', visible: false },
 
                 { data: 'edit' },
+                { data: 'date' },
+
                 { data: 'action' }
 
 
