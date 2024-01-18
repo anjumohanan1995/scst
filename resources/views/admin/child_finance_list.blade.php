@@ -72,7 +72,6 @@
                                             <th> Address </th>
                                             <th>Caste</th>
                                             <th>Created Date</th>
-                                            <th >View</th>
                                             <th >Date & Time</th>
                                             <th >Action</th>
 
@@ -195,14 +194,13 @@
 				{ data: 'caste' },
                 { data: 'created_at', visible: false },
 
-                { data: 'edit' },
                 { data: 'date' },
 
                 { data: 'action' }
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [4, 'desc'],
             'ordering': true,
          });
 

@@ -42,6 +42,10 @@ class ChildFinance extends Eloquent
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function RejectedUser()
+    {
+        return $this->belongsTo(User::class, 'rejected_by');
+    }
 
     
 }
