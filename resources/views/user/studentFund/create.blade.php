@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">Pincode (പിൻകോഡ്)  </label>
-                                    <input type="text" value="{{ old('current_pincode') }}"  class="form-control"  name="current_pincode" />
+                                    <input type="number" value="{{ old('current_pincode') }}"  class="form-control"  name="current_pincode" />
                                     @error('current_pincode')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -160,7 +160,7 @@
                                         
                                         
                                           </label>
-                                          <input type="text" value="{{ old('income') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം " name="income" >
+                                          <input type="number" value="{{ old('income') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം " name="income" >
                                     
                                     @error('income')
                                         <span class="text-danger">{{$message}}</span>

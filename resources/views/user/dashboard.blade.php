@@ -319,8 +319,10 @@
                                                     </h3>
                                                     <p class="ctm-height">പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11
                                                         ,12 ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ
-                                                    </p>
-                                                    <a href="TuitionFee/create" class="btn-card">Apply Now</a>
+                                                    </p> 
+                                                     <a href="#" class="btn-card" data-toggle="modal"
+                                                        data-target="#itiStudentModal">Apply Now</a>
+                                                    {{-- <a href="TuitionFee/create" class="btn-card">Apply Now</a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -333,7 +335,9 @@
                                                     </h3>
                                                     <p class="ctm-height">ഐ.റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള
                                                         സ്കോളർഷിപ്പ്</p>
-                                                    <a href="{{ url('iti-scholarship') }}" class="btn-card">Apply Now</a>
+                                                    <a href="#" class="btn-card" data-toggle="modal"
+                                                        data-target="#itiStudentModal">Apply Now</a>
+                                                    {{-- <a href="{{ url('iti-scholarship') }}" class="btn-card">Apply Now</a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -348,7 +352,9 @@
         </div>
 
 
-        <div class="modal fade" id="houseGrantModal" tabindex="-1" role="dialog"
+       
+
+         <div class="modal fade" id="itiStudentModal" tabindex="-1" role="dialog"
             aria-labelledby="applicationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -356,9 +362,8 @@
                     <form>
                         <div class="modal-header">
                             <h5 class="modal-title" id="applicationModalLabel">
-                                പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും
-                                പൂർത്തീകരിക്കുന്നതിനുമുള്ള
-                                ധനസഹായത്തിനുള്ള അപേക്ഷ
+                                പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11
+                                                        ,12 ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -377,14 +382,12 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="/houseGrant/create" class="btn btn-primary"> Continue</a>
+                            <a href="TuitionFee/create" class="btn btn-primary"> Continue</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-
 
         <div class="modal fade" id="houseGrantModal" tabindex="-1" role="dialog"
             aria-labelledby="applicationModalLabel" aria-hidden="true">
@@ -686,7 +689,6 @@
 
 
 
-    </div>
 
     <div class="modal fade" id="childFinancialAssistance" tabindex="-1" role="dialog" aria-labelledby="childFinancialAssistanceLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

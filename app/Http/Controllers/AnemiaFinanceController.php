@@ -48,7 +48,10 @@ class AnemiaFinanceController extends Controller
     public function anemiaFinancePreview(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required']
+            'name' => 'required',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',
+            ]
            
         );
         if ($validator->fails()) {

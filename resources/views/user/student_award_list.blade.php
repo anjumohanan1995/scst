@@ -8,11 +8,7 @@
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 				<div class="col-xl-6">
 					<h4 class="content-title mb-2">മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo </h4>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - Application List</li>
-                        </ol>
-                    </nav>
+                  
 				</div>
 				<div class="d-flex my-auto col-xl-6 pe-0">
 					<div class="card">
@@ -48,21 +44,7 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
-                                <div class="row mb-3">
-                            
-                                <div class="col-md-1 col-6 text-center" id="refresh">
-                                    <div class="task-box success  mb-0">
-                                            <p class="mb-0 tx-12">Refresh  </p>
-                                            <h3 class="mb-0"><i class="fa fa-spinner"></i></h3>
-                                    </div>
-                                </div>
-                                
-
-
-                            </div>
-
-
-
+                              
 
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
@@ -176,13 +158,13 @@ $(document).on("click",".deleteItem",function() {
                 { data: 'dob' },
 				{ data: 'address' },
                 { data: 'district' },
-                { data: 'created_at', visible: false },
+                { data: 'created_at' },
 
                 { data: 'edit' }
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [4, 'desc'],
             'ordering': true,
          });
 

@@ -9,7 +9,6 @@
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			<div class="col-xl-9">
 				<h4 class="content-title mb-2"> മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo</h4>
-				<h4 class="content-title mb-2">APPLICATION FOR SSLC/PLUS TWO/ DEGREE/PG AWARD 2023-24</h4>
 			</div>
 			<div class="col-xl-3">
 			</div>
@@ -30,84 +29,241 @@
 
 			<!-- row -->
 			<!-- row -->
-			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-					<div class="card">
-						<div class="card-body">
-							    <div id="success_message" class="ajax_response" style="display: none;"></div>
-								<div class="mb-4 main-content-label">
-                                 Application Preview
+            <div class="row row-sm w-100">
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <div class="card overflow-hidden" style="width: 113%;">
+                        <div class="card-body pd-y-7">
+                            <h1
+                            style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
+                            APPLICATION FOR SSLC/PLUS TWO/ DEGREE/PG AWARD 2023-24
+                        </h1>
+
+
+                        
+                                    <form action="#" method="post"
+                                        style="font-weight: 500;font-size: 12px;padding: 90px;">
+                                        
+                                            <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>1.	Name and address of Applicant </label>
                                     </div>
-								
-                                   
-          <table border="1" class="table">
-            <tr> 
-                <td >  Name </td>
-                <td><strong> {{ @$formData['name'] }} </strong></td>
 
-                <td colspan="">  Date of Birth  </td>                
-                <td> <strong> {{ @$formData['dob'] }}</strong>  </td>              
-            </tr>
-            <tr>
-                <td colspan="">  Address  </td>
-                <td> {{ @$formData['address'] }}</td>
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['name'] }} <br> {{ @$formData['address'] }} <br>
+                                            @if (@$formData['district_name'])
+                                            {{ @$formData['district_name'] }}
+                                        @endif
+                                        @if (@$formData['taluk_name'])
+                                            ,{{ @$formData['taluk_name'] }}
+                                        @endif
+                                        @if (@$formData['pincode'])
+                                            ,{{ @$formData['pincode'] }}
+                                        @endif
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="paper-1">
+                                    <div class="col-6">
 
-                <td colspan="">   District  </td>
-                <td> {{ @$formData['district_name'] }} </td>
-            </tr>                   
-            <tr> 
-                <td colspan=""> Taluk  </td>
-                <td>  {{ @$formData['taluk_name'] }}  </td>
+                                        <label>2.	Examination Passed </label>
+                                    </div>
 
-                <td>Pincode  </td>
-                <td>  {{ @$formData['pincode'] }}  </td>
-            </tr>
-            <tr>
-                <td colspan="">   Examination Passed   </td>
-                <td> {{ @$formData['examination_passed'] }} </td>
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['examination_passed'] }} </label>
+                                    </div>
+                                </div> 
 
-                <td colspan=""> Name of the Guardian  </td>
-                <td>  {{ @$formData['guardian_name'] }}  </td>
-            </tr>
-            <tr>       
-                <td>Community  </td>
-                <td>  {{ @$formData['community'] }}  </td>
+                                <div class="paper-1">
+                                    <div class="col-6">
 
-                <td colspan="">  Name of the Panchayath </td>
-                <td> {{ @$formData['panchayath_name'] }} </td>
-            </tr>
-            <tr>     
-                <td colspan=""> Name of the Institution </td>
-                <td>  {{ @$formData['institution_name'] }}  </td>
+                                        <label>3.	Name of the Guardian	</label>
+                                    </div>
 
-                <td>Month & Year of Pass  </td>
-                <td>  {{ @$formData['pass_month'] }} {{ @$formData['pass_year'] }}  </td>
-            </tr>
-         
-         
-               
-           </table>
-           <h5 style="text-align: center;">DECLARATION</h5>
-            <p style="text-align: center;">The above given Details are true according to my best knowledge</p>
-            <div>
-              <p style="float: left;">Name  &nbsp; &nbsp; <b>{{ @$formData['name'] }}</b></p>
-            </div>
-            <div>
-              
-                    <p style="float: right;">Signature<br>
-                         @if($formData['signature'])
-                    <img src="{{ asset('applications/student_award/' . @$formData['signature']) }}" style="width: 145px;height: 100px;" />
-               @endif</p>
-               <br>
-            </div>
-            <br>  <br>  <br>
-         
-                                
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['guardian_name'] }}</label>
+                                    </div>
+                                </div> 
+
+                               
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>4.	Date of Birth </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : @if($formData['dob'])  {{ date("d-m-Y",strtotime(@$formData['dob'])) }} @endif</label>
+                                    </div>
+                                </div>       
+
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>5.	Community	 </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['community'] }}</label>
+                                    </div>
+                                </div> 
+                               
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>6.	Name of Panchayath </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['panchayath_name'] }}</label>
+                                    </div>
+                                </div> 
+
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>7.	Name of Institution </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['institution_name'] }}</label>
+                                    </div>
+                                </div> 
+
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>8.	Month & Year of Pass	</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['pass_month'] }} {{ @$formData['pass_year'] }} </label>
+                                    </div>
+                                </div> 
+
+
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>9.	Phone No.	 </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['phone'] }}</label>
+                                    </div>
+                                </div> 
+
+
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>10.	Account No.		 </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['account_number'] }}</label>
+                                    </div>
+                                </div> 
+
+
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>11.	IFSC Code </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['ifsc_code'] }} </label>
+                                    </div>
+                                </div> 
+
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>12.	Aadhar No</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['aadhar_number'] }} </label>
+                                    </div>
+                                </div> 
+
+                    <h2 style="text-align: center;">DECLARATION</h2>
+                    <h5 style="text-align: center;">The above given Details are true according to my best knowledge </h5>
+
+
+                    
+
+                   
+                   
+                        <div>
+                            <label>
+                                {{ @$formData['name'] }}
+                            </label>
+                            <label  style="float: right;">  
+                                @if($formData['signature'])
+                                <img src="{{ asset('applications/student_award/' . @$formData['signature']) }}" style="width: 145px;height: 40px;" />
+                           @endif
+                           <br>
+                           (Name and Signature)
+                        
+                        </label><br>
+                         
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <h1
+                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                    അപേക്ഷ സമർപ്പിക്കുന്നത്
+
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class=" col-6 d-flex ">
+                                <div class=" d-flex col-12">
+                                    <div class="col-3">
+
+                                        <label>District </label>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <label> : </label>
+                                    </div>
+                                    <div class="col-8">
+                                        <label> {{ @$formData['dist_name'] }} </label>
+                              
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-6 d-flex">
+                                <div class=" d-flex col-12">
+                                    <div class="col-3">
+
+                                        <label>TEO</label>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <label> : </label>
+                                    </div>
+                                    <div class="col-8">
+                                        <label> {{ @$formData['teo_name'] }} </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br></br>
+
+                        </form>
+                          
                                 <form action="{{ url('studentAwardStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                   
                                
-                                    <div class="row">
+                                    <div class="row justify-content-center">
                                         <div class="col-md-3 text-center">
                                             <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
                                             <button type="submit" class="btn-block btn btn-success" onclick="return confirm('Do you want to continue?')">Submit</button>

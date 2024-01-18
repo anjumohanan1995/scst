@@ -1,6 +1,28 @@
 @extends('layouts.app')
 @section('content')
+<style>
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    
+    [hidden] {
+        display: none !important;
+    }
+    
+    </style>
 <!-- main-content -->
 <div class="main-content app-content">
 	<!-- container -->
@@ -29,143 +51,239 @@
 
 			<!-- row -->
 			<!-- row -->
-			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-					<div class="card">
-						<div class="card-body">
-							    <div id="success_message" class="ajax_response" style="display: none;"></div>
-							
-                                   
-          <table border="1" class="table">
-            <tr> <td >
- 
-                 പേര് </td><td><strong> {{ @$formData['name'] }} </strong></td>
-             <td colspan="">
- 
-                ജനനതീയതി </td><td> <strong> {{ @$formData['dob'] }}</strong> 
- 
-            </td>
-            <td colspan="">
- 
-                വയസ്  </td><td> {{ @$formData['age'] }}
- 
-                </td>
-            </tr><tr> 
-                <td colspan="">
- 
-                    ഫോൺ നമ്പർ  </td><td> {{ @$formData['phone'] }}
-     
-                    </td>
-                    <td colspan="">
-                        മേൽവിലാസം
-                    </td>
-                    <td> 
-                        {{ @$formData['address'] }} 
-                    </td>
-                     </tr>
-                   
-                <tr>
-                   
-                    <td colspan="">
-                        ജില്ല  </td><td> {{ @$formData['districtRelation']['name'] }}
-                    </td>
-            
-                     
-                <td colspan="">
-                    താലൂക്ക്
-                    </td>
-                    <td> 
-                        {{ @$formData['talukName']['taluk_name'] }} 
-                    </td>
-                    <td>
-                        പിൻകോഡ്
-                        </td>
-                        <td> 
-                            {{ @$formData['pincode'] }} 
-                        </td>
-               
-             </tr>
-             <tr>
-                     
-                <td colspan="2">
+            <div class="row row-sm w-100">
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <div class="card overflow-hidden" style="width: 113%;">
+                        <div class="card-body pd-y-7">
+                            <h4 class="medical__form--h1 text-center m-3">
+                                <b>പട്ടികവർഗ്ഗ വികസന വകുപ്പ്<br>
+                                    സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം
+                                </b>
+                            </h4>
+                            <div class="m-5">
+                                <h6 class="text-center"><u>അപേക്ഷ ഫോറം</u></h6>
+                            </div>
+                            <form action="#" method="post">
+                                <table>
+                                    <thead>
 
-                    ജാതി   </td><td> {{ @$formData['caste'] }}  </td>
-              <td>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
 
-                ജാതി സർട്ടിഫിക്കറ്റ്  </td>
-                 <td colspan="2">
-                    @if($formData['caste_certificate'])
-                    <iframe src="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
-               @endif
-                </td>
-              
-             </tr>
-             <tr>
-                     
-                <td colspan="2">
+                                            <td>പേര്
+                                                <br>
 
-                    ആധാർ നമ്പർ   </td><td> {{ @$formData['adhaar_number'] }}  </td>
-              <td>
+                                            </td>
+                                            <td>{{ @$formData['name'] }}</td>
+                                        </tr>
+                                        <tr>
 
-                ആധാർ പകർപ്പ്   </td>
-                 <td colspan="2">
-                    @if($formData['adhaar_copy'])
-                    <iframe src="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" width="400" height="200"></iframe>
-               @endif
-                </td>
-              
-             </tr>
-             <tr>
-                     
-                <td colspan="2">
+                                            <td>ജനന തീയതി
 
-                    ബാങ്ക് അക്കൗണ്ട് വിശദംശങ്ങൾ   </td><td> {{ @$formData['bank_account_details'] }}  </td>
-              <td>
 
-                ബാങ്ക് അക്കൗണ്ട് പാസ്സ് ബുക്കിന്റെ പകർപ്പ്  </td>
-                 <td colspan="2">
-                    @if($formData['passbook_copy'])
-                    <iframe src="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" width="400" height="200"></iframe>
-               @endif
-                </td>
-              
-             </tr>
-             <tr>
-                     
-                <td colspan="2">
+                                            </td>
+                                            <td>{{ @$formData['dob'] }}</td>
+                                        </tr>
+                                        <tr>
 
-                    റേഷൻ കാർഡ്   </td><td> {{ @$formData['ration_card_type'] }}  </td>
-              <td>
+                                            <td>വയസ്സ്
 
-                റേഷൻ  കാർഡ് പകർപ്പ്  </td>
-                 <td colspan="2">
-                    @if($formData['ration_card'])
-                    <iframe src="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" width="400" height="200"></iframe>
-               @endif
-                </td>
-              
-             </tr>
-             <tr>
-                     
-                <td colspan="2">
+                                            </td>
+                                            <td>{{ @$formData['age'] }}</td>
+                                        </tr>
+                                        <tr>
 
-                    മെഡിക്കൽ സർട്ടിഫിക്കറ്റ് ഹാജരാക്കിയിട്ടുണ്ടോ?   </td><td> {{ @$formData['is_medical_certificate_submitted'] }}  </td>
-              <td>
+                                            <td>ജാതി<br> (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
 
-                മെഡിക്കൽ സർട്ടിഫിക്കറ്റ്   </td>
-                 <td colspan="2">
-                    @if($formData['medical_certificate'])
-                    <iframe src="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" width="400" height="200"></iframe>
-               @endif
-                </td>
-              
-             </tr>
-           
-               
-           </table>
-          
-                         
+                                            </td>
+                                            <td>{{ @$formData['caste'] }} <br>
+                                                @if($formData['caste_certificate'])
+                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
+                                           @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
 
+                                            <td>മേൽവിലാസം
+
+                                            </td>
+                                            <td> {{ @$formData['address'] }} 
+                                                <br>
+                                                @if (@$formData['districtRelation']['name'])
+                                                    {{ @$formData['districtRelation']['name'] }}
+                                                @endif
+                                                @if (@$formData['talukName']['taluk_name'])
+                                                    ,{{ @$formData['talukName']['taluk_name'] }}
+                                                @endif
+                                                @if (@$formData['pincode'])
+                                                    ,{{ @$formData['pincode'] }}
+                                                @endif
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>ആധാർ നമ്പർ <br>
+                                                (പകർപ്പ് ഹാജരാക്കണം )
+
+
+                                            </td>
+                                            <td>{{ @$formData['adhaar_number'] }} <br>
+                                                @if($formData['adhaar_copy'])
+                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" width="400" height="200"></iframe>
+                                           @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>ബാങ്ക് അക്കൗണ്ട് വിശദംശങ്ങൾ<br>
+                                                (പാസ്സ് ബുക്കിന്റെ പകർപ്പ് ഹാജരാക്കണം )
+
+                                            </td>
+                                            <td>{{ @$formData['bank_account_details'] }} <br>
+                                                @if($formData['passbook_copy'])
+                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" width="400" height="200"></iframe>
+                                           @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>ഫോൺ നമ്പർ
+
+
+                                            </td>
+                                            <td> {{ @$formData['phone'] }}</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>റേഷൻ കാർഡ്
+                                                (പകർപ്പ് ഹാജരാക്കണം )
+
+
+                                            </td>
+                                            <td>{{ @$formData['ration_card_type'] }} <br>
+                                                @if($formData['ration_card'])
+                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" width="400" height="200"></iframe>
+                                           @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>മെഡിക്കൽ സർട്ടിഫിക്കറ്റ് ഹാജരാക്കിയിട്ടുണ്ടോ<br>
+                                                (മെഡിക്കൽ സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
+
+
+                                            </td>
+                                            <td>{{ @$formData['is_medical_certificate_submitted'] }} <br>
+                                                @if($formData['medical_certificate'])
+                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" width="400" height="200"></iframe>
+                                           @endif
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                                <div class="m-5">
+                                    <h6 class="text-center"><u>സത്യപ്രസ്താവന </u>
+                                    </h6>
+                                </div>
+                                <div class="m-5 ">
+                                    <p class="text-center">മേൽ പ്രസ്താവിച്ച വിവരങ്ങൾ പൂർണമായും സത്യമാണെന്ന്
+                                        ബോധിപ്പിക്കുന്നു
+
+                                    </p>
+                                </div>
+                                <div class="d-flex row">
+                                    <div class="col-6">
+
+                                        <label>സ്ഥലം: {{ @$formData['place'] }} </label><br>
+
+                                    </div>
+
+                                    <div  class="col-6"">
+
+                                        <div>
+                                            <label> പേര്: {{ @$formData['name'] }} 
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="d-flex row">
+                                    <div class="col-6">
+
+                                        <label>തീയതി : {{ @date('d-m-Y') }}</label><br>
+
+                                    </div>
+
+                                    <div class="col-6">
+
+                                            <label> ഒപ്പ്
+                                                :   
+                                                @if($formData['signature'])
+                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" style="width: 145px;height: 100px;" />
+                                           @endif
+                                            </label>
+                                    </div>
+
+                                </div>
+                           
+
+                        </div>
+
+
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <h1
+                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                    അപേക്ഷ സമർപ്പിക്കുന്നത്
+
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class=" col-6 d-flex ">
+                                <div class=" d-flex col-12">
+                                    <div class="col-3">
+
+                                        <label>ജില്ല </label>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <label> : </label>
+                                    </div>
+                                    <div class="col-8">
+                                        <label> {{ @$formData['submittedDistrict']['name'] }} </label>
+                              
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-6 d-flex">
+                                <div class=" d-flex col-12">
+                                    <div class="col-3">
+
+                                        <label>TEO</label>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <label> : </label>
+                                    </div>
+                                    <div class="col-8">
+                                        <label> {{ @$formData['submittedTeo']['teo_name'] }} </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </form>
                         </div>
                     </div>
                 </div>
