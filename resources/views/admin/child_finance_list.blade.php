@@ -72,8 +72,9 @@
                                             <th> Address </th>
                                             <th>Caste</th>
                                             <th>Created Date</th>
-                                            <th >View</th>
+                                           
                                             <th >Date & Time</th>
+                                             <th >View</th>
                                             <th >Action</th>
 
 
@@ -194,9 +195,9 @@
 				{ data: 'address' },
 				{ data: 'caste' },
                 { data: 'created_at', visible: false },
-
+                 { data: 'date' },
                 { data: 'edit' },
-                { data: 'date' },
+               
 
                 { data: 'action' }
 

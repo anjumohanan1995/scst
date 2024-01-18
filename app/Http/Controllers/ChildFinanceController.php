@@ -112,6 +112,7 @@ class ChildFinanceController extends Controller
     public function childFinancialStoreDetails(Request $request)
     {
         $data = json_decode($request->input('formData'), true);
+       
 
         $datainsert = ChildFinance::create([
             'name' => $data['name'],
@@ -162,6 +163,7 @@ class ChildFinanceController extends Controller
     {
        $role =  Auth::user()->role;       
        $teo =  Auth::user()->teo_name;
+       
 
         $name = $request->name;
 

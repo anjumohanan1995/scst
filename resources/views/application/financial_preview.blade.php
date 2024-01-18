@@ -7,7 +7,7 @@
             <!-- breadcrumb -->
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
                 <div class="col-xl-9">
-                    <h4 class="content-title mb-2">Registration</h4>
+                    {{-- <h4 class="content-title mb-2">Registration</h4> --}}
                 </div>
                 <div class="col-xl-3">
                 </div>
@@ -583,7 +583,7 @@
                                         </div>
 
                                     </div>
-                                     <div class="paper-1">
+                                    {{-- <div class="paper-1">
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
@@ -642,6 +642,54 @@
                                         </div>
 
                                     </div>
+                                    --}}
+                                      <div class="row mt-5">
+                                            <div class="col-12">
+                                                <h1
+                                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                                    അപേക്ഷ സമർപ്പിക്കുന്നത്
+
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class=" col-6 d-flex ">
+                                                <div class=" d-flex col-12">
+                                                    <div class="col-3">
+
+                                                        <label>ജില്ല </label>
+                                                    </div>
+
+                                                    <div class="col-1">
+                                                        <label> : </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <label> {{ @$formData['dist_name'] }} </label>
+                                              
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-6 d-flex">
+                                                <div class=" d-flex col-12">
+                                                    <div class="col-3">
+
+                                                        <label>TEO</label>
+                                                    </div>
+
+                                                    <div class="col-1">
+                                                        <label> : </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <label> {{ @$formData['teo_name'] }} </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><br>
+
 
 
 
@@ -671,7 +719,7 @@
                                     <div class="text">
                                         <div>
 
-                                            <label>തീയതി </label><br>{{ date("Y-m-d") }}
+                                            <label>തീയതി </label> : {{ date("Y-m-d") }}
 
 
 

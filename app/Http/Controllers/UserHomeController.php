@@ -182,6 +182,7 @@ class UserHomeController extends Controller
     {
 
         $formData = FinancialHelp::where('_id', $id)->first();
+        //dd($formData);
         return view('user.financial_view', compact('formData'));
     }
 
