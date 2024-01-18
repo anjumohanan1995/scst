@@ -78,6 +78,7 @@
                                             <th>ജാതി/ മതം 
                                             </th>
                                             <th>തീയതി   </th>
+                                             <th>തീയതി   </th>
                                             <th >ആക്ഷൻ</th>
 
 
@@ -160,7 +161,8 @@
 				{ data: 'caste' },
                 
                 { data: 'created_at', visible: false },
-
+                
+                { data: 'date' },
                 { data: 'edit' }
 
 

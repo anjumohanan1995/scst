@@ -160,7 +160,8 @@ class TuitionFeeController extends Controller
             'submitted_teo' => @$data['submitted_teo'],
             'dist_name' => @$data['dist_name'],
             'teo_name' => @$data['dob'],
-            'date' => @$data['dob'],
+            'date' =>date('Y-m-d'),
+            'time'=>date('H:i:s'),
             'user_id' =>Auth::user()->id, 
             'status' =>0
         ]);
@@ -244,6 +245,8 @@ class TuitionFeeController extends Controller
              $address = $record->address;
              $student_name = $record->student_name;
              $caste = $record->caste;
+             $date = $record->date;
+             $time = $record->time;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
@@ -252,6 +255,7 @@ class TuitionFeeController extends Controller
                 "address" => $address,
                 "student_name" => $student_name,
                 "caste" => $caste,
+                "date" => $date." ".$time,  
                 "created_at" => $created_at,                  
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionUserFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
@@ -355,6 +359,8 @@ class TuitionFeeController extends Controller
              $address = $record->address;
              $student_name = $record->student_name;
              $caste = $record->caste;
+             $date = $record->date;
+             $time = $record->time;
               $created_at =  $record->created_at;
 
             $data_arr[] = array(
@@ -363,7 +369,8 @@ class TuitionFeeController extends Controller
                 "address" => $address,
                 "student_name" => $student_name,
                 "caste" => $caste,
-                "created_at" => $created_at,                  
+                "created_at" => $created_at, 
+                "date"=>  $date." ".$time,             
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('tuitionAdminFeeView/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );

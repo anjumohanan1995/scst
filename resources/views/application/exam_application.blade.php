@@ -310,6 +310,8 @@
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">Parent's Sign / രക്ഷിതാവിന്റെ ഒപ്പും</label>
                                         <input type="file" class="form-control" name="signature" required />
+                                        <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            മാത്രം.)</span>
                                         @error('signature')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -446,9 +448,6 @@
                 }
             });
         }
-
-
-
 
         $('#taluk').change(function() {
             var talukName = this.options[this.selectedIndex].text;
