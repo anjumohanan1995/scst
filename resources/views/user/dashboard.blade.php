@@ -894,7 +894,7 @@
                 <form>
                     <div class="modal-header">
                         <h5 class="modal-title" id="applicationModalLabel">
-                            സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി 
+                            അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -908,7 +908,7 @@
                         <ul>
                      
                             <li>
-                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                                രക്ഷിതാവിന്റെ ഒപ്പും (ഫോട്ടോ)
                             </li>
                         </ul>
                     </h4>

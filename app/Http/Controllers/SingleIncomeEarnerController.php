@@ -90,6 +90,7 @@ class SingleIncomeEarnerController extends Controller
         }else{
             $death_certificate = '';
         }
+
         if ($request->hasfile('ration_card')) {
 
             $ration = $request->ration_card;
@@ -148,6 +149,7 @@ class SingleIncomeEarnerController extends Controller
         $formData['income_certificate']= $income_certificate;
         $formData['signature']= $signature;
         $formData['past_job_document']= $past_job_document;
+        $formData['death_certificate']= $death_certificate;
 
         return view('application.single_income_earner_preview', compact('formData'));
 
