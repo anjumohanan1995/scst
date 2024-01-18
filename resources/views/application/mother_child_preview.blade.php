@@ -273,7 +273,7 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-2">
-                                                    <label> {{ @$formData['submitted_district'] }} </label>
+                                                    <label> {{ @$formData['dist_name'] }} </label>
                                                 </div>
                                             </div>
 
@@ -291,7 +291,7 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-4">
-                                                    <label> {{ @$formData['submitted_teo'] }} </label>
+                                                    <label> {{ @$formData['teo_name'] }} </label>
                                                 </div>
                                             </div>
                                         </div>
