@@ -234,7 +234,7 @@
                                         <div class="col-8">
                                             <iframe
                                             src="{{ asset('applications/mother_child_protection/' . @$formData['signature']) }}"
-                                            width="400" height="200"></iframe>
+                                            width="250" height="150"></iframe>
                                             <label>അപേക്ഷകന്റെ ഒപ്പ്</label>
                                         </div>
     
