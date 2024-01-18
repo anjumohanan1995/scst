@@ -34,7 +34,7 @@ class TuitionFee extends Eloquent
         'dist_name',
         'submitted_teo',
         'teo_name',
-        'date',
+        'date','time',
         'user_id',
         'status'
     ];

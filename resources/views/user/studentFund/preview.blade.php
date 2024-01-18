@@ -126,6 +126,37 @@
 
                                         </tbody>
                                     </table>
+                                    <br>
+                                    <div class="row mt-5">
+                                        <div class="col-12">
+                                            <h1
+                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                    അപേക്ഷ സമർപ്പിക്കുന്നത് 
+    
+                                </h1>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+    
+                                        <div class="col-6 d-flex">
+                                            <span class="col-5"> ജില്ല
+                                            </span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6"> {{ @$formData['dist_name'] }}  </span>
+    
+                                        </div>
+    
+                                        <div class="col-6 d-flex">
+                                            <span class="col-5"> ടി .ഇ .ഓ</span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6">{{ @$formData['teo_name'] }} </span>
+    
+                                        </div>
+                                       
+    
+                                    </div>
+                                  
+                                    <br><br>
                                     <div class="m-5">
                                         <h6 class="text-center"><u>സമ്മതപത്രം</u> </h6>
                                     </div>

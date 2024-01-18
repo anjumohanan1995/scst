@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Models\HouseManagement;
 use App\Models\Taluk;
+use App\Models\Teo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,7 +104,14 @@ class HouseManagementController extends Controller
         $taluk=Taluk::where('_id',$request->current_taluk)->first();
         $formData['current_taluk_name']= $taluk->taluk_name;
        }
-       
+       if($request->submitted_district!=''){
+        $dis1=District::where('_id',$request->submitted_district)->first();
+        $formData['dist_name']= $dis1->name;
+       }
+       if($request->submitted_teo!=''){
+         $teo=Teo::where('_id',$request->submitted_teo)->first();
+         $formData['teo_name']= $teo->teo_name;
+        }
        
       $formData['signature']= $signature;
       $formData['prove_eligibility_file']= $signature;
@@ -300,6 +308,8 @@ $formattedDate = $currentDate->toDateString();
             'current_pincode' => $data['current_pincode'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
+            'dist_name' => $data['dist_name'],
+            'teo_name' => @$data['teo_name'],
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
             'time' =>date('h:i:s a'),

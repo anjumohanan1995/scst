@@ -18,9 +18,6 @@
         background-color: #f2f2f2;
     }
     
-    [hidden] {
-        display: none !important;
-    }
     
     </style>
 <!-- main-content -->
@@ -29,11 +26,7 @@
 	<div class="main-container container-fluid">
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-			<div class="col-xl-9">
-				<h4 class="content-title mb-2">സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി</h4>
-			</div>
-			<div class="col-xl-3">
-			</div>
+			
 		</div>
 		<!-- /breadcrumb -->
 		<!-- main-content-body -->
@@ -225,65 +218,66 @@
                                             <label> ഒപ്പ്
                                                 :   
                                                 @if($formData['signature'])
-                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" style="width: 145px;height: 100px;" />
+                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" width="400" height="200"></iframe>
                                            @endif
                                             </label>
                                     </div>
 
                                 </div>
-                           
-
-                        </div>
-
-
-                        <div class="row mt-5">
-                            <div class="col-12">
-                                <h1
-                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
-                                    അപേക്ഷ സമർപ്പിക്കുന്നത്
-
-                                </h1>
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class=" col-6 d-flex ">
-                                <div class=" d-flex col-12">
-                                    <div class="col-3">
-
-                                        <label>ജില്ല </label>
-                                    </div>
-
-                                    <div class="col-1">
-                                        <label> : </label>
-                                    </div>
-                                    <div class="col-8">
-                                        <label> {{ @$formData['submittedDistrict']['name'] }} </label>
-                              
-
+                                <div class="row mt-5">
+                                    <div class="col-12">
+                                        <h1
+                                            style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                            അപേക്ഷ സമർപ്പിക്കുന്നത്
+        
+                                        </h1>
                                     </div>
                                 </div>
-
-
-                            </div>
-
-                            <div class="col-6 d-flex">
-                                <div class=" d-flex col-12">
-                                    <div class="col-3">
-
-                                        <label>TEO</label>
+                                <div class="row ">
+                                    <div class=" col-6 d-flex ">
+                                        <div class=" d-flex col-12">
+                                            <div class="col-3">
+        
+                                                <label>ജില്ല </label>
+                                            </div>
+        
+                                            <div class="col-1">
+                                                <label> : </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <label> {{ @$formData['submittedDistrict']['name'] }} </label>
+                                      
+        
+                                            </div>
+                                        </div>
+        
+        
                                     </div>
-
-                                    <div class="col-1">
-                                        <label> : </label>
-                                    </div>
-                                    <div class="col-8">
-                                        <label> {{ @$formData['submittedTeo']['teo_name'] }} </label>
+        
+                                    <div class="col-6 d-flex">
+                                        <div class=" d-flex col-12">
+                                            <div class="col-3">
+        
+                                                <label>TEO</label>
+                                            </div>
+        
+                                            <div class="col-1">
+                                                <label> : </label>
+                                            </div>
+                                            <div class="col-8">
+                                                <label> {{ @$formData['submittedTeo']['teo_name'] }} </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+        <br><br>
+
                         </div>
 
+
+                       
                         </form>
+                        <br><br>
                         </div>
                     </div>
                 </div>

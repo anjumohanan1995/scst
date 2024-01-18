@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\MedEngStudentFund;
+use App\Models\Taluk;
+use App\Models\Teo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -227,6 +229,22 @@ class MedEngStudentFundController extends Controller
         if($request->account_details==''){
             $formData['account_details']="no";
           }
+          if($request->current_district!=''){
+            $dis=District::where('_id',$request->current_district)->first();
+            $formData['current_district_name']= $dis->name;
+           }
+           if($request->current_taluk!=''){
+             $taluk=Taluk::where('_id',$request->current_taluk)->first();
+             $formData['current_taluk_name']= $taluk->taluk_name;
+            }
+            if($request->submitted_district!=''){
+                $dis1=District::where('_id',$request->submitted_district)->first();
+                $formData['dist_name']= $dis1->name;
+               }
+               if($request->submitted_teo!=''){
+                 $teo=Teo::where('_id',$request->submitted_teo)->first();
+                 $formData['teo_name']= $teo->teo_name;
+                }
       $formData['signature']= $signature;
       $formData['parent_signature']= $parent_signature;
       $formData['caste_certificate']= $caste_certificate;
@@ -269,6 +287,8 @@ $formattedDate = $currentDate->toDateString();
             'current_pincode' => $data['current_pincode'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
+            'dist_name' => $data['dist_name'],
+            'teo_name' => @$data['teo_name'],
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
         ]);

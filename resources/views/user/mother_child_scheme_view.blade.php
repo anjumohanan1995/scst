@@ -231,8 +231,9 @@
                             <div class="col-6 d-flex">
                                 <div class="row d-flex col-12" >
                                     <div class="col-8">
-                                        <img src="{{ url('/') }}/applications/{{ $formData['signature'] }}" alt="Preview" width="500" height="40">
-                                        <label>അപേക്ഷകന്റെ ഒപ്പ്</label>
+                                        <iframe
+                                        src="{{ asset('applications/mother_child_protection/' . @$formData['signature']) }}"
+                                        width="400" height="200"></iframe>                                        <label>അപേക്ഷകന്റെ ഒപ്പ്</label>
                                     </div>
 
                                 </div>

@@ -22,6 +22,7 @@
 		<!-- /breadcrumb -->
 
 	</div>
+
 <div class="main-content-body">
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
@@ -44,7 +45,7 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">Address/മേൽവിലാസം 
                                     </label>
-                                    <textarea type="text" value="{{ old('address') }}"  class="form-control" placeholder="മേൽവിലാസം" name="address" ></textarea>
+                                    <textarea type="text"  class="form-control" placeholder="മേൽവിലാസം" name="address" >{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -163,7 +164,7 @@
                                         </label>
 
                                         
-                                        <input type="text" class="form-control"   name="school_name" id="school_name" value="" placeholder="പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര്" />
+                                        <input type="text" class="form-control"   name="school_name" id="school_name" value="{{ old('school_name') }}" placeholder="പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര്" />
                                     @error('school_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -172,7 +173,7 @@
                                     <label class="form-label"> Class/ ക്ലാസ് 
  
                                         </label>
-                                        <input type="number" class="form-control"   name="class_number" id="class_number" value="" placeholder="ക്ലാസ് " />
+                                        <input type="number" class="form-control"   name="class_number" id="class_number" value="{{ old('class_number') }}" placeholder="ക്ലാസ് " />
                                     @error('class_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -191,7 +192,7 @@
                                     <label class="form-label">Name of Tuition Centre/ട്യുഷൻ സെന്ററിന്റെ പേര്  
  
                                         </label>
-                                        <input type="text" class="form-control"   name="tuition_center" id="tuition_center" value="" placeholder="ട്യുഷൻ സെന്ററിന്റെ പേര് " />
+                                        <input type="text" class="form-control"   name="tuition_center" id="tuition_center" value="{{ old('tuition_center') }}" placeholder="ട്യുഷൻ സെന്ററിന്റെ പേര് " />
                                     @error('tuition_center')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -200,7 +201,7 @@
                                     <label class="form-label">Place/ സ്ഥലം  
  
                                         </label>
-                                        <input type="text" class="form-control"   name="place" id="place" value="" placeholder="സ്ഥലം " />
+                                        <input type="text" class="form-control"   name="place" id="place" value="{{ old('place') }}" placeholder="സ്ഥലം " />
                                     @error('place')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
