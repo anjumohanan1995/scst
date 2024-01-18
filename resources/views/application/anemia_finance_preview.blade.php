@@ -221,18 +221,20 @@ th {
                                     <div class="col-6">
 
                                             <label> ഒപ്പ്
-                                                :   
-                                                @if($formData['signature'])
-                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" style="width: 145px;height: 100px;" />
-                                           @endif
+                                                : 
+                                                @if(@$formData['signature'])
+                                                <embed
+                                                    src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}"
+                                                    type="">
+                                                    @else
+                                                   {{$formData['signature']}}
+                                                    @endif  
+                                               
                                             </label>
                                     </div>
 
                                 </div>
                            
-
-
-                        </div>
 
 
                         <div class="row mt-5">
@@ -306,6 +308,9 @@ th {
                                 </form>
                                 
                                 <br><br>
+
+
+                            </div>
 
                         </div>
                     </div>

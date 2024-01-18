@@ -38,7 +38,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">പേര് / Name </label>
                                             <input type="text" value="{{ old('name') }}" class="form-control"
-                                                placeholder="പേര്" name="name" />
+                                                placeholder="പേര്" name="name" required />
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -106,7 +106,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">ഭർത്താവിന്റെ പേര് / Husband's Name</label>
                                             <input type="text" class="form-control" name="hus_name" id="hus_name"
-                                                value="" placeholder="ഭർത്താവിന്റെ പേര് " />
+                                                value="" placeholder="ഭർത്താവിന്റെ പേര് "  />
                                             @error('hus_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -171,11 +171,12 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ് / Applicant's signature</label>
                                             <input type="file" class="form-control" name="signature" id="signature"
-                                                value="" placeholder="" />
+                                                value="" placeholder="" onchange="validateSignature()" accept=".jpg, .jpeg, .png, .pdf" />
                                                 <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="errorSignature" style="color:red;"></div>
                                         </div>
                                     </div><br>
                                 </div>
@@ -233,6 +234,28 @@
 </div>
 
     <script>
+
+        function validateSignature() {
+            var input = document.getElementById('signature');
+            var errorMessage = document.getElementById('errorSignature');
+    
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // in bytes
+                var maxSize = 2 * 1024 * 1024; // 2MB
+    
+                if (fileSize > maxSize) {
+                    errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                    input.value = ''; // Clear the file input
+                    $("#submit").prop("disabled", true);
+                } else {
+                    errorMessage.innerText = '';
+                     $("#submit").prop("disabled", false);
+                }
+            }
+    
+            
+        }
+
         var selectElement = document.getElementById("district");
         var districtName = selectElement.options[selectElement.selectedIndex].text;
         document.getElementById('district_name').value = districtName;
