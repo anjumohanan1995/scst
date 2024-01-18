@@ -386,7 +386,7 @@ class TuitionFeeController extends Controller
          return response()->json($response);
     }
 
-    public function tuitionAdminFeeView(Request $request)
+    public function tuitionAdminFeeView(Request $request,$id)
     {
         $formData = TuitionFee::where('_id',$id)->first();
        

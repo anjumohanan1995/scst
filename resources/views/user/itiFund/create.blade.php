@@ -23,7 +23,7 @@
             </div>
             <!-- /breadcrumb -->
 
-        </div>
+      
         <div class="main-content-body">
             <div class="row row-sm mt-4">
                 <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
@@ -48,7 +48,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Address / മേൽവിലാസം
                                             </label>
-                                            <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="മേൽവിലാസം" name="address"></textarea>
+                                            <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="മേൽവിലാസം" name="address">{{ old('address') }}</textarea>
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -84,7 +84,7 @@
                                         </div>
                                         <div class="col-md-2 mb-2">
                                             <label class="form-label">Pincode / പിൻകോഡ് </label>
-                                            <input type="text" value="{{ old('current_pincode') }}" class="form-control"
+                                            <input type="number" value="{{ old('current_pincode') }}" class="form-control"
                                                 name="current_pincode" placeholder="പിൻകോഡ്" maxlength="6"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
 
@@ -127,18 +127,18 @@
                                             <div style="border: 1px solid black" class="form-control">
 
 
-                                                <input type="radio" id="merit" name="admission_type" value="merit">
+                                                <input type="radio" id="merit" name="admission_type" value="merit" {{ old('admission_type') == 'merit' ? 'checked' : '' }}>
                                                 <label for="merit">merit / മെരിറ്റ് </label> &nbsp; &nbsp;
                                                 <input type="radio" id="reservation" name="admission_type"
-                                                    value="innovation">
+                                                    value="reservation" {{ old('admission_type') == 'reservation' ? 'checked' : '' }}>
                                                 <label for="innovation">reservation / സംവരണം </label> &nbsp; &nbsp;
 
                                                 <input type="radio" id="management" name="admission_type"
-                                                    value="management">
+                                                    value="management" {{ old('admission_type') == 'management' ? 'checked' : '' }}>
                                                 <label for="management">management / മാനേജ്‌മന്റ്</label>&nbsp; &nbsp;
 
                                                 <input type="radio" id="option3" name="admission_type"
-                                                    value="others">
+                                                    value="others" {{ old('admission_type') == 'others' ? 'checked' : '' }}>
                                                 <label for="others">others / മറ്റുള്ളവ</label>&nbsp; &nbsp;
                                             </div>
                                             @error('admission_type')
@@ -166,7 +166,7 @@
                                                 <div class="d-flex">
                                                     <div class="col-6">
                                                         <textarea type="text" value="{{ old('caste') }}" class="form-control" placeholder="അപേക്ഷകന്റെ ജാതി/ മതം"
-                                                            name="caste"></textarea>
+                                                            name="caste">{{ old('caste') }}</textarea>
                                                         @error('caste')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -183,6 +183,8 @@
                                                         @error('caste_certificate')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
+                                                        <br>
+                                                        <span class="text-danger" id="errorcaste"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,8 +198,8 @@
                                                 <div class="d-flex">
                                                     <div class="col-6">
 
-                                                        <textarea type="text" value="{{ old('income') }}" class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം "
-                                                            name="income"></textarea>
+                                                        <input type="number" value="{{ old('income') }}" class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം "
+                                                            name="income">
 
                                                         @error('income')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -208,13 +210,15 @@
                                                         </label>
                                                         <input type="file" class="form-control"
                                                             name="income_certificate" id="income_certificate"
-                                                            value="" placeholder=" സർട്ടിഫിക്കറ്റ്" />
+                                                            value="{{ old('income_certificate') }}" placeholder=" സർട്ടിഫിക്കറ്റ്" />
                                                         <span class="small"> (File less than 2 mb. jpg & pdf only. / ഫയൽ:
                                                             2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                             മാത്രം.)</span>
-                                                        @error('caste_certificate')
+                                                        @error('income_certificate')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
+                                                        <br>
+                                                        <span class="text-danger" id="errorincome"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,17 +226,55 @@
                                         </div><br>
 
                                         <div class="row d-flex">
-                                            <div class="col-md-6 mb-6">
-                                                <label class="form-label">If students have e-grand account no.Bank branch
-                                                    /e-grand account no / വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ
-                                                    ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം
-                                                </label>
-                                                <input type="text" class="form-control" name="account_details"
-                                                   id="account_details" value="{{old('account_details')}}" placeholder="വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടെങ്കിൽ ബാങ്ക് ശാഖ /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം" />
-                                                @error('account_details')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                          <div class="col-md-6 mb-6">
+                                    <label class="form-label">
+                                        Do students have an e-grand account number?
+                                        (വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടോ ?)</label>
+                                        <div style="border: 1px solid black" class="form-control">
+
+                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
+                                          
+                                            <input type="radio" id="yes" name="account_details" value="yes"  {{ old('account_details') == 'yes' ? 'checked' : '' }}>&nbsp; &nbsp;
+                                            <label for="No">No (ഇല്ല)</label>&nbsp; &nbsp;
+                                          
+                                            <input type="radio" id="no" name="account_details" value="no" {{ old('account_details') == 'no' ? 'checked' : '' }}>
+                                           
+                                           
+                                        </div><br>
+                                        <div class="row" style="display:none" id="accountDiv">
+                                        <div class="col-md-4 mb-4">
+                                            Bank Branch  (ബാങ്ക് ശാഖ)
+                                        
+                                            <input type="text" value="{{ old('bank_branch') }}"  class="form-control" placeholder="ബാങ്ക് ശാഖ" name="bank_branch" value="{{ old('bank_branch') }}">
+                                           
+                                        
+                                          @error('bank_branch')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            E-Grand Account no (ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം  )
+                                            
+                                            
+                                              
+                                              <input type="number" value="{{ old('account_no') }}"  class="form-control" placeholder="ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം " name="account_no" >
+                                              @error('account_no')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
                                             </div>
+                                            <div class="col-md-4 mb-4">
+                                                IFSC Code  (IFSC കോഡ്  )
+                                                
+                                                
+                                                  
+                                                  <input type="text" value="{{ old('ifsc_code') }}"  class="form-control" placeholder="IFSC കോഡ്" name="ifsc_code" >
+                                                  @error('ifsc_code')
+                                                  <span class="text-danger">{{$message}}</span>
+                                              @enderror
+                                                </div>
+                                        </div>
+
+                                </div>
 
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label">Applicant's signature / അപേക്ഷകന്റെ ഒപ്പ്</label>
@@ -245,6 +287,8 @@
                                                 @error('signature')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+                                                <br>
+                                                <span class="text-danger" id="errorsignature"></span>
                                             </div>
                                         </div>
                                         <br>
@@ -277,6 +321,8 @@
                                                 @error('parent_signature')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+                                                <br>
+                                                <span class="text-danger" id="errorParentSignature"></span>
                                             </div>
 
 
@@ -292,7 +338,7 @@
                                                 class="form-control">
                                                 <option value="">Select</option>
                                                 @foreach ($institutions as $institution)
-                                                    <option value="{{ $institution->id }}">{{ $institution->name }}
+                                                    <option value="{{ $institution->id }}"   {{ old('current_institution') == $institution->id ? 'selected' : '' }}>{{ $institution->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -303,9 +349,21 @@
                                         </div>
                                     </div><br>
 
-                                    <br>
                                     <hr>
-                                    <br>
+                                    <div class="row">
+                                      <div class="col-md-1 mb-1">
+                                           </div>
+                                      <div class="col-md-1 mb-1">
+                                          <input type="checkbox" id="agree" name="agree" value="Yes" required>
+                                      </div>
+                                      <div class="col-md-9 mb-9">
+                                          We hereby pledge that all the information we have added above is true and correct.
+                                        (  ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.)
+                                      </div>
+                                  </div>
+                                      <br>
+                                      <hr>
+                                      <br>
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
@@ -346,7 +404,7 @@
                                         </div>
                                         <div class="col-md-8 mb-8">
                                             <button type="submit" id="submit"
-                                                class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                                                class="btn btn-warning waves-effect waves-light text-start submit" >Save</button>
                                         </div>
 
 
@@ -366,7 +424,78 @@
             </div>
         </div>
     </div>
+</div>
+<script type="text/javascript">
 
+
+    @if(!empty(old('current_district')))
+    var val = document.getElementById("current_district").value;
+    $.ajax({
+        url: "{{url('district/fetch-taluk')}}",
+        type: "POST",
+        data: {
+            district_id: val,
+            _token: '{{csrf_token()}}'
+        },
+        success: function (data) {
+            $("#current_taluk").find('option').remove();
+            $("#current_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(data.taluks, function (key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+                $opt.appendTo('#current_taluk');
+            });
+
+            // Set the selected value for permanent_taluk
+            var permanentTalukValue = "{{ old('current_taluk') }}";
+            if (permanentTalukValue) {
+                $('#current_taluk').val(permanentTalukValue);
+            }
+
+            // Refresh the selectpicker (if you are using it)
+           
+            var currentTalukName = $("#current_taluk option:selected").text();
+            console.log(currentTalukName); // Check if it prints the correct text
+            $('#current_taluk_name').val(currentTalukName);
+        }
+    });
+@endif
+
+@if(!empty(old('submitted_district')))
+    var val = document.getElementById("submitted_district").value;
+    $.ajax({
+        url: "{{url('district/fetch-teo')}}",
+        type: "POST",
+        data: {
+            district_id: val,
+            _token: '{{csrf_token()}}'
+        },
+        success: function (data) {
+          
+            $("#submitted_teo").find('option').remove();
+            $("#submitted_teo").append('<option value="" selected>Choose Teo</option>');
+
+            $.each(data.teos, function (key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.teo_name);
+                $opt.appendTo('#submitted_teo');
+            });
+
+            // Set the selected value for permanent_taluk
+            var permanentTeoValue = "{{ old('submitted_teo') }}";
+            if (permanentTeoValue) {
+                $('#submitted_teo').val(permanentTeoValue);
+            }
+
+            // Refresh the selectpicker (if you are using it)
+            
+        }
+    });
+@endif
+
+
+</script>
     <script>
         $('#current_institution').change(function() {
             var current_institution = this.options[this.selectedIndex].text;
@@ -583,12 +712,99 @@
             var submitted_teo = this.options[this.selectedIndex].text;
             document.getElementById('teo_name').value = submitted_teo;
         });
-
         $(document).ready(function() {
+
+            $('#income_certificate').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+          } else {
+            $('#errorincome').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#income_certificate').val('');
+          }
+        }
+      });
+      
+      $('#caste_certificate').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+          } else {
+            $('#errorcaste').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#caste_certificate').val('');
+          }
+        }
+      });
+      
+      $('#signature').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+          } else {
+            $('#errorsignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#signature').val('');
+          }
+        }
+      });
+      
+      $('#parent_signature').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+          } else {
+            $('#errorParentSignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#parent_signature').val('');
+          }
+        }
+      });
             fetchTaluk();
-            // fetchTeo();
-            $('#example').DataTable();
-        });
+        $('input[name="account_details"]').change(function() {
+      
+      if ($(this).val() === 'yes') {
+          $('#accountDiv').show();
+      } else {
+          $('#accountDiv').hide();
+      }
+  }).change();
+  $('input[name="account_details"]:checked').change();
+// Trigger the change event initially
+
+
+     	$('#example').DataTable();
+	});
+       
     </script>
     <!-- main-content-body -->
 @endsection

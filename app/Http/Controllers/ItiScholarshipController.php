@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Models\ItiFund;
 use App\Models\Institution;
+use App\Models\Taluk;
+use App\Models\Teo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,13 +46,14 @@ class ItiScholarshipController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'income' => 'required',
-            'income_certificate' => 'required',
-            'caste' => 'required',
-            'caste_certificate' => 'required',
-            'signature' => 'required',
-            'parent_name' => 'required',
-            'parent_signature' => 'required',
+            'income_certificate' => 'max:2048',
+            // 'caste' => 'required',
+             'caste_certificate' => 'max:2048',
+             'signature' => 'max:2048',
+            // 'parent_name' => 'required',
+             'parent_signature' => 'max:2048',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',
             
                  
         ]);
@@ -93,6 +96,10 @@ class ItiScholarshipController extends Controller
             $image2->move(public_path('/itiStudentFund'), $imgfileName2);
 
             $income_certificate = $imgfileName2;
+            // session(['file_details' => [
+            //     'path' => '/itiStudentFund/'.$income_certificate,
+            //     'original_name' => $imgfileName2,
+            // ]]);
 
         }else{
             $income_certificate = '';
@@ -102,7 +109,7 @@ class ItiScholarshipController extends Controller
             $image3 = $request->caste_certificate;
             $imgfileName3 = time() . rand(100, 999) . '.' . $image3->extension();
 
-            $image3->move(public_path('/itiStudentFund'), $imgfileName3);
+           $path= $image3->move(public_path('/itiStudentFund'), $imgfileName3);
 
             $caste_certificate = $imgfileName3;
 
@@ -111,7 +118,26 @@ class ItiScholarshipController extends Controller
         }
       
         $formData = $data;
-       
+        if($request->current_district!=''){
+            $dis=District::where('_id',$request->current_district)->first();
+            $formData['current_district_name']= $dis->name;
+           }
+           if($request->current_taluk!=''){
+             $taluk=Taluk::where('_id',$request->current_taluk)->first();
+             $formData['current_taluk_name']= $taluk->taluk_name;
+            }
+            if($request->submitted_district!=''){
+                $dis1=District::where('_id',$request->submitted_district)->first();
+                $formData['dist_name']= $dis1->name;
+               }
+               if($request->submitted_teo!=''){
+                 $teo=Teo::where('_id',$request->submitted_teo)->first();
+                 $formData['teo_name']= $teo->teo_name;
+                }
+                if($request->current_institution!=''){
+                    $inst=Institution::where('_id',$request->current_institution)->first();
+                    $formData['institution_name']= $inst->name;
+                   }
       $formData['signature']= $signature;
       $formData['parent_signature']= $parent_signature;
       $formData['caste_certificate']= $caste_certificate;
@@ -121,6 +147,9 @@ class ItiScholarshipController extends Controller
         // Format the date if needed
         $formattedDate = $currentDate->toDateString();
         $formData['date']= $formattedDate;
+        $request->flash();
+        // $request->flashExcept(['income_certificate']);
+        
         return view('user.itiFund.preview', compact('formData'));
     }
 
@@ -202,6 +231,8 @@ class ItiScholarshipController extends Controller
             'current_pincode' => $data['current_pincode'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
+            'submitted_district_name' => $data['dist_name'],
+            'submitted_teo_name' => @$data['teo_name'],
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
             'institution_name' => $data['institution_name'],
@@ -302,7 +333,7 @@ class ItiScholarshipController extends Controller
                 "caste" => $caste,
                 "income" =>$income,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . route('itiScholarship.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }

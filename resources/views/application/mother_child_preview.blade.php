@@ -234,11 +234,11 @@
                                                 </div>
                                             </div>
 
-                        
+
                                         </div>
 
                                         <div class="col-6 d-flex">
-                                            <div class="row d-flex col-12" >
+                                            <div class="row d-flex col-12">
                                                 <div class="col-8">
                                                     @if ($formData['signature'])
                                                     <iframe
@@ -255,10 +255,10 @@
                                     <div class="row mt-5">
                                         <div class="col-12">
                                             <h1
-                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
-                                    അപേക്ഷ സമർപ്പിക്കുന്നത് 
+                                                style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                                അപേക്ഷ സമർപ്പിക്കുന്നത്
 
-                                </h1>
+                                            </h1>
                                         </div>
                                     </div>
                                     <div class="row ">
@@ -273,11 +273,11 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-2">
-                                                    <label> {{ @$formData['dist_name'] }} </label>
+                                                    <label> {{ @$formData['submitted_district'] }} </label>
                                                 </div>
                                             </div>
 
-                        
+
                                         </div>
 
                                         <div class="col-6 d-flex">
@@ -291,13 +291,13 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-4">
-                                                    <label> {{ @$formData['teo_name'] }} </label>
+                                                    <label> {{ @$formData['submitted_teo'] }} </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                             
+
+
 
                                 </form>
 
@@ -307,7 +307,8 @@
                                     @csrf
 
 
-                                    <div class="row justify-content-center">                                        <div class="col-md-3">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-3">
                                             <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
                                             <button type="submit" class="btn-block btn btn-success"
                                                 onclick="return confirm('Do you want to continue?')">Submit</button>

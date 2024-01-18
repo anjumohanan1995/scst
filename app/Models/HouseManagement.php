@@ -40,7 +40,9 @@ class HouseManagement extends Eloquent
         'submitted_teo',
         'current_district',
         'current_taluk',
-        'time'
+        'time',
+        'dist_name',
+        'teo_name'
 
     ];
 

@@ -35,7 +35,7 @@
 			<div class="row row-sm mt-4">
 				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
 					<div class="card">
-						<div class="card-body">
+						<div class="card-body  p-5">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
 								<div class="mb-4 main-content-label">
                                     <h4 class="medical__form--h1 text-center m-3">
@@ -172,6 +172,36 @@
                                         </div>
 
                                     </div>   <br><br>
+                                    <div class="row mt-5">
+                                        <div class="col-12">
+                                            <h1
+                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                    അപേക്ഷ സമർപ്പിക്കുന്നത് 
+    
+                                </h1>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+    
+                                        <div class="col-6 d-flex">
+                                            <span class="col-5"> ജില്ല
+                                            </span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6"> {{ @$studentFund['dist_name'] }}  </span>
+    
+                                        </div>
+    
+                                        <div class="col-6 d-flex">
+                                            <span class="col-5"> ടി .ഇ .ഓ</span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6">{{ @$studentFund['teo_name'] }} </span>
+    
+                                        </div>
+                                     
+    
+                                    </div>
+                                  
+                                    <br><br>
                                     <div class="row">
                                         <div class="col-md-4 mb-4">
                                           
