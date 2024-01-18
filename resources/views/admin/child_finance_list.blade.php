@@ -74,7 +74,6 @@
                                             <th>Created Date</th>
                                            
                                             <th >Date & Time</th>
-                                             <th >View</th>
                                             <th >Action</th>
 
 
@@ -196,7 +195,6 @@
 				{ data: 'caste' },
                 { data: 'created_at', visible: false },
                  { data: 'date' },
-                { data: 'edit' },
                
 
                 { data: 'action' }
