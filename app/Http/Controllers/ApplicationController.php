@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\Taluk;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
 use Illuminate\Http\Request;
@@ -566,6 +567,14 @@ class ApplicationController extends Controller
             $signature = '';
         }
         $formData = $data;
+        $formData['signature'] = $signature;
+        $formData['district'] = District::where('_id', $formData['district'])->first();
+        $formData['birth_district'] = District::where('_id', $formData['birth_district'])->first();
+        $formData['submitted_district'] = District::where('_id', $formData['submitted_district'])->first();
+        $formData['submitted_teo'] = District::where('_id', $formData['submitted_teo'])->first();
+        $formData['taluk'] = Taluk::where('_id', $formData['taluk'])->first();
+
+
         $formData['signature'] = $signature;
 
         return view('application.exam_application_preview', compact('formData'));

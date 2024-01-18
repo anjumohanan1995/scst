@@ -31,217 +31,356 @@
                 <!-- row -->
                 <div class="row row-sm mt-4">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="success_message" class="ajax_response" style="display: none;"></div>
+                        <div class="card overflow-hidden" style="width: 113%;">
 
-                                <div class="mb-4 main-content-label">Application Details</div>
-                                <table id="example" class="" style="width:100%">
-
-                                    <tr>
+                            <div class="card-body pd-y-7">
 
 
-                                        <td><label class="form-control">School Name / സ്ക്കൂളിന്റെ പേര് :
-                                                <b>{{ @$formData['school_name'] }} </b>
-                                            </label></td>
-                                        <td><label class="form-control">Student Name/വിദ്യാർത്ഥിയുടെ പേര് :
-                                                <b>{{ @$formData['student_name'] }}</b></label>
-                                        </td>
-                                    </tr>
+                                <h1
+                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                    അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ
 
-                                    <tr>
-
-                                        <td><label class="form-control">Gender / ആൺകുട്ടിയോ/ പെൺകുട്ടിയോ :
-                                                <b>{{ @$formData['gender'] }} </b>
-                                        </td>
-                                        <td><label class="form-control">Parent Name : <b>{{ @$formData['parent_name'] }}</b>
-                                            </label></td>
-                                    </tr>
-                                    <tr>
-
-                                        <td><label class="form-control">Parent Address : <b>{{ @$formData['address'] }} </b>
-                                        </td>
-                                        @php
-                                            $district = DB::table('districts')
-                                                ->where('_id', @$formData['birth_district'])
-                                                ->first();
-                                            $thaluk = DB::table('taluks')
-                                                ->where('_id', @$formData['taluk'])
-                                                ->first();
-
-                                        @endphp
-                                        <td><label class="form-control">District / Taluk / Pincode:
-                                                <b>{{ @$district['name'] }} ,
-                                                    {{ @$thaluk['taluk_name'] }} , {{ @$formData['pincode'] }}</b>
-                                            </label></td>
-                                    </tr>
-
-                                    <tr>
-
-                                        <td><label class="form-control">Relation / രക്ഷിതാവിനു കുട്ടിയുമായുള്ള ബന്ധം :
-                                                <b>{{ @$formData['relation'] }} </b>
-                                        </td>
-                                        <td><label class="form-control">Mother's Name / മാതാവിന്റെ പേര് :
-                                                <b>{{ @$formData['mother_name'] }}</b>
-                                            </label></td>
-                                    </tr>
+                                </h1>
 
 
-                                    <tr>
+                                <form action="#" method="post" style="font-weight: 500;font-size: 12px;padding: 90px;">
 
-                                        <td><label class="form-control">Annual Income / കുടുംബ വാർഷിക വരുമാനം :
-                                                <b>{{ @$formData['annual_income'] }} </b>
-                                        </td>
-                                        <td><label class="form-control">Occupation of Parent / രക്ഷിതാവിന്റെ തൊഴിൽ :
-                                                <b>{{ @$formData['occupation_parent'] }}</b>
-                                            </label></td>
-                                    </tr>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
 
-                                    {{-- 
-                                        <tr>
-                                       
-                                            <td><label class="form-control">Date of Birth & Age / വിദ്യാർത്ഥിയുടെ ജനനതിയതിയും പൂർത്തിയായ വയസ്സും :<b>{{ @$formData['dob'] }} </b>
-                                            </td>
-                                            <td><label class="form-control">Religion & Caste / ജാതിയും മതവും : <b>{{ @$formData['caste'] }}</b>
-                                                </label>
-                                            </td>
-                                        </tr> --}}
+                                            <label>1. School Name / സ്ക്കൂളിന്റെ പേര് </label>
+                                        </div>
 
-                                    <tr>
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['school_name'] }} </label>
+                                        </div>
+                                    </div>
 
-                                        <td><label class="form-control">Date of Birth / വിദ്യാർത്ഥിയുടെ ജനനതിയതി
-                                                :<b>{{ @$formData['dob'] }} </b>
-                                        </td>
-                                        <td><label class="form-control"> Age /
-                                                പൂർത്തിയായ വയസ്സും :<b>{{ @$formData['age'] }} </b>
-                                        </td>
-                                    </tr>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
 
+                                            <label>2. Student Name/വിദ്യാർത്ഥിയുടെ പേര് </label>
+                                        </div>
 
-                                    <tr>
-                                        <td><label class="form-control">Religion & Caste / ജാതിയും മതവും :
-                                                <b>{{ @$formData['caste'] }}</b>
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['student_name'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>3. Gender / ആൺകുട്ടിയോ/ പെൺകുട്ടിയോ </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['gender'] }} </label>
+                                        </div>
+                                    </div>
+
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>4. Parent Name & Address With Pincode / രക്ഷിതാവിന്റെ പേരും വിലാസവും
+                                                (പിൻകോഡ് സഹിതം ) </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label> {{ @$formData['address'] }} </label>
+                                            <br>{{ @$formData['district']['name'] }},
+                                            <br>{{ @$formData['taluk']['taluk_name'] }},
+                                            <br> {{ @$formData['pincode'] }}
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>5. Relation / രക്ഷിതാവിനു കുട്ടിയുമായുള്ള ബന്ധം </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['relation'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>6. Mother's Name / മാതാവിന്റെ പേര് </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['mother_name'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>7. Annual Income / കുടുംബ വാർഷിക വരുമാനം </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['annual_income'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>8. Occupation of Parent / രക്ഷിതാവിന്റെ തൊഴിൽ </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['occupation_parent'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>9. Date of Birth / വിദ്യാർത്ഥിയുടെ ജനനതിയതി</label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['dob'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>10. Age / വയസ്സും </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['age'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>11. Religion & Caste / ജാതിയും മതവും </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['caste'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>12. പട്ടികജാതി/ പട്ടികവർഗ/ മറ്റിതര സമുദായം ഇവയിൽ ഏത് </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['other'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>12. Class, School Name and Address / പഠിക്കുന്ന ക്ലാസും ,സ്കൂളിന്റെ
+                                                പേരും വിലാസവും </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['school_address'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>12. Birth Place / ജനനസ്ഥലവും </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['birth_place'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>13. Birth District / ജില്ലയും </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['birth_district']['name'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>12. Mother Tounge/വിദ്യാർത്ഥിയുടെ മാതൃഭാഷ </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['mother_tonge'] }} </label>
+                                        </div>
+                                    </div>
+                                    <div class=" row paper-1">
+                                        <div class="col-5">
+
+                                            <label>13. Place/സ്ഥലം </label>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label> {{ @$formData['place'] }} </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row paper-1">
+                                        <div class="col-5">
+                                            <label for="date">14. Date/തിയതി</label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label>:</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label id="dateLabel">{{ @$formData['date'] }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row paper-1">
+                                        <div class="col-5">
+                                            <label for="parentName">Parent's Name/രക്ഷിതാവിന്റെ പേരു</label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label>:</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label id="parentNameLabel">{{ @$formData['parent_name'] }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row paper-1">
+                                        <div class="col-5">
+                                            <label for="parentSign">Parent's Sign/രക്ഷിതാവിന്റെ ഒപ്പും</label>
+                                        </div>
+                                        <div class="col-1">
+                                            <label>:</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>
+                                                <a href="{{ asset('/signature/' . @$formData->signature) }}"
+                                                    target="_blank">View</a>
                                             </label>
-                                        </td>
-                                        <td><label class="form-control">Place/സ്ഥലം : <b>{{ @$formData['place'] }} </b>
-                                        </td>
-
-                                    </tr>
-
-
-                                    <tr>
-
-
-                                        <td><label class="form-control">പട്ടികജാതി/ പട്ടികവർഗ/ മറ്റിതര സമുദായം ഇവയിൽ ഏത് :
-                                                <b>{{ @$formData['other'] }} </b>
-                                        </td>
-                                        <td><label class="form-control">Class,School Name and Address / പഠിക്കുന്ന ക്ലാസും
-                                                ,സ്കൂളിന്റെ പേരും വിലാസവും: <b>{{ @$formData['school_address'] }}</b>
-                                            </label>
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-
-                                        <td><label class="form-control">Birth Place / ജനനസ്ഥലം:
-                                                <b>{{ @$formData['birth_place'] }} </b>
-                                        </td>
-
-                                        @php
-                                            $district = DB::table('districts')
-                                                ->where('_id', @$formData['birth_district'])
-                                                ->first();
-                                        @endphp
-
-                                        <td>
-                                            <label class="form-control">Birth District / ജനിച്ച ജില്ലാ :
-                                                <b>{{ $district['name'] }} </b>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><label class="form-control">Mother Tounge / വിദ്യാർത്ഥിയുടെ മാതൃഭാഷ :
-                                                <b>{{ @$formData['mother_tonge'] }} </b>
-                                        </td>
-                                    </tr>
-
-
-
-                                    <tr>
-                                        <td>
-                                            Parent's Sign/രക്ഷിതാവിന്റെ ഒപ്പും
-                                            @if ($formData['signature'])
-                                                <iframe src="{{ asset('signature/' . @$formData['signature']) }}"
-                                                    width="400" height="200"></iframe>
-                                            @endif
-                                        </td>
-                                    </tr>
-
-
-
-
-
-
-                                </table>
-
-                                <form action="{{ url('examApplicationStore') }}" method="POST"
-                                    enctype="multipart/form-data" onsubmit="return validateForm()">
-                                    @csrf
-
+                                        </div>
+                                    </div>
                                     <br>
-                                    <div class="row">
-                                        <div class="col-md-1 mb-1">
-                                            <input type="checkbox" id="wifeCheckbox" name="agree" value="Yes" required>
-                                        </div>
-                                        <div class="col-md-11 mb-11">
-                                            മുകളിൽ പറഞ്ഞിട്ടുള്ള വിവരങ്ങൾ എല്ലാം എന്റെ അറിവിൽപെട്ടിടത്തോളം സത്യവും
-                                            ശരിയുമെന്നെന്നും ഇതിനാൽ ബോധിപ്പിച്ചുകൊള്ളുന്നു.
-                                            മുകളിൽ പറഞ്ഞിട്ടുള്ള സ്കൂളിൽ എന്റെ മകൻ/മകൾ <input type="text"
-                                                class="form-control" value="{{ @$formData['student_name'] }}"
-                                                name="student_name" required /> പ്രവേശനം ലഭിക്കുന്ന പക്ഷം പഠനം
-                                            പൂർത്തിയാക്കുന്നതിനു മുൻപായി എന്റെ സ്വന്തം താല്പര്യപ്രകാരം പഠിത്തം നിർത്തുകയോ
-                                            കുട്ടിയെ പിന്വലിക്കുകയോ ചെയ്യുകയില്ല എന്നു ഇതിനാൽ ഉറപ്പുതന്നുകുള്ളുന്നു.
+                                    <br>
+                                    <div class="row mt-5">
+                                        <div class="col-12">
+                                            <h1
+                                                style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                                അപേക്ഷ സമർപ്പിക്കുന്നത്
 
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="row d-flex flex-direction-row col-6">
+                                            <div class="row col-12">
+                                                <div class="col-3">
+
+                                                    <label>ജില്ല </label>
+                                                </div>
+
+                                                <div class="col-1">
+                                                    <label> : </label>
+                                                </div>
+                                                <div class="col-2">
+                                                    <label> {{ @$formData['dist_name'] }} </label>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-6 d-flex">
+                                            <div class="row d-flex col-12">
+                                                <div class="col-6">
+
+                                                    <label>TEO</label>
+                                                </div>
+
+                                                <div class="col-1">
+                                                    <label> : </label>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label> {{ @$formData['teo_name'] }} </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    {{-- <div class="row">
-                                        <div class="col-md-3">
+                                    {{-- ends here  --}}
 
-                                            <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
 
-                                            <button type="submit" class="btn-block  btn btn-success"
-                                                    onclick="return confirm('Do you want to continue?')">Submit</button>
-                                            
-                                        </div>
-                                        <div class="col-md-3">
+                                    <br><br>
 
-                                          
-                                            <div class="btn_wrapper">
-                                                <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
-                                            </div>
+                                    <div class="row paper-1">
+                                        <div class="col-12">
+                                            <span for="parentSign"> മുകളിൽ പറഞ്ഞിട്ടുള്ള വിവരങ്ങൾ എല്ലാം എന്റെ
+                                                അറിവിൽപെട്ടിടത്തോളം സത്യവും ശരിയുമെന്നെന്നും ഇതിനാൽ
+                                                ബോധിപ്പിച്ചുകൊള്ളുന്നു.
+                                                മുകളിൽ പറഞ്ഞിട്ടുള്ള സ്കൂളിൽ എന്റെ മകൻ/മകൾ
+                                                <b>{{ @$formData['student_name'] }}</b> പ്രവേശനം ലഭിക്കുന്ന പക്ഷം പഠനം
+                                                പൂർത്തിയാക്കുന്നതിനു മുൻപായി എന്റെ സ്വന്തം താല്പര്യപ്രകാരം പഠിത്തം
+                                                നിർത്തുകയോ കുട്ടിയെ പിന്വലിക്കുകയോ ചെയ്യുകയില്ല എന്നു ഇതിനാൽ
+                                                ഉറപ്പുതന്നുകുള്ളുന്നു.</span>
                                         </div>
-                                    </div> --}}
 
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
-                                            <button type="submit" class="btn-block btn btn-success"
-                                                onclick="return confirm('Do you want to continue?')">Submit</button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="btn_wrapper">
-                                                <a href="javascript:void(0)" class="btn btn-primary w-100"
-                                                    onclick="goback()">Edit</a>
-                                            </div>
-                                        </div>
                                     </div>
+
                                 </form>
-
-                                <br>
-
                             </div>
+
+
                         </div>
                     </div>
                 </div>
