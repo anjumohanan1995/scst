@@ -37,7 +37,9 @@ class ItiFund extends Eloquent
         'current_district',
         'current_taluk',
         'institution_name',
-        'current_institution'
+        'current_institution',
+        'submitted_district_name',
+        'submitted_teo_name'
         
 
     ];
