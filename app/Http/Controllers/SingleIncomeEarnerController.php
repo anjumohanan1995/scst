@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\District;
+use App\Models\Taluk;
 use App\Models\SingleIncomeEarner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +21,7 @@ class SingleIncomeEarnerController extends Controller
     {
 
         $districts = District::get();
+
         return view('application.single_income_earner_application',compact('districts'));
     }
     public function singleIncomeEarnerPreview(Request $request)
@@ -90,6 +93,7 @@ class SingleIncomeEarnerController extends Controller
         }else{
             $death_certificate = '';
         }
+
         if ($request->hasfile('ration_card')) {
 
             $ration = $request->ration_card;
@@ -148,6 +152,13 @@ class SingleIncomeEarnerController extends Controller
         $formData['income_certificate']= $income_certificate;
         $formData['signature']= $signature;
         $formData['past_job_document']= $past_job_document;
+        $formData['death_certificate']= $death_certificate;
+        
+        //adding the realation db
+        $formData['taluk'] = Taluk::where('_id',$formData['taluk'])->first();
+        $formData['district'] = District::where('_id',$formData['district'])->first();
+
+
 
         return view('application.single_income_earner_preview', compact('formData'));
 

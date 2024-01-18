@@ -98,7 +98,7 @@ class AnemiaFinanceController extends Controller
         }
         if ($request->hasfile('ration_card')) {
 
-            $ration = $request->passbook_copy;
+            $ration = $request->ration_card;
             $imgfileName3 = time() . rand(100, 999) . '.' . $ration->extension();
 
             $ration->move(public_path('/applications/anemia_finance'), $imgfileName3);
@@ -111,7 +111,7 @@ class AnemiaFinanceController extends Controller
 
         if ($request->hasfile('medical_certificate')) {
 
-            $medical = $request->passbook_copy;
+            $medical = $request->medical_certificate;
             $imgfileName4 = time() . rand(100, 999) . '.' . $medical->extension();
 
             $medical->move(public_path('/applications/anemia_finance'), $imgfileName4);

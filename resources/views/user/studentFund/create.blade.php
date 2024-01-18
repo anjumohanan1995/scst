@@ -299,7 +299,7 @@
                                           <input type="hidden" name="dist_name" id="dist_name" value="">
                                       </div>
                                       <div class="col-md-6 mb-6">
-                                          <label class="form-label">TEO  </label>
+                                          <label class="form-label">TEO (ടി .ഇ .ഓ) </label>
                                           <select id="submitted_teo" name="submitted_teo" class="form-control">
                                               <option value="">Choose TEO</option>
                                           </select>                                 

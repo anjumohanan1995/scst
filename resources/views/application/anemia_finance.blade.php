@@ -65,12 +65,13 @@
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">ജാതി സർട്ടിഫിക്കറ്റ് / Caste Certificate  </label>
-                                    <input type="file" class="form-control"  name="caste_certificate" id="caste_certificate" value="" placeholder="" />
+                                    <input type="file" class="form-control"  name="caste_certificate" id="caste_certificate" value="" placeholder="" onchange="validateCaste()" />
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
 
                                     @error('caste_certificate')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorMessageone" style="color:red;"></div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">ഫോൺ നമ്പർ / Phone Number   </label>
@@ -128,12 +129,13 @@
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ആധാർ പകർപ്പ് / Aadhaar copy  </label>
-                                    <input type="file" class="form-control"  name="adhaar_copy" id="adhaar_copy" value="" placeholder="" />
+                                    <input type="file" class="form-control"  name="adhaar_copy" id="adhaar_copy" value="" placeholder="" onchange="validateAdhar()"/>
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
 
                                     @error('adhaar_copy')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorAdhar" style="color:red;"></div>
                                 </div>
                             </div><br>
                             <div class="row">   
@@ -146,10 +148,11 @@
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ബാങ്ക് അക്കൗണ്ട് പാസ്സ് ബുക്കിന്റെ പകർപ്പ് / Copy of Bank Account Pass Book   </label>
-                                    <input type="file" class="form-control"  name="passbook_copy" id="passbook_copy" value="" placeholder="" />
+                                    <input type="file" class="form-control"  name="passbook_copy" id="passbook_copy" value="" placeholder="" onchange="validatePassbook()" />
                                     @error('passbook_copy')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorPassbook" style="color:red;"></div>
                                 </div>
                             </div><br>
                             <div class="row">   
@@ -169,12 +172,13 @@
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">റേഷൻ  കാർഡ് പകർപ്പ് / Copy of Ration Card  </label>
-                                    <input type="file" class="form-control"  name="ration_card" id="ration_card" value="" placeholder="" />
+                                    <input type="file" class="form-control"  name="ration_card" id="ration_card" value="" placeholder="" onchange="validateRationcard()" />
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
 
                                     @error('ration_card')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorRationcard" style="color:red;"></div>
                                 </div>
                             </div><br>
                             <div class="row">   
@@ -194,12 +198,13 @@
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">മെഡിക്കൽ സർട്ടിഫിക്കറ്റ് / Medical certificate  </label>
-                                    <input type="file" class="form-control"  name="medical_certificate" id="medical_certificate" value="" placeholder="" />
+                                    <input type="file" class="form-control"  name="medical_certificate" id="medical_certificate" value="" placeholder="" onchange="validateMedical()" />
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
 
                                     @error('medical_certificate')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorMedical" style="color:red;"></div>
                                 </div>
                             </div><br>
                             {{--  <h3 style="text-align: center;"><u>സത്യപ്രസ്താവന</u></h3>
@@ -214,12 +219,13 @@
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ഒപ്പ് / Signature</label>
-                                    <input type="file" class="form-control"  name="signature" id="signature" value="" placeholder="" />
+                                    <input type="file" class="form-control"  name="signature" id="signature" value="" placeholder="" onchange="validateSignature()" />
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
 
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorSignature" style="color:red;"></div>
                                 </div>
                             </div><br>
                         </div>
@@ -275,6 +281,126 @@
 </div>
 
 <script>
+    function validateCaste() {
+        var input = document.getElementById('caste_certificate');
+        var errorMessage = document.getElementById('errorMessageone');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+    function validateAdhar() {
+        var input = document.getElementById('adhaar_copy');
+        var errorMessage = document.getElementById('errorAdhar');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+    function validatePassbook() {
+        var input = document.getElementById('passbook_copy');
+        var errorMessage = document.getElementById('errorPassbook');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+    function validateRationcard() {
+        var input = document.getElementById('ration_card');
+        var errorMessage = document.getElementById('errorRationcard');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+    function validateMedical() {
+        var input = document.getElementById('medical_certificate');
+        var errorMessage = document.getElementById('errorMedical');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+    function validateSignature() {
+        var input = document.getElementById('signature');
+        var errorMessage = document.getElementById('errorSignature');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
    
 	$('#district').change(function(){
         var districtName = this.options[this.selectedIndex].text;

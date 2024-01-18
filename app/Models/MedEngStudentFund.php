@@ -38,7 +38,9 @@ class MedEngStudentFund extends Eloquent
         'current_taluk',
         'ifsc_code',
         'account_no',
-        'bank_branch'
+        'bank_branch',
+        'dist_name',
+        'teo_name'
         
 
     ];

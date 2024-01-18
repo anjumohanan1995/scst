@@ -321,7 +321,7 @@
                                                         ,12 ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ
                                                     </p> 
                                                      <a href="#" class="btn-card" data-toggle="modal"
-                                                        data-target="#itiStudentModal">Apply Now</a>
+                                                        data-target="#tutionStudentModal">Apply Now</a>
                                                     {{-- <a href="TuitionFee/create" class="btn-card">Apply Now</a> --}}
                                                 </div>
                                             </div>
@@ -352,9 +352,42 @@
         </div>
 
 
-       
+        <div class="modal fade" id="itiStudentModal" tabindex="-1" role="dialog"
+        aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Your form content goes here -->
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel">
+                            ഐ.റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള
+                                                        സ്കോളർഷിപ്പ്
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                            <p> ഹാജരാക്കേണ്ട രേഖകൾ:</p>
 
-         <div class="modal fade" id="itiStudentModal" tabindex="-1" role="dialog"
+                            <ul>
+                                <li>
+                                    അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                                </li>
+                            </ul>
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="itiScholarship/create" class="btn btn-primary"> Continue</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+         <div class="modal fade" id="tutionStudentModal" tabindex="-1" role="dialog"
             aria-labelledby="applicationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -894,7 +927,7 @@
                 <form>
                     <div class="modal-header">
                         <h5 class="modal-title" id="applicationModalLabel">
-                            സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം നൽകുന്ന പദ്ധതി 
+                            അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -908,7 +941,7 @@
                         <ul>
                      
                             <li>
-                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                                രക്ഷിതാവിന്റെ ഒപ്പും (ഫോട്ടോ)
                             </li>
                         </ul>
                     </h4>

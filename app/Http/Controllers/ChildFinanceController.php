@@ -236,10 +236,42 @@ class ChildFinanceController extends Controller
              $address = $record->address;
              $age = $record->age;
              $caste = $record->caste;
+             $status = $record->status;
             $date = $record->date;
             $time = $record->time;
               $created_at =  $record->created_at;
-
+              if($status ==1) $statusvalue='<span class="badge bg-success" style="height: 17px;">Approved</span>';
+              else  if($status ==2) $statusvalue='<span class="badge bg-danger" style="height: 17px;">Rejected by'.$record->RejectedUser->name.'</span>'.'<br>'.'Reason: '.@$record->rejected_reason;
+         if($role == "TEO"){
+            if($status == 1 || $status == 2){
+                $data_arr[] = array(
+                    "id" => $id,
+                    "name" => $name,
+                    "address" => $address,
+                    "age" => $age,
+                    "caste" => $caste,
+                    "date" => $date." ".$time,  
+                    "created_at" => $created_at,                  
+                    "action" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;'.$statusvalue.'</div>'
+    
+                );
+            }
+            else{
+                $data_arr[] = array(
+                    "id" => $id,
+                    "name" => $name,
+                    "address" => $address,
+                    "age" => $age,
+                    "caste" => $caste,
+                    "date" => $date." ".$time,  
+                    "created_at" => $created_at,                  
+                    "action" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>'
+    
+                );
+            }
+           
+        }
+        else{
             $data_arr[] = array(
                 "id" => $id,
                 "name" => $name,
@@ -248,10 +280,10 @@ class ChildFinanceController extends Controller
                 "caste" => $caste,
                 "date" => $date." ".$time,  
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>',
-                "action" => '<div class="settings-main-icon"><a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>'
+                "action" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>',
 
             );
+        }
          }
 
          $response = array(

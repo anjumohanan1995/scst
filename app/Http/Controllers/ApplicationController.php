@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\Taluk;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
 use Illuminate\Http\Request;
@@ -569,6 +570,14 @@ class ApplicationController extends Controller
         }
         $formData = $data;
         $formData['signature'] = $signature;
+        $formData['district'] = District::where('_id', $formData['district'])->first();
+        $formData['birth_district'] = District::where('_id', $formData['birth_district'])->first();
+        $formData['submitted_district'] = District::where('_id', $formData['submitted_district'])->first();
+        $formData['submitted_teo'] = District::where('_id', $formData['submitted_teo'])->first();
+        $formData['taluk'] = Taluk::where('_id', $formData['taluk'])->first();
+
+
+        $formData['signature'] = $signature;
 
         return view('application.exam_application_preview', compact('formData'));
     }
@@ -793,7 +802,7 @@ class ApplicationController extends Controller
             $image = $request->signature;
             $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
 
-            $image->move(public_path('/applications'), $imgfileName);
+            $image->move(public_path('/applications/mother_child_protection'), $imgfileName);
 
             $signature = $imgfileName;
         } else {
