@@ -30,7 +30,8 @@ class ItiScholarshipController extends Controller
     public function create()
     {
         $districts=District::all();
-        return view("user.tuitionFee.create",compact('districts'));
+        $institutions=Institution::where('deleted_at',null)->get();
+        return view("user.itiFund.create",compact('districts','institutions'));
     }
 
     /**

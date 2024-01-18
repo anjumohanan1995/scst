@@ -380,7 +380,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="TuitionFee/create" class="btn btn-primary"> Continue</a>
+                        <a href="itiScholarship/create" class="btn btn-primary"> Continue</a>
                     </div>
                 </form>
             </div>
