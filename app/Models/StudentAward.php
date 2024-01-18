@@ -49,6 +49,11 @@ class StudentAward extends Eloquent
     public function talukName() {
         return $this->belongsTo('App\Models\Taluk', 'taluk');
     }
-
+    public function submittedDistrict() {
+        return $this->belongsTo('App\Models\District', 'submitted_district');
+    }
+    public function submittedTeo() {
+        return $this->belongsTo('App\Models\Teo', 'submitted_teo');
+    }
     
 }

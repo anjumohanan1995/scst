@@ -33,7 +33,7 @@
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">പേര് / Name </label>
-                                    <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="" name="name" />
+                                    <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="" name="name" required />
                                     @error('name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">IFSC കോഡ് / IFSC Code </label>
-                                    <input type="number" class="form-control"  name="ifsc_code" id="ifsc_code" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="ifsc_code" id="ifsc_code" value="" placeholder="" />
                                     @error('ifsc_code')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -196,6 +196,8 @@
                             <div class="col-md-6 mb-6">
                                 <label class="form-label">ഒപ്പ് / Signature</label>
                                 <input type="file" class="form-control"  name="signature" id="signature" value="" placeholder="" />
+                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
+
                                 @error('signature')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -210,7 +212,7 @@
                                 <div class="row">   
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ജില്ല / District  </label>
-                                        <select id="submitted_district" name="submitted_district" class="form-control" >
+                                        <select id="submitted_district" name="submitted_district" class="form-control" required />
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
                                                     <option value="{{$district->id}}"  >{{$district->name}}</option>
@@ -223,7 +225,7 @@
                                     </div>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ടി.ഇ.ഒ / TEO  </label>
-                                        <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                        <select id="submitted_teo" name="submitted_teo" class="form-control" required />
                                             <option value="">Choose TEO</option>
                                         </select>                                 
                                         @error('teo')
