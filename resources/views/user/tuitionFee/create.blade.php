@@ -111,7 +111,7 @@
 
 
                                         </label>
-                                        <input type="text" value="{{ old('annual_income') }}"  class="form-control" placeholder="വരുമാനം" name="annual_income" />
+                                        <input type="number" value="{{ old('annual_income') }}"  class="form-control" placeholder="വരുമാനം" name="annual_income" />
                                
                                         @error('annual_income')
                                             <span class="text-danger">{{$message}}</span>
@@ -146,7 +146,35 @@
                                         
                                         
                                           </label>
-                                           <input type="text" class="form-control" value="{{ old('relation') }}"   name="relation" id="relation" value="" placeholder="അപേക്ഷകനുമായുള്ള ബന്ധം " />
+                                          <select class="form-select" name="relation">
+                                                <option value="" disabled>Select a relationship</option>
+                                                <option value="father" @if (old('relation') == 'father') selected @endif>
+                                                    Father / അച്ഛൻ</option>
+                                                <option value="mother" @if (old('relation') == 'mother') selected @endif>
+                                                    Mother / അമ്മ</option>
+                                                <option value="grandfather"
+                                                    @if (old('relation') == 'grandfather') selected @endif>Grandfather /
+                                                    മുത്തച്ഛൻ</option>
+                                                <option value="grandmother"
+                                                    @if (old('relation') == 'grandmother') selected @endif>Grandmother /
+                                                    മുത്തശ്ശി</option>
+                                                <option value="uncle" @if (old('relation') == 'uncle') selected @endif>
+                                                    Uncle / മാമൻ </option>
+                                                <option value="aunt" @if (old('relation') == 'aunt') selected @endif>
+                                                    Aunt / മാമി </option>
+                                                <option value="cousin" @if (old('relation') == 'cousin') selected @endif>
+                                                    Cousin / സഹോദര / സഹോദരി</option>
+                                                <option value="siblings"
+                                                    @if (old('relation') == 'siblings') selected @endif>Siblings / സഹോദര /
+                                                    സഹോദരി</option>
+                                                <option value="others" @if (old('relation') == 'others') selected @endif>
+                                                    Others / മറ്റുള്ളവ </option>
+                                            </select>
+
+
+
+
+                                           
 
                                     
                                     @error('relation')
@@ -281,6 +309,9 @@
 </div>
 
 <script>
+$('input[name="current_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
 function validateImage() {
     var input = document.getElementById('signature');
     var errorMessage = document.getElementById('errorMessage');

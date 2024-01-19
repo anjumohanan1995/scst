@@ -1,35 +1,34 @@
 @extends('layouts.app')
 @section('content')
+    <!-- main-content -->
+    <div class="main-content app-content">
+        <!-- container -->
+        <div class="main-container container-fluid">
+            <!-- breadcrumb -->
+            <div class="breadcrumb-header justify-content-between row me-0 ms-0">
+                <div class="col-xl-9">
+                    {{-- <h4 class="content-title mb-2">Registration</h4> --}}
+                </div>
+                <div class="col-xl-3">
+                </div>
+            </div>
+            <!-- /breadcrumb -->
+            <!-- main-content-body -->
+            <div class="main-content-body">
 
-<!-- main-content -->
-<div class="main-content app-content">
-	<!-- container -->
-	<div class="main-container container-fluid">
-		<!-- breadcrumb -->
-		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-			<div class="col-xl-9">
-				<h4 class="content-title mb-2"></h4>
-			</div>
-			<div class="col-xl-3">
-			</div>
-		</div>
-		<!-- /breadcrumb -->
-		<!-- main-content-body -->
-		<div class="main-content-body">
-			
 
-			@if (session('success'))
-				<div class="alert alert-success alert-dismissible fade show" role="alert">
-					{{ session('success') }}
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-			@endif  
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
 
-			<!-- row -->
-			<!-- row -->
-             <div class="row row-sm">
+                <!-- row -->
+                <!-- row -->
+                <div class="row row-sm">
                     <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                         <div class="card overflow-hidden" style="width: 113%;">
                             <div class="card-body pd-y-7">
@@ -429,7 +428,9 @@
                                                 <div class="col-6">
                                                     <label> 
                                                         @if($formData['marriage_certificate'])
-                                                            <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe>
+
+                                                        <a href="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" target="_blank">View</a>
+                                                            {{-- <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
                                                         @endif 
                                                     </label>
 
@@ -584,8 +585,67 @@
                                         </div>
 
                                     </div>
-                                      
-                                        <div class="row mt-5">
+                                    {{-- <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>10. ജില്ല </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                      {{ @$formData['dist_name'] }}
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+
+                                     <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>11.ടി.ഇ.ഒ</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                      {{ @$formData['teo_name'] }}
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+                                    --}}
+                                      <div class="row mt-5">
                                             <div class="col-12">
                                                 <h1
                                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
@@ -649,7 +709,8 @@
 
                                         <div>
                                             <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($formData['husband_sign'])
-                                            <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe>
+                                            {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe> --}}
+                                            <img src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="120px" height="60px">
                                             @endif
                                         </div>
 
@@ -661,7 +722,7 @@
                                     <div class="text">
                                         <div>
 
-                                            <label>തീയതി </label><br>{{ date("Y-m-d") }}
+                                            <label>തീയതി </label> :  {{ @$formData['date'] }}
 
 
 
@@ -673,9 +734,11 @@
                                         <div class="text">
 
                                             <div>
-                                                <label> ഭാര്യയുടെ ഒപ്പ് </label>:   @if($formData['wife_sign'])
-                                            <iframe src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="400" height="200"></iframe>
-                                            @endif
+                                                <label> ഭാര്യയുടെ ഒപ്പ് </label>:  
+                                                @if($formData['wife_sign'])
+                                                    {{-- <iframe src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="400" height="200"></iframe> --}}
+                                                    <img src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="120px" height="60px">
+                                                @endif
                                             </div>
 
 
@@ -687,7 +750,7 @@
 
 
                             </div>
-                             {{-- <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                             <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                    
                                    
@@ -702,7 +765,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form> --}}
+                                </form>
                             {{-- <div class="bottom">
                                 <p>മേൽപ്പറഞ്ഞ കാര്യങ്ങളെപ്പറ്റി അനേഷിച്ചതിൽ അവ സത്യമണ്ണുന്നും ഈ വ്യക്തികൾ
                                     <br>ബുദ്ധിമുട്ടനുഭവിക്കുന്നവരാണെന്നും ബോദ്ധ്യപ്പെട്ടിരിക്കുന്നതായി ഞാൻ
@@ -714,33 +777,37 @@
 
                     </div>
                 </div>
+
+            </div>
         </div>
     </div>
-</div>
-<script>
-    function validateForm() {
-        // Check if the required fields are filled
-        var husbandSign = document.getElementsByName('husband_sign')[0].value;
-        var wifeSign = document.getElementsByName('wife_sign')[0].value;
-        var husbandName = document.getElementsByName('husband_name')[0].value;
-        var wifeName = document.getElementsByName('wife_name')[0].value;
+    <script>
 
-        if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
-            alert('Please fill in all required fields.');
-            return false; // Prevent form submission
+        
+        function validateForm() {
+            // Check if the required fields are filled
+            var husbandSign = document.getElementsByName('husband_sign')[0].value;
+            var wifeSign = document.getElementsByName('wife_sign')[0].value;
+            var husbandName = document.getElementsByName('husband_name')[0].value;
+            var wifeName = document.getElementsByName('wife_name')[0].value;
+
+            if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
+                alert('Please fill in all required fields.');
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
         }
+    </script>
 
-        return true; // Allow form submission
-    }
-</script>
-
-<script>
-    // edit button function
-    function goback() {
-        if (confirm('Are you sure ? Do you want to edit this form!. ')) {
-            window.history.back();
+    <script>
+        // edit button function
+        function goback() {
+            if (confirm('Are you sure? Do you want to edit this form?')) {
+                window.location.href = "{{ url()->previous() }}";
+                //window.history.back();
+               
+            }
         }
-        return
-    }
-</script>
+    </script>
 @endsection

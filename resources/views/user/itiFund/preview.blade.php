@@ -30,8 +30,8 @@
 
 			<!-- row -->
 			<!-- row -->
-			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-8 col-md-8 col-sm-12 ">
+			<div class="row row-sm">
+                <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
 					<div class="card">
 						<div class="card-body">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
@@ -67,7 +67,7 @@
                                                 <td>3</td>
                                                 <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
                                                 </td>
-                                                <td> {{ @$formData['class_start_date'] }}</td>
+                                                <td>@if(@$formData['class_start_date']!=null) {{ \Carbon\Carbon::parse(@$formData['class_start_date'])->format('d-m-Y') }}@endif</td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
@@ -187,7 +187,7 @@
                                             </span>
                                             <span class="col-1"> :</span>
                                             <span class="col-6"> @if($formData['signature'])
-                                                <img src="{{ asset('itiStudentFund/' . @$formData['signature']) }}" width="150px" height="70px">
+                                                <img src="{{ asset('itiStudentFund/' . @$formData['signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
                                         </div>
@@ -215,7 +215,7 @@
                                             </span>
                                             <span class="col-1"> :</span>
                                             <span class="col-6"> @if($formData['parent_signature'])
-                                                <img src="{{ asset('itiStudentFund/' . @$formData['parent_signature']) }}" width="150px" height="70px">
+                                                <img src="{{ asset('itiStudentFund/' . @$formData['parent_signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
                                         </div>

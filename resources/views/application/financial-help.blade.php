@@ -415,9 +415,9 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">Husband's Sign/ഭർത്താവിന്റെ ഒപ്പ് </label>
-                                        <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                        <label class="form-label">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</label>
-                                        <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                                        <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*"/>
                                         @error('husband_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -426,9 +426,9 @@
 
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">Wife's Sign/ ഭാര്യയുടെ ഒപ്പ് </label>
-                                        <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                        <label class="form-label">(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</label>
-                                        <input type="file"   accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()" />
+                                        <input type="file"   accept="image/*" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()" />
                                         @error('wife_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -439,7 +439,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-1 mb-1">
-                                        <input type="checkbox" id="wifeCheckbox" name="agree" value="Yes" required>
+                                        <input type="checkbox" id="wifeCheckbox" name="agree" value="Yes" required  {{ old('agree') == 'Yes' ? 'checked' : '' }}>
                                     </div>
                                     <div class="col-md-11 mb-11">
                                         {{-- ശ്രീമാൻ <input type="text" class="form-control"  id="husband_name_new" required   value="{{ old('husband_name_new') }}"/> 
@@ -509,6 +509,13 @@
     </div>
 </div>
 <script type="text/javascript">
+$('input[name="hus_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+$('input[name="wife_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+
 function validateImage() {
         var input = document.getElementById('husband_sign');
         var errorMessage = document.getElementById('errorMessage');

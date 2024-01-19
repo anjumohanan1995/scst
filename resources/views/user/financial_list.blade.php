@@ -96,13 +96,13 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Husband Name and Address</th>
-                                            <th>Wife Name and Address</th>
-                                            <th>Marriage Registration Details </th>
-                                            <th>Marriage Certification </th>
+                                            <th>Husband Name</th>
+                                            <th>Wife Name </th>
+                                            {{-- <th>Marriage Registration Details </th>
+                                            <th>Marriage Certification </th> --}}
                                             <th>Husband Caste</th>
                                             <th>Wife Caste</th> 
-                                             <th> Date & Time</th>
+                                             <th> Applied date</th>
                                             <th>Created Date</th>
                                             <th >Action</th>
 
@@ -205,10 +205,10 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
-                { data: 'husband_address' },
-                { data: 'wife_address' },
-				{ data: 'register_details' },
-				{ data: 'certificate_details' },
+                { data: 'husband_name' },
+                { data: 'wife_name' },
+				//{ data: 'register_details' },
+				//{ data: 'certificate_details' },
                 { data: 'husband_caste' },
 				{ data: 'wife_caste' },
                 { data: 'created_at', visible: false },

@@ -51,7 +51,13 @@
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
                                 <div class="row mb-3">
-                            
+                                    <div class="col-md-1 col-6 text-center" id="">
+                                        <a href="itiScholarship/create">
+                                        <div class="task-box  primary mb-0">
+                                                <p class="mb-0 tx-12">Add  </p>
+                                                <h3 class="mb-0"><i class="fa fa-plus"></i></h3>
+                                        </div></a>
+                                    </div>
                                 <div class="col-md-1 col-6 text-center" id="refresh">
                                     <div class="task-box success  mb-0">
                                             <p class="mb-0 tx-12">Refresh  </p>
@@ -69,17 +75,18 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>അപേക്ഷകന്റെ പേര് </th>
-                                            <th>മേൽവിലാസം 
+                                            <th>Sl No</th>
+                                            <th>Applicant's Name / അപേക്ഷകന്റെ പേര് </th>
+                                            <th>Address / മേൽവിലാസം 
                                             </th>
-                                            <th>കോഴ്‌സിന്റെ പേര് 
+                                            <th>Course Name / കോഴ്‌സിന്റെ പേര് 
                                             </th>
-                                            <th>അപേക്ഷകന്റെ വരുമാനം 
+                                            <th>Applicant's Income / അപേക്ഷകന്റെ വരുമാനം 
                                             </th>
-                                            <th>ജാതി/ മതം 
+                                            <th>Caste/Religion / ജാതി/ മതം 
                                             </th>
-                                            <th>തീയതി   </th>
-                                            <th >ആക്ഷൻ</th>
+                                            <th>Date / തീയതി   </th>
+                                            <th >Action / ആക്ഷൻ</th>
 
 
 
@@ -153,13 +160,14 @@
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'name' },
                 { data: 'address' },
 				{ data: 'course_name' },
                 { data: 'income' },
 				{ data: 'caste' },
                 
-                { data: 'created_at', visible: false },
+                { data: 'created_at' },
 
                 { data: 'edit' }
 

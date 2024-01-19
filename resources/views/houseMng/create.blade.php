@@ -211,14 +211,14 @@
                                         ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ 
                                         ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ ?</label>
                                         <div style="border: 1px solid black" class="form-control">
-
-                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
-                                          
                                             <input type="radio" id="innovation" name="payment_details" value="yes"  {{ old('payment_details') == 'yes' ? 'checked' : '' }}>&nbsp; &nbsp;
-                                            <label for="No">No (ഇല്ല)</label>&nbsp; &nbsp;
+                                            
+                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
+                                            &nbsp; &nbsp;
                                           
                                             <input type="radio" id="option2" name="payment_details" value="no" {{ old('payment_details') == 'no' ? 'checked' : '' }}>
                                            
+                                           <label for="No">No (ഇല്ല)</label>
                                            
                                         </div><br>
                                         <div class="row" style="display:none" id="paymentDiv">
@@ -268,7 +268,10 @@
                                        
                                     @error('prove_eligibility_file')
                                         <span class="text-danger">{{$message}}</span>
+                                        
                                     @enderror
+                                    <br>
+                                    <span class="text-danger" id="prove_eligibility_file_error"></span>
                                 </div>
                                
                                
@@ -292,6 +295,8 @@
                                 @error('signature')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
+                                <br>
+                                <span class="text-danger" id="errorsignature"></span>
                             </div>
                           </div><br>
                           <br>
@@ -361,7 +366,7 @@ We hereby pledge that all the information we have added above is true and correc
                             </div>
                             <div class="col-md-8 mb-8">
                      
-                                <button type="reset" id="submit" class="btn btn-primary waves-effect waves-light text-start submit">Cancel</button>
+                                <button type="reset" id="submit1" class="btn btn-primary waves-effect waves-light text-start submit">Cancel</button>
                                 <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
                             </div>
                             
@@ -545,6 +550,44 @@ $(document).ready(function() {
     });
 
 	$(document).ready(function() {
+        $('#prove_eligibility_file').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+            $('#prove_eligibility_file_error').html('') 
+          } else {
+            $('#prove_eligibility_file_error').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#prove_eligibility_file').val('');
+          }
+        }
+      });
+      $('#signature').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+            $('#errorsignature').html('') 
+          } else {
+            $('#errorsignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#signature').val('');
+          }
+        }
+      });
         $('input[name="current_pincode"]').on('input', function() {
             this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
         });
