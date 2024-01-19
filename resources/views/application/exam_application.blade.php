@@ -351,8 +351,8 @@
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Parent's Sign / രക്ഷിതാവിന്റെ ഒപ്പും</label>
-                                            <input type="file" class="form-control" name="signature" accept=".jpg"
-                                                required />
+                                            <input type="file" class="form-control" name="signature" id="signature" accept=".jpg"
+                                                required onchange = "validateImage()" />
                                             <span class="text-muted small">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി
                                                 കുറഞ്ഞത്,
                                                 JPG/PDF
@@ -360,58 +360,60 @@
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="errorMessage" style="color:red;">
+                                            </div>
                                         </div>
+                                    </div>
 
-                                    </div><br>
-                                </div>
+                                </div><br>
                             </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-6">
-                                            <label class="form-label">District / ജില്ല </label>
-                                            <select id="submitted_district" name="submitted_district"
-                                                class="form-control" required>
-                                                <option value="">Select</option>
-                                                @foreach ($districts as $district)
-                                                    <option value="{{ $district->id }}"
-                                                        {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
-                                                        {{ $district->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('dist')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <input type="hidden" name="dist_name" id="dist_name" value="">
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label class="form-label">TEO / ടി . ഇ . ഓ </label>
-                                            <select id="submitted_teo" name="submitted_teo" class="form-control"
-                                                required>
-                                                <option value="">Choose TEO</option>
-                                            </select>
-                                            @error('teo')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <input type="hidden" name="teo_name" id="teo_name" value="">
-                                        </div>
-                                    </div><br>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">District / ജില്ല </label>
+                                    <select id="submitted_district" name="submitted_district" class="form-control"
+                                        required>
+                                        <option value="">Select</option>
+                                        @foreach ($districts as $district)
+                                            <option value="{{ $district->id }}"
+                                                {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
+                                                {{ $district->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('dist')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    <input type="hidden" name="dist_name" id="dist_name" value="">
                                 </div>
-                                <div class=" d-flex justify-content-end col-md-8 mb-8">
-                                    <button type="submit" id="submit"
-                                        class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">TEO / ടി . ഇ . ഓ </label>
+                                    <select id="submitted_teo" name="submitted_teo" class="form-control" required>
+                                        <option value="">Choose TEO</option>
+                                    </select>
+                                    @error('teo')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    <input type="hidden" name="teo_name" id="teo_name" value="">
                                 </div>
                             </div><br>
-                        </form>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                        </div>
+                        <div class=" d-flex justify-content-end col-md-8 mb-8">
+                            <button type="submit" id="submit"
+                                class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                        </div>
+                    </div><br>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
     </div>
@@ -536,6 +538,28 @@
                 }
             });
         });
+
+
+
+        function validateImage() {
+            // alert('ho');
+            var input = document.getElementById('signature');
+            var errorMessage = document.getElementById('errorMessage');
+
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // in bytes
+                var maxSize = 2 * 1024 * 1024; // 2MB
+
+                if (fileSize > maxSize) {
+                    errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                    input.value = ''; // Clear the file input
+                    $("#submit").prop("disabled", true);
+                } else {
+                    errorMessage.innerText = '';
+                    $("#submit").prop("disabled", false);
+                }
+            }
+        }
 
 
 
