@@ -443,7 +443,7 @@
                                                 </div>
 
                                                 <div class="col-6">
-                                                    <label> {{ date("d-m-Y") }} <br>
+                                                    <label>  {{ @$formData['date'] }} <br>
                                                              </label>
 
                                                 </div>
@@ -472,9 +472,12 @@
                                                 </div>
 
                                                 <div class="col-6">
+
                                                    @if($formData['signature'])
-                                            <iframe src="{{ asset('tuition/' . @$formData['signature']) }}" width="400" height="200"></iframe>
-                                            @endif
+                                            {{-- <iframe src="{{ asset('tuition/' . @$formData['signature']) }}" width="400" height="200"></iframe> --}}
+
+                                            <img src="{{ asset('tuition/' . @$formData['signature']) }}" width="120px" height="60px">
+                                            @endif 
 
                                                 </div>
                                             </div>
@@ -487,22 +490,9 @@
 
 
                                         
-                                        <div class="d-flex row">
-                                           
-
-                                            <div class="col-6">
-
-                                                    <label> അപേക്ഷകന്റെ ഒപ്പ് 
-
-                                                        :
-                                                    </label>
-                                            </div>
-
-                                        </div>
                                         
-                                        <br>
 
-                                       <br>
+                                       {{-- <br>
                                         <div>
                                             <p>പഠിക്കുന്ന സ്‌കൂളിന്റെ മേലധികാരിയുടെ ഒപ്പും സീലും 
 
@@ -517,7 +507,7 @@
 
                                             </p>
                                         </div>
-                                      
+                                       --}}
                                     </form>
                                    
 
