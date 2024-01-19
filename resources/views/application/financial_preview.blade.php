@@ -428,7 +428,9 @@
                                                 <div class="col-6">
                                                     <label> 
                                                         @if($formData['marriage_certificate'])
-                                                            <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe>
+
+                                                        <a href="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" target="_blank">View</a>
+                                                            {{-- <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
                                                         @endif 
                                                     </label>
 
@@ -707,7 +709,8 @@
 
                                         <div>
                                             <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($formData['husband_sign'])
-                                            <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe>
+                                            {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe> --}}
+                                            <img src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="120px" height="60px">
                                             @endif
                                         </div>
 
@@ -719,7 +722,7 @@
                                     <div class="text">
                                         <div>
 
-                                            <label>തീയതി </label> : {{ date("Y-m-d") }}
+                                            <label>തീയതി </label> : {{ date("d-m-Y") }}
 
 
 
@@ -731,9 +734,11 @@
                                         <div class="text">
 
                                             <div>
-                                                <label> ഭാര്യയുടെ ഒപ്പ് </label>:   @if($formData['wife_sign'])
-                                            <iframe src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="400" height="200"></iframe>
-                                            @endif
+                                                <label> ഭാര്യയുടെ ഒപ്പ് </label>:  
+                                                @if($formData['wife_sign'])
+                                                    {{-- <iframe src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="400" height="200"></iframe> --}}
+                                                    <img src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="120px" height="60px">
+                                                @endif
                                             </div>
 
 
@@ -745,7 +750,7 @@
 
 
                             </div>
-                             <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                            {{-- <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                    
                                    
@@ -760,7 +765,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                            </form> --}}
                             {{-- <div class="bottom">
                                 <p>മേൽപ്പറഞ്ഞ കാര്യങ്ങളെപ്പറ്റി അനേഷിച്ചതിൽ അവ സത്യമണ്ണുന്നും ഈ വ്യക്തികൾ
                                     <br>ബുദ്ധിമുട്ടനുഭവിക്കുന്നവരാണെന്നും ബോദ്ധ്യപ്പെട്ടിരിക്കുന്നതായി ഞാൻ
@@ -777,6 +782,8 @@
         </div>
     </div>
     <script>
+
+        
         function validateForm() {
             // Check if the required fields are filled
             var husbandSign = document.getElementsByName('husband_sign')[0].value;
