@@ -722,7 +722,7 @@
                                     <div class="text">
                                         <div>
 
-                                            <label>തീയതി </label> : {{ date("d-m-Y") }}
+                                            <label>തീയതി </label> :  {{ @$formData['date'] }}
 
 
 

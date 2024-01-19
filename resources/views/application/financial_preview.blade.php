@@ -750,7 +750,7 @@
 
 
                             </div>
-                            {{-- <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                         <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                    
                                    
@@ -765,7 +765,7 @@
                                             </div>
                                         </div>
                                     </div>
-                            </form> --}}
+                            </form> 
                             {{-- <div class="bottom">
                                 <p>മേൽപ്പറഞ്ഞ കാര്യങ്ങളെപ്പറ്റി അനേഷിച്ചതിൽ അവ സത്യമണ്ണുന്നും ഈ വ്യക്തികൾ
                                     <br>ബുദ്ധിമുട്ടനുഭവിക്കുന്നവരാണെന്നും ബോദ്ധ്യപ്പെട്ടിരിക്കുന്നതായി ഞാൻ
