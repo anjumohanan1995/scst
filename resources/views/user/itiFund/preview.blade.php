@@ -31,7 +31,7 @@
 			<!-- row -->
 			<!-- row -->
 			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
+				<div class="col-lg-12 col-xl-8 col-md-8 col-sm-12 ">
 					<div class="card">
 						<div class="card-body">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
@@ -92,7 +92,7 @@
 
                                                 </td>
                                                 <td>{{ @$formData['caste'] }} <br> @if($formData['caste_certificate'])
-                                                    <iframe src="{{ asset('itiStudentFund/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('itiStudentFund/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -102,7 +102,7 @@
 
                                                 </td>
                                                 <td> {{ @$formData['income'] }} <br> @if($formData['income_certificate'])
-                                                    <iframe src="{{ asset('itiStudentFund/' . @$formData['income_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('itiStudentFund/' . @$formData['income_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -167,7 +167,7 @@
                                 <br><br>
                                     <div class="m-5">
                                         <h1
-                                        style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                        style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 5px;line-height: 32px;font-weight: 600;">
                                        <u>സമ്മതപത്രം</u> </h1>
                                     </div>
                                     <div class="m-5 ">

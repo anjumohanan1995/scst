@@ -30,9 +30,9 @@
 			<!-- row -->
 			<!-- row -->
 			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
+				<div class="col-lg-8 col-xl-8 col-md-8 col-sm-12 ">
 					<div class="card">
-						<div class="card-body">
+						<div class="card-body p-5">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
 								<div class="mb-4 main-content-label">
                                     <h4 class="medical__form--h1 text-center m-3">
@@ -91,7 +91,7 @@
 
                                                 </td>
                                                 <td>{{ @$formData['caste'] }} <br> @if($formData['caste_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('medEngStudentFund/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -101,7 +101,7 @@
 
                                                 </td>
                                                 <td> {{ @$formData['income'] }} <br> @if($formData['income_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$formData['income_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('medEngStudentFund/' . @$formData['income_certificate']) }}"  target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>

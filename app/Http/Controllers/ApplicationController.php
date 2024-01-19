@@ -557,6 +557,8 @@ class ApplicationController extends Controller
         }
         $data = $request->all();
 
+
+
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
@@ -568,15 +570,8 @@ class ApplicationController extends Controller
         } else {
             $signature = '';
         }
+
         $formData = $data;
-        $formData['signature'] = $signature;
-        $formData['district'] = District::where('_id', $formData['district'])->first();
-        $formData['birth_district'] = District::where('_id', $formData['birth_district'])->first();
-        $formData['submitted_district'] = District::where('_id', $formData['submitted_district'])->first();
-        $formData['submitted_teo'] = District::where('_id', $formData['submitted_teo'])->first();
-        $formData['taluk'] = Taluk::where('_id', $formData['taluk'])->first();
-
-
         $formData['signature'] = $signature;
 
         return view('application.exam_application_preview', compact('formData'));
@@ -601,18 +596,18 @@ class ApplicationController extends Controller
             'mother_name' => @$data['mother_name'],
 
             'birth_district' => $data['birth_district'],
-            'age' => $data['age'],
+            'age' => @$data['age'],
 
-            'annual_income' => $data['annual_income'],
-            'occupation_parent' => $data['occupation_parent'],
-            'dob' => $data['dob'],
-            'caste' => $data['caste'],
-            'other' => $data['other'],
-            'school_address' => $data['school_address'],
-            'birth_place' => $data['birth_place'],
-            'mother_tonge' => $data['mother_tonge'],
+            'annual_income' => @$data['annual_income'],
+            'occupation_parent' => @$data['occupation_parent'],
+            'dob' => @$data['dob'],
+            'caste' => @$data['caste'],
+            'other' => @$data['other'],
+            'school_address' => @$data['school_address'],
+            'birth_place' => @$data['birth_place'],
+            'mother_tonge' => @$data['mother_tonge'],
             'date' => date('d-m-Y'),
-            'place' => $data['place'],
+            'place' => @$data['place'],
             'user_id' => Auth::user()->id,
             'agree' => $request->input('agree'),
             'parent_name'  => @$data['parent_name'],
@@ -771,6 +766,8 @@ class ApplicationController extends Controller
     public function examApplicationView($id)
     {
         $formData = ExamApplication::where('_id', $id)->first();
+        $formData = ExamApplication::with('submittedDistrict', 'submittedTeo', 'districtRelation', 'birthDistrictRelation', 'talukName')->where('_id', $id)->first();
+
         return view('admin.exam_application_view', compact('formData'));
     }
 

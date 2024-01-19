@@ -114,7 +114,7 @@ class HouseManagementController extends Controller
         }
        
       $formData['signature']= $signature;
-      $formData['prove_eligibility_file']= $signature;
+      $formData['prove_eligibility_file']= $eligibility_file;
       $currentDate = Carbon::now();
 
 // Format the date if needed
@@ -387,7 +387,7 @@ $formattedDate = $currentDate->toDateString();
                 $items->where('submitted_teo',$teo);
             }
 
-             $records = $items->skip($start)->take($rowperpage)->get();
+             $records = $items->skip($start)->orderBy('created_at','desc')->take($rowperpage)->get();
          
 
 
@@ -402,7 +402,10 @@ $formattedDate = $currentDate->toDateString();
              $place = $record->place;
              $caste = $record->caste;
               $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
 
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
             $data_arr[] = array(
                 "id" => $id,
                 "place" => $place,
@@ -410,7 +413,7 @@ $formattedDate = $currentDate->toDateString();
                 "address" => $address,
                 "panchayath" => $panchayath,
                 "caste" => $caste,
-                "created_at" => $created_at,                  
+                "date" => $date .' ' .$time,                   
                 "edit" => '<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
