@@ -19,7 +19,6 @@ use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
 use App\Http\Controllers\InstitutionController;
-use App\Http\Controllers\ItiScholarshipController;
 use App\Http\Controllers\MedEngStudentFundController;
 use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
@@ -96,8 +95,6 @@ Route::get('/userchildFinanceList', [App\Http\Controllers\ChildFinanceController
 Route::get('/getUserchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getUserchildFinanceList'])->name('getUserchildFinanceList');
 Route::get('/userchildFinance/{id}/view', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceView'])->name('userchildFinanceView');
 
-
-Route::resource('/itiScholarship', ItiScholarshipController::class);
 Route::get('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiScholarshipForm'])->name('iti-scholarship');
 Route::Post('/iti-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'store'])->name('iti-scholarship.store');
 Route::Post('/iti-fund-scholarship', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundStore'])->name('itiFundStore');

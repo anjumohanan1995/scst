@@ -50,7 +50,7 @@
                                     <div class="row">   
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Child's date of birth (write only if certificate is available)/കുട്ടിയുടെ ജനന തീയതി(സർട്ടിഫിക്കറ്റ് ഉണ്ടെങ്കിൽ മാത്രം എഴുതുക) </label>
-                                            <input type="date" value="{{ old('dob') }}"  class="form-control" placeholder="" name="dob" />
+                                            <input type="date" value="{{ old('dob') }}" class="form-control" placeholder="" name="dob" max="{{ date('Y-m-d') }}" />
                                             @error('dob')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
@@ -211,9 +211,8 @@
                                         
                                         <div class="col-md-6 mb-4">
                                             <label class="form-label">Applicant's Signature/അപേക്ഷകന്റെ ഒപ്പ്(വിരലടയാളം) </label>
-                                            <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
-                                                        മാത്രം.)</label>
-                                            <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" id="signature" onchange="validateImageOne()"    accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"  />
+                                            <label class="form-label">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG മാത്രം.)</label>
+                                            <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" id="signature" onchange="validateImageOne()"  accept="image/*"  />
                                             @error('signature')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
@@ -223,9 +222,9 @@
                                     <div class="row">   
                                         <div class="col-md-6 mb-4">
                                             <label class="form-label">Child's photo / കുട്ടിയുടെ ഫോട്ടോ </label>
-                                            <label class="form-label">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <label class="form-label">(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                         മാത്രം.)</label>
-                                            <input type="file" value="{{ old('child_signature') }}"  class="form-control" placeholder="കുട്ടിയുടെ ഫോട്ടോ" name="child_signature" id="child_signature" onchange="validateImageTwo()"    accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                                            <input type="file" value="{{ old('child_signature') }}"  class="form-control" placeholder="കുട്ടിയുടെ ഫോട്ടോ" name="child_signature" id="child_signature" onchange="validateImageTwo()"    accept="image/*" />
                                             @error('child_signature')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
@@ -296,6 +295,9 @@
 </div>
 
 <script type="text/javascript">
+$('input[name="current_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
 function validateImage() {
         var input = document.getElementById('birth_certificate');
         var errorMessage = document.getElementById('errorMessage');

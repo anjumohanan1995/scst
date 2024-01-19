@@ -157,9 +157,14 @@
 
                                                 <div class="col-6">
                                                     <label> 
-                                                        @if($formData['birth_certificate'])
-                                                            <iframe src="{{ asset('birth_certificate/' . @$formData['birth_certificate']) }}" width="400" height="200"></iframe>
+                                                      @if($formData['birth_certificate'])
+
+                                                        <a href="{{ asset('/child/birth_certificate/' . @$formData['birth_certificate']) }}" target="_blank">View</a>
+                                                            {{-- <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
                                                         @endif 
+                                                        {{-- @if($formData['birth_certificate'])
+                                                            <iframe src="{{ asset('birth_certificate/' . @$formData['birth_certificate']) }}" width="400" height="200"></iframe>
+                                                        @endif  --}}
                                                     </label>
 
                                                 </div>
@@ -504,47 +509,42 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div><br></br>
+                                        </div>
 
+                                        <div class="text">
+                                            <div>
 
+                                                <label>സ്ഥലം </label>  : {{ @$formData['place'] }}
+                                            </div>
 
-                                   
+                                            <div>
+                                                <label> അപേക്ഷകന്റെ ഒപ്പ്(വിരലടയാളം) </label> :  
+                                                @if($formData['signature'])
+                                                    {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe> --}}
+                                                    <img src="{{ asset('/child/signature/' . @$formData['signature']) }}" width="120px" height="60px">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    <br>
 
+                                    <div class="text">
+                                        <div>
+                                            <label>തീയതി </label> : {{ date("d-m-Y") }}
+                                        </div>
 
+                                        <div class="text">
 
+                                            <div>
+                                                <label>കുട്ടിയുടെ ഫോട്ടോ </label>:  
+                                               @if($formData['child_signature'])
 
-
-                                       
-
-
-
-
-
-                                        
-
-                                      
-                                       
-
-                                       
-
-
-                                        
-
-
-                                   
-
-
-
-
-                                        
-
-
-                                       
-                                        
-
-                                       
-                                        <br>
-                                        <div class="m-5">
+                                                        <a href="{{ asset('/child/child_signature/' . @$formData['child_signature']) }}" target="_blank">View</a>
+                                                            {{-- <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
+                                                        @endif 
+                                            </div>
+                                        </div>
+                                    </div>
+                                        {{-- <div class="m-5">
                                             <h6 class="text-center"><u><b>രക്ഷിതാവിന്റെ സമ്മതപത്രം</b>
                                                 </u>
                                             </h6>
@@ -588,7 +588,7 @@
                                                 <span class="col-1"> :</span>
                                                 <span class="col-5"> </span>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                     </form>
 
