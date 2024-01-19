@@ -12,7 +12,6 @@
                 </div>
                 <div class="col-xl-3">
                 </div>
-
                 <!-- /breadcrumb -->
                 <!-- main-content-body -->
                 <div class="main-content-body">
@@ -30,7 +29,7 @@
                     <!-- row -->
                     <!-- row -->
                     <div class="row row-sm mt-4">
-                        <div class="col-sm-12 col-md-12 col-lg-8">
+                        <div class="col-12 col-md-8 ">
                             <div class="card overflow-hidden" style="width: 113%;">
 
                                 <div class="card-body pd-y-7">
@@ -97,13 +96,12 @@
                                             <div class="col-1">
                                                 <label> : </label>
                                             </div>
-                                            <div class="col-6">
-                                                <label> {{ @$formData['address'] }},
-                                                    <br>{{ @$formData['districtRelation']['name'] }},
-                                                    <br>{{ @$formData['talukName']['taluk_name'] }},
-                                                    <br>
 
-                                                </label>
+                                            <div class="col-6">
+                                                <label> {{ @$formData['address'] }} </label>
+                                                <br>{{ @$formData['district']['name'] }},
+                                                <br>{{ @$formData['taluk']['taluk_name'] }},
+                                                <br> {{ @$formData['pincode'] }}
                                             </div>
                                         </div>
                                         <div class=" row paper-1">
@@ -247,9 +245,7 @@
                                                 <label> : </label>
                                             </div>
                                             <div class="col-6">
-
-
-                                                <label> {{ @$formData['birthDistrictRelation']['name'] }} </label>
+                                                <label> {{ @$formData['birth_district']['name'] }} </label>
                                             </div>
                                         </div>
                                         <div class=" row paper-1">
@@ -308,23 +304,22 @@
                                             <div class="col-1">
                                                 <label>:</label>
                                             </div>
+
                                             <div class="col-6">
-                                                <label>
-                                                    {{-- <a href="{{ asset('/signature/' . @$formData->signature) }}"
-                                                    target="_blank">View</a> --}}
+                                                {{-- <label class="d-block">
+                                                    <a href="{{ asset('/signature/' . @$formData['signature']) }}" target="_blank">View Signature</a>
+                                                </label> --}}
 
-
-                                                    @if ($formData['signature'])
-                                                        <img class="w-50"
-                                                            src="{{ asset('/signature/' . @$formData['signature']) }}"
-                                                            alt="">
-                                                    @endif
-                                                </label>
+                                                @if ($formData['signature'])
+                                                    <img class="w-50"
+                                                        src="{{ asset('/signature/' . @$formData['signature']) }}"
+                                                        alt="">
+                                                @endif
                                             </div>
+
                                         </div>
-
-                                        {{-- ends here  --}}
-
+                                        <br>
+                                        <br>
                                         <div class="row mt-5">
                                             <div class="col-12">
                                                 <h1
@@ -345,8 +340,7 @@
                                                     <label class="fw-bold">:</label>
                                                 </div>
                                                 <div class="col-7">
-                                                    <label>{{ @$formData['submittedDistrict']['name'] }}</label>
-                                                    {{-- <label>{{ @$formData['submittedDistrict']['name'] }}</label> --}}
+                                                    <label>{{ @$formData['dist_name'] }}</label>
                                                 </div>
                                             </div>
 
@@ -359,141 +353,69 @@
                                                     <label class="fw-bold">:</label>
                                                 </div>
                                                 <div class="col-7">
-                                                    <label>{{ @$formData['submittedTeo']['teo_name'] }}</label>
+                                                    <label>{{ @$formData['teo_name'] }}</label>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <br><br>
 
-                                        <div class="row paper-1">
-                                            <div class="col-12">
-                                                <span for="parentSign"> മുകളിൽ പറഞ്ഞിട്ടുള്ള വിവരങ്ങൾ എല്ലാം എന്റെ
-                                                    അറിവിൽപെട്ടിടത്തോളം സത്യവും ശരിയുമെന്നെന്നും ഇതിനാൽ
-                                                    ബോധിപ്പിച്ചുകൊള്ളുന്നു.
-                                                    മുകളിൽ പറഞ്ഞിട്ടുള്ള സ്കൂളിൽ എന്റെ മകൻ/മകൾ
-                                                    <b>{{ @$formData['student_name'] }}</b> പ്രവേശനം ലഭിക്കുന്ന പക്ഷം പഠനം
-                                                    പൂർത്തിയാക്കുന്നതിനു മുൻപായി എന്റെ സ്വന്തം താല്പര്യപ്രകാരം പഠിത്തം
-                                                    നിർത്തുകയോ കുട്ടിയെ പിന്വലിക്കുകയോ ചെയ്യുകയില്ല എന്നു ഇതിനാൽ
-                                                    ഉറപ്പുതന്നുകുള്ളുന്നു.</span>
-                                            </div>
 
+                                </div>
+
+                                {{-- ends here  --}}
+
+
+
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class=" m-auto col-10">
+                                            <span for="parentSign"> മുകളിൽ പറഞ്ഞിട്ടുള്ള വിവരങ്ങൾ എല്ലാം എന്റെ
+                                                അറിവിൽപെട്ടിടത്തോളം സത്യവും ശരിയുമെന്നെന്നും ഇതിനാൽ
+                                                ബോധിപ്പിച്ചുകൊള്ളുന്നു.
+                                                മുകളിൽ പറഞ്ഞിട്ടുള്ള സ്കൂളിൽ എന്റെ മകൻ/മകൾ
+                                                <b>{{ @$formData['student_name'] }}</b> പ്രവേശനം ലഭിക്കുന്ന പക്ഷം പഠനം
+                                                പൂർത്തിയാക്കുന്നതിനു മുൻപായി എന്റെ സ്വന്തം താല്പര്യപ്രകാരം പഠിത്തം
+                                                നിർത്തുകയോ കുട്ടിയെ പിന്വലിക്കുകയോ ചെയ്യുകയില്ല എന്നു ഇതിനാൽ
+                                                ഉറപ്പുതന്നുകുള്ളുന്നു.</span>
                                         </div>
-
-                                    </form>
-                                </div>
-
-
-                            </div>
-                        </div>
-                        @if (Auth::user()->role !== 'User')
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="card overflow-hidden"
-                                style="width: min-content;margin-left: 128px;width: 73%;">
-                                <div class="card-body pb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="card-title mg-b-10">project &amp; task</h4>
-                                        <i class="mdi mdi-dots-horizontal text-gray"> </i>
-                                    </div>
-                                    <p class="tx-12 text-muted mb-3">In project, a task is an activity that needs to be
-                                        accomplished within a defined period of time or by a deadline. <a
-                                            href="">Learn
-                                            more</a></p>
-                                    <div class="table-responsive mb-0 projects-stat tx-14">
-                                        <table
-                                            class="table table-hover table-bordered mb-0 text-md-nowrap text-lg-nowrap text-xl-nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>Project &amp; Task</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="project-names">
-                                                            <h6
-                                                                class="bg-primary-transparent text-primary d-inline-block mr-2 text-center">
-                                                                U</h6>
-                                                            <p class="d-inline-block font-weight-semibold mb-0">UI
-                                                                Design
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-success">Completed</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="project-names">
-                                                            <h6
-                                                                class="bg-pink-transparent text-pink d-inline-block text-center mr-2">
-                                                                R</h6>
-                                                            <p class="d-inline-block font-weight-semibold mb-0">Landing
-                                                                Page
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-warning">Pending</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="project-names">
-                                                            <h6
-                                                                class="bg-success-transparent text-success d-inline-block mr-2 text-center">
-                                                                W</h6>
-                                                            <p class="d-inline-block font-weight-semibold mb-0">Website
-                                                                &amp; Blog</p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-danger">Canceled</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="project-names">
-                                                            <h6
-                                                                class="bg-purple-transparent text-purple d-inline-block mr-2 text-center">
-                                                                P</h6>
-                                                            <p class="d-inline-block font-weight-semibold mb-0">Product
-                                                                Development</p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-teal">on-going</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="project-names">
-                                                            <h6
-                                                                class="bg-danger-transparent text-danger d-inline-block mr-2 text-center">
-                                                                L</h6>
-                                                            <p class="d-inline-block font-weight-semibold mb-0">Logo
-                                                                Design
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-success">Completed</div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
+
+
+                                <br>
+                                <br>
+                                <br>
+
+                                <form action="{{ url('examApplicationStore') }}" method="POST"
+                                    enctype="multipart/form-data" onsubmit="return validateForm()">
+                                    @csrf
+                                    <div class="row justify-content-center m-5">
+                                        <div class="col-md-3">
+                                            <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
+                                            <button type="submit" class="btn-block btn btn-success"
+                                                onclick="return confirm('Do you want to continue?')">Submit</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="btn_wrapper">
+                                                <a href="javascript:void(0)" class="btn btn-primary w-100"
+                                                    onclick="goback()">Edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
+
+
                         </div>
-                    @endif
                     </div>
                 </div>
             </div>
         </div>
+
+    </div>
+
     </div>
     <script>
         function validateForm() {

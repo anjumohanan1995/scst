@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\District;
+use App\Models\Taluk;
 use App\Models\AnemiaFinance;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
@@ -328,6 +331,12 @@ class UserHomeController extends Controller
     public function userExamApplicationView($id)
     {
         $formData = ExamApplication::where('_id', $id)->first();
+        $formData = ExamApplication::with('submittedDistrict','submittedTeo','districtRelation', 'birthDistrictRelation', 'talukName')->where('_id', $id)->first();
+
+        // $formData->load('submittedDistrict', 'submittedTeo');
+
+        // dd($formData);
+
         return view('user.exam_application_view', compact('formData'));
     }
 

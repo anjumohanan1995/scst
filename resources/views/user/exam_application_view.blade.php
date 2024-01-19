@@ -101,7 +101,12 @@
                                                 <label> : </label>
                                             </div>
                                             <div class="col-6">
-                                                <label> {{ @$formData['address'] }} </label>
+                                                <label> {{ @$formData['address'] }},
+                                                <br>{{ @$formData['districtRelation']['name'] }},
+                                                <br>{{ @$formData['talukName']['taluk_name'] }},
+                                                <br>
+                                                
+                                                </label>
                                             </div>
                                         </div>
                                         <div class=" row paper-1">
@@ -246,12 +251,8 @@
                                             </div>
                                             <div class="col-6">
 
-                                                {{-- @php
-                                                    $district = District::where('_id', @$formData('birth_district') )->first();
-                                                    dd($district);
-                                                @endphp
-                                                <label> {{@$district->name}} </label> --}}
-                                                <label> {{ @$formData['birth_district'] }} </label>
+            
+                                                <label> {{ @$formData['birthDistrictRelation']['name'] }} </label>
                                             </div>
                                         </div>
                                         <div class=" row paper-1">
@@ -312,13 +313,59 @@
                                             </div>
                                             <div class="col-6">
                                                 <label>
-                                                    <a href="{{ asset('/signature/' . @$formData->signature) }}"
-                                                        target="_blank">View</a>
+                                                    {{-- <a href="{{ asset('/signature/' . @$formData->signature) }}"
+                                                        target="_blank">View</a> --}}
+
+
+                                                @if ($formData['signature'])
+                                                <img class="w-50"
+                                                    src="{{ asset('/signature/' . @$formData['signature']) }}"
+                                                    alt="">
+                                            @endif
                                                 </label>
                                             </div>
                                         </div>
 
                                         {{-- ends here  --}}
+
+                                        <div class="row mt-5">
+                                            <div class="col-12">
+                                                <h1
+                                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                                    അപേക്ഷ സമർപ്പിക്കുന്നത്
+
+                                                </h1>
+                                            </div>
+                                        </div>
+
+                                        <div class="row w-100">
+
+                                            <div class="col-6 d-flex">
+                                                <div class="col-4">
+                                                    <label class="fw-bold">ജില്ല</label>
+                                                </div>
+                                                <div class="col-1">
+                                                    <label class="fw-bold">:</label>
+                                                </div>
+                                                <div class="col-7">
+                                                    <label>{{ @$formData['submittedDistrict']['name'] }}</label>
+                                                    {{-- <label>{{ @$formData['submittedDistrict']['name'] }}</label> --}}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-6 d-flex">
+                                                <div class="col-4">
+                                                    <label class="fw-bold">TEO</label>
+                                                </div>
+                                                <div class="col-1">
+                                                    <label class="fw-bold">:</label>
+                                                </div>
+                                                <div class="col-7">
+                                                    <label>{{ @$formData['submittedTeo']['teo_name'] }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
                                         <br><br>
