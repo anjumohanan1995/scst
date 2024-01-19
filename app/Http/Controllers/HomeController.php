@@ -69,8 +69,50 @@ class HomeController extends Controller
 
             return view('user.dashboard',compact('data'));
        }else{
+        if (auth()->user()->role =='TEO'){
+            $teo=Auth::user()->teo_name;
+            $data['coupleFinanceCount'] = FinancialHelp::where('submitted_teo',$teo)->where('status',0)->count();
+      //    dd($data['coupleFinanceCount']);
+            $data['examCount'] = ExamApplication::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['motherChildCount'] = MotherChildScheme::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['marriageGrantCount'] = MarriageGrant::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['houseGrantCount'] = HouseManagement::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['itiFundCount'] = ItiFund::where('submitted_teo',$teo)->where('status',0)->count();    
+            $data['studentAwardCount'] = StudentAward::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['anemiaFinanceCount'] = AnemiaFinance::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['singleEarnerCount'] = SingleIncomeEarner::where('submitted_teo',$teo)->where('status',0)->count();    
+            $data['studentFundCount'] = MedEngStudentFund::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['childFinanceCount'] = ChildFinance::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['tuitionFeeCount'] = TuitionFee::where('submitted_teo',$teo)->where('status',0)->count();
 
-      
+            $data['approvedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedExamCount'] = ExamApplication::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedMotherChildCount'] = MotherChildScheme::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedMarriageGrantCount'] = MarriageGrant::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedHouseGrantCount'] = HouseManagement::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedItiFundCount'] = ItiFund::where('submitted_teo',$teo)->where('status',1)->count();    
+            $data['approvedStudentAwardCount'] = StudentAward::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedAnemiaFinanceCount'] = AnemiaFinance::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedSingleEarnerCount'] = SingleIncomeEarner::where('submitted_teo',$teo)->where('status',1)->count();    
+            $data['approvedStudentFundCount'] = MedEngStudentFund::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedChildFinanceCount'] = ChildFinance::where('submitted_teo',$teo)->where('status',1)->count();
+            $data['approvedTuitionFeeCount'] = TuitionFee::where('submitted_teo',$teo)->where('status',1)->count();
+            
+            $data['rejectedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedExamCount'] = ExamApplication::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedMotherChildCount'] = MotherChildScheme::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedMarriageGrantCount'] = MarriageGrant::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedHouseGrantCount'] = HouseManagement::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedItiFundCount'] = ItiFund::where('submitted_teo',$teo)->where('status',2)->count();    
+            $data['rejectedStudentAwardCount'] = StudentAward::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedAnemiaFinanceCount'] = AnemiaFinance::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedSingleEarnerCount'] = SingleIncomeEarner::where('submitted_teo',$teo)->where('status',2)->count();    
+            $data['rejectedStudentFundCount'] = MedEngStudentFund::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedChildFinanceCount'] = ChildFinance::where('submitted_teo',$teo)->where('status',2)->count();
+            $data['rejectedTuitionFeeCount'] = TuitionFee::where('submitted_teo',$teo)->where('status',2)->count();
+            return view('admin.dashboard',compact('data'));
+        }
+   
             return view('admin.dashboard');
         }
     }

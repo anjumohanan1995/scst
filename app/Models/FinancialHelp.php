@@ -34,6 +34,7 @@ class FinancialHelp extends Eloquent
         'submitted_district',
         'submitted_teo',
         'place','date','time',
+        'dist_name','teo_name',
 
 
       
