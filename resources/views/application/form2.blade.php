@@ -38,14 +38,14 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">പേര് / Name </label>
                                             <input type="text" value="{{ old('name') }}" class="form-control"
-                                                placeholder="പേര്" name="name" required />
+                                                placeholder="പേര്" name="name"  />
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">മേൽവിലാസം / Address </label>
-                                            <textarea type="text" value="{{ old('address') }}" class="form-control" name="address"></textarea>
+                                            <textarea type="text" value="{{ old('address') }}" class="form-control" name="address">{{ old('address') }}</textarea>
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -78,7 +78,7 @@
                                         <div class="col-md-4 mb-4">
                                             <label class="form-label">പിൻകോഡ് / Pincode</label>
                                             <input type="text" value="{{ old('pincode') }}" class="form-control"
-                                                name="pincode" />
+                                                name="pincode" id="pincode" />
                                             @error('pincode')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -96,7 +96,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">ജനനതീയതി /Date Of Birth </label>
                                             <input type="date" class="form-control" name="dob" id="dob"
-                                                value="" />
+                                                value="{{ old('dob') }}"  max="{{ now()->format('Y-m-d') }}" />
                                             @error('dob')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -106,7 +106,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">ഭർത്താവിന്റെ പേര് / Husband's Name</label>
                                             <input type="text" class="form-control" name="hus_name" id="hus_name"
-                                                value="" placeholder="ഭർത്താവിന്റെ പേര് "  />
+                                                value="{{ old('hus_name') }}" placeholder="ഭർത്താവിന്റെ പേര് "  />
                                             @error('hus_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -114,7 +114,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">സമുദായം / ജാതി (Community / Caste) </label>
                                             <input type="text" class="form-control" name="caste" id="caste"
-                                                value="" placeholder="സമുദായം / ജാതി " />
+                                                value="{{ old('caste') }}" placeholder="സമുദായം / ജാതി " />
                                             @error('Caste')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -124,7 +124,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">വില്ലേജ് / Village </label>
                                             <input type="text" class="form-control" name="village" id="village"
-                                                value="" placeholder="വില്ലേജ്" />
+                                                value="{{ old('village') }}" placeholder="വില്ലേജ്" />
                                             @error('village')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -132,7 +132,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">എത്രാമത്തെ പ്രസവം / How many births? </label>
                                             <input type="number" class="form-control" name="births" id="births"
-                                                value="" placeholder="എത്രാമത്തെ പ്രസവം" />
+                                                value="{{ old('births') }}" placeholder="എത്രാമത്തെ പ്രസവം" />
                                             @error('births')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -142,7 +142,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി / Expected date of delivery </label>
                                             <input type="date" class="form-control" name="expected_date_of_delivery"
-                                                id="expected_date_of_delivery" value=""
+                                                id="expected_date_of_delivery" value="{{ old('expected_date_of_delivery') }}"
                                                 placeholder="" />
                                             @error('expected_date_of_delivery')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -152,7 +152,7 @@
                                             <label class="form-label">ഗർഭ /പ്രസവ ശുശ്രുഷക്ക് ആശ്രയിക്കുന്ന ആശുപത്രി
                                                 /കുടുംബക്ഷേമ കേന്ദ്രം / Dependent hospital/family welfare center for pregnancy/antenatal care</label>
                                             <input type="text" class="form-control" name="dependent_hospital"
-                                                id="dependent_hospital" value=""
+                                                id="dependent_hospital" value="{{ old('dependent_hospital') }}"
                                                 placeholder="" />
                                             @error('dependent_hospital')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -163,7 +163,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">സ്ഥലം / Place </label>
                                             <input type="text" class="form-control" name="place" id="place"
-                                                value="" placeholder="" />
+                                                value="{{ old('place') }}" placeholder="" />
                                             @error('place')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -361,16 +361,49 @@
         });
 
         $(document).ready(function() {      
-            alert("fgdf"); 
-            fetchTeo();
+           fetchTeo();
+           fetchTaluk();
+           $('input[name="pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
          
         });
 
       
+        function fetchTaluk() {    
+            //alert("qqqqqqq");    
+            var val1 = $("#district").val();
+        
+            $.ajax({
+                 url: "{{ url('district/fetch-taluk') }}",
+                type: "POST",
+                data: {
+                    district_id: val1,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#taluk").find('option').remove();
+                    $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+
+                    $.each(result.taluks, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.taluk_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('taluk') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#taluk');
+                    });
+                }
+            });
+        }
         function fetchTeo() {    
             //alert("qqqqqqq");    
             var val1 = $("#submitted_district").val();
-          alert({{ old('submitted_teo') }});
+        
             $.ajax({
                 url: "{{ url('district/fetch-teo') }}",
                 type: "POST",

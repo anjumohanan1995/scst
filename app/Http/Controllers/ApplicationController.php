@@ -13,6 +13,7 @@ use App\User;
 use App\Models\ExamApplication;
 
 use App\Models\FinancialHelp;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
@@ -807,7 +808,14 @@ class ApplicationController extends Controller
         }
 
         $formData = $data;
-
+        if($request->district!=''){
+            $dis=District::where('_id',$request->district)->first();
+            $formData['district_name']= $dis->name;
+           }
+           if($request->taluk!=''){
+             $taluk=Taluk::where('_id',$request->taluk)->first();
+             $formData['taluk_name']= $taluk->taluk_name;
+            }
         $formData['signature'] = $signature;
         $request->flash();
         return view('application.mother_child_preview', compact('formData'));
@@ -957,7 +965,9 @@ class ApplicationController extends Controller
             $caste = $record->caste;
             $village =  $record->village;
             $created_at =  $record->created_at;
-
+            if(@$record->dob!=null) {
+                $dob=Carbon::parse(@$record->dob)->format('d-m-Y');
+            }
             $data_arr[] = array(
                 "id" => $id,
                 "name" => $name,
@@ -965,7 +975,7 @@ class ApplicationController extends Controller
                 "dob" => $age . '/' . $dob,
                 "caste" => $caste,
                 "village" => $village,
-                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s'),
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i:s '),
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );

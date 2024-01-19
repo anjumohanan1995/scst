@@ -112,7 +112,7 @@
                                 <label> : </label>
                             </div>
                             <div class="col-6">
-                                <label> {{ @$formData['age'] }} , {{ @$formData['dob'] }} </label>
+                                <label> {{ @$formData['age'] }} , @if(@$formData['dob']!=null) {{ \Carbon\Carbon::parse(@$formData['dob'])->format('d-m-Y') }}@endif </label>
                             </div>
                         </div>
                         <div class=" row paper-1">
@@ -177,7 +177,7 @@
                                 <label> : </label>
                             </div>
                             <div class="col-6">
-                                <label> {{ @$formData['expected_date_of_delivery'] }} </label>
+                                <label>@if(@$formData['expected_date_of_delivery']!=null) {{ \Carbon\Carbon::parse(@$formData['expected_date_of_delivery'])->format('d-m-Y') }}@endif </label>
                             </div>
                         </div>
                         <div class=" row paper-1">
@@ -231,9 +231,12 @@
                             <div class="col-6 d-flex">
                                 <div class="row d-flex col-12" >
                                     <div class="col-8">
-                                        <iframe
+                                        @if(@$formData['signature'] !=null)
+                                        <img
                                         src="{{ asset('applications/mother_child_protection/' . @$formData['signature']) }}"
-                                        width="400" height="200"></iframe>                                        <label>അപേക്ഷകന്റെ ഒപ്പ്</label>
+                                        width="120px" height="60px">  
+                                        @endif                         
+                                                    <label>അപേക്ഷകന്റെ ഒപ്പ്</label>
                                     </div>
 
                                 </div>
