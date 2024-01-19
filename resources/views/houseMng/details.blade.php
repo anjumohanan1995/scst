@@ -32,11 +32,11 @@
          <div class="row row-sm">
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                <div class="card overflow-hidden" style="width: 113%;">
-                  <div class="card-body pd-y-7">
+                  <div class="card-body p-5">
                      <h1
-                        style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;"><ul>
+                        style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;"><u>
                         പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
-                        ധനസഹായത്തിനുള്ള അപേക്ഷ</ul>
+                        ധനസഹായത്തിനുള്ള അപേക്ഷ</u>
                      </h1>
                      <br>
                      <br>
@@ -207,7 +207,7 @@
                                  അമ്മ, വനിത നാഥയായ കുടുംബം , അകാലത്തിൽ
                                  വിധവയാകേണ്ടി വന്നവർ , ശാരീരിക മാനസിക
                                  വേല്ലുവിളി നേരിടുന്നവർ , തീരാവ്യാധി പിടിപ്പെട്ടവർ ,
-                                 അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ
+                                 അതികർമങ്ങൾക്ക് ഇരയായ വനിതകൾ തുടങ്ങിയവ)
                                  </label><br>
                               </div>
                               <div class="col-1 w-100">
@@ -284,7 +284,7 @@
                         <div class="w-100">
                            <div class="row w-100">
                               <div class="col-5">
-                                 <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള
+                                 <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള മറ്റു സംഗതികൾ
                                  </label><br>
                               </div>
                               <div class="col-1 w-100">
@@ -296,7 +296,7 @@
                                  {{ @$houseManagement['prove_eligibility'] }}    </label>
                                  <br>
                                  @if($houseManagement['prove_eligibility_file'])
-                                 <iframe src="{{ asset('homeMng/' . @$houseManagement['prove_eligibility_file']) }}" width="400" height="200"></iframe>
+                                 <a href="{{ asset('homeMng/' . @$houseManagement['prove_eligibility_file']) }}" target="_blank">View</a>
                                  @endif
                               </div>
                            </div>
@@ -321,7 +321,35 @@
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </div><br>
+                     <div class="row mt-5">
+                        <div class="col-12">
+                            <h1
+                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                    അപേക്ഷ സമർപ്പിക്കുന്നത് 
+   
+                </h1>
+                        </div>
+                    </div>
+                    <div class="row ">
+   
+                        <div class="col-6 d-flex">
+                            <span class="col-5"> ജില്ല
+                            </span>
+                            <span class="col-1"> :</span>
+                            <span class="col-6"> {{ @$houseManagement['dist_name'] }}  </span>
+   
+                        </div>
+   
+                        <div class="col-6 d-flex">
+                            <span class="col-5"> ടി .ഇ .ഓ</span>
+                            <span class="col-1"> :</span>
+                            <span class="col-6">{{ @$houseManagement['teo_name'] }} </span>
+   
+                        </div>
+                       
+   
+                    </div>
                      <br>
               
                      <div class="row">

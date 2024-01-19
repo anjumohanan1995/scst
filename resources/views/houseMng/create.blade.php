@@ -252,7 +252,7 @@
                                         
                                         
                                           </label>
-                                          <textarea type="text" value="{{ old('prove_eligibility ') }}"  class="form-control" placeholder="Other matters to prove eligibility for preference" name="prove_eligibility" >{{ old('prove_eligibility ') }}</textarea>
+                                          <textarea type="text" value="{{ old('prove_eligibility ') }}"  class="form-control" placeholder="Other matters to prove eligibility for preference" name="prove_eligibility" >{{ old('prove_eligibility') }}</textarea>
                                     
                                     @error('prove_eligibility')
                                         <span class="text-danger">{{$message}}</span>
@@ -300,61 +300,73 @@
                             <div class="col-md-1 mb-1">
                                  </div>
                             <div class="col-md-1 mb-1">
-                                <input type="checkbox" id="agree" name="agree" value="Yes" required>
+                                <input type="checkbox" id="agree" name="agree" value="Yes" required {{ old('agree') == 'Yes' ? 'checked' : '' }}>
                             </div>
                             <div class="col-md-9 mb-9">
-                                ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.
+                             
+We hereby pledge that all the information we have added above is true and correct.   (ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.)
                             </div>
                         </div>
                           <br>
-                          <div class="card">
-                            <div class="card-body">
-                                <div class="row">   
-                                    <div class="col-md-6 mb-6">
-                                        <label class="form-label">District (ജില്ല)  </label>
-                                        <select id="submitted_district" name="submitted_district" class="form-control" >
-                                            <option value="">Select</option>
-                                                @foreach($districts as $district)
-                                                    <option value="{{$district->id}}" {{ old('submitted_district') == $district->id ? 'selected' : '' }} >{{$district->name}}</option>
-                                                @endforeach
-                                        </select>
-                                         @error('submitted_district')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                        <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
-                                    </div>
-                                    <div class="col-md-6 mb-6">
-                                        <label class="form-label">TEO (ടി .ഇ .ഓ)  </label>
-                                        <select id="submitted_teo" name="submitted_teo" class="form-control">
-                                            <option value="">Choose TEO</option>
-                                        </select>                                 
-                                        @error('submitted_teo')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                        <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
-                                    </div>                                 
-                                </div><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                
-                                    </div>
-                                    <div class="col-md-8 mb-8">
-                                        <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
-                                    </div>
-                                    
-        
-                                </div><br>
+                          
+                        
                            
                         </div>
                     </div>
                 </div>
 
                
-                                  
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <h1
+                        style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 10px;line-height: 32px;font-weight: 600;">
+                        Submitting the application( അപേക്ഷ സമർപ്പിക്കുന്നത് )
+       
+                    </h1>
+                            </div>
+                        </div>
+                        <div class="row">   
+                            <div class="col-md-6 mb-6">
+                                <label class="form-label">District (ജില്ല)  </label>
+                                <select id="submitted_district" name="submitted_district" class="form-control" >
+                                    <option value="">Select</option>
+                                        @foreach($districts as $district)
+                                            <option value="{{$district->id}}" {{ old('submitted_district') == $district->id ? 'selected' : '' }} >{{$district->name}}</option>
+                                        @endforeach
+                                </select>
+                                 @error('submitted_district')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                                <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
+                            </div>
+                            <div class="col-md-6 mb-6">
+                                <label class="form-label">TEO (ടി .ഇ .ഓ)  </label>
+                                <select id="submitted_teo" name="submitted_teo" class="form-control">
+                                    <option value="">Choose TEO</option>
+                                </select>                                 
+                                @error('submitted_teo')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                                <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
+                            </div>                                 
+                        </div><br>
+                    </div>
+                </div> 
                                  
+                <div class="row">
+                    <div class="col-md-2 mb-2">
+                        
+                            </div>
+                            <div class="col-md-8 mb-8">
+                     
+                                <button type="reset" id="submit" class="btn btn-primary waves-effect waves-light text-start submit">Cancel</button>
+                                <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                            </div>
                             
+
+                        </div><br>
                    
                         </form>
                     </div>
@@ -533,6 +545,9 @@ $(document).ready(function() {
     });
 
 	$(document).ready(function() {
+        $('input[name="current_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
      	$('#example').DataTable();
 	});
   </script>

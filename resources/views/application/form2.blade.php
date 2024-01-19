@@ -185,30 +185,34 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row">   
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">ജില്ല / District </label>
-                                        <select id="submitted_district" name="submitted_district" class="form-control" required />
+                                        <label class="form-label">District/ജില്ല  </label>
+                                        <select id="submitted_district" name="submitted_district" class="form-control" required>
                                             <option value="">Select</option>
-                                            @foreach ($districts as $district)
-                                                <option value="{{ $district->id }}" @if($district->id == old('submitted_district')) selected @endif>{{ $district->name }}</option>
-                                            @endforeach
+                                                @foreach($districts as $district)
+                                                   <option value="{{ $district->id }}" {{ (old('submitted_district') == $district->id) ? 'selected' : '' }}>
+    {{ $district->name }}
+</option>
+                                                   
+                                                    {{-- <option value="{{$district->id}}"  @if(old('submitted_district') == $district->id) selected @endif>{{$district->name}}</option> --}}
+                                                @endforeach
                                         </select>
-                                        @error('dist')
-                                            <span class="text-danger">{{ $message }}</span>
+                                        @error('submitted_district')
+                                            <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="dist_name" id="dist_name" value="">
+                                        <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
                                     </div>
                                     <div class="col-md-6 mb-6">
-                                        <label class="form-label">ടി.ഇ.ഒ / TEO </label>
-                                        <select id="submitted_teo" name="submitted_teo" class="form-control" required />
+                                        <label class="form-label">TEO /ടി.ഇ.ഒ </label>
+                                        <select id="submitted_teo" name="submitted_teo" class="form-control" required>
                                             <option value="">Choose TEO</option>
-                                        </select>
-                                        @error('teo')
-                                            <span class="text-danger">{{ $message }}</span>
+                                        </select>                                 
+                                        @error('submitted_teo')
+                                            <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="teo_name" id="teo_name" value="">
-                                    </div>
+                                        <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
+                                    </div>                                 
                                 </div><br>
                             </div>
                         </div>
@@ -233,7 +237,7 @@
     </div>
 </div>
 
-    <script>
+<script type="text/javascript">
 
         function validateSignature() {
             var input = document.getElementById('signature');
@@ -321,34 +325,6 @@
         });
 
 
-        var selectElement = document.getElementById("submitted_district");
-        var submitted_district = selectElement.options[selectElement.selectedIndex].text;
-        document.getElementById('dist_name').value = submitted_district;
-        var val = document.getElementById("submitted_district").value;
-
-        $.ajax({
-            url: "{{ url('district/fetch-teo') }}",
-            type: "POST",
-            data: {
-                district_id: val,
-                _token: '{{ csrf_token() }}'
-            },
-            dataType: 'json',
-            success: function(result) {
-                var permanentTalukValue = "{{ old('submitted_teo') }}";
-              
-                $("#submitted_teo").find('option').remove();
-                $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
-                $.each(result.teos, function (key, value) {
-                    if(value._id == permanentTalukValue)
-                    $('#submitted_teo').append('<option value="'+value._id+'" selected>'+ value.teo_name +'</option>');
-                    else
-                    $('#submitted_teo').append('<option value="'+value._id+'">'+ value.teo_name +'</option>');
-                });
-             
-
-            }
-        });
 
 
         $('#submitted_district').change(function() {
@@ -384,9 +360,43 @@
             document.getElementById('teo_name').value = submitted_teo;
         });
 
-        $(document).ready(function() {
-            $('#example').DataTable();
+        $(document).ready(function() {      
+            alert("fgdf"); 
+            fetchTeo();
+         
         });
+
+      
+        function fetchTeo() {    
+            //alert("qqqqqqq");    
+            var val1 = $("#submitted_district").val();
+          alert({{ old('submitted_teo') }});
+            $.ajax({
+                url: "{{ url('district/fetch-teo') }}",
+                type: "POST",
+                data: {
+                    district_id: val1,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#submitted_teo").find('option').remove();
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+
+                    $.each(result.teos, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.teo_name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('submitted_teo') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#submitted_teo');
+                    });
+                }
+            });
+        }
     </script>
     <!-- main-content-body -->
 @endsection

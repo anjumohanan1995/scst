@@ -273,7 +273,7 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-2">
-                                                    <label> {{ @$formData['submitted_district'] }} </label>
+                                                    <label> {{ @$formData['dist_name'] }} </label>
                                                 </div>
                                             </div>
 
@@ -291,7 +291,7 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-4">
-                                                    <label> {{ @$formData['submitted_teo'] }} </label>
+                                                    <label> {{ @$formData['teo_name'] }} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -315,8 +315,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="btn_wrapper">
-                                                <a href="javascript:void(0)" class="btn btn-primary w-100"
-                                                    onclick="goback()">Edit</a>
+                                                <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
                                             </div>
                                         </div>
                                     </div>
@@ -351,10 +350,11 @@
     <script>
         // edit button function
         function goback() {
-            if (confirm('Are you sure ? Do you want to edit this form!. ')) {
-                window.history.back();
+            if (confirm('Are you sure? Do you want to edit this form?')) {
+                window.location.href = "{{ url()->previous() }}";
+                //window.history.back();
+               
             }
-            return
         }
     </script>
 @endsection

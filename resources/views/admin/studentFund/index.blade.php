@@ -195,7 +195,7 @@ $(document).on("click",".deleteItem",function() {
                 { data: 'income' },
 				{ data: 'caste' },
                 
-                { data: 'created_at', visible: false },
+                { data: 'date'},
 
                 { data: 'edit' }
 
