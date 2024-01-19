@@ -127,13 +127,16 @@
                                                 </div>
                                                 <div class="col-md-4 mb-4">
                                                     <label class="form-label">Pincode / പിൻകോഡ് </label>
-                                                    <input type="text" pattern="[0-9]{6}" maxlength="6"
-                                                        value="{{ old('pincode') }}" class="form-control"
-                                                        name="pincode" />
+                                                    <input placeholder="Pincode" type="text" pattern="[0-9]{6}" maxlength="6"
+                                                    value="{{ old('pincode') }}" class="form-control"
+                                                    name="pincode" title="Please enter a 6-digit numeric pin code"
+                                                    inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
+                                         
                                                     @error('pincode')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
+                                                
 
                                             </div>
                                         </div>

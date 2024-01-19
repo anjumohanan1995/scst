@@ -34,7 +34,7 @@ class SingleIncomeEarnerController extends Controller
             'death_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
             'ration_card' => 'nullable|file|mimes:jpg,pdf|max:2048',
             'income_certificate' => 'nullable|file|mimes:jpg,pdf|max:2048',
-            // 'signature' => 'nullable|file|mimes:jpg,pdf|max:2048',
+            'signature' => 'nullable|file|mimes:jpg|max:2048',
             'past_job_document' => 'nullable|file|mimes:jpg,pdf|max:2048'
             ]
            
@@ -136,7 +136,7 @@ class SingleIncomeEarnerController extends Controller
             $image = $request->past_job_document;
             $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
 
-            $image->move(public_path('applications/past_job_document'), $imgfileName);
+            $image->move(public_path('applications/single_earner'), $imgfileName);
 
             $past_job_document = $imgfileName;
 
@@ -153,10 +153,8 @@ class SingleIncomeEarnerController extends Controller
         $formData['signature']= $signature;
         $formData['past_job_document']= $past_job_document;
         $formData['death_certificate']= $death_certificate;
+
         
-        //adding the realation db
-        $formData['taluk'] = Taluk::where('_id',$formData['taluk'])->first();
-        $formData['district'] = District::where('_id',$formData['district'])->first();
 
 
 
@@ -168,6 +166,9 @@ class SingleIncomeEarnerController extends Controller
 
     public function singleEarnerStore(Request $request)
     {
+
+    
+
         $data = json_decode($request->input('formData'), true);
        
       

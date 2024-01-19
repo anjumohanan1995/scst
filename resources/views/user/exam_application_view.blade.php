@@ -102,10 +102,10 @@
                                             </div>
                                             <div class="col-6">
                                                 <label> {{ @$formData['address'] }},
-                                                <br>{{ @$formData['districtRelation']['name'] }},
-                                                <br>{{ @$formData['talukName']['taluk_name'] }},
-                                                <br>
-                                                
+                                                    <br>{{ @$formData['districtRelation']['name'] }},
+                                                    <br>{{ @$formData['talukName']['taluk_name'] }},
+                                                    <br>
+
                                                 </label>
                                             </div>
                                         </div>
@@ -251,7 +251,7 @@
                                             </div>
                                             <div class="col-6">
 
-            
+
                                                 <label> {{ @$formData['birthDistrictRelation']['name'] }} </label>
                                             </div>
                                         </div>
@@ -317,11 +317,11 @@
                                                         target="_blank">View</a> --}}
 
 
-                                                @if ($formData['signature'])
-                                                <img class="w-50"
-                                                    src="{{ asset('/signature/' . @$formData['signature']) }}"
-                                                    alt="">
-                                            @endif
+                                                    @if ($formData['signature'])
+                                                        <img class="w-50"
+                                                            src="{{ asset('/signature/' . @$formData['signature']) }}"
+                                                            alt="">
+                                                    @endif
                                                 </label>
                                             </div>
                                         </div>
