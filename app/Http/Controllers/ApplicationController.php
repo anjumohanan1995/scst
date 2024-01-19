@@ -812,6 +812,7 @@ class ApplicationController extends Controller
         $formData = $data;
 
         $formData['signature'] = $signature;
+        $request->flash();
         return view('application.mother_child_preview', compact('formData'));
     }
     public function motherChildStoreDetails(Request $request)
