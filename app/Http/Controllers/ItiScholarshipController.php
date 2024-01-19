@@ -149,7 +149,9 @@ class ItiScholarshipController extends Controller
         $formData['date']= $formattedDate;
         $request->flash();
         // $request->flashExcept(['income_certificate']);
-        
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $time = $currentTimeInKerala->format('h:i A');
+        $formData['time']= $time;
         return view('user.itiFund.preview', compact('formData'));
     }
 
@@ -210,7 +212,7 @@ class ItiScholarshipController extends Controller
      
 
         $datainsert = ItiFund::create([
-            'name' => $data['name'],
+            'name' => @$data['name'],
             'address' => @$data['address'],
             'course_name' => @$data['course_name'],
             'class_start_date' => @$data['class_start_date'],
@@ -220,23 +222,25 @@ class ItiScholarshipController extends Controller
             'income' => @$data['income'],
             'income_certificate' => @$data['income_certificate'],
             'account_details' => @$data['account_details'],
-            'signature' => $data['signature'],
-            'parent_name' => $data['parent_name'],
-            'parent_signature' => $data['parent_signature'],
-            'date' => $data['date'],
+            'signature' => @$data['signature'],
+            'parent_name' => @$data['parent_name'],
+            'parent_signature' => @$data['parent_signature'],
+            'date' => @$data['date'],
             'user_id' =>Auth::user()->id, 
             'status' =>0,
-            'current_district_name' => $data['current_district_name'],
-            'current_taluk_name' => $data['current_taluk_name'],
-            'current_pincode' => $data['current_pincode'],
-            'submitted_district' => $data['submitted_district'],
+            'current_district_name' => @$data['current_district_name'],
+            'current_taluk_name' => @$data['current_taluk_name'],
+            'current_pincode' => @$data['current_pincode'],
+            'submitted_district' => @$data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
-            'submitted_district_name' => $data['dist_name'],
+            'submitted_district_name' => @$data['dist_name'],
             'submitted_teo_name' => @$data['teo_name'],
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
-            'institution_name' => $data['institution_name'],
+            'institution_name' => @$data['institution_name'],
             'current_institution' => @$data['current_institution'],
+            'time' => @$data['time'],
+            
         ]);
 
 
@@ -306,14 +310,15 @@ class ItiScholarshipController extends Controller
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
 
          $data_arr = array();
-
+$i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -323,16 +328,19 @@ class ItiScholarshipController extends Controller
              $income=$record->income;
              $caste = $record->caste;
               $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
 
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
             $data_arr[] = array(
                 "id" => $id,
-               
+               "sl_no" =>$i,
                 "name" => $name,
                 "address" => $address,
                 "course_name" => $course_name,
                 "caste" => $caste,
                 "income" =>$income,
-                "created_at" => $created_at,                  
+                "created_at" => $date .' ' .$record->time,               
                 "edit" => '<div class="settings-main-icon"><a  href="' . route('itiScholarship.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
@@ -385,6 +393,10 @@ class ItiScholarshipController extends Controller
 
              // Total records
              $totalRecord = ItiFund::where('deleted_at',null);
+             if(Auth::user()->role =="TEO"){
+                $totalRecord =  $totalRecord ->where('submitted_teo',Auth::user()->teo_name);
+             }
+            
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -395,7 +407,9 @@ class ItiScholarshipController extends Controller
 
 
              $totalRecordswithFilte = ItiFund::where('deleted_at',null);
-
+             if(Auth::user()->role =="TEO"){
+                $totalRecordswithFilte =  $totalRecordswithFilte ->where('submitted_teo',Auth::user()->teo_name);
+             }
           
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -407,20 +421,23 @@ class ItiScholarshipController extends Controller
 
              // Fetch records
              $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
-           
+             if(Auth::user()->role =="TEO"){
+                $items =  $items ->where('submitted_teo',Auth::user()->teo_name);
+             }
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
 
          $data_arr = array();
-
+$i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -436,13 +453,13 @@ class ItiScholarshipController extends Controller
               $time = $carbonDate->format('g:i a');
             $data_arr[] = array(
                 "id" => $id,
-               
+               "sl_no" => $i,
                 "name" => $name,
                 "address" => $address,
                 "course_name" => $course_name,
                 "caste" => $caste,
                 "income" =>$income,
-                "date" => $date .' ' .$time, 
+                "date" => $date .' ' .$record->time, 
                                 
                 "edit" => '<div class="settings-main-icon"><a  href="' . route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 

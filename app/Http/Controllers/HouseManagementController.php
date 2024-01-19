@@ -120,6 +120,9 @@ class HouseManagementController extends Controller
 // Format the date if needed
 $formattedDate = $currentDate->toDateString();
       $formData['date']= $formattedDate;
+      $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $time = $currentTimeInKerala->format('h:i A');
+      $formData['time']= $time;
       $request->flash();
         return view('houseMng.preview', compact('formData'));
     }
@@ -288,31 +291,31 @@ $formattedDate = $currentDate->toDateString();
             'ward_no' => @$data['ward_no'],
             'caste' => @$data['caste'],
             'annual_income' => @$data['annual_income'],
-            'house_details' => $data['house_details'],
-            'agency' => $data['agency'],
+            'house_details' => @$data['house_details'],
+            'agency' => @$data['agency'],
             'last_payment_year' => @$data['last_payment_year'],
             'family_details' => @$data['family_details'],
             'nature_payment' => @$data['nature_payment'],
             'payment_details' => @$data['payment_details'],
-            'payment_amount' => $data['payment_amount'],
-            'date_received' => $data['date_received'],
-            'prove_eligibility_file' => $data['prove_eligibility_file'],
-            'prove_eligibility' => $data['prove_eligibility'],
-            'place' => $data['place'],
-            'date' => $data['date'],
+            'payment_amount' => @$data['payment_amount'],
+            'date_received' => @$data['date_received'],
+            'prove_eligibility_file' => @$data['prove_eligibility_file'],
+            'prove_eligibility' => @$data['prove_eligibility'],
+            'place' => @$data['place'],
+            'date' => @$data['date'],
             'signature' => @$data['signature'],
             'user_id' =>Auth::user()->id, 
             'status' =>0,
-            'current_district_name' => $data['current_district_name'],
-            'current_taluk_name' => $data['current_taluk_name'],
-            'current_pincode' => $data['current_pincode'],
-            'submitted_district' => $data['submitted_district'],
+            'current_district_name' => @$data['current_district_name'],
+            'current_taluk_name' => @$data['current_taluk_name'],
+            'current_pincode' => @$data['current_pincode'],
+            'submitted_district' => @$data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
             'dist_name' => $data['dist_name'],
             'teo_name' => @$data['teo_name'],
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
-            'time' =>date('h:i:s a'),
+            'time' =>@$data['time'],
             
             
 

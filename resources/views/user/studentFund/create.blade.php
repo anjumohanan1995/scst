@@ -152,6 +152,8 @@
                                 @error('caste_certificate')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
+                                <br>
+                                <span class="text-danger" id="errorcaste"></span>
                                 </div>
                               
                                 <div class="col-md-3 mb-3">
@@ -173,6 +175,8 @@
                                 @error('income_certificate')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
+                                <br>
+                                   <span class="text-danger" id="errorincome"></span>
                                 </div>
                                
                             </div><br>   
@@ -183,14 +187,14 @@
                                         Do students have an e-grand account number?
                                         (വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടോ ?)</label>
                                         <div style="border: 1px solid black" class="form-control">
-
-                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
-                                          
                                             <input type="radio" id="yes" name="account_details" value="yes"  {{ old('account_details') == 'yes' ? 'checked' : '' }}>&nbsp; &nbsp;
-                                            <label for="No">No (ഇല്ല)</label>&nbsp; &nbsp;
+                                         
+                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
+                                            &nbsp; &nbsp;
                                           
                                             <input type="radio" id="no" name="account_details" value="no" {{ old('account_details') == 'no' ? 'checked' : '' }}>
                                            
+                                             <label for="No">No (ഇല്ല)</label>
                                            
                                         </div><br>
                                         <div class="row" style="display:none" id="accountDiv">
@@ -242,6 +246,8 @@
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <br>
+                                    <span class="text-danger" id="errorsignature"></span>
                                 </div>
                              
                             </div><br> 
@@ -263,6 +269,8 @@
                                     @error('parent_signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <br>
+                                    <span class="text-danger" id="errorParentSignature"></span>
                                 </div>
                                
                               
@@ -331,7 +339,7 @@
                                     </div>
                                     <div class="col-md-8 mb-8">
                              
-                                        <button type="reset" id="submit" class="btn btn-primary waves-effect waves-light text-start submit">Cancel</button>
+                                        <button type="reset" id="submit1" class="btn btn-primary waves-effect waves-light text-start submit">Cancel</button>
                                         <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
                                     </div>
                                     
@@ -517,6 +525,85 @@
     });
 
 	$(document).ready(function() {
+        $('#income_certificate').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+            $('#errorincome').html('')
+          } else {
+            $('#errorincome').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#income_certificate').val('');
+          }
+        }
+      });
+      
+      $('#caste_certificate').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+            $('#errorcaste').html('')
+          } else {
+            $('#errorcaste').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#caste_certificate').val('');
+          }
+        }
+      });
+      
+      $('#signature').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false);
+            $('#errorsignature').html('') 
+          } else {
+            $('#errorsignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#signature').val('');
+          }
+        }
+      });
+      
+      $('#parent_signature').change(function () {
+        var file = this.files[0];
+        if (file) {
+          var fileSize = file.size;
+
+          // Convert fileSize to megabytes
+          var fileSizeInMB = fileSize / (1024 * 1024);
+          if (fileSizeInMB <= 2) {
+            
+            $('#submit').prop('disabled', false); 
+            $('#errorParentSignature').html('') 
+          } else {
+            $('#errorParentSignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            // alert('');
+            $('#submit').prop('disabled', true); 
+            $('#parent_signature').val('');
+          }
+        }
+      });
         $('input[name="account_details"]').change(function() {
       
       if ($(this).val() === 'yes') {

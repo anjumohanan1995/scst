@@ -26,6 +26,7 @@ class MedEngStudentFund extends Eloquent
         'signature',
         'parent_name',
         'date',
+        'time',
         'parent_signature',
         'status',
         'user_id',

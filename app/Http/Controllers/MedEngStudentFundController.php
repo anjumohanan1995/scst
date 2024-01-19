@@ -81,14 +81,15 @@ class MedEngStudentFundController extends Controller
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
 
          $data_arr = array();
-
+$i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -108,14 +109,13 @@ class MedEngStudentFundController extends Controller
             
             $data_arr[] = array(
                 "id" => $id,
-               
+               "sl_no" =>$i,
                 "name" => $name,
                 "address" => $address,
                 "course_name" => $course_name,
                 "caste" => $caste,
                 "income" =>$income,
-                "date" => $date,   
-                "time" => $time,                 
+                "date" => $date.' ' .$record->time,                   
                 "edit" => '<div class="settings-main-icon"><a  href="' . route('MedicalEngineeringStudentFund.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
@@ -254,7 +254,11 @@ class MedEngStudentFundController extends Controller
 // Format the date if needed
 $formattedDate = $currentDate->toDateString();
       $formData['date']= $formattedDate;
+      $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $time = $currentTimeInKerala->format('h:i A');
+      $formData['time']= $time;
       $request->flash();
+      
         return view('user.studentFund.preview', compact('formData'));
     }
 
@@ -263,34 +267,35 @@ $formattedDate = $currentDate->toDateString();
      
 
         $datainsert = MedEngStudentFund::create([
-            'name' => $data['name'],
+            'name' => @$data['name'],
             'address' => @$data['address'],
             'course_name' => @$data['course_name'],
             'class_start_date' => @$data['class_start_date'],
             'admission_type' => @$data['admission_type'],
-            'caste' => $data['caste'],
-            'caste_certificate' => $data['caste_certificate'],
+            'caste' => @$data['caste'],
+            'caste_certificate' => @$data['caste_certificate'],
             'income' => @$data['income'],
             'income_certificate' => @$data['income_certificate'],
             'account_details' => @$data['account_details'],
             'account_no' => @$data['account_no'],
             'ifsc_code' => @$data['ifsc_code'],
-            'bank_branch' => $data['bank_branch'],
-            'signature' => $data['signature'],
-            'parent_name' => $data['parent_name'],
-            'parent_signature' => $data['parent_signature'],
-            'date' => $data['date'],
+            'bank_branch' => @$data['bank_branch'],
+            'signature' => @$data['signature'],
+            'parent_name' => @$data['parent_name'],
+            'parent_signature' => @$data['parent_signature'],
+            'date' => @$data['date'],
             'user_id' =>Auth::user()->id, 
             'status' =>0,
-            'current_district_name' => $data['current_district_name'],
-            'current_taluk_name' => $data['current_taluk_name'],
-            'current_pincode' => $data['current_pincode'],
-            'submitted_district' => $data['submitted_district'],
+            'current_district_name' => @$data['current_district_name'],
+            'current_taluk_name' => @$data['current_taluk_name'],
+            'current_pincode' => @$data['current_pincode'],
+            'submitted_district' => @$data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
-            'dist_name' => $data['dist_name'],
+            'dist_name' => @$data['dist_name'],
             'teo_name' => @$data['teo_name'],
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
+            'time' => @$data['time'],
         ]);
 
         return redirect()->route('MedicalEngineeringStudentFund.index')->with('status','Application Submitted Successfully.');
@@ -406,14 +411,15 @@ $formattedDate = $currentDate->toDateString();
                 $items->where('submitted_teo',$teo);
             }
 
-             $records = $items->skip($start)->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');;
          
 
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -430,13 +436,13 @@ $formattedDate = $currentDate->toDateString();
 
             $data_arr[] = array(
                 "id" => $id,
-               
+               "sl_no" =>$i,
                 "name" => $name,
                 "address" => $address,
                 "course_name" => $course_name,
                 "caste" => $caste,
                 "income" =>$income,
-                "date" => $date .' ' .$time, 
+                "date" => $date .' ' .$record->time, 
                 
                             
                 "edit" => '<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'

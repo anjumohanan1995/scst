@@ -408,7 +408,7 @@
 											<span class="side-menu__label">Student Award applications</span>
 										</a>
 									</li>
-                                    <li class="slide">
+                                    <li class="slide {{ ((\Request::route()->getName() == 'adminItiFundList') )? 'active' : '' }}">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'adminItiFundList') )? 'active' : '' }}"  href="{{route('adminItiFundList')}}">
 											<i class="side-menu__icon fe fe-menu"> </i>
 											<span class="side-menu__label">ITI Student Fund Scheme Applications</span>

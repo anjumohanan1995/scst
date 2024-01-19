@@ -230,14 +230,14 @@
                                         Do students have an e-grand account number?
                                         (വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് നമ്പർ ഉണ്ടോ ?)</label>
                                         <div style="border: 1px solid black" class="form-control">
-
-                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
-                                          
                                             <input type="radio" id="yes" name="account_details" value="yes"  {{ old('account_details') == 'yes' ? 'checked' : '' }}>&nbsp; &nbsp;
-                                            <label for="No">No (ഇല്ല)</label>&nbsp; &nbsp;
+                                            <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
                                           
                                             <input type="radio" id="no" name="account_details" value="no" {{ old('account_details') == 'no' ? 'checked' : '' }}>
                                            
+                                            &nbsp; &nbsp;<label for="No">No (ഇല്ല)</label>
+                                          
+
                                            
                                         </div><br>
                                         <div class="row" style="display:none" id="accountDiv">
@@ -413,7 +413,7 @@
                                     </div>
                                     <div class="col-md-8 mb-8">
                              
-                                        <button type="reset" id="submit" class="btn btn-primary waves-effect waves-light text-start submit">Cancel</button>
+                                        <button type="reset" id="submit1" class="btn btn-primary waves-effect waves-light text-start submit">Reset</button>
                                         <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
                                     </div>
                                     
@@ -728,6 +728,7 @@
           if (fileSizeInMB <= 2) {
             
             $('#submit').prop('disabled', false); 
+            $('#errorincome').html('')
           } else {
             $('#errorincome').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
             // alert('');
@@ -747,6 +748,7 @@
           if (fileSizeInMB <= 2) {
             
             $('#submit').prop('disabled', false); 
+            $('#errorcaste').html('') 
           } else {
             $('#errorcaste').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
             // alert('');
@@ -766,6 +768,7 @@
           if (fileSizeInMB <= 2) {
             
             $('#submit').prop('disabled', false); 
+            $('#errorsignature').html('') 
           } else {
             $('#errorsignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
             // alert('');
@@ -785,6 +788,7 @@
           if (fileSizeInMB <= 2) {
             
             $('#submit').prop('disabled', false); 
+            $('#errorParentSignature').html('') 
           } else {
             $('#errorParentSignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
             // alert('');

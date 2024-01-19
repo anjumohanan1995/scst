@@ -32,8 +32,8 @@
 
 			<!-- row -->
 			<!-- row -->
-			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
+            <div class="row row-sm">
+                <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
 					<div class="card">
 						<div class="card-body  p-5">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
@@ -56,7 +56,8 @@
                                                     <br>
                                                     മേൽവിലാസം
                                                 </td>
-                                                <td>{{ @$studentFund['name'] }} <br> <br>{{ @$studentFund['address'] }}</td>
+                                                <td>{{ @$studentFund['name'] }} <br> <br>{{ @$studentFund['address'] }} , {{ @$studentFund['current_taluk_name'] }}
+                                                    , {{ @$studentFund['current_district_name'] }}  , {{ @$studentFund['current_pincode'] }}</td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
