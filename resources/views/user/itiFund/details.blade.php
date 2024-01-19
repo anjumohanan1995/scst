@@ -36,8 +36,8 @@
 
         <!-- row -->
         <!-- row -->
-        <div class="row row-sm mt-4 pl-10">
-            <div class="col-lg-8 col-xl-12 col-md-12 col-sm-12 ">
+        <div class="row row-sm">
+            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                 <div class=" card">
                     <div class="card-body  p-5">
                             <div id="success_message" class="ajax_response" style="display: none;"></div>
@@ -73,7 +73,7 @@
                                             <td>3</td>
                                             <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
                                             </td>
-                                            <td> {{ @$studentFund['class_start_date'] }}</td>
+                                            <td> @if(@$studentFund['class_start_date']!=null){{ \Carbon\Carbon::parse(@$studentFund['class_start_date'])->format('d-m-Y') }}@endif</td>
                                         </tr>
                                         <tr>
                                             <td>4</td>

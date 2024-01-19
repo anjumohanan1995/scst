@@ -75,18 +75,18 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>അപേക്ഷകന്റെ പേര് </th>
-                                            <th>മേൽവിലാസം 
+                                            <th>Sl No</th>
+                                            <th>Applicant's Name / അപേക്ഷകന്റെ പേര് </th>
+                                            <th>Address / മേൽവിലാസം 
                                             </th>
-                                            <th>കോഴ്‌സിന്റെ പേര് 
+                                            <th>Course Name / കോഴ്‌സിന്റെ പേര് 
                                             </th>
-                                            <th>അപേക്ഷകന്റെ വരുമാനം 
+                                            <th>Applicant's Income / അപേക്ഷകന്റെ വരുമാനം 
                                             </th>
-                                            <th>ജാതി/ മതം 
+                                            <th>Caste/Religion / ജാതി/ മതം 
                                             </th>
-                                            <th>തീയതി      </th>
-                                            <th>സമയം</th>
-                                            <th >ആക്ഷൻ</th>
+                                            <th>Date / തീയതി   </th>
+                                            <th >Action / ആക്ഷൻ</th>
 
 
 
@@ -196,13 +196,14 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'name' },
                 { data: 'address' },
 				{ data: 'course_name' },
                 { data: 'income' },
 				{ data: 'caste' },
                 { data: 'date' },
-                { data: 'time' },
+               
                 // { data: 'created_at', visible: false },
 
                 { data: 'edit' }
