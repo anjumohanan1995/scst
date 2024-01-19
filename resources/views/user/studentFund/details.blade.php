@@ -94,7 +94,7 @@
 
                                                 </td>
                                                 <td>{{ @$studentFund['caste'] }} <br> @if($studentFund['caste_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -104,7 +104,7 @@
 
                                                 </td>
                                                 <td> {{ @$studentFund['income'] }} <br> @if($studentFund['income_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a src="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>

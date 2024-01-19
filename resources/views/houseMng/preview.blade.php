@@ -280,7 +280,7 @@
                        <div class="w-100">
                           <div class="row w-100">
                              <div class="col-5">
-                                <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള
+                                <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള മറ്റു സംഗതികൾ
                                 </label><br>
                              </div>
                              <div class="col-1 w-100">
@@ -291,8 +291,8 @@
                                 <label> 
                                 {{ @$formData['prove_eligibility'] }}    </label>
                                 <br>
-                                @if($formData['prove_eligibility_file'])
-                                <iframe src="{{ asset('homeMng/' . @$formData['prove_eligibility_file']) }}" width="400" height="200"></iframe>
+                                @if($formData['prove_eligibility_file'] !='')
+                                <a href="{{ asset('homeMng/' . @$formData['prove_eligibility_file']) }}" target="_blank">View</a>
                                 @endif
                              </div>
                           </div>

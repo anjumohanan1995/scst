@@ -430,7 +430,10 @@ class ItiScholarshipController extends Controller
              $income=$record->income;
              $caste = $record->caste;
               $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
 
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
             $data_arr[] = array(
                 "id" => $id,
                
@@ -439,8 +442,9 @@ class ItiScholarshipController extends Controller
                 "course_name" => $course_name,
                 "caste" => $caste,
                 "income" =>$income,
-                "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . route('userItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "date" => $date .' ' .$time, 
+                                
+                "edit" => '<div class="settings-main-icon"><a  href="' . route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }

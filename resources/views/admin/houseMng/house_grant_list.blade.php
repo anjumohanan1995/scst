@@ -183,7 +183,7 @@ $(document).on("click",".deleteItem",function() {
 				{ data: 'panchayath' },
 				{ data: 'caste' },
                 { data: 'place' },
-                { data: 'created_at', visible: false },
+                { data: 'date' },
 
                 { data: 'edit' }
 
