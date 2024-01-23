@@ -341,7 +341,7 @@ $i=$start;
                 "caste" => $caste,
                 "income" =>$income,
                 "created_at" => $date .' ' .$record->time,               
-                "edit" => '<div class="settings-main-icon"><a  href="' . route('itiScholarship.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => '<div class="settings-main-icon"><a  href="' . route('userItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
          }

@@ -395,7 +395,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="itiScholarship/create" class="btn btn-primary"> Continue</a>
+                        <a href="{{ url('iti-scholarship') }}" class="btn btn-primary"> Continue</a>
                     </div>
                 </form>
             </div>
@@ -579,6 +579,11 @@
                                 <ul>
                                     <li>
                                         കുടുംബ വാർഷിക വരുമാനം പകർപ്പ് (ഫോട്ടോ / ഡോക്യുമെന്റ്)
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        അപേക്ഷകന്റെ ഒപ്പു  (ഫോട്ടോ)
                                     </li>
                                 </ul>
                                 

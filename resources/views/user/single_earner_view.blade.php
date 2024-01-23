@@ -31,9 +31,18 @@
                 <div class="row row-sm mt-4">
                     <div class="col-12 d-flex ">
 
+                        @php
+
+                            $taluk = App\Models\Taluk::where('_id', $formData['taluk'])->first();
+                            $district = App\Models\District::where('_id', $formData['district'])->first();
+                            $submitted_district = App\Models\District::where('_id', $formData['submitted_district'])->first();
+                            $submitted_teo = App\Models\Teo::where('_id', $formData['submitted_teo'])->first();
+
+                        @endphp
 
 
-                        <div class="col-12 col-md-9">
+
+                        <div id="showPrint" class="col-12 col-md-9">
                             <div class="card">
                                 <div class="card-body">
                                     <div id="success_message" class="ajax_response" style="display: none;"></div>
@@ -54,7 +63,7 @@
 
 
 
-                                        <form action="#" method="post"
+                                        <div action="#" method="post"
                                             style="font-weight: 500;font-size: 12px;padding: 90px;">
                                             <p>A അപേക്ഷകനെ/യെ സംബന്ധിച്ച വിവരങ്ങൾ </p>
                                             <br>
@@ -117,10 +126,13 @@
                                                     <label> :</label>
                                                 </div>
 
+                                                @php
+                                                @endphp
+
                                                 <div class="col-5">
                                                     <label> {{ @$formData['address'] }},
-                                                        <br>{{ @$formData['talukName']['taluk_name'] }},
-                                                        <br>{{ @$formData['districtRelation']['name'] }},
+                                                        <br>{{ @$taluk->taluk_name }},
+                                                        <br>{{ @$district->name }},
                                                         <br> {{ @$formData['pincode'] }}
                                                     </label>
                                                 </div>
@@ -169,8 +181,6 @@
                                             <div class="row w-100">
                                                 <div class="col-6">
 
-                                                    {{-- <label>ബാങ്ക് അക്കൗണ്ട് വിവരങ്ങൾ (പകർപ്പ് സഹിതം )
-                                                    </label> --}}
                                                     <label>ബാങ്ക് അക്കൗണ്ട് നം
                                                     </label>
                                                 </div>
@@ -387,27 +397,37 @@
                                                 </div>
                                             </div>
                                             <br>
-                                            <p>കുടുബാംഗങ്ങളിൽ 18 നും 70 നും മദ്ധ്യേ പ്രായമായവരുടെ പേരും, തൊഴിലും, വരുമാനവും
-                                            </p>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p>കുടുബാംഗങ്ങളിൽ 18 നും 70 നും മദ്ധ്യേ പ്രായമായവരുടെ പേരും, തൊഴിലും,
+                                                        വരുമാനവും
+                                                    </p>
+                                                </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-5">
+                                                    <table border="1" class="w-100">
+                                                        <tr>
+                                                            <th>പേര് </th>
+                                                            <th>തൊഴിൽ </th>
+                                                            <th>വരുമാനം
+                                                            </th>
+                                                        </tr>
 
-                                            <table border="1">
-                                                <tr>
-                                                    <th>പേര് </th>
-                                                    <th>തൊഴിൽ </th>
-                                                    <th>വരുമാനം
-                                                    </th>
-                                                </tr>
+                                                        @for ($i = 0; $i < count($formData['name']); $i++)
+                                                            <tr>
+                                                                <td>{{ $formData['name'][$i] }}</td>
+                                                                <td>{{ $formData['job'][$i] }}</td>
+                                                                <td>{{ $formData['salary'][$i] }}</td>
+                                                            </tr>
+                                                        @endfor
 
-                                                @for ($i = 0; $i < count($formData['name']); $i++)
-                                                    <tr>
-                                                        <td>{{ $formData['name'][$i] }}</td>
-                                                        <td>{{ $formData['job'][$i] }}</td>
-                                                        <td>{{ $formData['salary'][$i] }}</td>
-                                                    </tr>
-                                                @endfor
+                                                        <!-- Add more rows as needed -->
+                                                    </table>
+                                                </div>
+                                            </div>
 
-                                                <!-- Add more rows as needed -->
-                                            </table>
+
+
 
                                             <br>
                                             <br>
@@ -455,163 +475,140 @@
                                                 <div class="col-12">
 
                                                     <h6 class="text-center">
-                                                        <b>അപ്‌ലോഡ് ചേത പകർപ്പുകൾ
+                                                        <b><u>അപ്‌ലോഡ് ചേത പകർപ്പുകൾ</u>
                                                         </b>
                                                     </h6>
                                                 </div>
                                             </div>
 
+
+
+                                            {{-- files code starts here   --}}
+
+
+                                            @if ($formData['caste_certificate'])
+                                                <div class="row">
+                                                    <div class="col-6">അപേക്ഷകന്റെ ജാതി തെളിയിക്കുന്ന സർട്ടിഫിക്കറ്റ്
+                                                    </div>
+                                                    <div class="col-1">:</div>
+                                                    <div class="col-5">
+                                                        <a href="{{ asset('/applications/single_earner/' . @$formData['caste_certificate'] ?? '') }}"
+                                                            target="_blank" rel="noopener noreferrer">View</a>
+
+                                                    </div>
+                                                </div>
+                                            @endif
+
+
+
+                                            @if ($formData['adhaar_copy'])
+                                                <div class="row">
+                                                    <div class="col-6">അപേക്ഷകന്റെ ആധാർ പകർപ്പ് </div>
+                                                    <div class="col-1">:</div>
+                                                    <div class="col-5">
+                                                        <a href="{{ asset('/applications/single_earner/' . @$formData['adhaar_copy']) }}"
+                                                            target="_blank">View</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            @if ($formData['passbook_copy'])
+                                                <div class="row">
+                                                    <div class="col-6">അപേക്ഷകന്റെ പാസ്ബുക്ക് പകർപ്പ്</div>
+                                                    <div class="col-1">:</div>
+                                                    <div class="col-5">
+                                                        <a href="{{ asset('/applications/single_earner/' . @$formData['passbook_copy']) }}"
+                                                            target="_blank">View</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            @if ($formData['death_certificate'])
+                                                <div class="row">
+                                                    <div class="col-6">മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് </div>
+                                                    <div class="col-1">:</div>
+                                                    <div class="col-5">
+                                                        <a href="{{ asset('/applications/single_earner/' . @$formData['death_certificate']) }}"
+                                                            target="_blank">View</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            @if ($formData['ration_card'])
+                                                <div class="row">
+                                                    <div class="col-6">റേഷൻ കാർഡിന്റെ പകർപ്പ് </div>
+                                                    <div class="col-1">:</div>
+                                                    <div class="col-5">
+                                                        <a href="{{ asset('/applications/single_earner/' . @$formData['ration_card']) }}"
+                                                            target="_blank">View</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+
+                                            @if ($formData['income_certificate'])
+                                                <div class="row">
+                                                    <div class="col-6">വില്ലജ് ഓഫീസറിൽ നിന്നുള്ള സാക്ഷ്യപത്രം</div>
+                                                    <div class="col-1">:</div>
+                                                    <div class="col-5">
+                                                        <a href="{{ asset('/applications/single_earner/' . @$formData['income_certificate']) }}"
+                                                            target="_blank">View</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            @if ($formData['past_job_document'])
+                                                <div class="row">
+                                                    <div class="col-6">ഏക വരുമാന ദായകനായിരുന്നു എന്നത് സംബന്ധിച്ച്
+                                                        തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം</div>
+                                                    <div class="col-1">:</div>
+                                                    <div class="col-5">
+                                                        <a href="{{ asset('/applications/single_earner/' . @$formData['past_job_document']) }}"
+                                                            target="_blank">View</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+
                                             <div class="row">
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>അപേക്ഷകന്റെ ജാതി തെളിയിക്കുന്ന
-                                                            സർട്ടിഫിക്കറ്റ്</b> </label>
-
-                                                    @if (@$formData['caste_certificate'])
-                                                        <embed
-                                                            src="{{ asset('applications/single_earner/' . @$formData['caste_certificate']) }}"
-                                                            type="" width="250px" height="150px">
-                                                    @else
-                                                        <br>
-                                                        Not uploaded!
-                                                    @endif
-                                                </div>
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>അപേക്ഷകന്റെ ആധാർ പകർപ്പ് </b> </label>
-
-                                                    @if (@$formData['adhaar_copy'])
-                                                        <embed
-                                                            src="{{ asset('applications/single_earner/' . @$formData['adhaar_copy']) }}"
-                                                            type="" width="250px" height="150px">
-                                                    @else
-                                                        <br>
-                                                        Not uploaded!
-                                                    @endif
-                                                </div>
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>അപേക്ഷകന്റെ പാസ്ബുക്ക് പകർപ്പ് </b> </label>
-
-                                                    @if (@$formData['passbook_copy'])
-                                                        <embed
-                                                            src="{{ asset('applications/single_earner/' . @$formData['passbook_copy']) }}"
-                                                            type="" width="250px" height="150px">
-                                                    @else
-                                                        <br>
-                                                        Not uploaded!
-                                                    @endif
-                                                </div>
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് </b> </label>
-
-                                                    @if (@$formData['death_certificate'])
-                                                        <embed
-                                                            src="{{ asset('applications/single_earner/' . @$formData['death_certificate']) }}"
-                                                            type="" width="250px" height="150px">
-                                                    @else
-                                                        <br>
-                                                        Not uploaded!
-                                                    @endif
-                                                </div>
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>റേഷൻ കാർഡിന്റെ പകർപ്പ് </b> </label>
-
-                                                    @if (@$formData['ration_card'])
-                                                        <embed
-                                                            src="{{ asset('applications/single_earner/' . @$formData['ration_card']) }}"
-                                                            type="" width="250px" height="150px">
-                                                    @else
-                                                        <br>
-                                                        Not uploaded!
-                                                    @endif
-                                                </div>
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>വില്ലജ് ഓഫീസറിൽ നിന്നുള്ള സാക്ഷ്യപത്രം </b>
-                                                    </label>
-
-                                                    @if (@$formData['income_certificate'])
-                                                        <embed
-                                                            src="{{ asset('applications/single_earner/' . @$formData['income_certificate']) }}"
-                                                            type="" width="250px" height="150px">
-                                                    @else
-                                                        <br>
-                                                        Not uploaded!
-                                                    @endif
-                                                </div>
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>ഏക വരുമാന ദായകനായിരുന്നു എന്നത് സംബന്ധിച്ച്
-                                                            തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം </b> </label>
-
-                                                    @if (@$formData['past_job_document'])
-                                                        <embed
-                                                            src="{{ asset('applications/single_earner/' . @$formData['past_job_document']) }}"
-                                                            type="" width="250px" height="150px">
-                                                    @else
-                                                        <br>
-                                                        Not uploaded!
-                                                    @endif
-                                                </div>
-                                                <div class="col-5 m-2">
-                                                    <label for=""><b>അപേക്ഷകന്റെ പാസ്ബുക്ക് പകർപ്പ് </b> </label>
+                                                <div class="col-6">അപേക്ഷകന്റെ ഒപ്പു </div>
+                                                <div class="col-1">:</div>
+                                                <div class="col-5">
+                                                    {{-- <a href="{{ asset('/applications/single_earner/' . @$formData->past_job_document) }}"
+                                                        target="_blank">View</a> --}}
 
                                                     @if (@$formData['signature'])
                                                         <embed
                                                             src="{{ asset('applications/single_earner/' . @$formData['signature']) }}"
                                                             type="" width="250px" height="150px">
                                                     @else
-                                                        <br>
                                                         Not uploaded!
                                                     @endif
+
                                                 </div>
-
-
                                             </div>
+
+
+
+                                            {{-- files code ends here   --}}
+
 
                                             <div class="m-5">
                                                 <h6 class="text-center">
-                                                    <b>സത്യപ്രസ്താവന
+                                                    <b><u>സത്യപ്രസ്താവന</u>
                                                     </b>
                                                 </h6>
                                             </div>
                                             <p>മേൽ പ്രസ്താവിച്ച വിവരങ്ങൾ പൂർണമായും സത്യമാണെന്ന് ബോധിപ്പിച് കൊള്ളുന്നു
                                             </p>
 
-                                            {{-- <div class="d-flex row">
-                                                <div class="col-6">
-
-                                                    <label>സ്ഥലം: </label><br>
-
-                                                </div>
-
-                                                <div class="col-6"">
-
-                                                    <div>
-                                                        <label> അപേക്ഷകന്റെ പേരും ഒപ്പും:
-                                                        </label>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                            <div class=" d-flex row">
-                                                <div class="col-6">
-
-                                                    <label>തീയതി : </label><br>
-
-                                                </div>
-
-                                                <div class="col-6">
-
-                                                    <label>
 
 
-                                                    </label>
-                                                </div>
-
-                                            </div> --}}
-
+                                            <br>
 
                                             <div class="m-3">
                                                 <h6 class="text-center">
-                                                    <b>ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫീസറുടെ റിപ്പോർട്ട്
+                                                    <b><u>ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫീസറുടെ റിപ്പോർട്ട്</u>
 
                                                     </b>
                                                 </h6>
@@ -619,42 +616,42 @@
                                             <p>ബന്ധപ്പെട്ട രേഖകളുടെ പരിശോധനയിലും ഫീൽഡ് തല അന്വേഷണത്തിലും അപേക്ഷകനെ/യ്ക്ക്
                                                 പദ്ധതി മാനദണ്ഡങ്ങൾ പ്രകാരം ധനസഹായത്തിന് അർഹതയുണ്ട് എന്ന് റിപ്പോർട്ട്
                                                 ചെയുന്നു.</p>
+                                            <br>
+                                            <div class="row w-100">
 
-                                            {{-- <div class="d-flex row">
-                                                <div class="col-6">
-
-                                                    <label>സ്ഥലം: </label><br>
-
-                                                </div>
-
-                                                <div class="col-6"">
-
-                                                    <div>
-                                                        <label>
-                                                        </label>
+                                                <div class="col-6 d-flex">
+                                                    <div class="col-4">
+                                                        <label class="fw-bold">ജില്ല</label>
                                                     </div>
+                                                    <div class="col-1">
+                                                        <label class="fw-bold">:</label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <label>{{ @$submitted_district->name }}</label>
 
+                                                    </div>
                                                 </div>
 
+
+                                                <div class="col-6 d-flex">
+                                                    <div class="col-4">
+                                                        <label class="fw-bold">TEO</label>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <label class="fw-bold">:</label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <label>{{ @$submitted_teo->teo_name }}</label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class=" d-flex row">
-                                                <div class="col-6">
+                                            <br>
+                                            <div class="row" id="btnHide">
+                                                <button class="btn btn-primary" onclick="printDiv()">Print Part</button>
+                                            </div>
 
-                                                    <label>തീയതി : </label><br>
+                                        </div>
 
-                                                </div>
-
-                                                <div class="col-6">
-
-                                                    <label>
-                                                        ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫീസർ
-
-
-
-                                                    </label>
-                                                </div>
-
-                                            </div> --}}
                                     </div>
 
                                 </div>
@@ -662,7 +659,7 @@
                             </div>
                         </div>
 
-                        @if (Auth::user()->role != 'User')  
+                        @if (Auth::user()->role != 'User')
                             <div class="col-12 col-md-3">
                                 <div class="card">
                                     <div class="card-body">
@@ -787,6 +784,24 @@
     </div>
     </div>
 
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #btnHide {
+                display: none;
+            }
+
+
+            #showPrint * {
+                visibility: visible;
+            }
+
+        }
+    </style>
+
 
     <script>
         // edit button function
@@ -795,6 +810,11 @@
                 window.history.back();
             }
             return
+        }
+
+        //print preview function.
+        function printDiv() {
+            window.print();
         }
     </script>
 @endsection
