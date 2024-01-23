@@ -260,6 +260,7 @@ Route::post('/singleEarnerStore', [App\Http\Controllers\SingleIncomeEarnerContro
     Route::get('/HouseGrantDetails/{id}', [HouseManagementController::class, 'getAdminHouseGrantDetails'])->name('getAdminHouseGrantDetails');
     Route::get('/redirect/back', [HouseManagementController::class, 'redirectBack'])->name('redirectBack');
     Route::post('/HouseGrant/teoApprove', [HouseManagementController::class, 'teoApprove'])->name('housegrant-teo.approve');
+    Route::post('/HouseGrant/teoReject', [HouseManagementController::class, 'teoReject'])->name('housegrant-teo.reject');
     
     //Medical / Engineering student fund scheme
 Route::resource('/MedicalEngineeringStudentFund', MedEngStudentFundController::class);

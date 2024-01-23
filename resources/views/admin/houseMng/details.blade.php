@@ -366,12 +366,12 @@
             </div>
          </div>
          @if(auth::user()->role=='TEO' && @$houseManagement->teo_view_status==1)
-          <div class="col-md-4 ">
-            <div class="card ">
-               <div class="card-body p-5">
+         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <div class="card overflow-hidden">
+               <div class="card-body">
                   <div class="paper-1">
                      <div class="w-100">
-                        <div class="row w-100">
+                        <div class="row ">
                            <div class="col-5">
                               <label>Viewed Date  </label><br>
                            </div>
@@ -390,7 +390,7 @@
 
                </div>
             </div>
-          </div>
+         </div>
           @endif
       </div>
     </div>

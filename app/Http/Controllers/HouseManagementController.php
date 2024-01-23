@@ -415,12 +415,17 @@ $formattedDate = $currentDate->toDateString();
                     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
                 }
                 else if($record->teo_status ==2){
-
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+              
                 }
                 else if($record->teo_status ==null){
                     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
                 }
                
+              }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+             
               }
 
             $data_arr[] = array(
@@ -485,6 +490,27 @@ $formattedDate = $currentDate->toDateString();
 
         return response()->json([
             'success' => 'House Grant Scheme Application approved successfully.'
+        ]);
+    
+    }
+    public function teoReject(Request $request){
+        $id = $request->id;
+        $reason =$request->reason;
+        $currentTime = Carbon::now();
+        $houseGrant = HouseManagement::where('_id', $request->id)->first();
+
+      
+
+        $houseGrant->update([
+            'teo_status' => 2,
+            'teo_status_date' => $currentTime->toDateTimeString(),
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+
+
+        return response()->json([
+            'success' => 'House Grant Scheme Application Rejected successfully.'
         ]);
     
     }
