@@ -34,9 +34,14 @@
 
 
 
-                            <div class="card overflow-hidden" style="width: 113%;">
+                            <div id="showPrint" class="card overflow-hidden" style="width: 113%;">
 
                                 <div class="card-body pd-y-7">
+
+                                    <div id="btnHide" class="row justify-content-end m-3">
+                                        <a style="width: 50px" onclick="printDiv()"><img
+                                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                                    </div>
 
 
                                     <h1
@@ -507,6 +512,23 @@
                 </div>
             </div>
         </div>
+        <style>
+            @media print {
+                body * {
+                    visibility: hidden;
+                }
+
+                #btnHide {
+                    display: none;
+                }
+
+
+                #showPrint * {
+                    visibility: visible;
+                }
+
+            }
+        </style>
         <script>
             function validateForm() {
                 // Check if the required fields are filled
@@ -531,6 +553,10 @@
                     window.history.back();
                 }
                 return
+            }
+            //print preview function.
+            function printDiv() {
+                window.print();
             }
         </script>
     @endsection

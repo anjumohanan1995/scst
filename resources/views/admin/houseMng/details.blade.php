@@ -365,6 +365,33 @@
                </div>
             </div>
          </div>
+         @if(auth::user()->role=='TEO' && @$houseManagement->teo_view_status==1)
+          <div class="col-md-4 ">
+            <div class="card ">
+               <div class="card-body p-5">
+                  <div class="paper-1">
+                     <div class="w-100">
+                        <div class="row w-100">
+                           <div class="col-5">
+                              <label>Viewed Date  </label><br>
+                           </div>
+                           <div class="col-1 w-100">
+                              <label> :  
+                              </label>
+                           </div>
+                           <div class="col-6">
+                              <label> 
+                              {{ @$houseManagement['teo_view_date'] }}
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+          </div>
+          @endif
       </div>
     </div>
 </div>

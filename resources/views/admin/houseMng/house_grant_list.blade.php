@@ -104,8 +104,39 @@
 		<!-- /container -->
 	</div>
     <!-- /main-content -->
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
+<script src="{{ asset('js/toastr.js') }}"></script>
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 <script type="text/javascript">
+
+
+
+
+   
+
+   $(document).on("click", ".approveItem", function() {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "{{ route('housegrant-teo.approve') }}",
+                type: "POST",
+                data: {
+                    "id": $(this).attr('data-id'),
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    toastr.success(response.success, 'Success!')
+                    $('#success').show();
+                    $('#success_message').fadeIn().html(response.success);
+                    setTimeout(function() {
+                        $('#success_message').fadeOut("slow");
+                    }, 2000);
+
+                    $('#example').DataTable().ajax.reload();
+
+                }
+            });
+        });
 
 $(document).on("click",".deleteItem",function() {
 
