@@ -33,6 +33,8 @@
                         <div class="card overflow-hidden" style="width: 113%;">
                             <div class="card-body pd-y-7">
 
+                         
+
                                 <h1
                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
                                     മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് <br>

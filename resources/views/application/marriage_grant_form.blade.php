@@ -148,11 +148,12 @@
                                     @enderror
                                 </div>
                                     <div class="col-md-6 mb-6">
-                                        <input type="file" value="{{ old('caste_certificate') }}" class="form-control" placeholder="" name="caste_certificate" />
+                                        <input type="file" onchange="validateCaste()" value="{{ old('caste_certificate') }}" class="form-control" placeholder="" name="caste_certificate" id="caste_certificate" />
                                         <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
                                         @error('caste_certificate')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorCaste" style="color:red;"></div>
                                     </div>  
                                     </div>                                 
                                     
@@ -264,11 +265,12 @@
                                     @enderror
                                 </div>
                                     <div class="col-md-6 mb-6">
-                                        <input type="file" value="{{ old('income_certificate') }}" class="form-control" placeholder="" name="income_certificate" />
+                                        <input type="file" onchange="validateIncome()" value="{{ old('income_certificate') }}" class="form-control" placeholder="" name="income_certificate" id="income_certificate" />
                                         <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
                                         @error('income_certificate')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorIncome" style="color:red;"></div>
                                     </div>  
                                     </div>  
                                 </div>
@@ -463,11 +465,12 @@
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം / Applicant's Signature/Fingerprint </label>
-                                    <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" />
-                                    <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
+                                    <input type="file" onchange="validateSignature()" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" id="signature" />
+                                    <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <div id="errorSignature" style="color:red;"></div>
                                 </div>                                
                             </div><br>  
                         </div>
@@ -523,6 +526,70 @@
 </div>
 </div>
 <script>
+    function validateSignature() {
+        var input = document.getElementById('signature');
+        var errorMessage = document.getElementById('errorSignature');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+
+    function validateCaste() {
+        var input = document.getElementById('caste_certificate');
+        var errorMessage = document.getElementById('errorCaste');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: File size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+
+    function validateIncome() {
+        var input = document.getElementById('income_certificate');
+        var errorMessage = document.getElementById('errorIncome');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: File size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
+
+
     function copyCurrentAddress() {
         if ($('#copyAddress').prop('checked')) {
             // Copy the value of current_address to permanent_address
@@ -729,9 +796,25 @@
     document.getElementById('teo_name').value = submitted_teo;
     });
 
-	$(document).ready(function() {
-     	$('#example').DataTable();
-	});
+    $(document).ready(function() {
+        $('input[name="current_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+        $('input[name="permanent_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+        $('input[name="fiancee_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+        $('input[name="groom_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+        $('input[name="groom_parent_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+        $('#example').DataTable();
+      
+   });
   </script>
 <!-- main-content-body -->
 @endsection

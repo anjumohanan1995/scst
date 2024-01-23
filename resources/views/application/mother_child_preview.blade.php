@@ -121,7 +121,7 @@
                                             <label> : </label>
                                         </div>
                                         <div class="col-6">
-                                            <label> {{ @$formData['age'] }} , {{ @$formData['dob'] }} </label>
+                                            <label> {{ @$formData['age'] }} , @if(@$formData['dob']!=null) {{ \Carbon\Carbon::parse(@$formData['dob'])->format('d-m-Y') }}@endif  </label>
                                         </div>
                                     </div>
                                     <div class=" row paper-1">
@@ -186,7 +186,7 @@
                                             <label> : </label>
                                         </div>
                                         <div class="col-6">
-                                            <label> {{ @$formData['expected_date_of_delivery'] }} </label>
+                                            <label>@if(@$formData['expected_date_of_delivery']!=null) {{ \Carbon\Carbon::parse(@$formData['expected_date_of_delivery'])->format('d-m-Y') }}@endif  </label>
                                         </div>
                                     </div>
                                     <div class=" row paper-1">
@@ -215,7 +215,7 @@
                                                 <div class="col-1">
                                                     <label> : </label>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-6">
                                                     <label> {{ @$formData['place'] }} </label>
                                                 </div>
                                             </div>
@@ -229,7 +229,7 @@
                                                 <div class="col-1">
                                                     <label> : </label>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-6">
                                                     <label> {{ date('d-m-Y') }} </label>
                                                 </div>
                                             </div>
@@ -241,9 +241,10 @@
                                             <div class="row d-flex col-12">
                                                 <div class="col-8">
                                                     @if ($formData['signature'])
-                                                    <iframe
+                                                    {{-- <iframe
                                                         src="{{ asset('applications/mother_child_protection/' . @$formData['signature']) }}"
-                                                        width="400" height="200"></iframe>
+                                                        width="400" height="200"></iframe> --}}
+                                                        <img src="{{ asset('applications/mother_child_protection/' . @$formData['signature']) }}" width="120px" height="60px">
                                                 @endif
                                                     <label>അപേക്ഷകന്റെ ഒപ്പ്</label>
                                                 </div>

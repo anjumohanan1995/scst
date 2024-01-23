@@ -8,8 +8,8 @@
             <!-- breadcrumb -->
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
                 <div class="col-md-12">
-                    <h4> Application Form</h4><br>
-                    <h2>ഏക വരുമാന ദായകൻ മരണപ്പെട്ട പട്ടിക വർഗ്ഗ വിഭാഗ കുടുംബങ്ങൾക്കുള്ള ധനസഹായം
+
+                    <h2 class="text-white">ഏക വരുമാന ദായകൻ മരണപ്പെട്ട പട്ടിക വർഗ്ഗ വിഭാഗ കുടുംബങ്ങൾക്കുള്ള ധനസഹായം
                         അപേക്ഷ ഫോറം </h2>
 
                 </div>
@@ -46,7 +46,7 @@
                                         <div class="col-md-12">
 
                                             <input type="text" value="{{ old('applicant_name') }}" class="form-control"
-                                                 name="applicant_name" placeholder="പേര്" />
+                                                name="applicant_name" placeholder="പേര്" />
                                             @error('applicant_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -68,18 +68,21 @@
                                         <div class="col-md-6">
                                             Certificate from Tehsildar / തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം അപ്‌ലോഡ് ചെയുക
                                             <input type="file" value="{{ old('caste_certificate') }}"
-                                                class="form-control" placeholder="" name="caste_certificate" />
-                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                                class="form-control" placeholder="" name="caste_certificate" id="caste_certificate" onchange="validateImage('caste_certificate','caste_certificate_error')" />
+                                            <span class="text-muted small">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2
+                                                എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</span>
                                             @error('caste_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="caste_certificate_error" style="color:red;">
+                                            </div>
                                         </div>
                                     </div>
                                     <br>
 
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <label class="form-label"> Address / മേൽവിലാസം </label>
                                             <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="മേൽവിലാസം" name="address"></textarea>
                                             @error('address')
@@ -87,54 +90,79 @@
                                             @enderror
 
                                         </div>
+                                        <div class="col-md-6 d-flex">
+                                            <div class="col-md-4 mb-4">
+                                                <label class="form-label">District / ജില്ല </label>
+                                                <select id="district" name="district" class="form-control">
+                                                    <option value="">Select</option>
+                                                    @foreach ($districts as $district)
+                                                        <option value="{{ $district->id }}"
+                                                            {{ old('district') == $district->id ? 'selected' : '' }}>
+                                                            {{ $district->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('district')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                                <input type="hidden" name="district_name" id="district_name"
+                                                    value="">
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label class="form-label">Taluk / താലൂക്ക് </label>
+                                                <select id="taluk" name="taluk" class="form-control">
+                                                    <option value="">Choose Taluk</option>
+                                                </select>
+                                                @error('taluk')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                                <input type="hidden" name="taluk_name" id="taluk_name" value="">
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label class="form-label">Pincode / പിൻകോഡ് </label>
+                                                <input type="text" value="{{ old('pincode') }}" class="form-control"
+                                                    name="pincode" placeholder="പിൻകോഡ്" inputmode="numeric"
+                                                    inputmode="numeric" pattern="[0-9]{6}" maxlength="6"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                                                @error('pincode')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+
                                     </div><br>
 
-                                    <div class="row">
-                                        <div class="col-md-4 mb-4">
-                                            <label class="form-label">District / ജില്ല </label>
-                                            <select id="district" name="district" class="form-control">
-                                                <option value="">Select</option>
-                                                @foreach ($districts as $district)
-                                                    <option value="{{ $district->id }}"
-                                                        {{ old('district') == $district->id ? 'selected' : '' }}>
-                                                        {{ $district->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('district')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <input type="hidden" name="district_name" id="district_name" value="">
-                                        </div>
-                                        <div class="col-md-4 mb-4">
-                                            <label class="form-label">Taluk / താലൂക്ക് </label>
-                                            <select id="taluk" name="taluk" class="form-control">
-                                                <option value="">Choose Taluk</option>
-                                            </select>
-                                            @error('taluk')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <input type="hidden" name="taluk_name" id="taluk_name" value="">
-                                        </div>
-                                        <div class="col-md-4 mb-4">
-                                            <label class="form-label">Pincode / പിൻകോഡ് </label>
-                                            <input type="number" value="{{ old('pincode') }}" class="form-control"
-                                                name="pincode" placeholder="പിൻകോഡ്" />
-                                            @error('pincode')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <br>
+
+
 
                                     <label class="form-label">relation to the deceased person / മരണപ്പെട്ടയാളുമായുള്ള ബന്ധം
                                     </label>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input type="text" value="{{ old('relation_with_person') }}"
+                                            {{-- <input type="text" value="{{ old('relation_with_person') }}"
                                                 class="form-control"
                                                 placeholder="അയാളും ഉള്ള ബന്ധം മരണപ്പെട്ടയാളുമായുള്ള ബന്ധം"
-                                                name="relation_with_person" />
+                                                name="relation_with_person" /> --}}
+
+                                            <select class="form-control" name="relation_with_person">
+                                                <option value="" selected disabled>Select a relationship </option>
+                                                @foreach ([
+            'father' => 'Father / അച്ഛൻ',
+            'mother' => 'Mother / അമ്മ',
+            'sibling' => 'Sibling / സഹോദര/സഹോദരി',
+            'spouse' => 'Spouse / ഭാര്യ/ഭര്‍ത്ത',
+            'friend' => 'Friend / സുഹൃത്ത്',
+            'relative' => 'Relative / ബന്ധു',
+            'colleague' => 'Colleague / സഹോദര',
+            'other' => 'other / മറ്റുള്ളവ ',
+        ] as $value => $label)
+                                                    <option value="{{ $value }}"
+                                                        @if (old('relation_with_person') == $value) selected @endif>
+                                                        {{ $label }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             @error('relation_with_person')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -146,21 +174,26 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             Aadhar No. / ആധാർ നം
-                                            <input type="text" value="{{ old('applicant_aadhar_no') }}"
-                                                class="form-control" placeholder="ആധാർ നം" name="applicant_aadhar_no" />
+                                            <input type="text" pattern="[0-9]{12}" maxlength="12"
+                                                value="{{ old('applicant_aadhar_no') }}" class="form-control"
+                                                placeholder="ആധാർ നം" name="applicant_aadhar_no" inputmode="numeric"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                                             @error('applicant_aadhar_no')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-6">
                                             Upload Aadhar card image / പകർപ്പ് സഹിതം അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('adhaar_copy') }}" class="form-control"
-                                                placeholder="ആധാർ നം" name="adhaar_copy" />
-                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <input type="file"  class="form-control"
+                                                placeholder="ആധാർ നം" id="adhaar_copy" name="adhaar_copy" onchange="validateImage('adhaar_copy','adhaar_copy_error')" />
+                                            <span class="text-muted small">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2
+                                                എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</span>
                                             @error('adhaar_copy')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="adhaar_copy_error" style="color:red;">
+                                            </div>
                                         </div>
                                     </div>
                                     <br>
@@ -171,7 +204,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" value="{{ old('applicant_phone') }}"
-                                                class="form-control" placeholder="ഫോൺ നമ്പർ" name="applicant_phone" />
+                                                class="form-control" maxlength="12" placeholder="ഫോൺ നമ്പർ"
+                                                name="applicant_phone" inputmode="numeric"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                                             @error('applicant_phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -204,14 +239,17 @@
                                         <div class="col-md-4">
                                             <label class="">Upload the copy of passbook / ബാങ്ക് അക്കൗണ്ട് പകർപ്പ്
                                                 അപ്‌ലോഡ് ചെയുക </label>
-                                            <input type="file" value="{{ old('passbook_copy') }}"
-                                                class="form-control" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
+                                            <input type="file" onchange="validateImage('passbook_copy','passbook_copy_error')" value="{{ old('passbook_copy') }}"
+                                                class="form-control" id="passbook_copy" placeholder="ബാങ്ക് അക്കൗണ്ട് IFSC നം  "
                                                 name="passbook_copy" />
-                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <span class="text-muted small">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2
+                                                എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</span>
                                             @error('passbook_copy')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="passbook_copy_error" style="color:red;">
+                                            </div>
                                         </div>
                                     </div>
                                     <br>
@@ -229,8 +267,7 @@
                                         <div class="col-md-12">
 
                                             <input type="text" value="{{ old('deceased_person_name') }}"
-                                                class="form-control" placeholder="Total Members in family"
-                                                name="deceased_person_name" />
+                                                class="form-control" placeholder="പേര്" name="deceased_person_name" />
                                             @error('deceased_person_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -271,7 +308,8 @@
                                         <div class="col-md-4">
                                             Date of death / മരണ തീയതി
                                             <input type="date" value="{{ old('date_of_death') }}"
-                                                class="form-control" placeholder="മരണ തീയതി " name="date_of_death" />
+                                                class="form-control" placeholder="മരണ തീയതി " name="date_of_death"
+                                                max="{{ now()->format('Y-m-d') }}" />
                                             @error('date_of_death')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -279,7 +317,9 @@
                                         <div class="col-md-4">
                                             Age / വയസ്സ്
                                             <input type="text" value="{{ old('deceased_person_age') }}"
-                                                class="form-control" placeholder="വയസ്സ് " name="deceased_person_age" />
+                                                class="form-control" placeholder="വയസ്സ്" name="deceased_person_age"
+                                                inputmode="numeric" maxlength="3"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                                             @error('deceased_person_age')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -287,13 +327,16 @@
                                         <div class="col-md-4">
                                             Upload the death certificate image / മരണ സർട്ടിഫിക്കറ്റിന്റെ പകർപ്പ് അപ്‌ലോഡ്
                                             ചെയുക
-                                            <input type="file" value="{{ old('death_certificate') }}"
-                                                class="form-control" placeholder="വയസ്സ് " name="death_certificate" />
-                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <input type="file" onchange="validateImage('death_certificate','death_certificate_error')" value="{{ old('death_certificate') }}"
+                                                class="form-control" id="death_certificate" placeholder="വയസ്സ് " name="death_certificate" />
+                                            <span class="text-muted small">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2
+                                                എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</span>
                                             @error('death_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="death_certificate_error" style="color:red;">
+                                            </div>
                                         </div>
                                     </div>
                                     <br>
@@ -302,7 +345,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" value="{{ old('cause_of_death') }}"
-                                                class="form-control" placeholder="മരണ കാരണം " name="cause_of_death" />
+                                                class="form-control" id="cause_of_death" placeholder="മരണ കാരണം " name="cause_of_death" />
                                             @error('cause_of_death')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -329,13 +372,16 @@
                                             Upoad the document form the Tehsildar / തഹസിൽദാരിൽ നിന്നുള്ള സാക്ഷ്യപത്രം
                                             ഹാജരാക്കുക
 
-                                            <input type="file" value="{{ old('past_job_document') }}"
-                                                class="form-control" name="past_job_document" />
-                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <input type="file" onchange="validateImage('past_job_document','past_job_document_error')" value="{{ old('past_job_document') }}"
+                                                class="form-control" id="past_job_document" name="past_job_document" />
+                                            <span class="text-muted small">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2
+                                                എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</span>
                                             @error('past_job_document')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="past_job_document_error" style="color:red;">
+                                            </div>
                                         </div>
                                     </div>
                                     <br>
@@ -365,19 +411,22 @@
 
                                         <div class="col-md-6">
                                             Upload the ration card image / റേഷൻ കാർഡിന്റെ പകർപ്പ് അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('ration_card') }}" class="form-control"
-                                                placeholder="Total Members in family" name="ration_card" />
-                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <input type="file" onchange="validateImage('ration_card','ration_card_error')" value="{{ old('ration_card') }}" class="form-control"
+                                                placeholder="Total Members in family" id="ration_card" name="ration_card" />
+                                            <span class="text-muted small">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2
+                                                എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</span>
                                             @error('ration_card')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="ration_card_error" style="color:red;">
+                                            </div>
                                         </div>
                                     </div>
 
                                     <br>
 
-
+                                   
 
                                     <label class="form-label"> Name, occupation and income of dependents aged between 18
                                         and 70 / കടുബാംഗങ്ങളിൽ 18 നും 70 നും മദ്ധ്യേ പ്രയമായവരുടെ പേരും
@@ -510,21 +559,24 @@
                                             Upload Certificate of Attendance from Village Officer / വില്ലജ് ഓഫീസറിൽ
                                             നിന്നുള്ള
                                             സാക്ഷ്യപത്രം ഹാജരാകണം അപ്‌ലോഡ് ചെയുക
-                                            <input type="file" value="{{ old('income_certificate') }}"
-                                                class="form-control" placeholder="വാർഷിക വരുമാനം"
+                                            <input type="file" onchange="validateImage('income_certificate','income_certificate_error')" value="{{ old('income_certificate') }}"
+                                                class="form-control" id="income_certificate" placeholder="വാർഷിക വരുമാനം"
                                                 name="income_certificate" />
-                                            <span>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <span class="text-muted small">(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2
+                                                എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.)</span>
                                             @error('income_certificate')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div id="income_certificate_error" style="color:red;">
+                                            </div>
                                         </div>
 
 
                                     </div><br>
 
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <label class="form-label"> Current source of income for the family / നിലവിൽ
                                                 കുടുംബത്തിന്റെ വരുമാന സ്രോതസ്സ് </label>
                                             <input type="text" value="{{ old('income_source') }}"
@@ -534,8 +586,17 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-
-
+                                        <div class="col-md-6">
+                                            <label class="form-label">'Applicant's Name / അപേക്ഷകന്റെ ഒപ്പു </label>
+                                            <input type="file" value="{{ old('signature') }}" class="form-control"
+                                                name="signature" />
+                                            <span class="text-muted small">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി
+                                                കുറഞ്ഞത്, JPG
+                                                മാത്രം.)</span>
+                                            @error('signature')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
 
                                     <br>
@@ -599,6 +660,29 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         //duplication code starts here.
+
+
+        function validateImage(inputId, errorMessageId) {
+
+            var input = document.getElementById(inputId);
+            var errorMessage = document.getElementById(errorMessageId);
+            var submitButton = document.getElementById('submit');
+
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // in bytes
+                var maxSize = 2 * 1024 * 1024; // 2MB
+
+                if (fileSize > maxSize) {
+                    errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                    input.value = ''; // Clear the file input
+                    submitButton.disabled = true;
+                } else {
+                    errorMessage.innerText = '';
+                    submitButton.disabled = false;
+                }
+            }
+        }
+
 
         $(document).ready(function() {
             let count = 1;
@@ -808,7 +892,7 @@
         }
 
 
- 
+
 
 
         // Call the function on page load
