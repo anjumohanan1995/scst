@@ -160,7 +160,7 @@ class TuitionFeeController extends Controller
             'submitted_teo' => @$data['submitted_teo'],
             'dist_name' => @$data['dist_name'],
             'teo_name' => @$data['dob'],
-            'date' =>date('Y-m-d'),
+            'date' =>date('d-m-Y'),
             'time'=>date('H:i:s'),
             'user_id' =>Auth::user()->id, 
             'status' =>0
