@@ -1,4 +1,4 @@
-@extends('layouts.app_login')
+@extends('layouts.app_register')
 @section('content')
 
 <!-- main-content -->
@@ -40,7 +40,7 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Name</label>
+												<label class="form-label">പേര് / Name</label>
         										<input type="text" value="{{ old('name') }}"  class="form-control" placeholder="Name" name="name" id="name" />
 												@error('name')
 													<span class="text-danger">{{$message}}</span>
@@ -48,7 +48,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Name once Again</label>
+												<label class="form-label">ഒരിക്കൽ കൂടി പേര് /Name once Again</label>
         										<input type="text" value="{{ old('name_confirmation') }}" class="form-control" placeholder="Name" name="name_confirmation" id="name_confirmation" />
 												<span id="nameError" class="text-danger"></span>
 												@error('name_confirmation')
@@ -60,7 +60,7 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Date of Birth</label>
+												<label class="form-label">ജനനതീയതി / Date of Birth</label>
         										<input type="date" value="{{ old('dob') }}"  class="form-control" placeholder="Date of birth" name="dob" id="dob" />
 												@error('dob')
 													<span class="text-danger">{{$message}}</span>
@@ -68,7 +68,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Date of Birth once Again</label>
+												<label class="form-label">ഒരിക്കൽ കൂടി ജനനത്തീയതി / Date of Birth once Again</label>
 												<input type="date"  value="{{ old('dob1') }}"  class="form-control" placeholder="Date of birth" name="dob1" id="dob1" />
 												<span id="dobError" class="text-danger"></span>	
 												@error('dob1')
@@ -80,7 +80,7 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Gender</label>
+												<label class="form-label">ലിംഗഭേദം / Gender</label>
 												<select class="form-control" name="gender" >
 													<option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
 													<option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
@@ -94,7 +94,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Mobile Number</label>
+												<label class="form-label">മൊബൈൽ നമ്പർ / Mobile Number</label>
 												<input type="text" class="form-control" placeholder="Mobile Number" name="mobile" id="mobile" value="{{ old('mobile') }}" />
     											<span id="mobileError" class="text-danger"></span>
 												@error('mobile')
@@ -106,7 +106,7 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Father's Name</label>
+												<label class="form-label">പിതാവിന്റെ പേര് / Father's Name</label>
 												<input type="text" class="form-control" placeholder="Father's Name" name="father_name" value="{{ old('father_name') }}" />
 												@error('father_name')
 														<span class="text-danger">{{$message}}</span>
@@ -114,7 +114,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Mother's Name</label>
+												<label class="form-label">അമ്മയുടെ പേര് / Mother's Name</label>
 												<input type="text" class="form-control" placeholder="Mother's Name" name="mother_name" value="{{ old('mother_name') }}" />
 												@error('mother_name')
 														<span class="text-danger">{{$message}}</span>
@@ -127,7 +127,7 @@
 										
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Caste</label>
+												<label class="form-label">ജാതി / Caste</label>
 												<select class="form-control" name="caste" >
 													<option value="SC" {{ old('caste') == 'SC' ? 'selected' : '' }}>SC</option>
 													<option value="ST" {{ old('caste') == 'ST' ? 'selected' : '' }}>ST</option>
@@ -140,7 +140,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Aadhar Number</label>
+												<label class="form-label">ആധാർ നമ്പർ / Aadhar Number</label>
 												<input type="text" class="form-control" placeholder="Aadhar Number" name="aadhar_number" id="aadhar_number" value="{{ old('aadhar_number') }}"  />
 												<span id="aadharError" class="text-danger"></span>	
                                                 @error('aadhar_number')
@@ -153,7 +153,7 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Id Proof</label>
+												<label class="form-label">ഐഡി പ്രൂഫ് / Id Proof</label>
 												<select class="form-control" name="id_proof" >
 													<option value="AADHAR" {{ old('id_proof') == 'AADHAR' ? 'selected' : '' }}>AADHAR</option>
             										<option value="Account No of Nationalised/Scheduled Bank" {{ old('id_proof') == 'Account No of Nationalised/Scheduled Bank' ? 'selected' : '' }}>Account No of Nationalised/Scheduled Bank</option>
@@ -179,7 +179,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Id Proof Details</label>
+												<label class="form-label">ഐഡി പ്രൂഫ് വിശദാംശങ്ങൾ / Id Proof Details</label>
 												<input type="text" class="form-control" placeholder="Id Proof Details" name="id_proof_details"  value="{{ old('id_proof_details') }}"/>
 												@error('id_proof_details')
 														<span class="text-danger">{{$message}}</span>
@@ -190,7 +190,7 @@
 										</div><br>
 										<div class="row">
 												<div class="col-md-6 mb-6">
-												<label class="form-label">Email</label>
+												<label class="form-label">ഇമെയിൽ / Email</label>
 												  	<input type="email" class="form-control"  value="{{ old('email') }}"  placeholder="Email" name="email" id="email"/>
 													<span id="emailError" class="text-danger"></span>
 													@error('email')
@@ -225,7 +225,7 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label for="captcha">Enter the Captcha:</label>
+												<label for="captcha">ക്യാപ്ച നൽകുക / Enter the Captcha:</label>
 												<div class="captcha">
 
 												 	<span>{!! captcha_img() !!}</span>
