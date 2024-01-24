@@ -40,7 +40,12 @@ class ItiFund extends Eloquent
         'institution_name',
         'current_institution',
         'submitted_district_name',
-        'submitted_teo_name'
+        'submitted_teo_name',
+        'approved_by',
+        'approved_date',
+        'rejected_by',
+        'rejected_date',
+        'rejected_reason',
         
 
     ];
