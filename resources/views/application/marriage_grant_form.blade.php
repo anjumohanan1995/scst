@@ -797,6 +797,9 @@
     });
 
     $(document).ready(function() {
+        fetchTeo();
+        fetchTaluk();
+
         $('input[name="current_pincode"]').on('input', function() {
             this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
         });
@@ -815,6 +818,67 @@
         $('#example').DataTable();
       
    });
+
+   function fetchTaluk() {    
+    //alert("qqqqqqq");    
+    var val1 = $("#current_district").val();
+
+    $.ajax({
+         url: "{{ url('district/fetch-taluk') }}",
+        type: "POST",
+        data: {
+            district_id: val1,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            $("#current_taluk").find('option').remove();
+            $("#current_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(result.taluks, function(key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+
+                // Set the selected attribute based on the old submitted value
+                if ('{{ old('taluk') }}' == value._id) {
+                    $opt.attr('selected', 'selected');
+                }
+
+                $opt.appendTo('#current_taluk');
+            });
+        }
+    });
+}
+function fetchTeo() {    
+    //alert("qqqqqqq");    
+    var val1 = $("#submitted_district").val();
+
+    $.ajax({
+        url: "{{ url('district/fetch-teo') }}",
+        type: "POST",
+        data: {
+            district_id: val1,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            $("#submitted_teo").find('option').remove();
+            $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+
+            $.each(result.teos, function(key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.teo_name);
+
+                // Set the selected attribute based on the old submitted value
+                if ('{{ old('submitted_teo') }}' == value._id) {
+                    $opt.attr('selected', 'selected');
+                }
+
+                $opt.appendTo('#submitted_teo');
+            });
+        }
+    });
+}
   </script>
 <!-- main-content-body -->
 @endsection
