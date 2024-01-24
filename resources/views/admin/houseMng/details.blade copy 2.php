@@ -31,7 +31,7 @@
          <!-- row -->
          <div class="row row-sm">
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
-               <div class="card overflow-hidden">
+               <div class="card overflow-hidden" style="width: 113%;">
                   <div class="card-body p-5">
                      <div id="btnHide" class="row justify-content-end m-3">
                         <a style="width: 50px" onclick="printDiv()"><img
@@ -336,7 +336,7 @@
                 </h1>
                         </div>
                     </div>
-                    <div class="row ">
+                    <div class="row">
    
                         <div class="col-6 d-flex">
                             <span class="col-5"> ജില്ല
@@ -369,93 +369,38 @@
                     
                </div>
             </div>
+            @if(auth::user()->role=='TEO' && @$houseManagement->teo_view_status==1)
+            <div class="card">
+               <div class="card-body">
+                   <div class="row mt-5">
+                       <div class="col-12">
+                           <h1
+                   style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 10px;line-height: 32px;font-weight: 600;">
+                   Submitting the application( അപേക്ഷ സമർപ്പിക്കുന്നത് )
+  
+               </h1>
+                       </div>
+                   </div>
+                   <div class="row">   
+                       <div class="col-md-6 mb-6">
+                           <label class="form-label">Viewed Date </label>
+                         
+                       </div>
+                       <div class="col-md-6 mb-6">
+                        {{ @$houseManagement['teo_view_date'] }}
+                       </div>                                 
+                   </div><br>
+               </div>
+           </div> 
+     
+      
+          @endif
          </div>
          
-    
+      </div>
 
-      @if(auth::user()->role=='TEO' && @$houseManagement->teo_view_status==1)
-         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-            <div class="pt-2 card overflow-hidden">
-            
-               <div class="card-body">
-                  
-                        <div class="pb-2 row ">
-                           <div class="col-5">
-                              <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
-                           </div>
-                           <div class="col-1 w-100">
-                              <label> :  
-                              </label>
-                           </div>
-                           <div class="col-6">
-                              <label> 
-                              {{ @$houseManagement['teo_view_date'] }}
-                              </label>
-                         
-                     </div>
-                  </div>
-                  <hr>
-                  <div class="pb-2 row ">
-                     <div class="col-5">
-                        <label>Status  </label><br>
-                     </div>
-                     <div class="col-1 w-100">
-                        <label> :  
-                        </label>
-                     </div>
-                     <div class="col-6">
-                      @if(@$houseManagement->teo_status == null)
-                      <button class="btn btn-warning" >Pending</button>
-                      @elseif(@$houseManagement->teo_status == 1)
-                      <button class="btn btn-success" >Approved</button>
-                      @elseif(@$houseManagement->teo_status == 2)
-                      <button class="btn btn-danger" >Rejected</button> 
-                     @endif
-                     </div>
-            </div>
-            @if(@$houseManagement->teo_status == 2)
-            <div class="pb-2 row ">
-               <div class="col-5">
-                  <label>Rejected Reason  </label><br>
-               </div>
-               <div class="col-1 w-100">
-                  <label> :  
-                  </label>
-               </div>
-               <div class="col-6">
-            {{ @$houseManagement->teo_status_reason }}
-            
-               </div>
-      </div>
-      @endif
-            @if(@$houseManagement->teo_status != null)
-            <div class=" pb-2 row ">
-               <div class="col-5">
-                  @if(@$houseManagement->teo_status == 1)
-                  <label>Approved Date  </label>
-                  @elseif(@$houseManagement->teo_status == 2)
-                  <label>Rejected Date  </label>
-                 @endif
-                  
-                  <br>
-               </div>
-               <div class="col-1 w-100">
-                  <label> :  
-                  </label>
-               </div>
-               <div class="col-6">
-                  @if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif
-              
-               
-               </div>
-      </div>
-      @endif
-               </div>
-            </div>
-         </div>
-          @endif
+    
     </div>
-   </div>
 </div>
 </div>
 <script>

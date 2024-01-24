@@ -460,7 +460,23 @@ $formattedDate = $currentDate->toDateString();
          return response()->json($response);
     }
     public function adminStudentFundDetails ($id){
-        $studentFund=MedEngStudentFund::find($id);
+
+
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+     
+      $studentFund=MedEngStudentFund::find($id);
+        if($studentFund->teo_view_status==null){
+            $studentFund->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+       
         return view('admin.studentFund.details', compact('studentFund'));
 
     }
