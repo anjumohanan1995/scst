@@ -895,7 +895,6 @@ $()
 <script type="text/javascript">
 function userUpdate (){
 	var id = $('#requestId').val();
-	alert(id);
     var passbookInput = $("#passbook")[0];
     var passbookFile = passbookInput.files[0];
     var formData = new FormData($("#userForm")[0]); // Create FormData object from the form
@@ -920,9 +919,7 @@ function userUpdate (){
 			 
 	     
 		   success: function(response) {
-        console.log("After AJAX success");
-        alert(response.success);
-        console.log(response.success);
+      
         toastr.success(response.success, 'Success!')
         $('#user-modal').modal('hide');
         $('#success_message').fadeIn().html(response.success);
@@ -931,8 +928,8 @@ function userUpdate (){
         }, 2000);
     },
     error: function(xhr, status, error) {
-        console.log("AJAX Error: " + error);
-        console.log(xhr.responseText);
+		window.location.reload();
+       
     }
 	  });
 		}
