@@ -168,7 +168,7 @@
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [6, 'desc'],
             'ordering': true,
          });
 
