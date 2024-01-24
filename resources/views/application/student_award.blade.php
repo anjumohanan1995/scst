@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">ജനനത്തീയതി / Date of Birth   </label>
-                                    <input type="date" class="form-control"  name="dob" id="dob" value=""  />
+                                    <input type="date" class="form-control"  name="dob" id="dob" value="{{ old('name') }}"  />
                                     @error('dob')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -61,13 +61,13 @@
                                     <select id="district" name="district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}" @if($district->id == old('district')) selected @endif >{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="district_name" id="district_name" value="">
+                                    <input type="hidden" name="district_name" id="district_name" value="{{ old('district_name') }}">
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">താലൂക്ക് / Taluk  </label>
@@ -77,7 +77,7 @@
                                     @error('taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="taluk_name" id="taluk_name" value="">
+                                    <input type="hidden" name="taluk_name" id="taluk_name" value="{{ old('taluk_name') }}">
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">പിൻകോഡ് / Pincode  </label>
@@ -93,21 +93,21 @@
                                     <div class="row">   
                                         <div class="col-md-6 mb-6">
                                             <div>
-                                                <input type="radio" id="sslc" name="examination_passed" value="SSLC">
+                                                <input type="radio" id="sslc" name="examination_passed" value="SSLC" {{ old('examination_passed') == 'SSLC' ? 'checked' : '' }} >
                                                 <label for="sslc">SSLC</label>
                                             </div>
                                             <div>
-                                                <input type="radio" id="plus_two" name="examination_passed" value="PLUS TWO">
+                                                <input type="radio" id="plus_two" name="examination_passed" value="PLUS TWO" {{ old('examination_passed') == 'PLUS TWO' ? 'checked' : '' }} >
                                                 <label for="plus_two">PLUS TWO</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <div>
-                                                <input type="radio" id="degree" name="examination_passed" value="DEGREE">
+                                                <input type="radio" id="degree" name="examination_passed" value="DEGREE" {{ old('examination_passed') == 'DEGREE' ? 'checked' : '' }} >
                                                 <label for="degree">DEGREE</label>
                                             </div>
                                             <div>
-                                                <input type="radio" id="pg" name="examination_passed" value="PG">
+                                                <input type="radio" id="pg" name="examination_passed" value="PG" {{ old('examination_passed') == 'PG' ? 'checked' : '' }} >
                                                 <label for="pg">PG</label>
                                             </div>
                                         </div>
@@ -119,14 +119,14 @@
                                
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">സംരക്ഷകന്റെ പേര് / Name of the Guardian</label>
-                                    <input type="text" class="form-control"  name="guardian_name" id="guardian_name" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="guardian_name" id="guardian_name" value="{{ old('guardian_name') }}" placeholder="" />
                                     @error('guardian_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">സമുദായം / Community</label>
-                                    <input type="text" class="form-control"  name="community" id="community" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="community" id="community" value="{{ old('community') }}" placeholder="" />
                                     @error('community')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -135,14 +135,14 @@
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">പഞ്ചായത്തിന്റെ പേര് / Name of the Panchayath</label>
-                                    <input type="text" class="form-control"  name="panchayath_name" id="panchayath_name" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="panchayath_name" id="panchayath_name" value="{{ old('panchayath_name') }}" placeholder="" />
                                     @error('panchayath_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">സ്ഥാപനത്തിന്റെ പേര് / Name of the Institution</label>
-                                    <input type="text" class="form-control"  name="institution_name" id="institution_name" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="institution_name" id="institution_name" value="{{ old('institution_name') }}" placeholder="" />
                                     @error('institution_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror

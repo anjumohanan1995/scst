@@ -81,7 +81,7 @@ th {
 
 
                                             </td>
-                                            <td>{{ @$formData['dob'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse(@$formData['dob'])->format('d-m-Y') }}</td>
                                         </tr>
                                         <tr>
 
@@ -97,7 +97,7 @@ th {
                                             </td>
                                             <td>{{ @$formData['caste'] }} <br>
                                                 @if($formData['caste_certificate'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -129,8 +129,8 @@ th {
                                             </td>
                                             <td>{{ @$formData['adhaar_number'] }} <br>
                                                 @if($formData['adhaar_copy'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" width="400" height="200"></iframe>
-                                           @endif
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" target="_blank">View</a>
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -141,7 +141,8 @@ th {
                                             </td>
                                             <td>{{ @$formData['bank_account_details'] }} <br>
                                                 @if($formData['passbook_copy'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" target="_blank">View</a>
+
                                            @endif
                                             </td>
                                         </tr>
@@ -162,8 +163,8 @@ th {
                                             </td>
                                             <td>{{ @$formData['ration_card_type'] }} <br>
                                                 @if($formData['ration_card'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" width="400" height="200"></iframe>
-                                           @endif
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" target="_blank">View</a>
+                                                 @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -175,7 +176,8 @@ th {
                                             </td>
                                             <td>{{ @$formData['is_medical_certificate_submitted'] }} <br>
                                                 @if($formData['medical_certificate'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" target="_blank">View</a>
+
                                            @endif
                                             </td>
                                         </tr>
@@ -223,11 +225,8 @@ th {
                                             <label> ഒപ്പ്
                                                 : 
                                                 @if(@$formData['signature'])
-                                                <embed
-                                                    src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}"
-                                                    type="">
-                                                    @else
-                                                   {{$formData['signature']}}
+                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" width="120px" height="60px">
+
                                                     @endif  
                                                
                                             </label>
@@ -290,7 +289,7 @@ th {
             <br>  <br>   
          
                                 
-                                <form action="{{ url('anemiaFinanceStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                <form action="{{ url('anemiaFinanceStore') }}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                   
                                <br> <br>
@@ -319,30 +318,14 @@ th {
         </div>
     </div>
 </div>
-<script>
-    function validateForm() {
-        // Check if the required fields are filled
-        var husbandSign = document.getElementsByName('husband_sign')[0].value;
-        var wifeSign = document.getElementsByName('wife_sign')[0].value;
-        var husbandName = document.getElementsByName('husband_name')[0].value;
-        var wifeName = document.getElementsByName('wife_name')[0].value;
-
-        if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
-            alert('Please fill in all required fields.');
-            return false; // Prevent form submission
-        }
-
-        return true; // Allow form submission
-    }
-</script>
 
 <script>
-    // edit button function
     function goback() {
-        if (confirm('Are you sure ? Do you want to edit this form!. ')) {
-            window.history.back();
+        if (confirm('Are you sure? Do you want to edit this form?')) {
+            window.location.href = "{{ url()->previous() }}";
+            //window.history.back();
+           
         }
-        return
     }
 </script>
 @endsection

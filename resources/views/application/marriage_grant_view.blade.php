@@ -114,9 +114,8 @@
                                     </td>
                                     <td>
                                         @if ($formData['caste_certificate'])
-                                            <iframe
-                                                src="{{ asset('applications/marriage_grant_certificates/' . @$formData['caste_certificate']) }}"
-                                                width="400" height="200"></iframe>
+                                        <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
+
                                         @endif
                                     </td>
                                 </tr>
@@ -176,9 +175,8 @@
                                     </td>
                                     <td>{{ ucwords(@$formData['annual_income']) }}<br>
                                         @if ($formData['income_certificate'])
-                                            <iframe
-                                                src="{{ asset('applications/marriage_grant_certificates/' . @$formData['income_certificate']) }}"
-                                                width="400" height="200"></iframe>
+                                        <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['income_certificate']) }}" target="_blank">View</a>
+
                                         @endif
                                     </td>
                                 </tr>
