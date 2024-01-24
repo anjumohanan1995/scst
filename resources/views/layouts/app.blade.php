@@ -76,6 +76,77 @@
 
 			<!-- End Switcher -->
 			<!-- Loader -->
+		
+			@if(auth()->check() && auth()->user()->role == 'User')
+
+			  
+	<div class="modal fade" id="user-modal">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content country-select-modal border-0">
+				<div class="modal-header offcanvas-header">
+					<h6 class="modal-title">Please Update Bank Details</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+				</div>
+				<div class="modal-body p-5">
+					<form id="userForm">
+						@csrf
+					
+					<div class="text-center">
+						{{-- <h5>Bank Details</h5> --}}
+						<div class="row pb-4">
+							<div class="col-md-4">
+								<label>Bank Name * </label>
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="bank_name" id="bank_name" required>
+								<span class="text-danger error-message" id="error-bank_name"></span>
+							</div>
+
+						</div>
+						<div class="row pb-4">
+							<div class="col-md-4">
+								<label>Account Number * </label>
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="account_no" id="account_no" required>
+								<span class="text-danger error-message" id="error-account_no"></span>
+							</div>
+
+						</div>
+						<div class="row pb-4">
+							<div class="col-md-4">
+								<label>IFSC Code *</label>
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="ifsc_code" id="ifsc_code" required>
+							
+								<span class="text-danger error-message" id="error-ifsc_code"></span>
+							</div>
+
+						</div>
+						<div class="row pb-4">
+							<div class="col-md-4">
+								<label>Passbook (Pdf/Image Max Size :2 MB) *</label>
+							</div>
+							<div class="col-md-8">
+								<input type="file" class="form-control" name="passbook" id="passbook" required>
+								<span class="text-danger error-message" id="error-passbook"></span>
+							</div>
+
+						</div>
+
+					</div>
+						<input type="hidden" value="{{ auth()->user()->id }}" name="requestId" id="requestId">
+					
+					<div class="text-center">
+						<button type="button" onclick="userUpdate()" class="btn btn-primary mt-4 mb-0 me-2">Submit</button>
+						<button class="btn btn-default mt-4 mb-0"  type="Reset">Reset</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	@endif
             <div id="global-loader">
 				<img src="{{ asset('img/loader.gif')}}" class="loader-img" alt="Loader" width="250" />
 			</div>
@@ -468,6 +539,7 @@
 
 				<!-- main-sidebar -->
 		 @yield('content')
+	
 				<!-- /main-content -->
 				<div class="sidebar sidebar-right sidebar-animate ps ps--active-y">
 					<div class="panel panel-primary card mb-0">
@@ -621,7 +693,10 @@
 				</div>
 				<!--/Sidebar-right-->
 				<!-- Footer opened -->
+				
 				<div class="main-footer ht-45">
+						
+			
 					<div class="container-fluid pd-t-0-f ht-100p">
 						<span>
 							Copyright © 2024 <a href="javascript:void(0);" class="text-primary"></a>. Designed with  by <a href="javascript:void(0);"> Kawika Technologies </a> All rights reserved.
@@ -667,7 +742,7 @@
   } );
 	$(document).ready(function() {
     /*$('#example').DataTable(
-
+$()
 
 
     	);*/
@@ -676,7 +751,7 @@
 
 } );
   </script>
-
+	
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -819,8 +894,118 @@
 	</body>
 </html>
 
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
+<script src="{{ asset('js/toastr.js') }}"></script>
+
+<script>
+   @if(auth()->check() && auth()->user()->role == 'User')
+    @if(auth()->user()->bank_name == null && auth()->user()->account_no == null && auth()->user()->passbook == null)
+       
+            $(document).ready(function () {
+                $('#user-modal').modal('show');
+            });
+      
+    @endif
+@endif
+
+</script>
 <script type="text/javascript">
+function userUpdate (){
+	var id = $('#requestId').val();
+    var passbookInput = $("#passbook")[0];
+    var passbookFile = passbookInput.files[0];
+    var formData = new FormData($("#userForm")[0]); // Create FormData object from the form
+
+    // Validate all required fields
+    if (validateForm()) {
+        // Add passbook to formData if it exists
+        if (passbookFile) {
+            formData.append('passbook', passbookFile);
+        }
+        formData.append('id', id);
+
+
+
+			$.ajax({
+          
+		  url: "{{ route('userBankDetails.update') }}",
+		  type: "POST",
+		  data: formData,
+           processData: false,
+           contentType: false,
+			 
+	     
+		   success: function(response) {
+      
+        toastr.success(response.success, 'Success!')
+        $('#user-modal').modal('hide');
+        $('#success_message').fadeIn().html(response.success);
+        setTimeout(function() {
+            $('#success_message').fadeOut("slow");
+        }, 2000);
+    },
+    error: function(xhr, status, error) {
+		window.location.reload();
+       
+    }
+	  });
+		}
+	}
+	function validateForm() {
+		var isValid = true;
+
+		// Reset error messages
+		$('.error-message').html('');
+
+		// Validate each required field
+		$('#userForm [required]').each(function() {
+			if (!$(this).val()) {
+				isValid = false;
+				var fieldName = $(this).attr('name');
+				$('#error-' + fieldName).html(fieldName + ' is required.');
+			}
+		});
+
+		// Display general error message in the #errorMessages div
+		// $('#errorMessages').html(isValid ? '' : 'Please fill in all required fields.');
+
+		return isValid;
+}
     $(document).ready(function(){
+		$('#user-modal').modal({
+    backdrop: 'static',
+    keyboard: false
+})
+	//     $.ajax({
+          
+	// 	  url: "{{ route('userData.status') }}",
+	// 	  type: "POST",
+	// 		  data: {
+				
+	// 			  "_token": "{{ csrf_token() }}"
+	// 		  },
+	// 	  success: function(response) {
+	// 		//alert(response.user);
+	// 		if(response.user =="user"){
+			
+	// 			$('#requestId').val(response.user_data._id);
+	// 			//alert(response.data);
+	// 			if(response.data == "not-exist"){
+	// 				$('#user-modal').modal('show');
+	// 			}
+	// 			else{
+	// 				$('#user-modal').modal('hide');
+	// 			}
+	// 		}
+	// 		else{
+	// 			$('#user-modal').modal('hide');
+	// 		}
+			  
+
+	// 	  }
+	//   })
+		
     $('.aminus').on('click',function (){
         //alert("aminus");
         let url="{{ route('changeStatus') }}";

@@ -249,4 +249,56 @@ class HomeController extends Controller
 
         echo json_encode($results);
     }
+    public function userData(){
+        $id=Auth::user()->id;
+        $data="";
+        if(Auth::user()->role=='User'){
+            $user=User::find($id);
+            if($user->bank_name== null && $user->bank_name== null && $user->passbook == null ){
+                return response()->json([
+                    'user' => 'user', "data" =>"not-exist","user_data" =>$user
+                ]);
+            }
+            else{
+                return response()->json([
+                    'user' => 'user', "data" =>"exist","user_data" =>$user
+                ]);
+            }
+        }
+        else{
+            return response()->json([
+                'user' => 'not-user'
+            ]);
+        }
+    }
+
+    public function bankDetailsUpdate(Request $request){
+      
+        $user=User::where('_id',$request->id)->first();
+       // $input=$request->all();
+        $passbook = '';
+        if ($request->hasfile('passbook')) {
+
+            $image = $request->passbook;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/user'), $imgfileName);
+
+            $passbook = $imgfileName;
+
+        }else{
+            $passbook = '';
+        }
+        $user->update([
+            "passbook" =>$passbook,
+            "bank_name" =>$request->bank_name,
+            "account_no" =>$request->account_no,
+            "ifsc_code" =>$request->ifsc_code,
+
+
+        ]);
+        return response()->json(['success' => 'Bank Details Updated Successfully']);
+       
+    
+    }
 }

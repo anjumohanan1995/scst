@@ -9,7 +9,8 @@
             <div class="wd-md-50p login d-none d-md-block page-signin-style p-5 text-black"> 
                 <div class="my-auto authentication-pages"> 
                     <div>  <br><br><br><br>
-                        <img src="img//logo.png" class="main-logo" alt="logo"> 
+                    <img src="{{ asset('images_new/logo.png')}}" alt="logo"  class="main-logo">
+                        {{-- <img src="imgages_new/logo.png" class="main-logo" alt="logo">  --}}
                     </div> 
                 </div> 
             </div> 

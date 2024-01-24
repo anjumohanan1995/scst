@@ -62,6 +62,8 @@ Route::post('/user-registration/save', [ApplicationController::class, 'userRegis
 Route::get('/filter-words', [App\Http\Controllers\ApplicationController::class, 'filterAndCountWords']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/userData', [App\Http\Controllers\HomeController::class, 'userData'])->name('userData.status');
+Route::post('/bankDetailsUpdate', [App\Http\Controllers\HomeController::class, 'bankDetailsUpdate'])->name('userBankDetails.update');
 
 
 Route::get('/application-forms', [App\Http\Controllers\HomeController::class, 'applicationForms'])->name('applicationForms');
