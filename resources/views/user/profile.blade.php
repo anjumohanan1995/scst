@@ -27,8 +27,14 @@
 
 	</div>
 	<div class="main-content-body">
-		
+		<ul>
+            <li><a href="#tab1">Tab 1</a></li>
+            <li><a href="#tab2">Tab 2</a></li>
+            <li><a href="#tab3">Tab 3</a></li>
+        </ul>
+        <div id="tab1">
 		   <table id="example" class="" style="width:100%">
+            
                                         <tr>
 
 
@@ -73,14 +79,35 @@
                                         </tr>
                                          <tr>
                                          </tr>
-                                    </table>
+            </table>
+        </div>
+        <div id="tab2">
+            <h3>Content for Tab 2</h3>
+            <p>This is the content for Tab 2.</p>
+        </div>
+        
+        <div id="tab3">
+            <h3>Content for Tab 3</h3>
+            <p>This is the content for Tab 3.</p>
+        </div>
 	</div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
 <script>
 
 
 	$(document).ready(function() {
      	$('#example').DataTable();
+       
+         $("ul li a").click(function(){
+            var tabId = $(this).attr("href");
+            $(tabId).show().siblings().hide();
+            return false;
+        });
+    
 	});
   </script>
 <!-- main-content-body -->
