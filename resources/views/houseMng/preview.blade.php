@@ -127,7 +127,7 @@
                              </div>
                              <div class="col-6">
                                 <label> 
-                                {{ @$formData['income'] }} 
+                                {{ @$formData['annual_income'] }} 
                                 </label>
                              </div>
                           </div>
@@ -268,7 +268,7 @@
                                 No 
                                 @endif 
                                 @if(@$formData['payment_details'] =='yes')
-                                {{ @$formData['payment_amount'] }} , {{ @$formData['date_received'] }}
+                                {{ @$formData['payment_amount'] }} ,@if(@$formData['date_received']!=null) {{ \Carbon\Carbon::parse(@$formData['date_received'])->format('d-m-Y') }}@endif 
                                 @endif 
                                 </label>
                              </div>
@@ -380,7 +380,7 @@
                            </div>
                         </div>
                      </div> --}}
-                    <form action="{{ url('HouseGrantStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                    <form action="{{ url('HouseGrantStoreDetails') }}" method="POST" enctype="multipart/form-data">
                        @csrf
                        <div class="row">
                           <div class="col-md-3">

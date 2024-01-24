@@ -36,6 +36,11 @@
                 <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
 					<div class="card">
 						<div class="card-body  p-5">
+                            <div id="btnHide" class="row justify-content-end m-3">
+                                <a style="width: 50px" onclick="printDiv()"><img
+                                        src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                            </div>
+                             <div id="print_content">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
 								<div class="mb-4 main-content-label">
                                     <h4 class="medical__form--h1 text-center m-3">
@@ -95,7 +100,7 @@
 
                                                 </td>
                                                 <td>{{ @$studentFund['caste'] }} <br> @if($studentFund['caste_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -105,7 +110,7 @@
 
                                                 </td>
                                                 <td> {{ @$studentFund['income'] }} <br> @if($studentFund['income_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -139,7 +144,7 @@
                                             </span>
                                             <span class="col-1"> :</span>
                                             <span class="col-6"> @if($studentFund['signature'])
-                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['signature']) }}" width="150px" height="70px">
+                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
                                         </div>
@@ -160,7 +165,7 @@
                                             </span>
                                             <span class="col-1"> :</span>
                                             <span class="col-6"> @if($studentFund['parent_signature'])
-                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['parent_signature']) }}" width="150px" height="70px">
+                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['parent_signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
                                         </div>
@@ -203,6 +208,7 @@
                                     </div>
                                   
                                     <br><br>
+                        </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-4">
                                           
@@ -234,6 +240,16 @@
 	$(document).ready(function() {
      	$('#example').DataTable();
 	});
+    function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
   </script>
 <!-- main-content-body -->
 @endsection
