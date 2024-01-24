@@ -76,7 +76,10 @@
 
 			<!-- End Switcher -->
 			<!-- Loader -->
-			
+		
+			@if(auth()->check() && auth()->user()->role == 'User')
+
+			  
 	<div class="modal fade" id="user-modal">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content country-select-modal border-0">
@@ -132,7 +135,7 @@
 						</div>
 
 					</div>
-						<input type="hidden" value="" name="requestId" id="requestId">
+						<input type="hidden" value="{{ auth()->user()->id }}" name="requestId" id="requestId">
 					
 					<div class="text-center">
 						<button type="button" onclick="userUpdate()" class="btn btn-primary mt-4 mb-0 me-2">Submit</button>
@@ -143,6 +146,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
             <div id="global-loader">
 				<img src="{{ asset('img/loader.gif')}}" class="loader-img" alt="Loader" width="250" />
 			</div>
@@ -889,9 +893,23 @@ $()
 		<div class="main-navbar-backdrop"></div>
 	</body>
 </html>
+
 <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
 <script src="{{ asset('js/toastr.js') }}"></script>
+
+<script>
+   @if(auth()->check() && auth()->user()->role == 'User')
+    @if(auth()->user()->bank_name == null && auth()->user()->account_no == null && auth()->user()->passbook == null)
+       
+            $(document).ready(function () {
+                $('#user-modal').modal('show');
+            });
+      
+    @endif
+@endif
+
+</script>
 <script type="text/javascript">
 function userUpdate (){
 	var id = $('#requestId').val();
@@ -955,6 +973,10 @@ function userUpdate (){
 		return isValid;
 }
     $(document).ready(function(){
+		$('#user-modal').modal({
+    backdrop: 'static',
+    keyboard: false
+})
 	//     $.ajax({
           
 	// 	  url: "{{ route('userData.status') }}",
