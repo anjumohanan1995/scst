@@ -39,7 +39,11 @@
 
                                 <div class="card-body pd-y-7">
 
-
+                                    <div id="btnHide" class="row justify-content-end m-3">
+                                        <a style="width: 50px" onclick="printDiv()"><img
+                                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                                    </div>
+                                    <div id="print_content">
 
                                     <h4 class="medical__form--h1 text-center m-5">
                                         <u><b>പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11 ,12 ക്ലാസ്സുകളിൽ
@@ -512,6 +516,7 @@
                                    
 
                                 </div>
+                                </div>
 
                                 
                             </div>
@@ -558,6 +563,18 @@
         }
         return
     
+
+    
+    }
+    function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
     }
 </script>
 @endsection

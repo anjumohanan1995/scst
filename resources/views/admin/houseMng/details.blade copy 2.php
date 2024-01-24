@@ -136,7 +136,7 @@
                               </div>
                               <div class="col-6">
                                  <label> 
-                                 {{ @$houseManagement['income'] }} 
+                                 {{ @$houseManagement['annual_income'] }} 
                                  </label>
                               </div>
                            </div>
@@ -289,7 +289,7 @@
                         <div class="w-100">
                            <div class="row w-100">
                               <div class="col-5">
-                                 <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള മറ്റു സംഗതികൾ
+                                 <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള
                                  </label><br>
                               </div>
                               <div class="col-1 w-100">
@@ -336,7 +336,7 @@
                 </h1>
                         </div>
                     </div>
-                    <div class="row ">
+                    <div class="row">
    
                         <div class="col-6 d-flex">
                             <span class="col-5"> ജില്ല
@@ -361,7 +361,7 @@
                         <div class="col-md-4 mb-4">
                         </div>
                         <div class="col-md-6 mb-6">
-                           <a href="{{ route('userHouseGrantList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                           <a href="{{ route('adminHouseGrantList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
                            </a>  
                         </div>
                      </div>
@@ -369,8 +369,37 @@
                     
                </div>
             </div>
+            @if(auth::user()->role=='TEO' && @$houseManagement->teo_view_status==1)
+            <div class="card">
+               <div class="card-body">
+                   <div class="row mt-5">
+                       <div class="col-12">
+                           <h1
+                   style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 10px;line-height: 32px;font-weight: 600;">
+                   Submitting the application( അപേക്ഷ സമർപ്പിക്കുന്നത് )
+  
+               </h1>
+                       </div>
+                   </div>
+                   <div class="row">   
+                       <div class="col-md-6 mb-6">
+                           <label class="form-label">Viewed Date </label>
+                         
+                       </div>
+                       <div class="col-md-6 mb-6">
+                        {{ @$houseManagement['teo_view_date'] }}
+                       </div>                                 
+                   </div><br>
+               </div>
+           </div> 
+     
+      
+          @endif
          </div>
+         
       </div>
+
+    
     </div>
 </div>
 </div>

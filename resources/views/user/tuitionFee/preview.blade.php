@@ -509,7 +509,7 @@
                                         </div>
                                        --}}
                                     </form>
-                                     <form action="{{ route('TuitionFeeStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                     <form action="{{ route('TuitionFeeStore') }}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                   
                                

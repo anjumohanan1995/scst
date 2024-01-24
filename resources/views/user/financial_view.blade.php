@@ -32,9 +32,13 @@
                     <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                         <div class="card overflow-hidden" style="width: 113%;">
                             <div class="card-body pd-y-7">
+                                    <div id="btnHide" class="row justify-content-end m-3">
+                                        <a style="width: 50px" onclick="printDiv()"><img
+                                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                                    </div>
 
-                         
 
+                            <div id="print_content">
                                 <h1
                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
                                     മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് <br>
@@ -751,8 +755,9 @@
                                
 
 
+                                </div>
                             </div>
-                             <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                             {{-- <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf
                                    
                                    
@@ -767,7 +772,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </form> --}}
                             {{-- <div class="bottom">
                                 <p>മേൽപ്പറഞ്ഞ കാര്യങ്ങളെപ്പറ്റി അനേഷിച്ചതിൽ അവ സത്യമണ്ണുന്നും ഈ വ്യക്തികൾ
                                     <br>ബുദ്ധിമുട്ടനുഭവിക്കുന്നവരാണെന്നും ബോദ്ധ്യപ്പെട്ടിരിക്കുന്നതായി ഞാൻ
@@ -811,5 +816,15 @@
                
             }
         }
+         function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
     </script>
 @endsection

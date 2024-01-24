@@ -52,7 +52,16 @@
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
                                 <div class="row mb-3">
-                            
+                                 
+                                    <div class="col-md-1 col-6 text-center" id="refresh">
+                                        <a href="/houseGrant/create" >
+                                        <div class="task-box primary  mb-0">
+                                                <p class="mb-0 tx-12">Add  </p>
+                                                <h3 class="mb-0"><i class="fa fa-plus"></i></h3>
+                                        </div>
+                                    </a>
+                                    </div>
+                              
                                 <div class="col-md-1 col-6 text-center" id="refresh">
                                     <div class="task-box success  mb-0">
                                             <p class="mb-0 tx-12">Refresh  </p>
@@ -70,6 +79,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>അപേക്ഷകന്റെ പേര് </th>
                                             <th>മേൽവിലാസം 
                                             </th>
@@ -107,6 +117,15 @@
 	</div>
     <!-- /main-content -->
 <meta name="csrf_token" content="{{ csrf_token() }}" />
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
+<script src="{{ asset('js/toastr.js') }}"></script>
+
+@if (session('status'))
+<script>
+    toastr.success('{{ session("status") }}', 'Success!')
+</script>
+@endif
 <script type="text/javascript">
 
 $(document).on("click",".deleteItem",function() {
@@ -180,6 +199,7 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'name' },
                 { data: 'address' },
 				{ data: 'panchayath' },
@@ -191,7 +211,7 @@ $(document).on("click",".deleteItem",function() {
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [6, 'desc'],
             'ordering': true,
          });
 

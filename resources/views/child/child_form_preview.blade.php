@@ -592,7 +592,7 @@
 
                                     </form>
 
-                                      <form action="{{ url('childFinancialStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                      <form action="{{ url('childFinancialStoreDetails') }}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                   
                                
