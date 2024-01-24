@@ -1,4 +1,4 @@
-@extends('layouts.app_login')
+@extends('layouts.app_register')
 @section('content')
 
 <!-- main-content -->
@@ -46,9 +46,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><label class="form-control">Date of Birth: <b>{{ @$formData['dob'] }} </b>
+                                            <td><label class="form-control">Date of Birth: <b>{{ \Carbon\Carbon::parse(@$formData['dob'])->format('d-m-Y') }}</b>
                                             </td>
-                                            <td><label class="form-control">Date of Birth once Again: <b>{{ @$formData['dob1'] }}</b>
+                                            <td><label class="form-control">Date of Birth once Again: <b>{{ \Carbon\Carbon::parse(@$formData['dob1'])->format('d-m-Y') }}</b>
                                                 </label></td>
                                         </tr>
 
@@ -89,7 +89,7 @@
                                 
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3"> 
 
                                         <form action="{{ url('user-registration/save') }}" method="POST">
                                             @csrf
