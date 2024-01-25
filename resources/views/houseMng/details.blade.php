@@ -33,6 +33,11 @@
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                <div class="card overflow-hidden" style="width: 113%;">
                   <div class="card-body p-5">
+                     <div id="btnHide" class="row justify-content-end m-3">
+                        <a style="width: 50px" onclick="printDiv()"><img
+                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                    </div>
+                     <div id="print_content">
                      <h1
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;"><u>
                         പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
@@ -272,7 +277,7 @@
                                  No 
                                  @endif 
                                  @if(@$houseManagement['payment_details'] =='yes')
-                                 {{ @$houseManagement['payment_amount'] }} , {{ @$houseManagement['date_received'] }}
+                                 {{ @$houseManagement['payment_amount'] }} , @if(@$houseManagement['date_received']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['date_received'])->format('d-m-Y') }}@endif
                                  @endif 
                                  </label>
                               </div>
@@ -351,7 +356,7 @@
    
                     </div>
                      <br>
-              
+                  </div>
                      <div class="row">
                         <div class="col-md-4 mb-4">
                         </div>
@@ -373,7 +378,16 @@
    $(document).ready(function() {
        	$('#example').DataTable();
    });
-    
+   function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
 </script>
 <!-- main-content-body -->
 @endsection

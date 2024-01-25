@@ -233,14 +233,15 @@ $formattedDate = $currentDate->toDateString();
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -256,6 +257,7 @@ $formattedDate = $currentDate->toDateString();
               // Extract time
               $time =@$record->time;
             $data_arr[] = array(
+                "sl_no" => $i,
                 "id" => $id,
                 "place" => $place,
                 "name" => $name,
@@ -320,8 +322,8 @@ $formattedDate = $currentDate->toDateString();
             
 
         ]);
-
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+        return redirect()->route('userHouseGrantList')->with('status','Application Submitted Successfully.');
+       // return redirect()->route('home')->with('success','Application Submitted Successfully.');
     }
     public function adminHouseGrantList(Request $request)
     {
@@ -390,14 +392,15 @@ $formattedDate = $currentDate->toDateString();
                 $items->where('submitted_teo',$teo);
             }
 
-             $records = $items->skip($start)->orderBy('created_at','desc')->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('date');
          
 
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -429,6 +432,7 @@ $formattedDate = $currentDate->toDateString();
               }
 
             $data_arr[] = array(
+                "sl_no" =>$i,
                 "id" => $id,
                 "place" => $place,
                 "name" => $name,

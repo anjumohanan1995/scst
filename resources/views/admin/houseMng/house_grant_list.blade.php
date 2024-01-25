@@ -69,6 +69,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>അപേക്ഷകന്റെ പേര് </th>
                                             <th>മേൽവിലാസം 
                                             </th>
@@ -304,6 +305,7 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'name' },
                 { data: 'address' },
 				{ data: 'panchayath' },
@@ -315,7 +317,7 @@ $(document).on("click",".deleteItem",function() {
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [6, 'desc'],
             'ordering': true,
          });
 

@@ -230,7 +230,7 @@
                                     </div>
                                    
                                     <br><br>
-                                <form action="{{ route('itiFundStore') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                <form action="{{ route('itiFundStore') }}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                   
                                

@@ -140,7 +140,7 @@ class AnemiaFinanceController extends Controller
         $formData['ration_card']= $ration_card;
         $formData['medical_certificate']= $medical_certificate;
         $formData['signature']= $signature;
-
+        $request->flash();
         return view('application.anemia_finance_preview', compact('formData'));
 
 

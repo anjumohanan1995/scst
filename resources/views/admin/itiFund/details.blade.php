@@ -40,6 +40,11 @@
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                 <div class=" card">
                     <div class="card-body  p-5">
+                        <div id="btnHide" class="row justify-content-end m-3">
+                            <a style="width: 50px" onclick="printDiv()"><img
+                                    src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                        </div>
+                         <div id="print_content">
                             <div id="success_message" class="ajax_response" style="display: none;"></div>
                             <div class="mb-4 main-content-label">
                                 <h4 class="medical__form--h1 text-center m-3">
@@ -134,7 +139,7 @@
                                     </tbody>
                                 </table>
                                 
-                            </div>
+                            
 
                           <br><br>
                           <div class="row ">
@@ -221,6 +226,7 @@
                             </div>
                                <br><br>
                             <br>
+                        </div>
                             <div class="row">
                                 <div class="col-md-4 mb-4">
                                   
@@ -246,6 +252,16 @@
 	$(document).ready(function() {
      	$('#example').DataTable();
 	});
+     function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
   </script>
 <!-- main-content-body -->
 @endsection
