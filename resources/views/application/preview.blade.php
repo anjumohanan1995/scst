@@ -40,48 +40,50 @@
                                         <tr>
 
 
-                                            <td><label class="form-control">Name: <b>{{ @$formData['name'] }} </b>
+                                            <td><label class="form-control">Name / പേര് : <b>{{ @$formData['name'] }} </b>
                                                 </label></td>
-                                            <td><label class="form-control"> Name once Again: <b>{{ @$formData['name_confirmation'] }}</b></label>
+                                              <td><label class="form-control">Date of Birth / ജനനതീയതി: <b>{{ \Carbon\Carbon::parse(@$formData['dob'])->format('d-m-Y') }}</b>
                                             </td>
+                                            {{-- <td><label class="form-control"> Name once Again: <b>{{ @$formData['name_confirmation'] }}</b></label>
+                                            </td> --}}
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td><label class="form-control">Date of Birth: <b>{{ \Carbon\Carbon::parse(@$formData['dob'])->format('d-m-Y') }}</b>
                                             </td>
                                             <td><label class="form-control">Date of Birth once Again: <b>{{ \Carbon\Carbon::parse(@$formData['dob1'])->format('d-m-Y') }}</b>
                                                 </label></td>
-                                        </tr>
+                                        </tr> --}}
 
                                         <tr>
-                                            <td><label class="form-control">Gender: <b>{{ @$formData['gender'] }} </b>
+                                            <td><label class="form-control">Gender / ലിംഗഭേദം: <b>{{ @$formData['gender'] }} </b>
                                             </td>
-                                            <td><label class="form-control">Mobile Number: <b>{{ @$formData['mobile'] }}</b>
+                                            <td><label class="form-control">Mobile Number / മൊബൈൽ നമ്പർ: <b>{{ @$formData['mobile'] }}</b>
                                                 </label></td>
                                         </tr>
 
                                         <tr>
-                                            <td><label class="form-control">Father's Name: <b>{{ @$formData['father_name'] }} </b>
+                                            <td><label class="form-control">Father's Name / പിതാവിന്റെ പേര് : <b>{{ @$formData['father_name'] }} </b>
                                             </td>
-                                            <td><label class="form-control">Mother's Name: <b>{{ @$formData['mother_name'] }}</b>
+                                            <td><label class="form-control">Mother's Name / അമ്മയുടെ പേര് : <b>{{ @$formData['mother_name'] }}</b>
                                                 </label></td>
                                         </tr>
 
                                         <tr>
-                                            <td><label class="form-control">Caste: <b>{{ @$formData['caste'] }} </b>
+                                            <td><label class="form-control">Caste / ജാതി: <b>{{ @$formData['caste'] }} </b>
                                             </td>
-                                            <td><label class="form-control">Aadhar Number: <b>{{ @$formData['aadhar_number'] }}</b>
+                                            <td><label class="form-control">Aadhar Number /ആധാർ നമ്പർ: <b>{{ @$formData['aadhar_number'] }}</b>
                                                 </label></td>
                                         </tr>
 
                                         <tr>
-                                            <td><label class="form-control">Id Proof: <b>{{ @$formData['id_proof'] }} </b>
+                                            <td><label class="form-control">Id Proof /ഐഡി പ്രൂഫ്  : <b>{{ @$formData['id_proof'] }} </b>
                                             </td>
-                                            <td><label class="form-control">Id Proof Details: <b>{{ @$formData['id_proof_details'] }}</b>
+                                            <td><label class="form-control">Id Proof Number Details / ഐഡി പ്രൂഫ് നമ്പർ വിശദാംശങ്ങൾ : <b>{{ @$formData['id_proof_details'] }}</b>
                                                 </label></td>
                                         </tr>
 
                                         <tr>
-                                            <td><label class="form-control">Email: <b>{{ @$formData['email'] }} </b>
+                                            <td><label class="form-control">Email / ഇമെയിൽ: <b>{{ @$formData['email'] }} </b>
                                             </td>
                                            
                                         </tr>
