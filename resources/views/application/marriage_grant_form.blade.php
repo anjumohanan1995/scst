@@ -51,7 +51,7 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ഇപ്പോഴത്തെ മേൽവിലാസം / Current address  </label>
-                                    <textarea type="text" id="current_address" value="{{ old('current_address') }}"  class="form-control" placeholder="" name="current_address" ></textarea>
+                                    <textarea type="text" id="current_address" value="{{ old('current_address') }}"  class="form-control" placeholder="" name="current_address" >{{ old('current_address') }}</textarea>
                                     @error('current_address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -60,7 +60,7 @@
                                 <div class="col-md-6 mb-6"> 
                                     <label class="form-label">സ്ഥിരമായ മേൽവിലാസം / Permanent address &nbsp;&nbsp;  <input type="checkbox" id="copyAddress" onclick="copyCurrentAddress()" style="align:left;"> (നിലവിലെ ഇപ്പോഴത്തെ മേൽവിലാസം) </label>
                                    
-                                    <textarea type="text" id="permanent_address" value="{{ old('permanent_address') }}" class="form-control" placeholder="" name="permanent_address" ></textarea>
+                                    <textarea type="text" id="permanent_address" value="{{ old('permanent_address') }}" class="form-control" placeholder="" name="permanent_address" >{{ old('permanent_address') }}</textarea>
                                     
                                     @error('permanent_address')
                                         <span class="text-danger">{{$message}}</span>
@@ -73,13 +73,13 @@
                                         <select id="current_district" name="current_district" class="form-control" >
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
-                                                    <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                    <option value="{{$district->id}}" @if($district->id == old('current_district')) selected @endif >{{$district->name}}</option>
                                                 @endforeach
                                         </select>
                                          @error('current_district')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="current_district_name" id="current_district_name" value="">
+                                        <input type="hidden" name="current_district_name" id="current_district_name" value="{{ old('current_district_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
                                         <label class="form-label">താലൂക്ക് / Taluk  </label>
@@ -89,7 +89,7 @@
                                         @error('current_taluk')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="">
+                                        <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="{{ old('current_taluk_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
                                         <label class="form-label">പിൻകോഡ് / Pincode  </label>
@@ -103,13 +103,13 @@
                                         <select id="permanent_district" name="permanent_district" class="form-control" >
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
-                                                    <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                    <option value="{{$district->id}}" @if($district->id == old('permanent_district')) selected @endif >{{$district->name}}</option>
                                                 @endforeach
                                         </select>
                                          @error('permanent_district')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="permanent_district_name" id="permanent_district_name" value="">
+                                        <input type="hidden" name="permanent_district_name" id="permanent_district_name" value="{{ old('permanent_district_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
                                         <label class="form-label">താലൂക്ക് /Taluk  </label>
@@ -119,7 +119,7 @@
                                         @error('permanent_taluk')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="permanent_taluk_name" id="permanent_taluk_name" value="">
+                                        <input type="hidden" name="permanent_taluk_name" id="permanent_taluk_name" value="{{ old('permanent_taluk_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
                                         <label class="form-label">പിൻകോഡ് / Pincode </label>
@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വിവാഹം ഉറപ്പിച്ചിരിക്കുന്ന പെൺകുട്ടിയുടെ മേൽവിലാസം / Address of girl whose marriage is fixed  </label>
-                                    <textarea type="text" value="{{ old('fiancee_address') }}"  class="form-control" placeholder="" name="fiancee_address" ></textarea>
+                                    <textarea type="text"  class="form-control" placeholder="" name="fiancee_address" >{{ old('fiancee_address') }}</textarea>
                                     @error('fiancee_address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -189,13 +189,13 @@
                                     <select id="fiancee_district" name="fiancee_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}" @if($district->id == old('fiancee_district')) selected @endif  >{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('fiancee_district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="fiancee_district_name" id="fiancee_district_name" value="">
+                                    <input type="hidden" name="fiancee_district_name" id="fiancee_district_name" value="{{ old('fiancee_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">താലൂക്ക് / Taluk </label>
@@ -205,7 +205,7 @@
                                     @error('fiancee_taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="fiancee_taluk_name" id="fiancee_taluk_name" value="">
+                                    <input type="hidden" name="fiancee_taluk_name" id="fiancee_taluk_name" value="{{ old('fiancee_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">പിൻകോഡ് / Pincode </label>
@@ -219,11 +219,11 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">പെൺകുട്ടിയുടെ ആദ്യവിവാഹമോ പുനർവിവാഹമോ? /Girl's first marriage or remarriage?  </label>
                                     <div>
-                                        <input type="radio" id="firstMarriage" name="marriage_type" value="first">
+                                        <input type="radio" id="firstMarriage" name="marriage_type" value="first" {{ old('marriage_type') == 'first' ? 'checked' : '' }}>
                                         <label for="firstMarriage">ആദ്യവിവാഹം (First marriage)</label>
                                     </div>
                                     <div>
-                                        <input type="radio" id="remarriage" name="marriage_type" value="remarriage">
+                                        <input type="radio" id="remarriage" name="marriage_type" value="remarriage" {{ old('marriage_type') == 'remarriage' ? 'checked' : '' }} >
                                         <label for="remarriage">പുനർവിവാഹം (Remarriage)</label>
                                     </div>
                                     {{--  <textarea type="text" value="{{ old('marriage_count') }}"  class="form-control" placeholder="" name="marriage_count" ></textarea>  --}}
@@ -235,11 +235,11 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ഗുണഭോക്താവ് വിധവയാണോ? /Is the beneficiary a widow?  </label>
                                     <div>
-                                        <input type="radio" id="yes" name="is_widow" value="Yes">
+                                        <input type="radio" id="yes" name="is_widow" value="Yes" {{ old('is_widow') == 'Yes' ? 'checked' : '' }} >
                                         <label for="yes">അതെ/Yes</label>
                                     </div>
                                     <div>
-                                        <input type="radio" id="no" name="is_widow" value="No">
+                                        <input type="radio" id="no" name="is_widow" value="No" {{ old('is_widow') == 'No' ? 'checked' : '' }} >
                                         <label for="no">അല്ല/No</label>
                                     </div>
                                     @error('is_widow')
@@ -250,7 +250,7 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">അച്ഛൻ/അമ്മ/ രക്ഷാകർത്താവിന്റെ തൊഴിൽ /Occupation of Father/Mother/Guardian  </label>
-                                    <textarea type="text" value="{{ old('parent_occupation') }}"  class="form-control" placeholder="" name="parent_occupation" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="parent_occupation" >{{ old('parent_occupation') }}</textarea>
                                     @error('parent_occupation')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -296,7 +296,7 @@
 
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വിവാഹിതയാകാൻ പോകുന്ന പെൺകുട്ടിയുടെ മാതാവ് / പിതാവ് മരിച്ചുപോയിട്ടുടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ:/ Information regarding the deceased mother/father of the girl to be married: </label>
-                                    <textarea type="text" value="{{ old('fiancee_family_details') }}" class="form-control" placeholder="" name="fiancee_family_details" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="fiancee_family_details" >{{ old('fiancee_family_details') }}</textarea>
                                     
                                     @error('fiancee_family_details')
                                         <span class="text-danger">{{$message}}</span>
@@ -306,14 +306,14 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">മാതാപിതാക്കളിലാർക്കെങ്കിലും തൊഴിലിൽ ഏർപ്പെടാൻ  കഴിയാത്തവിധം അംഗവൈകല്യം സംഭവിച്ചിട്ടുണ്ടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ / Information about if either of the parents is disabled so that they are unable to engage in employment  </label>
-                                    <textarea type="text" value="{{ old('disabled_parent_info') }}"  class="form-control" placeholder="" name="disabled_parent_info" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="disabled_parent_info" >{{ old('disabled_parent_info') }}</textarea>
                                     @error('disabled_parent_info')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വിവാഹം കഴിക്കുന്ന പെണ്കുട്ടിയോ മാതാപിതാക്കളോ അടിമപ്പണിയിൽ നിന്നും വിമുക്തരാക്കപ്പെട്ടവരാണെങ്കിൽ ആയതിന്റെ വിശദവിവരം / Details of whether the girl to be married or her parents are freedmen </label>
-                                    <textarea type="text" value="{{ old('freedmen_parent_details') }}" class="form-control" placeholder="" name="freedmen_parent_details" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="freedmen_parent_details" >{{ old('freedmen_parent_details') }}</textarea>
                                     @error('freedmen_parent_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -322,14 +322,14 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വിവാഹിതയാകുന്ന പെൺക്കുട്ടിയോ മാതാപിതാക്കളോ പട്ടികവർഗക്കാരല്ലാത്തവരുടെ അതിക്രമങ്ങൾക്കിരയായിട്ടുള്ളവരാണെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ / Information about whether the girl child getting married or her parents have been victims of violence by non-Scheduled Tribes</label>
-                                    <textarea type="text" value="{{ old('violence_by_non_scheduled_tribes_info') }}" class="form-control" placeholder="" name="violence_by_non_scheduled_tribes_info" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="violence_by_non_scheduled_tribes_info" >{{ old('violence_by_non_scheduled_tribes_info') }}</textarea>
                                     @error('violence_by_non_scheduled_tribes_info')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെയോ ഭൂമി അന്യാധീനപ്പെട്ട് നിർദ്ധനരായിട്ടുള്ളപക്ഷം ആയതിന്റെ വിവരങ്ങൾ / Details of the girl getting married or if the land has been alienated and destitute  </label>
-                                    <textarea type="text" value="{{ old('land_alienated_details') }}"  class="form-control" placeholder="" name="land_alienated_details" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="land_alienated_details" >{{ old('land_alienated_details') }}</textarea>
                                     @error('land_alienated_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -338,14 +338,14 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ സമുദായഭ്രഷ്ടരാണെങ്കിൽ ആയതിന്റെ പൂർണവിവരം / Full details of the mother/father of the girl to be married if they are outcasts</label>
-                                    <textarea type="text" value="{{ old('outcast_parent_details') }}" class="form-control" placeholder="" name="outcast_parent_details" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="outcast_parent_details" >{{ old('outcast_parent_details') }}</textarea>
                                     @error('outcast_parent_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ പുനർവിവാഹം ചെയ്ത് ജീവിക്കുന്നുവെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ / Details of mother/father of the girl to be married if remarried and living  </label>
-                                    <textarea type="text" value="{{ old('remarried_parent_details') }}"  class="form-control" placeholder="" name="remarried_parent_details" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="remarried_parent_details" >{{ old('remarried_parent_details') }}</textarea>
                                     @error('remarried_parent_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -361,7 +361,7 @@
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">വരന്റെ മേൽവിലാസം / Groom's Address</label>
-                                    <textarea type="text" value="{{ old('groom_address') }}" class="form-control" placeholder="" name="groom_address" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="groom_address" >{{ old('groom_address') }}</textarea>
                                     @error('groom_address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -371,13 +371,13 @@
                                     <select id="groom_district" name="groom_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}" @if($district->id == old('groom_district')) selected @endif >{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('groom_district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="groom_district_name" id="groom_district_name" value="">
+                                    <input type="hidden" name="groom_district_name" id="groom_district_name" value="{{ old('groom_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">താലൂക്ക്  Taluk </label>
@@ -387,7 +387,7 @@
                                     @error('groom_taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="groom_taluk_name" id="groom_taluk_name" value="">
+                                    <input type="hidden" name="groom_taluk_name" id="groom_taluk_name" value="{{ old('groom_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">പിൻകോഡ് / Pincode  </label>
@@ -408,7 +408,7 @@
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">വരന്റെ അച്ഛന്റെ / അമ്മയുടെ /രക്ഷാകർത്താവിന്റെ മേൽവിലാസം / Address of Groom's Father/Mother/Guardian</label>
-                                    <textarea type="text" value="{{ old('groom_parent_address') }}" class="form-control" placeholder="" name="groom_parent_address" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="groom_parent_address" >{{ old('groom_parent_address') }}</textarea>
                                     @error('groom_parent_address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -418,13 +418,13 @@
                                     <select id="groom_parent_district" name="groom_parent_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}" @if($district->id == old('groom_parent_district')) selected @endif  >{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('current_district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="groom_parent_district_name" id="groom_parent_district_name" value="">
+                                    <input type="hidden" name="groom_parent_district_name" id="groom_parent_district_name" value="{{ old('groom_parent_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">താലൂക്ക് / Taluk </label>
@@ -434,7 +434,7 @@
                                     @error('groom_parent_taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="groom_parent_taluk_name" id="groom_parent_taluk_name" value="">
+                                    <input type="hidden" name="groom_parent_taluk_name" id="groom_parent_taluk_name" value="{{ old('groom_parent_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">പിൻകോഡ് / Pincode  </label>
@@ -448,7 +448,7 @@
                             <div class="row">   
                               
                                     <label class="form-label">ഈ ആവശ്യത്തിന് സർക്കാരിൽനിന്നോ സംഘടനകളിൽനിന്നോ ഏജൻസികളിൽനിന്നോ ധനസഹായം ലഭിച്ചിട്ടുണ്ടെങ്കിൽ ആയതിന്റെ പൂർണവിവരം / Full details of any financial assistance, if any, received from the Government, organizations or agencies for this purpose</label>
-                                    <textarea type="text" value="{{ old('financial_assistance_details') }}" class="form-control" placeholder="" name="financial_assistance_details" ></textarea>
+                                    <textarea type="text" class="form-control" placeholder="" name="financial_assistance_details" >{{ old('financial_assistance_details') }}</textarea>
                                     @error('financial_assistance_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -484,13 +484,13 @@
                                 <select id="submitted_district" name="submitted_district" class="form-control" required />
                                     <option value="">Select</option>
                                         @foreach($districts as $district)
-                                            <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                            <option value="{{$district->id}}" @if($district->id == old('submitted_district')) selected @endif  >{{$district->name}}</option>
                                         @endforeach
                                 </select>
                                  @error('submitted_district')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
-                                <input type="hidden" name="dist_name" id="dist_name" value="">
+                                <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
                             </div>
                             <div class="col-md-6 mb-6">
                                 <label class="form-label">ടി.ഇ.ഒ / TEO  </label>
@@ -500,7 +500,7 @@
                                 @error('submitted_teo')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
-                                <input type="hidden" name="teo_name" id="teo_name" value="">
+                                <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
                             </div>                                 
                         </div><br>
                     </div>
@@ -799,7 +799,10 @@
     $(document).ready(function() {
         fetchTeo();
         fetchTaluk();
-
+        fetchPermanentTaluk();
+        fetchFianceeTaluk();
+        fetchGroomTaluk();
+        fetchGroomParentTaluk();
         $('input[name="current_pincode"]').on('input', function() {
             this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
         });
@@ -820,7 +823,7 @@
    });
 
    function fetchTaluk() {    
-    //alert("qqqqqqq");    
+      
     var val1 = $("#current_district").val();
 
     $.ajax({
@@ -840,11 +843,42 @@
                 $opt.val(value._id).text(value.taluk_name);
 
                 // Set the selected attribute based on the old submitted value
-                if ('{{ old('taluk') }}' == value._id) {
+                if ('{{ old('current_taluk') }}' == value._id) {
                     $opt.attr('selected', 'selected');
                 }
 
                 $opt.appendTo('#current_taluk');
+            });
+        }
+    });
+}
+
+function fetchPermanentTaluk() {    
+      
+    var val1 = $("#permanent_district").val();
+
+    $.ajax({
+         url: "{{ url('district/fetch-taluk') }}",
+        type: "POST",
+        data: {
+            district_id: val1,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            $("#permanent_taluk").find('option').remove();
+            $("#permanent_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(result.taluks, function(key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+
+                // Set the selected attribute based on the old submitted value
+                if ('{{ old('permanent_taluk') }}' == value._id) {
+                    $opt.attr('selected', 'selected');
+                }
+
+                $opt.appendTo('#permanent_taluk');
             });
         }
     });
@@ -875,6 +909,96 @@ function fetchTeo() {
                 }
 
                 $opt.appendTo('#submitted_teo');
+            });
+        }
+    });
+}
+function fetchFianceeTaluk() {    
+      
+    var val1 = $("#fiancee_district").val();
+
+    $.ajax({
+         url: "{{ url('district/fetch-taluk') }}",
+        type: "POST",
+        data: {
+            district_id: val1,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            $("#fiancee_taluk").find('option').remove();
+            $("#fiancee_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(result.taluks, function(key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+
+                // Set the selected attribute based on the old submitted value
+                if ('{{ old('fiancee_taluk') }}' == value._id) {
+                    $opt.attr('selected', 'selected');
+                }
+
+                $opt.appendTo('#fiancee_taluk');
+            });
+        }
+    });
+}
+function fetchGroomTaluk() {    
+      
+    var val1 = $("#groom_district").val();
+
+    $.ajax({
+         url: "{{ url('district/fetch-taluk') }}",
+        type: "POST",
+        data: {
+            district_id: val1,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            $("#groom_taluk").find('option').remove();
+            $("#groom_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(result.taluks, function(key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+
+                // Set the selected attribute based on the old submitted value
+                if ('{{ old('groom_taluk') }}' == value._id) {
+                    $opt.attr('selected', 'selected');
+                }
+
+                $opt.appendTo('#groom_taluk');
+            });
+        }
+    });
+}
+function fetchGroomParentTaluk() {    
+      
+    var val1 = $("#groom_parent_district").val();
+
+    $.ajax({
+         url: "{{ url('district/fetch-taluk') }}",
+        type: "POST",
+        data: {
+            district_id: val1,
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            $("#groom_parent_taluk").find('option').remove();
+            $("#groom_parent_taluk").append('<option value="" selected>Choose Taluk</option>');
+
+            $.each(result.taluks, function(key, value) {
+                var $opt = $('<option>');
+                $opt.val(value._id).text(value.taluk_name);
+
+                // Set the selected attribute based on the old submitted value
+                if ('{{ old('groom_parent_taluk') }}' == value._id) {
+                    $opt.attr('selected', 'selected');
+                }
+
+                $opt.appendTo('#groom_parent_taluk');
             });
         }
     });

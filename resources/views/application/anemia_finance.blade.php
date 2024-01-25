@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">ജനനതീയതി / Date of Birth  </label>
-                                    <input type="date" class="form-control"  name="dob" id="dob" value=""  />
+                                    <input type="date" class="form-control"  name="dob" id="dob" value="{{ old('dob') }}"  />
                                     @error('dob')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">ഫോൺ നമ്പർ / Phone Number   </label>
-                                    <input type="text" class="form-control"  name="phone" id="phone" value="" placeholder="" />                                    @error('phone')
+                                    <input type="number" class="form-control"  name="phone" id="phone" value="{{ old('phone') }}" placeholder="" />                                    @error('phone')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>                               
@@ -83,7 +83,7 @@
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">മേൽവിലാസം / Address </label>
-                                    <textarea type="text" value="{{ old('address') }}" class="form-control" name="address" ></textarea>
+                                    <textarea type="text" class="form-control" name="address" >{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -93,13 +93,13 @@
                                     <select id="district" name="district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}" @if($district->id == old('district')) selected @endif  >{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="district_name" id="district_name" value="">
+                                    <input type="hidden" name="district_name" id="district_name" value="{{ old('district_name') }}">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">താലൂക്ക് / Taluk </label>
@@ -109,7 +109,7 @@
                                     @error('taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="taluk_name" id="taluk_name" value="">
+                                    <input type="hidden" name="taluk_name" id="taluk_name" value="{{ old('taluk_name') }}">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">പിൻകോഡ് / Pincode </label>
@@ -122,7 +122,7 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ആധാർ നമ്പർ / Aadhar Number  </label>
-                                    <input type="text" class="form-control"  name="adhaar_number" id="adhaar_number" value="" placeholder="" />
+                                    <input type="number" class="form-control"  name="adhaar_number" id="adhaar_number" value="{{ old('adhaar_number') }}" placeholder="" />
                                     @error('adhaar_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -141,7 +141,7 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ബാങ്ക് അക്കൗണ്ട് വിശദംശങ്ങൾ / Bank account details   </label>
-                                    <textarea type="text" class="form-control"  name="bank_account_details" id="bank_account_details" value="" placeholder="" ></textarea>
+                                    <textarea type="text" class="form-control"  name="bank_account_details" id="bank_account_details" value="" placeholder="" >{{ old('bank_account_details') }}</textarea>
                                     @error('bank_account_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -159,11 +159,11 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">റേഷൻ കാർഡ് / Ration card </label>
                                     <div>
-                                        <input type="radio" id="apl" name="ration_card_type" value="APL">
+                                        <input type="radio" id="apl" name="ration_card_type" value="APL" {{ old('ration_card_type') == 'APL' ? 'checked' : '' }}>
                                         <label for="apl">APL</label>
                                     </div>
                                     <div>
-                                        <input type="radio" id="bpl" name="ration_card_type" value="BPL">
+                                        <input type="radio" id="bpl" name="ration_card_type" value="BPL" {{ old('ration_card_type') == 'BPL' ? 'checked' : '' }}>
                                         <label for="bpl">BPL</label>
                                     </div>
                                     @error('ration_card_type')
@@ -185,11 +185,11 @@
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">മെഡിക്കൽ സർട്ടിഫിക്കറ്റ് ഹാജരാക്കിയിട്ടുണ്ടോ? / Is the medical certificate submitted? </label>
                                     <div>
-                                        <input type="radio" id="yes" name="is_medical_certificate_submitted" value="Yes">
+                                        <input type="radio" id="yes" name="is_medical_certificate_submitted" value="Yes" {{ old('is_medical_certificate_submitted') == 'Yes' ? 'checked' : '' }}>
                                         <label for="yes">Yes</label>
                                     </div>
                                     <div>
-                                        <input type="radio" id="no" name="is_medical_certificate_submitted" value="No">
+                                        <input type="radio" id="no" name="is_medical_certificate_submitted" value="No" {{ old('is_medical_certificate_submitted') == 'No' ? 'checked' : '' }}>
                                         <label for="no">No</label>
                                     </div>
                                     @error('is_medical_certificate_submitted')
@@ -212,7 +212,7 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">സ്ഥലം / Place </label>
-                                    <input type="text" class="form-control"  name="place" id="place" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="place" id="place" value="{{ old('place') }}" placeholder="" />
                                     @error('place')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -240,13 +240,13 @@
                                         <select id="submitted_district" name="submitted_district" class="form-control" required />
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
-                                                    <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                    <option value="{{$district->id}}" @if($district->id == old('submitted_district')) selected @endif >{{$district->name}}</option>
                                                 @endforeach
                                         </select>
                                          @error('dist')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="dist_name" id="dist_name" value="" >
+                                        <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}" >
                                     </div>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ടി.ഇ.ഒ / TEO</label>
@@ -256,7 +256,7 @@
                                         @error('teo')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="teo_name" id="teo_name" value="">
+                                        <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
                                     </div>                                 
                                 </div><br>
                             </div>
@@ -469,8 +469,73 @@
     });
 
 	$(document).ready(function() {
-     	$('#example').DataTable();
+        fetchTeo();
+        fetchTaluk();
+
+        $('input[name="current_pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
 	});
+    function fetchTaluk() {    
+      
+        var val1 = $("#district").val();
+    
+        $.ajax({
+             url: "{{ url('district/fetch-taluk') }}",
+            type: "POST",
+            data: {
+                district_id: val1,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(result) {
+                $("#taluk").find('option').remove();
+                $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+    
+                $.each(result.taluks, function(key, value) {
+                    var $opt = $('<option>');
+                    $opt.val(value._id).text(value.taluk_name);
+    
+                    // Set the selected attribute based on the old submitted value
+                    if ('{{ old('taluk') }}' == value._id) {
+                        $opt.attr('selected', 'selected');
+                    }
+    
+                    $opt.appendTo('#taluk');
+                });
+            }
+        });
+    }
+    function fetchTeo() {    
+        //alert("qqqqqqq");    
+        var val1 = $("#submitted_district").val();
+    
+        $.ajax({
+            url: "{{ url('district/fetch-teo') }}",
+            type: "POST",
+            data: {
+                district_id: val1,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(result) {
+                $("#submitted_teo").find('option').remove();
+                $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+    
+                $.each(result.teos, function(key, value) {
+                    var $opt = $('<option>');
+                    $opt.val(value._id).text(value.teo_name);
+    
+                    // Set the selected attribute based on the old submitted value
+                    if ('{{ old('submitted_teo') }}' == value._id) {
+                        $opt.attr('selected', 'selected');
+                    }
+    
+                    $opt.appendTo('#submitted_teo');
+                });
+            }
+        });
+    }
   </script>
 <!-- main-content-body -->
 @endsection

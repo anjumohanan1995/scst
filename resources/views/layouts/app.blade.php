@@ -70,7 +70,8 @@
 
 
 	</head>
-	<body class="main-body app sidebar-mini ltr" >//oncontextmenu="return false;"
+	<body class="main-body app sidebar-mini ltr" >
+	
 		<div class="horizontalMenucontainer">
 			<!-- Switcher -->
 

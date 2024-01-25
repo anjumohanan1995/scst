@@ -750,7 +750,7 @@
 
 
                             </div>
-                            <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                            <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                    
                                    

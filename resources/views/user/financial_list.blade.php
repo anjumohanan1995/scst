@@ -217,7 +217,7 @@ $(document).on("click",".deleteItem",function() {
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [4, 'desc'],
             'ordering': true,
          });
 
