@@ -15,7 +15,7 @@
 		</div>
 		<!-- /breadcrumb -->
 		<!-- main-content-body -->
-		<div class="main-content-body">
+		<div class="main-content-body main-content-body--margin">
 			
 
 			@if (session('success'))
