@@ -7,7 +7,7 @@
             <!-- breadcrumb -->
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
                 <div class="col-xl-6">
-                    <h4 class="content-title mb-2">ഏകവരുമാനദായകന്റെ മരണം തെളിയിക്കുന അപേക്ഷഫോറം </h4>
+                    <h4 class="text-white mb-2">ഏകവരുമാനദായകന്റെ മരണം തെളിയിക്കുന അപേക്ഷഫോറം </h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> -
@@ -24,8 +24,6 @@
                                         <input class="form-control" placeholder="Name" type="text" name="name"
                                             id="name">
                                     </div>
-
-
                                     <div class="col-lg mg-t-10 mg-lg-t-0">
                                         <button class="btn ripple btn-success btn-block" type="submit"
                                             id="submit">Search</button>

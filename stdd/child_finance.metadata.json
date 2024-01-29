@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"63761e8aa94c4935992c0bf259f90b18","collectionName":"child_finance","type":"collection"}
