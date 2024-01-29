@@ -26,7 +26,7 @@
 
 
 
-                        <div id="showPrint" class="card overflow-hidden" style="width: 113%;">
+                        <div id="showPrint" class="card overflow-hidden" >
 
                             <div class="card-body pd-y-7">
 
@@ -34,7 +34,7 @@
                                     <a style="width: 50px" onclick="printDiv()"><img
                                             src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
                                 </div>
-
+                                <div id="print_content">
                                 <h1
                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
                                     ജനനി-ജനനി -ജന്മരക്ഷ <br> പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി <br> അപേക്ഷഫോറം
@@ -302,7 +302,7 @@
 
 
                                 </form>
-
+                            </div>
                             </div>
 
 
@@ -335,8 +335,15 @@
         });
 
         function printDiv() {
-            window.print();
-        }
+        var printContents = document.getElementById('print_content').innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
     </script>
     <!-- main-content-body -->
 @endsection

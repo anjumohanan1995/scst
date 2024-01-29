@@ -399,7 +399,7 @@
                                     enctype="multipart/form-data" onsubmit="return validateForm()">
                                     @csrf --}}
                                     <form action="{{ url('examApplicationStore') }}" method="POST"
-                                        enctype="multipart/form-data" onsubmit="return validateForm()">
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="row justify-content-center m-5">
                                             <div class="col-md-3">
