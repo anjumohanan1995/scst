@@ -41,11 +41,13 @@ class ItiFund extends Eloquent
         'current_institution',
         'submitted_district_name',
         'submitted_teo_name',
-        'approved_by',
-        'approved_date',
-        'rejected_by',
-        'rejected_date',
-        'rejected_reason',
+        'teo_view_status',
+        'teo_view_id',
+        'teo_view_date',
+        'teo_status',
+        'teo_status_id',
+        'teo_status_date',
+        'teo_status_reason',
         
 
     ];
