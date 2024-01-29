@@ -103,6 +103,9 @@ Route::Post('/iti-fund-scholarship', [App\Http\Controllers\ItiScholarshipControl
 Route::get('/userItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'userItiFundList'])->name('userItiFundList');
 Route::get('/getUserItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'getUserItiFundList'])->name('getUserItiFundList');
 Route::get('/getUserItiFundList/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'show'])->name('userItiFundList.show');
+Route::post('/iti-scholarship/teoApprove', [App\Http\Controllers\ItiScholarshipController::class, 'teoApprove'])->name('itiScholarship-teo.approve');
+Route::post('/iti-scholarship/teoReject', [App\Http\Controllers\ItiScholarshipController::class, 'teoReject'])->name('itiScholarship-teo.reject');
+
 
 Route::get('/adminItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'adminItiFundList'])->name('adminItiFundList');
 Route::get('/getAdminItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'getAdminItiFundList'])->name('getAdminItiFundList');
@@ -271,6 +274,8 @@ Route::post('/Medical/Engineering/StudentFundStore', [MedEngStudentFundControlle
 Route::get('/Medical/Engineering/StudentFundList', [MedEngStudentFundController::class, 'adminStudentFundList'])->name('adminStudentFundList');
 Route::get('/getAdminStudentFundList', [MedEngStudentFundController::class, 'getAdminStudentFundList'])->name('getAdminStudentFundList');
 Route::get('/Medical/Engineering/StudentFundDetails/{id}', [MedEngStudentFundController::class, 'adminStudentFundDetails'])->name('adminStudentFundDetails');
+Route::post('/Medical/Engineering/teoApprove', [MedEngStudentFundController::class, 'teoApprove'])->name('studentFund-teo.approve');
+Route::post('/Medical/Engineering/teoReject', [MedEngStudentFundController::class, 'teoReject'])->name('studentFund-teo.reject');
 
 //Tuition fee
 Route::resource('/TuitionFee', TuitionFeeController::class);
