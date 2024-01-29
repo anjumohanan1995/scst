@@ -31,7 +31,7 @@
 			<!-- row -->
 			<div class="row row-sm mt-4">
                 <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 ">
-                    <div class="card">
+                    <div class="card"> 
 						<div class="card-body">
                             <div class="mb-4 main-content-label"> Instructions</div>
 
