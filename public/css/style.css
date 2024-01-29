@@ -10830,6 +10830,7 @@ a.text-dark:focus {
 
 .breadcrumb-header .content-title {
     color: #fff;
+    margin-left: -100px;
 }
 
 .breadcrumb-item a {
@@ -32485,6 +32486,12 @@ a.tag-addon:hover {
 
 .main-content-body {
     flex: 1;
+
+}
+
+.main-content-body--margin{
+    margin-left: -100px;
+    margin-right: 160px;
 }
 
 .main-content-right {

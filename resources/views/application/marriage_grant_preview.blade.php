@@ -113,9 +113,8 @@
                                             </td>
                                             <td>
                                                 @if ($formData['caste_certificate'])
-                                                    <iframe
-                                                        src="{{ asset('applications/marriage_grant_certificates/' . @$formData['caste_certificate']) }}"
-                                                        width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
+                                                    
                                                 @endif
                                             </td>
                                         </tr>
@@ -175,9 +174,8 @@
                                             </td>
                                             <td>{{ ucwords(@$formData['annual_income']) }}<br>
                                                 @if ($formData['income_certificate'])
-                                                    <iframe
-                                                        src="{{ asset('applications/marriage_grant_certificates/' . @$formData['income_certificate']) }}"
-                                                        width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['income_certificate']) }}" target="_blank">View</a>
+
                                                 @endif
                                             </td>
                                         </tr>
@@ -335,9 +333,8 @@
                                         </label>
                                         <label style="margin-left: 425px; margin-top:-30px;">
                                             @if ($formData['signature'])
-                                                <iframe
-                                                    src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}"
-                                                    width="350" height="50"></iframe>
+                                            <img src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}" width="120px" height="60px">
+                                              
                                             @endif
                                             അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം
 
@@ -394,7 +391,7 @@
                                         </div><br></br>
 
                                         <form action="{{ url('marriageGrantStoreDetails') }}" method="POST"
-                                            enctype="multipart/form-data" onsubmit="return validateForm()">
+                                            enctype="multipart/form-data" >
                                             @csrf
 
 
@@ -423,30 +420,16 @@
                     </div>
                 </div>
             </div>
-            <script>
-                function validateForm() {
-                    // Check if the required fields are filled
-                    var husbandSign = document.getElementsByName('husband_sign')[0].value;
-                    var wifeSign = document.getElementsByName('wife_sign')[0].value;
-                    var husbandName = document.getElementsByName('husband_name')[0].value;
-                    var wifeName = document.getElementsByName('wife_name')[0].value;
-
-                    if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
-                        alert('Please fill in all required fields.');
-                        return false; // Prevent form submission
-                    }
-
-                    return true; // Allow form submission
-                }
-            </script>
+       
 
             <script>
                 // edit button function
                 function goback() {
-                    if (confirm('Are you sure ? Do you want to edit this form!. ')) {
-                        window.history.back();
+                    if (confirm('Are you sure? Do you want to edit this form?')) {
+                        window.location.href = "{{ url()->previous() }}";
+                        //window.history.back();
+                       
                     }
-                    return
                 }
             </script>
         @endsection

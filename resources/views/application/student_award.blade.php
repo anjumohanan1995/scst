@@ -40,14 +40,14 @@
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">ജനനത്തീയതി / Date of Birth   </label>
-                                    <input type="date" class="form-control"  name="dob" id="dob" value=""  />
+                                    <input type="date" class="form-control"  name="dob" id="dob" value="{{ old('dob') }}"  />
                                     @error('dob')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">മേൽവിലാസം / Address  </label>
-                                    <textarea type="text" value="{{ old('address') }}" class="form-control" name="address" ></textarea>
+                                    <textarea type="text" class="form-control" name="address" >{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -61,13 +61,13 @@
                                     <select id="district" name="district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
-                                                <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                <option value="{{$district->id}}" @if($district->id == old('district')) selected @endif >{{$district->name}}</option>
                                             @endforeach
                                     </select>
                                      @error('district')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="district_name" id="district_name" value="">
+                                    <input type="hidden" name="district_name" id="district_name" value="{{ old('district_name') }}">
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">താലൂക്ക് / Taluk  </label>
@@ -77,11 +77,11 @@
                                     @error('taluk')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" name="taluk_name" id="taluk_name" value="">
+                                    <input type="hidden" name="taluk_name" id="taluk_name" value="{{ old('taluk_name') }}">
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">പിൻകോഡ് / Pincode  </label>
-                                    <input type="text" value="{{ old('pincode') }}"  class="form-control"  name="pincode" />
+                                    <input type="text" value="{{ old('pincode') }}"  class="form-control"  name="pincode" id="pincode" />
                                     @error('pincode')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -93,21 +93,21 @@
                                     <div class="row">   
                                         <div class="col-md-6 mb-6">
                                             <div>
-                                                <input type="radio" id="sslc" name="examination_passed" value="SSLC">
+                                                <input type="radio" id="sslc" name="examination_passed" value="SSLC" {{ old('examination_passed') == 'SSLC' ? 'checked' : '' }} >
                                                 <label for="sslc">SSLC</label>
                                             </div>
                                             <div>
-                                                <input type="radio" id="plus_two" name="examination_passed" value="PLUS TWO">
+                                                <input type="radio" id="plus_two" name="examination_passed" value="PLUS TWO" {{ old('examination_passed') == 'PLUS TWO' ? 'checked' : '' }} >
                                                 <label for="plus_two">PLUS TWO</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <div>
-                                                <input type="radio" id="degree" name="examination_passed" value="DEGREE">
+                                                <input type="radio" id="degree" name="examination_passed" value="DEGREE" {{ old('examination_passed') == 'DEGREE' ? 'checked' : '' }} >
                                                 <label for="degree">DEGREE</label>
                                             </div>
                                             <div>
-                                                <input type="radio" id="pg" name="examination_passed" value="PG">
+                                                <input type="radio" id="pg" name="examination_passed" value="PG" {{ old('examination_passed') == 'PG' ? 'checked' : '' }} >
                                                 <label for="pg">PG</label>
                                             </div>
                                         </div>
@@ -119,14 +119,14 @@
                                
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">സംരക്ഷകന്റെ പേര് / Name of the Guardian</label>
-                                    <input type="text" class="form-control"  name="guardian_name" id="guardian_name" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="guardian_name" id="guardian_name" value="{{ old('guardian_name') }}" placeholder="" />
                                     @error('guardian_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">സമുദായം / Community</label>
-                                    <input type="text" class="form-control"  name="community" id="community" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="community" id="community" value="{{ old('community') }}" placeholder="" />
                                     @error('community')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -135,28 +135,28 @@
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">പഞ്ചായത്തിന്റെ പേര് / Name of the Panchayath</label>
-                                    <input type="text" class="form-control"  name="panchayath_name" id="panchayath_name" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="panchayath_name" id="panchayath_name" value="{{ old('panchayath_name') }}" placeholder="" />
                                     @error('panchayath_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">സ്ഥാപനത്തിന്റെ പേര് / Name of the Institution</label>
-                                    <input type="text" class="form-control"  name="institution_name" id="institution_name" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="institution_name" id="institution_name" value="{{ old('institution_name') }}" placeholder="" />
                                     @error('institution_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">പാസ് ആയ മാസം / Month of Pass</label>
-                                    <input type="text" class="form-control"  name="pass_month" id="pass_month" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="pass_month" id="pass_month" value="{{ old('pass_month') }}" placeholder="" />
                                     @error('pass_month')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">പാസ് ആയ വര്ഷം / Year of Pass</label>
-                                    <input type="number" class="form-control"  name="pass_year" id="pass_year" value="" placeholder="" />
+                                    <input type="number" class="form-control"  name="pass_year" id="pass_year" value="{{ old('pass_year') }}" placeholder="" />
                                     @error('pass_year')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -165,21 +165,21 @@
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">ഫോൺ നമ്പർ / Phone No.</label>
-                                    <input type="number" class="form-control"  name="phone" id="phone" value="" placeholder="" />
+                                    <input type="number" class="form-control"  name="phone" id="phone" value="{{ old('phone') }}" placeholder="" />
                                     @error('phone')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">അക്കൗണ്ട് നമ്പർ / Account No.</label>
-                                    <input type="number" class="form-control"  name="account_number" id="account_number" value="" placeholder="" />
+                                    <input type="number" class="form-control"  name="account_number" id="account_number" value="{{ old('account_number') }}" placeholder="" />
                                     @error('account_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">IFSC കോഡ് / IFSC Code </label>
-                                    <input type="text" class="form-control"  name="ifsc_code" id="ifsc_code" value="" placeholder="" />
+                                    <input type="text" class="form-control"  name="ifsc_code" id="ifsc_code" value="{{ old('ifsc_code') }}" placeholder="" />
                                     @error('ifsc_code')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -188,19 +188,20 @@
                             <div class="row">                                
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ആധാർ നമ്പർ / Aadhar No.	 </label>
-                                    <input type="number" class="form-control"  name="aadhar_number" id="aadhar_number" value="" placeholder="" />
+                                    <input type="number" class="form-control"  name="aadhar_number" id="aadhar_number" value="{{ old('aadhar_number') }}" placeholder="" />
                                     @error('aadhar_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>                           
                             <div class="col-md-6 mb-6">
                                 <label class="form-label">ഒപ്പ് / Signature</label>
-                                <input type="file" class="form-control"  name="signature" id="signature" value="" placeholder="" />
-                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
+                                <input type="file" onchange="validateSignature()" class="form-control"  name="signature" id="signature" value="" placeholder="" />
+                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
 
                                 @error('signature')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
+                                <div id="errorSignature" style="color:red;"></div>
                             </div>
                         </div><br>
                         </div>
@@ -215,13 +216,13 @@
                                         <select id="submitted_district" name="submitted_district" class="form-control" required />
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
-                                                    <option value="{{$district->id}}"  >{{$district->name}}</option>
+                                                    <option value="{{$district->id}}" @if($district->id == old('submitted_district')) selected @endif  >{{$district->name}}</option>
                                                 @endforeach
                                         </select>
                                          @error('dist')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="dist_name" id="dist_name" value="">
+                                        <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
                                     </div>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ടി.ഇ.ഒ / TEO  </label>
@@ -231,7 +232,7 @@
                                         @error('teo')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="teo_name" id="teo_name" value="">
+                                        <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
                                     </div>                                 
                                 </div><br>
                             </div>
@@ -256,6 +257,26 @@
 </div>
 </div>
 <script>
+    function validateSignature() {
+        var input = document.getElementById('signature');
+        var errorMessage = document.getElementById('errorSignature');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size; // in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB
+
+            if (fileSize > maxSize) {
+                errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+            } else {
+                errorMessage.innerText = '';
+                 $("#submit").prop("disabled", false);
+            }
+        }
+
+        
+    }
    
 	$('#district').change(function(){
         var districtName = this.options[this.selectedIndex].text;
@@ -324,8 +345,75 @@
     });
 
 	$(document).ready(function() {
-     	$('#example').DataTable();
+        fetchTeo();
+        fetchTaluk();
+
+        $('input[name="pincode"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
 	});
+
+    function fetchTaluk() {    
+      
+        var val1 = $("#district").val();
+    
+        $.ajax({
+             url: "{{ url('district/fetch-taluk') }}",
+            type: "POST",
+            data: {
+                district_id: val1,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(result) {
+                $("#taluk").find('option').remove();
+                $("#taluk").append('<option value="" selected>Choose Taluk</option>');
+    
+                $.each(result.taluks, function(key, value) {
+                    var $opt = $('<option>');
+                    $opt.val(value._id).text(value.taluk_name);
+    
+                    // Set the selected attribute based on the old submitted value
+                    if ('{{ old('taluk') }}' == value._id) {
+                        $opt.attr('selected', 'selected');
+                    }
+    
+                    $opt.appendTo('#taluk');
+                });
+            }
+        });
+    }
+
+    function fetchTeo() {    
+        //alert("qqqqqqq");    
+        var val1 = $("#submitted_district").val();
+    
+        $.ajax({
+            url: "{{ url('district/fetch-teo') }}",
+            type: "POST",
+            data: {
+                district_id: val1,
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(result) {
+                $("#submitted_teo").find('option').remove();
+                $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+    
+                $.each(result.teos, function(key, value) {
+                    var $opt = $('<option>');
+                    $opt.val(value._id).text(value.teo_name);
+    
+                    // Set the selected attribute based on the old submitted value
+                    if ('{{ old('submitted_teo') }}' == value._id) {
+                        $opt.attr('selected', 'selected');
+                    }
+    
+                    $opt.appendTo('#submitted_teo');
+                });
+            }
+        });
+    }
   </script>
 <!-- main-content-body -->
 @endsection

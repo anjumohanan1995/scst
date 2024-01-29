@@ -81,7 +81,7 @@ class MedEngStudentFundController extends Controller
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('date');
          
 
 
@@ -433,6 +433,24 @@ $formattedDate = $currentDate->toDateString();
 
               $date = $carbonDate->format('d-m-Y');
               $time = $carbonDate->format('g:i a');
+              $edit ='';
+              if($role == "TEO"){
+                if($record->teo_status== 1){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                }
+                else if($record->teo_status ==2){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+              
+                }
+                else if($record->teo_status ==null){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                }
+               
+              }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+             
+              }
 
             $data_arr[] = array(
                 "id" => $id,
@@ -445,7 +463,7 @@ $formattedDate = $currentDate->toDateString();
                 "date" => $date .' ' .$record->time, 
                 
                             
-                "edit" => '<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => $edit
 
             );
          }
@@ -460,7 +478,23 @@ $formattedDate = $currentDate->toDateString();
          return response()->json($response);
     }
     public function adminStudentFundDetails ($id){
-        $studentFund=MedEngStudentFund::find($id);
+
+
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+     
+      $studentFund=MedEngStudentFund::find($id);
+        if($studentFund->teo_view_status==null){
+            $studentFund->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+       
         return view('admin.studentFund.details', compact('studentFund'));
 
     }

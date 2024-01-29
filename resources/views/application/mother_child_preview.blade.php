@@ -304,7 +304,7 @@
 
 
                                 <form action="{{ url('motherChildStoreDetails') }}" method="POST"
-                                    enctype="multipart/form-data" onsubmit="return validateForm()">
+                                    enctype="multipart/form-data" >
                                     @csrf
 
 
@@ -331,22 +331,7 @@
             </div>
         </div>
     </div>
-    <script>
-        function validateForm() {
-            // Check if the required fields are filled
-            var husbandSign = document.getElementsByName('husband_sign')[0].value;
-            var wifeSign = document.getElementsByName('wife_sign')[0].value;
-            var husbandName = document.getElementsByName('husband_name')[0].value;
-            var wifeName = document.getElementsByName('wife_name')[0].value;
-
-            if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
-                alert('Please fill in all required fields.');
-                return false; // Prevent form submission
-            }
-
-            return true; // Allow form submission
-        }
-    </script>
+  
 
     <script>
         // edit button function

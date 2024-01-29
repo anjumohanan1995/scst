@@ -550,6 +550,7 @@ $(document).ready(function() {
     });
 
 	$(document).ready(function() {
+     
         $('#prove_eligibility_file').change(function () {
         var file = this.files[0];
         if (file) {

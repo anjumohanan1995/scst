@@ -36,6 +36,11 @@
                 <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
 					<div class="card">
 						<div class="card-body  p-5">
+                            <div id="btnHide" class="row justify-content-end m-3">
+                                <a style="width: 50px" onclick="printDiv()"><img
+                                        src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                            </div>
+                             <div id="print_content">
 							    <div id="success_message" class="ajax_response" style="display: none;"></div>
 								<div class="mb-4 main-content-label">
                                     <h4 class="medical__form--h1 text-center m-3">
@@ -70,7 +75,9 @@
                                                 <td>3</td>
                                                 <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
                                                 </td>
-                                                <td> {{ @$studentFund['class_start_date'] }}</td>
+                                                <td>   @if(@$studentFund['class_start_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['class_start_date'])->format('d-m-Y ') }}@endif
+              
+                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
@@ -95,7 +102,7 @@
 
                                                 </td>
                                                 <td>{{ @$studentFund['caste'] }} <br> @if($studentFund['caste_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('medEngStudentFund/' . @$studentFund['caste_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -105,7 +112,7 @@
 
                                                 </td>
                                                 <td> {{ @$studentFund['income'] }} <br> @if($studentFund['income_certificate'])
-                                                    <iframe src="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" width="400" height="200"></iframe>
+                                                    <a href="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
                                             <tr>
@@ -139,7 +146,7 @@
                                             </span>
                                             <span class="col-1"> :</span>
                                             <span class="col-6"> @if($studentFund['signature'])
-                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['signature']) }}" width="150px" height="70px">
+                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
                                         </div>
@@ -160,7 +167,7 @@
                                             </span>
                                             <span class="col-1"> :</span>
                                             <span class="col-6"> @if($studentFund['parent_signature'])
-                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['parent_signature']) }}" width="150px" height="70px">
+                                                <img src="{{ asset('medEngStudentFund/' . @$studentFund['parent_signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
                                         </div>
@@ -203,6 +210,7 @@
                                     </div>
                                   
                                     <br><br>
+                        </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-4">
                                           
@@ -223,6 +231,87 @@
                         </div>
                     </div>
                 </div>
+                @if(auth::user()->role=='TEO' && @$studentFund->teo_view_status==1)
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                   <div class="pt-2 card overflow-hidden">
+                   
+                      <div class="card-body">
+                         
+                               <div class="pb-2 row ">
+                                  <div class="col-5">
+                                     <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
+                                  </div>
+                                  <div class="col-1 w-100">
+                                     <label> :  
+                                     </label>
+                                  </div>
+                                  <div class="col-6">
+                                     <label> 
+                                     {{ @$studentFund['teo_view_date'] }}
+                                     </label>
+                                
+                            </div>
+                         </div>
+                         <hr>
+                         <div class="pb-2 row ">
+                            <div class="col-5">
+                               <label>Status  </label><br>
+                            </div>
+                            <div class="col-1 w-100">
+                               <label> :  
+                               </label>
+                            </div>
+                            <div class="col-6">
+                             @if(@$studentFund->teo_status == null)
+                             <button class="btn btn-warning" >Pending</button>
+                             @elseif(@$studentFund->teo_status == 1)
+                             <button class="btn btn-success" >Approved</button>
+                             @elseif(@$studentFund->teo_status == 2)
+                             <button class="btn btn-danger" >Rejected</button> 
+                            @endif
+                            </div>
+                   </div>
+                   @if(@$studentFund->teo_status == 2)
+                   <div class="pb-2 row ">
+                      <div class="col-5">
+                         <label>Rejected Reason  </label><br>
+                      </div>
+                      <div class="col-1 w-100">
+                         <label> :  
+                         </label>
+                      </div>
+                      <div class="col-6">
+                   {{ @$studentFund->teo_status_reason }}
+                   
+                      </div>
+             </div>
+             @endif
+                   @if(@$studentFund->teo_status != null)
+                   <div class=" pb-2 row ">
+                      <div class="col-5">
+                         @if(@$studentFund->teo_status == 1)
+                         <label>Approved Date  </label>
+                         @elseif(@$studentFund->teo_status == 2)
+                         <label>Rejected Date  </label>
+                        @endif
+                         
+                         <br>
+                      </div>
+                      <div class="col-1 w-100">
+                         <label> :  
+                         </label>
+                      </div>
+                      <div class="col-6">
+                         @if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+                     
+                      
+                      </div>
+             </div>
+             @endif
+                      </div>
+                   </div>
+                </div>
+                 @endif
             </div>
         </div>
 
@@ -234,6 +323,16 @@
 	$(document).ready(function() {
      	$('#example').DataTable();
 	});
+    function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
   </script>
 <!-- main-content-body -->
 @endsection

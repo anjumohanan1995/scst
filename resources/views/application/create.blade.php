@@ -1,4 +1,4 @@
-@extends('layouts.app_login')
+@extends('layouts.app_register')
 @section('content')
 
 <!-- main-content -->
@@ -15,7 +15,7 @@
 		</div>
 		<!-- /breadcrumb -->
 		<!-- main-content-body -->
-		<div class="main-content-body">
+		<div class="main-content-body main-content-body--margin">
 			
 
 			@if (session('success'))
@@ -30,7 +30,17 @@
 			<!-- row -->
 			<!-- row -->
 			<div class="row row-sm mt-4">
-				<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 ">
+                    <div class="card"> 
+						<div class="card-body">
+                            <div class="mb-4 main-content-label"> Instructions</div>
+
+                              <p>Already a user? Please <a href="{{ route('login') }}">login</a></p>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 ">
 					<div class="card">
 						<div class="card-body">
 							<div id="success_message" class="ajax_response" style="display: none;"></div>
@@ -40,17 +50,17 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Name</label>
-        										<input type="text" value="{{ old('name') }}"  class="form-control" placeholder="Name" name="name" id="name" />
+												<label class="form-label">പേര് / Name</label>
+        										<input type="text" autocomplete="off"  value="{{ old('name') }}"  class="form-control" placeholder="Name" name="name" id="name" />
 												@error('name')
 													<span class="text-danger">{{$message}}</span>
 												@enderror
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Name once Again</label>
-        										<input type="text" value="{{ old('name_confirmation') }}" class="form-control" placeholder="Name" name="name_confirmation" id="name_confirmation" />
-												<span id="nameError" class="text-danger"></span>
+												<label class="form-label">ഒരിക്കൽ കൂടി പേര് /Name once Again</label>
+        										<input type="text" autocomplete="off" value="{{ old('name_confirmation') }}" class="form-control" placeholder="Name" name="name_confirmation" id="name_confirmation" />
+												<span id="nameError" ></span>
 												@error('name_confirmation')
 													<span class="text-danger">{{$message}}</span>
 												@enderror
@@ -60,17 +70,17 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Date of Birth</label>
-        										<input type="date" value="{{ old('dob') }}"  class="form-control" placeholder="Date of birth" name="dob" id="dob" />
+												<label class="form-label">ജനനതീയതി / Date of Birth</label>
+        										<input type="date" value="{{ old('dob') }}"  class="form-control" placeholder="Date of birth" name="dob" id="dob" max="{{ date('Y-m-d') }}" />
 												@error('dob')
 													<span class="text-danger">{{$message}}</span>
 												@enderror
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Date of Birth once Again</label>
-												<input type="date"  value="{{ old('dob1') }}"  class="form-control" placeholder="Date of birth" name="dob1" id="dob1" />
-												<span id="dobError" class="text-danger"></span>	
+												<label class="form-label">ഒരിക്കൽ കൂടി ജനനത്തീയതി / Date of Birth once Again</label>
+												<input type="date"  value="{{ old('dob1') }}"  class="form-control" placeholder="Date of birth" name="dob1" id="dob1" max="{{ date('Y-m-d') }}"/>
+												<span id="dobError"></span>	
 												@error('dob1')
 														<span class="text-danger">{{$message}}</span>
 												@enderror										
@@ -80,8 +90,8 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Gender</label>
-												<select class="form-control" name="gender" >
+												<label class="form-label">ലിംഗഭേദം / Gender</label>
+												<select class="form-control" name="gender" autocomplete="off" >
 													<option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
 													<option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
 													<option value="Transgender" {{ old('gender') == 'Transgender' ? 'selected' : '' }}>Transgender</option>
@@ -94,8 +104,8 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Mobile Number</label>
-												<input type="text" class="form-control" placeholder="Mobile Number" name="mobile" id="mobile" value="{{ old('mobile') }}" />
+												<label class="form-label">മൊബൈൽ നമ്പർ / Mobile Number</label>
+												<input type="text" autocomplete="off" class="form-control" placeholder="Mobile Number" name="mobile" id="mobile" value="{{ old('mobile') }}" />
     											<span id="mobileError" class="text-danger"></span>
 												@error('mobile')
 														<span class="text-danger">{{$message}}</span>
@@ -106,16 +116,16 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Father's Name</label>
-												<input type="text" class="form-control" placeholder="Father's Name" name="father_name" value="{{ old('father_name') }}" />
+												<label class="form-label">പിതാവിന്റെ പേര് / Father's Name</label>
+												<input type="text" autocomplete="off" class="form-control" placeholder="Father's Name" name="father_name" value="{{ old('father_name') }}" />
 												@error('father_name')
 														<span class="text-danger">{{$message}}</span>
 												@enderror
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Mother's Name</label>
-												<input type="text" class="form-control" placeholder="Mother's Name" name="mother_name" value="{{ old('mother_name') }}" />
+												<label class="form-label">അമ്മയുടെ പേര് / Mother's Name</label>
+												<input type="text" autocomplete="off" class="form-control" placeholder="Mother's Name" name="mother_name" value="{{ old('mother_name') }}" />
 												@error('mother_name')
 														<span class="text-danger">{{$message}}</span>
 												@enderror
@@ -127,8 +137,8 @@
 										
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Caste</label>
-												<select class="form-control" name="caste" >
+												<label class="form-label">ജാതി / Caste</label>
+												<select class="form-control" name="caste" autocomplete="off">
 													<option value="SC" {{ old('caste') == 'SC' ? 'selected' : '' }}>SC</option>
 													<option value="ST" {{ old('caste') == 'ST' ? 'selected' : '' }}>ST</option>
 												
@@ -140,8 +150,8 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Aadhar Number</label>
-												<input type="text" class="form-control" placeholder="Aadhar Number" name="aadhar_number" id="aadhar_number" value="{{ old('aadhar_number') }}"  />
+												<label class="form-label">ആധാർ നമ്പർ / Aadhar Number</label>
+												<input type="text" autocomplete="off" class="form-control" placeholder="Aadhar Number" name="aadhar_number" id="aadhar_number" value="{{ old('aadhar_number') }}"  />
 												<span id="aadharError" class="text-danger"></span>	
                                                 @error('aadhar_number')
 														<span class="text-danger">{{$message}}</span>
@@ -153,8 +163,8 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Id Proof</label>
-												<select class="form-control" name="id_proof" >
+												<label class="form-label">ഐഡി പ്രൂഫ് / Id Proof</label>
+												<select class="form-control" name="id_proof" autocomplete="off" >
 													<option value="AADHAR" {{ old('id_proof') == 'AADHAR' ? 'selected' : '' }}>AADHAR</option>
             										<option value="Account No of Nationalised/Scheduled Bank" {{ old('id_proof') == 'Account No of Nationalised/Scheduled Bank' ? 'selected' : '' }}>Account No of Nationalised/Scheduled Bank</option>
 													<option value="Conductor Licence" {{ old('id_proof') == 'Conductor Licence' ? 'selected' : '' }}>Conductor Licence</option>
@@ -179,8 +189,8 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Id Proof Details</label>
-												<input type="text" class="form-control" placeholder="Id Proof Details" name="id_proof_details"  value="{{ old('id_proof_details') }}"/>
+												<label class="form-label">ഐഡി പ്രൂഫ് നമ്പർ വിശദാംശങ്ങൾ / Id Proof Number Details</label>
+												<input type="text" class="form-control" autocomplete="off" placeholder="Id Proof Details" name="id_proof_details"  value="{{ old('id_proof_details') }}"/>
 												@error('id_proof_details')
 														<span class="text-danger">{{$message}}</span>
 												@enderror
@@ -190,8 +200,8 @@
 										</div><br>
 										<div class="row">
 												<div class="col-md-6 mb-6">
-												<label class="form-label">Email</label>
-												  	<input type="email" class="form-control"  value="{{ old('email') }}"  placeholder="Email" name="email" id="email"/>
+												<label class="form-label">ഇമെയിൽ / Email</label>
+												  	<input type="email" class="form-control" autocomplete="off"  value="{{ old('email') }}"  placeholder="Email" name="email" id="email"/>
 													<span id="emailError" class="text-danger"></span>
 													@error('email')
 														<span class="text-danger">{{$message}}</span>
@@ -203,7 +213,7 @@
 										<div class="row">
 											<div class="col-md-6 mb-6">
 												<label class="form-label">Password (<strong>8 numbers, 1 uppercase,1 lowercase,1 symbol and 1 number</strong> )</label>
-												<input value="{{ old('password') }}" type="password" class="form-control" placeholder="Password" name="password" id="password"/>
+												<input value="{{ old('password') }}" autocomplete="off" type="password" class="form-control" placeholder="Password" name="password" id="password"/>
 												<span class="text-danger" id="passwordError"></span>
 												@error('password')
 													<span class="text-danger">{{$message}}</span>
@@ -214,7 +224,7 @@
 
 											<div class="col-md-6 mb-6">
 												<label class="form-label"> Confirm Password </label>
-    											<input type="password"  value="{{ old('confirm_password') }}" class="form-control" placeholder="Confirm Password" name="confirm_password" id="confirm_password" />
+    											<input type="password" autocomplete="off"  value="{{ old('confirm_password') }}" class="form-control" placeholder="Confirm Password" name="confirm_password" id="confirm_password" />
 												<span class="text-danger" id="confirmPasswordError"></span>
 											</div>
 											@error('confirm_password')
@@ -225,7 +235,7 @@
 										</div><br>
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label for="captcha">Enter the Captcha:</label>
+												<label for="captcha">ക്യാപ്ച നൽകുക / Enter the Captcha:</label>
 												<div class="captcha">
 
 												 	<span>{!! captcha_img() !!}</span>
@@ -308,10 +318,11 @@
             var name = $('#name').val();
             var nameConfirmation = $('#name_confirmation').val();
 			  if (name != nameConfirmation) {
-				 $('#nameError').text('Names do not match.');
+				 $('#nameError').text('Names do not match.').css('color', 'red');
                  $("#submit").prop("disabled", true);
 			  }else{
-				$('#nameError').text('Names match.');
+
+				$('#nameError').text('Names match.').css('color', 'green');
                 $("#submit").prop("disabled", false);
 			  }
 
@@ -327,10 +338,10 @@
             var dob1 = $('#dob1').val();
 
             if (dob === dob1) {
-                $('#dobError').text('Dates of birth match.');
+                $('#dobError').text('Dates of birth match.').css('color', 'green');
                 $("#submit").prop("disabled", false);
             } else {
-                $('#dobError').text('Dates of birth do not match.');
+                $('#dobError').text('Dates of birth do not match.').css('color', 'red');
                 $("#submit").prop("disabled", true);
             }
         }

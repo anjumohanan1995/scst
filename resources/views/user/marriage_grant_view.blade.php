@@ -30,6 +30,12 @@
                 <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                     <div class="card overflow-hidden" style="width: 113%;">
                         <div class="card-body pd-y-7">
+
+                            <div id="btnHide" class="row justify-content-end m-3">
+                                <a style="width: 50px" onclick="printDiv()"><img
+                                        src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                            </div>
+                            <div id="print_content" >
 							<h1
                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
                                     പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്
@@ -110,9 +116,8 @@
                                             </td>
                                             <td>
                                                 @if ($formData['caste_certificate'])
-                                                    <iframe
-                                                        src="{{ asset('applications/marriage_grant_certificates/' . @$formData['caste_certificate']) }}"
-                                                        width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
+
                                                 @endif
                                             </td>
                                         </tr>
@@ -172,9 +177,8 @@
                                             </td>
                                             <td>{{ ucwords(@$formData['annual_income']) }}<br>
                                                 @if ($formData['income_certificate'])
-                                                    <iframe
-                                                        src="{{ asset('applications/marriage_grant_certificates/' . @$formData['income_certificate']) }}"
-                                                        width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['income_certificate']) }}" target="_blank">View</a>
+
                                                 @endif
                                             </td>
                                         </tr>
@@ -332,9 +336,8 @@
                                         </label>
                                         <label style="margin-left: 425px; margin-top:-30px;">
                                             @if ($formData['signature'])
-                                                <iframe
-                                                    src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}"
-                                                    width="350" height="50"></iframe>
+                                            <img src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}" width="120px" height="60px">
+                                               
                                             @endif
                                             അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം
 
@@ -396,25 +399,22 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function validateForm() {
-        // Check if the required fields are filled
-        var husbandSign = document.getElementsByName('husband_sign')[0].value;
-        var wifeSign = document.getElementsByName('wife_sign')[0].value;
-        var husbandName = document.getElementsByName('husband_name')[0].value;
-        var wifeName = document.getElementsByName('wife_name')[0].value;
+    function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
 
-        if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
-            alert('Please fill in all required fields.');
-            return false; // Prevent form submission
-        }
+    document.body.innerHTML = printContents;
 
-        return true; // Allow form submission
-    }
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
 </script>
 
 <script>

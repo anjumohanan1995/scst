@@ -62,6 +62,8 @@ Route::post('/user-registration/save', [ApplicationController::class, 'userRegis
 Route::get('/filter-words', [App\Http\Controllers\ApplicationController::class, 'filterAndCountWords']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/userData', [App\Http\Controllers\HomeController::class, 'userData'])->name('userData.status');
+Route::post('/bankDetailsUpdate', [App\Http\Controllers\HomeController::class, 'bankDetailsUpdate'])->name('userBankDetails.update');
 
 
 Route::get('/application-forms', [App\Http\Controllers\HomeController::class, 'applicationForms'])->name('applicationForms');
@@ -259,7 +261,9 @@ Route::post('/singleEarnerStore', [App\Http\Controllers\SingleIncomeEarnerContro
     Route::get('/getAdminHouseGrantList', [HouseManagementController::class, 'getAdminHouseGrantList'])->name('getAdminHouseGrantList');
     Route::get('/HouseGrantDetails/{id}', [HouseManagementController::class, 'getAdminHouseGrantDetails'])->name('getAdminHouseGrantDetails');
     Route::get('/redirect/back', [HouseManagementController::class, 'redirectBack'])->name('redirectBack');
-
+    Route::post('/HouseGrant/teoApprove', [HouseManagementController::class, 'teoApprove'])->name('housegrant-teo.approve');
+    Route::post('/HouseGrant/teoReject', [HouseManagementController::class, 'teoReject'])->name('housegrant-teo.reject');
+    
     //Medical / Engineering student fund scheme
 Route::resource('/MedicalEngineeringStudentFund', MedEngStudentFundController::class);
 Route::get('/getStudentFundList', [MedEngStudentFundController::class, 'getStudentFundList'])->name('getStudentFundList');

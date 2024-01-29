@@ -77,6 +77,7 @@ class StudentAwardController extends Controller
         $formData = $data;
       
         $formData['signature']= $signature;
+        $request->flash();
 
         return view('application.student_award_preview', compact('formData'));
 

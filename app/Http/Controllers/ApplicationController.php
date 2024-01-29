@@ -1054,6 +1054,7 @@ class ApplicationController extends Controller
         $formData['caste_certificate'] = $caste_certificate;
         $formData['income_certificate'] = $income_certificate;
         $formData['signature'] = $signature;
+        $request->flash();
         return view('application.marriage_grant_preview', compact('formData'));
     }
     public function marriageGrantStoreDetails(Request $request)

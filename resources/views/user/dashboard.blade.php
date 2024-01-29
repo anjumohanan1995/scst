@@ -388,14 +388,14 @@
                                 <li>
                                     അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
                                     
-                                </li>
+                                </li>  
                                
                             </ul>
                         </h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="itiScholarship/create" class="btn btn-primary"> Continue</a>
+                        <a href="{{ url('iti-scholarship') }}" class="btn btn-primary"> Continue</a>
                     </div>
                 </form>
             </div>

@@ -31,8 +31,13 @@
          <!-- row -->
          <div class="row row-sm">
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
-               <div class="card overflow-hidden" style="width: 113%;">
+               <div class="card overflow-hidden">
                   <div class="card-body p-5">
+                     <div id="btnHide" class="row justify-content-end m-3">
+                        <a style="width: 50px" onclick="printDiv()"><img
+                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                    </div>
+                     <div id="print_content">
                      <h1
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;"><u>
                         പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
@@ -131,7 +136,7 @@
                               </div>
                               <div class="col-6">
                                  <label> 
-                                 {{ @$houseManagement['income'] }} 
+                                 {{ @$houseManagement['annual_income'] }} 
                                  </label>
                               </div>
                            </div>
@@ -272,7 +277,7 @@
                                  No 
                                  @endif 
                                  @if(@$houseManagement['payment_details'] =='yes')
-                                 {{ @$houseManagement['payment_amount'] }} , {{ @$houseManagement['date_received'] }}
+                                 {{ @$houseManagement['payment_amount'] }} , @if(@$houseManagement['date_received']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['date_received'])->format('d-m-Y') }}@endif
                                  @endif 
                                  </label>
                               </div>
@@ -296,7 +301,7 @@
                                  {{ @$houseManagement['prove_eligibility'] }}    </label>
                                  <br>
                                  @if($houseManagement['prove_eligibility_file'])
-                                 <iframe src="{{ asset('homeMng/' . @$houseManagement['prove_eligibility_file']) }}" width="400" height="200"></iframe>
+                                 <a href="{{ asset('homeMng/' . @$houseManagement['prove_eligibility_file']) }}" target="_blank">View</a>
                                  @endif
                               </div>
                            </div>
@@ -351,7 +356,7 @@
    
                     </div>
                      <br>
-              
+                  </div>
                      <div class="row">
                         <div class="col-md-4 mb-4">
                         </div>
@@ -365,15 +370,108 @@
                </div>
             </div>
          </div>
+         
+    
+
+      @if(auth::user()->role=='TEO' && @$houseManagement->teo_view_status==1)
+         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <div class="pt-2 card overflow-hidden">
+            
+               <div class="card-body">
+                  
+                        <div class="pb-2 row ">
+                           <div class="col-5">
+                              <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
+                           </div>
+                           <div class="col-1 w-100">
+                              <label> :  
+                              </label>
+                           </div>
+                           <div class="col-6">
+                              <label> 
+                              {{ @$houseManagement['teo_view_date'] }}
+                              </label>
+                         
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="pb-2 row ">
+                     <div class="col-5">
+                        <label>Status  </label><br>
+                     </div>
+                     <div class="col-1 w-100">
+                        <label> :  
+                        </label>
+                     </div>
+                     <div class="col-6">
+                      @if(@$houseManagement->teo_status == null)
+                      <button class="btn btn-warning" >Pending</button>
+                      @elseif(@$houseManagement->teo_status == 1)
+                      <button class="btn btn-success" >Approved</button>
+                      @elseif(@$houseManagement->teo_status == 2)
+                      <button class="btn btn-danger" >Rejected</button> 
+                     @endif
+                     </div>
+            </div>
+            @if(@$houseManagement->teo_status == 2)
+            <div class="pb-2 row ">
+               <div class="col-5">
+                  <label>Rejected Reason  </label><br>
+               </div>
+               <div class="col-1 w-100">
+                  <label> :  
+                  </label>
+               </div>
+               <div class="col-6">
+            {{ @$houseManagement->teo_status_reason }}
+            
+               </div>
       </div>
+      @endif
+            @if(@$houseManagement->teo_status != null)
+            <div class=" pb-2 row ">
+               <div class="col-5">
+                  @if(@$houseManagement->teo_status == 1)
+                  <label>Approved Date  </label>
+                  @elseif(@$houseManagement->teo_status == 2)
+                  <label>Rejected Date  </label>
+                 @endif
+                  
+                  <br>
+               </div>
+               <div class="col-1 w-100">
+                  <label> :  
+                  </label>
+               </div>
+               <div class="col-6">
+                  @if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+              
+               
+               </div>
+      </div>
+      @endif
+               </div>
+            </div>
+         </div>
+          @endif
     </div>
+   </div>
 </div>
 </div>
 <script>
    $(document).ready(function() {
        	$('#example').DataTable();
    });
-    
+   function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
 </script>
 <!-- main-content-body -->
 @endsection

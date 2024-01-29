@@ -48,6 +48,13 @@
                 <div class="col-sm-12 col-md-12 col-lg-8">
                     <div class="card overflow-hidden" style="width: 113%;">
                         <div class="card-body pd-y-7">
+
+                            <div id="btnHide" class="row justify-content-end m-3">
+                                <a style="width: 50px" onclick="printDiv()"><img
+                                        src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                            </div>
+                            <div id="print_content" >
+
                             <h4 class="medical__form--h1 text-center m-3">
                                 <b>പട്ടികവർഗ്ഗ വികസന വകുപ്പ്<br>
                                     സിക്കിൾസെൽ അനീമിയരോഗികൾക്ക് പ്രതിമാസ ധനസഹായം
@@ -76,7 +83,7 @@
 
 
                                             </td>
-                                            <td>{{ @$formData['dob'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse(@$formData['dob'])->format('d-m-Y') }}</td>
                                         </tr>
                                         <tr>
 
@@ -92,7 +99,7 @@
                                             </td>
                                             <td>{{ @$formData['caste'] }} <br>
                                                 @if($formData['caste_certificate'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -124,7 +131,7 @@
                                             </td>
                                             <td>{{ @$formData['adhaar_number'] }} <br>
                                                 @if($formData['adhaar_copy'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -136,7 +143,7 @@
                                             </td>
                                             <td>{{ @$formData['bank_account_details'] }} <br>
                                                 @if($formData['passbook_copy'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -157,7 +164,7 @@
                                             </td>
                                             <td>{{ @$formData['ration_card_type'] }} <br>
                                                 @if($formData['ration_card'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -170,7 +177,7 @@
                                             </td>
                                             <td>{{ @$formData['is_medical_certificate_submitted'] }} <br>
                                                 @if($formData['medical_certificate'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -218,7 +225,7 @@
                                             <label> ഒപ്പ്
                                                 :   
                                                 @if($formData['signature'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" width="400" height="200"></iframe>
+                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" width="120px" height="60px">
                                            @endif
                                             </label>
                                     </div>
@@ -273,6 +280,7 @@
         <br><br>
 
                         </div>
+                    </div>
 
 
                        
@@ -288,6 +296,17 @@
 
 
 <script>
+    function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
+            
     // edit button function
     function goback() {
         if (confirm('Are you sure ? Do you want to edit this form!. ')) {

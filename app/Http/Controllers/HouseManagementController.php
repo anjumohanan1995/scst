@@ -233,14 +233,15 @@ $formattedDate = $currentDate->toDateString();
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -256,6 +257,7 @@ $formattedDate = $currentDate->toDateString();
               // Extract time
               $time =@$record->time;
             $data_arr[] = array(
+                "sl_no" => $i,
                 "id" => $id,
                 "place" => $place,
                 "name" => $name,
@@ -320,8 +322,8 @@ $formattedDate = $currentDate->toDateString();
             
 
         ]);
-
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+        return redirect()->route('userHouseGrantList')->with('status','Application Submitted Successfully.');
+       // return redirect()->route('home')->with('success','Application Submitted Successfully.');
     }
     public function adminHouseGrantList(Request $request)
     {
@@ -390,14 +392,15 @@ $formattedDate = $currentDate->toDateString();
                 $items->where('submitted_teo',$teo);
             }
 
-             $records = $items->skip($start)->orderBy('created_at','desc')->take($rowperpage)->get();
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('date');
          
 
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -409,7 +412,27 @@ $formattedDate = $currentDate->toDateString();
 
               $date = $carbonDate->format('d-m-Y');
               $time = $carbonDate->format('g:i a');
+              $edit='';
+              if($role == "TEO"){
+                if($record->teo_status== 1){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                }
+                else if($record->teo_status ==2){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+              
+                }
+                else if($record->teo_status ==null){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                }
+               
+              }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+             
+              }
+
             $data_arr[] = array(
+                "sl_no" =>$i,
                 "id" => $id,
                 "place" => $place,
                 "name" => $name,
@@ -417,7 +440,7 @@ $formattedDate = $currentDate->toDateString();
                 "panchayath" => $panchayath,
                 "caste" => $caste,
                 "date" => $date .' ' .$time,                   
-                "edit" => '<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => $edit,
 
             );
          }
@@ -432,7 +455,20 @@ $formattedDate = $currentDate->toDateString();
          return response()->json($response);
     }
     public function getAdminHouseGrantDetails($id){
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+     
         $houseManagement=HouseManagement::find($id);
+        if($houseManagement->teo_view_status==null){
+            $houseManagement->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         return view('admin.houseMng.details', compact('houseManagement'));
     }
    
@@ -440,5 +476,46 @@ $formattedDate = $currentDate->toDateString();
         //dd("fkhsdfjh");
         //return redirect()->route('houseGrant.create')->withInput();
         return redirect()->route('houseGrant.create')->withInput();
+    }
+    public function teoApprove(Request $request){
+        $id = $request->id;
+
+        $currentTime = Carbon::now();
+        $houseGrant = HouseManagement::where('_id', $request->id)->first();
+
+      
+
+        $houseGrant->update([
+            'teo_status' => 1,
+            'teo_status_date' => $currentTime->toDateTimeString(),
+            'teo_status_id' => Auth::user()->id,
+        ]);
+
+
+        return response()->json([
+            'success' => 'House Grant Scheme Application approved successfully.'
+        ]);
+    
+    }
+    public function teoReject(Request $request){
+        $id = $request->id;
+        $reason =$request->reason;
+        $currentTime = Carbon::now();
+        $houseGrant = HouseManagement::where('_id', $request->id)->first();
+
+      
+
+        $houseGrant->update([
+            'teo_status' => 2,
+            'teo_status_date' => $currentTime->toDateTimeString(),
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+
+
+        return response()->json([
+            'success' => 'House Grant Scheme Application Rejected successfully.'
+        ]);
+    
     }
 }
