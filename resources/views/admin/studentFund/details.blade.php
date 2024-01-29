@@ -271,6 +271,26 @@
                             @endif
                             </div>
                    </div>
+                   @if(@$studentFund->teo_status == null)
+                   <div class="pb-2 row ">
+                    <div class="col-5">
+                       <label>Action </label><br>
+                    </div>
+                    <div class="col-1 w-100">
+                       <label> :  
+                       </label>
+                    </div>
+                    <div class="col-6">
+                        <div class="settings-main-icon">
+                        <a class="approveItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                        &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                  
+                    
+                    </div>
+                    </div>
+                 
+           </div>
+               @endif
                    @if(@$studentFund->teo_status == 2)
                    <div class="pb-2 row ">
                       <div class="col-5">
@@ -312,11 +332,146 @@
                    </div>
                 </div>
                  @endif
+
+                 <div class="modal fade" id="approve-popup" style="display: none">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content country-select-modal border-0">
+                            <div class="modal-header offcanvas-header">
+                                <h6 class="modal-title">Are you sure?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body p-5">
+                                <div class="text-center">
+                                    <h4>Are you sure to Approve this Application?</h4>
+                                </div>
+                                <form id="ownForm">
+            
+                                    @csrf
+                                <input type="hidden" id="requestId" name="requestId" value="" />
+                                <div class="text-center">
+                                    <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="rejection-popup">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content country-select-modal border-0">
+                            <div class="modal-header offcanvas-header">
+                                <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body p-5">
+                                <form id="ownForm">
+                                    @csrf
+                                <div class="text-center">
+                                    <h5>Reason for Rejection</h5>
+                                    <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                                    <span id="rejection"></span>
+                                </div>
+            
+                                <input type="hidden" id="requestId2" name="requestId2" value="" />
+                                <div class="text-center">
+                                    <button type="button" onclick="reject()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
 </div>
 </div>
+<meta name="csrf_token" content="{{ csrf_token() }}" />
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
+<script src="{{ asset('js/toastr.js') }}"></script>
+<script type="text/javascript">
+
+
+    $(document).on("click", ".approveItem", function() {
+        var id =$(this).attr('data-id');
+            $('#requestId').val($(this).attr('data-id') );
+            $('#approve-popup').modal('show');
+              
+          
+            });
+            $(document).on("click", ".rejectItem", function() {
+                $('#requestId2').val($(this).attr('data-id') );
+            $('#rejection-popup').modal('show');
+            });
+            function approve() {
+    
+            var reqId = $('#requestId').val();
+    
+        $.ajax({
+                    url: "{{ route('studentFund-teo.approve') }}",
+                    type: "POST",
+                    data: {
+                        "id": reqId,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        toastr.success(response.success, 'Success!')
+                        $('#success').show();
+                        $('#approve-popup').modal('hide');
+                        $('#success_message').fadeIn().html(response.success);
+                        setTimeout(function() {
+                            $('#success_message').fadeOut("slow");
+                        }, 2000);
+    
+                        setTimeout(function() {
+    window.location.reload();
+}, 2000);
+    
+                    }
+                });
+    }
+    function reject() {
+            var reason = $('#reason').val();
+          
+            if($('#reason').val() == ""){
+                rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+            }
+            else{
+                rejection.innerHTML ="";
+                var reqId = $('#requestId2').val();
+            console.log(reqId);
+            $.ajax({
+              
+                url: "{{ route('studentFund-teo.reject') }}",
+                type: "POST",
+                    data: {
+                        "id": reqId,
+                        "reason" :reason,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                success: function(response) {
+                    console.log(response.success);
+                    toastr.success(response.success, 'Success!')
+                        $('#rejection-popup').modal('hide');
+                        $('#success_message').fadeIn().html(response.success);
+                            setTimeout(function() {
+                                $('#success_message').fadeOut("slow");
+                            }, 2000 );
+    
+                            setTimeout(function() {
+    window.location.reload();
+}, 2000);
+    
+                }
+            })
+    
+            }
+         }
+    
+            
+</script>   
+
 <script>
 
 
