@@ -572,7 +572,18 @@ class ApplicationController extends Controller
         }
         $data = $request->all();
 
+        if ($request->hasfile('applicant_image')) {
 
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/img'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
 
         if ($request->hasfile('signature')) {
 
@@ -588,6 +599,7 @@ class ApplicationController extends Controller
 
         $formData = $data;
         $formData['signature'] = $signature;
+        $formData['applicant_image'] = $applicant_image;
 
         return view('application.exam_application_preview', compact('formData'));
     }
@@ -627,6 +639,7 @@ class ApplicationController extends Controller
             'agree' => $request->input('agree'),
             'parent_name'  => @$data['parent_name'],
             'signature' => @$data['signature'],
+             'applicant_image' => @$data['applicant_image'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
             'status' => 0
