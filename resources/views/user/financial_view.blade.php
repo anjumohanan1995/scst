@@ -712,7 +712,12 @@
 
                                             <label>സ്ഥലം </label>  : {{ @$formData['place'] }}
                                         </div>
-
+                                        <div>
+                                            <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> :  @if($formData['husband_photo'])
+                                            {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="400" height="200"></iframe> --}}
+                                            <img src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="120px" height="60px">
+                                            @endif
+                                        </div>
                                         <div>
                                             <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($formData['husband_sign'])
                                             {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe> --}}
@@ -735,7 +740,12 @@
 
                                         </div>
 
-
+ 
+                                        <div>
+                                            <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if($formData['wife_photo'])
+                                            <img src="{{ asset('sign/wife/' . @$formData['wife_photo']) }}" width="120px" height="60px">
+                                            @endif
+                                        </div>
 
                                         <div class="text">
 

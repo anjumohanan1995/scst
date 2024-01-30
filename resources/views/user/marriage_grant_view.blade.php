@@ -305,46 +305,64 @@
                                 </table>
 
 
-                                <div class="text">
-                                    <div>
+                                <div class="row mt-5">
+                                        <div class="row d-flex flex-direction-row col-4">
+                                            <div class="row col-12">
+                                                <div class="col-4">
 
-                                        <label>സ്ഥലം : {{ @$formData['place'] }} </label>
+                                                    <label>സ്ഥലം </label>
+                                                </div>
+
+                                                <div class="col-1">
+                                                    <label> : </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label> {{ @$formData['place'] }} </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row col-12">
+                                                <div class="col-4">
+
+                                                    <label>തീയതി </label>
+                                                </div>
+
+                                                <div class="col-1">
+                                                    <label> : </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label> {{ date('d-m-Y') }} </label>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-4 d-flex">
+                                            <div class="row d-flex col-12">
+                                                <div class="col-12">
+                                                    @if ($formData['applicant_photo'])
+                                                 
+                                                        <img src="{{ asset('applications/marriage_grant_certificates/' . @$formData['applicant_photo']) }}" width="120px" height="60px">
+                                                @endif
+                                                    <label>അപേക്ഷകന്റെ ഫോട്ടോ</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-4 d-flex">
+                                            <div class="row d-flex col-12">
+                                                <div class="col-12">
+                                                    @if ($formData['signature'])
+                                                  
+                                                        <img src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}" width="120px" height="60px">
+                                                @endif
+                                                    <label>അപേക്ഷകന്റെ ഒപ്പ്</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
-
-
-
-
-
-
-                                </div>
-                                <div class="text">
-                                    <div>
-
-                                        <label>തീയതി : {{ date('d-m-Y') }}
-                                        </label>
-                                    </div>
-
-                                </div>
-
-                                <div class="text">
-
-                                    <div>
-
-
-
-
-                                        </label>
-                                        <label style="margin-left: 425px; margin-top:-30px;">
-                                            @if ($formData['signature'])
-                                            <img src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}" width="120px" height="60px">
-                                               
-                                            @endif
-                                            അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം
-
-
-
-
-                                        </label>
 
                                         <div class="row mt-5">
                                             <div class="col-12">

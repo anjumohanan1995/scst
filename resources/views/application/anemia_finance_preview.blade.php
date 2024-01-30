@@ -197,13 +197,13 @@ th {
                                     </p>
                                 </div>
                                 <div class="d-flex row">
-                                    <div class="col-6">
+                                    <div class="col-8">
 
                                         <label>സ്ഥലം: {{ @$formData['place'] }} </label><br>
 
                                     </div>
 
-                                    <div  class="col-6"">
+                                    <div  class="col-4">
 
                                         <div>
                                             <label> പേര്: {{ @$formData['name'] }} 
@@ -214,22 +214,26 @@ th {
 
                                 </div>
                                 <div class="d-flex row">
-                                    <div class="col-6">
+                                    <div class="col-4">
 
                                         <label>തീയതി : {{ @date('d-m-Y') }}</label><br>
 
                                     </div>
+                                    <div class="col-4">
+                                    @if(@$formData['signature'])
+                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['applicant_photo']) }}" width="120px" height="60px">
 
-                                    <div class="col-6">
+                                                    @endif  
+                                            <label> അപേക്ഷകന്റെ ഫോട്ടോ
+                                               </label>
+                                    </div>
 
-                                            <label> ഒപ്പ്
-                                                : 
-                                                @if(@$formData['signature'])
+                                    <div class="col-4">
+                                    @if(@$formData['signature'])
                                                 <img src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" width="120px" height="60px">
 
                                                     @endif  
-                                               
-                                            </label>
+                                            <label>അപേക്ഷകന്റെ ഒപ്പ്  </label>
                                     </div>
 
                                 </div>
