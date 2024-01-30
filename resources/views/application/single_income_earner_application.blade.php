@@ -587,15 +587,34 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">'Applicant's Name / അപേക്ഷകന്റെ ഒപ്പു </label>
+                                            <label class="form-label">'Applicant's Signature / അപേക്ഷകന്റെ ഒപ്പു </label>
                                             <input type="file" value="{{ old('signature') }}" class="form-control"
-                                                name="signature" />
+                                                name="signature" required accept="image/*" />
                                             <span class="text-muted small">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി
                                                 കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</span>
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Applicant's Image / 
+                                                അപേക്ഷകന്റെ ഫോട്ടോ </label>
+                                            <input type="file" class="form-control" accept="image/*"
+                                                name="applicant_image" id="applicant_image" 
+                                                required />
+                                                <span class="text-muted small">(File less than 2 mb. image only. / ഫയൽ: 2 എംബി
+                                                    കുറഞ്ഞത്,
+                                                   image
+                                                    മാത്രം.)</span>
+                                            @error('applicant_image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <br>
+                                            <span class="text-danger" id="errorimage"></span>
                                         </div>
                                     </div>
 
@@ -660,7 +679,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         //duplication code starts here.
+   $('#applicant_image').change(function() {
+                var file = this.files[0];
+                if (file) {
+                    var fileSize = file.size;
 
+                    // Convert fileSize to megabytes
+                    var fileSizeInMB = fileSize / (1024 * 1024);
+                    if (fileSizeInMB <= 2) {
+
+                        $('#submit').prop('disabled', false);
+                        $('#errorimage').html('')
+                    } else {
+                        $('#errorimage').html(
+                            'File size exceeds the limit of 2 MB. Please choose a smaller file.')
+                        // alert('');
+                        $('#submit').prop('disabled', true);
+                        $('#errorimage').val('');
+                    }
+                }
+            });
 
         function validateImage(inputId, errorMessageId) {
 

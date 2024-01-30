@@ -195,7 +195,7 @@
                                 </div>                           
                             <div class="col-md-6 mb-6">
                                 <label class="form-label">ഒപ്പ് / Signature</label>
-                                <input type="file" onchange="validateSignature()" class="form-control"  name="signature" id="signature" value="" placeholder="" />
+                                <input type="file" onchange="validateSignature()" accept="image/*" class="form-control"  name="signature" id="signature" value="" placeholder="" required/>
                                 <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
 
                                 @error('signature')
@@ -204,10 +204,29 @@
                                 <div id="errorSignature" style="color:red;"></div>
                             </div>
                         </div><br>
+                      
+                        <div class="row">
+                            <div class="col-md-6 mb-6">
+                                <label class="form-label">Applicant's Image / 
+                                    അപേക്ഷകന്റെ ഫോട്ടോ </label>
+                                <input type="file" class="form-control" accept="image/*"
+                                    name="applicant_image" id="applicant_image" 
+                                    required />
+                                    <span class="text-muted small">(File less than 2 mb. image only. / ഫയൽ: 2 എംബി
+                                        കുറഞ്ഞത്,
+                                       image
+                                        മാത്രം.)</span>
+                                @error('applicant_image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                <br>
+                                <span class="text-danger" id="errorimage"></span>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
-
+              
                     <div class="card">
                             <div class="card-body">
                                 <div class="row">   
@@ -257,6 +276,26 @@
 </div>
 </div>
 <script>
+      $('#applicant_image').change(function() {
+                var file = this.files[0];
+                if (file) {
+                    var fileSize = file.size;
+
+                    // Convert fileSize to megabytes
+                    var fileSizeInMB = fileSize / (1024 * 1024);
+                    if (fileSizeInMB <= 2) {
+
+                        $('#submit').prop('disabled', false);
+                        $('#errorimage').html('')
+                    } else {
+                        $('#errorimage').html(
+                            'File size exceeds the limit of 2 MB. Please choose a smaller file.')
+                        // alert('');
+                        $('#submit').prop('disabled', true);
+                        $('#errorimage').val('');
+                    }
+                }
+            });
     function validateSignature() {
         var input = document.getElementById('signature');
         var errorMessage = document.getElementById('errorSignature');

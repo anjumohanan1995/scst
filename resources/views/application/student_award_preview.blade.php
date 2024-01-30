@@ -38,7 +38,17 @@
                             APPLICATION FOR SSLC/PLUS TWO/ DEGREE/PG AWARD 2023-24
                         </h1>
 
-
+                        <div class="paper-1 pt-4">
+                            <div class="w-100">
+                               <div class="row w-100">
+                                  <div class="col-12" style="text-align: right;">
+                                     @if(@$formData['applicant_image'])
+                                        <img src="{{ asset('applications/student_award/' . @$formData['applicant_image']) }}" width= "100mm" height= "100mm";>
+                                     @endif
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
                         
                                     <form action="#" method="post"
                                         style="font-weight: 500;font-size: 12px;padding: 90px;">

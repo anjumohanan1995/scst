@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class HouseManagementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +51,8 @@ class HouseManagementController extends Controller
             'name' => 'required|regex:/^[a-zA-Z]+$/',
             'submitted_district' => 'required',
             'submitted_teo' => 'required', 
-            'signature' => 'max:2048',
+            'signature' => 'required|max:2048',
+            'applicant_image' => 'required|max:2048',
             'prove_eligibility_file' => 'max:2048',
             
            
@@ -66,7 +71,18 @@ class HouseManagementController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
-       
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/homeMng'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
       
         if ($request->hasfile('signature')) {
 
@@ -114,6 +130,7 @@ class HouseManagementController extends Controller
         }
        
       $formData['signature']= $signature;
+      $formData['applicant_image']= $applicant_image;
       $formData['prove_eligibility_file']= $eligibility_file;
       $currentDate = Carbon::now();
 
@@ -306,6 +323,7 @@ $formattedDate = $currentDate->toDateString();
             'place' => @$data['place'],
             'date' => @$data['date'],
             'signature' => @$data['signature'],
+            'applicant_image' => @$data['applicant_image'],
             'user_id' =>Auth::user()->id, 
             'status' =>0,
             'current_district_name' => @$data['current_district_name'],
@@ -392,7 +410,7 @@ $formattedDate = $currentDate->toDateString();
                 $items->where('submitted_teo',$teo);
             }
 
-             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('date');
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
@@ -413,6 +431,8 @@ $formattedDate = $currentDate->toDateString();
               $date = $carbonDate->format('d-m-Y');
               $time = $carbonDate->format('g:i a');
               $edit='';
+
+
               if($role == "TEO"){
                 if($record->teo_status== 1){
                     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
@@ -477,6 +497,7 @@ $formattedDate = $currentDate->toDateString();
         //return redirect()->route('houseGrant.create')->withInput();
         return redirect()->route('houseGrant.create')->withInput();
     }
+
     public function teoApprove(Request $request){
         $id = $request->id;
 
@@ -499,6 +520,8 @@ $formattedDate = $currentDate->toDateString();
     
     }
     public function teoReject(Request $request){
+
+        // dd('holo');
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();

@@ -40,7 +40,17 @@
                                         അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ
 
                                     </h1>
-
+                                    <div class="paper-1 pt-4">
+                                        <div class="w-100">
+                                           <div class="row w-100">
+                                              <div class="col-12" style="text-align: right;">
+                                                 @if(@$formData['applicant_image'])
+                                                    <img src="{{ asset('img/' . @$formData['applicant_image']) }}" width= "100mm" height= "100mm";>
+                                                 @endif
+                                              </div>
+                                           </div>
+                                        </div>
+                                     </div>
                                     @php
                                         // dd($formData);
                                         $district = App\Models\District::where('_id', $formData['district'])->first();

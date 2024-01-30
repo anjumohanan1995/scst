@@ -34,6 +34,18 @@
                        പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽനിന്ന് വീടുകളുടെ നവീകരണത്തിനും അധികസൗകര്യങ്ങൾ ഏർപെടുത്തുന്നതിനും   പൂർത്തീകരിക്കുന്നതിനുമുള്ള 
                        ധനസഹായത്തിനുള്ള അപേക്ഷ</u>
                     </h1>
+                    <div class="paper-1 pt-4">
+                     <div class="w-100">
+                        <div class="row w-100">
+                           <div class="col-12" style="text-align: right;">
+                              @if($formData['applicant_image'])
+                                 <img src="{{ asset('homeMng/' . @$formData['applicant_image']) }}" width= "100mm" height= "100mm";>
+                              @endif
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
                     <br>
                     <br>
                     <div class="paper-1">
@@ -311,10 +323,11 @@
                                 </label>: {{date('d-m-Y')}}
                              </div>
                              <div class="col-6">
-                                <label> അപേക്ഷകന്റെ ഒപ്പ് /
-                                </label> :  @if($formData['signature'])
+                              @if($formData['signature'])
                                 <img src="{{ asset('homeMng/' . @$formData['signature']) }}" width="150px" height="70px">
                                 @endif
+                                <label> അപേക്ഷകന്റെ ഒപ്പ് /
+                                </label>   
                              </div>
                           </div>
                        </div>

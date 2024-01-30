@@ -275,6 +275,20 @@
                                
                               
                             </div><br> 
+                            <div class="row">
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">Applicant's Image( Max size: 2 MB)
+                                        (അപേക്ഷകന്റെ ഫോട്ടോ )</label>
+                                    <input type="file" class="form-control" accept="image/*"
+                                        name="applicant_image" id="applicant_image" value=""
+                                        placeholder="Applicant's Image "  />
+                                    @error('applicant_image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    <br>
+                                    <span class="text-danger" id="errorimage"></span>
+                                </div>
+                            </div><br>
                             <hr>
                           <div class="row">
                             <div class="col-md-1 mb-1">
@@ -564,7 +578,26 @@
           }
         }
       });
-      
+      $('#applicant_image').change(function() {
+                var file = this.files[0];
+                if (file) {
+                    var fileSize = file.size;
+
+                    // Convert fileSize to megabytes
+                    var fileSizeInMB = fileSize / (1024 * 1024);
+                    if (fileSizeInMB <= 2) {
+
+                        $('#submit').prop('disabled', false);
+                        $('#errorimage').html('')
+                    } else {
+                        $('#errorimage').html(
+                            'File size exceeds the limit of 2 MB. Please choose a smaller file.')
+                        // alert('');
+                        $('#submit').prop('disabled', true);
+                        $('#errorimage').val('');
+                    }
+                }
+            });
       $('#signature').change(function () {
         var file = this.files[0];
         if (file) {

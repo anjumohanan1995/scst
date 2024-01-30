@@ -61,7 +61,18 @@ class StudentAwardController extends Controller
         }
         $data = $request->all();
 
-     
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/applications/student_award'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
@@ -77,6 +88,7 @@ class StudentAwardController extends Controller
         $formData = $data;
       
         $formData['signature']= $signature;
+        $formData['applicant_image']= $applicant_image;
         $request->flash();
 
         return view('application.student_award_preview', compact('formData'));
@@ -109,7 +121,8 @@ class StudentAwardController extends Controller
             'account_number' => $data['account_number'],  
             'ifsc_code' => $data['ifsc_code'],  
             'aadhar_number' => $data['aadhar_number'],  
-            'signature' => $data['signature'],  
+            'signature' => $data['signature'], 
+            'applicant_image' => $data['applicant_image'],  
             'date' => date('d-m-Y'),         
             'user_id' =>Auth::user()->id, 
             'submitted_district' => $data['submitted_district'],
