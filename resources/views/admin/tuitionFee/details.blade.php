@@ -35,9 +35,9 @@
                         <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
 
 
-                            <div class="card overflow-hidden" style="width: 113%;">
+                            <div class="card overflow-hidden">
 
-                                <div class="card-body pd-y-7">
+                                <div class="card-body pd-y-5">
 
                                     <div id="btnHide" class="row justify-content-end m-3">
                                         <a style="width: 50px" onclick="printDiv()"><img
@@ -532,6 +532,86 @@
                            
                         </div>
                         <!-- /row -->
+
+
+                        @if(auth::user()->role=='TEO' && @$tuitionFee->teo_view_status==1)
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                           <div class="pt-2 card overflow-hidden">
+                           
+                              <div class="card-body">
+                                 
+                                       <div class="pb-2 row ">
+                                          <div class="col-5">
+                                             <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
+                                          </div>
+                                          <div class="col-1 w-100">
+                                             <label> :  
+                                             </label>
+                                          </div>
+                                          <div class="col-6">
+                                             <label> 
+                                             {{ @$tuitionFee['teo_view_date'] }}
+                                             </label>
+                                        
+                                    </div>
+                                 </div>
+                                 <hr>
+                                 <div class="pb-2 row ">
+                                    <div class="col-5">
+                                       <label>Status  </label><br>
+                                    </div>
+                                    <div class="col-1 w-100">
+                                       <label> :  
+                                       </label>
+                                    </div>
+                                    <div class="col-6">
+                                     @if(@$tuitionFee->teo_status == null)
+                                     <button class="btn btn-warning" >Pending</button>
+                                     @elseif(@$tuitionFee->teo_status == 1)
+                                     <button class="btn btn-success" >Approved</button>
+                                     @elseif(@$tuitionFee->teo_status == 2)
+                                     <button class="btn btn-danger" >Rejected</button> 
+                                    @endif
+                                    </div>
+                           </div>
+                        @if(@$tuitionFee->teo_status == 2)
+                            <div class="pb-2 row ">
+                              <div class="col-5">
+                                 <label>Rejected Reason  </label><br>
+                              </div>
+                              <div class="col-1 w-100">
+                                 <label> :  
+                                 </label>
+                              </div>
+                              <div class="col-6">
+                                    {{ @$tuitionFee->teo_status_reason }}
+                           
+                              </div>
+                            </div>
+                     @endif
+                     @if(@$tuitionFee->teo_status != null)
+                           <div class=" pb-2 row ">
+                              <div class="col-5">
+                                 @if(@$tuitionFee->teo_status == 1)
+                                 <label>Approved Date  </label>
+                                 @elseif(@$tuitionFee->teo_status == 2)
+                                 <label>Rejected Date  </label>
+                                @endif
+                                 
+                                 <br>
+                              </div>
+                              <div class="col-1 w-100">
+                                 <label> :  
+                                 </label>
+                              </div>
+                              <div class="col-6">
+                                 @if(@$tuitionFee['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$tuitionFee['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+                             
+                              
+                              </div>
+                           </div>
+                     @endif
+                     @endif
                     </div>
         </div>
     </div>

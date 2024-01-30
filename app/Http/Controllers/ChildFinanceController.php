@@ -10,6 +10,7 @@ use App\Role;
 use App\Permission;
 use App\User;
 use App\Models\ExamApplication;
+use Carbon\Carbon;
 
 use App\Models\FinancialHelp;
 use App\Models\ChildFinance;
@@ -297,10 +298,25 @@ class ChildFinanceController extends Controller
     }
     public function childFinanceView(Request $request, $id)
     {     
+
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('h:i A');
+     
+        $childFinancialHelp=ChildFinance::find($id);
+        if($childFinancialHelp->teo_view_status==null && Auth::user()->role=='TEO'){
+            $childFinancialHelp->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
       
         $formData = ChildFinance::where('_id',$id)->first();
        
-        return view('admin.child_finance_view', compact('formData'));
+        return view('admin.child_finance_view', compact('formData','childFinancialHelp'));
 
 
 
@@ -309,6 +325,7 @@ class ChildFinanceController extends Controller
     public function userchildFinanceList(Request $request)
     {     
       
+
         return view('child.user_child_finance_list');
 
 

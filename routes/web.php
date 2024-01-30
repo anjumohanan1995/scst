@@ -78,12 +78,17 @@ Route::get('/couplefinancialList', [App\Http\Controllers\ApplicationController::
 Route::get('/getCoupleList', [App\Http\Controllers\ApplicationController::class, 'getCoupleList'])->name('getCoupleList');
 Route::get('/couple-application/{id}', [App\Http\Controllers\ApplicationController::class, 'coupleApplicationView'])->name('coupleApplicationView');
 
+
+//exam application routes starts here.
 Route::get('/exam-application', [App\Http\Controllers\ApplicationController::class, 'examApplication'])->name('exam-application');
 Route::post('/examApplicationPreview', [App\Http\Controllers\ApplicationController::class, 'examApplicationPreview'])->name('examApplicationPreview');
 Route::post('/examApplicationStore', [App\Http\Controllers\ApplicationController::class, 'examApplicationStore'])->name('examApplicationStore');
 Route::get('/examApplicationList', [App\Http\Controllers\ApplicationController::class, 'examApplicationList'])->name('examApplicationList');
 Route::get('/getExamList', [App\Http\Controllers\ApplicationController::class, 'getExamList'])->name('getExamList');
 Route::get('/exam-application/{id}', [App\Http\Controllers\ApplicationController::class, 'examApplicationView'])->name('examApplicationView');
+Route::post('/exam-application/teoApprove', [ApplicationController::class, 'teoApprove'])->name('exam-application-teo.approve');
+Route::post('/exam-application/teoReject', [ApplicationController::class, 'teoReject'])->name('exam-application-teo.reject');
+//exam application routes ends here.
 
 
 Route::get('/childFinancialAssistanceForm', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceForm'])->name('childFinancialAssistanceForm');
@@ -133,6 +138,8 @@ Route::post('/marriageGrantStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/marriageGrantList', [App\Http\Controllers\ApplicationController::class, 'marriageGrantList'])->name('marriageGrantList');
 Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController::class, 'getmarriageGrantList'])->name('getmarriageGrantList');
 Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
+
+
 
 Route::get('/singleEarnerList', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerList'])->name('singleEarnerList');
 Route::get('/getSingleEarnerList', [App\Http\Controllers\SingleIncomeEarnerController::class, 'getSingleEarnerList'])->name('getSingleEarnerList');

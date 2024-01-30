@@ -334,10 +334,10 @@
                                 </label>
                                 <label style="margin-left: 425px; margin-top:-30px;">
                                     @if ($formData['signature'])
-                                        <iframe
-                                            src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}"
-                                            width="350" height="50"></iframe>
+                                    <img src="{{ asset('applications/marriage_grant_certificates/' . @$formData['signature']) }}" width="120px" height="60px">
+                                     
                                     @endif
+                                    <br>
                                     അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം
 
 

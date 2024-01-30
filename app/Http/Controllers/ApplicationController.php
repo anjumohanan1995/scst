@@ -527,9 +527,23 @@ class ApplicationController extends Controller
     }
     public function coupleApplicationView($id)
     {
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+     
+        $financialHelp=FinancialHelp::find($id);
+        if($financialHelp->teo_view_status==null && Auth::user()->role=='TEO'){
+            $financialHelp->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
 
         $formData = FinancialHelp::where('_id', $id)->first();
-        return view('admin.financial_view', compact('formData'));
+        return view('admin.financial_view', compact('formData','financialHelp'));
     }
 
 
@@ -737,6 +751,18 @@ class ApplicationController extends Controller
             $mother_name =  $record->mother_name;
             $created_at =  $record->created_at;
 
+            if ($role == "TEO") {
+                if ($record->teo_status == 1) {
+                    $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                } else if ($record->teo_status == 2) {
+                    $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } else if ($record->teo_status == null) {
+                    $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
+                }
+            } else {
+                $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+            }
+
             $data_arr[] = array(
                 "id" => $id,
                 "school_name" => $school_name,
@@ -746,9 +772,10 @@ class ApplicationController extends Controller
                 "relation" => $relation,
                 "mother_name" => $mother_name,
                 "created_at" => $created_at,
+                "edit" => $edit
 
                 //  "more"=>'<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal'.$id.'" data-bs-whatever="@mdo">More Details</button><div class="modal fade" id="exampleModal'.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">'.$name.'('.$age.')  </h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="eva eva-close-outline header-icons"><g data-name="Layer 2"><g data-name="close"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"></path></g></g></svg></button></div><div class="modal-body"><table id="example" class="table table-striped table-bordered" style="width:100%"><tbody><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Name</h6></div></td><td><div class="image-grouped"> '.$name.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Name</h6></div></td><td><div class="image-grouped">'.$gname.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Relationship</h6></div></td><td><div class="image-grouped">'.$g_relation.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Age</h6></div></td><td><div class="image-grouped"> '.$age.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Gender</h6></div></td><td><div class="image-grouped">'.$gender.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Mobile Number</h6></div></td><td><div class="image-grouped"> '.$mobile.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Adhar Number</h6></div></td><td><div class="image-grouped"> '.$adhar.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Scheme Id</h6></div></td><td><div class="image-grouped">  '.$sc_id.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Email Id</h6></div></td><td><div class="image-grouped"> '.$email.' </div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Abha Number</h6></div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Ration card Number</h6></div></td><td><div class="image-grouped"> '.$ration_card.' </div></td></tr></tbody></table></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div></div></div></div>',
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fe fe-eye bg-info me-1"></i></a></div>'
+                // "edit" => '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fe fe-eye bg-info me-1"></i></a></div>'
 
             );
         }
@@ -773,12 +800,49 @@ class ApplicationController extends Controller
     }
 
 
+    public function teoApprove(Request $request)
+    {
+        $id = $request->id;
+
+        // $currentTime = Carbon::now();
+        $studentFund = ExamApplication::where('_id', $request->id)->first();
+
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+
+        $studentFund->update([
+            'teo_status' => 1,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+        ]);
+
+
+        return response()->json([
+            'success' => 'Application approved successfully.'
+        ]);
+    }
+    public function teoReject(Request $request)
+    {
+        $id = $request->id;
+        $reason = $request->reason;
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        $studentFund = ExamApplication::where('_id', $request->id)->first();
 
 
 
+        $studentFund->update([
+            'teo_status' => 2,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
 
 
-
+        return response()->json([
+            'success' => 'Application Rejected successfully.'
+        ]);
+    }
 
 
     public function motherChildProtectionSchemeStore(Request $request)
@@ -808,14 +872,14 @@ class ApplicationController extends Controller
         }
 
         $formData = $data;
-        if($request->district!=''){
-            $dis=District::where('_id',$request->district)->first();
-            $formData['district_name']= $dis->name;
-           }
-           if($request->taluk!=''){
-             $taluk=Taluk::where('_id',$request->taluk)->first();
-             $formData['taluk_name']= $taluk->taluk_name;
-            }
+        if ($request->district != '') {
+            $dis = District::where('_id', $request->district)->first();
+            $formData['district_name'] = $dis->name;
+        }
+        if ($request->taluk != '') {
+            $taluk = Taluk::where('_id', $request->taluk)->first();
+            $formData['taluk_name'] = $taluk->taluk_name;
+        }
         $formData['signature'] = $signature;
         $request->flash();
         return view('application.mother_child_preview', compact('formData'));
@@ -849,7 +913,7 @@ class ApplicationController extends Controller
             'status' => 0
         ]);
 
-        return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
+        return redirect()->route('userMotherChildList')->with('status', 'Application Submitted Successfully.');
     }
 
     public function motherChildSchemeList(Request $request)
@@ -965,8 +1029,8 @@ class ApplicationController extends Controller
             $caste = $record->caste;
             $village =  $record->village;
             $created_at =  $record->created_at;
-            if(@$record->dob!=null) {
-                $dob=Carbon::parse(@$record->dob)->format('d-m-Y');
+            if (@$record->dob != null) {
+                $dob = Carbon::parse(@$record->dob)->format('d-m-Y');
             }
             $data_arr[] = array(
                 "id" => $id,
@@ -1117,7 +1181,7 @@ class ApplicationController extends Controller
             'status' => 0
         ]);
 
-        return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
+        return redirect()->route('userMarriageGrantList')->with('status', 'Application Submitted Successfully.');
     }
     public function marriageGrantList(Request $request)
     {

@@ -42,7 +42,7 @@
                                     </h1>
 
                                     @php
-                                        // dd($formData);
+                                            // dd($formData);
                                         $district = App\Models\District::where('_id', $formData['district'])->first();
                                         $birth_district = App\Models\District::where('_id', $formData['birth_district'])->first();
                                         $submitted_district = App\Models\District::where('_id', $formData['submitted_district'])->first();
@@ -50,7 +50,6 @@
                                         $taluk = App\Models\Taluk::where('_id', $formData['taluk'])->first();
 
                                         // dd($submitted_teo);
-
                                     @endphp
 
 
@@ -111,7 +110,7 @@
                                             <div class="col-6">
                                                 <label> {{ @$formData['address'] }} </label>
                                                 <br>{{ @$taluk->taluk_name }},
-                                                <br>{{ @$district->name }},
+                                                <br>{{ @$district->name}},
                                                 <br> {{ @$formData['pincode'] }}
                                             </div>
                                         </div>
@@ -256,7 +255,7 @@
                                                 <label> : </label>
                                             </div>
                                             <div class="col-6">
-                                                <label> {{ @$birth_district->name }} </label>
+                                                <label> {{ @$birth_district->name}} </label>
                                             </div>
                                         </div>
                                         <div class=" row paper-1">
@@ -396,16 +395,18 @@
                                     <br>
                                     <br>
 
+                                    {{-- <form action="{{ url('examApplicationStore') }}" method="POST"
+                                    enctype="multipart/form-data" onsubmit="return validateForm()">
+                                    @csrf --}}
                                     <form action="{{ url('examApplicationStore') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                        enctype="multipart/form-data" onsubmit="return validateForm()">
                                         @csrf
                                         <div class="row justify-content-center m-5">
                                             <div class="col-md-3">
                                                 <input type="hidden" name="formData"
                                                     value="{{ json_encode($formData) }}">
-                                                <input type="submit" class="btn-block btn btn-success"
-                                                    onclick="return confirm('Do you want to continue?')" value="Submit">
-
+                                                <button type="submit" class="btn-block btn btn-success"
+                                                    onclick="return confirm('Do you want to continue?')">Submit</button>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="btn_wrapper">
@@ -415,7 +416,7 @@
                                             </div>
                                         </div>
                                     </form>
-
+                                    
                                 </div>
 
 
@@ -430,14 +431,11 @@
     </div>
     <script>
         function validateForm() {
-
-            alert('hho');
-
             // Check if the required fields are filled
-            var parent_name = document.querySelector('[name="parent_name"]').value.trim();
-            var signature = document.querySelector('[name="signature"]').value.trim();
-            var student_name = document.querySelector('[name="student_name"]').value.trim();
-            var agree = document.querySelector('[name="agree"]').value.trim();
+            var parent_name = document.getElementsByName('parent_name')[0].value;
+            var signature = document.getElementsByName('signature')[0].value;
+            var student_name = document.getElementsByName('student_name')[0].value;
+            var agree = document.getElementsByName('agree')[0].value;
 
             if (parent_name === '' || signature === '' || student_name === '' || agree === '') {
                 alert('Please fill in all required fields.');
@@ -451,7 +449,10 @@
     <script>
         // edit button function
         function goback() {
-            return confirm('Are you sure? Do you want to edit this form!');
+            if (confirm('Are you sure ? Do you want to edit this form!. ')) {
+                window.history.back();
+            }
+            return
         }
     </script>
 @endsection

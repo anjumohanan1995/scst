@@ -86,6 +86,16 @@
 	</div>
     <!-- /main-content -->
 <meta name="csrf_token" content="{{ csrf_token() }}" />
+
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
+<script src="{{ asset('js/toastr.js') }}"></script>
+
+@if (session('status'))
+<script>
+    toastr.success('{{ session("status") }}', 'Success!')
+</script>
+@endif
 <script type="text/javascript">
 
 $(document).on("click",".deleteItem",function() {

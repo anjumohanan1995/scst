@@ -417,6 +417,8 @@ $formattedDate = $currentDate->toDateString();
               $date = $carbonDate->format('d-m-Y');
               $time = $carbonDate->format('g:i a');
               $edit='';
+
+
               if($role == "TEO"){
                 if($record->teo_status== 1){
                     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
@@ -481,6 +483,7 @@ $formattedDate = $currentDate->toDateString();
         //return redirect()->route('houseGrant.create')->withInput();
         return redirect()->route('houseGrant.create')->withInput();
     }
+
     public function teoApprove(Request $request){
         $id = $request->id;
 
@@ -503,6 +506,8 @@ $formattedDate = $currentDate->toDateString();
     
     }
     public function teoReject(Request $request){
+
+        // dd('holo');
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
