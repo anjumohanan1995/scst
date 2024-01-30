@@ -82,7 +82,7 @@ class MedEngStudentFundController extends Controller
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('date');
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 

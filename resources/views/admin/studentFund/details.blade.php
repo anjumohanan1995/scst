@@ -113,6 +113,7 @@
                                                 </td>
                                                 <td> {{ @$studentFund['income'] }} <br> @if($studentFund['income_certificate'])
                                                     <a href="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" target="_blank">View</a>
+                                                   
                                                     @endif</td>
                                             </tr>
                                             <tr>

@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class HouseManagementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -392,7 +396,7 @@ $formattedDate = $currentDate->toDateString();
                 $items->where('submitted_teo',$teo);
             }
 
-             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('date');
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
