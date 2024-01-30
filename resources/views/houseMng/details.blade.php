@@ -17,7 +17,7 @@
          @endif
       </div>
       <!-- /breadcrumb -->
- 
+  
       <div class="main-content-body">
          @if (session('success'))
          <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -28,10 +28,10 @@
          </div>
          @endif
          <!-- row -->
-         <!-- row -->
+         <!-- row --> 
          <div class="row row-sm">
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
-               <div class="card overflow-hidden" style="width: 113%;">
+               <div class="card overflow-hidden">
                   <div class="card-body p-5">
                      <div id="btnHide" class="row justify-content-end m-3">
                         <a style="width: 50px" onclick="printDiv()"><img
@@ -147,7 +147,7 @@
                               </div>
                               <div class="col-6">
                                  <label> 
-                                 {{ @$houseManagement['income'] }} 
+                                 {{ @$houseManagement['annual_income'] }} 
                                  </label>
                               </div>
                            </div>
@@ -300,7 +300,7 @@
                         <div class="w-100">
                            <div class="row w-100">
                               <div class="col-5">
-                                 <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള മറ്റു സംഗതികൾ
+                                 <label>12. മുൻഗണന ലഭിക്കുന്നതിനുള്ള അർഹത തെളിയിക്കുന്നതിനുമുള്ള
                                  </label><br>
                               </div>
                               <div class="col-1 w-100">
@@ -326,14 +326,16 @@
                               <div class="col-5">
                                  <label>സ്ഥലം
                                  </label>: {{ @$houseManagement['place'] }}<br>
-                                 <label>തീയതി
+                                 <label>
+                                    തീയതി
                                  </label>: {{date('d-m-Y')}}
                               </div>
                               <div class="col-6">
-                                 <label> അപേക്ഷകന്റെ ഒപ്പ് /
-                                 </label> :  @if($houseManagement['signature'])
+                                 @if($houseManagement['signature'])
                                  <img src="{{ asset('homeMng/' . @$houseManagement['signature']) }}" width="150px" height="70px">
                                  @endif
+                                 <label> അപേക്ഷകന്റെ ഒപ്പ് /
+                                 </label>  
                               </div>
                            </div>
                         </div>
@@ -372,7 +374,7 @@
                         <div class="col-md-4 mb-4">
                         </div>
                         <div class="col-md-6 mb-6">
-                           <a href="{{ route('userHouseGrantList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                           <a href="{{ route('adminHouseGrantList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
                            </a>  
                         </div>
                      </div>
@@ -381,10 +383,108 @@
                </div>
             </div>
          </div>
+         
+    
+
+      @if(@$houseManagement->teo_view_status==1)
+         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <div class="pt-2 card overflow-hidden">
+            
+               <div class="card-body">
+                  
+                        <div class="pb-2 row ">
+                           <div class="col-5">
+                              <label><i class="fas fa-eye" style="color: blue"></i>TEO Viewed Date  </label><br>
+                           </div>
+                           <div class="col-1 w-100">
+                              <label> :  
+                              </label>
+                           </div>
+                           <div class="col-6">
+                              <label> 
+                              {{ @$houseManagement['teo_view_date'] }}
+                              </label>
+                         
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="pb-2 row ">
+                     <div class="col-5">
+                        <label>Status  </label><br>
+                     </div>
+                     <div class="col-1 w-100">
+                        <label> :  
+                        </label>
+                     </div>
+                     <div class="col-6">
+                      @if(@$houseManagement->teo_status == null)
+                      <button class="btn btn-warning" >Pending</button>
+                      @elseif(@$houseManagement->teo_status == 1)
+                      <button class="btn btn-success" >Approved</button>
+                      @elseif(@$houseManagement->teo_status == 2)
+                      <button class="btn btn-danger" >Rejected</button> 
+                     @endif
+                     </div>
+            </div>
+            
+            @if(@$houseManagement->teo_status == 2)
+            <div class="pb-2 row ">
+               <div class="col-5">
+                  <label>Rejected Reason  </label><br>
+               </div>
+               <div class="col-1 w-100">
+                  <label> :  
+                  </label>
+               </div>
+               <div class="col-6">
+            {{ @$houseManagement->teo_status_reason }}
+            
+               </div>
       </div>
+      @endif
+      @if(@$houseManagement->teo_status != null)
+            <div class=" pb-2 row ">
+               <div class="col-5">
+                  @if(@$houseManagement->teo_status == 1)
+                  <label>Approved Date  </label>
+                  @elseif(@$houseManagement->teo_status == 2)
+                  <label>Rejected Date  </label>
+                 @endif
+                  
+                  <br>
+               </div>
+               <div class="col-1 w-100">
+                  <label> :  
+                  </label>
+               </div>
+               <div class="col-6">
+                  @if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+              
+               
+               </div>
+            </div>
+      @endif
+      
+               </div>
+            </div>
+         </div>
+          @endif
+
+
+       
+
     </div>
+   </div>
 </div>
 </div>
+<meta name="csrf_token" content="{{ csrf_token() }}" />
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
+<script src="{{ asset('js/toastr.js') }}"></script>
+
+
+
+   
 <script>
    $(document).ready(function() {
        	$('#example').DataTable();

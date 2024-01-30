@@ -253,6 +253,88 @@
                     </div>
                 </div>
                 </div>
+                @if( @$studentFund->teo_view_status==1)
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                   <div class="pt-2 card overflow-hidden">
+                   
+                      <div class="card-body">
+                         
+                               <div class="pb-2 row ">
+                                  <div class="col-5">
+                                     <label><i class="fas fa-eye" style="color: blue"></i>TEO Viewed Date  </label><br>
+                                  </div>
+                                  <div class="col-1 w-100">
+                                     <label> :  
+                                     </label>
+                                  </div>
+                                  <div class="col-6">
+                                     <label> 
+                                     {{ @$studentFund['teo_view_date'] }}
+                                     </label>
+                                
+                            </div>
+                         </div>
+                         <hr>
+                         <div class="pb-2 row ">
+                            <div class="col-5">
+                               <label>Status  </label><br>
+                            </div>
+                            <div class="col-1 w-100">
+                               <label> :  
+                               </label>
+                            </div>
+                            <div class="col-6">
+                             @if(@$studentFund->teo_status == null)
+                             <button class="btn btn-warning" >Pending</button>
+                             @elseif(@$studentFund->teo_status == 1)
+                             <button class="btn btn-success" >Approved</button>
+                             @elseif(@$studentFund->teo_status == 2)
+                             <button class="btn btn-danger" >Rejected</button> 
+                            @endif
+                            </div>
+                   </div>
+                
+                   @if(@$studentFund->teo_status == 2)
+                   <div class="pb-2 row ">
+                      <div class="col-5">
+                         <label>Rejected Reason  </label><br>
+                      </div>
+                      <div class="col-1 w-100">
+                         <label> :  
+                         </label>
+                      </div>
+                      <div class="col-6">
+                   {{ @$studentFund->teo_status_reason }}
+                   
+                      </div>
+             </div>
+             @endif
+                   @if(@$studentFund->teo_status != null)
+                   <div class=" pb-2 row ">
+                      <div class="col-5">
+                         @if(@$studentFund->teo_status == 1)
+                         <label>Approved Date  </label>
+                         @elseif(@$studentFund->teo_status == 2)
+                         <label>Rejected Date  </label>
+                        @endif
+                         
+                         <br>
+                      </div>
+                      <div class="col-1 w-100">
+                         <label> :  
+                         </label>
+                      </div>
+                      <div class="col-6">
+                         @if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+                     
+                      
+                      </div>
+             </div>
+             @endif
+                      </div>
+                   </div>
+                </div>
+                 @endif
             </div>
         </div>
     </div>
