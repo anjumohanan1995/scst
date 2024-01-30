@@ -133,6 +133,19 @@ class AnemiaFinanceController extends Controller
         }else{
             $signature = '';
         }
+
+        if ($request->hasfile('applicant_photo')) {
+
+            $applicant_photo = $request->applicant_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $applicant_photo->extension();
+
+            $applicant_photo->move(public_path('/applications/anemia_finance'), $imgfileName1);
+
+            $applicant_photos = $imgfileName1;
+        } else {
+            $applicant_photos = '';
+        }
+
         $formData = $data;
         $formData['caste_certificate']= $caste_certificate;
         $formData['adhaar_copy']= $adhaar_copy;
@@ -140,6 +153,7 @@ class AnemiaFinanceController extends Controller
         $formData['ration_card']= $ration_card;
         $formData['medical_certificate']= $medical_certificate;
         $formData['signature']= $signature;
+        $formData['applicant_photo'] = $applicant_photos;
         $request->flash();
         return view('application.anemia_finance_preview', compact('formData'));
 
@@ -173,6 +187,7 @@ class AnemiaFinanceController extends Controller
             'is_medical_certificate_submitted' => @$data['is_medical_certificate_submitted'],
             'medical_certificate' => $data['medical_certificate'],  
             'signature' => $data['signature'],  
+            'applicant_photo' => @$data['applicant_photo'],
             'date' => date('d-m-Y'),
             'place' => $data['place'],            
             'user_id' =>Auth::user()->id, 
@@ -181,7 +196,7 @@ class AnemiaFinanceController extends Controller
             'status' =>0
         ]);
 
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+        return redirect()->route('userAnemiaFinanceList')->with('status','Application Submitted Successfully.');
     }
 
 

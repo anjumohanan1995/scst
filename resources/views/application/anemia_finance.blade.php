@@ -209,25 +209,36 @@
                             </div><br>
                             {{--  <h3 style="text-align: center;"><u>സത്യപ്രസ്താവന</u></h3>
                             <p style="text-align: center;">മേൽ പ്രസ്താവിച്ച വിവരങ്ങൾ പൂർണമായും സത്യമാണെന്ന് ബോധിപ്പിക്കുന്നു</p>  --}}
-                            <div class="row">   
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label">സ്ഥലം / Place </label>
-                                    <input type="text" class="form-control"  name="place" id="place" value="{{ old('place') }}" placeholder="" />
-                                    @error('place')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label">ഒപ്പ് / Signature</label>
-                                    <input type="file" class="form-control"  name="signature" id="signature" value="" placeholder="" onchange="validateSignature()" />
-                                    <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
-
-                                    @error('signature')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                    <div id="errorSignature" style="color:red;"></div>
-                                </div>
-                            </div><br>
+                             <div class="row">
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">സ്ഥലം / Place </label>
+                                            <input type="text" class="form-control" name="place" id="place"
+                                                value="{{ old('place') }}" placeholder="" />
+                                            @error('place')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">അപേക്ഷകന്റെ ഫോട്ടോ / Applicant's photo</label>
+                                            <input type="file" class="form-control" name="applicant_photo" id="applicant_photo"
+                                                value="" placeholder="" onchange="validatePhoto()" accept=".jpg, .jpeg, .png" required />
+                                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
+                                            @error('signature')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <div id="errorPhoto" style="color:red;"></div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ് / Applicant's signature</label>
+                                            <input type="file" class="form-control" name="signature" id="signature"
+                                                value="" placeholder="" onchange="validateSignature()" accept=".jpg, .jpeg, .png" required />
+                                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
+                                            @error('signature')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <div id="errorSignature" style="color:red;"></div>
+                                        </div>
+                                    </div><br>
                         </div>
                     </div>
                 </div>
@@ -401,6 +412,26 @@
 
         
     }
+    function validatePhoto() {
+            var input = document.getElementById('applicant_photo');
+            var errorMessage = document.getElementById('errorPhoto');
+    
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // in bytes
+                var maxSize = 2 * 1024 * 1024; // 2MB
+    
+                if (fileSize > maxSize) {
+                    errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                    input.value = ''; // Clear the file input
+                    $("#submit").prop("disabled", true);
+                } else {
+                    errorMessage.innerText = '';
+                     $("#submit").prop("disabled", false);
+                }
+            }
+    
+            
+        }
    
 	$('#district').change(function(){
         var districtName = this.options[this.selectedIndex].text;

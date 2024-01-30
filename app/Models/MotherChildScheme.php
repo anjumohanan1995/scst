@@ -30,7 +30,7 @@ class MotherChildScheme extends Eloquent
         'date',
         'submitted_district',
         'submitted_teo',
-        'signature','user_id','status'
+        'signature','applicant_photo','user_id','status'
 
 
     ];

@@ -48,7 +48,17 @@
                                             പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ</u></b>
                                     </h4>
                                     </div>
-								
+                                    <div class="paper-1 pt-4">
+                                        <div class="w-100">
+                                           <div class="row w-100">
+                                              <div class="col-12" style="text-align: right;">
+                                                 @if(@$studentFund['applicant_image'])
+                                                    <img src="{{ asset('medEngStudentFund/' . @$studentFund['applicant_image']) }}" width= "100mm" height= "100mm";>
+                                                 @endif
+                                              </div>
+                                           </div>
+                                        </div>
+                                     </div>
                                    <br>
                                     <table id="preview_student_fund">
                                         <thead>
@@ -113,6 +123,7 @@
                                                 </td>
                                                 <td> {{ @$studentFund['income'] }} <br> @if($studentFund['income_certificate'])
                                                     <a href="{{ asset('medEngStudentFund/' . @$studentFund['income_certificate']) }}" target="_blank">View</a>
+                                                   
                                                     @endif</td>
                                             </tr>
                                             <tr>

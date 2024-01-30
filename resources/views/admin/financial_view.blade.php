@@ -32,10 +32,7 @@
                     <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                         <div class="card overflow-hidden" >
                             <div class="card-body pd-y-5">
-                                <div id="btnHide" class="row justify-content-end m-3">
-                                    <a style="width: 50px" onclick="printDiv()"><img
-                                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
-                                </div>
+                               
 
                                 <div id="print_content">
 
@@ -644,7 +641,7 @@
 
                                    
                                     <div>
-                                        <p>ശ്രീമാൻ{{ @$formData['husband_name'] }} ശ്രീമതി {{ @$formData['wife_name'] }}
+                                        <p>ശ്രീമാൻ {{ @$formData['husband_name'] }} ശ്രീമതി {{ @$formData['wife_name'] }}
                                             എന്നിവരായ ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശേരിയുമാണുന്ന
                                             ഇതിനാൽ പ്രതിജ്ഞ ചെയ്ത്‌കൊള്ളുന്നു </p>
                                     </div>
@@ -653,7 +650,12 @@
 
                                             <label>സ്ഥലം </label>  : {{ @$formData['place'] }}
                                         </div>
-
+                                        <div>
+                                            <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> :  @if($formData['husband_photo'])
+                                            {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="400" height="200"></iframe> --}}
+                                            <img src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="120px" height="60px">
+                                            @endif
+                                        </div>
                                         <div>
                                             <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($formData['husband_sign'])
                                             {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe> --}}
@@ -676,7 +678,11 @@
 
                                         </div>
 
-
+                                        <div>
+                                            <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if($formData['wife_photo'])
+                                            <img src="{{ asset('sign/wife/' . @$formData['wife_photo']) }}" width="120px" height="60px">
+                                            @endif
+                                        </div>
 
                                         <div class="text">
 
@@ -817,15 +823,6 @@
             }
         }
         //print preview function.
-              function printDiv() {
-        var printContents = document.getElementById('print_content').innerHTML;
-    var originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = printContents;
-
-    window.print();
-
-    document.body.innerHTML = originalContents;
-            }
+             
     </script>
 @endsection

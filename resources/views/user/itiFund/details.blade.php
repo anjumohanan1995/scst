@@ -51,6 +51,17 @@
                                     <b><u>ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്</u></b>
                                 </h4>
                                 </div>
+                                <div class="paper-1 pt-4">
+                                    <div class="w-100">
+                                       <div class="row w-100">
+                                          <div class="col-12" style="text-align: right;">
+                                             @if(@$studentFund['applicant_image'])
+                                                <img src="{{ asset('itiStudentFund/' . @$studentFund['applicant_image']) }}" width= "100mm" height= "100mm";>
+                                             @endif
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
                             
                                <br>
                                 <table id="preview_student_fund">

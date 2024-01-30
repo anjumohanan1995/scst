@@ -15,6 +15,10 @@ use Illuminate\Support\Str;
 
 class ItiScholarshipController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,9 +54,10 @@ class ItiScholarshipController extends Controller
             'income_certificate' => 'max:2048',
             // 'caste' => 'required',
              'caste_certificate' => 'max:2048',
-             'signature' => 'max:2048',
-            // 'parent_name' => 'required',
-             'parent_signature' => 'max:2048',
+             'signature' => 'required|max:2048',
+             // 'parent_name' => 'required',
+              'parent_signature' => 'required|max:2048',
+              'applicant_image' => 'required|max:2048',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',
             
@@ -64,7 +69,18 @@ class ItiScholarshipController extends Controller
         }
         $data = $request->all();
        
-      
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/itiStudentFund'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
@@ -140,6 +156,7 @@ class ItiScholarshipController extends Controller
                     $formData['institution_name']= $inst->name;
                    }
       $formData['signature']= $signature;
+      $formData['applicant_image']= $applicant_image;
       $formData['parent_signature']= $parent_signature;
       $formData['caste_certificate']= $caste_certificate;
       $formData['income_certificate']= $income_certificate;
@@ -226,6 +243,7 @@ class ItiScholarshipController extends Controller
             'signature' => @$data['signature'],
             'parent_name' => @$data['parent_name'],
             'parent_signature' => @$data['parent_signature'],
+            'applicant_image' => @$data['applicant_image'],
             'date' => @$data['date'],
             'user_id' =>Auth::user()->id, 
             'status' =>0,

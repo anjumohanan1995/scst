@@ -195,13 +195,14 @@
                                     </p>
                                 </div>
                                 <div class="d-flex row">
-                                    <div class="col-6">
+                                    <div class="col-4">
 
                                         <label>സ്ഥലം: {{ @$formData['place'] }} </label><br>
 
                                     </div>
-
-                                    <div  class="col-6"">
+                                    <div  class="col-4">
+                                    </div>
+                                    <div  class="col-4">
 
                                         <div>
                                             <label> പേര്: {{ @$formData['name'] }} 
@@ -212,13 +213,20 @@
 
                                 </div>
                                 <div class="d-flex row">
-                                    <div class="col-6">
+                                    <div class="col-4">
 
                                         <label>തീയതി : {{ @date('d-m-Y') }}</label><br>
 
                                     </div>
-
-                                    <div class="col-6">
+                                    <div  class="col-4">
+                                    <label>  ഫോട്ടോ
+                                                :   
+                                                @if($formData['applicant_photo'])
+                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['applicant_photo']) }}" width="120px" height="60px">
+                                           @endif
+                                            </label>
+                                    </div>
+                                    <div class="col-4">
 
                                             <label> ഒപ്പ്
                                                 :   

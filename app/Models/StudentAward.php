@@ -34,7 +34,8 @@ class StudentAward extends Eloquent
         'date',
         'submitted_district',
         'submitted_teo',
-        'user_id','status'
+        'user_id','status',
+        'applicant_image'
 
 
     ];

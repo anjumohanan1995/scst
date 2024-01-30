@@ -200,13 +200,13 @@ class UserHomeController extends Controller
 
     public function getUserExamList(Request $request)
     {
+
         $name = $request->name;
         $mobile = $request->mobile;
         $role = $request->role;
         $user_id = Auth::user()->id;
 
         if ($request->from_date != '') {
-
             $from_date  = date("M d,Y", strtotime($request->from_date));
             $stDate = new Carbon($from_date);
         }
@@ -276,7 +276,7 @@ class UserHomeController extends Controller
             $items->where('mobile', $mobile);
         }
         if ($name != "") {
-            $items->where('name', 'like', "%" . $name . "%");
+            $items->where('school_name', 'like', "%" . $name . "%");
         }
         if ($role != "") {
             $items->where('role', $role);
@@ -329,11 +329,56 @@ class UserHomeController extends Controller
         return response()->json($response);
     }
 
+    public function teoApprove(Request $request)
+    {
+        $id = $request->id;
+
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        $houseGrant = ExamApplication::where('_id', $request->id)->first();
+
+
+
+        $houseGrant->update([
+            'teo_status' => 1,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+        ]);
+
+
+        return response()->json([
+            'success' => 'Exam Application Scheme Application approved successfully.'
+        ]);
+    }
+    public function teoReject(Request $request)
+    {
+        $id = $request->id;
+        $reason = $request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        $houseGrant = ExamApplication::where('_id', $request->id)->first();
+
+
+
+        $houseGrant->update([
+            'teo_status' => 2,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+
+
+        return response()->json([
+            'success' => 'Exam Application Scheme Application Rejected successfully.'
+        ]);
+    }
+
 
     public function userExamApplicationView($id)
     {
         $formData = ExamApplication::where('_id', $id)->first();
-        $formData = ExamApplication::with('submittedDistrict','submittedTeo','districtRelation', 'birthDistrictRelation', 'talukName')->where('_id', $id)->first();
+        $formData = ExamApplication::with('submittedDistrict', 'submittedTeo', 'districtRelation', 'birthDistrictRelation', 'talukName')->where('_id', $id)->first();
 
         // $formData->load('submittedDistrict', 'submittedTeo');
 
@@ -455,10 +500,10 @@ class UserHomeController extends Controller
             $caste = $record->caste;
             $village =  $record->village;
             $created_at =  $record->created_at;
-            if(@$record->dob!=null) {
-                $dob=Carbon::parse(@$record->dob)->format('d-m-Y');
+            if (@$record->dob != null) {
+                $dob = Carbon::parse(@$record->dob)->format('d-m-Y');
             }
-           
+
             $data_arr[] = array(
                 "id" => $id,
                 "name" => $name,
@@ -467,8 +512,8 @@ class UserHomeController extends Controller
                 "caste" => $caste,
                 "village" => $village,
 
-                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i:s') ,                        
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMotherChildScheme/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i:s'),
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMotherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
         }
@@ -571,8 +616,8 @@ class UserHomeController extends Controller
                 "current_address" => $current_address,
                 "age" => $age,
                 "caste" => $caste,
-                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                 
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMarriageGrant/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s'),
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userMarriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
 
             );
@@ -674,7 +719,7 @@ class UserHomeController extends Controller
                 "address" => $address,
                 "dob" => $dob,
                 "district" => $district,
-                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s'),
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('userStudentAward/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );
@@ -776,8 +821,8 @@ class UserHomeController extends Controller
                 "address" => $address,
                 "dob" => $dob,
                 "district" => $district,
-                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                    
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('userAnemiaFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s'),
+                "edit" => '<div class="settings-main-icon"><a  href="' . url('userAnemiaFinance/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
 
             );
@@ -900,6 +945,4 @@ class UserHomeController extends Controller
 
         return view('user.single_earner_view', compact('formData'));
     }
-
-    
 }

@@ -38,7 +38,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">പേര് / Name </label>
                                             <input type="text" value="{{ old('name') }}" class="form-control"
-                                                placeholder="പേര്" name="name"  />
+                                                placeholder="പേര്" name="name" required />
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -140,7 +140,7 @@
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി / Expected date of delivery </label>
+                                            <label class="form-label">പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി /<br> Expected date of delivery </label>
                                             <input type="date" class="form-control" name="expected_date_of_delivery"
                                                 id="expected_date_of_delivery" value="{{ old('expected_date_of_delivery') }}"
                                                 placeholder="" />
@@ -160,7 +160,7 @@
                                         </div>
                                     </div><br>
                                     <div class="row">
-                                        <div class="col-md-6 mb-6">
+                                        <div class="col-md-4 mb-4">
                                             <label class="form-label">സ്ഥലം / Place </label>
                                             <input type="text" class="form-control" name="place" id="place"
                                                 value="{{ old('place') }}" placeholder="" />
@@ -168,11 +168,21 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="col-md-6 mb-6">
+                                        <div class="col-md-4 mb-4">
+                                            <label class="form-label">അപേക്ഷകന്റെ ഫോട്ടോ / Applicant's photo</label>
+                                            <input type="file" class="form-control" name="applicant_photo" id="applicant_photo"
+                                                value="" placeholder="" onchange="validatePhoto()" accept=".jpg, .jpeg, .png" required />
+                                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
+                                            @error('signature')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <div id="errorPhoto" style="color:red;"></div>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
                                             <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ് / Applicant's signature</label>
                                             <input type="file" class="form-control" name="signature" id="signature"
-                                                value="" placeholder="" onchange="validateSignature()" accept=".jpg, .jpeg, .png, .pdf" />
-                                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
+                                                value="" placeholder="" onchange="validateSignature()" accept=".jpg, .jpeg, .png" required />
+                                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -186,6 +196,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">   
+                                <h1
+                            style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                            അപേക്ഷ സമർപ്പിക്കുന്നത് 
+    
+                        </h1>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">District/ജില്ല  </label>
                                         <select id="submitted_district" name="submitted_district" class="form-control" required>
@@ -242,6 +257,26 @@
         function validateSignature() {
             var input = document.getElementById('signature');
             var errorMessage = document.getElementById('errorSignature');
+    
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // in bytes
+                var maxSize = 2 * 1024 * 1024; // 2MB
+    
+                if (fileSize > maxSize) {
+                    errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                    input.value = ''; // Clear the file input
+                    $("#submit").prop("disabled", true);
+                } else {
+                    errorMessage.innerText = '';
+                     $("#submit").prop("disabled", false);
+                }
+            }
+    
+            
+        }
+        function validatePhoto() {
+            var input = document.getElementById('applicant_photo');
+            var errorMessage = document.getElementById('errorPhoto');
     
             if (input.files.length > 0) {
                 var fileSize = input.files[0].size; // in bytes

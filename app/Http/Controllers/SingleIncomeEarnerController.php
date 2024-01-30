@@ -45,6 +45,18 @@ class SingleIncomeEarnerController extends Controller
         }
         $data = $request->all();
 
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/applications/single_earner'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
         if ($request->hasfile('caste_certificate')) {
 
             $image = $request->caste_certificate;
@@ -145,6 +157,7 @@ class SingleIncomeEarnerController extends Controller
         }
 
         $formData = $data;
+        $formData['applicant_image']= $applicant_image;
         $formData['caste_certificate']= $caste_certificate;
         $formData['adhaar_copy']= $adhaar_copy;
         $formData['passbook_copy']= $passbook_copy;
@@ -202,6 +215,8 @@ class SingleIncomeEarnerController extends Controller
             'job' => @$data['job'],
             'salary' => @$data['salary'],
             'annual_income' => @$data['annual_income'],
+            'applicant_image' => @$data['applicant_image'],
+            'signature' => @$data['signature'],
             'income_certificate' => @$data['income_certificate'],
             'income_source' => @$data['income_source'],
             'user_id' =>Auth::user()->id, 

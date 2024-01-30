@@ -82,7 +82,7 @@ class MedEngStudentFundController extends Controller
             }
            
 
-             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('date');
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
 
@@ -151,9 +151,10 @@ $i=$start;
          'income_certificate' => 'max:2048',
             // 'caste' => 'required',
              'caste_certificate' => 'max:2048',
-             'signature' => 'max:2048',
+             'signature' => 'required|max:2048',
             // 'parent_name' => 'required',
-             'parent_signature' => 'max:2048',
+             'parent_signature' => 'required|max:2048',
+             'applicant_image' => 'required|max:2048',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',
             
@@ -176,7 +177,18 @@ $i=$start;
         }
         $data = $request->all();
        
-      
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/medEngStudentFund'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
@@ -248,6 +260,7 @@ $i=$start;
                 }
       $formData['signature']= $signature;
       $formData['parent_signature']= $parent_signature;
+      $formData['applicant_image']= $applicant_image;
       $formData['caste_certificate']= $caste_certificate;
       $formData['income_certificate']= $income_certificate;
       $currentDate = Carbon::now();
@@ -283,6 +296,7 @@ $formattedDate = $currentDate->toDateString();
             'bank_branch' => @$data['bank_branch'],
             'signature' => @$data['signature'],
             'parent_name' => @$data['parent_name'],
+            'applicant_image' => @$data['applicant_image'],
             'parent_signature' => @$data['parent_signature'],
             'date' => @$data['date'],
             'user_id' =>Auth::user()->id, 
