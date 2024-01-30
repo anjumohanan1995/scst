@@ -205,7 +205,7 @@
                                     </div>
 
                                     <div class="row mt-5">
-                                        <div class="row d-flex flex-direction-row col-6">
+                                        <div class="row d-flex flex-direction-row col-4">
                                             <div class="row col-12">
                                                 <div class="col-3">
 
@@ -237,7 +237,19 @@
 
                                         </div>
 
-                                        <div class="col-6 d-flex">
+                                        <div class="col-4 d-flex">
+                                            <div class="row d-flex col-12">
+                                                <div class="col-8">
+                                                    @if ($formData['applicant_photo'])
+                                                 
+                                                        <img src="{{ asset('applications/mother_child_protection/' . @$formData['applicant_photo']) }}" width="120px" height="60px">
+                                                @endif
+                                                    <label>അപേക്ഷകന്റെ ഫോട്ടോ</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-4 d-flex">
                                             <div class="row d-flex col-12">
                                                 <div class="col-8">
                                                     @if ($formData['signature'])

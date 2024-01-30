@@ -34,6 +34,7 @@ class AnemiaFinance extends Eloquent
         'place',
         'date',
         'signature',
+        'applicant_photo',
         'submitted_district',
         'submitted_teo',
         'user_id','status'

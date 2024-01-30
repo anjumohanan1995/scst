@@ -820,6 +820,17 @@ class ApplicationController extends Controller
         } else {
             $signature = '';
         }
+        if ($request->hasfile('applicant_photo')) {
+
+            $applicant_photo = $request->applicant_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $applicant_photo->extension();
+
+            $applicant_photo->move(public_path('/applications/mother_child_protection'), $imgfileName1);
+
+            $applicant_photos = $imgfileName1;
+        } else {
+            $applicant_photos = '';
+        }
 
         $formData = $data;
         if($request->district!=''){
@@ -831,6 +842,7 @@ class ApplicationController extends Controller
              $formData['taluk_name']= $taluk->taluk_name;
             }
         $formData['signature'] = $signature;
+        $formData['applicant_photo'] = $applicant_photos;
         $request->flash();
         return view('application.mother_child_preview', compact('formData'));
     }
@@ -859,6 +871,7 @@ class ApplicationController extends Controller
             'submitted_teo' => $data['submitted_teo'],
             'date' => date('d-m-Y'),
             'signature' => @$data['signature'],
+            'applicant_photo' => @$data['applicant_photo'],
             'user_id' => Auth::user()->id,
             'status' => 0
         ]);
@@ -1062,12 +1075,24 @@ class ApplicationController extends Controller
         } else {
             $signature = '';
         }
+        if ($request->hasfile('applicant_photo')) {
+
+            $applicant_photo = $request->applicant_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $applicant_photo->extension();
+
+            $applicant_photo->move(public_path('/applications/marriage_grant_certificates'), $imgfileName1);
+
+            $applicant_photos = $imgfileName1;
+        } else {
+            $applicant_photos = '';
+        }
 
         $formData = $data;
 
         $formData['caste_certificate'] = $caste_certificate;
         $formData['income_certificate'] = $income_certificate;
         $formData['signature'] = $signature;
+        $formData['applicant_photo'] = $applicant_photos;
         $request->flash();
         return view('application.marriage_grant_preview', compact('formData'));
     }
@@ -1127,6 +1152,7 @@ class ApplicationController extends Controller
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
             'signature' => @$data['signature'],
+            'applicant_photo' => @$data['applicant_photo'],
             'user_id' => Auth::user()->id,
             'status' => 0
         ]);
