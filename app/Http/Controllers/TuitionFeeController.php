@@ -274,9 +274,28 @@ class TuitionFeeController extends Controller
     public function tuitionUserFeeView(Request $request, $id)
     {     
       
+
+
+
+        
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('h:i A');
+     
+        $tuitionFee=TuitionFee::find($id);
+        if($tuitionFee->teo_view_status==null && Auth::user()->role=='TEO'){
+            $tuitionFee->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+
         $formData = TuitionFee::where('_id',$id)->first();
        
-        return view('user.tuitionFee.details', compact('formData'));
+        return view('user.tuitionFee.details', compact('formData','tuitionFee'));
 
 
 
@@ -388,9 +407,25 @@ class TuitionFeeController extends Controller
 
     public function tuitionAdminFeeView(Request $request,$id)
     {
+
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('h:i A');
+     
+        $tuitionFee=TuitionFee::find($id);
+        if($tuitionFee->teo_view_status==null && Auth::user()->role=='TEO'){
+            $tuitionFee->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         $formData = TuitionFee::where('_id',$id)->first();
+
        
-        return view('admin.tuitionFee.details', compact('formData'));
+        return view('admin.tuitionFee.details', compact('formData','tuitionFee'));
     }
 
     
