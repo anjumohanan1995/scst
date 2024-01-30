@@ -17,7 +17,7 @@
          @endif
       </div>
       <!-- /breadcrumb -->
- 
+  
       <div class="main-content-body">
          @if (session('success'))
          <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -28,7 +28,7 @@
          </div>
          @endif
          <!-- row -->
-         <!-- row -->
+         <!-- row --> 
          <div class="row row-sm">
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                <div class="card overflow-hidden">
@@ -428,7 +428,7 @@
                </div>
       </div>
       @endif
-            @if(@$houseManagement->teo_status != null)
+      @if(@$houseManagement->teo_status != null)
             <div class=" pb-2 row ">
                <div class="col-5">
                   @if(@$houseManagement->teo_status == 1)
@@ -448,7 +448,7 @@
               
                
                </div>
-      </div>
+            </div>
       @endif
                </div>
             </div>
