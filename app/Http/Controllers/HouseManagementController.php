@@ -51,7 +51,8 @@ class HouseManagementController extends Controller
             'name' => 'required|regex:/^[a-zA-Z]+$/',
             'submitted_district' => 'required',
             'submitted_teo' => 'required', 
-            'signature' => 'max:2048',
+            'signature' => 'required|max:2048',
+            'applicant_image' => 'required|max:2048',
             'prove_eligibility_file' => 'max:2048',
             
            
@@ -70,7 +71,18 @@ class HouseManagementController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
-       
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/homeMng'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
       
         if ($request->hasfile('signature')) {
 
@@ -118,6 +130,7 @@ class HouseManagementController extends Controller
         }
        
       $formData['signature']= $signature;
+      $formData['applicant_image']= $applicant_image;
       $formData['prove_eligibility_file']= $eligibility_file;
       $currentDate = Carbon::now();
 
@@ -310,6 +323,7 @@ $formattedDate = $currentDate->toDateString();
             'place' => @$data['place'],
             'date' => @$data['date'],
             'signature' => @$data['signature'],
+            'applicant_image' => @$data['applicant_image'],
             'user_id' =>Auth::user()->id, 
             'status' =>0,
             'current_district_name' => @$data['current_district_name'],

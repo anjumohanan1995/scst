@@ -40,7 +40,17 @@
                                             പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ</u></b>
                                     </h4>
                                     </div>
-								
+                                    <div class="paper-1 pt-4">
+                                        <div class="w-100">
+                                           <div class="row w-100">
+                                              <div class="col-12" style="text-align: right;">
+                                                 @if(@$formData['applicant_image'])
+                                                    <img src="{{ asset('medEngStudentFund/' . @$formData['applicant_image']) }}" width= "100mm" height= "100mm";>
+                                                 @endif
+                                              </div>
+                                           </div>
+                                        </div>
+                                     </div>
                                    <br>
                                     <table id="preview_student_fund">
                                         <thead>
