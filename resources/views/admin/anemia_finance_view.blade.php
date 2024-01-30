@@ -96,7 +96,8 @@
                                             </td>
                                             <td>{{ @$formData['caste'] }} <br>
                                                 @if($formData['caste_certificate'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
+                                              
                                            @endif
                                             </td>
                                         </tr>
@@ -128,8 +129,8 @@
                                             </td>
                                             <td>{{ @$formData['adhaar_number'] }} <br>
                                                 @if($formData['adhaar_copy'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" width="400" height="200"></iframe>
-                                           @endif
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['adhaar_copy']) }}" target="_blank">View</a>
+                                              @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -140,7 +141,7 @@
                                             </td>
                                             <td>{{ @$formData['bank_account_details'] }} <br>
                                                 @if($formData['passbook_copy'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['passbook_copy']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -161,7 +162,7 @@
                                             </td>
                                             <td>{{ @$formData['ration_card_type'] }} <br>
                                                 @if($formData['ration_card'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['ration_card']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -174,7 +175,7 @@
                                             </td>
                                             <td>{{ @$formData['is_medical_certificate_submitted'] }} <br>
                                                 @if($formData['medical_certificate'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" width="400" height="200"></iframe>
+                                                <a href="{{ asset('applications/anemia_finance/' . @$formData['medical_certificate']) }}" target="_blank">View</a>
                                            @endif
                                             </td>
                                         </tr>
@@ -222,7 +223,7 @@
                                             <label> ഒപ്പ്
                                                 :   
                                                 @if($formData['signature'])
-                                                <iframe src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" width="400" height="200"></iframe>
+                                                <img src="{{ asset('applications/anemia_finance/' . @$formData['signature']) }}" width="120px" height="60px">
                                            @endif
                                             </label>
                                     </div>

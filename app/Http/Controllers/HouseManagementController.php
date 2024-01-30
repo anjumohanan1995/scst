@@ -462,7 +462,7 @@ $formattedDate = $currentDate->toDateString();
       $currenttime = $currentTimeInKerala->format('h:i A');
      
         $houseManagement=HouseManagement::find($id);
-        if($houseManagement->teo_view_status==null){
+        if($houseManagement->teo_view_status==null && Auth::user()->role=='TEO'){
             $houseManagement->update([
             "teo_view_status"=>1,
             "teo_view_id" =>Auth::user()->id,
@@ -480,14 +480,15 @@ $formattedDate = $currentDate->toDateString();
     public function teoApprove(Request $request){
         $id = $request->id;
 
-        $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = HouseManagement::where('_id', $request->id)->first();
 
       
 
         $houseGrant->update([
             'teo_status' => 1,
-            'teo_status_date' => $currentTime->toDateTimeString(),
+            'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
         ]);
 
@@ -500,14 +501,16 @@ $formattedDate = $currentDate->toDateString();
     public function teoReject(Request $request){
         $id = $request->id;
         $reason =$request->reason;
-        $currentTime = Carbon::now();
+      //  $currentTime = Carbon::now();
+      $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = HouseManagement::where('_id', $request->id)->first();
 
       
 
         $houseGrant->update([
             'teo_status' => 2,
-            'teo_status_date' => $currentTime->toDateTimeString(),
+            'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
             'teo_status_reason' => $reason,
         ]);

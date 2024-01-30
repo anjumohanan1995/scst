@@ -863,7 +863,7 @@ class ApplicationController extends Controller
             'status' => 0
         ]);
 
-        return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
+        return redirect()->route('userMotherChildList')->with('status', 'Application Submitted Successfully.');
     }
 
     public function motherChildSchemeList(Request $request)
@@ -1131,7 +1131,7 @@ class ApplicationController extends Controller
             'status' => 0
         ]);
 
-        return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
+        return redirect()->route('userMarriageGrantList')->with('status', 'Application Submitted Successfully.');
     }
     public function marriageGrantList(Request $request)
     {
