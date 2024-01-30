@@ -30,7 +30,7 @@ class FinancialHelp extends Eloquent
         'husband_age',
         'wife_age','register_details','certificate_details','apart_for_any_period',
         'duration','reason','financial_assistance',
-        'difficulties','user_id','status','husband_sign','wife_sign','husband_name','wife_name','agree',
+        'difficulties','user_id','status','husband_sign','wife_sign','husband_name','wife_name','agree','husband_photo','wife_photo',
         'submitted_district',
         'submitted_teo',
         'place','date','time',

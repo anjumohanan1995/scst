@@ -6,13 +6,9 @@
 		<div class="main-container container-fluid">
 		    <!-- breadcrumb -->
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-				<div class="col-xl-3">
-					<h4 class="content-title mb-2">Application List</h4>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - List</li>
-                        </ol>
-                    </nav>
+				<div class="col-xl-12">
+					<h4 class="content-title mb-2">മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം</h4>
+                  
 				</div>
 				{{-- <div class="d-flex my-auto col-xl-9 pe-0">
 					<div class="card">

@@ -706,6 +706,13 @@
 
                                             <label>സ്ഥലം </label>  : {{ @$formData['place'] }}
                                         </div>
+                                        <div>
+                                            <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> :  @if($formData['husband_photo'])
+                                            {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="400" height="200"></iframe> --}}
+                                            <img src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="120px" height="60px">
+                                            @endif
+                                        </div>
+
 
                                         <div>
                                             <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($formData['husband_sign'])
@@ -729,14 +736,18 @@
 
                                         </div>
 
+                                        <div>
+                                            <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if($formData['wife_photo'])
+                                            <img src="{{ asset('sign/wife/' . @$formData['wife_photo']) }}" width="120px" height="60px">
+                                            @endif
+                                        </div>
 
 
-                                        <div class="text">
+                                      
 
                                             <div>
                                                 <label> ഭാര്യയുടെ ഒപ്പ് </label>:  
                                                 @if($formData['wife_sign'])
-                                                    {{-- <iframe src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="400" height="200"></iframe> --}}
                                                     <img src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="120px" height="60px">
                                                 @endif
                                             </div>
@@ -749,12 +760,12 @@
                                
 
 
-                            </div>
+                            </div><br>
                             <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                    
-                                   
-                                    <div class="row">
+                                    <br> <br>
+                                    <div class="row justify-content-center">
                                         <div class="col-md-3">
                                             <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
                                             <button type="submit" class="btn-block btn btn-success" onclick="return confirm('Do you want to continue?')">Submit</button>
@@ -766,6 +777,7 @@
                                         </div>
                                     </div>
                             </form> 
+                            <br> <br>
                             {{-- <div class="bottom">
                                 <p>മേൽപ്പറഞ്ഞ കാര്യങ്ങളെപ്പറ്റി അനേഷിച്ചതിൽ അവ സത്യമണ്ണുന്നും ഈ വ്യക്തികൾ
                                     <br>ബുദ്ധിമുട്ടനുഭവിക്കുന്നവരാണെന്നും ബോദ്ധ്യപ്പെട്ടിരിക്കുന്നതായി ഞാൻ

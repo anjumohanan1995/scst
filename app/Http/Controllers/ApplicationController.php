@@ -312,7 +312,29 @@ class ApplicationController extends Controller
             $marriage_certificate = '';
         }
 
+        if ($request->hasfile('husband_photo')) {
 
+            $image = $request->husband_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/huband'), $imgfileName1);
+
+            $husband_photo = $imgfileName1;
+        } else {
+            $husband_photo = '';
+        }
+
+        if ($request->hasfile('wife_photo')) {
+
+            $image = $request->wife_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/wife'), $imgfileName1);
+
+            $wife_photo = $imgfileName1;
+        } else {
+            $wife_photo = '';
+        }
 
 
         $data = $request->all();
@@ -320,6 +342,8 @@ class ApplicationController extends Controller
         $formData['marriage_certificate'] = $marriage_certificate;
         $formData['husband_sign'] = $husband_sign;
         $formData['wife_sign'] = $wife_sign;
+        $formData['husband_photo'] = $husband_photo;
+        $formData['wife_photo'] = $wife_photo;
 
         $request->flash();
 
@@ -377,12 +401,14 @@ class ApplicationController extends Controller
             'register_office_name' => @$data['register_office_name'],
             'marriage_certificate' => @$data['marriage_certificate'],
             'place' => @$data['place'],
+            'husband_photo' => @$data['husband_photo'],
+            'wife_photo' => @$data['wife_photo'],
             'date' => date("d-m-Y"),
             'time' => date("H:i:s"),
             'status' => 0
         ]);
 
-        return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
+        return redirect()->route('userCoupleFinanceList')->with('status', 'Application Submitted Successfully.');
     }
 
     public function couplefinancialList(Request $request)

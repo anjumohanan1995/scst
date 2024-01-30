@@ -409,7 +409,31 @@
                                         <input type="text" class="form-control" placeholder="Place" name="place"  value="{{ old('place') }}"/>
                                     </div>
                                 </div><br>
+                                <div class="row">
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">Husband's Photo/ഭർത്താവിന്റെ ഫോട്ടോ </label>
+                                        <label class="form-label">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
+                                                മാത്രം.)</label>
+                                        <input type="file" class="form-control"  name="husband_photo"  id="husband_photo" onchange="validateHusbandPhoto()"  accept="image/*" required />
+                                        @error('husband_sign')
+                                                <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                        <div id="errorHusbandPhoto" style="color:red;"></div>
+                                    </div>
 
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">Wife's Photo/ ഭാര്യയുടെ ഫോട്ടോ </label>
+                                        <label class="form-label">(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
+                                                മാത്രം.)</label>
+                                        <input type="file"   accept="image/*" class="form-control"  name="wife_photo"  id="wife_photo"  onchange="validateWifePhoto()" required />
+                                        @error('wife_sign')
+                                                <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                        <div id="errorWifePhoto" style="color:red;"></div>
+                                    </div>
+
+                                </div>
+                                <br>
                             
                                 
                                 <div class="row">
@@ -417,7 +441,7 @@
                                         <label class="form-label">Husband's Sign/ഭർത്താവിന്റെ ഒപ്പ് </label>
                                         <label class="form-label">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</label>
-                                        <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*"/>
+                                        <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*" required />
                                         @error('husband_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -428,7 +452,7 @@
                                         <label class="form-label">Wife's Sign/ ഭാര്യയുടെ ഒപ്പ് </label>
                                         <label class="form-label">(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</label>
-                                        <input type="file"   accept="image/*" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()" />
+                                        <input type="file"   accept="image/*" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()" required />
                                         @error('wife_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -460,6 +484,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">   
+                                <h1
+                            style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                            അപേക്ഷ സമർപ്പിക്കുന്നത് 
+    
+                        </h1>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">District/ജില്ല  </label>
                                         <select id="submitted_district" name="submitted_district" class="form-control" required>
@@ -577,7 +606,46 @@ function validateImage() {
         
     }
     
+    function validateHusbandPhoto() {
+            var input = document.getElementById('husband_photo');
+            var errorMessage = document.getElementById('errorHusbandPhoto');
     
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // in bytes
+                var maxSize = 2 * 1024 * 1024; // 2MB
+    
+                if (fileSize > maxSize) {
+                    errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                    input.value = ''; // Clear the file input
+                    $("#submit").prop("disabled", true);
+                } else {
+                    errorMessage.innerText = '';
+                     $("#submit").prop("disabled", false);
+                }
+            }
+    
+            
+        }
+        function validateWifePhoto() {
+            var input = document.getElementById('wife_photo');
+            var errorMessage = document.getElementById('errorWifePhoto');
+    
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // in bytes
+                var maxSize = 2 * 1024 * 1024; // 2MB
+    
+                if (fileSize > maxSize) {
+                    errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+                    input.value = ''; // Clear the file input
+                    $("#submit").prop("disabled", true);
+                } else {
+                    errorMessage.innerText = '';
+                     $("#submit").prop("disabled", false);
+                }
+            }
+    
+            
+        }
 
 
 
