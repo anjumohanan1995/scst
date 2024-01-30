@@ -68,11 +68,25 @@ class TuitionFeeController extends Controller
         }else{
             $signature = '';
         }
+
+        if ($request->hasfile('photo')) {
+
+            $image = $request->photo;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/photo'), $imgfileName);
+
+            $photo = $imgfileName;
+
+        }else{
+            $photo = '';
+        }
       
         $formData = $data;
        
         
         $formData['signature']= $signature;
+        $formData['photo']= $photo;
         $currentDate = Carbon::now();
 
         // Format the date if needed
@@ -156,6 +170,8 @@ class TuitionFeeController extends Controller
             'place' => @$data['place'],
 
             'signature' => @$data['signature'],
+            'photo' => @$data['photo'],
+
             'submitted_district' => @$data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
             'dist_name' => @$data['dist_name'],

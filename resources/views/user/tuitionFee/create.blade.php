@@ -242,11 +242,19 @@
 
                                  <div class="col-md-6 mb-4">
                                     <label class="form-label">Applicant's Signature/Fingerprint/അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </label>
-                                    <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature"  id="signature" onchange="validateImage()"    accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                                    <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature"  id="signature" onchange="validateImage()"    accept="image/*" />
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                     <div id="errorMessage" style="color:red;"></div>
+                                </div>   
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Applicant's Photo/അപേക്ഷകന്റെ ഫോട്ടോ </label>
+                                    <input type="file" value="{{ old('photo') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഫോട്ടോ" name="photo"  id="photo" onchange="validateImageOne()"    accept="image/*" />
+                                    @error('photo')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                    <div id="errorMessageOne" style="color:red;"></div>
                                 </div>   
                             </div>  
                             
@@ -315,6 +323,25 @@ $('input[name="current_pincode"]').on('input', function() {
 function validateImage() {
     var input = document.getElementById('signature');
     var errorMessage = document.getElementById('errorMessage');
+
+    if (input.files.length > 0) {
+        var fileSize = input.files[0].size; // in bytes
+        var maxSize = 2 * 1024 * 1024; // 2MB
+
+        if (fileSize > maxSize) {
+            errorMessage.innerText = 'Error: Image size exceeds 2MB limit';
+            input.value = ''; // Clear the file input
+                $("#submit").prop("disabled", true);
+        } else {
+            errorMessage.innerText = '';
+                $("#submit").prop("disabled", false);
+        }
+    }
+}
+
+function validateImageOne() {
+    var input = document.getElementById('photo');
+    var errorMessage = document.getElementById('errorMessageOne');
 
     if (input.files.length > 0) {
         var fileSize = input.files[0].size; // in bytes

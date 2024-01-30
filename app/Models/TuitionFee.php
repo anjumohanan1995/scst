@@ -29,7 +29,7 @@ class TuitionFee extends Eloquent
         'student_name','relation',
         'school_name','class_number',
         'tuition_center',
-        'place','signature',
+        'place','signature','photo',
         'submitted_district',
         'dist_name',
         'submitted_teo',
