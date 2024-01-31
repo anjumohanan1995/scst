@@ -122,7 +122,9 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ആധാർ നമ്പർ / Aadhar Number  </label>
-                                    <input type="number" class="form-control"  name="adhaar_number" id="adhaar_number" value="{{ old('adhaar_number') }}" placeholder="" />
+                                    <input type="text" pattern="[0-9]{12}" maxlength="12" class="form-control"  name="adhaar_number" id="adhaar_number" value="{{ old('adhaar_number') }}" placeholder="" inputmode="numeric"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                                            
                                     @error('adhaar_number')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
