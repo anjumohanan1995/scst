@@ -182,7 +182,7 @@ class TuitionFeeController extends Controller
             'status' =>0
         ]);
 
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+        return redirect('userTuitionFeeList')->with('status','Application Submitted Successfully.');
 
     }
 

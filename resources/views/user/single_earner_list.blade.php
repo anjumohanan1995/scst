@@ -102,6 +102,16 @@
     </div>
     <!-- /main-content -->
     <meta name="csrf_token" content="{{ csrf_token() }}" />
+
+    {{-- toster code starts here . --}}
+    @if (session('status'))
+        <script>
+            toastr.success('{{ session('status') }}', 'Success!')
+        </script>
+    @endif
+    {{-- toster code ends here . --}}
+
+
     <script type="text/javascript">
         $(document).on("click", ".deleteItem", function() {
 

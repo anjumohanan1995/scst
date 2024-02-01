@@ -130,7 +130,7 @@ class StudentAwardController extends Controller
             'status' =>0
         ]);
 
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+        return redirect('userStudentAwardList')->with('status','Application Submitted Successfully.');
     }
 
     public function studentAwardList(Request $request)
