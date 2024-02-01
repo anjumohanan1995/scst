@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\ItiFund;
 use App\Models\AnemiaFinance;
 use App\Models\ExamApplication;
@@ -50,72 +51,78 @@ class HomeController extends Controller
     {
 
 
-       if (auth()->user()->role =='User'){
-        $user_id=Auth::user()->id;
-        $data['coupleFinanceCount'] = FinancialHelp::where('user_id',$user_id)->count();
-        $data['examCount'] = ExamApplication::where('user_id',$user_id)->count();
-        $data['motherChildCount'] = MotherChildScheme::where('user_id',$user_id)->count();
-        $data['marriageGrantCount'] = MarriageGrant::where('user_id',$user_id)->count();
-        $data['houseGrantCount'] = HouseManagement::where('user_id',$user_id)->count();
-        $data['itiFundCount'] = ItiFund::where('user_id',$user_id)->count();
+        if (auth()->user()->role == 'User') {
 
-        $data['studentAwardCount'] = StudentAward::where('user_id',$user_id)->count();
-        $data['anemiaFinanceCount'] = AnemiaFinance::where('user_id',$user_id)->count();
-        $data['singleEarnerCount'] = SingleIncomeEarner::where('user_id',$user_id)->count();
+            $user_id = Auth::user()->id;
+            $data['coupleFinanceCount'] = FinancialHelp::where('user_id', $user_id)->count();
+            $data['examCount'] = ExamApplication::where('user_id', $user_id)->count();
+            $data['motherChildCount'] = MotherChildScheme::where('user_id', $user_id)->count();
+            $data['marriageGrantCount'] = MarriageGrant::where('user_id', $user_id)->count();
+            $data['houseGrantCount'] = HouseManagement::where('user_id', $user_id)->count();
+            $data['itiFundCount'] = ItiFund::where('user_id', $user_id)->count();
 
-        $data['studentFundCount'] = MedEngStudentFund::where('user_id',$user_id)->count();
-        $data['childFinanceCount'] = ChildFinance::where('user_id', $user_id)->count();
-        $data['tuitionFeeCount'] = TuitionFee::where('user_id', $user_id)->count();
+            $data['studentAwardCount'] = StudentAward::where('user_id', $user_id)->count();
+            $data['anemiaFinanceCount'] = AnemiaFinance::where('user_id', $user_id)->count();
+            $data['singleEarnerCount'] = SingleIncomeEarner::where('user_id', $user_id)->count();
 
-            return view('user.dashboard',compact('data'));
-       }else{
-        if (auth()->user()->role =='TEO'){
-            $teo=Auth::user()->teo_name;
-            $data['coupleFinanceCount'] = FinancialHelp::where('submitted_teo',$teo)->where('status',0)->count();
-      //    dd($data['coupleFinanceCount']);
-            $data['examCount'] = ExamApplication::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['motherChildCount'] = MotherChildScheme::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['marriageGrantCount'] = MarriageGrant::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['houseGrantCount'] = HouseManagement::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['itiFundCount'] = ItiFund::where('submitted_teo',$teo)->where('status',0)->count();    
-            $data['studentAwardCount'] = StudentAward::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['anemiaFinanceCount'] = AnemiaFinance::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['singleEarnerCount'] = SingleIncomeEarner::where('submitted_teo',$teo)->where('status',0)->count();    
-            $data['studentFundCount'] = MedEngStudentFund::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['childFinanceCount'] = ChildFinance::where('submitted_teo',$teo)->where('status',0)->count();
-            $data['tuitionFeeCount'] = TuitionFee::where('submitted_teo',$teo)->where('status',0)->count();
+            $data['studentFundCount'] = MedEngStudentFund::where('user_id', $user_id)->count();
+            $data['childFinanceCount'] = ChildFinance::where('user_id', $user_id)->count();
+            $data['tuitionFeeCount'] = TuitionFee::where('user_id', $user_id)->count();
 
-            $data['approvedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedExamCount'] = ExamApplication::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedMotherChildCount'] = MotherChildScheme::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedMarriageGrantCount'] = MarriageGrant::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedHouseGrantCount'] = HouseManagement::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedItiFundCount'] = ItiFund::where('submitted_teo',$teo)->where('status',1)->count();    
-            $data['approvedStudentAwardCount'] = StudentAward::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedAnemiaFinanceCount'] = AnemiaFinance::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedSingleEarnerCount'] = SingleIncomeEarner::where('submitted_teo',$teo)->where('status',1)->count();    
-            $data['approvedStudentFundCount'] = MedEngStudentFund::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedChildFinanceCount'] = ChildFinance::where('submitted_teo',$teo)->where('status',1)->count();
-            $data['approvedTuitionFeeCount'] = TuitionFee::where('submitted_teo',$teo)->where('status',1)->count();
-            
-            $data['rejectedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedExamCount'] = ExamApplication::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedMotherChildCount'] = MotherChildScheme::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedMarriageGrantCount'] = MarriageGrant::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedHouseGrantCount'] = HouseManagement::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedItiFundCount'] = ItiFund::where('submitted_teo',$teo)->where('status',2)->count();    
-            $data['rejectedStudentAwardCount'] = StudentAward::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedAnemiaFinanceCount'] = AnemiaFinance::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedSingleEarnerCount'] = SingleIncomeEarner::where('submitted_teo',$teo)->where('status',2)->count();    
-            $data['rejectedStudentFundCount'] = MedEngStudentFund::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedChildFinanceCount'] = ChildFinance::where('submitted_teo',$teo)->where('status',2)->count();
-            $data['rejectedTuitionFeeCount'] = TuitionFee::where('submitted_teo',$teo)->where('status',2)->count();
-            return view('admin.dashboard',compact('data'));
-        }
-   
+            return view('user.dashboard', compact('data'));
+
+
+        } else {
+
+
+            if (auth()->user()->role == 'TEO') {
+                $teo = Auth::user()->teo_name;
+                $data['coupleFinanceCount'] = FinancialHelp::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['examCount'] = ExamApplication::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['motherChildCount'] = MotherChildScheme::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['marriageGrantCount'] = MarriageGrant::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['houseGrantCount'] = HouseManagement::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['itiFundCount'] = ItiFund::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['studentAwardCount'] = StudentAward::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['anemiaFinanceCount'] = AnemiaFinance::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['singleEarnerCount'] = SingleIncomeEarner::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['studentFundCount'] = MedEngStudentFund::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['childFinanceCount'] = ChildFinance::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['tuitionFeeCount'] = TuitionFee::where('submitted_teo', $teo)->where('status', 0)->count();
+
+                $data['approvedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedExamCount'] = ExamApplication::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedMotherChildCount'] = MotherChildScheme::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedMarriageGrantCount'] = MarriageGrant::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedHouseGrantCount'] = HouseManagement::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedItiFundCount'] = ItiFund::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedStudentAwardCount'] = StudentAward::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedAnemiaFinanceCount'] = AnemiaFinance::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedSingleEarnerCount'] = SingleIncomeEarner::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedStudentFundCount'] = MedEngStudentFund::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedChildFinanceCount'] = ChildFinance::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedTuitionFeeCount'] = TuitionFee::where('submitted_teo', $teo)->where('status', 1)->count();
+
+                $data['rejectedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedExamCount'] = ExamApplication::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedMotherChildCount'] = MotherChildScheme::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedMarriageGrantCount'] = MarriageGrant::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedHouseGrantCount'] = HouseManagement::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedItiFundCount'] = ItiFund::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedStudentAwardCount'] = StudentAward::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedAnemiaFinanceCount'] = AnemiaFinance::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedSingleEarnerCount'] = SingleIncomeEarner::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedStudentFundCount'] = MedEngStudentFund::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedChildFinanceCount'] = ChildFinance::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedTuitionFeeCount'] = TuitionFee::where('submitted_teo', $teo)->where('status', 2)->count();
+                return view('admin.dashboard', compact('data'));
+            }
+
             return view('admin.dashboard');
         }
     }
+
+    
     public function applicationForms()
     {
         return view('application.form');
@@ -249,33 +256,33 @@ class HomeController extends Controller
 
         echo json_encode($results);
     }
-    public function userData(){
-        $id=Auth::user()->id;
-        $data="";
-        if(Auth::user()->role=='User'){
-            $user=User::find($id);
-            if($user->bank_name== null && $user->bank_name== null && $user->passbook == null ){
+    public function userData()
+    {
+        $id = Auth::user()->id;
+        $data = "";
+        if (Auth::user()->role == 'User') {
+            $user = User::find($id);
+            if ($user->bank_name == null && $user->bank_name == null && $user->passbook == null) {
                 return response()->json([
-                    'user' => 'user', "data" =>"not-exist","user_data" =>$user
+                    'user' => 'user', "data" => "not-exist", "user_data" => $user
+                ]);
+            } else {
+                return response()->json([
+                    'user' => 'user', "data" => "exist", "user_data" => $user
                 ]);
             }
-            else{
-                return response()->json([
-                    'user' => 'user', "data" =>"exist","user_data" =>$user
-                ]);
-            }
-        }
-        else{
+        } else {
             return response()->json([
                 'user' => 'not-user'
             ]);
         }
     }
 
-    public function bankDetailsUpdate(Request $request){
-      
-        $user=User::where('_id',$request->id)->first();
-       // $input=$request->all();
+    public function bankDetailsUpdate(Request $request)
+    {
+
+        $user = User::where('_id', $request->id)->first();
+        // $input=$request->all();
         $passbook = '';
         if ($request->hasfile('passbook')) {
 
@@ -285,20 +292,17 @@ class HomeController extends Controller
             $image->move(public_path('/user'), $imgfileName);
 
             $passbook = $imgfileName;
-
-        }else{
+        } else {
             $passbook = '';
         }
         $user->update([
-            "passbook" =>$passbook,
-            "bank_name" =>$request->bank_name,
-            "account_no" =>$request->account_no,
-            "ifsc_code" =>$request->ifsc_code,
+            "passbook" => $passbook,
+            "bank_name" => $request->bank_name,
+            "account_no" => $request->account_no,
+            "ifsc_code" => $request->ifsc_code,
 
 
         ]);
         return response()->json(['success' => 'Bank Details Updated Successfully']);
-       
-    
     }
 }
