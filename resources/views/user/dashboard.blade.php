@@ -353,58 +353,58 @@
 
 
         <div class="modal fade" id="itiStudentModal" tabindex="-1" role="dialog"
-        aria-labelledby="applicationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <!-- Your form content goes here -->
-                <form>
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="applicationModalLabel">
-                            ഐ.റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള
-                                                        സ്കോളർഷിപ്പ്
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h4>
-                            <p> ഹാജരാക്കേണ്ട രേഖകൾ:</p>
-                            <p style="font-size: 11px;">(Max. filesize: 2 MB • Format: JPG, PNG, PDF) </p>
+            aria-labelledby="applicationModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <!-- Your form content goes here -->
+                    <form>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="applicationModalLabel">
+                                ഐ.റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള
+                                                            സ്കോളർഷിപ്പ്
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>
+                                <p> ഹാജരാക്കേണ്ട രേഖകൾ:</p>
+                                <p style="font-size: 11px;">(Max. filesize: 2 MB • Format: JPG, PNG, PDF) </p>
 
-                            <ul>
-                                <li>
-                                    അപേക്ഷകന്റെ ഫോട്ടോ (ഫോട്ടോ)
-                                    
-                                </li>  
-                                <li>
-                                    വരുമാന സർട്ടിഫിക്കറ്റ് (ഫോട്ടോ / ഡോക്യുമെന്റ്)
-                                    
-                                </li>
-                                <li>
-                                    ജാതി/ മതം സർട്ടിഫിക്കറ്റ് (ഫോട്ടോ / ഡോക്യുമെന്റ്)
-                                    
-                                </li>
-                                <li>
-                                    രക്ഷാകർത്താവിന്റെ ഒപ്പ്  (ഫോട്ടോ)
-                                    
-                                </li>
-                                <li>
-                                    അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
-                                    
-                                </li>  
-                               
-                            </ul>
-                        </h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="{{ url('iti-scholarship') }}" class="btn btn-primary"> Continue</a>
-                    </div>
-                </form>
+                                <ul>
+                                    <li>
+                                        അപേക്ഷകന്റെ ഫോട്ടോ (ഫോട്ടോ)
+                                        
+                                    </li>  
+                                    <li>
+                                        വരുമാന സർട്ടിഫിക്കറ്റ് (ഫോട്ടോ / ഡോക്യുമെന്റ്)
+                                        
+                                    </li>
+                                    <li>
+                                        ജാതി/ മതം സർട്ടിഫിക്കറ്റ് (ഫോട്ടോ / ഡോക്യുമെന്റ്)
+                                        
+                                    </li>
+                                    <li>
+                                        രക്ഷാകർത്താവിന്റെ ഒപ്പ്  (ഫോട്ടോ)
+                                        
+                                    </li>
+                                    <li>
+                                        അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                                        
+                                    </li>  
+                                
+                                </ul>
+                            </h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a href="{{ url('iti-scholarship') }}" class="btn btn-primary"> Continue</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
          <div class="modal fade" id="tutionStudentModal" tabindex="-1" role="dialog"
             aria-labelledby="applicationModalLabel" aria-hidden="true">
@@ -675,7 +675,10 @@
                                         ലഭിച്ച സർട്ടിഫിക്കറ്റ് (അസൽ) ഹാജരാക്കണം )
                                     </li>
                                     <li>
-                                        അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                                        അപേക്ഷകന്റെ ഒപ്പ് 
+                                    </li>
+                                    <li>
+                                        അപേക്ഷകന്റെ ഫോട്ടോ
                                     </li>
                                 </ol>
                             </h4>
@@ -756,11 +759,18 @@
                                         വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ
                                     </li>
                                     <li>
-                                        ഭർത്താവിന്റെ ഒപ്പ്(ഫോട്ടോ)
+                                        ഭർത്താവിന്റെ ഒപ്പ്
                                     </li>
                                     <li>
-                                        ഭാര്യയുടെ ഒപ്പ്(ഫോട്ടോ)
+                                        ഭാര്യയുടെ ഒപ്പ്
                                     </li>
+                                    <li>
+                                        ഭർത്താവിന്റെ ഫോട്ടോ
+                                    </li>
+                                    <li>
+                                        ഭാര്യയുടെ ഫോട്ടോ
+                                    </li>
+
                                 </ul>
                             </h4>
                         </div>
@@ -849,8 +859,12 @@
                       
                         <ul>
                             <li>
-                                അപേക്ഷകന്റെ ഒപ്പ് (ഫോട്ടോ)
+                                അപേക്ഷകന്റെ ഒപ്പ് 
                             </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഫോട്ടോ
+                            </li>
+                           
                         </ul>
                     </h4>
                     </div>
@@ -1006,7 +1020,10 @@
                         <ul>
                      
                             <li>
-                                രക്ഷിതാവിന്റെ ഒപ്പും (ഫോട്ടോ)
+                                രക്ഷിതാവിന്റെ ഒപ്പും
+                            </li>
+                            <li>
+                                അപേക്ഷകന്റെ ഫോട്ടോ
                             </li>
                         </ul>
                     </h4>
