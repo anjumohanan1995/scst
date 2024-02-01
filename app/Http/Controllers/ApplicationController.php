@@ -671,7 +671,9 @@ class ApplicationController extends Controller
             'status' => 0
         ]);
 
-        return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
+        return redirect()->route('userExamList')->with('status', 'Application Submitted Successfully.');
+
+       // return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
     }
 
     public function examApplicationList(Request $request)

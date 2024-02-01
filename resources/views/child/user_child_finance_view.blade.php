@@ -543,8 +543,9 @@
                                             <div>
                                                 <label>കുട്ടിയുടെ ഫോട്ടോ </label>:  
                                                @if($formData['child_signature'])
+                                               <img src="{{ asset('/child/child_signature/' . @$formData['child_signature']) }}" width="120px" height="60px">
 
-                                                        <a href="{{ asset('/child/child_signature/' . @$formData['child_signature']) }}" target="_blank">View</a>
+                                                        {{-- <a href="{{ asset('/child/child_signature/' . @$formData['child_signature']) }}" target="_blank">View</a> --}}
                                                             {{-- <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
                                                         @endif 
                                             </div>
