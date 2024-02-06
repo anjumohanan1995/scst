@@ -9,7 +9,7 @@
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
 
                 <h4 class="content-title mb-2">Scholarship for students in ITI/Training Centres / ഐ .റ്റി.ഐ /ട്രൈനിംഗ്
-                    സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്
+                    സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ് 
 
                 </h4>
 

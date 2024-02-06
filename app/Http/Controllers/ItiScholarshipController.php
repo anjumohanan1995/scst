@@ -49,6 +49,7 @@ class ItiScholarshipController extends Controller
      */
     public function store(Request $request)
     {
+    
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'income_certificate' => 'max:2048',
@@ -263,7 +264,7 @@ class ItiScholarshipController extends Controller
         ]);
 
 
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+        return redirect('userTuitionFeeList')->with('status','Application Submitted Successfully.');
 
     }
 

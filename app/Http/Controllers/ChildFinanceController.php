@@ -148,7 +148,9 @@ class ChildFinanceController extends Controller
             'status' =>0
         ]);
 
-        return redirect()->route('home')->with('success','Application Submitted Successfully.');
+        return redirect()->route('userchildFinanceList')->with('status', 'Application Submitted Successfully.');
+
+       // return redirect()->route('home')->with('success','Application Submitted Successfully.');
 
     }
 

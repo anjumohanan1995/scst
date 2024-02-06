@@ -493,6 +493,39 @@
 
                                     </div>
 
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label> അപേക്ഷകന്റെ ഫോട്ടോ </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+
+                                                   @if($formData['photo'])
+                                            {{-- <iframe src="{{ asset('tuition/' . @$formData['signature']) }}" width="400" height="200"></iframe> --}}
+
+                                            <img src="{{ asset('photo/' . @$formData['photo']) }}" width="120px" height="60px">
+                                            @endif 
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+
 
 
                                         

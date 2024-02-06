@@ -347,7 +347,7 @@
     </div>
     <!-- End Department -->
 <!-- Start Featured Section -->	
-<section class="featured-section section-ptb" data-aos="fade-up">
+{{-- <section class="featured-section section-ptb" data-aos="fade-up">
    <div class="featured-area show_navigation">
       <div class="container">
          <div class="row">
@@ -390,10 +390,10 @@
          </div>
       </div>
    </div>
-</section>
+</section> --}}
 <!-- End Our Team Carousel -->
 <!-- Start Events Section -->
-<section class="blog-section semi_dark_bg section-ptb" data-aos="fade-up">
+{{-- <section class="blog-section semi_dark_bg section-ptb" data-aos="fade-up">
    <div class="blog-area">
       <div class="container">
          <div class="row">
@@ -456,7 +456,7 @@
          </div>
       </div>
    </div>
-</section>
+</section> --}}
 <!-- End Events Section -->
 <!-- Start Testimonials Section -->
 <section class="testimonials-section section-ptb" data-aos="fade-up">

@@ -178,7 +178,31 @@
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">ആരുടെ വിവാഹമാണോ ഉറപ്പിച്ചിരിക്കുന്നത് ആ പെൺകുട്ടിക്ക് അപേക്ഷകനുമായുള്ള ബന്ധം /The relationship of the girl with the applicant whose marriage is fixed   </label>
-                                    <input type="text" value="{{ old('relation_with_applicant') }}" class="form-control" placeholder="" name="relation_with_applicant" />
+                                    <!-- <input type="text" value="{{ old('relation_with_applicant') }}" class="form-control" placeholder="" name="relation_with_applicant" /> -->
+                                    <select class="form-select" name="relation_with_applicant">
+                                                <option value="" disabled>Select a relationship</option>
+                                                <option value="father" @if (old('relation_with_applicant') == 'father') selected @endif>
+                                                    Father / അച്ഛൻ</option>
+                                                <option value="mother" @if (old('relation_with_applicant') == 'mother') selected @endif>
+                                                    Mother / അമ്മ</option>
+                                                <option value="grandfather"
+                                                    @if (old('relation_with_applicant') == 'grandfather') selected @endif>Grandfather /
+                                                    മുത്തച്ഛൻ</option>
+                                                <option value="grandmother"
+                                                    @if (old('relation_with_applicant') == 'grandmother') selected @endif>Grandmother /
+                                                    മുത്തശ്ശി</option>
+                                                <option value="uncle" @if (old('relation_with_applicant') == 'uncle') selected @endif>
+                                                    Uncle / മാമൻ </option>
+                                                <option value="aunt" @if (old('relation_with_applicant') == 'aunt') selected @endif>
+                                                    Aunt / മാമി </option>
+                                                <option value="cousin" @if (old('relation_with_applicant') == 'cousin') selected @endif>
+                                                    Cousin / സഹോദര / സഹോദരി</option>
+                                                <option value="siblings"
+                                                    @if (old('relation_with_applicant') == 'siblings') selected @endif>Siblings / സഹോദര /
+                                                    സഹോദരി</option>
+                                                <option value="others" @if (old('relation_with_applicant') == 'others') selected @endif>
+                                                    Others / മറ്റുള്ളവ </option>
+                                            </select>
                                     
                                     @error('relation_with_applicant')
                                         <span class="text-danger">{{$message}}</span>
