@@ -329,8 +329,8 @@
                                 </a>
                             </li>
                             </li>
-                            @if (Auth::user()->role == 'Super Admin' || Auth::user()->role == 'Admin' || Auth::user()->role == 'TEO')
-                                @if (Auth::user()->role != 'TEO')
+                            @if (Auth::user()->role == 'Super Admin' || Auth::user()->role == 'Admin' || Auth::user()->role == 'TEO' || Auth::user()->role == 'TDO' || Auth::user()->role == 'Project Officer')
+                                @if (Auth::user()->role == 'Super Admin')
                                     <li class="slide">
                                         <a class="side-menu__item {{ \Request::route()->getName() == 'users.index' || \Request::route()->getName() == 'users.create' || \Request::route()->getName() == 'users.edit' ? 'active' : '' }}"
                                             href="{{ url('users') }}">

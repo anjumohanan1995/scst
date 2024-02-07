@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class HouseManagementController extends Controller
 {
@@ -383,6 +384,9 @@ $formattedDate = $currentDate->toDateString();
              if($role == "TEO"){
                 $totalRecord->where('submitted_teo',$teo);
             }
+            if($role == "TDO" || $role == "Project Officer"){
+                $totalRecord->where('submitted_teo',$teo)->where('teo_status',1);
+            }
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -397,7 +401,9 @@ $formattedDate = $currentDate->toDateString();
                 $totalRecordswithFilte->where('submitted_teo',$teo);
             }
            
-
+            if($role == "TDO" || $role == "Project Officer"){
+                $totalRecordswithFilte->where('submitted_teo',$teo)->where('teo_status',1);
+            }
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
@@ -409,7 +415,9 @@ $formattedDate = $currentDate->toDateString();
             if($role == "TEO"){
                 $items->where('submitted_teo',$teo);
             }
-
+            if($role == "TDO" || $role == "Project Officer"){
+                $items->where('submitted_teo',$teo)->where('teo_status',1);
+            }
              $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
 
@@ -431,6 +439,39 @@ $formattedDate = $currentDate->toDateString();
               $date = $carbonDate->format('d-m-Y');
               $time = $carbonDate->format('g:i a');
               $edit='';
+              if($role == "TDO" && $record->pjct_offcr_status == 1) {
+                $approved_status =" Approved By Project Officer";
+              }
+              else if($role == "Project Officer" && $record->tdo_status == 1){
+                $approved_status ="Approved By TDO ";
+              }
+              else{
+                $approved_status ="Approved  ";
+              }
+
+              if($role == "TDO" && $record->pjct_offcr_status == 2) {
+                $rejected_status =" Rejected By Project Officer";
+                $status_reason =Str::limit($record->pjct_offcr_status_reason, 10);
+              }
+              else if($role == "TDO" && $record->tdo_status == 2){
+                $rejected_status =" Rejected";
+                $status_reason =Str::limit($record->tdo_status_reason, 10);
+              
+              }
+              else if($role == "Project Officer" && $record->tdo_status == 2){
+                $rejected_status ="Rejected By TDO ";
+                $status_reason =Str::limit($record->tdo_status_reason, 10);
+              
+              }
+              else if($role == "Project Officer" && $record->pjct_offcr_status == 2){
+                $rejected_status ="Rejected ";
+                $status_reason =Str::limit($record->pjct_offcr_status_reason, 10);
+               
+              }
+              else{
+                $rejected_status ="Rejected ";
+              }
+
 
 
               if($role == "TEO"){
@@ -442,6 +483,20 @@ $formattedDate = $currentDate->toDateString();
               
                 }
                 else if($record->teo_status ==null){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                }
+               
+              }
+              else if($role == "TDO" || $role == "Project Officer"){
+               
+                if($record->tdo_status== 1 || $record->pjct_offcr_status== 1 ){
+                    $edit = '<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">'.$approved_status.'</div></div>';
+                }
+                else if($record->tdo_status ==2 || $record->pjct_offcr_status== 2){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">'.$rejected_status.'</div>&nbsp;&nbsp;<span>'.$status_reason.'</span></div>';
+              
+                }
+                else {
                     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
                 }
                
@@ -489,6 +544,20 @@ $formattedDate = $currentDate->toDateString();
             "teo_view_date" =>$date .' ' .$currenttime
             ]);
         }
+        else  if($houseManagement->tdo_view_status==null && Auth::user()->role=='TDO'){
+            $houseManagement->update([
+            "tdo_view_status"=>1,
+            "tdo_view_id" =>Auth::user()->id,
+            "tdo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+        else  if($houseManagement->pjct_offcr_view_status==null && Auth::user()->role=='Project Officer'){
+            $houseManagement->update([
+            "pjct_offcr_view_status"=>1,
+            "pjct_offcr_view_id" =>Auth::user()->id,
+            "pjct_offcr_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         return view('admin.houseMng.details', compact('houseManagement'));
     }
    
@@ -505,14 +574,29 @@ $formattedDate = $currentDate->toDateString();
       $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = HouseManagement::where('_id', $request->id)->first();
 
-      
-
+      if(Auth::user()->role == "TEO"){
         $houseGrant->update([
             'teo_status' => 1,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
         ]);
+      }
 
+       else  if(Auth::user()->role == "TDO"){
+        $houseGrant->update([
+            'tdo_status' => 1,
+            'tdo_status_date' => $currenttime,
+            'tdo_status_id' => Auth::user()->id,
+        ]);
+      }
+
+      else  if(Auth::user()->role == "Project Officer"){
+        $houseGrant->update([
+            'pjct_offcr_status' => 1,
+            'pjct_offcr_status_date' => $currenttime,
+            'pjct_offcr_status_id' => Auth::user()->id,
+        ]);
+      }
 
         return response()->json([
             'success' => 'House Grant Scheme Application approved successfully.'
@@ -530,14 +614,30 @@ $formattedDate = $currentDate->toDateString();
         $houseGrant = HouseManagement::where('_id', $request->id)->first();
 
       
-
+        if(Auth::user()->role == "TEO"){
         $houseGrant->update([
             'teo_status' => 2,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
             'teo_status_reason' => $reason,
         ]);
-
+        }
+        else  if(Auth::user()->role == "TDO"){
+            $houseGrant->update([
+                'tdo_status' => 2,
+                'tdo_status_date' => $currenttime,
+                'tdo_status_id' => Auth::user()->id,
+                'tdo_status_reason' => $reason,
+            ]);
+        }
+        else  if(Auth::user()->role == "Project Officer"){
+            $houseGrant->update([
+                'pjct_offcr_status' => 2,
+                'pjct_offcr_status_date' => $currenttime,
+                'pjct_offcr_status_id' => Auth::user()->id,
+                'pjct_offcr_status_reason' => $reason,
+            ]);
+          }
 
         return response()->json([
             'success' => 'House Grant Scheme Application Rejected successfully.'
