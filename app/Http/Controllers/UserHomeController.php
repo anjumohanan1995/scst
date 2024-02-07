@@ -489,8 +489,9 @@ class UserHomeController extends Controller
 
 
         $data_arr = array();
-
+        $i=$start;
         foreach ($records as $record) {
+            $i++;
             $id = $record->id;
             $name = $record->name;
             $address = $record->address;
@@ -505,6 +506,7 @@ class UserHomeController extends Controller
             }
 
             $data_arr[] = array(
+                "sl_no" => $i,
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,

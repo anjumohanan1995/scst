@@ -30,8 +30,31 @@ class MotherChildScheme extends Eloquent
         'date',
         'submitted_district',
         'submitted_teo',
-        'signature','applicant_photo','user_id','status'
+        'signature','applicant_photo','user_id','status',
 
+        'teo_view_status',
+        'teo_view_id',
+        'teo_view_date',
+        'teo_status',
+        'teo_status_id',
+        'teo_status_date',
+        'teo_status_reason',
+
+        'tdo_view_status',
+        'tdo_view_id',
+        'tdo_view_date',
+        'tdo_status',
+        'tdo_status_id',
+        'tdo_status_date',
+        'tdo_status_reason',
+
+        'pjct_offcr_view_status',
+        'pjct_offcr_view_id',
+        'pjct_offcr_view_date',
+        'pjct_offcr_status',
+        'pjct_offcr_status_id',
+        'pjct_offcr_status_date',
+        'pjct_offcr_status_reason',
 
     ];
 
@@ -53,4 +76,26 @@ class MotherChildScheme extends Eloquent
     }
 
     
+
+
+    public function prjUser()
+    {
+        return $this->belongsTo(User::class,'pjct_offcr_status_id');
+    }
+    public function tdoUser()
+    {
+        return $this->belongsTo(User::class,'tdo_status_id');
+    }
+    public function teoUser()
+    {
+        return $this->belongsTo(User::class,'teo_status_id');
+    }
+    public function district()
+    {
+        return $this->belongsTo(District::class,'submitted_district');
+    }
+    public function teo()
+    {
+        return $this->belongsTo(Teo::class,'submitted_teo');
+    }
 }

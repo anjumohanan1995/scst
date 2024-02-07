@@ -56,6 +56,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>Name</th>
                                             <th>Address</th>
                                             <th>Age/DOB </th>
@@ -176,7 +177,11 @@
                     }
                 },
 
-                columns: [{
+                columns: [
+                    {
+                        data: 'sl_no'
+                    },
+                    {
                         data: 'name'
                     },
                     {

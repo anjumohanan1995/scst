@@ -131,6 +131,9 @@ Route::get('/itiAdminFeeView/{id}', [App\Http\Controllers\ItiScholarshipControll
 Route::get('/motherChildSchemeList', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeList'])->name('motherChildSchemeList');
 Route::get('/getMotherChildList', [App\Http\Controllers\ApplicationController::class, 'getMotherChildList'])->name('getMotherChildList');
 Route::get('/motherChildScheme/{id}/view', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeView'])->name('motherChildSchemeView');
+Route::post('/motherChildScheme/approve', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeApprove'])->name('mother-child.approve');
+Route::post('/motherChildScheme/Reject', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeReject'])->name('mother-child.reject');
+
 
 Route::get('/marriageGrantForm', [App\Http\Controllers\ApplicationController::class, 'marriageGrantForm'])->name('marriageGrantForm');
 Route::post('/marriageGrantFormStore', [App\Http\Controllers\ApplicationController::class, 'marriageGrantFormStore'])->name('marriageGrantFormStore');
