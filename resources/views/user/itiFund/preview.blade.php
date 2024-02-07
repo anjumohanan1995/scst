@@ -68,19 +68,51 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
+                                                <td>പഞ്ചായത്തിൻ്റെ പേര്
+
+                                                </td>
+                                                <td>{{ @$formData['panchayath'] }} </td>
+                                            </tr>
+                                            <tr>
+                                            
+                                            <tr>
+                                                <td>3</td>
                                                 <td>കോഴ്‌സിന്റെ പേര്
 
                                                 </td>
                                                 <td>{{ @$formData['course_name'] }} </td>
                                             </tr>
                                             <tr>
-                                                <td>3</td>
+                                            <td>4</td>
+                                            <td>മെട്രിക് അല്ലെങ്കിൽ നോൺ മെട്രിക് ?
+
+                                            </td>
+                                            <td>{{ @$formData['metric_type'] }} </td>
+                                        </tr>
+                                        <tr>
+                                        <td>5</td>
+                                        <td>കോഴ്‌സിൻ്റെ ദൈർഘ്യം 
+
+                                        </td>
+                                        <td>{{ @$formData['course_duration'] }} </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>6</td>
+                                        <td>പ്രവേശന തീയതി
+                                        </td>
+                                        <td>@if(@$formData['admission_date']!=null) {{ \Carbon\Carbon::parse(@$formData['admission_date'])->format('d-m-Y') }}@endif</td>
+                                    </tr>
+                                    
+
+                                            <tr>
+                                                <td>7</td>
                                                 <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
                                                 </td>
                                                 <td>@if(@$formData['class_start_date']!=null) {{ \Carbon\Carbon::parse(@$formData['class_start_date'])->format('d-m-Y') }}@endif</td>
                                             </tr>
                                             <tr>
-                                                <td>4</td>
+                                                <td>8</td>
                                                 <td>അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത്
                                                 </td>
                                                 <td> @if(@$formData['admission_type'] == 'merit') 
@@ -96,7 +128,7 @@
                                                  </td>
                                             </tr>
                                             <tr>
-                                                <td>5</td>
+                                                <td>9</td>
                                                 <td>അപേക്ഷകന്റെ ജാതി/ മതം <br>
                                                     (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
 
@@ -105,7 +137,7 @@
                                                     <a href="{{ asset('itiStudentFund/' . @$formData['caste_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td>6</td>
                                                 <td>അപേക്ഷകന്റെ വരുമാനം <br>
                                                     (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
@@ -114,9 +146,9 @@
                                                 <td> {{ @$formData['income'] }} <br> @if($formData['income_certificate'])
                                                     <a href="{{ asset('itiStudentFund/' . @$formData['income_certificate']) }}" target="_blank">View</a>
                                                     @endif</td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr>
-                                                <td>7</td>
+                                                <td>10</td>
                                                 <td>വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് <br>നമ്പർ ഉണ്ടെങ്കിൽ
                                                     ബാങ്ക്
                                                     ശാഖ<br> /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം
@@ -132,6 +164,45 @@
                                                     <br>Account Number   : {{ @$formData['account_no']  }}
                                                     <br>IFSC Code : {{ @$formData['ifsc_code']  }}
                                                     @endif 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ
+                                                </td>
+                                                <td>
+                                                
+                                                  
+                                                    <br>Bank Branch  : {{ @$formData['parent_bank_branch']  }}
+                                                    <br>Account Number   : {{ @$formData['parent_account_no']  }}
+                                                    <br>IFSC Code : {{ @$formData['parent_ifsc_code']  }}
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>12</td>
+                                                <td>പ്രിൻസിപ്പൽ  അക്കൗണ്ട് വിശദാംശങ്ങൾ
+                                                </td>
+                                                <td>
+                                                
+                                                  
+                                                    <br>Bank Branch  : {{ @$formData['principal_bank_branch']  }}
+                                                    <br>Account Number   : {{ @$formData['principal_account_no']  }}
+                                                    <br>IFSC Code : {{ @$formData['principal_ifsc_code']  }}
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>13</td>
+                                                <td>ഹാജർ വിശദാംശങ്ങൾ 
+                                                </td>
+                                                <td>
+                                                
+                                                  
+                                                    @if($formData['attendance_doc'])
+                                                    <a href="{{ asset('itiStudentFund/' . @$formData['attendance_doc']) }}" target="_blank"> View </a>
+                                                    @endif 
+                                                    
                                                 </td>
                                             </tr>
 
@@ -220,7 +291,7 @@
                                     </div>
                                     <div class="row ">
 
-                                        <div class="col-6 d-flex">
+                                        {{-- <div class="col-6 d-flex">
                                             <span class="col-5"> രക്ഷാകർത്താവിന്റെ ഒപ്പ്
                                             </span>
                                             <span class="col-1"> :</span>
@@ -228,7 +299,7 @@
                                                 <img src="{{ asset('itiStudentFund/' . @$formData['parent_signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
-                                        </div>
+                                        </div> --}}
 
                                         <div class="col-6 d-flex">
                                             <span class="col-5"> രക്ഷാകർത്താവിന്റെ  പേര്</span>

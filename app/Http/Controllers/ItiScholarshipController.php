@@ -57,7 +57,7 @@ class ItiScholarshipController extends Controller
              'caste_certificate' => 'max:2048',
              'signature' => 'required|max:2048',
              // 'parent_name' => 'required',
-              'parent_signature' => 'required|max:2048',
+              'attendance_doc' => 'nullable|max:2048',
               'applicant_image' => 'required|max:2048',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',
@@ -94,17 +94,17 @@ class ItiScholarshipController extends Controller
         }else{
             $signature = '';
         }
-        if ($request->hasfile('parent_signature')) {
+        if ($request->hasfile('attendance_doc')) {
 
-            $image1 = $request->parent_signature;
+            $image1 = $request->attendance_doc;
             $imgfileName1 = time() . rand(100, 999) . '.' . $image1->extension();
 
             $image1->move(public_path('/itiStudentFund'), $imgfileName1);
 
-            $parent_signature = $imgfileName1;
+            $attendance_doc = $imgfileName1;
 
         }else{
-            $parent_signature = '';
+            $attendance_doc = '';
         }
         if ($request->hasfile('income_certificate')) {
 
@@ -158,7 +158,7 @@ class ItiScholarshipController extends Controller
                    }
       $formData['signature']= $signature;
       $formData['applicant_image']= $applicant_image;
-      $formData['parent_signature']= $parent_signature;
+      $formData['attendance_doc']= $attendance_doc;
       $formData['caste_certificate']= $caste_certificate;
       $formData['income_certificate']= $income_certificate;
       $currentDate = Carbon::now();
@@ -243,7 +243,7 @@ class ItiScholarshipController extends Controller
             'account_details' => @$data['account_details'],
             'signature' => @$data['signature'],
             'parent_name' => @$data['parent_name'],
-            'parent_signature' => @$data['parent_signature'],
+            'attendance_doc' => @$data['attendance_doc'],
             'applicant_image' => @$data['applicant_image'],
             'date' => @$data['date'],
             'user_id' =>Auth::user()->id, 
@@ -260,11 +260,22 @@ class ItiScholarshipController extends Controller
             'institution_name' => @$data['institution_name'],
             'current_institution' => @$data['current_institution'],
             'time' => @$data['time'],
-            
+
+            'panchayath' => $data['panchayath'],
+            'metric_type' => @$data['metric_type'],
+            'course_duration' => @$data['course_duration'],
+            'institution_type' => @$data['institution_type'],
+            'admission_date' => @$data['admission_date'],
+            'parent_bank_branch' => $data['parent_bank_branch'],
+            'parent_account_no' => @$data['parent_account_no'],
+            'parent_ifsc_code' => @$data['parent_ifsc_code'],
+            'principal_bank_branch' => @$data['principal_bank_branch'],
+            'principal_account_no' => @$data['principal_account_no'],
+            'principal_ifsc_code' => @$data['principal_ifsc_code'],
         ]);
 
 
-        return redirect('userTuitionFeeList')->with('status','Application Submitted Successfully.');
+        return redirect('userItiFundList')->with('status','Application Submitted Successfully.');
 
     }
 

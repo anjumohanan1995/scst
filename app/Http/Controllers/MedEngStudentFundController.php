@@ -153,7 +153,7 @@ $i=$start;
              'caste_certificate' => 'max:2048',
              'signature' => 'required|max:2048',
             // 'parent_name' => 'required',
-             'parent_signature' => 'required|max:2048',
+             'allotment_demo' => 'nullable|max:2048',
              'applicant_image' => 'required|max:2048',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',
@@ -171,6 +171,13 @@ $i=$start;
             $validator->sometimes('bank_branch', 'required', function ($input) {
                 return $input->account_details == 'yes';
             });
+        }
+        if ($request->input('admission_type') == 'others') {
+            $validator->sometimes('other_details', 'required', function ($input) {
+                return $input->admission_type == 'others';
+            });
+        
+           
         }
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -201,17 +208,17 @@ $i=$start;
         }else{
             $signature = '';
         }
-        if ($request->hasfile('parent_signature')) {
+        if ($request->hasfile('allotment_memo')) {
 
-            $image1 = $request->parent_signature;
+            $image1 = $request->allotment_memo;
             $imgfileName1 = time() . rand(100, 999) . '.' . $image1->extension();
 
             $image1->move(public_path('/medEngStudentFund'), $imgfileName1);
 
-            $parent_signature = $imgfileName1;
+            $allotment_memo = $imgfileName1;
 
         }else{
-            $parent_signature = '';
+            $allotment_memo = '';
         }
         if ($request->hasfile('income_certificate')) {
 
@@ -259,7 +266,7 @@ $i=$start;
                  $formData['teo_name']= $teo->teo_name;
                 }
       $formData['signature']= $signature;
-      $formData['parent_signature']= $parent_signature;
+      $formData['allotment_memo']= $allotment_memo;
       $formData['applicant_image']= $applicant_image;
       $formData['caste_certificate']= $caste_certificate;
       $formData['income_certificate']= $income_certificate;
@@ -297,7 +304,7 @@ $formattedDate = $currentDate->toDateString();
             'signature' => @$data['signature'],
             'parent_name' => @$data['parent_name'],
             'applicant_image' => @$data['applicant_image'],
-            'parent_signature' => @$data['parent_signature'],
+            'allotment_memo' => @$data['allotment_memo'],
             'date' => @$data['date'],
             'user_id' =>Auth::user()->id, 
             'status' =>0,
@@ -311,6 +318,9 @@ $formattedDate = $currentDate->toDateString();
             'current_district' => $data['current_district'],
             'current_taluk' => @$data['current_taluk'],
             'time' => @$data['time'],
+            'panchayath' => @$data['panchayath'],
+            'institution_type' => @$data['institution_type'],
+            'other_details' => @$data['other_details'],
         ]);
 
         return redirect()->route('MedicalEngineeringStudentFund.index')->with('status','Application Submitted Successfully.');

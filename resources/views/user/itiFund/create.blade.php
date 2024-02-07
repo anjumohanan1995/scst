@@ -93,58 +93,108 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">Course Name / കോഴ്‌സിന്റെ പേര്
+                                            <label class="form-label"> Name of panchayath (പഞ്ചായത്തിൻ്റെ പേര് )
+        
+                                            </label>
+                                            <input type="text" value="{{ old('panchayath') }}"  class="form-control" placeholder="പഞ്ചായത്തിൻ്റെ പേര്" name="panchayath" />
+                                           
+                                            @error('panchayath')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                       
+
+                                    </div><br>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Course Name / കോഴ്‌സിൻ്റെ പേര്
 
                                             </label>
                                             <input type="text" value="{{ old('course_name') }}" class="form-control"
-                                                placeholder="കോഴ്‌സിന്റെ പേര് " name="course_name" />
+                                                placeholder="കോഴ്‌സിൻ്റെ പേര് " name="course_name" />
 
                                             @error('course_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">
+                                                Metric or Non Metric ? / മെട്രിക് അല്ലെങ്കിൽ നോൺ മെട്രിക്?</label>
+                                                <div style="border: 1px solid black" class="form-control">
+                                                    <input type="radio" id="yes" name="metric_type" value="Metric"  {{ old('metric_type') == 'Metric' ? 'checked' : '' }}>&nbsp; &nbsp;
+                                                    <label for="yes">Metric /മെട്രിക്</label> &nbsp; &nbsp;
+                                                  
+                                                    <input type="radio" id="no" name="metric_type" value="Non Metric" {{ old('metric_type') == 'Non Metric' ? 'checked' : '' }}>
+                                                   
+                                                    &nbsp; &nbsp;<label for="No">Non Metric /
+                                                        നോൺ മെട്രിക്</label>
+                                                  
+        
+                                                   
+                                                </div>
+                                        </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">Current academic year & date / നടപ്പ് അദ്ധ്യയന വർഷം
-                                                ക്ലാസ് ആരംഭിച്ച തീയതി
+                                        <label class="form-label">Duration Of Course / കോഴ്‌സിൻ്റെ  ദൈർഘ്യം
+
+                                        </label>
+                                        <input type="text" value="{{ old('course_duration') }}" class="form-control"
+                                            placeholder="കോഴ്‌സിൻ്റെ  ദൈർഘ്യം" name="course_duration" />
+
+                                        @error('course_duration')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Type Of Institution (സ്ഥാപനത്തിൻ്റെ തരം )
+        
+                                            </label>
+                                            
+                                            <select class="form-select " id="institution_type" name="institution_type"
+                                            aria-label="Floating label select example">
+        
+                                            <option value="">Select Type Of Institution</option>
+                                            <option value="Government" {{ old('institution_type') == 'Government' ? 'selected' : '' }}>Government</option>
+                                            <option value="Aided" {{ old('institution_type') == 'Aided' ? 'selected' : '' }}>Aided</option>
+                                            <option value="Self-Financing" {{ old('institution_type') == 'Self-Financing' ? 'selected' : '' }}>Self-Financing</option>
+                                            <option value="Private" {{ old('institution_type') == 'Private' ? 'selected' : '' }}>Private</option>
+        
+                                        </select>
+                                            {{-- <input type="text" value="{{ old('institution_type') }}"  class="form-control" placeholder="സ്ഥാപനത്തിൻ്റെ തരം" name="institution_type" />
+                                            --}}
+                                            @error('institution_type')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div><br>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Date of Admission / പ്രവേശന തീയതി
+                                               
+                                            </label>
+                                            <input type="date" value="{{ old('admission_date') }}"
+                                                class="form-control"
+                                                placeholder="പ്രവേശന തീയതി "
+                                                name="admission_date" />
+
+                                            @error('admission_date')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Date of Commence of class / ക്ലാസ് ആരംഭിക്കുന്ന തീയതി
                                             </label>
                                             <input type="date" value="{{ old('class_start_date') }}"
                                                 class="form-control"
-                                                placeholder="നടപ്പ് അദ്ധ്യയന വർഷം ക്ലാസ് ആരംഭിച്ച തീയതി  "
+                                                placeholder="ക്ലാസ് ആരംഭിക്കുന്ന തീയതി"
                                                 name="class_start_date" />
 
                                             @error('class_start_date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label class="form-label">Applicants are admitted / അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത്
-
-                                            </label>
-                                            <div style="border: 1px solid black" class="form-control">
-
-
-                                                <input type="radio" id="merit" name="admission_type" value="merit" {{ old('admission_type') == 'merit' ? 'checked' : '' }}>
-                                                <label for="merit">merit / മെരിറ്റ് </label> &nbsp; &nbsp;
-                                                <input type="radio" id="reservation" name="admission_type"
-                                                    value="reservation" {{ old('admission_type') == 'reservation' ? 'checked' : '' }}>
-                                                <label for="innovation">reservation / സംവരണം </label> &nbsp; &nbsp;
-
-                                                <input type="radio" id="management" name="admission_type"
-                                                    value="management" {{ old('admission_type') == 'management' ? 'checked' : '' }}>
-                                                <label for="management">management / മാനേജ്‌മന്റ്</label>&nbsp; &nbsp;
-
-                                                <input type="radio" id="option3" name="admission_type"
-                                                    value="others" {{ old('admission_type') == 'others' ? 'checked' : '' }}>
-                                                <label for="others">others / മറ്റുള്ളവ</label>&nbsp; &nbsp;
-                                            </div>
-                                            @error('admission_type')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-
-                                        </div>
+                               
 
 
 
@@ -158,6 +208,33 @@
 
 
                                         <div class="row d-flex">
+                                            <div class="col-md-6 mb-6">
+                                                <label class="form-label">Applicants are admitted / അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത്
+    
+                                                </label>
+                                                <div style="border: 1px solid black" class="form-control">
+    
+    
+                                                    <input type="radio" id="merit" name="admission_type" value="merit" {{ old('admission_type') == 'merit' ? 'checked' : '' }}>
+                                                    <label for="merit">merit / മെരിറ്റ് </label> &nbsp; &nbsp;
+                                                    <input type="radio" id="reservation" name="admission_type"
+                                                        value="reservation" {{ old('admission_type') == 'reservation' ? 'checked' : '' }}>
+                                                    <label for="innovation">reservation / സംവരണം </label> &nbsp; &nbsp;
+    
+                                                    <input type="radio" id="management" name="admission_type"
+                                                        value="management" {{ old('admission_type') == 'management' ? 'checked' : '' }}>
+                                                    <label for="management">management / മാനേജ്‌മന്റ്</label>&nbsp; &nbsp;
+    
+                                                    <input type="radio" id="option3" name="admission_type"
+                                                        value="others" {{ old('admission_type') == 'others' ? 'checked' : '' }}>
+                                                    <label for="others">others / മറ്റുള്ളവ</label>&nbsp; &nbsp;
+                                                </div>
+                                                @error('admission_type')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+    
+                                            </div>
+                                            
                                             <div class="col-6 ">
                                                 <label class="form-label">Caste/Religion of Applicant (Certificate to be
                                                     produced) / അപേക്ഷകന്റെ ജാതി/ മതം (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
@@ -188,7 +265,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-6">
+                                            {{-- <div class="col-6">
                                                 <label class="form-label">Applicant's Income (certificate to be produced) /
                                                     അപേക്ഷകന്റെ വരുമാനം
                                                     (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
@@ -220,7 +297,7 @@
                                                         <span class="text-danger" id="errorincome"></span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                         </div><br>
 
@@ -306,7 +383,7 @@
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-6 mb-6">
+                                            {{-- <div class="col-md-6 mb-6">
                                                 <label class="form-label">Parent's signature / രക്ഷാകർത്താവിന്റെ ഒപ്പ്
                                                 </label>
                                                 <input type="file" class="form-control" accept="image/*"
@@ -322,8 +399,25 @@
                                                 @enderror
                                                 <br>
                                                 <span class="text-danger" id="errorParentSignature"></span>
-                                            </div>
+                                            </div> --}}
+                                            <div class="col-md-6 mb-6">
+                                                <label class="form-label">Attendance Details upload / ഹാജർ വിശദാംശങ്ങൾ അപ്‌ലോഡ് ചെയ്യുക
+                                                </label>
+                                                <input type="file" class="form-control" accept="image/*,.doc,.pdf"
+                                                    name="attendance_doc" id="attendance_doc" value=""
+                                                    placeholder="ഹാജർ വിശദാംശങ്ങൾ അപ്‌ലോഡ് ചെയ്യുക" />
 
+                                                <span class="small"> (File less than 2 mb. jpg ,png,doc, pdf only. / ഫയൽ: 2 എംബി
+                                                    കുറഞ്ഞത്, JPG/PDF
+                                                    മാത്രം.)</span>
+
+                                                @error('attendance_doc')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                                <br>
+                                                <span class="text-danger" id="errorAttendanceDoc"></span>
+                                            </div>
+                                         
 
                                         </div>
                                     </div>
@@ -360,6 +454,77 @@
                                         </div>
                                     </div><br>
 
+                                    <hr>
+                                    <label class="form-label"><b>Parent account Details /മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ</b></label>
+                                        <br>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-4">
+                                            Bank Branch  (ബാങ്ക് ശാഖ)
+                                        
+                                            <input type="text" value="{{ old('parent_bank_branch') }}"  class="form-control" placeholder="ബാങ്ക് ശാഖ" name="parent_bank_branch" value="{{ old('parent_bank_branch') }}">
+                                           
+                                        
+                                          @error('parent_bank_branch')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                             Account Number (അകൗണ്ട് നമ്പർ  )
+                                            
+                                            
+                                              
+                                              <input type="number" value="{{ old('parent_account_no') }}"  class="form-control" placeholder="അകൗണ്ട് നമ്പർ " name="parent_account_no" >
+                                              @error('parent_account_no')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                IFSC Code  (IFSC കോഡ്  )
+                                                
+                                                
+                                                  
+                                                  <input type="text" value="{{ old('parent_ifsc_code') }}"  class="form-control" placeholder="IFSC കോഡ്" name="parent_ifsc_code" >
+                                                  @error('parent_ifsc_code')
+                                                  <span class="text-danger">{{$message}}</span>
+                                              @enderror
+                                                </div>
+                                    </div>
+                                    <hr>
+                                    
+                                    <label class="form-label"><b>Principal account details /പ്രിൻസിപ്പൽ അക്കൗണ്ട് വിശദാംശങ്ങൾ</b></label>
+                                        <br>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-4">
+                                            Bank Branch  (ബാങ്ക് ശാഖ)
+                                        
+                                            <input type="text" value="{{ old('principal_bank_branch') }}"  class="form-control" placeholder="ബാങ്ക് ശാഖ" name="principal_bank_branch" value="{{ old('principal_bank_branch') }}">
+                                           
+                                        
+                                          @error('parent_bank_branch')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                        Account Number ( അകൗണ്ട് നമ്പർ  )
+                                            
+                                            
+                                              
+                                              <input type="number" value="{{ old('principal_account_no') }}"  class="form-control" placeholder="അകൗണ്ട് നമ്പർ " name="principal_account_no" >
+                                              @error('principal_account_no')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                IFSC Code  (IFSC കോഡ്  )
+                                                
+                                                
+                                                  
+                                                  <input type="text" value="{{ old('principal_ifsc_code') }}"  class="form-control" placeholder="IFSC കോഡ്" name="principal_ifsc_code" >
+                                                  @error('principal_ifsc_code')
+                                                  <span class="text-danger">{{$message}}</span>
+                                              @enderror
+                                                </div>
+                                    </div><br>
                                     <hr>
                                     <div class="row">
                                       <div class="col-md-1 mb-1">
@@ -809,7 +974,7 @@
         }
       });
       
-      $('#parent_signature').change(function () {
+      $('#attendance_doc').change(function () {
         var file = this.files[0];
         if (file) {
           var fileSize = file.size;
@@ -819,12 +984,12 @@
           if (fileSizeInMB <= 2) {
             
             $('#submit').prop('disabled', false); 
-            $('#errorParentSignature').html('') 
+            $('#errorAttendanceDoc').html('') 
           } else {
-            $('#errorParentSignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            $('#errorAttendanceDoc').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
             // alert('');
             $('#submit').prop('disabled', true); 
-            $('#parent_signature').val('');
+            $('#attendance_doc').val('');
           }
         }
       });

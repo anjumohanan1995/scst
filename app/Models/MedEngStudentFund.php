@@ -49,9 +49,11 @@ class MedEngStudentFund extends Eloquent
         'teo_status_id',
         'teo_status_date',
         'teo_status_reason',
-        'applicant_image'
-        
-
+        'applicant_image',
+        'panchayath',
+        'institution_type',
+        'allotment_memo',
+        'other_details'
     ];
 
 }

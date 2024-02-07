@@ -48,7 +48,21 @@ class ItiFund extends Eloquent
         'teo_status_id',
         'teo_status_date',
         'teo_status_reason',
-        'applicant_image'
+        'applicant_image',
+
+        'panchayath',
+        'metric_type',
+        'course_duration',
+        'institution_type',
+        'admission_date',
+        'attendance_doc',
+        'parent_bank_branch',
+        'parent_account_no',
+        'parent_ifsc_code',
+        'principal_bank_branch',
+        'principal_account_no',
+        'principal_ifsc_code',
+        
         
 
     ];

@@ -80,19 +80,51 @@
                                         </tr>
                                         <tr>
                                             <td>2</td>
+                                            <td>പഞ്ചായത്തിൻ്റെ പേര്
+
+                                            </td>
+                                            <td>{{ @$studentFund['panchayath'] }} </td>
+                                        </tr>
+                                        <tr>
+                                        
+                                        <tr>
+                                            <td>3</td>
                                             <td>കോഴ്‌സിന്റെ പേര്
 
                                             </td>
                                             <td>{{ @$studentFund['course_name'] }} </td>
                                         </tr>
                                         <tr>
-                                            <td>3</td>
+                                        <td>4</td>
+                                        <td>മെട്രിക് അല്ലെങ്കിൽ നോൺ മെട്രിക് ?
+
+                                        </td>
+                                        <td>{{ @$studentFund['metric_type'] }} </td>
+                                    </tr>
+                                    <tr>
+                                    <td>5</td>
+                                    <td>കോഴ്‌സിൻ്റെ ദൈർഘ്യം 
+
+                                    </td>
+                                    <td>{{ @$studentFund['course_duration'] }} </td>
+                                </tr>
+
+                                <tr>
+                                    <td>6</td>
+                                    <td>പ്രവേശന തീയതി
+                                    </td>
+                                    <td>@if(@$studentFund['admission_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['admission_date'])->format('d-m-Y') }}@endif</td>
+                                </tr>
+                                
+
+                                        <tr>
+                                            <td>7</td>
                                             <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
                                             </td>
-                                            <td> @if(@$studentFund['class_start_date']!=null){{ \Carbon\Carbon::parse(@$studentFund['class_start_date'])->format('d-m-Y') }}@endif</td>
+                                            <td>@if(@$studentFund['class_start_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['class_start_date'])->format('d-m-Y') }}@endif</td>
                                         </tr>
                                         <tr>
-                                            <td>4</td>
+                                            <td>8</td>
                                             <td>അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത്
                                             </td>
                                             <td> @if(@$studentFund['admission_type'] == 'merit') 
@@ -108,7 +140,7 @@
                                              </td>
                                         </tr>
                                         <tr>
-                                            <td>5</td>
+                                            <td>9</td>
                                             <td>അപേക്ഷകന്റെ ജാതി/ മതം <br>
                                                 (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
 
@@ -117,7 +149,7 @@
                                                 <a href="{{ asset('itiStudentFund/' . @$studentFund['caste_certificate']) }}" target="_blank">View</a>
                                                 @endif</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>6</td>
                                             <td>അപേക്ഷകന്റെ വരുമാനം <br>
                                                 (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
@@ -126,9 +158,9 @@
                                             <td> {{ @$studentFund['income'] }} <br> @if($studentFund['income_certificate'])
                                                 <a href="{{ asset('itiStudentFund/' . @$studentFund['income_certificate']) }}" target="_blank">View</a>
                                                 @endif</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
-                                            <td>7</td>
+                                            <td>10</td>
                                             <td>വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് <br>നമ്പർ ഉണ്ടെങ്കിൽ
                                                 ബാങ്ക്
                                                 ശാഖ<br> /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം
@@ -146,8 +178,48 @@
                                                 @endif 
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>11</td>
+                                            <td>മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ
+                                            </td>
+                                            <td>
+                                            
+                                              
+                                                <br>Bank Branch  : {{ @$studentFund['parent_bank_branch']  }}
+                                                <br>Account Number   : {{ @$studentFund['parent_account_no']  }}
+                                                <br>IFSC Code : {{ @$studentFund['parent_ifsc_code']  }}
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>12</td>
+                                            <td>പ്രിൻസിപ്പൽ  അക്കൗണ്ട് വിശദാംശങ്ങൾ
+                                            </td>
+                                            <td>
+                                            
+                                              
+                                                <br>Bank Branch  : {{ @$studentFund['principal_bank_branch']  }}
+                                                <br>Account Number   : {{ @$studentFund['principal_account_no']  }}
+                                                <br>IFSC Code : {{ @$studentFund['principal_ifsc_code']  }}
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>13</td>
+                                            <td>ഹാജർ വിശദാംശങ്ങൾ 
+                                            </td>
+                                            <td>
+                                            
+                                              
+                                                @if($studentFund['attendance_doc'])
+                                                <a href="{{ asset('itiStudentFund/' . @$studentFund['attendance_doc']) }}" target="_blank"> View </a>
+                                                @endif 
+                                                
+                                            </td>
+                                        </tr>
 
                                     </tbody>
+                                </table>
                                 </table>
                                 
                           
@@ -178,16 +250,16 @@
                                 <div class="row ">
 
                                     <div class="col-6 d-flex">
-                                        <span class="col-5"> രക്ഷാകർത്താവിന്റെ ഒപ്പ്
+                                        {{-- <span class="col-5"> രക്ഷാകർത്താവിന്റെ ഒപ്പ്
                                         </span>
                                         <span class="col-1"> :</span>
                                         <span class="col-6"> @if($studentFund['parent_signature'])
                                             <img src="{{ asset('itiStudentFund/' . @$studentFund['parent_signature']) }}" width="150px" height="70px">
                                             @endif </span>
 
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="col-6 d-flex">
+                                    <div class="col-12 d-flex">
                                         <span class="col-5"> രക്ഷാകർത്താവിന്റെ  പേര്</span>
                                         <span class="col-1"> :</span>
                                         <span class="col-6">{{@$studentFund['parent_name']}} </span>

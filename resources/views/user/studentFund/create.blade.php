@@ -82,6 +82,21 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                               
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label"> Name of panchayath (പഞ്ചായത്തിൻ്റെ പേര് )
+
+                                    </label>
+                                    <input type="text" value="{{ old('panchayath') }}"  class="form-control" placeholder="പഞ്ചായത്തിൻ്റെ പേര്" name="panchayath" />
+                                   
+                                    @error('panchayath')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                             
+                               
+                            </div><br>
+                            <div class="row">
                                 <div class="col-md-6 mb-6">
                                     <label class="form-label">Course Name (കോഴ്‌സിന്റെ പേര് )
 
@@ -92,7 +107,27 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                               
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">Type Of Institution (സ്ഥാപനത്തിൻ്റെ തരം )
+
+                                    </label>
+                                    
+                                    <select class="form-select " id="institution_type" name="institution_type"
+                                    aria-label="Floating label select example">
+
+                                    <option value="">Select Type Of Institution</option>
+                                    <option value="Government" {{ old('institution_type') == 'Government' ? 'selected' : '' }}>Government</option>
+                                    <option value="Aided" {{ old('institution_type') == 'Aided' ? 'selected' : '' }}>Aided</option>
+                                    <option value="Self-Financing" {{ old('institution_type') == 'Self-Financing' ? 'selected' : '' }}>Self-Financing</option>
+                                    <option value="Private" {{ old('institution_type') == 'Private' ? 'selected' : '' }}>Private</option>
+
+                                </select>
+                                    {{-- <input type="text" value="{{ old('institution_type') }}"  class="form-control" placeholder="സ്ഥാപനത്തിൻ്റെ തരം" name="institution_type" />
+                                    --}}
+                                    @error('institution_type')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
                             </div><br>
                                <div class="row">   
                                 <div class="col-md-6 mb-6">
@@ -104,6 +139,17 @@
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                       </div>
+                                      <div class="col-md-6 mb-6">
+                                      <label class="form-label">Allotement memo upload (Max Size : 2 MB)  (അലോട്ട്മെൻ്റ് മെമ്മോ അപ്ലോഡ്) </label>
+                                      <input type="file" class="form-control" accept="image/*,.pdf,.docs"  name="allotment_memo" id="allotment_memo" value="" placeholder="അലോട്ട്മെൻ്റ് മെമ്മോ അപ്ലോഡ്" />
+                                      @error('allotment_memo')
+                                          <span class="text-danger">{{$message}}</span>
+                                      @enderror
+                                      <br>
+                                      <span class="text-danger" id="errorAllotment"></span>
+                                  </div>
+                                </div><br>
+                                <div class="row"> 
                                           <div class="col-md-6 mb-6">
                                         <label class="form-label"> Applicant is admitted
                                             (അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത് )
@@ -129,7 +175,16 @@
                                        
                                     </div>
                                     
-                                   
+                                    <div class="col-md-6 mb-6"   style="display: none;" id="othersDiv">
+                                        <label class="form-label"> Others Details  </label>
+                                    
+                                        <input type="text" value="{{ old('other_details') }}"  class="form-control" placeholder="Others Details " name="other_details" value="{{ old('other_details') }}">
+                                       
+                                    
+                                      @error('other_details')
+                                          <span class="text-danger">{{$message}}</span>
+                                      @enderror
+                                    </div>
                                    
                                   
                                 </div><br>
@@ -264,19 +319,6 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Parent Signature (Max Size : 2 MB)  (രക്ഷാകർത്താവിന്റെ ഒപ്പ് ) </label>
-                                    <input type="file" class="form-control" accept="image/*"  name="parent_signature" id="parent_signature" value="" placeholder="രക്ഷാകർത്താവിന്റെ ഒപ്പ് " />
-                                    @error('parent_signature')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                    <br>
-                                    <span class="text-danger" id="errorParentSignature"></span>
-                                </div>
-                               
-                              
-                            </div><br> 
-                            <div class="row">
-                                <div class="col-md-6 mb-6">
                                     <label class="form-label">Applicant's Image( Max size: 2 MB)
                                         (അപേക്ഷകന്റെ ഫോട്ടോ )</label>
                                     <input type="file" class="form-control" accept="image/*"
@@ -288,7 +330,11 @@
                                     <br>
                                     <span class="text-danger" id="errorimage"></span>
                                 </div>
-                            </div><br>
+                                
+                               
+                              
+                            </div><br> 
+                            
                             <hr>
                           <div class="row">
                             <div class="col-md-1 mb-1">
@@ -539,6 +585,9 @@
     });
 
 	$(document).ready(function() {
+        if ($('input[name="admission_type"]:checked').val() === 'others') {
+        $('#othersDiv').show();
+    }
         $('#income_certificate').change(function () {
         var file = this.files[0];
         if (file) {
@@ -618,7 +667,7 @@
         }
       });
       
-      $('#parent_signature').change(function () {
+      $('#allotment_memo').change(function () {
         var file = this.files[0];
         if (file) {
           var fileSize = file.size;
@@ -628,15 +677,25 @@
           if (fileSizeInMB <= 2) {
             
             $('#submit').prop('disabled', false); 
-            $('#errorParentSignature').html('') 
+            $('#errorAllotment').html('') 
           } else {
-            $('#errorParentSignature').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
+            $('#errorAllotment').html('File size exceeds the limit of 2 MB. Please choose a smaller file.')
             // alert('');
             $('#submit').prop('disabled', true); 
-            $('#parent_signature').val('');
+            $('#allotment_memo').val('');
           }
         }
       });
+      
+      $('input[name="admission_type"]').change(function() {
+    
+      if ($(this).val() === 'others') {
+          $('#othersDiv').show();
+      } else {
+          $('#othersDiv').hide();
+      }
+  });
+
         $('input[name="account_details"]').change(function() {
       
       if ($(this).val() === 'yes') {

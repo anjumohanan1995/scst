@@ -68,19 +68,33 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
+                                                <td>പഞ്ചായത്തിൻ്റെ പേര്
+
+                                                </td>
+                                                <td>{{ @$formData['panchayath'] }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
                                                 <td>കോഴ്‌സിന്റെ പേര്
 
                                                 </td>
                                                 <td>{{ @$formData['course_name'] }} </td>
                                             </tr>
                                             <tr>
-                                                <td>3</td>
+                                                <td>4</td>
+                                                <td>സ്ഥാപനത്തിൻ്റെ തരം
+
+                                                </td>
+                                                <td>{{ @$formData['institution_type'] }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
                                                 <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
                                                 </td>
                                                 <td> @if(@$formData['class_start_date']!=null) {{ \Carbon\Carbon::parse(@$formData['class_start_date'])->format('d-m-Y') }}@endif</td>
                                             </tr>
                                             <tr>
-                                                <td>4</td>
+                                                <td>6</td>
                                                 <td>അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത്
                                                 </td>
                                                 <td> @if(@$formData['admission_type'] == 'merit') 
@@ -91,12 +105,22 @@
                                                     @elseif(@$formData['admission_type'] == 'management') 
                                                     മാനേജ്‌മന്റ്
                                                     @elseif(@$formData['admission_type'] == 'others') 
-                                                    മറ്റുള്ളവ
+                                                    മറ്റുള്ളവ ,  {{ @$formData['other_details'] }}
                                                     @endif
+                                                    
                                                  </td>
                                             </tr>
                                             <tr>
-                                                <td>5</td>
+                                                <td>7</td>
+                                                <td>അലോട്ട്മെൻ്റ് മെമ്മോ
+
+                                                </td>
+                                                <td> @if($formData['allotment_memo'])
+                                                    <a href="{{ asset('medEngStudentFund/' . @$formData['allotment_memo']) }}" target="_blank">View</a>
+                                                    @endif</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
                                                 <td>അപേക്ഷകന്റെ ജാതി/ മതം <br>
                                                     (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
 
@@ -106,7 +130,7 @@
                                                     @endif</td>
                                             </tr>
                                             <tr>
-                                                <td>6</td>
+                                                <td>9</td>
                                                 <td>അപേക്ഷകന്റെ വരുമാനം <br>
                                                     (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
 
@@ -116,7 +140,7 @@
                                                     @endif</td>
                                             </tr>
                                             <tr>
-                                                <td>7</td>
+                                                <td>10</td>
                                                 <td>വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് <br>നമ്പർ ഉണ്ടെങ്കിൽ
                                                     ബാങ്ക്
                                                     ശാഖ<br> /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം
@@ -211,7 +235,7 @@
                                     </div>
                                     <div class="row ">
 
-                                        <div class="col-6 d-flex">
+                                        {{-- <div class="col-6 d-flex">
                                             <span class="col-5"> രക്ഷാകർത്താവിന്റെ ഒപ്പ്
                                             </span>
                                             <span class="col-1"> :</span>
@@ -219,7 +243,7 @@
                                                 <img src="{{ asset('medEngStudentFund/' . @$formData['parent_signature']) }}" width="120px" height="60px">
                                                 @endif </span>
 
-                                        </div>
+                                        </div> --}}
 
                                         <div class="col-6 d-flex">
                                             <span class="col-5"> രക്ഷാകർത്താവിന്റെ  പേര്</span>
