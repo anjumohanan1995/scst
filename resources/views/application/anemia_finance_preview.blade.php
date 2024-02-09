@@ -156,6 +156,14 @@ th {
                                         </tr>
                                         <tr>
 
+                                            <td>ഇ - മെയിൽ ഐഡി
+
+
+                                            </td>
+                                            <td> {{ @$formData['email'] }}</td>
+                                        </tr>
+                                        <tr>
+
                                             <td>റേഷൻ കാർഡ്
                                                 (പകർപ്പ് ഹാജരാക്കണം )
 
@@ -220,7 +228,7 @@ th {
 
                                     </div>
                                     <div class="col-4">
-                                    @if(@$formData['signature'])
+                                    @if(@$formData['applicant_photo'])
                                                 <img src="{{ asset('applications/anemia_finance/' . @$formData['applicant_photo']) }}" width="120px" height="60px">
 
                                                     @endif  

@@ -647,8 +647,9 @@ class ApplicationController extends Controller
             'address' => @$data['address'],
             'relation' => @$data['relation'],
             'mother_name' => @$data['mother_name'],
+            'father_name' => @$data['father_name'],
 
-            'birth_district' => $data['birth_district'],
+            // 'birth_district' => $data['birth_district'],
             'age' => @$data['age'],
 
             'annual_income' => @$data['annual_income'],
@@ -657,7 +658,7 @@ class ApplicationController extends Controller
             'caste' => @$data['caste'],
             'other' => @$data['other'],
             'school_address' => @$data['school_address'],
-            'birth_place' => @$data['birth_place'],
+            // 'birth_place' => @$data['birth_place'],
             'mother_tonge' => @$data['mother_tonge'],
             'date' => date('d-m-Y'),
             'place' => @$data['place'],

@@ -49,11 +49,28 @@ class AnemiaFinanceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'age' => 'required',
+            'email' => 'email',
+            'phone' => 'required',
+            'caste' => 'required',
+            'caste_certificate' => 'required',
+            'address'=> 'required',
+            'adhaar_number' => 'required',
+            'adhaar_copy'=> 'required',
+            'bank_account_details' => 'required',
+            'passbook_copy'=> 'required',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',
             ]
            
         );
+        if ($request->input('is_medical_certificate_submitted') == 'Yes') {
+            $validator->sometimes('medical_certificate', 'required', function ($input) {
+                return true; 
+            });
+        
+            
+        }
         if ($validator->fails()) {
             // Captcha validation failed
             return redirect()->back()->withErrors($validator)->withInput();
@@ -178,6 +195,7 @@ class AnemiaFinanceController extends Controller
             'district' => @$data['district'],
             'taluk' => @$data['taluk'],
             'pincode' => @$data['pincode'],
+            'email' => @$data['email'],
             'adhaar_number' => @$data['adhaar_number'],
             'adhaar_copy' => @$data['adhaar_copy'],
             'bank_account_details' => @$data['bank_account_details'],

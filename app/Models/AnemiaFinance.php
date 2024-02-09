@@ -37,7 +37,8 @@ class AnemiaFinance extends Eloquent
         'applicant_photo',
         'submitted_district',
         'submitted_teo',
-        'user_id','status'
+        'user_id','status',
+        'email'
 
 
     ];

@@ -23,6 +23,7 @@ class ExamApplication extends Eloquent
         'pincode',
         'relation',
         'mother_name',
+        'father_name',
         'annual_income',
         'occupation_parent',
         'dob',

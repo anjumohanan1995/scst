@@ -54,7 +54,7 @@
                                     @php
                                         // dd($formData);
                                         $district = App\Models\District::where('_id', $formData['district'])->first();
-                                        $birth_district = App\Models\District::where('_id', $formData['birth_district'])->first();
+                                      //  $birth_district = App\Models\District::where('_id', $formData['birth_district'])->first();
                                         $submitted_district = App\Models\District::where('_id', $formData['submitted_district'])->first();
                                         $submitted_teo = App\Models\Teo::where('_id', $formData['submitted_teo'])->first();
                                         $taluk = App\Models\Taluk::where('_id', $formData['taluk'])->first();
@@ -110,7 +110,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>4. Parent Name & Address With Pincode / രക്ഷിതാവിന്റെ പേരും വിലാസവും
+                                                <label>4.  Address With Pincode /  വിലാസം
                                                     (പിൻകോഡ് സഹിതം ) </label>
                                             </div>
 
@@ -128,7 +128,21 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>5. Relation / രക്ഷിതാവിനു കുട്ടിയുമായുള്ള ബന്ധം </label>
+                                                <label>5. Guardian  Name / 
+                                                    രക്ഷാധികാരിയുടെ പേര്  </label>
+                                            </div>
+
+                                            <div class="col-1">
+                                                <label> : </label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label> {{ @$formData['parent_name'] }} </label>
+                                            </div>
+                                        </div>
+                                        <div class=" row paper-1">
+                                            <div class="col-5">
+
+                                                <label>6. Relation / രക്ഷിതാവിനു കുട്ടിയുമായുള്ള ബന്ധം </label>
                                             </div>
 
                                             <div class="col-1">
@@ -141,7 +155,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>6. Mother's Name / മാതാവിന്റെ പേര് </label>
+                                                <label>7. Father's Name /   അച്ഛൻ്റെ പേര് </label>
                                             </div>
 
                                             <div class="col-1">
@@ -154,7 +168,20 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>7. Annual Income / കുടുംബ വാർഷിക വരുമാനം </label>
+                                                <label>8. Mother's Name / മാതാവിന്റെ പേര് </label>
+                                            </div>
+
+                                            <div class="col-1">
+                                                <label> : </label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label> {{ @$formData['mother_name'] }} </label>
+                                            </div>
+                                        </div>
+                                        <div class=" row paper-1">
+                                            <div class="col-5">
+
+                                                <label>9. Annual Income / കുടുംബ വാർഷിക വരുമാനം </label>
                                             </div>
 
                                             <div class="col-1">
@@ -167,7 +194,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>8. Occupation of Parent / രക്ഷിതാവിന്റെ തൊഴിൽ </label>
+                                                <label>10. Occupation of Parent / രക്ഷിതാവിന്റെ തൊഴിൽ </label>
                                             </div>
 
                                             <div class="col-1">
@@ -180,7 +207,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>9. Date of Birth / വിദ്യാർത്ഥിയുടെ ജനനതിയതി</label>
+                                                <label>11. Date of Birth / വിദ്യാർത്ഥിയുടെ ജനനതിയതി</label>
                                             </div>
 
                                             <div class="col-1">
@@ -193,7 +220,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>10. Age / വയസ്സും </label>
+                                                <label>12. Age / വയസ്സും </label>
                                             </div>
 
                                             <div class="col-1">
@@ -206,7 +233,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>11. Religion & Caste / ജാതിയും മതവും </label>
+                                                <label>13. ST Category / ST വിഭാഗം </label>
                                             </div>
 
                                             <div class="col-1">
@@ -219,7 +246,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>12. പട്ടികജാതി/ പട്ടികവർഗ/ മറ്റിതര സമുദായം ഇവയിൽ ഏത് </label>
+                                                <label>14. പട്ടികജാതി/ പട്ടികവർഗ/ മറ്റിതര സമുദായം ഇവയിൽ ഏത് </label>
                                             </div>
 
                                             <div class="col-1">
@@ -229,7 +256,7 @@
                                                 <label> {{ @$formData['other'] }} </label>
                                             </div>
                                         </div>
-                                        <div class=" row paper-1">
+                                        {{-- <div class=" row paper-1">
                                             <div class="col-5">
 
                                                 <label>12. Class, School Name and Address / പഠിക്കുന്ന ക്ലാസും ,സ്കൂളിന്റെ
@@ -242,8 +269,8 @@
                                             <div class="col-6">
                                                 <label> {{ @$formData['school_address'] }} </label>
                                             </div>
-                                        </div>
-                                        <div class=" row paper-1">
+                                        </div> --}}
+                                        {{-- <div class=" row paper-1">
                                             <div class="col-5">
 
                                                 <label>12. Birth Place / ജനനസ്ഥലവും </label>
@@ -255,8 +282,8 @@
                                             <div class="col-6">
                                                 <label> {{ @$formData['birth_place'] }} </label>
                                             </div>
-                                        </div>
-                                        <div class=" row paper-1">
+                                        </div> --}}
+                                        {{-- <div class=" row paper-1">
                                             <div class="col-5">
 
                                                 <label>13. Birth District / ജില്ലയും </label>
@@ -268,11 +295,11 @@
                                             <div class="col-6">
                                                 <label> {{ @$birth_district->name }} </label>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>12. Mother Tounge/വിദ്യാർത്ഥിയുടെ മാതൃഭാഷ </label>
+                                                <label>15. Mother Tounge/വിദ്യാർത്ഥിയുടെ മാതൃഭാഷ </label>
                                             </div>
 
                                             <div class="col-1">
@@ -285,7 +312,7 @@
                                         <div class=" row paper-1">
                                             <div class="col-5">
 
-                                                <label>13. Place/സ്ഥലം </label>
+                                                <label>16. Place/സ്ഥലം </label>
                                             </div>
 
                                             <div class="col-1">
@@ -298,7 +325,7 @@
 
                                         <div class="row paper-1">
                                             <div class="col-5">
-                                                <label for="date">14. Date/തിയതി</label>
+                                                <label for="date">17. Date/തിയതി</label>
                                             </div>
                                             <div class="col-1">
                                                 <label>:</label>
@@ -309,7 +336,7 @@
                                         </div>
                                         <div class="row paper-1">
                                             <div class="col-5">
-                                                <label for="parentName">Parent's Name/രക്ഷിതാവിന്റെ പേരു</label>
+                                                <label for="parentName">Guardian Name/രക്ഷിതാവിന്റെ പേരു</label>
                                             </div>
                                             <div class="col-1">
                                                 <label>:</label>
@@ -320,7 +347,7 @@
                                         </div>
                                         <div class="row paper-1">
                                             <div class="col-5">
-                                                <label for="parentSign">Parent's Sign/രക്ഷിതാവിന്റെ ഒപ്പും</label>
+                                                <label for="parentSign">Guardian Sign/രക്ഷിതാവിന്റെ ഒപ്പും</label>
                                             </div>
                                             <div class="col-1">
                                                 <label>:</label>

@@ -19,7 +19,7 @@
 		</div>
 		<!-- /breadcrumb -->
 
-	</div>
+
 <div class="main-content-body">
     <div class="row row-sm mt-4">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
@@ -32,8 +32,8 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">പേര് / Name </label>
-                                    <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="പേര്" name="name" required />
+                                    <label class="form-label">പേര് / Name <span class="text-danger text-bold">*</span></label>
+                                    <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="പേര്" name="name"  />
                                     @error('name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -46,7 +46,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">വയസ് / Age </label>
+                                    <label class="form-label">വയസ് / Age <span class="text-danger text-bold">*</span> </label>
                                     <input type="number" value="{{ old('age') }}"  class="form-control"  name="age" />
                                     @error('age')
                                         <span class="text-danger">{{$message}}</span>
@@ -54,17 +54,33 @@
                                 </div> 
                               
                             </div>
+                            <div class="row pb-4">  
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">ഇ - മെയിൽ ഐഡി / Email Id   </label>
+                                    <input type="text" class="form-control"  name="email" id="email" value="{{ old('email') }}" placeholder="" />                                   
+                                     @error('email')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>      
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">ഫോൺ നമ്പർ / Phone Number   <span class="text-danger text-bold">*</span></label>
+                                    <input type="number" class="form-control"  name="phone" id="phone" value="{{ old('phone') }}" placeholder="" />                                  
+                                      @error('phone')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>       
+                            </div>
                             <div class="row">  
                                
-                                <div class="col-md-4 mb-4">
-                                    <label class="form-label">ജാതി / Caste </label>
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">ജാതി / Caste <span class="text-danger text-bold">*</span></label>
                                     <input type="text" value="{{ old('caste') }}"  class="form-control"  name="caste" />
                                     @error('caste')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-4">
-                                    <label class="form-label">ജാതി സർട്ടിഫിക്കറ്റ് / Caste Certificate  </label>
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">ജാതി സർട്ടിഫിക്കറ്റ് / Caste Certificate  <span class="text-danger text-bold">*</span></label>
                                     <input type="file" class="form-control"  name="caste_certificate" id="caste_certificate" value="" placeholder="" onchange="validateCaste()" />
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
 
@@ -73,16 +89,11 @@
                                     @enderror
                                     <div id="errorMessageone" style="color:red;"></div>
                                 </div>
-                                <div class="col-md-4 mb-4">
-                                    <label class="form-label">ഫോൺ നമ്പർ / Phone Number   </label>
-                                    <input type="number" class="form-control"  name="phone" id="phone" value="{{ old('phone') }}" placeholder="" />                                    @error('phone')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>                               
+                                                       
                             </div>
                             <div class="row">
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">മേൽവിലാസം / Address </label>
+                                    <label class="form-label">മേൽവിലാസം / Address <span class="text-danger text-bold">*</span></label>
                                     <textarea type="text" class="form-control" name="address" >{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{$message}}</span>
@@ -121,7 +132,7 @@
                             </div>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ആധാർ നമ്പർ / Aadhar Number  </label>
+                                    <label class="form-label">ആധാർ നമ്പർ / Aadhar Number  <span class="text-danger text-bold">*</span></label>
                                     <input type="text" pattern="[0-9]{12}" maxlength="12" class="form-control"  name="adhaar_number" id="adhaar_number" value="{{ old('adhaar_number') }}" placeholder="" inputmode="numeric"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                                             
@@ -130,7 +141,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ആധാർ പകർപ്പ് / Aadhaar copy  </label>
+                                    <label class="form-label">ആധാർ പകർപ്പ് / Aadhaar copy  <span class="text-danger text-bold">*</span></label>
                                     <input type="file" class="form-control"  name="adhaar_copy" id="adhaar_copy" value="" placeholder="" onchange="validateAdhar()"/>
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
 
@@ -142,14 +153,14 @@
                             </div><br>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ബാങ്ക് അക്കൗണ്ട് വിശദംശങ്ങൾ / Bank account details   </label>
+                                    <label class="form-label">ബാങ്ക് അക്കൗണ്ട് വിശദംശങ്ങൾ / Bank account details  <span class="text-danger text-bold">*</span> </label>
                                     <textarea type="text" class="form-control"  name="bank_account_details" id="bank_account_details" value="" placeholder="" >{{ old('bank_account_details') }}</textarea>
                                     @error('bank_account_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ബാങ്ക് അക്കൗണ്ട് പാസ്സ് ബുക്കിന്റെ പകർപ്പ് / Copy of Bank Account Pass Book   </label>
+                                    <label class="form-label">ബാങ്ക് അക്കൗണ്ട് പാസ്സ് ബുക്കിന്റെ പകർപ്പ് / Copy of Bank Account Pass Book   <span class="text-danger text-bold">*</span></label>
                                     <input type="file" class="form-control"  name="passbook_copy" id="passbook_copy" value="" placeholder="" onchange="validatePassbook()" />
                                     @error('passbook_copy')
                                         <span class="text-danger">{{$message}}</span>
@@ -223,7 +234,7 @@
                                         <div class="col-md-4 mb-4">
                                             <label class="form-label">അപേക്ഷകന്റെ ഫോട്ടോ / Applicant's photo</label>
                                             <input type="file" class="form-control" name="applicant_photo" id="applicant_photo"
-                                                value="" placeholder="" onchange="validatePhoto()" accept=".jpg, .jpeg, .png" required />
+                                                value="" placeholder="" onchange="validatePhoto()" accept=".jpg, .jpeg, .png"  />
                                                 <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -233,7 +244,7 @@
                                         <div class="col-md-4 mb-4">
                                             <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ് / Applicant's signature</label>
                                             <input type="file" class="form-control" name="signature" id="signature"
-                                                value="" placeholder="" onchange="validateSignature()" accept=".jpg, .jpeg, .png" required />
+                                                value="" placeholder="" onchange="validateSignature()" accept=".jpg, .jpeg, .png"  />
                                                 <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
                                             @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -250,23 +261,23 @@
                                 <div class="row">   
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ജില്ല / District </label>
-                                        <select id="submitted_district" name="submitted_district" class="form-control" required />
+                                        <select id="submitted_district" name="submitted_district" class="form-control"  />
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
                                                     <option value="{{$district->id}}" @if($district->id == old('submitted_district')) selected @endif >{{$district->name}}</option>
                                                 @endforeach
                                         </select>
-                                         @error('dist')
+                                         @error('submitted_district')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}" >
                                     </div>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label">ടി.ഇ.ഒ / TEO</label>
-                                        <select id="submitted_teo" name="submitted_teo" class="form-control" required />
+                                        <select id="submitted_teo" name="submitted_teo" class="form-control"  />
                                             <option value="">Choose TEO</option>
                                         </select>                                 
-                                        @error('teo')
+                                        @error('submitted_teo')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <input type="hidden" name="teo_name" id="teo_name" value="{{ old('teo_name') }}">
@@ -287,7 +298,7 @@
                    
                         </form>
               
-          
+                    </div>
         </div>
     </div>
 </div>

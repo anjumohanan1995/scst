@@ -73,22 +73,8 @@
                                                     @if (old('gender') == 'Female') checked @endif>
                                             </div>
                                         </div>
-
-
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">Parent Name / പിതാവിന്റെ പേര് </label>
-                                            <input class="form-control" placeholder="Parent Name"
-                                                value="{{ old('parent_name') }}" name="parent_name" />
-                                            <span id="nameError" class="text-danger"></span>
-                                            @error('parent_name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-
-                                    </div><br>
-                                    <label class="form-label">Address / വിലാസം </label>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Address / വിലാസം </label>
                                             <label class="form-label">House Name / വീട്ടുപേര് </label>
                                             <textarea class="form-control" placeholder="House Name" name="address"></textarea>
                                             <span id="nameError" class="text-danger"></span>
@@ -96,6 +82,12 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+
+                                      
+                                    </div><br>
+                                    
+                                    <div class="row">
+                                        
                                         <div class="col-md-6 mb-6">
                                             <div class="row">
                                                 <div class="col-md-4 mb-4">
@@ -140,6 +132,16 @@
 
                                             </div>
                                         </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Guardian  Name / 
+                                                രക്ഷാധികാരിയുടെ പേര് </label>
+                                            <input class="form-control" placeholder="Guardian Name"
+                                                value="{{ old('parent_name') }}" name="parent_name" />
+                                            <span id="nameError" class="text-danger"></span>
+                                            @error('parent_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
 
                                     </div><br>
                                     <div class="row">
@@ -175,7 +177,18 @@
                                             @enderror
                                         </div>
 
-
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">Father's Name / അച്ഛൻ്റെ  പേര് </label>
+                                            <input type="text" value="{{ old('father_name') }}" class="form-control"
+                                                placeholder="Father's Name" name="father_name" />
+                                            <span id="nameError" class="text-danger"></span>
+                                            @error('father_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                       
+                                    </div><br>
+                                    <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Mother's Name / മാതാവിന്റെ പേര് </label>
                                             <input type="text" value="{{ old('mother_name') }}" class="form-control"
@@ -185,8 +198,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div><br>
-                                    <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Annual Income / കുടുംബ വാർഷിക വരുമാനം </label>
                                             <input type="number" value="{{ old('annual_income') }}"
@@ -196,6 +207,11 @@
                                             @enderror
                                         </div>
 
+                                      
+
+
+                                    </div><br>
+                                    <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Occupation of Parent / രക്ഷിതാവിന്റെ തൊഴിൽ </label>
                                             <input type="text" value="{{ old('occupation_parent') }}"
@@ -206,10 +222,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-
-
-                                    </div><br>
-                                    <div class="row">
                                         <div class="col-md-6 mb-6 d-flex align-items-end">
                                             <div class="col-6">
                                                 <label class="form-label">Date of Birth/വിദ്യാർത്ഥിയുടെ ജനനതിയതി</label>
@@ -233,19 +245,20 @@
 
                                         </div>
 
+                                   
+
+
+                                    </div><br>
+                                    <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">Religion & Caste / ജാതിയും മതവും </label>
+                                            <label class="form-label">ST Category / ST  വിഭാഗം  </label>
                                             <input type="text" value="{{ old('caste') }}" class="form-control"
-                                                placeholder="Religion & Caste" name="caste" />
+                                                placeholder="ST Category" name="caste" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('caste')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-
-
-                                    </div><br>
-                                    <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> Caste / Category / Other Community ( പട്ടികജാതി/
                                                 പട്ടികവർഗ/ മറ്റിതര സമുദായം ഇവയിൽ ഏത് ) </label>
@@ -256,7 +269,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-md-6 mb-6">
+                                        {{-- <div class="col-md-6 mb-6">
                                             <label class="form-label">Class,School Name and Address / പഠിക്കുന്ന ക്ലാസും
                                                 ,സ്കൂളിന്റെ പേരും വിലാസവും </label>
                                             <input type="text" value="{{ old('school_address') }}"
@@ -266,13 +279,13 @@
                                             @error('school_address')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
-                                        </div>
+                                        </div> --}}
 
 
                                     </div><br>
                                     <div class="row">
 
-                                        <div class="col-md-6 mb-6">
+                                        {{-- <div class="col-md-6 mb-6">
                                             <label class="form-label">Birth Place and District /ജനനസ്ഥലവും ,ജില്ലയും
                                             </label>
                                             <div class="d-flex">
@@ -305,7 +318,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Mother Tounge / വിദ്യാർത്ഥിയുടെ മാതൃഭാഷ </label>
 
@@ -338,11 +351,6 @@
                                             @enderror
 
                                         </div>
-
-                                    </div>
-                                    <br>
-
-                                    <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Place / സ്ഥലം </label>
                                             <input type="text" value="{{ old('place') }}" class="form-control"
@@ -352,6 +360,11 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                       
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Parent's Sign / രക്ഷിതാവിന്റെ ഒപ്പും</label>
                                             <input type="file" class="form-control" name="signature" id="signature" accept=".jpg"
@@ -366,8 +379,6 @@
                                             <div id="errorMessage" style="color:red;">
                                             </div>
                                         </div>
-                                    </div><br>
-                                    <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">Applicant's Image / 
                                                 അപേക്ഷകന്റെ ഫോട്ടോ </label>
@@ -384,8 +395,8 @@
                                             <br>
                                             <span class="text-danger" id="errorimage"></span>
                                         </div>
-                                    </div>
-
+                                    </div><br>
+                                 
                                 </div><br>
                             </div>
                     </div>

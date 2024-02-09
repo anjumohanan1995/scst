@@ -11,7 +11,7 @@
 				
                 <h4 class="content-title mb-2">മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം </h4>
                
-                <h4 class="content-title mb-2">Application form for grant of financial assistance from the Scheduled Tribes Development Department to Scheduled Tribe couples suffering hardships due to mixed marriages</h4>
+                <h4 class="content-title mb-2">Application form for grant of financial assistance from the Scheduled Tribes Development Department to Scheduled Tribe couples suffering hardships due to Inter caste marriages</h4>
 			
 			</div>
 
