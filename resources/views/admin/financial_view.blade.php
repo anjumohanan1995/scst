@@ -214,13 +214,66 @@
                                     </div>
 
 
+                                    <div class="paper-1">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label>4. പഞ്ചായത്തിൻ്റെ അല്ലെങ്കിൽ കോ-ഓർപ്പറേഷൻ്റെ പേര്  </label>
+                                            </div>
+
+                                
+                                        </div>
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label> എ ) ഭർത്താവ് </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> {{ @$formData['husband_panchayath'] }}</label>
+
+                                                </div>
+                                            </div>
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label> ബി ) ഭാര്യ </label>
+                                                </div>
+
+
+                                                <div class="col-1">
+                                                    <label> :</label>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label>{{ @$formData['wife_panchayath'] }}
+                                                    
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
 
 
 
                                     <div class="paper-1">
                                         <div class="row">
                                             <div class="col-12">
-                                                <label>4. വിവാഹത്തിനുമുമ്പുള്ള തൊഴിലും മാസ വരുമാനവും </label>
+                                                <label>5. വിവാഹത്തിനുമുമ്പുള്ള തൊഴിലും മാസ വരുമാനവും </label>
                                             </div>
 
                                 
@@ -275,7 +328,7 @@
                                      <div class="paper-1">
                                         <div class="row">
                                             <div class="col-12">
-                                                <label>5.അപേക്ഷ സമർപ്പിക്കുമ്പോഴത്തെ തൊഴിലും മാസവരമാനവും </label>
+                                                <label>6.അപേക്ഷ സമർപ്പിക്കുമ്പോഴത്തെ തൊഴിലും മാസവരമാനവും </label>
                                             </div>
 
                                 
@@ -328,7 +381,7 @@
                                     <div class="paper-1">
                                         <div class="row">
                                             <div class="col-12">
-                                                <label>6. വിവാഹത്തിന്റെ വിശദ വിവരങ്ങൾ<br>എ) വിവാഹ സമയത്തെ പ്രായം</label>
+                                                <label>7. വിവാഹത്തിന്റെ വിശദ വിവരങ്ങൾ<br>എ) വിവാഹ സമയത്തെ പ്രായം</label>
                                             </div>
 
                                 
@@ -452,7 +505,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>7. വിവാഹത്തിനു ശേഷം ദമ്പതികൾ 
+                                                    <label>8. വിവാഹത്തിനു ശേഷം ദമ്പതികൾ 
                                                 ഏതെങ്കിലും കാലയളവിൽ വേർപിരിഞ്ഞു തമാശിച്ചിട്ടുണ്ടോ?
                                                 ഉണ്ടങ്കിൽ </label><br>
 
@@ -529,7 +582,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>8. ധനസഹായം ലഭിക്കുന്ന പക്ഷം എന്തു 
+                                                    <label>9. ധനസഹായം ലഭിക്കുന്ന പക്ഷം എന്തു 
                                                 കാര്യത്തിനു വേണ്ടി ചെലവഴിക്കാനാണ് 
                                                 ഉദ്ദേശിക്കുന്നത് </label><br>
 
@@ -562,9 +615,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>9. മിശ്രവിവാഹം മൂലം ദമ്പതികൾക്ക്
-                                                അനുഭവിക്കേണ്ടി വന്നിട്ടുള്ള കഷ്ടതകളം
-                                                പ്രയാസങ്ങളം എന്തെല്ലാം </label><br>
+                                                    <label>10. പ്രിൻസിപ്പലിൻ്റെ പ്രഖ്യാപനം (ഫയൽ) </label><br>
 
                                                 </div>
 

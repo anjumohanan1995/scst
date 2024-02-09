@@ -405,7 +405,9 @@ class ApplicationController extends Controller
             'wife_photo' => @$data['wife_photo'],
             'date' => date("d-m-Y"),
             'time' => date("H:i:s"),
-            'status' => 0
+            'status' => 0,
+            'husband_panchayath' => @$data['husband_panchayath'],
+            'wife_panchayath' => @$data['wife_panchayath'],
         ]);
 
         return redirect()->route('userCoupleFinanceList')->with('status', 'Application Submitted Successfully.');

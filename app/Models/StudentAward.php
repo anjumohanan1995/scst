@@ -35,7 +35,10 @@ class StudentAward extends Eloquent
         'submitted_district',
         'submitted_teo',
         'user_id','status',
-        'applicant_image'
+        'applicant_image',
+        'syllabus_certificate',
+        'mark',
+        'syllabus'
 
 
     ];

@@ -85,8 +85,20 @@ class StudentAwardController extends Controller
         }else{
             $signature = '';
         }
+        if ($request->hasfile('syllabus_certificate')) {
+
+            $image = $request->syllabus_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('applications/student_award'), $imgfileName);
+
+            $syllabus_certificate = $imgfileName;
+
+        }else{
+            $syllabus_certificate = '';
+        }
         $formData = $data;
-      
+        $formData['syllabus_certificate']= $syllabus_certificate;
         $formData['signature']= $signature;
         $formData['applicant_image']= $applicant_image;
         $request->flash();
@@ -127,7 +139,10 @@ class StudentAwardController extends Controller
             'user_id' =>Auth::user()->id, 
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
-            'status' =>0
+            'status' =>0,
+            'syllabus_certificate' =>@$data['syllabus_certificate'],
+            'syllabus' =>@$data['syllabus'],
+            'mark' =>@$data['mark'],
         ]);
 
         return redirect('userStudentAwardList')->with('status','Application Submitted Successfully.');

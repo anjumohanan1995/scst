@@ -37,6 +37,12 @@ class TuitionFee extends Eloquent
         'date','time',
         'user_id',
         'status',
+        'principal_declaration',
+        'panchayath',
+        'parent_bank_branch',
+        'parent_account_no',
+        'parent_ifsc_code',
+
         
         'teo_view_status',
         'teo_view_id',

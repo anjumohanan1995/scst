@@ -183,7 +183,24 @@
                                         @enderror
                                     </div>
                                 </div><br>
-                                
+                                <div class=" row">
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">Name of Panchayath or Co-orporation /പഞ്ചായത്തിൻ്റെ അല്ലെങ്കിൽ കോ-ഓർപ്പറേഷൻ്റെ പേര് (Husband / ഭർത്താവ്)  </label>
+                                        <input type="text" value="{{ old('husband_panchayath') }}" class="form-control" placeholder="Name of Panchayath or Co-orporation" name="husband_panchayath" />
+                                       
+                                        @error('husband_panchayath')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">Name of Panchayath or Co-orporation / പഞ്ചായത്തിൻ്റെ അല്ലെങ്കിൽ കോ-ഓർപ്പറേഷൻ്റെ പേര്(Wife / ഭാര്യ)  </label>
+                                        <input type="text" value="{{ old('wife_panchayath') }}" class="form-control" placeholder="Name of Panchayath or Co-orporation" name="wife_panchayath" />
+                                       
+                                        @error('wife_panchayath')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div><br>
                                 <div class="row">
                                 <div class="col-md-6 mb-6">
                                         <label class="form-label">വിവാഹത്തിനുമുമ്പുള്ള തൊഴിൽ /Employment before marriage (Husband / ഭർത്താവ് )</label>

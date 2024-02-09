@@ -35,7 +35,8 @@ class FinancialHelp extends Eloquent
         'submitted_teo',
         'place','date','time',
         'dist_name','teo_name',
-
+        'husband_panchayath',
+        'wife_panchayath',
 
       
         'hus_income_before_marriage',

@@ -143,7 +143,40 @@
                                 <div class="paper-1">
                                     <div class="col-6">
 
-                                        <label>8.	Month & Year of Pass	</label>
+                                        <label>9.	Percentage of Mark/grade	</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['mark'] }} </label>
+                                    </div>
+                                </div> 
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>10.	Syllabus	</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> : {{ @$formData['syllabus'] }} </label>
+                                    </div>
+                                </div> 
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>11.	Syllabus certificate	</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label> :  @if(@$formData['syllabus_certificate'] != '') 
+                                        <a href="{{ asset('applications/student_award/' . @$formData['syllabus_certificate']) }}" target="_blank">View</a>
+                                       @endif
+                                    </label>
+                                    </div>
+                                </div> 
+                                <div class="paper-1">
+                                    <div class="col-6">
+
+                                        <label>12.	Month & Year of Pass	</label>
                                     </div>
 
                                     <div class="col-6">
@@ -155,7 +188,7 @@
                                 <div class="paper-1">
                                     <div class="col-6">
 
-                                        <label>9.	Phone No.	 </label>
+                                        <label>13.	Phone No.	 </label>
                                     </div>
 
                                     <div class="col-6">
@@ -167,7 +200,7 @@
                                 <div class="paper-1">
                                     <div class="col-6">
 
-                                        <label>10.	Account No.		 </label>
+                                        <label>14.	Account No.		 </label>
                                     </div>
 
                                     <div class="col-6">
@@ -179,7 +212,7 @@
                                 <div class="paper-1">
                                     <div class="col-6">
 
-                                        <label>11.	IFSC Code </label>
+                                        <label>15.	IFSC Code </label>
                                     </div>
 
                                     <div class="col-6">
@@ -190,7 +223,7 @@
                                 <div class="paper-1">
                                     <div class="col-6">
 
-                                        <label>12.	Aadhar No</label>
+                                        <label>16.	Aadhar No</label>
                                     </div>
 
                                     <div class="col-6">
