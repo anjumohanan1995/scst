@@ -3,9 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class TDOMaster extends Model
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+class TDOMaster extends Eloquent
 {
     use HasFactory;
+    protected $connection = 'mongodb';
+    protected $collection = 'tdo_master';
+
+    protected $fillable = [
+        'district_id',
+        'type',
+        'name',
+        
+
+
+    ];
 }

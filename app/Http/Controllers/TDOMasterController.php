@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\TDOMaster;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TDOMasterController extends Controller
 {
@@ -24,7 +26,9 @@ class TDOMasterController extends Controller
      */
     public function create()
     {
-        //
+        $districts = District::get();
+        return view('admin.tdomaster.create', compact('districts'));
+       
     }
 
     /**
@@ -35,7 +39,31 @@ class TDOMasterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'district_id' => 'required',
+               // 'teo_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50'
+            ]
+        );
+        if ($validate->fails()) {
+            $messages = $validate->getMessageBag();
+            return redirect()->back()->withErrors($validate);
+        }
+
+        $data = $request->all();
+
+
+        TDOMaster::create([
+            'district_id' => $data['district_id'],
+            'name' => $data['name'],
+            'type' =>$data['type'],
+        ]);
+
+
+        return redirect()->route('teo.index')
+
+            ->with('success', 'TEO Added Successfully');
     }
 
     /**

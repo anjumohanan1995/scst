@@ -20,6 +20,7 @@ use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\MedEngStudentFundController;
+use App\Http\Controllers\TDOMasterController;
 use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
 
@@ -317,3 +318,7 @@ Route::get('/getAdminInstitutionList', [InstitutionController::class, 'getAdminI
 Route::post('/updateItiDetails/{id}', [InstitutionController::class, 'updateItiDetails'])->name('updateItiDetails');
 Route::get('/child_finance/approve/{id}', [App\Http\Controllers\ChildFinanceController::class, 'approve'])->name('approve-verify');
 Route::get('/child_finance/reject/{id}', [App\Http\Controllers\ChildFinanceController::class, 'reject'])->name('reject-verify');
+
+
+
+Route::resource('/po-tdo', TDOMasterController::class);
