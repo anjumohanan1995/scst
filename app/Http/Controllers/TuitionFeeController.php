@@ -68,6 +68,19 @@ class TuitionFeeController extends Controller
         }else{
             $signature = '';
         }
+        if ($request->hasfile('principal_declaration')) {
+
+            $image = $request->principal_declaration;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/tuition'), $imgfileName);
+
+            $principal_declaration = $imgfileName;
+
+        }else{
+            $principal_declaration = '';
+        }
+
 
         if ($request->hasfile('photo')) {
 
@@ -84,7 +97,7 @@ class TuitionFeeController extends Controller
       
         $formData = $data;
        
-        
+        $formData['principal_declaration']= $principal_declaration;
         $formData['signature']= $signature;
         $formData['photo']= $photo;
         $currentDate = Carbon::now();
@@ -179,7 +192,12 @@ class TuitionFeeController extends Controller
             'date' =>date('d-m-Y'),
             'time'=>date('H:i:s'),
             'user_id' =>Auth::user()->id, 
-            'status' =>0
+            'status' =>0,
+            'principal_declaration' => @$data['principal_declaration'],
+            'panchayath' => @$data['panchayath'],
+            'parent_bank_branch' => @$data['parent_bank_branch'],
+            'parent_account_no' => @$data['parent_account_no'],
+            'parent_ifsc_code' => @$data['parent_ifsc_code'],
         ]);
 
         return redirect('userTuitionFeeList')->with('status','Application Submitted Successfully.');

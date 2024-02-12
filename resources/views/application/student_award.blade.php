@@ -36,7 +36,7 @@
                                             <div class="col-md-4 mb-4">
                                                 <label class="form-label">പേര് / Name </label>
                                                 <input type="text" value="{{ old('name') }}" class="form-control"
-                                                    placeholder="" name="name" required />
+                                                    placeholder="Name" name="name"  />
                                                 @error('name')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -191,6 +191,37 @@
                                             </div>
                                         </div><br>
                                         <div class="row">
+                                        
+                                            <div class="col-md-4 mb-4">
+                                                <label class="form-label">മാർക്ക്/ഗ്രേഡിൻ്റെ ശതമാനം/  Percentage of Mark/grade</label>
+                                                <input type="text" class="form-control" name="mark"
+                                                    id="mark" value="{{ old('mark') }}"
+                                                    placeholder="Percentage of Mark/grade" />
+                                                @error('mark')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label class="form-label">സിലബസ് / Syllabus</label>
+                                                <select class="form-control" name="syllabus">
+                                                    <option value="">Select Syllabus</option>
+                                                    <option value="Kerala" {{ old('syllabus') == 'Kerala' ? 'selected' : '' }}>Kerala</option>
+                                                    <option value="CBSC" {{ old('syllabus') == 'CBSC' ? 'selected' : '' }}>CBSE</option>
+                                                </select>
+                                                @error('syllabus')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label class="form-label">സിലബസ് സർട്ടിഫിക്കറ്റ് അപ്‌ലോഡ് ചെയ്യുക / Upload Syllabus certificate</label>
+                                                <input type="file" class="form-control" name="syllabus_certificate"
+                                                    id="syllabus_certificate" value="{{ old('syllabus_certificate') }}" placeholder="" />
+                                                @error('syllabus_certificate')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div><br>
+                                        <div class="row">
                                             <div class="col-md-4 mb-4">
                                                 <label class="form-label">ഫോൺ നമ്പർ / Phone No.</label>
                                                 <input type="number" class="form-control" name="phone" id="phone"
@@ -259,9 +290,24 @@
                                                 <span class="text-danger" id="errorimage"></span>
                                             </div>
                                         </div>
+
+                                        <hr>
+                                        <div class="row">
+                                          <div class="col-md-1 mb-1">
+                                               </div>
+                                          <div class="col-md-1 mb-1">
+                                              <input type="checkbox" id="agree" name="agree" value="Yes" required {{ old('agree') == 'Yes' ? 'checked' : '' }}>
+                                          </div>
+                                          <div class="col-md-9 mb-9">
+                                              We hereby pledge that all the information we have added above is true and correct.
+                                            (  ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.)
+                                          </div>
+                                      </div>
+                                         
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="card">
                                 <div class="card-body">

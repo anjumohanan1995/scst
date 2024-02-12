@@ -120,7 +120,36 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>3. ഫോൺ നമ്പർ</label><br>
+                                                    <label>3. പഞ്ചായത്തിൻ്റെ പേര്  </label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> {{ @$formData['panchayath'] }} <br>
+                                                             </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>4. ഫോൺ നമ്പർ</label><br>
 
                                                 </div>
 
@@ -149,7 +178,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>4. ജാതി /മതം</label><br>
+                                                    <label>5. ജാതി /മതം</label><br>
 
                                                 </div>
 
@@ -179,7 +208,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>5. വരുമാനം</label><br>
+                                                    <label>6. വരുമാനം</label><br>
 
                                                 </div>
 
@@ -208,7 +237,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>6. വിദ്യാർത്ഥിയുടെ പേര്</label><br>
+                                                    <label>7. വിദ്യാർത്ഥിയുടെ പേര്</label><br>
 
                                                 </div>
 
@@ -237,7 +266,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>7. അപേക്ഷകനുമായുള്ള ബന്ധം</label><br>
+                                                    <label>8. അപേക്ഷകനുമായുള്ള ബന്ധം</label><br>
 
                                                 </div>
 
@@ -266,7 +295,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>8. പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര്</label><br>
+                                                    <label>9. പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര്</label><br>
 
                                                 </div>
 
@@ -295,7 +324,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>9. ക്ലാസ്</label><br>
+                                                    <label>10. ക്ലാസ്</label><br>
 
                                                 </div>
 
@@ -324,7 +353,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>10. ട്യുഷൻ സെന്ററിന്റെ പേര്</label><br>
+                                                    <label>11. ട്യുഷൻ സെന്ററിന്റെ പേര്</label><br>
 
                                                 </div>
 
@@ -339,6 +368,70 @@
                                                 <div class="col-6">
                                                     <label> {{ @$formData['tuition_center'] }} <br>
                                                              </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>12. പ്രിൻസിപ്പലിൻ്റെ പ്രഖ്യാപനം (ഫയൽ)</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> @if(@$formData['principal_declaration'] != '')
+                                                        
+                                                        <a href="{{ asset('tuition/' . @$formData['principal_declaration']) }}" target="_blank">View</a>
+                                                            @endif
+                                                         </label>
+
+                                                </div>
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>13.മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                      Bank Branch :   {{@$formData['parent_bank_branch']  }}<br>
+                                                    Account Number :  {{@$formData['parent_account_no']  }}<br>
+                                                    IFSC Code   :     {{@$formData['parent_ifsc_code']  }}
+                                                         </label>
 
                                                 </div>
                                             </div>
