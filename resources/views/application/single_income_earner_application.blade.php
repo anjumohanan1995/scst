@@ -40,14 +40,22 @@
                                     <br>
                                     <h4> Information about the applicant / അപേക്ഷകനെ യെ സംബന്ധിച്ച വിവരങ്ങൾ </h4>
                                     <br>
-                                    <label class="form-label"> Name / പേര്
+                                    
                                     </label>
                                     <div class="row">
-                                        <div class="col-md-12">
-
+                                        <div class="col-md-6">
+                                            <label class="form-label"> Name / പേര്
                                             <input type="text" value="{{ old('applicant_name') }}" class="form-control"
                                                 name="applicant_name" placeholder="പേര്" />
                                             @error('applicant_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label"> Email / ഇമെയിൽ
+                                            <input type="text" value="{{ old('applicant_email') }}" class="form-control"
+                                                name="applicant_email" placeholder="ഇമെയിൽ" />
+                                            @error('applicant_email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

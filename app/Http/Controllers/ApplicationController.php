@@ -1365,6 +1365,28 @@ class ApplicationController extends Controller
         } else {
             $applicant_photos = '';
         }
+        if ($request->hasfile('marriage_certificate')) {
+
+            $certificate = $request->marriage_certificate;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $certificate->extension();
+
+            $certificate->move(public_path('/applications/marriage_grant_certificates'), $imgfileName1);
+
+            $marriage_certificate = $imgfileName1;
+        } else {
+            $marriage_certificate = '';
+        }
+        if ($request->hasfile('invitation_letter')) {
+
+            $invitation = $request->invitation_letter;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $invitation->extension();
+
+            $invitation->move(public_path('/applications/marriage_grant_certificates'), $imgfileName1);
+
+            $invitation_letter = $imgfileName1;
+        } else {
+            $invitation_letter = '';
+        }
 
         $formData = $data;
 
@@ -1372,6 +1394,8 @@ class ApplicationController extends Controller
         $formData['income_certificate'] = $income_certificate;
         $formData['signature'] = $signature;
         $formData['applicant_photo'] = $applicant_photos;
+        $formData['marriage_certificate'] = $marriage_certificate;
+        $formData['invitation_letter'] = $invitation_letter;
         $request->flash();
         return view('application.marriage_grant_preview', compact('formData'));
     }
@@ -1426,6 +1450,11 @@ class ApplicationController extends Controller
             'groom_parent_taluk' => @$data['groom_parent_taluk'],
             'groom_parent_pincode' => @$data['groom_parent_pincode'],
             'financial_assistance_details' => $data['financial_assistance_details'],
+            'panchayath_name' => $data['panchayath_name'],
+            'submitted_after_marriage' => $data['submitted_after_marriage'],
+            'date_of_marriage' => $data['date_of_marriage'],
+            'marriage_certificate' => $data['marriage_certificate'],
+            'invitation_letter' => $data['invitation_letter'],
             'place' => $data['place'],
             'date' => date('d-m-Y'),
             'submitted_district' => $data['submitted_district'],
