@@ -203,7 +203,7 @@
                                                     <h3>Application 4 - <a
                                                             href="{{ route('userMarriageGrantList') }}">Applied({{ $data['marriageGrantCount'] }})</a>
                                                     </h3>
-                                                    <p class="ctm-height">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട
+                                                    <p class="ctm-height">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട
                                                         പെണ്കുട്ടികൾക്ക് വിവാഹധനസഹായം നൽകുന്നതിനുള്ള അപേക്ഷഫോറം </p>
                                                     {{--  <a href="{{url('marriageGrantForm')}}" class="btn-card">Apply Now</a>     --}}
                                                     <a href="#" class="btn-card" data-toggle="modal"
@@ -675,7 +675,7 @@
                     <form>
                         <div class="modal-header">
                             <h5 class="modal-title" id="applicationModalLabel">
-                                പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക് വിവാഹധനസഹായം നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
+                                പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക് വിവാഹധനസഹായം നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -903,7 +903,7 @@
                 <form>
                     <div class="modal-header">
                         <h5 class="modal-title" id="applicationModalLabel">
-                            പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക് വിവാഹധനസഹായം നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
+                            പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക് വിവാഹധനസഹായം നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

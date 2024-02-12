@@ -188,6 +188,7 @@ class SingleIncomeEarnerController extends Controller
 
         $datainsert = SingleIncomeEarner::create([
             'applicant_name' => @$data['applicant_name'],
+            'applicant_email' => @$data['applicant_email'],
             'applicant_caste' => @$data['applicant_caste'],
             'caste_certificate' => @$data['caste_certificate'],
             'address' => @$data['address'],
