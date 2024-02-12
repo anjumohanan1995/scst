@@ -322,3 +322,5 @@ Route::get('/child_finance/reject/{id}', [App\Http\Controllers\ChildFinanceContr
 
 
 Route::resource('/po-tdo', TDOMasterController::class);
+Route::post('/district/fetchTDO', [TDOMasterController::class, 'fetchTDO'])->name('district.fetch-po-tdo');
+

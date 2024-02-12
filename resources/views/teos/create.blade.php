@@ -102,6 +102,42 @@
 				<!-- /main-content -->
 <script src="{{ asset('js/jquery.validate.min.js')}}"></script>
 <script>
+$('#district_id').change(function(){
+	
+	var val1 = $("#district_id").val();
+           
+            $.ajax({
+                url: "{{ route('district.fetch-po-tdo') }}",
+                type: "POST",
+                data: {
+                    district_id: val1,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#submitted_teo").find('option').remove();
+                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
+
+                    $.each(result.tdo, function(key, value) {
+                        var $opt = $('<option>');
+                        $opt.val(value._id).text(value.name);
+
+                        // Set the selected attribute based on the old submitted value
+                        if ('{{ old('submitted_teo') }}' == value._id) {
+                            $opt.attr('selected', 'selected');
+                        }
+
+                        $opt.appendTo('#submitted_teo');
+                    });
+                }
+            });
+    });
+
+	
+            
+           
+
+
 
 $("#role").change(function () {
    var category= $('option:selected', this).text();// Here we can get the value of selected item
