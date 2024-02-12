@@ -377,6 +377,15 @@
 
                                     </li>
                                     <li class="slide">
+                                        <a class="side-menu__item {{ \Request::route()->getName() == 'tdo.index' || \Request::route()->getName() == 'teo.create' || \Request::route()->getName() == 'teo.edit' ? 'active' : '' }}"
+                                            href="{{ url('po-tdo/create') }}">
+                                            <i class="side-menu__icon fas fa-city"> </i>
+                                            <span class="side-menu__label">PO/TDO </span>
+
+                                        </a>
+
+                                    </li>
+                                    <li class="slide">
                                         <a class="side-menu__item {{ \Request::route()->getName() == 'institution.index' || \Request::route()->getName() == 'institution.create' || \Request::route()->getName() == 'institution.edit' ? 'active' : '' }}"
                                             href="{{ url('institution') }}">
                                             <i class="side-menu__icon fas fa-city"> </i>

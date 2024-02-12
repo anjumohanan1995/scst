@@ -8,7 +8,7 @@
 						<!-- breadcrumb -->
 						<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 							<div class="col-xl-9">
-								<h4 class="content-title mb-2">Add TEO
+								<h4 class="content-title mb-2">Add PO / TDO
 </h4>
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
@@ -40,7 +40,7 @@
 										<div class="card-body">
 												 <div id="success_message" class="ajax_response" style="display: none;"></div>
 
-												<form name="userForm" id="userForm" method="post" action="{{route('teo.store')}}">
+												<form name="userForm" id="userForm" method="post" action="{{route('po-tdo.store')}}">
 													@csrf
 
 													<div class="form-group">
@@ -57,9 +57,26 @@
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
 															</div>
+                                                            <div class="col-md-4 mb-4">
+																<label class="form-label">Type </label>
+																<select class="form-control" name="type">
+                                                                    <option value="po">PO
+
+                                                                    </option>
+                                                                    <option value="tdo">TDO
+
+                                                                    </option>
+                                                                </select>
+
+																@error('type')
+																   <span class="text-danger">{{$message}}</span>
+																@enderror
+															</div>
+                                                        </div>
+                                                        <div class="row">
 															<div class="col-md-4 mb-4">
-																<label class="form-label">TEO Name</label>
-																<input type="text" class="form-control" placeholder="TEO Name" name="teo_name" />
+																<label class="form-label">PO / TDO Name</label>
+																<input type="text" class="form-control" placeholder="PO / TDO Name" name="name" />
 																@error('name')
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
@@ -102,42 +119,6 @@
 				<!-- /main-content -->
 <script src="{{ asset('js/jquery.validate.min.js')}}"></script>
 <script>
-$('#district_id').change(function(){
-	
-	var val1 = $("#district_id").val();
-           
-            $.ajax({
-                url: "{{ route('district.fetch-po-tdo') }}",
-                type: "POST",
-                data: {
-                    district_id: val1,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: 'json',
-                success: function(result) {
-                    $("#submitted_teo").find('option').remove();
-                    $("#submitted_teo").append('<option value="" selected>Choose TEO</option>');
-
-                    $.each(result.tdo, function(key, value) {
-                        var $opt = $('<option>');
-                        $opt.val(value._id).text(value.name);
-
-                        // Set the selected attribute based on the old submitted value
-                        if ('{{ old('submitted_teo') }}' == value._id) {
-                            $opt.attr('selected', 'selected');
-                        }
-
-                        $opt.appendTo('#submitted_teo');
-                    });
-                }
-            });
-    });
-
-	
-            
-           
-
-
 
 $("#role").change(function () {
    var category= $('option:selected', this).text();// Here we can get the value of selected item
