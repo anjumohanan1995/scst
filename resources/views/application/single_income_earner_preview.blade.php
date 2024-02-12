@@ -92,7 +92,23 @@
                                                 <label> {{ @$formData['applicant_name'] }}</label>
                                             </div>
                                         </div>
+                                        <div class="row w-100">
+                                            <div class="col-6">
 
+                                                <label>ഇമെയിൽ
+
+
+                                                </label>
+                                            </div>
+
+                                            <div class="col-1">
+                                                <label> :</label>
+                                            </div>
+
+                                            <div class="col-5">
+                                                <label> {{ @$formData['applicant_email'] }}</label>
+                                            </div>
+                                        </div>
 
 
 

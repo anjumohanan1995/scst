@@ -8,7 +8,7 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			
-				<h4 class="content-title mb-2">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട  പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം <br>
+				<h4 class="content-title mb-2">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം <br>
                     Application form for marriage grant to poor girls belonging to Scheduled Tribes </h4>
 				
 
@@ -470,15 +470,73 @@
                                                             
                             </div><br><hr>
                             <div class="row">   
-                              
+                                <div class="col-md-6 mb-6">
                                     <label class="form-label">ഈ ആവശ്യത്തിന് സർക്കാരിൽനിന്നോ സംഘടനകളിൽനിന്നോ ഏജൻസികളിൽനിന്നോ ധനസഹായം ലഭിച്ചിട്ടുണ്ടെങ്കിൽ ആയതിന്റെ പൂർണവിവരം / Full details of any financial assistance, if any, received from the Government, organizations or agencies for this purpose</label>
                                     <textarea type="text" class="form-control" placeholder="" name="financial_assistance_details" >{{ old('financial_assistance_details') }}</textarea>
                                     @error('financial_assistance_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                </div>
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">പഞ്ചായത്തിൻ്റെ/കോ-ഓർപ്പറേഷൻ്റെ പേര് / Name of Panchayath/Co-orporation  </label>
+                                    <input type="text" value="{{ old('panchayath_name') }}"  class="form-control"  name="panchayath_name" />
+                                    @error('panchayath_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                    
                                
                                                             
-                            </div><br>  
+                            </div><br>
+                            <div class="row">   
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">വിവാഹത്തിന് ശേഷമാണോ അപേക്ഷ സമർപ്പിക്കുന്നത്? / Is the application submitted after marriage?</label>
+                                    <div>
+                                        <input type="radio" id="submitted_after_marriage_yes" name="submitted_after_marriage" value="Yes" {{ old('submitted_after_marriage') == 'Yes' ? 'checked' : '' }} >
+                                        <label for="submitted_after_marriage_yes">അതെ/Yes</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="submitted_after_marriage_no" name="submitted_after_marriage" value="No" {{ old('submitted_after_marriage') == 'No' ? 'checked' : '' }} >
+                                        <label for="submitted_after_marriage_no">അല്ല/No</label>
+                                    </div>
+                                    @error('submitted_after_marriage')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-6">
+                                    <div id="marriage" style="display: none;">
+                                        <label class="form-label">Marriage Date</label>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-6">
+                                                <input type="date" value="{{ old('date_of_marriage') }}" class="form-control" placeholder="" name="date_of_marriage" />
+                                                @error('date_of_marriage')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label class="form-label">Marriage Certificate</label>
+                                                <input type="file" onchange="validateCaste()" value="{{ old('marriage_certificate') }}" class="form-control" placeholder="" name="marriage_certificate" id="marriage_certificate" />
+                                                <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
+                                                @error('marriage_certificate')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                <div id="errorCaste" style="color:red;"></div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    
+                                    <div id="invite" style="display: none;">
+                                        <label class="form-label">Invitation Letter</label>                                  
+                                        <input type="file" onchange="validateCaste()" value="{{ old('invitation_letter') }}" class="form-control" placeholder="" name="invitation_letter" id="invitation_letter" />
+                                        <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG, PDF </p>
+                                        @error('invitation_letter')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>                          
+                                </div>
+                                                                              
+                            </div>
+                             
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">സ്ഥലം / Place</label>
@@ -565,6 +623,20 @@
 </div>
 </div>
 <script>
+    $(document).ready(function() {
+        $('#invite').hide();
+        $('#marriage').hide();
+        $('input[name="submitted_after_marriage"]').change(function() {
+            if ($(this).val() === 'Yes') {
+                $('#marriage').show();
+                $('#invite').hide();
+            } else {
+                $('#invite').show();
+                $('#marriage').hide();
+            }
+        });
+    });
+
     function validateSignature() {
         var input = document.getElementById('signature');
         var errorMessage = document.getElementById('errorSignature');

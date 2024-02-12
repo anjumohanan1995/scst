@@ -297,7 +297,57 @@
                                     </td>
                                     <td>{{ @$formData['financial_assistance_details'] }}</td>
                                 </tr>
+                                <tr>
+                                    <td>24</td>
+                                    <td>.പഞ്ചായത്തിൻ്റെ/കോ-ഓർപ്പറേഷൻ്റെ പേര്
 
+
+                                    </td>
+                                    <td>{{ @$formData['panchayath_name'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>25</td>
+                                    <td>വിവാഹത്തിന് ശേഷമാണോ അപേക്ഷ സമർപ്പിക്കുന്നത്? 
+
+
+                                    </td>
+                                    <td>{{ @$formData['submitted_after_marriage'] }}</td>
+                                </tr>
+                                @if($formData['submitted_after_marriage'] == 'Yes')
+                                <tr>
+                                    <td>26</td>
+                                    <td>Marriage Date & Certificate 
+
+
+                                    </td>
+                                    <td>
+                                        
+                                        @if(@$formData['date_of_marriage']!=null) {{ \Carbon\Carbon::parse(@$formData['date_of_marriage'])->format('d-m-Y') }} @endif<br>
+                                        @if ($formData['marriage_certificate'])
+                                       <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['marriage_certificate']) }}" target="_blank">View</a>
+                                         @endif
+
+                                    
+                                       
+                                    </td>
+                                </tr>
+                                @else
+                                <tr>
+                                    
+                                    <td>26</td>
+                                    <td>Invitation Letter
+
+
+                                    </td>
+                                    <td>
+                                       
+                                        @if ($formData['invitation_letter'])
+                                       <a href="{{ asset('applications/marriage_grant_certificates/' . @$formData['invitation_letter']) }}" target="_blank">View</a>
+                                         @endif
+                                       
+                                    </td>
+                                </tr>
+                                @endif
 
                             </tbody>
                         </table>
