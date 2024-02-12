@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Carbon\Carbon;
 use Excel;
-use Auth;
+
 use App\Hospital;
+use App\Models\FinancialHelp;
 use Illuminate\Support\Facades\Hash;
 use App\Role;
-
+use Illuminate\Support\Facades\Auth;
 
 class TeoController extends Controller
 {
@@ -235,5 +236,41 @@ class TeoController extends Controller
     {
         $data['teos'] = Teo::where('district_id', $request->district_id)->where('deleted_at', null)->get(["teo_name"]);
         return response()->json($data);
+    }
+
+
+    public function coupleApplicationApprove(Request $request){
+        $coupleApplication = FinancialHelp::where('_id', $request->id)->first();
+        $id = $request->id;
+        $reason =$request->reason;
+      //  $currentTime = Carbon::now();
+      $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+      
+       
+        $coupleApplication->update([
+            'teo_status' => 1,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+        
+    }
+    public function coupleApplicationReject(Request $request){
+        $coupleApplication = FinancialHelp::where('_id', $request->id)->first();
+        $id = $request->id;
+        $reason =$request->reason;
+      //  $currentTime = Carbon::now();
+      $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+      
+       
+        $coupleApplication->update([
+            'teo_status' => 2,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+        
     }
 }

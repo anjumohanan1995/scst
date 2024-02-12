@@ -77,6 +77,11 @@ Route::post('/financialHelpStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/couplefinancialList', [App\Http\Controllers\ApplicationController::class, 'couplefinancialList'])->name('couplefinancialList');
 Route::get('/getCoupleList', [App\Http\Controllers\ApplicationController::class, 'getCoupleList'])->name('getCoupleList');
 Route::get('/couple-application/{id}', [App\Http\Controllers\ApplicationController::class, 'coupleApplicationView'])->name('coupleApplicationView');
+Route::post('/financial-teo/approve', [App\Http\Controllers\TeoController::class, 'coupleApplicationApprove'])->name('financial-teo.approve');
+Route::post('/financial-teo/reject', [App\Http\Controllers\TeoController::class, 'coupleApplicationReject'])->name('financial-teo.reject');
+
+
+
 
 
 //exam application routes starts here.
@@ -141,6 +146,8 @@ Route::post('/marriageGrantStoreDetails', [App\Http\Controllers\ApplicationContr
 Route::get('/marriageGrantList', [App\Http\Controllers\ApplicationController::class, 'marriageGrantList'])->name('marriageGrantList');
 Route::get('/getmarriageGrantList', [App\Http\Controllers\ApplicationController::class, 'getmarriageGrantList'])->name('getmarriageGrantList');
 Route::get('/marriageGrant/{id}/view', [App\Http\Controllers\ApplicationController::class, 'marriageGrantView'])->name('marriageGrantView');
+Route::post('/marriageGrant-teo/approve', [App\Http\Controllers\TeoController::class, 'marriageGrantApprove'])->name('marriageGrant-teo.approve');
+Route::post('/marriageGrant-teo/reject', [App\Http\Controllers\TeoController::class, 'marriageGrantReject'])->name('marriageGrant-teo.reject');
 
 
 

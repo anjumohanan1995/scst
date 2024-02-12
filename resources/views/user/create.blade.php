@@ -195,7 +195,7 @@
 	$("#role").change(function () {
 		var category = $(this).val(); // Get the value of the selected item
 		
-		if (category === "TEO" || category === "TDO" || category === "") {
+		if (category === "TEO" || category === "TDO" || category === "Project Officer") {
 			$('#teo_div').show();
 		} else {
 			$('#teo_div').hide();
