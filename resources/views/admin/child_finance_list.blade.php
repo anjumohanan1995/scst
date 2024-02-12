@@ -7,7 +7,7 @@
 		    <!-- breadcrumb -->
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 				<div class="col-xl-6">
-					<h4 class="content-title mb-2">അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </h4>
+					<h4 class="content-title mb-2">അനാധകർക്ക്പ്രതിമാസം 2000 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - Application List</li>

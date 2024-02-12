@@ -266,31 +266,34 @@
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
-
                                                     <label>8.രക്ഷിതാവിന്റെ മേൽവിലാസം</label><br>
-
                                                 </div>
-
-
                                                 <div class="col-1 w-100">
-                                                    <label> :  
-                                                    
-                                                    </label>
-
+                                                    <label> :      </label>
                                                 </div>
-
                                                 <div class="col-6">
                                                     <label>  {{ @$formData['address'] }} <br>
                                                     {{ @$formData['current_district_name'] }} {{ @$formData['current_taluk_name'] }} {{ @$formData['current_pincode'] }}
                                                                </label>
-
-
                                                 </div>
-                                            </div>
-                                           
-
+                                            </div>   
                                         </div>
-
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>9.ഇമെയിൽ</label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :      </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['email'] }} <br>
+                                                               </label>
+                                                </div>
+                                            </div>   
+                                        </div>
                                     </div>
 
                                     <div class="paper-1">
@@ -298,7 +301,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>9. രക്ഷിതാവിന്റെ സമുദായം</label><br>
+                                                    <label>10. രക്ഷിതാവിന്റെ സമുദായം</label><br>
 
                                                 </div>
 
@@ -326,7 +329,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>10. ഫോൺ നമ്പർ</label><br>
+                                                    <label>11. ഫോൺ നമ്പർ</label><br>
 
                                                 </div>
 
@@ -355,7 +358,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>11. രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ </label><br>
+                                                    <label>12. രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ </label><br>
 
                                                 </div>
 
@@ -383,7 +386,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>12. ആധാർ ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ</label><br>
+                                                    <label>13. ആധാർ ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ</label><br>
 
                                                 </div>
 
@@ -412,7 +415,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>13.വോട്ടർ ഐ.ഡി. കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ </label><br>
+                                                    <label>14.വോട്ടർ ഐ.ഡി. കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ </label><br>
 
                                                 </div>
 
@@ -439,29 +442,72 @@
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
-
-                                                    <label>14. റേഷൻ കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ  </label><br>
-
+                                                    <label>15. റേഷൻ കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ  </label><br>
                                                 </div>
-
-
                                                 <div class="col-1 w-100">
-                                                    <label> :  
-                                                    
-                                                    </label>
-
+                                                    <label> :     </label>
                                                 </div>
-
                                                 <div class="col-6">
                                                     <label>  {{ @$formData['ration_card_number'] }} </label>
-
-
                                                 </div>
-                                            </div>
-                                           
-
+                                            </div>    
                                         </div>
-
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>16. അനാഥനാകാനുള്ള കാരണം   </label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :     </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['reason_for_orphan'] }} / <br>
+                                                        @if(@$formData['reason_for_orphan'] == 'Other reason')
+                                                        {{ @$formData['reason'] }}
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>17. മരണ സർട്ടിഫിക്കറ്റ്    </label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :     </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label> 
+                                                         <a href="{{ asset('/child/death_certificate/' . @$formData['death_certificate'] ?? '') }}"
+                                                        target="_blank" rel="noopener noreferrer">View</a> 
+                                                    </label>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>18.  ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫിസറുടെ സർട്ടിഫിക്കറ്റ്    </label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :     </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label> 
+                                                         <a href="{{ asset('/child/tribal_extension_certificate/' . @$formData['tribal_extension_certificate'] ?? '') }}"
+                                                        target="_blank" rel="noopener noreferrer">View</a> 
+                                                    </label>
+                                                </div>
+                                            </div>    
+                                        </div>
                                     </div>
 
                                       <div class="row mt-5">
