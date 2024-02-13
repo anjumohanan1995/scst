@@ -25,10 +25,19 @@
                <!--  <form name="searchForm" id="searchForm" method="post" action="javascript:void(0)">
 					@csrf -->
                     <div class="row row-sm">
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                        	<input class="form-control" placeholder="Name" type="text" name="name" id="name">
+						<div class="col-lg mg-t-10 mg-lg-t-0">
+							<select  class="form-control" name="dis_name" id="dis_name">
+								<option value="">Select District</option>
+								@foreach($districts as $district)
+								<option value="{{$district->id}}"  {{ (old('district_id') == $district->id) ? 'selected' : '' }}>{{$district->name}}</option>
+								@endforeach
+							</select>
+                        
                         </div>
-                      
+                        <div class="col-lg mg-t-10 mg-lg-t-0">
+                        	<input class="form-control" placeholder="Teo Name" type="text" name="name" id="name">
+                        </div>
+						
                       
                         <div class="col-lg mg-t-10 mg-lg-t-0">
                         	<button class="btn ripple btn-success btn-block" type="submit" id="submit" >Search</button>
@@ -85,7 +94,9 @@
     										<table id="example" class="table table-striped table-bordered" style="width:100%">
        											<thead>
 													<tr>
+														<th>Sl No</th>
 														<th>District Name</th>
+														<th>PO /TDO  Name</th>
 														<th>TEO Name</th>
                                                         <th>Created Date</th>
                                                         <th >Action</th>
@@ -206,6 +217,7 @@ $(document).on("click",".deleteItem",function() {
 			        	return $.extend( {}, d, {
 				            "mobile": $("#mobile").val(),
 				            "name": $("#name").val(),
+							"dis_name": $("#dis_name").val(),
 				            "role": $("#role").val(),
 				            //"from_date": $("#datepicker").val(),
 				            "delete_ctm": $("#delete_ctm").val(),
@@ -216,7 +228,9 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
+				{ data: 'sl_no' },
                 { data: 'district_name' },
+				{ data: 'po_or_tdo' },
 				{ data: 'teo_name' },
                 { data: 'created_at', visible: false },
 

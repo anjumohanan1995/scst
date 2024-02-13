@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\TDOMaster;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
@@ -227,8 +228,9 @@ class UserController extends Controller
                 'email' => $data['email'],
                 'role' => $data['role'],
                 'mobile' => $data['mobile'],
-                'district' => $data['district'],
-                'teo_name' => $data['teo_name'],
+                'district' => @$data['district'],
+                'teo_name' => @$data['teo_name'],
+                'po_tdo_office' => @$data['po_tdo_office'],
                 'password' => Hash::make($data['password']),
             ]);
 
@@ -301,8 +303,9 @@ class UserController extends Controller
             'email' => $data['email'],
             'role' => $data['role'],
             'mobile' => $data['mobile'],
-            'district' => $data['district'],
-            'teo_name' => $data['teo_name'],
+            'district' => @$data['district'],
+            'teo_name' => @$data['teo_name'],
+            'po_tdo_office' => @$data['po_tdo_office'],
             //'password' => Hash::make($data['password']),
         ]);
 
@@ -329,5 +332,11 @@ class UserController extends Controller
                         'success' => 'User Deleted successfully.'
                     ]);
 
+    }
+    public function fetchOffice(Request $request)
+    {
+        $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('deleted_at', null)->get(["name","type"]);
+    //  dd($data['offices']);
+        return response()->json($data);
     }
 }

@@ -129,7 +129,7 @@
                                                     @csrf
                                                     <div class="text-center">
                                                         <h5>Reason for Approve</h5>
-                                                        <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                                                        <textarea class="form-control" name="approve_reason" id="approve_reason" requred></textarea>
                                                         <span id="rejection"></span>
                                                     </div>
                                                     <input type="hidden" id="requestId" name="requestId" value="" />
@@ -208,7 +208,7 @@
     });
 
     function approve() {
-        var reason = $('#reason').val();
+        var reason = $('#approve_reason').val();
 
         var reqId = $('#requestId').val();
 
@@ -354,7 +354,7 @@ $(document).on("click",".deleteItem",function() {
 
 
 			],
-            "order": [4, 'desc'],
+            "order": [6, 'desc'],
             'ordering': true,
          });
 

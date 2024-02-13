@@ -508,14 +508,15 @@ class ApplicationController extends Controller
             $items->whereBetween('created_at', [$stDate, $edDate]);
         }
 
-        $records = $items->skip($start)->take($rowperpage)->get();
+        $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
 
 
 
 
         $data_arr = array();
-
+        $i=$start;
         foreach ($records as $record) {
+            $i++;
             $id = $record->id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
@@ -539,6 +540,10 @@ class ApplicationController extends Controller
                     $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
                 }
                
+              }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+           
               }
             $data_arr[] = array(
                 "sl_no"=>$i,
@@ -991,7 +996,7 @@ class ApplicationController extends Controller
  
     public function motherChildSchemeApprove(Request $request){
         $id = $request->id;
-
+        $reason =$request->reason;
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
       $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = MotherChildScheme::where('_id', $request->id)->first();
@@ -1001,6 +1006,7 @@ class ApplicationController extends Controller
             'teo_status' => 1,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
         ]);
       }
 
@@ -1232,7 +1238,7 @@ class ApplicationController extends Controller
 
               if($role == "TEO"){
                 if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $edit='<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
                 }
                 else if($record->teo_status ==2){
                     $edit='<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
@@ -1553,8 +1559,9 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-
+        $i=$start;
         foreach ($records as $record) {
+            $i++;
             $id = $record->id;
             $name = $record->name;
             $current_address = $record->current_address;
@@ -1576,6 +1583,7 @@ class ApplicationController extends Controller
                
               }
             $data_arr[] = array(
+                "sl_no" =>$i,
                 "id" => $id,
                 "name" => $name,
                 "current_address" => $current_address,

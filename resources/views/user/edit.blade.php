@@ -111,8 +111,8 @@
 															</div>
 
                                                         </div><br>
-														<div class="row" id="teo_div" style="display:none">
-															<div class="col-md-6 mb-6">
+														<div class="row" >
+															<div class="col-md-6 mb-6" id="district_div" style="display:none">
 																<label class="form-label">District</label>
 																<select id="dist" name="district" class="form-control">
 																	<option value="">Choose District</option>
@@ -125,7 +125,17 @@
 																@enderror
 															</div>
 	
-															<div class="col-md-6 mb-6" >
+															<div class="col-md-6 mb-6" id="po_tdo_office_div" style="display:none">
+																<label class="form-label">PO/TDO</label>
+																<select id="po_tdo_office" name="po_tdo_office" class="form-control">
+																	<option value="">Choose PO/TDO</option>
+																</select>                                 
+																@error('po_tdo_office')
+																	<span class="text-danger">{{$message}}</span>
+																@enderror
+															</div>
+	
+															<div class="col-md-6 mb-6" id="teo_div" style="display:none">
 																<label class="form-label">TEO</label>
 																<select id="teo_name" name="teo_name" class="form-control">
 																	<option value="">Choose TEO</option>
@@ -228,25 +238,45 @@ $( document ).ready(function() {
 	var category= $('#role option:selected').val();// Here we can get the value of selected item
 	//alert(category);
 	if(category == "TEO"){
-		$('#teo_div').show();
-	 }
-		else{
+		$('#district_div').show();
+			$('#teo_div').show();
+			$('#po_tdo_office_div').hide();
+		} else if (category === "Clerk" || category === "PO" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
+			$('#district_div').show();
+			$('#po_tdo_office_div').show();
 			$('#teo_div').hide();
+		}
+		else{
+			$('#district_div').hide();
+			$('#teo_div').hide();
+			$('#po_tdo_office_div').hide();
 		}
 	});
 
 	$("#role").change(function () {
 		var category = $(this).val(); // Get the value of the selected item
-		
+		$("#dist").val('');
+
 		if (category === "TEO") {
+			$('#district_div').show();
 			$('#teo_div').show();
-		} else {
+			$('#po_tdo_office_div').hide();
+		} else if (category === "Clerk" || category === "PO" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
+			$('#district_div').show();
+			$('#po_tdo_office_div').show();
 			$('#teo_div').hide();
+		}
+		else{
+			$('#district_div').hide();
+			$('#teo_div').hide();
+			$('#po_tdo_office_div').hide();
 		}
 	});
 
     var val = document.getElementById("dist").value;
    // alert(val);
+   var category = $('#role').val();
+   if (category === "TEO") {
     $.ajax({
 		url: "{{url('district/fetch-teo')}}",
 		type: "POST",
@@ -268,11 +298,39 @@ $( document ).ready(function() {
 
                 }
             });
+		}
+		if (category === "Clerk" || category === "PO" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
+			$.ajax({
+				url: "{{url('district/fetch-office')}}",
+				type: "POST",
+				data: {
+					district_id: val,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (result) {
+					var po_tdo_office =  {{ Js::from($patient['po_tdo_office']) }};
+					$("#po_tdo_office").find('option').remove();
+					  $("#po_tdo_office").append('<option value="" selected>Choose PO/TDO</option>');
+					$.each(result.offices, function (key, value) {
+						if(value._id == po_tdo_office)
+                        $('#po_tdo_office').append('<option value="'+value._id+'" selected>'+ value.name +' ('+value.type+')'+'</option>');
+                        else
+                        $('#po_tdo_office').append('<option value="'+value._id+'">'+ value.name +'</option>');
+                   
+						
+
+					});
+
+				}
+			});
+		}
  
 
 $('#dist').change(function(){
 	var val = document.getElementById("dist").value;
-      
+	var category = $('#role').val();
+	if (category === "TEO") {
 	$.ajax({
 				url: "{{url('district/fetch-teo')}}",
 				type: "POST",
@@ -294,6 +352,33 @@ $('#dist').change(function(){
 
 				}
 			});
+		}
+		if (category === "Clerk" || category === "PO" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
+			$.ajax({
+				url: "{{url('district/fetch-office')}}",
+				type: "POST",
+				data: {
+					district_id: val,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (result) {
+					$("#po_tdo_office").find('option').remove();
+					  $("#po_tdo_office").append('<option value="" selected>Choose</option>');
+					$.each(result.offices, function (key, value) {
+						var nameWithType = value.name + " (" + value.type + ")";
+						var $opt = $('<option>', {
+							value: value._id,
+							text: nameWithType
+						});
+						$opt.appendTo('#po_tdo_office');
+					  
+
+					});
+
+				}
+			});
+		}
 
 });
 </script>
