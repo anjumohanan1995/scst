@@ -228,6 +228,7 @@ Route::post('/teo/delete/{id}', [TeoController::class, 'destroy'])->name('delete
 
 Route::post('/district/fetch-taluk', [TalukController::class, 'fetchTaluk'])->name('fetch-taluk');
 Route::post('/district/fetch-teo', [TeoController::class, 'fetchTeo'])->name('fetch-fetchTeo');
+Route::post('/district/fetch-office', [UserController::class, 'fetchOffice'])->name('fetch-fetchOffice');
 
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
