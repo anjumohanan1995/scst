@@ -13,7 +13,7 @@
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 
-										<li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - TEO
+										<li class="breadcrumb-item active" aria-current="page"><i class="side-menu__icon fe fe-box"> </i> - PO / TDO
 </li>
 									</ol>
 								</nav>
@@ -47,19 +47,19 @@
 														<div class="row">
 															<div class="col-md-4 mb-4">
 																<label class="form-label">District Name</label>
-																<select id="district_id" name="district_id" class="form-control" >
+																<select id="district_id" name="district_id" class="form-control"  required>
 																	<option value="">Select</option>
 																		@foreach($districts as $district)
 																			<option value="{{$district->id}}"  >{{$district->name}}</option>
 																		@endforeach
 																</select>
-																@error('district_name')
+																@error('district_id')
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
 															</div>
                                                             <div class="col-md-4 mb-4">
 																<label class="form-label">Type </label>
-																<select class="form-control" name="type">
+																<select class="form-control" name="type" required>
                                                                     <option value="po">PO
 
                                                                     </option>
