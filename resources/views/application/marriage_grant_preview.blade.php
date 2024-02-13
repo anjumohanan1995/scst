@@ -312,7 +312,7 @@
                                             </td>
                                             <td>{{ @$formData['submitted_after_marriage'] }}</td>
                                         </tr>
-                                        @if($formData['submitted_after_marriage'] == 'Yes')
+                                        @if(@$formData['submitted_after_marriage'] == 'Yes')
                                         <tr>
                                             <td>26</td>
                                             <td>Marriage Date & Certificate 

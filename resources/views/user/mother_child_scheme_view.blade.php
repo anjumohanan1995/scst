@@ -38,7 +38,7 @@
                                 <h1
                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
                                     ജനനി-ജനനി -ജന്മരക്ഷ <br> പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി <br> അപേക്ഷഫോറം
-
+sdeasdsdsdsd
                                 </h1>
                                 <form action="#" method="post" style="font-weight: 500;font-size: 12px;padding: 90px;">
 
@@ -375,6 +375,21 @@
                           </div>
                  </div>
                  @endif
+                 @if(@$formData->teo_status == 1)
+                 <div class="pb-2 row ">
+                    <div class="col-5">
+                       <label>TEO Approved Reason  </label><br>
+                    </div>
+                    <div class="col-1 w-100">
+                       <label> :  
+                       </label>
+                    </div>
+                    <div class="col-6">
+                 {{ @$formData->teo_status_reason }}
+                 
+                    </div>
+           </div>
+           @endif
                  @if(@$formData->teo_status != null)
                        <div class=" pb-2 row ">
                           <div class="col-5">
@@ -423,7 +438,8 @@
                                               <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
                                               <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
                                               <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                             
+                                              <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                                            
                                           </div>
                                       </div>
                                       @elseif(@$formData->teo_status == 2)
@@ -527,6 +543,8 @@
                                           <div class="inner-circle"></div><br>
                                          
                                           <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                          <p class="h6 text-muted mb-0 mb-lg-2">PO/TDO </p>
+                                        
                                           @if(@$formData->pjct_offcr_view_date != null)
                                           <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer View Date :   </span> {{ @$formData->pjct_offcr_view_date}}</p>
                                            @endif

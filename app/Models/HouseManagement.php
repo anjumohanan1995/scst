@@ -52,6 +52,7 @@ class HouseManagement extends Eloquent
         'teo_status_reason',
         'date_received',
         'applicant_image',
+        
         'tdo_view_status',
         'tdo_view_id',
         'tdo_view_date',

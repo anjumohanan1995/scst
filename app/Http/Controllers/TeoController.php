@@ -14,6 +14,7 @@ use Excel;
 
 use App\Hospital;
 use App\Models\FinancialHelp;
+use App\Models\MarriageGrant;
 use Illuminate\Support\Facades\Hash;
 use App\Role;
 use Illuminate\Support\Facades\Auth;
@@ -269,7 +270,9 @@ class TeoController extends Controller
             'teo_status_id' => Auth::user()->id,
             'teo_status_reason' => $reason,
         ]);
-        
+        return response()->json([
+            'success' => 'Couple Financial Scheme Application Approved successfully.'
+        ]);
     }
     public function coupleApplicationReject(Request $request){
         $coupleApplication = FinancialHelp::where('_id', $request->id)->first();
@@ -286,6 +289,47 @@ class TeoController extends Controller
             'teo_status_id' => Auth::user()->id,
             'teo_status_reason' => $reason,
         ]);
-        
+        return response()->json([
+            'success' => 'Couple Financial Scheme Application Rejected successfully.'
+        ]);
     }
+
+        public function marriageGrantApprove(Request $request){
+            $marriage = MarriageGrant::where('_id', $request->id)->first();
+            $id = $request->id;
+            $reason =$request->reason;
+          //  $currentTime = Carbon::now();
+          $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+          $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+          
+           
+            $marriage->update([
+                'teo_status' => 1,
+                'teo_status_date' => $currenttime,
+                'teo_status_id' => Auth::user()->id,
+                'teo_status_reason' => $reason,
+            ]);
+            return response()->json([
+                'success' => 'Marriage Grant Scheme Application Approved successfully.'
+            ]);
+        }
+        public function marriageGrantReject(Request $request){
+            $marriage = MarriageGrant::where('_id', $request->id)->first();
+            $id = $request->id;
+            $reason =$request->reason;
+          //  $currentTime = Carbon::now();
+          $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+          $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+          
+           
+            $marriage->update([
+                'teo_status' => 2,
+                'teo_status_date' => $currenttime,
+                'teo_status_id' => Auth::user()->id,
+                'teo_status_reason' => $reason,
+            ]);
+            return response()->json([
+                'success' => 'Marriage Grant Scheme Application Rejected successfully.'
+            ]);
+        }
 }

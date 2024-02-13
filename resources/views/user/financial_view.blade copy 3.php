@@ -30,12 +30,15 @@
                 <!-- row -->
                 <div class="row row-sm">
                     <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
-                        <div class="card overflow-hidden" >
-                            <div class="card-body pd-y-5">
-                               
+                        <div class="card overflow-hidden" style="width: 113%;">
+                            <div class="card-body pd-y-7">
+                                    <div id="btnHide" class="row justify-content-end m-3">
+                                        <a style="width: 50px" onclick="printDiv()"><img
+                                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                                    </div>
 
-                                <div id="print_content">
 
+                            <div id="print_content">
                                 <h1
                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
                                     മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് <br>
@@ -615,7 +618,9 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>10. പ്രിൻസിപ്പലിൻ്റെ പ്രഖ്യാപനം (ഫയൽ) </label><br>
+                                                    <label>10. മിശ്രവിവാഹം മൂലം ദമ്പതികൾക്ക്
+                                                അനുഭവിക്കേണ്ടി വന്നിട്ടുള്ള കഷ്ടതകളം
+                                                പ്രയാസങ്ങളം എന്തെല്ലാം </label><br>
 
                                                 </div>
 
@@ -639,60 +644,119 @@
                                         </div>
 
                                     </div>
-                            
-                                    <div class="row mt-5">
-                                        <div class="col-12">
-                                            <h1
-                                                style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
-                                                അപേക്ഷ സമർപ്പിക്കുന്നത്
+                                    {{-- <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
 
-                                            </h1>
-                                        </div>
-                                    </div>
-                                    <div class="row ">
-                                        <div class=" col-6 d-flex ">
-                                            <div class=" d-flex col-12">
-                                                <div class="col-3">
+                                                    <label>10. ജില്ല </label><br>
 
-                                                    <label>ജില്ല </label>
                                                 </div>
 
-                                                <div class="col-1">
-                                                    <label> : </label>
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
                                                 </div>
-                                                <div class="col-8">
-                                                    <label> {{ @$formData['dist_name'] }} </label>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                      {{ @$formData['dist_name'] }}
+                                                    </label>
+
+                                                </div>
+                                            </div>
                                             
 
+                                        </div>
+
+                                    </div>
+
+                                     <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+
+                                                    <label>11.ടി.ഇ.ഒ</label><br>
+
+                                                </div>
+
+
+                                                <div class="col-1 w-100">
+                                                    <label> :  
+                                                    
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label> 
+                                                      {{ @$formData['teo_name'] }}
+                                                    </label>
+
                                                 </div>
                                             </div>
-
+                                            
 
                                         </div>
 
-                                        <div class="col-6 d-flex">
-                                            <div class=" d-flex col-12">
-                                                <div class="col-3">
+                                    </div>
+                                    --}}
+                                      <div class="row mt-5">
+                                            <div class="col-12">
+                                                <h1
+                                                    style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                                    അപേക്ഷ സമർപ്പിക്കുന്നത്
 
-                                                    <label>TEO</label>
-                                                </div>
-
-                                                <div class="col-1">
-                                                    <label> : </label>
-                                                </div>
-                                                <div class="col-8">
-                                                    <label> {{ @$formData['teo_name'] }} </label>
-                                                </div>
+                                                </h1>
                                             </div>
                                         </div>
-                                    </div><br>
+                                        <div class="row ">
+                                            <div class=" col-6 d-flex ">
+                                                <div class=" d-flex col-12">
+                                                    <div class="col-3">
+
+                                                        <label>ജില്ല </label>
+                                                    </div>
+
+                                                    <div class="col-1">
+                                                        <label> : </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <label> {{ @$formData['dist_name'] }} </label>
+                                              
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-6 d-flex">
+                                                <div class=" d-flex col-12">
+                                                    <div class="col-3">
+
+                                                        <label>TEO</label>
+                                                    </div>
+
+                                                    <div class="col-1">
+                                                        <label> : </label>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <label> {{ @$formData['teo_name'] }} </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><br>
 
 
 
 
                                    
                                     <div>
-                                        <p>ശ്രീമാൻ {{ @$formData['husband_name'] }} ശ്രീമതി {{ @$formData['wife_name'] }}
+                                        <p>ശ്രീമാൻ{{ @$formData['husband_name'] }} ശ്രീമതി {{ @$formData['wife_name'] }}
                                             എന്നിവരായ ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശേരിയുമാണുന്ന
                                             ഇതിനാൽ പ്രതിജ്ഞ ചെയ്ത്‌കൊള്ളുന്നു </p>
                                     </div>
@@ -729,6 +793,7 @@
 
                                         </div>
 
+ 
                                         <div>
                                             <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if($formData['wife_photo'])
                                             <img src="{{ asset('sign/wife/' . @$formData['wife_photo']) }}" width="120px" height="60px">
@@ -753,110 +818,36 @@
                                
 
 
-                                    </div>
                                 </div>
                             </div>
-                            
+                             {{-- <form action="{{ url('financialHelpStoreDetails') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                    @csrf
+                                   
+                                   
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
+                                            <button type="submit" class="btn-block btn btn-success" onclick="return confirm('Do you want to continue?')">Submit</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="btn_wrapper">
+                                                <a href="javascript:void(0)" class="btn btn-primary w-100" onclick="goback()">Edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form> --}}
+                            {{-- <div class="bottom">
+                                <p>മേൽപ്പറഞ്ഞ കാര്യങ്ങളെപ്പറ്റി അനേഷിച്ചതിൽ അവ സത്യമണ്ണുന്നും ഈ വ്യക്തികൾ
+                                    <br>ബുദ്ധിമുട്ടനുഭവിക്കുന്നവരാണെന്നും ബോദ്ധ്യപ്പെട്ടിരിക്കുന്നതായി ഞാൻ
+                                    സാക്ഷ്യപ്പെടുത്തുന്നു
+                                </p>
+                            </div>
+                        </div>
+                        <p class="end">ട്രൈബൽ ടെവേലോപ്മെന്റ് ഓഫീസർ പ്രോജെക്ട് ഓഫീസർ </p> --}}
+
                     </div>
                 </div>
 
-                        
-
-
-                    @if(auth::user()->role=='TEO' && @$financialHelp->teo_view_status==1)
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                       <div class="pt-2 card overflow-hidden">
-                       
-                          <div class="card-body">
-                             
-                                   <div class="pb-2 row ">
-                                      <div class="col-5">
-                                         <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
-                                      </div>
-                                      <div class="col-1 w-100">
-                                         <label> :  
-                                         </label>
-                                      </div>
-                                      <div class="col-6">
-                                         <label> 
-                                         {{ @$financialHelp['teo_view_date'] }}
-                                         </label>
-                                    
-                                </div>
-                             </div>
-                             <hr>
-                             <div class="pb-2 row ">
-                                <div class="col-5">
-                                   <label>Status  </label><br>
-                                </div>
-                                <div class="col-1 w-100">
-                                   <label> :  
-                                   </label>
-                                </div>
-                                <div class="col-6">
-                                 @if(@$financialHelp->teo_status == null)
-                                 <button class="btn btn-warning" >Pending</button>
-                                 @elseif(@$financialHelp->teo_status == 1)
-                                 <button class="btn btn-success" >Approved</button>
-                                 @elseif(@$financialHelp->teo_status == 2)
-                                 <button class="btn btn-danger" >Rejected</button> 
-                                @endif
-                                </div>
-                       </div>
-                       @if(@$financialHelp->teo_status == 2 )
-                       <div class="pb-2 row ">
-                          <div class="col-5">
-                             <label>Rejected Reason  </label><br>
-                          </div>
-                          <div class="col-1 w-100">
-                             <label> :  
-                             </label>
-                          </div>
-                          <div class="col-6">
-                       {{ @$financialHelp->teo_status_reason }}
-                       
-                          </div>
-                 </div>
-                 @endif
-                 @if(@$financialHelp->teo_status == 1 )
-                 <div class="pb-2 row ">
-                    <div class="col-5">
-                       <label>Approved Reason  </label><br>
-                    </div>
-                    <div class="col-1 w-100">
-                       <label> :  
-                       </label>
-                    </div>
-                    <div class="col-6">
-                 {{ @$financialHelp->teo_status_reason }}
-                 
-                    </div>
-           </div>
-           @endif
-                 @if(@$financialHelp->teo_status != null)
-                       <div class=" pb-2 row ">
-                          <div class="col-5">
-                             @if(@$financialHelp->teo_status == 1)
-                             <label>Approved Date  </label>
-                             @elseif(@$financialHelp->teo_status == 2)
-                             <label>Rejected Date  </label>
-                            @endif
-                             
-                             <br>
-                          </div>
-                          <div class="col-1 w-100">
-                             <label> :  
-                             </label>
-                          </div>
-                          <div class="col-6">
-                             @if(@$financialHelp['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['teo_status_date'])->format('d-m-Y h:i a') }}@endif
-                         
-                          
-                          </div>
-                       </div>
-                 @endif
-                 @endif
-              
             </div>
         </div>
     </div>
@@ -888,7 +879,15 @@
                
             }
         }
-        //print preview function.
-             
+         function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
     </script>
 @endsection
