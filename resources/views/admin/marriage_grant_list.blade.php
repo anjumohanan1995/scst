@@ -185,7 +185,7 @@
         var reqId = $('#requestId').val();
 
         $.ajax({
-            url: "{{ route('marrage-grant-teo.approve') }}",
+            url: "{{ route('marriageGrant-teo.approve') }}",
             type: "POST",
             data: {
                 "id": reqId,
@@ -218,7 +218,7 @@
             console.log(reqId);
             $.ajax({
 
-                url: "{{ route('marrage-grant-teo.reject') }}",
+                url: "{{ route('marriageGrant-teo.reject') }}",
                 type: "POST",
                 data: {
                     "id": reqId,

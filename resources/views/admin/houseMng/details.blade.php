@@ -442,6 +442,21 @@
                </div>
             </div>
             @endif
+            @if(@$houseManagement->teo_status == 1)
+            <div class="pb-2 row ">
+               <div class="col-5">
+                  <label>TEO Approved Reason  </label><br>
+               </div>
+               <div class="col-1 w-100">
+                  <label> :  
+                  </label>
+               </div>
+               <div class="col-6">
+            {{ @$houseManagement->teo_status_reason }}
+            
+               </div>
+      </div>
+      @endif
             @if(@$houseManagement->teo_status != null)
             <div class=" pb-2 row ">
                <div class="col-5">
@@ -589,6 +604,11 @@
                </div>
                <form id="ownForm">
                   @csrf
+                  <div class="text-center">
+                     <h5>Reason for Approved</h5>
+                     <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                     <span id="rejection"></span>
+                  </div>
                   <input type="hidden" id="requestId" name="requestId" value="" />
                   <div class="text-center">
                      <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
@@ -737,7 +757,7 @@
            $('#rejection-popup').modal('show');
            });
            function approve() {
-   
+            var reason = $('#approved_reason').val();
            var reqId = $('#requestId').val();
    
        $.ajax({
@@ -745,6 +765,7 @@
                    type: "POST",
                    data: {
                        "id": reqId,
+                       "reason" :reason,
                        "_token": "{{ csrf_token() }}"
                    },
                    success: function(response) {

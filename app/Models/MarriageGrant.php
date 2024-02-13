@@ -66,8 +66,16 @@ class MarriageGrant extends Eloquent
         'date',
         'submitted_district',
         'submitted_teo',
-        'signature','applicant_photo','user_id','status'
+        'signature','applicant_photo','user_id','status',
 
+        'teo_view_status',
+        'teo_view_id',
+        'teo_view_date',
+
+        'teo_status',
+        'teo_status_id',
+        'teo_status_date',
+        'teo_status_reason',
 
     ];
 
@@ -113,5 +121,16 @@ class MarriageGrant extends Eloquent
         return $this->belongsTo('App\Models\Teo', 'submitted_teo');
     }
 
-    
+    public function teoUser()
+    {
+        return $this->belongsTo(User::class,'teo_status_id');
+    }
+    public function district()
+    {
+        return $this->belongsTo(District::class,'submitted_district');
+    }
+    public function teo()
+    {
+        return $this->belongsTo(Teo::class,'submitted_teo');
+    }
 }

@@ -438,7 +438,8 @@ sdeasdsdsdsd
                                               <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
                                               <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
                                               <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                             
+                                              <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                                            
                                           </div>
                                       </div>
                                       @elseif(@$formData->teo_status == 2)
@@ -542,6 +543,8 @@ sdeasdsdsdsd
                                           <div class="inner-circle"></div><br>
                                          
                                           <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                          <p class="h6 text-muted mb-0 mb-lg-2">PO/TDO </p>
+                                        
                                           @if(@$formData->pjct_offcr_view_date != null)
                                           <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer View Date :   </span> {{ @$formData->pjct_offcr_view_date}}</p>
                                            @endif

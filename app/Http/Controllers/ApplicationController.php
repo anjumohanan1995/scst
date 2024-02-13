@@ -1431,13 +1431,13 @@ class ApplicationController extends Controller
             'current_district' => @$data['current_district'],
             'current_taluk' => @$data['current_taluk'],
             'current_pincode' => @$data['current_pincode'],
-            'age' => $data['age'],
+            'age' => @$data['age'],
             'permanent_address' => $data['permanent_address'],
             'permanent_district' => @$data['permanent_district'],
             'permanent_taluk' => @$data['permanent_taluk'],
             'permanent_pincode' => @$data['permanent_pincode'],
-            'family_details' => $data['family_details'],
-            'caste' => $data['caste'],
+            'family_details' => @$data['family_details'],
+            'caste' => @$data['caste'],
             'caste_certificate' => $data['caste_certificate'],
             'fiancee_name' => @$data['fiancee_name'],
             'fiancee_address' => @$data['fiancee_address'],
@@ -1447,18 +1447,18 @@ class ApplicationController extends Controller
             'relation_with_applicant' => @$data['relation_with_applicant'],
             'marriage_type' => @$data['marriage_type'],
             'is_widow' => @$data['is_widow'],
-            'parent_occupation' => $data['parent_occupation'],
-            'annual_income' => $data['annual_income'],
-            'income_certificate' => $data['income_certificate'],
-            'marriage_place' => $data['marriage_place'],
-            'marriage_date' => $data['marriage_date'],
-            'fiancee_family_details' => $data['fiancee_family_details'],
-            'disabled_parent_info' => $data['disabled_parent_info'],
-            'freedmen_parent_details' => $data['freedmen_parent_details'],
+            'parent_occupation' => @$data['parent_occupation'],
+            'annual_income' => @$data['annual_income'],
+            'income_certificate' => @$data['income_certificate'],
+            'marriage_place' => @$data['marriage_place'],
+            'marriage_date' => @$data['marriage_date'],
+            'fiancee_family_details' => @$data['fiancee_family_details'],
+            'disabled_parent_info' => @$data['disabled_parent_info'],
+            'freedmen_parent_details' => @$data['freedmen_parent_details'],
             'violence_by_non_scheduled_tribes_info' => $data['violence_by_non_scheduled_tribes_info'],
-            'land_alienated_details' => $data['land_alienated_details'],
-            'outcast_parent_details' => $data['outcast_parent_details'],
-            'remarried_parent_details' => $data['remarried_parent_details'],
+            'land_alienated_details' => @$data['land_alienated_details'],
+            'outcast_parent_details' => @$data['outcast_parent_details'],
+            'remarried_parent_details' => @$data['remarried_parent_details'],
             'groom_name' => @$data['groom_name'],
             'groom_address' => @$data['groom_address'],
             'groom_district' => @$data['groom_district'],
@@ -1470,12 +1470,12 @@ class ApplicationController extends Controller
             'groom_parent_taluk' => @$data['groom_parent_taluk'],
             'groom_parent_pincode' => @$data['groom_parent_pincode'],
             'financial_assistance_details' => $data['financial_assistance_details'],
-            'panchayath_name' => $data['panchayath_name'],
-            'submitted_after_marriage' => $data['submitted_after_marriage'],
-            'date_of_marriage' => $data['date_of_marriage'],
-            'marriage_certificate' => $data['marriage_certificate'],
-            'invitation_letter' => $data['invitation_letter'],
-            'place' => $data['place'],
+            'panchayath_name' => @$data['panchayath_name'],
+            'submitted_after_marriage' => @$data['submitted_after_marriage'],
+            'date_of_marriage' => @$data['date_of_marriage'],
+            'marriage_certificate' => @$data['marriage_certificate'],
+            'invitation_letter' => @$data['invitation_letter'],
+            'place' => @$data['place'],
             'date' => date('d-m-Y'),
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
@@ -1571,7 +1571,7 @@ class ApplicationController extends Controller
             $edit="";
             if($role == "TEO"){
                 if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
                 }
                 else if($record->teo_status ==2){
                     $edit='<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
@@ -1582,6 +1582,11 @@ class ApplicationController extends Controller
                 }
                
               }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' . url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+              
+              }
+              
             $data_arr[] = array(
                 "sl_no" =>$i,
                 "id" => $id,
@@ -1607,8 +1612,21 @@ class ApplicationController extends Controller
     public function marriageGrantView(Request $request, $id)
     {
 
-        $formData = MarriageGrant::where('_id', $id)->first();
+       
+        $currentTime = Carbon::now();
 
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+     
+      $formData = MarriageGrant::where('_id', $id)->first();
+        if($formData->teo_view_status==null && Auth::user()->role=='TEO'){
+            $formData->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         return view('application.marriage_grant_view', compact('formData'));
     }
 }

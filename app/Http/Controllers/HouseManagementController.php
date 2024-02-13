@@ -476,7 +476,7 @@ $formattedDate = $currentDate->toDateString();
 
               if($role == "TEO"){
                 if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
                 }
                 else if($record->teo_status ==2){
                     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
@@ -490,7 +490,7 @@ $formattedDate = $currentDate->toDateString();
               else if($role == "TDO" || $role == "Project Officer"){
                
                 if($record->tdo_status== 1 || $record->pjct_offcr_status== 1 ){
-                    $edit = '<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">'.$approved_status.'</div></div>';
+                    $edit = '<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">'.$approved_status.'</div>&nbsp;&nbsp;<span>'.$status_reason.'</span></div>';
                 }
                 else if($record->tdo_status ==2 || $record->pjct_offcr_status== 2){
                     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">'.$rejected_status.'</div>&nbsp;&nbsp;<span>'.$status_reason.'</span></div>';
@@ -569,7 +569,7 @@ $formattedDate = $currentDate->toDateString();
 
     public function teoApprove(Request $request){
         $id = $request->id;
-
+        $reason =$request->reason;
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
       $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = HouseManagement::where('_id', $request->id)->first();
@@ -579,6 +579,7 @@ $formattedDate = $currentDate->toDateString();
             'teo_status' => 1,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
         ]);
       }
 
