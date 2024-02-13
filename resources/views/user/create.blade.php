@@ -209,7 +209,7 @@
 			$('#district_div').show();
 			$('#teo_div').show();
 			$('#po_tdo_office_div').hide();
-		} else if (category === "Clerk" || category === "PO" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
+		} else if (category === "Clerk" || category === "Project Officer" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
 			$('#district_div').show();
 			$('#po_tdo_office_div').show();
 			$('#teo_div').hide();
@@ -249,7 +249,7 @@
                     }
                 });
 			}
-			if (category === "Clerk" || category === "PO" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
+			if (category === "Clerk" || category === "Project Officer" || category === "TDO" || category === "APO" || category === "ATDO" || category === "JS" || category === "SEO") {
 				$.ajax({
                     url: "{{url('district/fetch-office')}}",
                     type: "POST",

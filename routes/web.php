@@ -155,14 +155,20 @@ Route::post('/marriageGrant-teo/reject', [App\Http\Controllers\TeoController::cl
 Route::get('/singleEarnerList', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerList'])->name('singleEarnerList');
 Route::get('/getSingleEarnerList', [App\Http\Controllers\SingleIncomeEarnerController::class, 'getSingleEarnerList'])->name('getSingleEarnerList');
 Route::get('/singleEarner/{id}/view', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerView'])->name('singleEarnerView');
+Route::post('/singleEarner/teoApprove', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerTeoApprove'])->name('singleEarner-teo.approve');
+Route::post('/singleEarner/teoReject', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerTeoReject'])->name('singleEarner-teo.reject');
 
 Route::get('/anemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceList'])->name('anemiaFinanceList');
 Route::get('/getAnemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceList'])->name('getAnemiaFinanceList');
 Route::get('/anemiaFinance/{id}/view', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceView'])->name('anemiaFinanceView');
+Route::post('/anemiaFinance/teoApprove', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoApprove'])->name('anemiaFinance-teo.approve');
+Route::post('/anemiaFinance/teoReject', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoReject'])->name('anemiaFinance-teo.reject');
 
 Route::get('/studentAwardList', [App\Http\Controllers\StudentAwardController::class, 'studentAwardList'])->name('studentAwardList');
 Route::get('/getStudentAwardList', [App\Http\Controllers\StudentAwardController::class, 'getStudentAwardList'])->name('getStudentAwardList');
 Route::get('/studentAward/{id}/view', [App\Http\Controllers\StudentAwardController::class, 'studentAwardView'])->name('studentAwardView');
+Route::post('/studentAward/teoApprove', [App\Http\Controllers\StudentAwardController::class, 'studentAwardTeoApprove'])->name('studentAward-teo.approve');
+Route::post('/studentAward/teoReject', [App\Http\Controllers\StudentAwardController::class, 'studentAwardTeoReject'])->name('studentAward-teo.reject');
 
 
 Route::get('/anemia-financial-assistance', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancialAssistance'])->name('anemia-financial-assistance');
@@ -307,7 +313,8 @@ Route::get('/tuitionUserFeeView/{id}/view', [TuitionFeeController::class, 'tuiti
 Route::get('/adminTuitionFeeList', [TuitionFeeController::class, 'adminTuitionFeeList'])->name('adminTuitionFeeList');
 Route::get('/getTuitionFeeList', [TuitionFeeController::class, 'getTuitionFeeList'])->name('getTuitionFeeList');
 Route::get('/tuitionAdminFeeView/{id}/view', [TuitionFeeController::class, 'tuitionAdminFeeView'])->name('tuitionAdminFeeView');
-
+Route::post('/tuitionFee/teoApprove', [App\Http\Controllers\TuitionFeeController::class, 'tuitionFeeTeoApprove'])->name('tuitionFee-teo.approve');
+Route::post('/tuitionFee/teoReject', [App\Http\Controllers\TuitionFeeController::class, 'tuitionFeeTeoReject'])->name('tuitionFee-teo.reject');
 
 
 

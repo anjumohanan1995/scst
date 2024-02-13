@@ -38,7 +38,14 @@ class StudentAward extends Eloquent
         'applicant_image',
         'syllabus_certificate',
         'mark',
-        'syllabus'
+        'syllabus',
+        'teo_view_status',
+        'teo_view_id',
+        'teo_view_date',
+        'teo_status',
+        'teo_status_id',
+        'teo_status_date',
+        'teo_status_reason',
 
 
     ];
