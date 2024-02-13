@@ -19,4 +19,9 @@ class TDOMaster extends Eloquent
 
 
     ];
+    public function districts() {
+        return $this->belongsTo('App\Models\District','district_id');
+    }
+
+
 }
