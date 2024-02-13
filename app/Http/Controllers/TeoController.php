@@ -27,7 +27,8 @@ class TeoController extends Controller
      */
     public function index()
     {
-        return view('teos.index');
+        $districts = District::where('deleted_at',null)->get();
+        return view('teos.index',compact('districts'));
     }
 
     /**
@@ -38,7 +39,7 @@ class TeoController extends Controller
     public function getTeo(Request $request)
     {
         $teo_name = $request->name;
-
+        $district_name = $request->dis_name;
 
         if ($request->from_date != '') {
 
@@ -72,8 +73,10 @@ class TeoController extends Controller
         if ($teo_name != "") {
             $totalRecord->where('teo_name', 'like', "%" . $teo_name . "%");
         }
-
-
+        if ($district_name != "") {
+            $totalRecord->where('district_id', $district_name);
+        }
+       
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
@@ -82,7 +85,10 @@ class TeoController extends Controller
         if ($teo_name != "") {
             $totalRecordswithFilte->where('teo_name', 'like', "%" . $teo_name . "%");
         }
-
+        if ($district_name != "") {
+            $totalRecordswithFilte->where('district_id', $district_name);
+        }
+       
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
@@ -91,14 +97,17 @@ class TeoController extends Controller
         if ($teo_name != "") {
             $items->where('teo_name', 'like', "%" . $teo_name . "%");
         }
-
+        if ($district_name != "") {
+            $items->where('district_id', $district_name);
+        }
         $records = $items->skip($start)->take($rowperpage)->get();
 
 
 
         $data_arr = array();
-
+            $i=$start;
         foreach ($records as $record) {
+            $i++;
             // dd($record);
             $id = $record->id;
             $teo_name = $record->teo_name;
@@ -106,8 +115,10 @@ class TeoController extends Controller
             $created_at =  $record->created_at;
 
             $data_arr[] = array(
+                "sl_no" => $i,
                 "id" => $id,
                 "teo_name" => $teo_name,
+                "po_or_tdo" =>@$record->tdo->name,
                 "district_name" => $district_name,
                 "created_at" => $created_at,
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('teo/' . $id . '/edit') . '"><i class="fe fe-edit-2 bg-info me-1"></i></a>&nbsp;&nbsp;<a class="deleteItem" data-id="' . $id . '"><i class="si si-trash bg-danger "></i></a></div>'
@@ -143,12 +154,13 @@ class TeoController extends Controller
             $request->all(),
             [
                 'district_id' => 'required',
-                'teo_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50'
+                'teo_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50',
+                'tdo_id' => 'required',
             ]
         );
         if ($validate->fails()) {
             $messages = $validate->getMessageBag();
-            return redirect()->back()->withErrors($validate);
+            return redirect()->back()->withErrors($validate)->withInput();
         }
 
         $data = $request->all();
@@ -203,6 +215,7 @@ class TeoController extends Controller
         request()->validate([
             'district_id' => 'required',
             'teo_name' => 'required|regex:/^[\pL\s\-]+$/u|max:50',
+            'tdo_id' => 'required',
         ]);
 
 
@@ -213,6 +226,7 @@ class TeoController extends Controller
         $book->update([
             'district_id' => $data['district_id'],
             'teo_name' => $data['teo_name'],
+            'po_or_tdo' =>$data['tdo_id'],
         ]);
 
         return redirect()->route('teo.index')

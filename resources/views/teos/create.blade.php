@@ -50,10 +50,10 @@
 																<select id="district_id" name="district_id" class="form-control" >
 																	<option value="">Select</option>
 																		@foreach($districts as $district)
-																			<option value="{{$district->id}}"  >{{$district->name}}</option>
+																			<option value="{{$district->id}}"  {{ (old('district_id') == $district->id) ? 'selected' : '' }}>{{$district->name}}</option>
 																		@endforeach
 																</select>
-																@error('district_name')
+																@error('district_id')
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
 															</div>
@@ -62,7 +62,7 @@
 																<select id="tdo_id" name="tdo_id" class="form-control" >
 																	
 																</select>
-																@error('district_name')
+																@error('tdo_id')
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
 															</div>
@@ -70,8 +70,8 @@
 														<div class="row">
 															<div class="col-md-4 mb-4">
 																<label class="form-label">TEO Name</label>
-																<input type="text" class="form-control" placeholder="TEO Name" name="teo_name" />
-																@error('name')
+																<input type="text" class="form-control" placeholder="TEO Name" name="teo_name" value="{{ old('teo_name') }}"/>
+																@error('teo_name')
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
 															</div>

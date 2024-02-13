@@ -18,6 +18,9 @@ class Teo extends Eloquent
     public function districts() {
         return $this->belongsTo('App\Models\District','district_id');
     }
+    public function tdo(){
+        return $this->belongsTo('App\Models\TDOMaster','po_or_tdo');
+    }
 
     
 }

@@ -48,7 +48,7 @@
 																			<option value="{{$district->id}}" @if($data['district_id'] == $district->id) selected @endif  >{{$district->name}}</option>
 																		@endforeach
 																</select>
-																@error('district_name')
+																@error('district_id')
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
 															</div>
@@ -57,7 +57,7 @@
 																<select id="tdo_id" name="tdo_id" class="form-control" >
 																	
 																</select>
-																@error('district_name')
+																@error('tdo_id')
 																   <span class="text-danger">{{$message}}</span>
 																@enderror
 															</div>
@@ -142,7 +142,7 @@ $.ajax({
 
 
 			// Set the selected attribute based on the old submitted value
-			var oldTdoId = '{{ {{ old('tdo_id') }} }}';
+			var oldTdoId = '{{ old('tdo_id')  }}';
             if (oldTdoId == value._id) {
                 $opt.prop('selected', true);
             }
