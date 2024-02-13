@@ -8,7 +8,7 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			<div class="col-xl-9">
-				<h4 class="content-title mb-2">അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </h4>
+				<h4 class="content-title mb-2">അനാധകർക്ക്പ്രതിമാസം 2000 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </h4>
 			</div>
 			<div class="col-xl-3">
 			</div>
@@ -331,8 +331,25 @@
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
+                                                    <label>10.ഇമെയിൽ</label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :      </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['email'] }} <br>
+                                                               </label>
+                                                </div>
+                                            </div>   
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
 
-                                                    <label>10. ഫോൺ നമ്പർ</label><br>
+                                                    <label>11. ഫോൺ നമ്പർ</label><br>
 
                                                 </div>
 
@@ -361,7 +378,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>11. രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ </label><br>
+                                                    <label>12. രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ </label><br>
 
                                                 </div>
 
@@ -389,7 +406,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>12. ആധാർ ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ</label><br>
+                                                    <label>13. ആധാർ ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ</label><br>
 
                                                 </div>
 
@@ -418,7 +435,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>13.വോട്ടർ ഐ.ഡി. കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ </label><br>
+                                                    <label>14.വോട്ടർ ഐ.ഡി. കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ </label><br>
 
                                                 </div>
 
@@ -446,7 +463,7 @@
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>14. റേഷൻ കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ  </label><br>
+                                                    <label>15. റേഷൻ കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ  </label><br>
 
                                                 </div>
 
@@ -468,6 +485,62 @@
 
                                         </div>
 
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>16. അനാഥനാകാനുള്ള കാരണം   </label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :     </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>  {{ @$formData['reason_for_orphan'] }} / <br>
+                                                        @if(@$formData['reason_for_orphan'] == 'Other reason')
+                                                        {{ @$formData['reason'] }}
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>17. മരണ സർട്ടിഫിക്കറ്റ്    </label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :     </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label> 
+                                                         <a href="{{ asset('/child/death_certificate/' . @$formData['death_certificate'] ?? '') }}"
+                                                        target="_blank" rel="noopener noreferrer">View</a> 
+                                                    </label>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                    <div class="paper-1">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>18.  ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫിസറുടെ സർട്ടിഫിക്കറ്റ്    </label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label> :     </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label> 
+                                                         <a href="{{ asset('/child/tribal_extension_certificate/' . @$formData['tribal_extension_certificate'] ?? '') }}"
+                                                        target="_blank" rel="noopener noreferrer">View</a> 
+                                                    </label>
+                                                </div>
+                                            </div>    
+                                        </div>
                                     </div>
 
                                       <div class="row mt-5">
