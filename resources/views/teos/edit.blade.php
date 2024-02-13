@@ -53,6 +53,17 @@
 																@enderror
 															</div>
 															<div class="col-md-4 mb-4">
+																<label class="form-label">PO /TDO  Name</label>
+																<select id="tdo_id" name="tdo_id" class="form-control" >
+																	
+																</select>
+																@error('district_name')
+																   <span class="text-danger">{{$message}}</span>
+																@enderror
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-4 mb-4">
 																<label class="form-label">TEO Name</label>
 																<input type="text" class="form-control" placeholder="TEO Name" name="teo_name" value="{{ $data['teo_name'] }}" />
 																@error('teo_name')
@@ -93,6 +104,64 @@
 
 
 
+<script>
+	 $('#district_id').change(function(){
 
+
+fetchTdo();
+});
+
+$(document).ready(function() {
+
+fetchTdo();
+//  fetchDistrict();
+//fetchWifeDistrict();
+});
+
+function fetchTdo() {
+var val1 = $("#district_id").val();
+
+
+
+
+$.ajax({
+	url: "{{ route('district.fetch-po-tdo') }}",
+	type: "POST",
+	data: {
+		district_id: val1,
+		_token: '{{ csrf_token() }}'
+	},
+	dataType: 'json',
+	success: function(result) {
+		$("#tdo_id").find('option').remove();
+		$("#tdo_id").append('<option value="" selected>Choose TEO</option>');
+
+		$.each(result.tdo, function(key, value) {
+			var $opt = $('<option>');
+				$opt.val(value._id).text(value.name + ' (' + value.type + ')');
+
+
+			// Set the selected attribute based on the old submitted value
+			var oldTdoId = '{{ {{ old('tdo_id') }} }}';
+            if (oldTdoId == value._id) {
+                $opt.prop('selected', true);
+            }
+			var TdoId = '{{ $data->po_or_tdo }}';
+            if (TdoId == value._id) {
+                $opt.prop('selected', true);
+            }
+
+            $opt.appendTo('#tdo_id');
+
+			
+		});
+	}
+});
+}
+
+		
+				
+			   
+</script>	
 
 @endsection

@@ -111,7 +111,7 @@ class TDOMasterController extends Controller
        
     }
     public function fetchTDO(Request $request){
-        $data['tdos'] = TDOMaster::where('district_id', $request->district_id)->where('deleted_at', null)->get();
+        $data['tdo'] = TDOMaster::where('district_id', $request->district_id)->where('deleted_at', null)->get();
         return response()->json($data);
     }
 

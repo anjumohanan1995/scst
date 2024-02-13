@@ -13,7 +13,7 @@ class Teo extends Eloquent
     protected $collection = 'teo';
 
     protected $fillable = [
-        'district_id','teo_name'
+        'district_id','teo_name','po_or_tdo'
     ];
     public function districts() {
         return $this->belongsTo('App\Models\District','district_id');
