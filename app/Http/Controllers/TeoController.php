@@ -158,6 +158,7 @@ class TeoController extends Controller
         Teo::create([
             'district_id' => $data['district_id'],
             'teo_name' => $data['teo_name'],
+            'po_or_tdo' =>$data['tdo_id'],
         ]);
 
 

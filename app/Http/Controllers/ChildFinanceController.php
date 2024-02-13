@@ -99,12 +99,40 @@ class ChildFinanceController extends Controller
         }else{
             $signature = '';
         }
+        if ($request->hasfile('death_certificate')) {
+
+            $image = $request->death_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/child/death_certificate'), $imgfileName);
+
+            $death_certificate = $imgfileName;
+
+        }else{
+            $death_certificate = '';
+        }
+
+        if ($request->hasfile('tribal_extension_certificate')) {
+
+            $image = $request->tribal_extension_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/child/tribal_extension_certificate'), $imgfileName);
+
+            $tribal_extension_certificate = $imgfileName;
+
+        }else{
+            $tribal_extension_certificate = '';
+        }
+
       
         $formData = $data;
        
         $formData['birth_certificate']= $birth_certificate;
         $formData['child_signature']= $child_signature;
         $formData['signature']= $signature;
+        $formData['death_certificate']= $death_certificate;
+        $formData['tribal_extension_certificate']= $tribal_extension_certificate;
         $request->flash();
 
         return view('child.child_form_preview', compact('formData'));
@@ -135,6 +163,11 @@ class ChildFinanceController extends Controller
             'aadhar_number' => @$data['aadhar_number'],
             'voter_id' => @$data['voter_id'],
             'ration_card_number' => @$data['ration_card_number'],
+            'email' => @$data['email'],
+            'reason_for_orphan' => @$data['reason_for_orphan'],
+            'reason' => @$data['reason'],
+            'death_certificate' => @$data['death_certificate'],
+            'tribal_extension_certificate' => @$data['tribal_extension_certificate'],
             'place' => @$data['place'],
             'signature' => @$data['signature'],
             'child_signature' => @$data['child_signature'],

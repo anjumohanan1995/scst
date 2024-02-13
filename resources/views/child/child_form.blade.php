@@ -7,8 +7,8 @@
 	<div class="main-container container-fluid">
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-			<h4 class="content-title mb-2">Kaithang scheme to provide financial assistance of Rs 1500 per month to poor people </h4>
-				<h4 class="content-title mb-2">അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ്  </h4>
+			<h4 class="content-title mb-2">Kaithang scheme to provide financial assistance of Rs 2000 per month to poor people </h4>
+				<h4 class="content-title mb-2">അനാധകർക്ക്പ്രതിമാസം 2000 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ്  </h4>
 				
 
             @if ($message = Session::get('error'))
@@ -89,7 +89,7 @@
 
                                     
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">Name of the parent who is currently protecting the child/ കുട്ടിയെ നിലവിൽ സംരക്ഷിക്കുന്ന രക്ഷിതാവിന്റെ പേര്  </label>
+                                            <label class="form-label">Name of the guardian who is currently protecting the child/ കുട്ടിയെ നിലവിൽ സംരക്ഷിക്കുന്ന രക്ഷിതാവിന്റെ പേര്  </label>
                                             <input type="text" value="{{ old('guardian_name') }}"  class="form-control" placeholder="" name="guardian_name" />
                                             @error('guardian_name')
                                                 <span class="text-danger">{{$message}}</span>
@@ -98,7 +98,7 @@
                                         
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">Parent's Address/ രക്ഷിതാവിന്റെ മേൽവിലാസം  </label>
+                                            <label class="form-label">Guardian's Address/ രക്ഷിതാവിന്റെ മേൽവിലാസം  </label>
                                             <textarea type="text" value="{{ old('address') }}"  class="form-control" placeholder="" name="address" ></textarea>
                                             @error('address')
                                                 <span class="text-danger">{{$message}}</span>
@@ -143,15 +143,22 @@
                                         </div>
                                     </div>
                                     <div class="row">   
-                                        <div class="col-md-6 mb-2">
-                                            <label class="form-label">Parent's Community/രക്ഷിതാവിന്റെ സമുദായം  </label>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="form-label">Guardian's Community/രക്ഷിതാവിന്റെ സമുദായം  </label>
                                                 <input type="text" value="{{ old('caste') }}"  class="form-control" placeholder="" name="caste" />
                                                 @error('caste')
                                                     <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="col-md-4 mb-2">
+                                            <label class="form-label">Email / ഇമെയിൽ   </label>
+                                            <input type="text" value="{{ old('email') }}"  class="form-control" placeholder="" name="email" />
+                                                @error('email')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-2">
                                             <label class="form-label">Mobile/ഫോൺ നമ്പർ   </label>
                                             <input type="number" value="{{ old('mobile') }}"  class="form-control" placeholder="" name="mobile" />
                                                 @error('mobile')
@@ -163,7 +170,7 @@
 
                                     <div class="row">  
                                     <div class="col-md-6 mb-2">
-                                            <label class="form-label">Parent's Bank Account No/രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ  </label>
+                                            <label class="form-label">Guardian's Bank Account No/രക്ഷിതാവിന്റെ ബാങ്ക് അക്കൗണ്ട് നമ്പർ  </label>
                                             <input type="text" value="{{ old('account_number') }}"  class="form-control" placeholder="" name="account_number" />
                                                 @error('account_number')
                                                     <span class="text-danger">{{$message}}</span>
@@ -200,6 +207,59 @@
                                         
                                         
                                     </div><br>
+                                    <div class="row">   
+                                        <div class="col-md-6 mb-2">
+                                            <label class="form-label">Reason for Orphan/അനാഥനാകാനുള്ള കാരണം </label>
+                                            <select class="form-select" name="reason_for_orphan" id="reason_for_orphan">
+                                                <option value="" disabled>Select</option>
+                                                <option value="Death of father" @if (old('relation') == 'Death of father') selected @endif>
+                                                    Death of father / അച്ഛൻ്റെ മരണം</option>
+                                                <option value="Death of mother" @if (old('relation') == 'Death of mother') selected @endif>
+                                                    Death of mother / അമ്മയുടെ മരണം</option>
+                                                <option value="Death of both father and mother"
+                                                    @if (old('relation') == 'Death of both father and mother') selected @endif>Death of both father and mother /
+                                                    അച്ഛൻ്റെയും അമ്മയുടെയും മരണം</option>
+                                                <option value="Other reason"
+                                                    @if (old('relation') == 'Other reason') selected @endif>Other reason /
+                                                    മറ്റു കാരണങ്ങൾ</option>                                               
+                                            </select>
+                                                @error('reason_for_orphan')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                        </div>
+                                        <div class="col-md-6 mb-2" id="other">
+                                            <label class="form-label">Mention that reason/ കാരണം സൂചിപ്പിക്കുക </label>
+                                                <input type="text" value="{{ old('reason') }}"  class="form-control" placeholder="" name="reason" />
+                                                @error('reason')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            
+                                        </div>
+                                        
+                                        
+                                    </div><br>
+                                    <div class="row">   
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label">Death Certificate / മരണ സർട്ടിഫിക്കറ്റ് </label>
+
+                                            <label class="form-label">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG മാത്രം.)</label>
+                                            <input type="file" value="{{ old('death_certificate') }}"  class="form-control" name="death_certificate" id="death_certificate" onchange="validateImageOne()"  accept="image/*"  />
+                                            @error('death_certificate')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                             <div id="errorMessageone" style="color:red;"></div>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label">Certificate of Tribal Extension Officer / ട്രൈബൽ എക്സ്റ്റൻഷൻ ഓഫിസറുടെ സർട്ടിഫിക്കറ്റ് </label>
+                                            <label class="form-label">(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG മാത്രം.)</label>
+                                            <input type="file" value="{{ old('tribal_extension_certificate') }}"  class="form-control" name="tribal_extension_certificate" id="tribal_extension_certificate" onchange="validateImageOne()"  accept="image/*"  />
+                                            @error('tribal_extension_certificate')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                             <div id="errorMessageone" style="color:red;"></div>
+                                        </div>                                
+                                    </div><br>  
                                     <div class="row">   
                                         <div class="col-md-6 mb-4">
                                             <label class="form-label">Place/സ്ഥലം</label>
@@ -295,6 +355,18 @@
 </div>
 
 <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#other').hide();
+        $('#reason_for_orphan').change(function() {
+            if ($(this).val() === 'Other reason') {
+                $('#other').show();                
+            } else {               
+                $('#other').hide();
+            }
+        });
+    });
+
 $('input[name="current_pincode"]').on('input', function() {
             this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
         });

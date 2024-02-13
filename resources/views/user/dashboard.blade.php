@@ -218,7 +218,7 @@
 
                                                 <div class="card-desc">
                                                     <h3>Application 5 -<a href="{{ route('userchildFinanceList') }}">Applied({{ $data['childFinanceCount'] }})</h3>
-                                                    <p class="ctm-height">അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
+                                                    <p class="ctm-height">അനാധകർക്ക്പ്രതിമാസം 2000 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
                                                          
                                                         {{-- <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>    --}}
 
@@ -816,7 +816,7 @@
                 <form>
                     <div class="modal-header">
                         <h5 class="modal-title" id="applicationModalLabel">
-                          അനാധകർക്ക്പ്രതിമാസം 1500 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് 
+                          അനാധകർക്ക്പ്രതിമാസം 2000 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് 
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
