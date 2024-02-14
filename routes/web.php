@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\ClerkController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DistrictController;
@@ -334,3 +335,13 @@ Route::post('/district/fetchTDO', [TDOMasterController::class, 'fetchTDO'])->nam
 Route::get('/getTdo', [TDOMasterController::class, 'getTdo'])->name('getTdo');
 Route::post('/po-tdo/update/{id}', [TDOMasterController::class, 'update'])->name('update-tdo');
 Route::post('/po-tdo/delete/{id}', [TDOMasterController::class, 'destroy'])->name('delete-tdo');
+
+
+//Clerk Section
+Route::controller(ClerkController::class)->group(function(){
+
+	Route::get('/ChildFinanceListClerk','ChildFinanceListClerk')->name('ChildFinanceListClerk');
+
+	
+
+});

@@ -1,9 +1,9 @@
-  <li class="slide">
-            <a class="side-menu__item {{ \Request::route()->getName() == 'ChildFinanceList' ? 'active' : '' }}"
-             href="{{ url('ChildFinanceList') }}">
+<li class="slide">
+            <a class="side-menu__item {{ \Request::route()->getName() == 'ChildFinanceListClerk' ? 'active' : '' }}"
+             href="{{ url('ChildFinanceListClerk') }}">
          <i class="side-menu__icon fe fe-menu"> </i>
-                                        <span class="side-menu__label">Child Finance Applications</span>
+         <span class="side-menu__label">Child Finance Applications</span>
 
-                                    </a>
+        </a>
 
-                                </li>
+</li>
