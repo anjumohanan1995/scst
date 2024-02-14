@@ -67,6 +67,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>Name</th>
                                             <th>Age </th>
                                             <th> Address </th>
@@ -108,6 +109,11 @@
                                 <form id="ownForm">
             
                                     @csrf
+                                    <div class="text-center">
+                                        <h5>Reason for Approve</h5>
+                                        <textarea class="form-control" name="approve_reason" id="approve_reason" requred></textarea>
+                                        <span id="rejection"></span>
+                                    </div>
                                 <input type="hidden" id="requestId" name="requestId" value="" />
                                 <div class="text-center">
                                     <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
@@ -189,6 +195,7 @@
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'name' },
                 { data: 'age' },
 				{ data: 'address' },
@@ -201,7 +208,7 @@
 
 
 			],
-            "order": [4, 'desc'],
+            "order": [5, 'desc'],
             'ordering': true,
          });
 
@@ -248,14 +255,14 @@
        });
 
        function approve() {
-
+        var reason = $('#approve_reason').val();
         var reqId = $('#requestId').val();
          $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
             url: '{{ url("child_finance/approve") }}'+'/'+reqId,
            // type: 'PATCH',
             method: 'get',
-            data: {status:"1",application_id:reqId},
+            data: {status:"1",application_id:reqId,reason:reason},
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function(response) {

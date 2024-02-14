@@ -406,8 +406,9 @@ class TuitionFeeController extends Controller
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -419,7 +420,8 @@ class TuitionFeeController extends Controller
               $edit ='';
               if(Auth::user()->role== "TEO"){
                 if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('tuitionAdminFeeView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $teo_status_reason = Str::limit($record->teo_status_reason, 10);
+                    $edit='<div class="settings-main-icon"><a  href="' . route('tuitionAdminFeeView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$teo_status_reason.'</span></div>';
                 }
                 else if($record->teo_status ==2){
                     $teo_status_reason = Str::limit($record->teo_status_reason, 10);
@@ -436,6 +438,7 @@ class TuitionFeeController extends Controller
              
               }
             $data_arr[] = array(
+                "sl_no" => $i,
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,

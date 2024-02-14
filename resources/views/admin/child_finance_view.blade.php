@@ -753,6 +753,21 @@
                               </div>
                             </div>
                      @endif
+                     @if(@$childFinancialHelp->teo_status == 1)
+                     <div class="pb-2 row ">
+                       <div class="col-5">
+                          <label>Approved Reason  </label><br>
+                       </div>
+                       <div class="col-1 w-100">
+                          <label> :  
+                          </label>
+                       </div>
+                       <div class="col-6">
+                             {{ @$childFinancialHelp->teo_status_reason }}
+                    
+                       </div>
+                     </div>
+              @endif
                      @if(@$childFinancialHelp->teo_status != null)
                            <div class=" pb-2 row ">
                               <div class="col-5">

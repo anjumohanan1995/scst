@@ -171,7 +171,7 @@ class ChildFinanceController extends Controller
             'place' => @$data['place'],
             'signature' => @$data['signature'],
             'child_signature' => @$data['child_signature'],
-            'submitted_district' => @$data['dist_name'],
+            'submitted_district' => @$data['submitted_district'],
             'submitted_teo' => @$data['submitted_teo'],
             'dist_name' => @$data['dist_name'],
             'teo_name' => @$data['teo_name'],
@@ -273,12 +273,12 @@ class ChildFinanceController extends Controller
              $address = $record->address;
              $age = $record->age;
              $caste = $record->caste;
-             $status = $record->status;
+             $status = $record->teo_status;
             $date = $record->date;
             $time = $record->time;
               $created_at =  $record->created_at;
-              if($status ==1) $statusvalue='<span class="badge bg-success" style="height: 17px;">Approved</span>';
-              else  if($status ==2) $statusvalue='<span class="badge bg-danger" style="height: 17px;">Rejected by'.$record->RejectedUser->name.'</span>'.'<br>'.'Reason: '.@$record->rejected_reason;
+              if($status ==1) $statusvalue='<span class="badge bg-success" style="height: 17px;">Approved</span>'.'<br>'.'Reason: '.@$record->teo_status_reason;
+              else  if($status ==2) $statusvalue='<span class="badge bg-danger" style="height: 17px;">Rejected by'.$record->RejectedUser->name.'</span>'.'<br>'.'Reason: '.@$record->teo_status_reason;
              $edit='';
               if($role == "TEO"){
                 if($status == 1 || $status == 2){
@@ -468,9 +468,10 @@ class ChildFinanceController extends Controller
         $application_id = $request->application_id;
      
         $verify =ChildFinance::where('_id',$application_id)->first();
-        $verify->status = 1;
-        $verify->approved_by = Auth::user()->id;
-        $verify->approved_date = date('Y-m-d');
+        $verify->teo_status = 1;
+        $verify->teo_status_id = Auth::user()->id;
+        $verify->teo_status_date = date('Y-m-d');
+        $verify->teo_status_reason =$request->reason;
         $verify->update();
 
 
@@ -487,15 +488,15 @@ class ChildFinanceController extends Controller
         $reason = $request->reason;
      
         $verify =ChildFinance::where('_id',$id)->first();
-        $verify->status = 2;
-        $verify->rejected_by = Auth::user()->id;
-        $verify->rejected_date = date('Y-m-d');
-        $verify->rejected_reason = $reason;
+        $verify->teo_status = 2;
+        $verify->teo_status_id = Auth::user()->id;
+        $verify->teo_status_date = date('Y-m-d');
+        $verify->teo_status_reason = $reason;
         $verify->update();
 
 
             return response()->json([
-                'success' => 'Application Approved successfully.'
+                'success' => 'Application Rejected successfully.'
            ]);
 
 

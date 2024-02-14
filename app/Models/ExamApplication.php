@@ -73,4 +73,8 @@ class ExamApplication extends Eloquent
     public function submittedTeo() {
         return $this->belongsTo('App\Models\Teo', 'submitted_teo');
     }
+    public function teoUser()
+    {
+        return $this->belongsTo(User::class,'teo_status_id');
+    }
 }
