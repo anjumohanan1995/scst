@@ -344,4 +344,22 @@ Route::controller(ClerkController::class)->group(function(){
 
 	
 
+
+
+
+
+
+
+
+
+
+
+    Route::get('/clerkItiFundList', 'clerkItiFundList')->name('clerkItiFundList');
+    Route::get('/getClerkItiFundList', 'getClerkItiFundList')->name('getClerkItiFundList');
+    Route::get('/itiFeeClerkView/{id}', 'itiFeeClerkView')->name('clerkItiFundList.show');
+    
+    
+
+
+
 });
