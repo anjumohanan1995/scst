@@ -265,8 +265,9 @@ class ChildFinanceController extends Controller
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -278,48 +279,36 @@ class ChildFinanceController extends Controller
               $created_at =  $record->created_at;
               if($status ==1) $statusvalue='<span class="badge bg-success" style="height: 17px;">Approved</span>';
               else  if($status ==2) $statusvalue='<span class="badge bg-danger" style="height: 17px;">Rejected by'.$record->RejectedUser->name.'</span>'.'<br>'.'Reason: '.@$record->rejected_reason;
-         if($role == "TEO"){
-            if($status == 1 || $status == 2){
-                $data_arr[] = array(
-                    "id" => $id,
-                    "name" => $name,
-                    "address" => $address,
-                    "age" => $age,
-                    "caste" => $caste,
-                    "date" => $date." ".$time,  
-                    "created_at" => $created_at,                  
-                    "action" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;'.$statusvalue.'</div>'
-    
-                );
-            }
-            else{
-                $data_arr[] = array(
-                    "id" => $id,
-                    "name" => $name,
-                    "address" => $address,
-                    "age" => $age,
-                    "caste" => $caste,
-                    "date" => $date." ".$time,  
-                    "created_at" => $created_at,                  
-                    "action" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>'
-    
-                );
-            }
-           
-        }
-        else{
-            $data_arr[] = array(
-                "id" => $id,
-                "name" => $name,
-                "address" => $address,
-                "age" => $age,
-                "caste" => $caste,
-                "date" => $date." ".$time,  
-                "created_at" => $created_at,                  
-                "action" => '<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>',
+             $edit='';
+              if($role == "TEO"){
+                if($status == 1 || $status == 2){
+                    $edit ='<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;'.$statusvalue.'</div>';
+                }
+                else{
+                    $edit='<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                }
 
-            );
-        }
+              }
+              else{
+                $edit ='<div class="settings-main-icon"><a  href="' . url('childFinance/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+              }
+        
+        
+             
+           
+                $data_arr[] = array(
+                    "sl_no" => $i,
+                    "id" => $id,
+                    "name" => $name,
+                    "address" => $address,
+                    "age" => $age,
+                    "caste" => $caste,
+                    "date" => $date." ".$time,  
+                    "created_at" => $created_at,                  
+                    "action" => $edit
+    
+                );
+          
          }
 
          $response = array(

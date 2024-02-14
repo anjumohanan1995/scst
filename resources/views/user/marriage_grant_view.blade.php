@@ -468,104 +468,136 @@
                     </div>
                 </div>
                 </div>
-                @if(@$formData->teo_view_status==1)
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                   <div class="pt-2 card overflow-hidden">
-                   
-                      <div class="card-body">
-                         
-                               <div class="pb-2 row ">
-                                  <div class="col-5">
-                                     <label><i class="fas fa-eye" style="color: blue"></i>TEO Viewed Date  </label><br>
-                                  </div>
-                                  <div class="col-1 w-100">
-                                     <label> :  
-                                     </label>
-                                  </div>
-                                  <div class="col-6">
-                                     <label> 
-                                     {{ @$formData['teo_view_date'] }}
-                                     </label>
-                                
-                            </div>
-                         </div>
-                         <hr>
-                         <div class="pb-2 row ">
-                            <div class="col-5">
-                               <label>TEO Status  </label><br>
-                            </div>
-                            <div class="col-1 w-100">
-                               <label> :  
-                               </label>
-                            </div>
-                            <div class="col-6">
-                             @if(@$formData->teo_status == null)
-                             <button class="btn btn-warning" >Pending</button>
-                             @elseif(@$formData->teo_status == 1)
-                             <button class="btn btn-success" >Approved</button>
-                             @elseif(@$formData->teo_status == 2)
-                             <button class="btn btn-danger" >Rejected</button> 
-                            @endif
-                            </div>
-                   </div>
-                   
-                   @if(@$formData->teo_status == 2)
-                   <div class="pb-2 row ">
-                      <div class="col-5">
-                         <label>TEO Rejected Reason  </label><br>
-                      </div>
-                      <div class="col-1 w-100">
-                         <label> :  
-                         </label>
-                      </div>
-                      <div class="col-6">
-                   {{ @$formData->teo_status_reason }}
-                   
-                      </div>
-             </div>
-             @endif
-             @if(@$formData->teo_status == 1)
-             <div class="pb-2 row ">
-                <div class="col-5">
-                   <label>TEO Approved Reason  </label><br>
-                </div>
-                <div class="col-1 w-100">
-                   <label> :  
-                   </label>
-                </div>
-                <div class="col-6">
-             {{ @$formData->teo_status_reason }}
-             
-                </div>
-       </div>
-       @endif
-             @if(@$formData->teo_status != null)
-                   <div class=" pb-2 row ">
-                      <div class="col-5">
-                         @if(@$formData->teo_status == 1)
-                         <label>TEO Approved Date  </label>
-                         @elseif(@$formData->teo_status == 2)
-                         <label>TEO Rejected Date  </label>
-                        @endif
-                         
-                         <br>
-                      </div>
-                      <div class="col-1 w-100">
-                         <label> :  
-                         </label>
-                      </div>
-                      <div class="col-6">
-                         @if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+                    <div class="pt-2 card overflow-hidden">
+                    
+                       <div class="card-body">
+                 <ul class="timeline-3">
+                    @if(@$formData->teo_status == 1)
+                    <li class="ApproveTimeline">
+                      <a href="#!">TEO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
                      
+                      <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                      <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                      <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                      <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                      <p  class="mt-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                    
+                    </li>
+                   
+                    @elseif(@$formData->teo_status == 2)
+                    <li class="rejectTimeline">
+                       <a href="#!">TEO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                     
+                           <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
+                           <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                          <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                          <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                          <p  class="mt-2"><span class= "spanclr">TEO Rejected Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                          <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                       </li>
+                          
+                   @elseif(@$formData->teo_status == null)
+                   <li class="pendingTimeline">
+                    <a href="#!">TEO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                     
+                    <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                    <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
+                    
+                   
+                
+                </li>
+                       
+                @endif
+                @if(@$formData->teo_status == 1)
+                @if( @$formData->pjct_offcr_status == 1)
+                 
+                <li class="ApproveTimeline">
+                 <a href="#!">Project Officer</a>
+                 <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['pjct_offcr_view_date'] }}</a>
+                        <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
+                       
+                        <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
+                          <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                         <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       
+                    </li>
+                @elseif( @$formData->tdo_status == 1)
+                <li class="ApproveTimeline">
+                <a href="#!">TDO</a>
+                <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['tdo_view_date'] }}</a>
+                       <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
+                  
+                        <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                          <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       
+                </li>
+                @endif
+                @if( @$formData->tdo_status == 2 )
+                 
+                <li class="rejectTimeline">
+                 <a href="#!">TDO</a>
+                <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['tdo_view_date'] }}</a>
+               
                       
-                      </div>
-                   </div>
-             @endif
-             
-                      </div>
-                   </div>
-                </div>
-                 @endif
+                       <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
+                       <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                       <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                       <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->tdo_status_reason}}</p>
+                      
+                </li>
+                
+                 
+                 @elseif( @$formData->pjct_offcr_status == 2)
+                
+                 <li class="rejectTimeline">
+                    <a href="#!">TDO</a>
+                   <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['pjct_offcr_view_date'] }}</a>
+                  
+                      
+                        <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
+                       
+                        <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                        <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->pjct_offcr_status_reason}}</p>
+                       
+                 </li>
+                @endif
+                @if(@$formData->tdo_status == null && @$formData->pjct_offcr_status == null)
+                <li class="pendingTimeline">
+                 <a href="#!">PO/TDO</a>
+                   <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                    @if(@$formData->pjct_offcr_view_date != null)
+                   PO :  {{ @$formData['pjct_offcr_view_date'] }}
+                   @endif
+                   @if(@$formData->tdo_view_date != null)
+                   TDO :  {{ @$formData['teo_view_date'] }} 
+                   @endif
+                 </a>
+                  
+                    
+                   
+                 
+                </li>
+                  @endif
+                
+                  @endif 
+                  
+        
+                  
+                  </ul>
+                 </div>
+              </div>
+           </div>
 
             </div>
 
@@ -580,125 +612,125 @@
                            
                                 <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
           
-                                  @if(@$houseManagement->teo_status == 1)
+                                  @if(@$formData->teo_status == 1)
                                   <div class="timeline-step timeline-step2">
                                       <div class="timeline-content timeline-content2" >
                                           <div class="inner-circle"></div><br>
                                           <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Name : </span>{{ @$houseManagement->teoUser->name }}</p>
-                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$houseManagement['teo_view_date'] }}</p>
-                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
+                                          <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                                          
                                       </div>
                                   </div>
-                                  @elseif(@$houseManagement->teo_status == 2)
+                                  @elseif(@$formData->teo_status == 2)
                                   <div class="timeline-step timeline-step1 rej">
                                      <div class="timeline-content timeline-content1" >
                                          <div class="inner-circle"></div><br>
                                          <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
                                         
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Name : </span>{{ @$houseManagement->teoUser->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$houseManagement['teo_view_date'] }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Rejected Date :   </span>@if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                           <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->teo_status_reason}}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO Rejected Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                           <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->teo_status_reason}}</p>
                                         
                                      </div>
                                  </div>
-                                 @elseif(@$houseManagement->teo_status == null)
+                                 @elseif(@$formData->teo_status == null)
                                  <div class="timeline-step">
                                   <div class="timeline-content" >
                                       <div class="inner-circle"></div><br>
                                      
                                       <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                                      <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$houseManagement['teo_view_date'] }}</p>
+                                      <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
                                   
                                   </div>
                               </div>
                                   @endif
           
                                    
-                                  @if(@$houseManagement->teo_status == 1)
-                                 @if( @$houseManagement->pjct_offcr_status == 1)
+                                  @if(@$formData->teo_status == 1)
+                                 @if( @$formData->pjct_offcr_status == 1)
                                   
                                   <div class="timeline-step timeline-step2">
                                      <div class="timeline-content timeline-content2" >
                                          <div class="inner-circle"></div><br>
                                          <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
                                         
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$houseManagement->prjUser->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$houseManagement->pjct_offcr_view_date}}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$formData->pjct_offcr_view_date}}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                                         
                                      </div>
                                  </div>
-                                 @elseif( @$houseManagement->tdo_status == 1)
+                                 @elseif( @$formData->tdo_status == 1)
                                   
                                   <div class="timeline-step timeline-step2">
                                      <div class="timeline-content timeline-content2" >
                                          <div class="inner-circle"></div><br>
                                          <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
                                         
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TDO Name  : </span>{{ @$houseManagement->tdoUser->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$houseManagement->tdo_view_date}}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$formData->tdo_view_date}}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                                         
                                      </div>
                                  </div>
                                  @endif
-                                 @if( @$houseManagement->tdo_status == 2 )
+                                 @if( @$formData->tdo_status == 2 )
                                   
                                  <div class="timeline-step timeline-step1 rej">
                                     <div class="timeline-content timeline-content1" >
                                         <div class="inner-circle"></div><br>
                                         <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
                                        
-                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TDO Name  : </span>{{ @$houseManagement->tdoUser->name }}</p>
-                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$houseManagement->tdo_view_date}}</p>
-                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->tdo_status_reason}}</p>
+                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
+                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$formData->tdo_view_date}}</p>
+                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                        <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->tdo_status_reason}}</p>
                                        
                                     </div>
                                 </div>
                                  
                                   
-                                  @elseif( @$houseManagement->pjct_offcr_status == 2)
+                                  @elseif( @$formData->pjct_offcr_status == 2)
                                  
                                   <div class="timeline-step timeline-step1 rej">
                                      <div class="timeline-content timeline-content1" >
                                          <div class="inner-circle"></div><br>
                                          <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
                                         
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$houseManagement->prjUser->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$houseManagement->pjct_offcr_view_date}}</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->pjct_offcr_status_reason}}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> View Date :   </span> {{ @$formData->pjct_offcr_view_date}}</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                         <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->pjct_offcr_status_reason}}</p>
                                         
                                      </div>
                                  </div>
                                  @endif
-                                 @if(@$houseManagement->tdo_status == null && @$houseManagement->pjct_offcr_status == null)
+                                 @if(@$formData->tdo_status == null && @$formData->pjct_offcr_status == null)
                                  <div class="timeline-step">
                                   <div class="timeline-content" >
                                       <div class="inner-circle"></div><br>
                                      
                                       <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                                      @if(@$houseManagement->pjct_offcr_view_date != null)
-                                      <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer View Date :   </span> {{ @$houseManagement->pjct_offcr_view_date}}</p>
+                                      @if(@$formData->pjct_offcr_view_date != null)
+                                      <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">Project Officer View Date :   </span> {{ @$formData->pjct_offcr_view_date}}</p>
                                        @endif
-                                      @if(@$houseManagement->tdo_view_date != null)
-                                      <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TDO View Date :   </span> {{ @$houseManagement->tdo_view_date}}</p>
+                                      @if(@$formData->tdo_view_date != null)
+                                      <p class="h6 text-muted mb-0 mb-lg-2"><span class= "spanclr">TDO View Date :   </span> {{ @$formData->tdo_view_date}}</p>
                                     
                                       @endif
                                      
@@ -721,6 +753,7 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
 <script>
     function printDiv() {
         var printContents = document.getElementById('print_content').innerHTML;

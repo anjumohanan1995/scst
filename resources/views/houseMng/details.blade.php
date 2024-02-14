@@ -489,7 +489,7 @@
         @endif
         @if(@$houseManagement->tdo_status == null && @$houseManagement->pjct_offcr_status == null)
         <li class="pendingTimeline">
-         <a href="#!">TEO</a>
+         <a href="#!">PO / TDO</a>
            <a href="#!" class="float-end"><i class="fa fa-eye"></i>
             @if(@$houseManagement->pjct_offcr_view_date != null)
            PO :  {{ @$houseManagement['pjct_offcr_view_date'] }}
