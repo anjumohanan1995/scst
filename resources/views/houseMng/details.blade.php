@@ -421,8 +421,8 @@
               <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['teo_view_date'] }}</a>
              
             <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-            <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$houseManagement['teo_view_date'] }}</p>
-            
+            {{-- <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$houseManagement['teo_view_date'] }}</p>
+             --}}
            
         
         </li>

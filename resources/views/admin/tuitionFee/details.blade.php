@@ -851,7 +851,9 @@
                                 $('#success_message').fadeOut("slow");
                             }, 2000);
         
-                            $('#example').DataTable().ajax.reload();
+                            setTimeout(function() {
+   window.location.reload();
+   }, 2000);
         
                         }
                     });
@@ -884,7 +886,9 @@
                                     $('#success_message').fadeOut("slow");
                                 }, 2000 );
         
-                            $('#example').DataTable().ajax.reload();
+                                setTimeout(function() {
+   window.location.reload();
+   }, 2000);
         
                     }
                 })

@@ -59,5 +59,16 @@ class TuitionFee extends Eloquent
         return $this->belongsTo('App\Models\District','district_id');
     }
 
-
+    public function teoUser()
+    {
+        return $this->belongsTo(User::class,'teo_status_id');
+    }
+    public function district()
+    {
+        return $this->belongsTo(District::class,'submitted_district');
+    }
+    public function teo()
+    {
+        return $this->belongsTo(Teo::class,'submitted_teo');
+    }
 }

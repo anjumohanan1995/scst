@@ -803,8 +803,9 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-
+        $i=$start;
         foreach ($records as $record) {
+            $i++;
             $id = $record->id;
             $school_name = $record->school_name;
             $student_name = $record->student_name;
@@ -816,7 +817,7 @@ class ApplicationController extends Controller
 
             if ($role == "TEO") {
                 if ($record->teo_status == 1) {
-                    $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
                 } else if ($record->teo_status == 2) {
                     $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
                 } else if ($record->teo_status == null) {
@@ -827,6 +828,7 @@ class ApplicationController extends Controller
             }
 
             $data_arr[] = array(
+                "sl_no" =>$i,
                 "id" => $id,
                 "school_name" => $school_name,
                 "student_name" => $student_name,
@@ -858,7 +860,18 @@ class ApplicationController extends Controller
     {
         $formData = ExamApplication::where('_id', $id)->first();
         $formData = ExamApplication::with('submittedDistrict', 'submittedTeo', 'districtRelation', 'birthDistrictRelation', 'talukName')->where('_id', $id)->first();
+        $currentTime = Carbon::now();
 
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+        if($formData->teo_view_status==null && Auth::user()->role=='TEO'){
+            $formData->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         return view('admin.exam_application_view', compact('formData'));
     }
 
@@ -866,7 +879,7 @@ class ApplicationController extends Controller
     public function teoApprove(Request $request)
     {
         $id = $request->id;
-
+        $reason = $request->reason;
         // $currentTime = Carbon::now();
         $studentFund = ExamApplication::where('_id', $request->id)->first();
 
@@ -877,6 +890,7 @@ class ApplicationController extends Controller
             'teo_status' => 1,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
         ]);
 
 
