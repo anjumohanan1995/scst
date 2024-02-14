@@ -578,7 +578,11 @@
 									</li> --}}
                             @endif
 
-
+                            @if (auth::user()->role === 'Clerk')
+                            
+                                @include('layouts.clerk_app')
+                              
+                            @endif
 
 
                         </ul>
