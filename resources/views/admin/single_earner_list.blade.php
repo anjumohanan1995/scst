@@ -84,7 +84,56 @@
                                     </tbody>
                                 </table>
 
-
+                                <div class="modal fade" id="approve-popup" style="display: none">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content country-select-modal border-0">
+                                            <div class="modal-header offcanvas-header">
+                                                <h6 class="modal-title">Are you sure to Approve this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                                            </div>
+                                            <div class="modal-body p-5">
+                                               
+                                                <form id="ownForm">                            
+                                                    @csrf
+                                                    <div class="text-center">
+                                                        <h5>Reason for Approval</h5>
+                                                        <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
+                                                        <span id="approval"></span>
+                                                    </div>
+                                                <input type="hidden" id="requestId" name="requestId" value="" />
+                                                <div class="text-center">
+                                                    <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="rejection-popup">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content country-select-modal border-0">
+                                            <div class="modal-header offcanvas-header">
+                                                <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                                            </div>
+                                            <div class="modal-body p-5">
+                                                <form id="ownForm">
+                                                    @csrf
+                                                <div class="text-center">
+                                                    <h5>Reason for Rejection</h5>
+                                                    <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                                                    <span id="rejection"></span>
+                                                </div>
+                            
+                                                <input type="hidden" id="requestId2" name="requestId2" value="" />
+                                                <div class="text-center">
+                                                    <button type="button" onclick="reject()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -102,46 +151,80 @@
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 <script type="text/javascript">
 
-$(document).on("click",".deleteItem",function() {
+    $(document).on("click", ".approveItem", function() {
+        var id =$(this).attr('data-id');
+            $('#requestId').val($(this).attr('data-id') );
+            $('#approve-popup').modal('show');
+              
+          
+            });
+            $(document).on("click", ".rejectItem", function() {
+                $('#requestId2').val($(this).attr('data-id') );
+            $('#rejection-popup').modal('show');
+            });
 
-     var id =$(this).attr('data-id');
-     $('#requestId').val($(this).attr('data-id') );
-     $('#confirmation-popup').modal('show');
-});
+            function approve() {
 
-
-         function ownRequest() {
-
-            var reqId = $('#requestId').val();
-            console.log(reqId);
+                var reqId = $('#requestId').val();
+                var reason = $('#approved_reason').val();
+        
             $.ajax({
-            	headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-                url: '{{ url("users/delete") }}'+'/'+reqId,
-                method: 'post',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-
-                    },
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response.success);
-
-                        $('#confirmation-popup').modal('hide');
-                        $('#success_message').fadeIn().html(response.success);
-							setTimeout(function() {
-								$('#success_message').fadeOut("slow");
-							}, 2000 );
-
-                        $('#example').DataTable().ajax.reload();
-
-
-
-                }
-            })
+                        url: "{{ route('singleEarner-teo.approve') }}",
+                        type: "POST",
+                        data: {
+                            "id": reqId,
+                            "reason" :reason,
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            toastr.success(response.success, 'Success!')
+                            $('#success').show();
+                            $('#approve-popup').modal('hide');
+                            $('#success_message').fadeIn().html(response.success);
+                            setTimeout(function() {
+                                $('#success_message').fadeOut("slow");
+                            }, 2000);
+        
+                            $('#example').DataTable().ajax.reload();
+        
+                        }
+                    });
         }
-
-
+        function reject() {
+                var reason = $('#reason').val();
+              
+                if($('#reason').val() == ""){
+                    rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+                }
+                else{
+                    rejection.innerHTML ="";
+                    var reqId = $('#requestId2').val();
+                console.log(reqId);
+                $.ajax({
+                  
+                    url: "{{ route('singleEarner-teo.reject') }}",
+                    type: "POST",
+                        data: {
+                            "id": reqId,
+                            "reason" :reason,
+                            "_token": "{{ csrf_token() }}"
+                        },
+                    success: function(response) {
+                        console.log(response.success);
+                        toastr.success(response.success, 'Success!')
+                            $('#rejection-popup').modal('hide');
+                            $('#success_message').fadeIn().html(response.success);
+                                setTimeout(function() {
+                                    $('#success_message').fadeOut("slow");
+                                }, 2000 );
+        
+                            $('#example').DataTable().ajax.reload();
+        
+                    }
+                })
+        
+                }
+             }
 
      $(document).ready(function(){
 

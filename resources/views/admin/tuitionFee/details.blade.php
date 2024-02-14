@@ -657,8 +657,7 @@
                         </div>
                         <!-- /row -->
 
-
-                        @if(auth::user()->role=='TEO' && @$tuitionFee->teo_view_status==1)
+                        @if(auth::user()->role=='TEO' && @$formData->teo_view_status==1)
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                            <div class="pt-2 card overflow-hidden">
                            
@@ -674,7 +673,7 @@
                                           </div>
                                           <div class="col-6">
                                              <label> 
-                                             {{ @$tuitionFee['teo_view_date'] }}
+                                             {{ @$formData['teo_view_date'] }}
                                              </label>
                                         
                                     </div>
@@ -689,17 +688,37 @@
                                        </label>
                                     </div>
                                     <div class="col-6">
-                                     @if(@$tuitionFee->teo_status == null)
+                                     @if(@$formData->teo_status == null)
                                      <button class="btn btn-warning" >Pending</button>
-                                     @elseif(@$tuitionFee->teo_status == 1)
+                                     @elseif(@$formData->teo_status == 1)
                                      <button class="btn btn-success" >Approved</button>
-                                     @elseif(@$tuitionFee->teo_status == 2)
+                                     @elseif(@$formData->teo_status == 2)
                                      <button class="btn btn-danger" >Rejected</button> 
                                     @endif
                                     </div>
                            </div>
-                        @if(@$tuitionFee->teo_status == 2)
-                            <div class="pb-2 row ">
+                           @if(@$formData->teo_status == null)
+                           <div class="pb-2 row ">
+                            <div class="col-5">
+                               <label>Action </label><br>
+                            </div>
+                            <div class="col-1 w-100">
+                               <label> :  
+                               </label>
+                            </div>
+                            <div class="col-6">
+                                <div class="settings-main-icon">
+                                <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                                &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                          
+                            
+                            </div>
+                            </div>
+                         
+                   </div>
+                       @endif
+                           @if(@$formData->teo_status == 2)
+                           <div class="pb-2 row ">
                               <div class="col-5">
                                  <label>Rejected Reason  </label><br>
                               </div>
@@ -708,17 +727,17 @@
                                  </label>
                               </div>
                               <div class="col-6">
-                                    {{ @$tuitionFee->teo_status_reason }}
+                           {{ @$formData->teo_status_reason }}
                            
                               </div>
-                            </div>
+                     </div>
                      @endif
-                     @if(@$tuitionFee->teo_status != null)
+                           @if(@$formData->teo_status != null)
                            <div class=" pb-2 row ">
                               <div class="col-5">
-                                 @if(@$tuitionFee->teo_status == 1)
+                                 @if(@$formData->teo_status == 1)
                                  <label>Approved Date  </label>
-                                 @elseif(@$tuitionFee->teo_status == 2)
+                                 @elseif(@$formData->teo_status == 2)
                                  <label>Rejected Date  </label>
                                 @endif
                                  
@@ -729,35 +748,150 @@
                                  </label>
                               </div>
                               <div class="col-6">
-                                 @if(@$tuitionFee['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$tuitionFee['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+                                 @if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif
                              
                               
                               </div>
+                     </div>
+                     @endif
+                              </div>
                            </div>
-                     @endif
-                     @endif
-                    </div>
-        </div>
-    </div>
+                        </div>
+                         @endif
+        
+                         <div class="modal fade" id="approve-popup" style="display: none">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content country-select-modal border-0">
+                                    <div class="modal-header offcanvas-header">
+                                        <h6 class="modal-title">Are you sure to Approve this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-body p-5">
+                                       
+                                        <form id="ownForm">                            
+                                            @csrf
+                                            <div class="text-center">
+                                                <h5>Reason for Approval</h5>
+                                                <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
+                                                <span id="approval"></span>
+                                            </div>
+                                        <input type="hidden" id="requestId" name="requestId" value="" />
+                                        <div class="text-center">
+                                            <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                            <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="rejection-popup">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content country-select-modal border-0">
+                                    <div class="modal-header offcanvas-header">
+                                        <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-body p-5">
+                                        <form id="ownForm">
+                                            @csrf
+                                        <div class="text-center">
+                                            <h5>Reason for Rejection</h5>
+                                            <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                                            <span id="rejection"></span>
+                                        </div>
+                    
+                                        <input type="hidden" id="requestId2" name="requestId2" value="" />
+                                        <div class="text-center">
+                                            <button type="button" onclick="reject()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                            <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
 </div>
-<script>
-    function validateForm() {
-        // Check if the required fields are filled
-        var husbandSign = document.getElementsByName('husband_sign')[0].value;
-        var wifeSign = document.getElementsByName('wife_sign')[0].value;
-        var husbandName = document.getElementsByName('husband_name')[0].value;
-        var wifeName = document.getElementsByName('wife_name')[0].value;
 
-        if (husbandSign === '' || wifeSign === '' || husbandName === '' || wifeName === '') {
-            alert('Please fill in all required fields.');
-            return false; // Prevent form submission
+
+<script>
+
+    $(document).on("click", ".approveItem", function() {
+        var id =$(this).attr('data-id');
+            $('#requestId').val($(this).attr('data-id') );
+            $('#approve-popup').modal('show');
+              
+          
+            });
+            $(document).on("click", ".rejectItem", function() {
+                $('#requestId2').val($(this).attr('data-id') );
+            $('#rejection-popup').modal('show');
+            });
+
+            function approve() {
+
+                var reqId = $('#requestId').val();
+                var reason = $('#approved_reason').val();
+        
+            $.ajax({
+                        url: "{{ route('tuitionFee-teo.approve') }}",
+                        type: "POST",
+                        data: {
+                            "id": reqId,
+                            "reason" :reason,
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            toastr.success(response.success, 'Success!')
+                            $('#success').show();
+                            $('#approve-popup').modal('hide');
+                            $('#success_message').fadeIn().html(response.success);
+                            setTimeout(function() {
+                                $('#success_message').fadeOut("slow");
+                            }, 2000);
+        
+                            $('#example').DataTable().ajax.reload();
+        
+                        }
+                    });
         }
-
-        return true; // Allow form submission
-    }
-</script>
-
-<script>
+        function reject() {
+                var reason = $('#reason').val();
+              
+                if($('#reason').val() == ""){
+                    rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+                }
+                else{
+                    rejection.innerHTML ="";
+                    var reqId = $('#requestId2').val();
+                console.log(reqId);
+                $.ajax({
+                  
+                    url: "{{ route('tuitionFee-teo.reject') }}",
+                    type: "POST",
+                        data: {
+                            "id": reqId,
+                            "reason" :reason,
+                            "_token": "{{ csrf_token() }}"
+                        },
+                    success: function(response) {
+                        console.log(response.success);
+                        toastr.success(response.success, 'Success!')
+                            $('#rejection-popup').modal('hide');
+                            $('#success_message').fadeIn().html(response.success);
+                                setTimeout(function() {
+                                    $('#success_message').fadeOut("slow");
+                                }, 2000 );
+        
+                            $('#example').DataTable().ajax.reload();
+        
+                    }
+                })
+        
+                }
+             }
+             
     // edit button function
     function goback() {
         if (confirm('Are you sure ? Do you want to edit this form!. ')) {

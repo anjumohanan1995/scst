@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
+use Carbon\Carbon;
 use App\Models\District;
 use App\Models\Taluk;
 use App\Models\SingleIncomeEarner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth; // Make sure to include this line
 
@@ -311,7 +312,25 @@ class SingleIncomeEarnerController extends Controller
              $applicant_caste = $record->applicant_caste;
              $district = @$record->districtRelation->name;
               $created_at =  $record->created_at;
-
+              $edit ='';
+              if(Auth::user()->role== "TEO"){
+                if($record->teo_status== 1){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                }
+                else if($record->teo_status ==2){
+                    $teo_status_reason = Str::limit($record->teo_status_reason, 10);
+                    $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$teo_status_reason.'</span></div>';
+              
+                }
+                else if($record->teo_status ==null){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                }
+               
+              }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+             
+              }
             $data_arr[] = array(
                 "id" => $id,
                 "name" => $name,
@@ -319,7 +338,7 @@ class SingleIncomeEarnerController extends Controller
                 "caste" => $applicant_caste,
                 "district" => $district,
                 "created_at" => $created_at,                  
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('singleEarner/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => $edit
 
             );
          }
@@ -335,11 +354,67 @@ class SingleIncomeEarnerController extends Controller
     }
 
     public function singleEarnerView(Request $request, $id)
-    {           
-        $formData = SingleIncomeEarner::where('_id',$id)->first();
+    {       
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+     
+      $formData=SingleIncomeEarner::find($id);
+        if($formData->teo_view_status==null && Auth::user()->role=='TEO'){
+            $formData->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }  
        
         return view('admin.single_earner_view', compact('formData'));
 
+    }
+    public function singleEarnerTeoApprove(Request $request){
+     
+        $reason =$request->reason;
+        $data = SingleIncomeEarner::where('_id', $request->id)->first();
+
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+
+        $data->update([
+            'teo_status' => 1,
+            'teo_status_date' =>$currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+
+
+        return response()->json([
+            'success' => 'Application approved successfully.'
+        ]);
+    
+    }
+    public function singleEarnerTeoReject(Request $request){
+       
+        $reason =$request->reason;
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        $data = SingleIncomeEarner::where('_id', $request->id)->first();
+
+      
+
+        $data->update([
+            'teo_status' => 2,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+
+
+        return response()->json([
+            'success' => 'Application Rejected successfully.'
+        ]);
+    
     }
    
 }

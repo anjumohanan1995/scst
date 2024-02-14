@@ -12,7 +12,7 @@ use App\Role;
 use App\Permission;
 use App\User;
 use App\Models\ExamApplication;
-
+use Carbon\Carbon;
 use App\Models\FinancialHelp;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -232,7 +232,25 @@ class StudentAwardController extends Controller
              $dob = $record->dob;
              $district = @$record->districtRelation->name;
               $created_at =  $record->created_at;
-
+              $edit ='';
+              if(Auth::user()->role== "TEO"){
+                if($record->teo_status== 1){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                }
+                else if($record->teo_status ==2){
+                    $teo_status_reason = Str::limit($record->teo_status_reason, 10);
+                    $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$teo_status_reason.'</span></div>';
+              
+                }
+                else if($record->teo_status ==null){
+                    $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                }
+               
+              }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+             
+              }
             $data_arr[] = array(
                 "id" => $id,
                 "name" => $name,
@@ -240,7 +258,7 @@ class StudentAwardController extends Controller
                 "dob" => $dob,
                 "district" => $district,
                 "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,                 
-                "edit" => '<div class="settings-main-icon"><a  href="' . url('studentAward/'.$id.'/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" => $edit
 
             );
          }
@@ -255,13 +273,70 @@ class StudentAwardController extends Controller
          return response()->json($response);
     }
     public function studentAwardView(Request $request, $id)
-    {           
+    {   
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+     
+      $formData=StudentAward::find($id);
+        if($formData->teo_view_status==null && Auth::user()->role=='TEO'){
+            $formData->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+              
         $formData = StudentAward::where('_id',$id)->first();
        
         return view('admin.student_award_view', compact('formData'));
 
     }
+    public function studentAwardTeoApprove(Request $request){
+     
+        $reason =$request->reason;
+        $studentAward = StudentAward::where('_id', $request->id)->first();
+
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+
+        $studentAward->update([
+            'teo_status' => 1,
+            'teo_status_date' =>$currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+
+
+        return response()->json([
+            'success' => 'Application approved successfully.'
+        ]);
     
+    }
+    public function studentAwardTeoReject(Request $request){
+       
+        $reason =$request->reason;
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        $studentAward = StudentAward::where('_id', $request->id)->first();
+
+      
+
+        $studentAward->update([
+            'teo_status' => 2,
+            'teo_status_date' => $currenttime,
+            'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
+        ]);
+
+
+        return response()->json([
+            'success' => 'Application Rejected successfully.'
+        ]);
+    
+    }
 
 
 }
