@@ -40,19 +40,16 @@
 
                         @endphp
 
-
-
-                        <div id="showPrint" class="col-12 col-md-9">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div id="success_message" class="ajax_response" style="display: none;"></div>
-
-                                    <div class="card-body pd-y-7">
+                        <div class="row row-sm w-100">
+                            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
+                                <div class=" card">
+                                    <div class="card-body  p-5">
+    
                                         <div id="btnHide" class="row justify-content-end m-3">
                                             <a style="width: 50px" onclick="printDiv()"><img
                                                     src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
                                         </div>
-
+                                   
 
                                         <div id="form_id">
 
@@ -693,122 +690,141 @@
                                 </div>
 
                             </div>
-                        </div>
-
-                        @if (Auth::user()->role != 'User')
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div id="success_message" class="ajax_response" style="display: none;"></div>
+                     
 
 
-                                        <div class="d-flex justify-content-between">
-                                            <h4 class="card-title mg-b-10">project &amp; task</h4>
-                                            <i class="mdi mdi-dots-horizontal text-gray"> </i>
-                                        </div>
-                                        <p class="tx-12 text-muted mb-3">In project, a task is an activity
-                                            that
-                                            needs to be
-                                            accomplished within a defined period of time or by a deadline.
-                                            <a href="">Learn
-                                                more</a>
-                                        </p>
-                                        <div class="table-responsive mb-0 projects-stat tx-14">
-                                            <table
-                                                class="table table-hover table-bordered mb-0 text-md-nowrap text-lg-nowrap text-xl-nowrap">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Project &amp; Task</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="project-names">
-                                                                <h6
-                                                                    class="bg-primary-transparent text-primary d-inline-block mr-2 text-center">
-                                                                    U</h6>
-                                                                <p class="d-inline-block font-weight-semibold mb-0">
-                                                                    UI
-                                                                    Design
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-success">Completed</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="project-names">
-                                                                <h6
-                                                                    class="bg-pink-transparent text-pink d-inline-block text-center mr-2">
-                                                                    R</h6>
-                                                                <p class="d-inline-block font-weight-semibold mb-0">
-                                                                    Landing
-                                                                    Page
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-warning">Pending</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="project-names">
-                                                                <h6
-                                                                    class="bg-success-transparent text-success d-inline-block mr-2 text-center">
-                                                                    W</h6>
-                                                                <p class="d-inline-block font-weight-semibold mb-0">
-                                                                    Website
-                                                                    &amp; Blog</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-danger">Canceled</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="project-names">
-                                                                <h6
-                                                                    class="bg-purple-transparent text-purple d-inline-block mr-2 text-center">
-                                                                    P</h6>
-                                                                <p class="d-inline-block font-weight-semibold mb-0">
-                                                                    Product
-                                                                    Development</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-teal">on-going</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="project-names">
-                                                                <h6
-                                                                    class="bg-danger-transparent text-danger d-inline-block mr-2 text-center">
-                                                                    L</h6>
-                                                                <p class="d-inline-block font-weight-semibold mb-0">
-                                                                    Logo
-                                                                    Design
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-success">Completed</div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                            <div class="pt-2 card overflow-hidden">
+                            
+                               <div class="card-body">
+                         <ul class="timeline-3">
+                            @if(@$formData->teo_status == 1)
+                            <li class="ApproveTimeline">
+                              <a href="#!">TEO</a>
+                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                             
+                              <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                              <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                              <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                              <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                              <p  class="mt-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                              <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                            
+                            </li>
+                           
+                            @elseif(@$formData->teo_status == 2)
+                            <li class="rejectTimeline">
+                               <a href="#!">TEO</a>
+                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                             
+                                   <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
+                                   <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                  <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                                  <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                  <p  class="mt-2"><span class= "spanclr">TEO Rejected Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                  <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                               </li>
+                                  
+                           @elseif(@$formData->teo_status == null)
+                           <li class="pendingTimeline">
+                            <a href="#!">TEO</a>
+                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                             
+                            <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                            <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
+                            
+                           
+                        
+                        </li>
+                               
                         @endif
+                        @if(@$formData->teo_status == 1)
+                        @if( @$formData->pjct_offcr_status == 1)
+                         
+                        <li class="ApproveTimeline">
+                         <a href="#!">Project Officer</a>
+                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['pjct_offcr_view_date'] }}</a>
+                                <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
+                               
+                                <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
+                                  <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                 <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                               
+                            </li>
+                        @elseif( @$formData->tdo_status == 1)
+                        <li class="ApproveTimeline">
+                        <a href="#!">TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['tdo_view_date'] }}</a>
+                               <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
+                          
+                                <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
+                                <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                  <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                               
+                        </li>
+                        @endif
+                        @if( @$formData->tdo_status == 2 )
+                         
+                        <li class="rejectTimeline">
+                         <a href="#!">TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['tdo_view_date'] }}</a>
+                       
+                              
+                               <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
+                               <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                               <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                               <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                               <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->tdo_status_reason}}</p>
+                              
+                        </li>
+                        
+                         
+                         @elseif( @$formData->pjct_offcr_status == 2)
+                        
+                         <li class="rejectTimeline">
+                            <a href="#!">TDO</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['pjct_offcr_view_date'] }}</a>
+                          
+                              
+                                <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
+                               
+                                <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
+                                <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                                <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                                <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->pjct_offcr_status_reason}}</p>
+                               
+                         </li>
+                        @endif
+                        @if(@$formData->tdo_status == null && @$formData->pjct_offcr_status == null)
+                        <li class="pendingTimeline">
+                         <a href="#!">PO / TDO</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                            @if(@$formData->pjct_offcr_view_date != null)
+                           PO :  {{ @$formData['pjct_offcr_view_date'] }}
+                           @endif
+                           @if(@$formData->tdo_view_date != null)
+                           TDO :  {{ @$formData['teo_view_date'] }} 
+                           @endif
+                         </a>
+                          
+                            
+                           
+                         
+                        </li>
+                          @endif
+                        
+                          @endif 
+                          
+                
+                          
+                          </ul>
+                         </div>
+                      </div>
+                   </div>
+
+                      
                     </div>
                 </div>
 
@@ -820,6 +836,7 @@
     </div>
     </div>
 
+    <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
 
     <script>
         // edit button function
