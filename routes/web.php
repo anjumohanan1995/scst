@@ -341,6 +341,12 @@ Route::post('/po-tdo/delete/{id}', [TDOMasterController::class, 'destroy'])->nam
 Route::controller(ClerkController::class)->group(function(){
 
 	Route::get('/ChildFinanceListClerk','ChildFinanceListClerk')->name('ChildFinanceListClerk');
+    Route::get('/getchildFinanceListClerk','getchildFinanceListClerk')->name('getchildFinanceListClerk');
+    Route::get('/childFinancialDetails/{id}','childFinancialClerkDetails')->name('childFinancialClerkDetails');
+    Route::post('/childFinanceApprove','childFinanceApprove')->name('childFinance.approve');
+    Route::post('/childFinanceReject','childFinanceReject')->name('childFinance.reject');
+   
+
 
 	
 

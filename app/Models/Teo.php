@@ -21,6 +21,9 @@ class Teo extends Eloquent
     public function tdo(){
         return $this->belongsTo('App\Models\TDOMaster','po_or_tdo');
     }
-
+    public function childFinances()
+    {
+        return $this->hasMany(ChildFinance::class, 'submitted_teo');
+    }
     
 }
