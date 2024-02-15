@@ -760,7 +760,7 @@
                                     <li class="ApproveTimeline">
                                       <a href="#!">TEO</a>
                                       <a href="#!" class="float-end">@if( @$formData['teo_view_date'] !='')<i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}@endif</a>
-                                     
+                                      <br>
                                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
                                       <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
                                       <p class="mt-2"><span class= "spanclr"> Name : </span>{{ @$formData->teoUser->name }}</p>
@@ -774,7 +774,8 @@
                                     <li class="pendingTimeline">
                                      <a href="#!">{{ auth::user()->name }}</a>
                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
-                                            <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
+                                     <br>       
+                                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
                                             <div class="settings-icon">
                                                 <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
                                                 &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
@@ -787,6 +788,7 @@
                                         <li class="ApproveTimeline">
                                          <a href="#!">{{ auth::user()->name }}</a>
                                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                                         <br>
                                          <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
                                     
                                          <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
@@ -798,6 +800,7 @@
                                             <li class="rejectTimeline">
                                              <a href="#!">{{ auth::user()->name }}</a>
                                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                                             <br>
                                              <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
                                         
                                              <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>

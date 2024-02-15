@@ -536,9 +536,10 @@
                        </li>
                        @elseif( @$formData->clerk_status == null)
 
-                       <li class="ApproveTimeline">
+                       <li class="pendingTimeline">
                          <a href="#!">Clerk</a>
                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                       
                          <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
                           </li>
                           @endif

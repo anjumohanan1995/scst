@@ -47,7 +47,16 @@ class ExamApplication extends Eloquent
         'teo_status_id',
         'teo_status_date',
         'teo_status_reason',
-        'applicant_image'
+        'applicant_image',
+
+        'clerk_view_status',
+        'clerk_view_id',
+        'clerk_view_date',
+        'clerk_status',
+        'clerk_status_id',
+        'clerk_status_date',
+        'clerk_status_reason',
+
     ];
 
     public function User()

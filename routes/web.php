@@ -347,9 +347,33 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/childFinanceReject','childFinanceReject')->name('childFinance.reject');
    
 
-
-	
-
+    Route::get('/examApplicationListClerk','examApplicationListClerk')->name('examApplicationListClerk');
+    Route::get('/getexamApplicationListClerk','getexamApplicationListClerk')->name('getexamApplicationListClerk');
+    Route::get('/examApplicationDetails/{id}','examApplicationDetails')->name('examApplicationDetails');
+    Route::post('/examApplicationApprove','examApplicationApprove')->name('examApplication.approve');
+    Route::post('/examApplicationReject','examApplicationReject')->name('examApplication.reject');
+   
+    Route::get('/couplefinancialListClerk','couplefinancialListClerk')->name('couplefinancialListClerk');
+    Route::get('/getcouplefinancialListClerk','getcouplefinancialListClerk')->name('getcouplefinancialListClerk');
+    Route::get('/couplefinancialDetails/{id}','couplefinancialDetails')->name('couplefinancialDetails');
+    Route::post('/couplefinancialApprove','couplefinancialApprove')->name('couplefinancial.approve');
+    Route::post('/couplefinancialReject','couplefinancialReject')->name('couplefinancial.reject');
+   
+    
+	Route::get('/motherChildSchemeListClerk','motherChildSchemeListClerk')->name('motherChildSchemeListClerk');
+    Route::get('/getmotherChildSchemeListClerk','getmotherChildSchemeListClerk')->name('getmotherChildSchemeListClerk');
+    Route::get('/motherChildSchemeDetails/{id}','motherChildSchemeDetails')->name('motherChildSchemeDetails');
+    Route::post('/motherChildSchemeApprove','motherChildSchemeApprove')->name('motherChildScheme.approve');
+    Route::post('/motherChildSchemeReject','motherChildSchemeReject')->name('motherChildScheme.reject');
+   
+    
+  
+	Route::get('/marriageGrantListClerk','marriageGrantListClerk')->name('marriageGrantListClerk');
+    Route::get('/getmarriageGrantListClerk','getmarriageGrantListClerk')->name('getmarriageGrantListClerk');
+    Route::get('/marriageGrantDetails/{id}','marriageGrantDetails')->name('marriageGrantDetails');
+    Route::post('/marriageGrantClerkApprove','marriageGrantClerkApprove')->name('marriageGrantClerk.approve');
+    Route::post('/marriageGrantClerkReject','marriageGrantClerkReject')->name('marriageGrantClerk.reject');
+   
 
 
 

@@ -77,6 +77,16 @@ class MarriageGrant extends Eloquent
         'teo_status_date',
         'teo_status_reason',
 
+
+        'clerk_view_status',
+        'clerk_view_id',
+        'clerk_view_date',
+        'clerk_status',
+        'clerk_status_id',
+        'clerk_status_date',
+        'clerk_status_reason',
+        
+
     ];
 
     public function User()
