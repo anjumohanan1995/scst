@@ -45,3 +45,22 @@ ul.timeline-3 {
   background-color: transparent;
   text-decoration: none;
 }
+
+
+
+.settings-icon a {
+  display: inline-block;
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.settings-icon i {
+  width: 2rem;
+  height: 2rem;
+  font-size: 18px;
+  line-height: 2rem;
+  background-color: var(--primary-bg-color);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
