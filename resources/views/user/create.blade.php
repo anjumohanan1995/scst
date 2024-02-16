@@ -255,6 +255,7 @@
                     type: "POST",
                     data: {
                         district_id: val,
+						category :category,
                         _token: '{{csrf_token()}}'
                     },
                     dataType: 'json',

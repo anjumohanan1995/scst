@@ -19,6 +19,7 @@ use App\Http\Controllers\HouseManagementController;
 use App\Http\Controllers\NewslistController;
 use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
+use App\Http\Controllers\ApoTdoController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\MedEngStudentFundController;
 use App\Http\Controllers\TDOMasterController;
@@ -367,13 +368,13 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/motherChildSchemeReject','motherChildSchemeReject')->name('motherChildScheme.reject');
    
     
+      
   
 	Route::get('/marriageGrantListClerk','marriageGrantListClerk')->name('marriageGrantListClerk');
     Route::get('/getmarriageGrantListClerk','getmarriageGrantListClerk')->name('getmarriageGrantListClerk');
     Route::get('/marriageGrantDetails/{id}','marriageGrantDetails')->name('marriageGrantDetails');
     Route::post('/marriageGrantClerkApprove','marriageGrantClerkApprove')->name('marriageGrantClerk.approve');
     Route::post('/marriageGrantClerkReject','marriageGrantClerkReject')->name('marriageGrantClerk.reject');
-   
 
 
 
@@ -413,5 +414,65 @@ Route::controller(ClerkController::class)->group(function(){
     Route::get('/StudentFund/{id}/clerkview', 'studentFundClerkView')->name('studentFundClerkView');
     Route::post('/StudentFund/clerkApprove', 'studentFundClerkApprove')->name('studentFund-clerk.approve');
     Route::post('/StudentFund/clerkReject', 'studentFundClerkReject')->name('studentFund-clerk.reject');
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Clerk Section
+Route::controller(ApoTdoController::class)->group(function(){
+
+	Route::get('/ChildFinanceListAssistant','ChildFinanceListAssistant')->name('ChildFinanceListAssistant');
+    Route::get('/getchildFinanceListAssistant','getchildFinanceListAssistant')->name('getchildFinanceListAssistant');
+    Route::get('/childFinancialDetailsAssistant/{id}','childFinancialDetailsAssistant')->name('childFinancialDetailsAssistant');
+    Route::post('/childFinanceApproveAssistant','childFinanceApproveAssistant')->name('childFinance.assistant.approve');
+    Route::post('/childFinanceRejectAssistant','childFinanceRejectAssistant')->name('childFinance.assistant.reject');
+   
+
+    Route::get('/examApplicationListAssistant','examApplicationListAssistant')->name('examApplicationListAssistant');
+    Route::get('/getexamApplicationListAssistant','getexamApplicationListAssistant')->name('getexamApplicationListAssistant');
+    Route::get('/examApplicationDetailsAssistant/{id}','examApplicationDetailsAssistant')->name('examApplicationDetailsAssistant');
+    Route::post('/examApplicationApproveAssistant','examApplicationApproveAssistant')->name('examApplication.assistant.approve');
+    Route::post('/examApplicationRejectAssistant','examApplicationRejectAssistant')->name('examApplication.assistant.reject');
+   
+    Route::get('/couplefinancialListAssistant','couplefinancialListAssistant')->name('couplefinancialListAssistant');
+    Route::get('/getcouplefinancialListAssistant','getcouplefinancialListAssistant')->name('getcouplefinancialListAssistant');
+    Route::get('/couplefinancialDetailsAssistant/{id}','couplefinancialDetailsAssistant')->name('couplefinancialDetailsAssistant');
+    Route::post('/couplefinancialApproveAssistant','couplefinancialApproveAssistant')->name('couplefinancial.assistant.approve');
+    Route::post('/couplefinancialRejectAssistant','couplefinancialRejectAssistant')->name('couplefinancial.assistant.reject');
+   
+    
+	Route::get('/motherChildSchemeListAssistant','motherChildSchemeListAssistant')->name('motherChildSchemeListAssistant');
+    Route::get('/getmotherChildSchemeListAssistant','getmotherChildSchemeListAssistant')->name('getmotherChildSchemeListAssistant');
+    Route::get('/motherChildSchemeDetailsAssistant/{id}','motherChildSchemeDetailsAssistant')->name('motherChildSchemeDetailsAssistant');
+    Route::post('/motherChildSchemeApproveAssistant','motherChildSchemeApproveAssistant')->name('motherChildScheme.assistant.approve');
+    Route::post('/motherChildSchemeRejectAssistant','motherChildSchemeRejectAssistant')->name('motherChildScheme.assistant.reject');
+   
+
+    Route::get('/marriageGrantListAssistant','marriageGrantListAssistant')->name('marriageGrantListAssistant');
+    Route::get('/getmarriageGrantListAssistant','getmarriageGrantListAssistant')->name('getmarriageGrantListAssistant');
+    Route::get('/marriageGrantDetailsAssistant/{id}','marriageGrantDetailsAssistant')->name('marriageGrantDetailsAssistant');
+    Route::post('/marriageGrantApproveAssistant','marriageGrantApproveAssistant')->name('marriageGrant.assistant.approve');
+    Route::post('/marriageGrantRejectAssistant','marriageGrantRejectAssistant')->name('marriageGrant.assistant.reject');
+   
+
+
+    
+
+
 
 });

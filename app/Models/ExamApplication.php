@@ -57,6 +57,14 @@ class ExamApplication extends Eloquent
         'clerk_status_date',
         'clerk_status_reason',
 
+
+        'assistant_view_status',
+        'assistant_view_id',
+        'assistant_view_date',
+        'assistant_status',
+        'assistant_status_id',
+        'assistant_status_date',
+        'assistant_status_reason',
     ];
 
     public function User()
@@ -85,5 +93,13 @@ class ExamApplication extends Eloquent
     public function teoUser()
     {
         return $this->belongsTo(User::class,'teo_status_id');
+    }
+    public function clerkUser()
+    {
+        return $this->belongsTo(User::class,'clerk_status_id');
+    }
+    public function assistantUser()
+    {
+        return $this->belongsTo(User::class,'assistant_status_id');
     }
 }

@@ -86,6 +86,13 @@ class MarriageGrant extends Eloquent
         'clerk_status_date',
         'clerk_status_reason',
         
+        'assistant_view_status',
+        'assistant_view_id',
+        'assistant_view_date',
+        'assistant_status',
+        'assistant_status_id',
+        'assistant_status_date',
+        'assistant_status_reason',
 
     ];
 
@@ -142,5 +149,13 @@ class MarriageGrant extends Eloquent
     public function teo()
     {
         return $this->belongsTo(Teo::class,'submitted_teo');
+    }
+    public function clerkUser()
+    {
+        return $this->belongsTo(User::class,'clerk_status_id');
+    }
+    public function assistantUser()
+    {
+        return $this->belongsTo(User::class,'assistant_status_id');
     }
 }

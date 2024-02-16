@@ -58,6 +58,14 @@ class MotherChildScheme extends Eloquent
         'tdo_status_date',
         'tdo_status_reason',
 
+        'assistant_view_status',
+        'assistant_view_id',
+        'assistant_view_date',
+        'assistant_status',
+        'assistant_status_id',
+        'assistant_status_date',
+        'assistant_status_reason',
+
         'pjct_offcr_view_status',
         'pjct_offcr_view_id',
         'pjct_offcr_view_date',
@@ -107,5 +115,14 @@ class MotherChildScheme extends Eloquent
     public function teo()
     {
         return $this->belongsTo(Teo::class,'submitted_teo');
+    }
+
+    public function clerkUser()
+    {
+        return $this->belongsTo(User::class,'clerk_status_id');
+    }
+    public function assistantUser()
+    {
+        return $this->belongsTo(User::class,'assistant_status_id');
     }
 }

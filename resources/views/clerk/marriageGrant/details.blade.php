@@ -389,111 +389,70 @@
                </div>
                <br>
             </div>
-            @if(auth::user()->role=='TEO' && @$formData->teo_view_status==1)
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                <div class="pt-2 card overflow-hidden">
+               
                   <div class="card-body">
-                     <div class="pb-2 row ">
-                        <div class="col-5">
-                           <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
-                        </div>
-                        <div class="col-1 w-100">
-                           <label> :  
-                           </label>
-                        </div>
-                        <div class="col-6">
-                           <label> 
-                           {{ @$formData['teo_view_date'] }}
-                           </label>
-                        </div>
-                     </div>
-                     <hr>
-                     <div class="pb-2 row ">
-                        <div class="col-5">
-                           <label>Status  </label><br>
-                        </div>
-                        <div class="col-1 w-100">
-                           <label> :  
-                           </label>
-                        </div>
-                        <div class="col-6">
-                           @if(@$formData->teo_status == null)
-                           <button class="btn btn-warning" >Pending</button>
-                           @elseif(@$formData->teo_status == 1)
-                           <button class="btn btn-success" >Approved</button>
-                           @elseif(@$formData->teo_status == 2)
-                           <button class="btn btn-danger" >Rejected</button> 
-                           @endif
-                        </div>
-                     </div>
-                     @if(@$formData->teo_status == null)
-                     <div class="pb-2 row ">
-                        <div class="col-5">
-                           <label>Action </label><br>
-                        </div>
-                        <div class="col-1 w-100">
-                           <label> :  
-                           </label>
-                        </div>
-                        <div class="col-6">
-                           <div class="settings-main-icon">
-                              <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                              &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
-                           </div>
-                        </div>
-                     </div>
-                     @endif
-                     @if(@$formData->teo_status == 2)
-                     <div class="pb-2 row ">
-                        <div class="col-5">
-                           <label>Rejected Reason  </label><br>
-                        </div>
-                        <div class="col-1 w-100">
-                           <label> :  
-                           </label>
-                        </div>
-                        <div class="col-6">
-                           {{ @$formData->teo_status_reason }}
-                        </div>
-                     </div>
-                     @endif
-                     @if(@$formData->teo_status == 1)
-                     <div class="pb-2 row ">
-                        <div class="col-5">
-                           <label>Approved Reason  </label><br>
-                        </div>
-                        <div class="col-1 w-100">
-                           <label> :  
-                           </label>
-                        </div>
-                        <div class="col-6">
-                           {{ @$formData->teo_status_reason }}
-                        </div>
-                     </div>
-                     @endif
-                     @if(@$formData->teo_status != null)
-                     <div class=" pb-2 row ">
-                        <div class="col-5">
-                           @if(@$formData->teo_status == 1)
-                           <label>Approved Date  </label>
-                           @elseif(@$formData->teo_status == 2)
-                           <label>Rejected Date  </label>
-                           @endif
-                           <br>
-                        </div>
-                        <div class="col-1 w-100">
-                           <label> :  
-                           </label>
-                        </div>
-                        <div class="col-6">
-                           @if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif
-                        </div>
-                     </div>
-                     @endif
-                  </div>
-               </div>
-            </div>
-            @endif
+                    <ul class="timeline-3">
+                     
+                        <li class="ApproveTimeline">
+                          <a href="#!">TEO</a>
+                          <a href="#!" class="float-end">@if( @$formData['teo_view_date'] !='')<i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}@endif</a>
+                         <br>
+                          <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                          <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->submittedTeo->teo_name }}</p>
+                          <p class="mt-2"><span class= "spanclr"> Name : </span>{{ @$formData->teoUser->name }}</p>
+                          <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->submittedDistrict->name }}</p>
+                          <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                          <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                        
+                        </li>
+                        @if( @$formData->clerk_status == null)
+
+                        <li class="pendingTimeline">
+                         <a href="#!">{{ auth::user()->name }}</a>
+                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                         <br>
+                         <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
+                                <div class="settings-icon">
+                                    <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                                    &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                                 </div>
+                               
+                            </li>
+                          
+                            @elseif( @$formData->clerk_status == 1)
+
+                            <li class="ApproveTimeline">
+                             <a href="#!">{{ auth::user()->name }}</a>
+                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                             <br>
+                             <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                        
+                             <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                             <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
+                           
+                                </li>
+                                @elseif( @$formData->clerk_status == 2)
+
+                                <li class="rejectTimeline">
+                                 <a href="#!">{{ auth::user()->name }}</a>
+                                 <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                                 <br>
+                                 <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                            
+                                 <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                 <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
+                               
+                                    </li>
+                                @endif
+                    </ul>
+        
+            <!-- /row -->
+        </div>
+        
+</div>
+</div>
             <div class="modal fade" id="approve-popup" style="display: none">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                    <div class="modal-content country-select-modal border-0">
@@ -553,6 +512,7 @@
 </div>
 </div>
 </div>
+<link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 <script src="{{ asset('js/toastr.js') }}"></script>
@@ -574,7 +534,7 @@
            var reqId = $('#requestId').val();
    
        $.ajax({
-                   url: "{{ route('marriageGrant-teo.approve') }}",
+                   url: "{{ route('marriageGrantClerk.approve') }}",
                    type: "POST",
                    data: {
                        "id": reqId,
@@ -609,7 +569,7 @@
            console.log(reqId);
            $.ajax({
              
-               url: "{{ route('marriageGrant-teo.reject') }}",
+               url: "{{ route('marriageGrantClerk.reject') }}",
                type: "POST",
                    data: {
                        "id": reqId,

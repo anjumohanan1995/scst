@@ -61,7 +61,7 @@
 										 <div class="row mb-3">
 											<div class="col-md-1 col-6 text-center">
 											 	<div class="task-box primary mb-0">
-											 		<a href="{{route('teo.create')}}">
+											 		<a href="{{route('po-tdo.create')}}">
 											 			<p class="mb-0 tx-12">Add </p>
 											 			<h3 class="mb-0"><i class="fa fa-plus"></i></h3>
 											 		</a>

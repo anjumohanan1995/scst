@@ -335,8 +335,20 @@ class UserController extends Controller
     }
     public function fetchOffice(Request $request)
     {
-        $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('deleted_at', null)->get(["name","type"]);
-    //  dd($data['offices']);
+        $category=$request->category;
+        if($category == 'Project Officer' || $category =='APO'){
+            $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('type','PO')->where('deleted_at', null)->get(["name","type"]);
+
+        }
+        else if($category == 'TDO' || $category =='ATDO'){
+            $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('type','TDO')->where('deleted_at', null)->get(["name","type"]);
+
+        }
+        else{
+            $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('deleted_at', null)->get(["name","type"]);
+ 
+        }
+       //  dd($data['offices']);
         return response()->json($data);
     }
 }
