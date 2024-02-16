@@ -387,9 +387,31 @@ Route::controller(ClerkController::class)->group(function(){
     Route::get('/clerkItiFundList', 'clerkItiFundList')->name('clerkItiFundList');
     Route::get('/getClerkItiFundList', 'getClerkItiFundList')->name('getClerkItiFundList');
     Route::get('/itiFeeClerkView/{id}', 'itiFeeClerkView')->name('clerkItiFundList.show');
+    Route::post('/itiScholarshipClerkApprove','itiScholarshipClerkApprove')->name('itiScholarshipClerk.approve');
+    Route::post('/itiScholarshipClerkReject','itiScholarshipClerkReject')->name('itiScholarshipClerk.reject');
+   
+    Route::get('/studentAwardListClerk', 'studentAwardListClerk')->name('studentAwardListClerk');
+    Route::get('/getStudentAwardListClerk', 'getStudentAwardListClerk')->name('getStudentAwardListClerk');
+    Route::get('/studentAward/{id}/Clerkview', 'studentAwardClerkView')->name('studentAwardClerkView');
+    Route::post('/studentAward/clerkApprove', 'studentAwardClerkApprove')->name('studentAward-clerk.approve');
+    Route::post('/studentAward/clerkReject', 'studentAwardClerkReject')->name('studentAward-clerk.reject');
     
-    
+    Route::get('/anemiaFinanceListClerk', 'anemiaFinanceListClerk')->name('anemiaFinanceListClerk');
+    Route::get('/getAnemiaFinanceListClerk', 'getAnemiaFinanceListClerk')->name('getAnemiaFinanceListClerk');
+    Route::get('/anemiaFinance/{id}/Clerkview', 'anemiaFinanceClerkView')->name('anemiaFinanceClerkView');
+    Route::post('/anemiaFinance/clerkApprove', 'anemiaFinanceClerkApprove')->name('anemiaFinance-clerk.approve');
+    Route::post('/anemiaFinance/clerkReject', 'anemiaFinanceClerkReject')->name('anemiaFinance-clerk.reject');
 
+    Route::get('/singleEarnerListClerk', 'singleEarnerListClerk')->name('singleEarnerListClerk');
+    Route::get('/getSingleEarnerListClerk', 'getSingleEarnerListClerk')->name('getSingleEarnerListClerk');
+    Route::get('/singleEarner/{id}/clerkview', 'singleEarnerClerkView')->name('singleEarnerClerkView');
+    Route::post('/singleEarner/clerkApprove', 'singleEarnerClerkApprove')->name('singleEarner-clerk.approve');
+    Route::post('/singleEarner/clerkReject', 'singleEarnerClerkReject')->name('singleEarner-clerk.reject');
 
+    Route::get('/StudentFundListClerk', 'studentFundListClerk')->name('studentFundListClerk');
+    Route::get('/getStudentFundListClerk', 'getStudentFundListClerk')->name('getStudentFundListClerk');
+    Route::get('/StudentFund/{id}/clerkview', 'studentFundClerkView')->name('studentFundClerkView');
+    Route::post('/StudentFund/clerkApprove', 'studentFundClerkApprove')->name('studentFund-clerk.approve');
+    Route::post('/StudentFund/clerkReject', 'studentFundClerkReject')->name('studentFund-clerk.reject');
 
 });

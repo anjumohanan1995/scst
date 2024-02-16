@@ -12,43 +12,7 @@ class StudentAward extends Eloquent
     protected $connection = 'mongodb';
     protected $collection = 'student_award';
 
-    protected $fillable = [
-        'name',
-        'dob',
-        'address',
-        'district',
-        'taluk',
-        'pincode',        
-        'examination_passed',
-        'guardian_name',
-        'community',
-        'panchayath_name',
-        'institution_name',
-        'pass_month',
-        'pass_year',
-        'phone',
-        'account_number',
-        'ifsc_code',
-        'aadhar_number',
-        'signature',
-        'date',
-        'submitted_district',
-        'submitted_teo',
-        'user_id','status',
-        'applicant_image',
-        'syllabus_certificate',
-        'mark',
-        'syllabus',
-        'teo_view_status',
-        'teo_view_id',
-        'teo_view_date',
-        'teo_status',
-        'teo_status_id',
-        'teo_status_date',
-        'teo_status_reason',
-
-
-    ];
+    protected $guarded = ['_id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function User()
     {

@@ -323,107 +323,74 @@
                     </div>
                 </div>
             </div>
-            @if(auth::user()->role=='TEO' && @$studentFund->teo_view_status==1)
+           
+
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-               <div class="pt-2 card overflow-hidden">
-               
-                  <div class="card-body">
-                     
-                           <div class="pb-2 row ">
-                              <div class="col-5">
-                                 <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
-                              </div>
-                              <div class="col-1 w-100">
-                                 <label> :  
-                                 </label>
-                              </div>
-                              <div class="col-6">
-                                 <label> 
-                                 {{ @$studentFund['teo_view_date'] }}
-                                 </label>
-                            
-                        </div>
-                     </div>
-                     <hr>
-                     <div class="pb-2 row ">
-                        <div class="col-5">
-                           <label>Status  </label><br>
-                        </div>
-                        <div class="col-1 w-100">
-                           <label> :  
-                           </label>
-                        </div>
-                        <div class="col-6">
-                         @if(@$studentFund->teo_status == null)
-                         <button class="btn btn-warning" >Pending</button>
-                         @elseif(@$studentFund->teo_status == 1)
-                         <button class="btn btn-success" >Approved</button>
-                         @elseif(@$studentFund->teo_status == 2)
-                         <button class="btn btn-danger" >Rejected</button> 
-                        @endif
-                        </div>
-               </div>
-               @if(@$studentFund->teo_status == null)
-               <div class="pb-2 row ">
-                <div class="col-5">
-                   <label>Action </label><br>
-                </div>
-                <div class="col-1 w-100">
-                   <label> :  
-                   </label>
-                </div>
-                <div class="col-6">
-                    <div class="settings-main-icon">
-                    <a class="approveItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                    &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
-              
+                <div class="pt-2 card overflow-hidden">
                 
-                </div>
-                </div>
-             
-       </div>
-           @endif
-               @if(@$studentFund->teo_status == 2)
-               <div class="pb-2 row ">
-                  <div class="col-5">
-                     <label>Rejected Reason  </label><br>
-                  </div>
-                  <div class="col-1 w-100">
-                     <label> :  
-                     </label>
-                  </div>
-                  <div class="col-6">
-               {{ @$studentFund->teo_status_reason }}
-               
-                  </div>
+                   <div class="card-body">
+                     <ul class="timeline-3">
+                      
+                         <li class="ApproveTimeline">
+                           <a href="#!">TEO</a>
+                           <a href="#!" class="float-end">@if( @$studentFund['teo_view_date'] !='')<i class="fa fa-eye"></i>  {{ @$studentFund['teo_view_date'] }}@endif</a>
+                           <br>
+                           <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                           <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$studentFund->teo->teo_name }}</p>
+                           <p class="mt-2"><span class= "spanclr"> Name : </span>{{ @$studentFund->teoUser->name }}</p>
+                           <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$studentFund->district->name }}</p>
+                           <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                           <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->teo_status_reason}}</p>
+                         
+                         </li>
+                         @if( @$studentFund->clerk_status == null)
+
+                         <li class="pendingTimeline">
+                          <a href="#!">{{ auth::user()->name }}</a>
+                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
+                          <br>       
+                          <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
+                                 <div class="settings-icon">
+                                     <a class="approveItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                                     &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                                  </div>
+                                
+                             </li>
+                           
+                             @elseif( @$studentFund->clerk_status == 1)
+
+                             <li class="ApproveTimeline">
+                              <a href="#!">{{ auth::user()->name }}</a>
+                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
+                              <br>
+                              <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                         
+                              <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                              <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->clerk_status_reason}}</p>
+                            
+                                 </li>
+                                 @elseif( @$studentFund->clerk_status == 2)
+
+                                 <li class="rejectTimeline">
+                                  <a href="#!">{{ auth::user()->name }}</a>
+                                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
+                                  <br>
+                                  <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                             
+                                  <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                  <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->clerk_status_reason}}</p>
+                                
+                                     </li>
+                                 @endif
+                     </ul>
+         
+             <!-- /row -->
          </div>
-         @endif
-               @if(@$studentFund->teo_status != null)
-               <div class=" pb-2 row ">
-                  <div class="col-5">
-                     @if(@$studentFund->teo_status == 1)
-                     <label>Approved Date  </label>
-                     @elseif(@$studentFund->teo_status == 2)
-                     <label>Rejected Date  </label>
-                    @endif
-                     
-                     <br>
-                  </div>
-                  <div class="col-1 w-100">
-                     <label> :  
-                     </label>
-                  </div>
-                  <div class="col-6">
-                     @if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}@endif
-                 
-                  
-                  </div>
-         </div>
-         @endif
-                  </div>
-               </div>
-            </div>
-             @endif
+         
+</div>
+</div>
+
+
 
              <div class="modal fade" id="approve-popup" style="display: none">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -438,6 +405,11 @@
                             <form id="ownForm">
         
                                 @csrf
+                                <div class="text-center">
+                                    <h5>Reason for Approval</h5>
+                                    <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
+                                    <span id="approval"></span>
+                                </div>
                             <input type="hidden" id="requestId" name="requestId" value="" />
                             <div class="text-center">
                                 <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
@@ -479,6 +451,7 @@
 </div>
 </div>
 <meta name="csrf_token" content="{{ csrf_token() }}" />
+<link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
 <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
 <script src="{{ asset('js/toastr.js') }}"></script>
@@ -497,14 +470,15 @@
             $('#rejection-popup').modal('show');
             });
             function approve() {
-    
+                var reason = $('#approved_reason').val();
             var reqId = $('#requestId').val();
     
         $.ajax({
-                    url: "{{ route('itiScholarship-teo.approve') }}",
+                    url: "{{ route('itiScholarshipClerk.approve') }}",
                     type: "POST",
                     data: {
                         "id": reqId,
+                        "reason" :reason,
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(response) {
@@ -517,8 +491,8 @@
                         }, 2000);
     
                         setTimeout(function() {
-    window.location.reload();
-}, 2000);
+                    window.location.reload();
+                }, 2000);
     
                     }
                 });
@@ -535,7 +509,7 @@
             console.log(reqId);
             $.ajax({
               
-                url: "{{ route('itiScholarship-teo.reject') }}",
+                url: "{{ route('itiScholarshipClerk.reject') }}",
                 type: "POST",
                     data: {
                         "id": reqId,

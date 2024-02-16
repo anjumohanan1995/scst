@@ -323,7 +323,7 @@
                     </div>
                 </div>
             </div>
-            @if(auth::user()->role=='TEO' && @$studentFund->teo_view_status==1)
+            @if(auth::user()->role=='Clerk' && @$studentFund->teo_view_status==1)
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                <div class="pt-2 card overflow-hidden">
                

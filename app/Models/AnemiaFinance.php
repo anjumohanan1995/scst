@@ -12,43 +12,7 @@ class AnemiaFinance extends Eloquent
     protected $connection = 'mongodb';
     protected $collection = 'anemia_finance';
 
-    protected $fillable = [
-        'name',
-        'dob',
-        'age',
-        'caste',
-        'caste_certificate',
-        'phone',
-        'address',
-        'district',
-        'taluk',
-        'pincode',
-        'adhaar_number',
-        'adhaar_copy',
-        'bank_account_details',
-        'passbook_copy',
-        'ration_card_type',
-        'ration_card',
-        'is_medical_certificate_submitted',
-        'medical_certificate',
-        'place',
-        'date',
-        'signature',
-        'applicant_photo',
-        'submitted_district',
-        'submitted_teo',
-        'user_id','status',
-        'email',
-        'teo_view_status',
-        'teo_view_id',
-        'teo_view_date',
-        'teo_status',
-        'teo_status_id',
-        'teo_status_date',
-        'teo_status_reason',
-
-
-    ];
+    protected $guarded = ['_id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function User()
     {
