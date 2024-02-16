@@ -161,7 +161,7 @@ $(document).on("click",".deleteItem",function() {
             $.ajax({
             	headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
                 url: '{{ url("po-tdo/delete") }}'+'/'+reqId,
-                method: 'post',
+                method: 'post
                 data: {
                     "_token": "{{ csrf_token() }}",
 
