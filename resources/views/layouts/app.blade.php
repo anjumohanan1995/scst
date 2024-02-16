@@ -584,6 +584,12 @@
                               
                             @endif
 
+                            @if (auth::user()->role === 'APO' || auth::user()->role === 'ATDO')
+                            
+                            @include('layouts.apo_atdo_app')
+                          
+                        @endif
+
 
                         </ul>
                         <div class="slide-right" id="slide-right">
