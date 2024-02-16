@@ -337,11 +337,11 @@ class UserController extends Controller
     {
         $category=$request->category;
         if($category == 'Project Officer' || $category =='APO'){
-            $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('type','po')->where('deleted_at', null)->get(["name","type"]);
+            $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('type','PO')->where('deleted_at', null)->get(["name","type"]);
 
         }
         else if($category == 'TDO' || $category =='ATDO'){
-            $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('type','tdo')->where('deleted_at', null)->get(["name","type"]);
+            $data['offices'] = TDOMaster::where('district_id', $request->district_id)->where('type','TDO')->where('deleted_at', null)->get(["name","type"]);
 
         }
         else{
