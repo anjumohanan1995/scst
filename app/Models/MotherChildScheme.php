@@ -74,6 +74,15 @@ class MotherChildScheme extends Eloquent
         'pjct_offcr_status_date',
         'pjct_offcr_status_reason',
 
+
+        'officer_view_status',
+        'officer_view_id',
+        'officer_view_date',
+        'officer_status',
+        'officer_status_id',
+        'officer_status_date',
+        'officer_status_reason',
+
     ];
 
     public function User()
@@ -124,5 +133,9 @@ class MotherChildScheme extends Eloquent
     public function assistantUser()
     {
         return $this->belongsTo(User::class,'assistant_status_id');
+    }
+    public function officerUser()
+    {
+        return $this->belongsTo(User::class,'officer_status_id');
     }
 }

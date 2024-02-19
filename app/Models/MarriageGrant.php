@@ -94,6 +94,14 @@ class MarriageGrant extends Eloquent
         'assistant_status_date',
         'assistant_status_reason',
 
+        'officer_view_status',
+        'officer_view_id',
+        'officer_view_date',
+        'officer_status',
+        'officer_status_id',
+        'officer_status_date',
+        'officer_status_reason',
+
     ];
 
     public function User()
@@ -157,5 +165,9 @@ class MarriageGrant extends Eloquent
     public function assistantUser()
     {
         return $this->belongsTo(User::class,'assistant_status_id');
+    }
+    public function officerUser()
+    {
+        return $this->belongsTo(User::class,'officer_status_id');
     }
 }

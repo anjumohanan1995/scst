@@ -329,7 +329,7 @@
                                 </a>
                             </li>
                             </li>
-                            @if (Auth::user()->role == 'Super Admin' || Auth::user()->role == 'Admin' || Auth::user()->role == 'TEO' || Auth::user()->role == 'TDO' || Auth::user()->role == 'Project Officer')
+                            @if (Auth::user()->role == 'Super Admin' || Auth::user()->role == 'Admin' || Auth::user()->role == 'TEO' )
                                 @if (Auth::user()->role == 'Super Admin')
                                     <li class="slide">
                                         <a class="side-menu__item {{ \Request::route()->getName() == 'users.index' || \Request::route()->getName() == 'users.create' || \Request::route()->getName() == 'users.edit' ? 'active' : '' }}"
@@ -581,8 +581,11 @@
                             @if (auth::user()->role === 'Clerk')
                             
                                 @include('layouts.clerk_app')
-                              
-                            @endif
+                                @elseif ( Auth::user()->role == 'ATDO' || Auth::user()->role == 'APO')
+                                @include('layouts.apo_atdo_app')
+                              @elseif ( Auth::user()->role == 'TDO' || Auth::user()->role == 'Project Officer')
+                            @include('layouts.po_tdo_app')
+                              @endif
 
 
                         </ul>

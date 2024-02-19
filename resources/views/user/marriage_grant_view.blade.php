@@ -584,7 +584,41 @@
                   @endif
                   @endif
                   
-        
+                  @if(@$formData->assistant_status == 1)
+                  @if( @$formData->officer_status == 1)
+ 
+                  <li class="ApproveTimeline">
+                    <a href="#!">PO / TDO</a>
+                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                    <p></p>
+                    <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                    <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                   
+                    <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                    <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->officer_status_reason}}</p>
+                 </li>
+                 @elseif( @$formData->officer_status == 2)
+ 
+                 <li class="rejectTimeline">
+                   <a href="#!">PO / TDO</a>
+                   <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                   <p></p>
+                   <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                   <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                   
+                   <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                   <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->officer_status_reason}}</p>
+                </li>
+                @elseif( @$formData->officer_status == null)
+ 
+                <li class="pendingTimeline">
+                  <a href="#!">PO / TDO</a>
+                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                 <p></p>
+                  <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                   </li>
+                   @endif
+                   @endif
                   
                   </ul>
                  </div>

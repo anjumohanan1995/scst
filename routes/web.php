@@ -22,6 +22,7 @@ use App\Http\Controllers\AnemiaFinanceController;
 use App\Http\Controllers\ApoTdoController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\MedEngStudentFundController;
+use App\Http\Controllers\PoTdoController;
 use App\Http\Controllers\TDOMasterController;
 use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
@@ -446,6 +447,51 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::get('/marriageGrantDetailsAssistant/{id}','marriageGrantDetailsAssistant')->name('marriageGrantDetailsAssistant');
     Route::post('/marriageGrantApproveAssistant','marriageGrantApproveAssistant')->name('marriageGrant.assistant.approve');
     Route::post('/marriageGrantRejectAssistant','marriageGrantRejectAssistant')->name('marriageGrant.assistant.reject');
+   
+
+
+    
+
+
+
+});
+
+
+
+Route::controller(PoTdoController::class)->group(function(){
+
+	Route::get('/ChildFinanceListOfficer','ChildFinanceListOfficer')->name('ChildFinanceListOfficer');
+    Route::get('/getchildFinanceListOfficer','getchildFinanceListOfficer')->name('getchildFinanceListOfficer');
+    Route::get('/childFinancialDetailsOfficer/{id}','childFinancialDetailsOfficer')->name('childFinancialDetailsOfficer');
+    Route::post('/childFinanceApproveOfficer','childFinanceApproveOfficer')->name('childFinance.officer.approve');
+    Route::post('/childFinanceRejectOfficer','childFinanceRejectOfficer')->name('childFinance.officer.reject');
+   
+
+    Route::get('/examApplicationListOfficer','examApplicationListOfficer')->name('examApplicationListOfficer');
+    Route::get('/getexamApplicationListOfficer','getexamApplicationListOfficer')->name('getexamApplicationListOfficer');
+    Route::get('/examApplicationDetailsOfficer/{id}','examApplicationDetailsOfficer')->name('examApplicationDetailsOfficer');
+    Route::post('/examApplicationApproveOfficer','examApplicationApproveOfficer')->name('examApplication.officer.approve');
+    Route::post('/examApplicationRejectOfficer','examApplicationRejectOfficer')->name('examApplication.officer.reject');
+   
+    Route::get('/couplefinancialListOfficer','couplefinancialListOfficer')->name('couplefinancialListOfficer');
+    Route::get('/getcouplefinancialListOfficer','getcouplefinancialListOfficer')->name('getcouplefinancialListOfficer');
+    Route::get('/couplefinancialDetailsOfficer/{id}','couplefinancialDetailsOfficer')->name('couplefinancialDetailsOfficer');
+    Route::post('/couplefinancialApproveOfficer','couplefinancialApproveOfficer')->name('couplefinancial.officer.approve');
+    Route::post('/couplefinancialRejectOfficer','couplefinancialRejectOfficer')->name('couplefinancial.officer.reject');
+   
+    
+	Route::get('/motherChildSchemeListOfficer','motherChildSchemeListOfficer')->name('motherChildSchemeListOfficer');
+    Route::get('/getmotherChildSchemeListOfficer','getmotherChildSchemeListOfficer')->name('getmotherChildSchemeListOfficer');
+    Route::get('/motherChildSchemeDetailsOfficer/{id}','motherChildSchemeDetailsOfficer')->name('motherChildSchemeDetailsOfficer');
+    Route::post('/motherChildSchemeApproveOfficer','motherChildSchemeApproveOfficer')->name('motherChildScheme.officer.approve');
+    Route::post('/motherChildSchemeRejectOfficer','motherChildSchemeRejectOfficer')->name('motherChildScheme.officer.reject');
+   
+
+    Route::get('/marriageGrantListOfficer','marriageGrantListOfficer')->name('marriageGrantListOfficer');
+    Route::get('/getmarriageGrantListOfficer','getmarriageGrantListOfficer')->name('getmarriageGrantListOfficer');
+    Route::get('/marriageGrantDetailsOfficer/{id}','marriageGrantDetailsOfficer')->name('marriageGrantDetailsOfficer');
+    Route::post('/marriageGrantApproveOfficer','marriageGrantApproveOfficer')->name('marriageGrant.officer.approve');
+    Route::post('/marriageGrantRejectOfficer','marriageGrantRejectOfficer')->name('marriageGrant.officer.reject');
    
 
 
