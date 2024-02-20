@@ -185,7 +185,7 @@
 	        ],
              "ajax": {
 
-			       	"url": "{{route('gethouseGrantListAssistant')}}",
+			       	"url": "{{route('gethouseGrantListOfficer')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {
@@ -279,7 +279,7 @@
             var reqId = $('#requestId').val();
 
             $.ajax({
-                url: "{{ route('houseGrant.assistant.approve') }}",
+                url: "{{ route('houseGrant.officer.approve') }}",
                 type: "POST",
                 data: {
                     "id": reqId,
@@ -312,7 +312,7 @@
                 console.log(reqId);
                 $.ajax({
 
-                    url: "{{ route('houseGrant.assistant.reject') }}",
+                    url: "{{ route('houseGrant.officer.reject') }}",
                     type: "POST",
                     data: {
                         "id": reqId,

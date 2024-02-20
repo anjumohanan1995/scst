@@ -167,7 +167,7 @@
           var reqId = $('#requestId').val();
    
           $.ajax({
-              url: "{{ route('tuitionFee.assistant.approve') }}",
+              url: "{{ route('tuitionFee.officer.approve') }}",
               type: "POST",
               data: {
                   "id": reqId,
@@ -200,7 +200,7 @@
               console.log(reqId);
               $.ajax({
    
-                  url: "{{ route('tuitionFee.assistant.reject') }}",
+                  url: "{{ route('tuitionFee.officer.reject') }}",
                   type: "POST",
                   data: {
                       "id": reqId,
@@ -240,7 +240,7 @@
            ],
                "ajax": {
    
-   		       	"url": "{{route('gettuitionFeeListAssistant')}}",
+   		       	"url": "{{route('gettuitionFeeListOfficer')}}",
    		       	// "data": { mobile: $("#mobile").val()}
    		       	"data": function ( d ) {
    		        	return $.extend( {}, d, {
