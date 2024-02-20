@@ -96,6 +96,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>Husband Name</th>
                                             <th>Wife Name </th>
                                             {{-- <th>Marriage Registration Details </th>
@@ -214,6 +215,7 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'husband_name' },
                 { data: 'wife_name' },
 				//{ data: 'register_details' },
@@ -226,7 +228,7 @@ $(document).on("click",".deleteItem",function() {
 
 
 			],
-            "order": [4, 'desc'],
+            "order": [6, 'desc'],
             'ordering': true,
          });
 

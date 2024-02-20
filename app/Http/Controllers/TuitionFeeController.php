@@ -273,8 +273,9 @@ class TuitionFeeController extends Controller
 
 
          $data_arr = array();
-
+            $i=$start;
          foreach($records as $record){
+            $i++;
              $id = $record->id;
              $name = $record->name;
              $address = $record->address;
@@ -286,6 +287,7 @@ class TuitionFeeController extends Controller
 
             $data_arr[] = array(
                 "id" => $id,
+                "sl_no" =>$i,
                 "name" => $name,
                 "address" => $address,
                 "student_name" => $student_name,

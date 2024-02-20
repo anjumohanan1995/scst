@@ -512,7 +512,7 @@
          var reqId = $('#requestId').val();
    
          $.ajax({
-             url: "{{ route('houseGrant.clerk.approve') }}",
+             url: "{{ route('houseGrant.assistant.approve') }}",
              type: "POST",
              data: {
                  "id": reqId,
@@ -547,7 +547,7 @@
              console.log(reqId);
              $.ajax({
    
-                 url: "{{ route('houseGrant.clerk.reject') }}",
+                 url: "{{ route('houseGrant.assistant.reject') }}",
                  type: "POST",
                  data: {
                      "id": reqId,

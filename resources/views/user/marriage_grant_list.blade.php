@@ -67,6 +67,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>Name</th>
                                             <th>Age </th>
                                             <th>Current Address </th>
@@ -182,6 +183,7 @@ $(document).on("click",".deleteItem",function() {
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'name' },
                 { data: 'age' },
 				{ data: 'current_address' },
@@ -192,7 +194,7 @@ $(document).on("click",".deleteItem",function() {
 
 
 			],
-            "order": [4, 'desc'],
+            "order": [5, 'desc'],
             'ordering': true,
          });
 

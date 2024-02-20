@@ -74,6 +74,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>School Name</th>
                                             <th>Student Name</th>
                                             <th>Gender </th>
@@ -159,7 +160,11 @@
                     }
                 },
 
-                columns: [{
+                columns: [
+                    {
+                        data: 'sl_no'
+                    },    
+                {
                         data: 'school_name'
                     },
                     {
@@ -178,8 +183,8 @@
                         data: 'mother_name'
                     },
                     {
-                        data: 'created_at',
-                        visible: false
+                        data: 'created_at'
+                      
                     },
 
                     {
@@ -188,7 +193,7 @@
 
 
                 ],
-                "order": [1, 'desc'],
+                "order": [7, 'desc'],
                 'ordering': true,
             });
 

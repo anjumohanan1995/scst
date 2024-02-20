@@ -486,7 +486,7 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/marriageGrantRejectAssistant','marriageGrantRejectAssistant')->name('marriageGrant.assistant.reject');
    
 
-    Route::get('/houseGrantListAssistant','houseGrantListAssistant')->name('houserantListAssistant');
+    Route::get('/houseGrantListAssistant','houseGrantListAssistant')->name('houseGrantListAssistant');
     Route::get('/gethouseGrantListAssistant','gethouseGrantListAssistant')->name('gethouseGrantListAssistant');
     Route::get('/houseGrantDetailsAssistant/{id}','houseGrantDetailsAssistant')->name('houseGrantDetailsAssistant');
     Route::post('/houseGrantApproveAssistant','houseGrantApproveAssistant')->name('houseGrant.assistant.approve');
@@ -570,7 +570,19 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::post('/marriageGrantRejectOfficer','marriageGrantRejectOfficer')->name('marriageGrant.officer.reject');
    
 
+    Route::get('/houseGrantListOfficer','houseGrantListOfficer')->name('houseGrantListOfficer');
+    Route::get('/gethouseGrantListOfficer','gethouseGrantListOfficer')->name('gethouseGrantListOfficer');
+    Route::get('/houseGrantDetailsOfficer/{id}','houseGrantDetailsOfficer')->name('houseGrantDetailsOfficer');
+    Route::post('/houseGrantApproveOfficer','houseGrantApproveOfficer')->name('houseGrant.officer.approve');
+    Route::post('/houseGrantRejectOfficer','houseGrantRejectOfficer')->name('houseGrant.officer.reject');
+   
 
+    Route::get('/tuitionFeeListOfficer','tuitionFeeListOfficer')->name('tuitionFeeListOfficer');
+    Route::get('/gettuitionFeeListOfficer','gettuitionFeeListOfficer')->name('gettuitionFeeListOfficer');
+    Route::get('/tuitionFeeDetailsOfficer/{id}','tuitionFeeDetailsOfficer')->name('tuitionFeeDetailsOfficer');
+    Route::post('/tuitionFeeApproveOfficer','tuitionFeeApproveOfficer')->name('tuitionFee.officer.approve');
+    Route::post('/tuitionFeeRejectOfficer','tuitionFeeRejectOfficer')->name('tuitionFee.officer.reject');
+   
     
 
 

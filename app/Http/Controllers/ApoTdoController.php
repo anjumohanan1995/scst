@@ -871,7 +871,7 @@ class ApoTdoController extends Controller
              $totalRecord = HouseManagement::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -884,7 +884,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = HouseManagement::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -901,7 +901,7 @@ class ApoTdoController extends Controller
              $items = HouseManagement::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -925,21 +925,21 @@ class ApoTdoController extends Controller
              $place = $record->place;
              $panchayath = $record->panchayath;
              $caste = $record->caste;
-             $status = $record->clerk_status;
+             $status = $record->assistant_status;
             $date = $record->date;
             $time = $record->time;
             $teo_name=$record->teo->teo_name;
               $created_at =  $record->created_at;
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -983,11 +983,11 @@ class ApoTdoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =HouseManagement::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->assistant_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+                "assistant_view_status"=>1,
+                "assistant_view_id" =>Auth::user()->id,
+                "assistant_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
@@ -1005,10 +1005,10 @@ class ApoTdoController extends Controller
       
        
         $house->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'assistant_status' => 1,
+            'assistant_status_date' => $currenttime,
+            'assistant_status_id' => Auth::user()->id,
+            'assistant_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'House Grant Scheme Application Approved successfully.'
@@ -1024,10 +1024,10 @@ class ApoTdoController extends Controller
       
        
         $house->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'assistant_status' => 2,
+            'assistant_status_date' => $currenttime,
+            'assistant_status_id' => Auth::user()->id,
+            'assistant_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'House Grant Scheme Application Rejected successfully.'
@@ -1071,7 +1071,7 @@ class ApoTdoController extends Controller
              $totalRecord = TuitionFee::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1084,7 +1084,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = TuitionFee::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -1101,7 +1101,7 @@ class ApoTdoController extends Controller
              $items = TuitionFee::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -1124,21 +1124,21 @@ class ApoTdoController extends Controller
              $address = $record->address;
              $student_name = $record->student_name;
              $caste = $record->caste;
-             $status = $record->clerk_status;
+             $status = $record->assistant_status;
             $date = $record->date;
             $time = $record->time;
             $teo_name=$record->teo->teo_name;
               $created_at =  $record->created_at;
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -1181,11 +1181,11 @@ class ApoTdoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =TuitionFee::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->assistant_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+            "assistant_view_status"=>1,
+            "assistant_view_id" =>Auth::user()->id,
+            "assistant_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
@@ -1203,10 +1203,10 @@ class ApoTdoController extends Controller
       
        
         $tuition->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'assistant_status' => 1,
+            'assistant_status_date' => $currenttime,
+            'assistant_status_id' => Auth::user()->id,
+            'assistant_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Tuition Fee Scheme Application Approved successfully.'
@@ -1222,10 +1222,10 @@ class ApoTdoController extends Controller
       
        
         $tuition->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'assistant_status' => 2,
+            'assistant_status_date' => $currenttime,
+            'assistant_status_id' => Auth::user()->id,
+            'assistant_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Tuition Fee Application Rejected successfully.'

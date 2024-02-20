@@ -67,6 +67,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>Name</th>
                                             <th>Age </th>
                                             <th> Address </th>
@@ -148,6 +149,7 @@
        			},
 
              columns: [
+                { data: 'sl_no' },
                 { data: 'name' },
                 { data: 'age' },
 				{ data: 'address' },
@@ -158,7 +160,7 @@
 
 
 			],
-            "order": [4, 'desc'],
+            "order": [5, 'desc'],
             'ordering': true,
          });
 

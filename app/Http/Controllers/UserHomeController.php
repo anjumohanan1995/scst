@@ -142,8 +142,9 @@ class UserHomeController extends Controller
 
 
         $data_arr = array();
-
+        $i=$start;
         foreach ($records as $record) {
+            $i++;
             $id = $record->id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
@@ -157,6 +158,7 @@ class UserHomeController extends Controller
             $time =  $record->time;
 
             $data_arr[] = array(
+                "sl_no"=>$i,
                 "id" => $id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
@@ -292,8 +294,9 @@ class UserHomeController extends Controller
 
 
         $data_arr = array();
-
+        $i=$start;
         foreach ($records as $record) {
+            $i++;
             $id = $record->id;
             $school_name = $record->school_name;
             $student_name = $record->student_name;
@@ -301,9 +304,10 @@ class UserHomeController extends Controller
             $address = $record->address;
             $relation = $record->relation;
             $mother_name =  $record->mother_name;
-            $created_at =  $record->created_at;
+            $created_at =  Carbon::parse(@$record->created_at)->format('d-m-Y h:i a');
 
             $data_arr[] = array(
+                "sl_no" =>$i,
                 "id" => $id,
                 "school_name" => $school_name,
                 "student_name" => $student_name,
@@ -483,7 +487,7 @@ class UserHomeController extends Controller
             $items->whereBetween('created_at', [$stDate, $edDate]);
         }
 
-        $records = $items->skip($start)->take($rowperpage)->get();
+        $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
 
 
 
@@ -500,7 +504,7 @@ class UserHomeController extends Controller
             $hus_name = $record->hus_name;
             $caste = $record->caste;
             $village =  $record->village;
-            $created_at =  $record->created_at;
+            $created_at = Carbon::parse(@$record->created_at)->format('d-m-Y h:i a');
             if (@$record->dob != null) {
                 $dob = Carbon::parse(@$record->dob)->format('d-m-Y');
             }
@@ -603,8 +607,9 @@ class UserHomeController extends Controller
 
 
         $data_arr = array();
-
+        $i=$start;
         foreach ($records as $record) {
+            $i++;
             $id = $record->id;
             $name = $record->name;
             $current_address = $record->current_address;
@@ -614,6 +619,7 @@ class UserHomeController extends Controller
 
             $data_arr[] = array(
                 "id" => $id,
+                "sl_no" =>$i,
                 "name" => $name,
                 "current_address" => $current_address,
                 "age" => $age,

@@ -185,7 +185,7 @@
 	        ],
              "ajax": {
 
-			       	"url": "{{route('gethouseGrantListClerk')}}",
+			       	"url": "{{route('gethouseGrantListAssistant')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {
