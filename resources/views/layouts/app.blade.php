@@ -3,12 +3,12 @@
 
 <head>
     @php
-        $domains = ['opportal.sha.kerala.gov.in', '61.0.248.21', '10.5.69.181', '127.0.0.1'];
+       /* $domains = ['opportal.sha.kerala.gov.in', '61.0.248.21', '10.5.69.181', '127.0.0.1'];
         if (!in_array($_SERVER['SERVER_NAME'], $domains)) {
             return false;
             exit();
         }
-        /*  $host = request()->getHost();
+          $host = request()->getHost();
         if($host != 'opportal.sha.kerala.gov.in' && $host != '61.0.248.21' && $host != '10.5.69.181' && $host != '127.0.0.1'){
 			return false;exit();
 		}  */
