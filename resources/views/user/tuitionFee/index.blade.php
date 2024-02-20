@@ -74,6 +74,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Sl No</th>
                                             <th>അപേക്ഷകന്റെ പേര് </th>
                                             <th>മേൽവിലാസം
                                             </th>
@@ -151,7 +152,11 @@
                     }
                 },
 
-                columns: [{
+                columns: [
+                    {
+                        data: 'sl_no'
+                    },
+                    {
                         data: 'name'
                     },
                     {
@@ -179,7 +184,7 @@
 
 
                 ],
-                "order": [1, 'desc'],
+                "order": [5, 'desc'],
                 'ordering': true,
             });
 

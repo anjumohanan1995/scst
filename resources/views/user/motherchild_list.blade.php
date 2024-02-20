@@ -206,7 +206,7 @@
 
 
                 ],
-                "order": [5, 'desc'],
+                "order": [6, 'desc'],
                 'ordering': true,
             });
 
