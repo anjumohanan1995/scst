@@ -385,134 +385,208 @@
          </div>
          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
             <div class="pt-2 card overflow-hidden">
-            
                <div class="card-body">
-         <ul class="timeline-3">
-            @if(@$houseManagement->teo_status == 1)
-            <li class="ApproveTimeline">
-              <a href="#!">TEO</a>
-              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['teo_view_date'] }}</a>
-             
-              <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-              <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-              <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$houseManagement->teoUser->name }}</p>
-              <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-              <p  class="mt-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-              <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$houseManagement->teo_status_reason}}</p>
-            
-            </li>
-           
-            @elseif(@$houseManagement->teo_status == 2)
-            <li class="rejectTimeline">
-               <a href="#!">TEO</a>
-              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['teo_view_date'] }}</a>
-             
-                   <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
-                   <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                  <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$houseManagement->teoUser->name }}</p>
-                  <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                  <p  class="mt-2"><span class= "spanclr">TEO Rejected Date :   </span>@if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                  <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->teo_status_reason}}</p>
-               </li>
-                  
-           @elseif(@$houseManagement->teo_status == null)
-           <li class="pendingTimeline">
-            <a href="#!">TEO</a>
-              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['teo_view_date'] }}</a>
-             
-            <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-            {{-- <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$houseManagement['teo_view_date'] }}</p>
-             --}}
-           
-        
-        </li>
-               
-        @endif
-        @if(@$houseManagement->teo_status == 1)
-        @if( @$houseManagement->pjct_offcr_status == 1)
-         
-        <li class="ApproveTimeline">
-         <a href="#!">Project Officer</a>
-         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['pjct_offcr_view_date'] }}</a>
-                <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
-               
-                <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$houseManagement->prjUser->name }}</p>
-                  <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                 <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-               
-            </li>
-        @elseif( @$houseManagement->tdo_status == 1)
-        <li class="ApproveTimeline">
-        <a href="#!">TDO</a>
-        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['tdo_view_date'] }}</a>
-               <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
-          
-                <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$houseManagement->tdoUser->name }}</p>
-                <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                  <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-               
-        </li>
-        @endif
-        @if( @$houseManagement->tdo_status == 2 )
-         
-        <li class="rejectTimeline">
-         <a href="#!">TDO</a>
-        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['tdo_view_date'] }}</a>
-       
-              
-               <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$houseManagement->tdoUser->name }}</p>
-               <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-               <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-               <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-               <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->tdo_status_reason}}</p>
-              
-        </li>
-        
-         
-         @elseif( @$houseManagement->pjct_offcr_status == 2)
-        
-         <li class="rejectTimeline">
-            <a href="#!">TDO</a>
-           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['pjct_offcr_view_date'] }}</a>
-          
-              
-                <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
-               
-                <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$houseManagement->prjUser->name }}</p>
-                <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
-                <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
-                <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->pjct_offcr_status_reason}}</p>
-               
-         </li>
-        @endif
-        @if(@$houseManagement->tdo_status == null && @$houseManagement->pjct_offcr_status == null)
-        <li class="pendingTimeline">
-         <a href="#!">PO / TDO</a>
-           <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-            @if(@$houseManagement->pjct_offcr_view_date != null)
-           PO :  {{ @$houseManagement['pjct_offcr_view_date'] }}
-           @endif
-           @if(@$houseManagement->tdo_view_date != null)
-           TDO :  {{ @$houseManagement['teo_view_date'] }} 
-           @endif
-         </a>
-          
-            
-           
-         
-        </li>
-          @endif
-        
-          @endif 
-          
-
-          
-          </ul>
+                  <ul class="timeline-3">
+                     @if(@$houseManagement->teo_status == 1)
+                     <li class="ApproveTimeline">
+                        <a href="#!">TEO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['teo_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                        <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
+                        <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$houseManagement->teoUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
+                        <p  class="mt-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$houseManagement->teo_status_reason}}</p>
+                     </li>
+                     @elseif(@$houseManagement->teo_status == 2)
+                     <li class="rejectTimeline">
+                        <a href="#!">TEO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['teo_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
+                        <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
+                        <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$houseManagement->teoUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
+                        <p  class="mt-2"><span class= "spanclr">TEO Rejected Date :   </span>@if(@$houseManagement['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->teo_status_reason}}</p>
+                     </li>
+                     @elseif(@$houseManagement->teo_status == null)
+                     <li class="pendingTimeline">
+                        <a href="#!">TEO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['teo_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                        {{-- 
+                        <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$houseManagement['teo_view_date'] }}</p>
+                        --}}
+                     </li>
+                     @endif
+                     @if(@$houseManagement->teo_status == 1)
+                     @if( @$houseManagement->clerk_status == 1)
+    
+                     <li class="ApproveTimeline">
+                       <a href="#!">Clerk</a>
+                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['clerk_view_date'] }}</a>
+                       <p></p>
+                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$houseManagement->clerkUser->name }}</p>
+                       <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$houseManagement->clerk_status_reason}}</p>
+                    </li>
+                    @elseif( @$houseManagement->clerk_status == 2)
+    
+                    <li class="rejectTimeline">
+                      <a href="#!">Clerk</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['clerk_view_date'] }}</a>
+                      <p></p>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$houseManagement->clerkUser->name }}</p>
+                       
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->clerk_status_reason}}</p>
+                   </li>
+                   @elseif( @$houseManagement->clerk_status == null)
+    
+                   <li class="pendingTimeline">
+                     <a href="#!">Clerk</a>
+                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['clerk_view_date'] }}</a>
+                     <p></p>
+                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                      </li>
+                      @endif
+    
+                      @endif 
+                      @if(@$houseManagement->clerk_status == 1)
+                      @if( @$houseManagement->assistant_status == 1)
+     
+                      <li class="ApproveTimeline">
+                        <a href="#!">APO / ATDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['assistant_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$houseManagement->assistantUser->name }}</p>
+                       
+                        <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$houseManagement->teo_status_reason}}</p>
+                     </li>
+                     @elseif( @$houseManagement->assistant_status == 2)
+     
+                     <li class="rejectTimeline">
+                       <a href="#!">APO / ATDO</a>
+                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['assistant_view_date'] }}</a>
+                       <p></p>
+                       <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$houseManagement->assistantUser->name }}</p>
+                       
+                       <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->assistant_status_reason}}</p>
+                    </li>
+                    @elseif( @$houseManagement->assistant_status == null)
+     
+                    <li class="pendingTimeline">
+                      <a href="#!">APO / ATDO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['assistant_view_date'] }}</a>
+                     <p></p>
+                      <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                       </li>
+                       @endif
+                       @endif
+                       @if(@$houseManagement->assistant_status == 1)
+                       @if( @$houseManagement->officer_status == 1)
+      
+                       <li class="ApproveTimeline">
+                         <a href="#!">PO / TDO</a>
+                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['officer_view_date'] }}</a>
+                         <p></p>
+                         <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                         <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$houseManagement->officerUser->name }}</p>
+                        
+                         <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                         <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$houseManagement->officer_status_reason}}</p>
+                      </li>
+                      @elseif( @$houseManagement->officer_status == 2)
+      
+                      <li class="rejectTimeline">
+                        <a href="#!">PO / TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['officer_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$houseManagement->officerUser->name }}</p>
+                        
+                        <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->officer_status_reason}}</p>
+                     </li>
+                     @elseif( @$houseManagement->officer_status == null)
+      
+                     <li class="pendingTimeline">
+                       <a href="#!">PO / TDO</a>
+                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['officer_view_date'] }}</a>
+                      <p></p>
+                       <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                        </li>
+                        @endif
+                        @endif
+                     {{-- @if( @$houseManagement->pjct_offcr_status == 1)
+                     <li class="ApproveTimeline">
+                        <a href="#!">Project Officer</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['pjct_offcr_view_date'] }}</a>
+                        <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
+                        <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$houseManagement->prjUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
+                        <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                     </li>
+                     @elseif( @$houseManagement->tdo_status == 1)
+                     <li class="ApproveTimeline">
+                        <a href="#!">TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['tdo_view_date'] }}</a>
+                        <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
+                        <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$houseManagement->tdoUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
+                        <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$houseManagement['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                     </li>
+                     @endif
+                     @if( @$houseManagement->tdo_status == 2 )
+                     <li class="rejectTimeline">
+                        <a href="#!">TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['tdo_view_date'] }}</a>
+                        <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$houseManagement->tdoUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
+                        <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->tdo_status_reason}}</p>
+                     </li>
+                     @elseif( @$houseManagement->pjct_offcr_status == 2)
+                     <li class="rejectTimeline">
+                        <a href="#!">TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$houseManagement['pjct_offcr_view_date'] }}</a>
+                        <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
+                        <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$houseManagement->prjUser->name }}</p>
+                        <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$houseManagement->teo->teo_name }}</p>
+                        <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$houseManagement->district->name }}</p>
+                        <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$houseManagement['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$houseManagement['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$houseManagement->pjct_offcr_status_reason}}</p>
+                     </li>
+                     @endif
+                     @if(@$houseManagement->tdo_status == null && @$houseManagement->pjct_offcr_status == null)
+                     <li class="pendingTimeline">
+                        <a href="#!">PO / TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                        @if(@$houseManagement->pjct_offcr_view_date != null)
+                        PO :  {{ @$houseManagement['pjct_offcr_view_date'] }}
+                        @endif
+                        @if(@$houseManagement->tdo_view_date != null)
+                        TDO :  {{ @$houseManagement['teo_view_date'] }} 
+                        @endif
+                        </a>
+                     </li>
+                     @endif --}}
+                    
+                  </ul>
+               </div>
+            </div>
          </div>
-      </div>
-   </div>
     
 
 

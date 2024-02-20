@@ -38,28 +38,37 @@
     </a>
 
 </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <li class="slide">
-    <a class="side-menu__item {{ \Request::route()->getName() == 'clerkItiFundList' ? 'active' : '' }}"
-     href="{{ url('clerkItiFundList') }}">
- <i class="side-menu__icon fe fe-menu"> </i>
- <span class="side-menu__label">ITI Student Fund Scheme Applications</span>
+    <a class="side-menu__item {{ \Request::route()->getName() == 'houseGrantListAssistant'  || \Request::route()->getName() == 'houseGrantDetailsAssistant' ? 'active' : '' }}"
+        href="{{ url('houseGrantListAssistant') }}">
+        <i class="side-menu__icon fe fe-menu"> </i>
+        <span class="side-menu__label">House Grant Applications</span>
 
-</a>
+    </a>
 
 </li>
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'tuitionFeeListAssistant'  || \Request::route()->getName() == 'tuitionFeeDetailsAssistant' ? 'active' : '' }}"
+        href="{{ url('tuitionFeeListAssistant') }}">
+        <i class="side-menu__icon fe fe-menu"> </i>
+        <span class="side-menu__label">Tuition Fee Applications</span>
+
+    </a>
+
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

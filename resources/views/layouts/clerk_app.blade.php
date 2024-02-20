@@ -46,7 +46,24 @@
     </a>
 
 </li>
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'houseGrantListClerk' || \Request::route()->getName() == 'houseGrantClerkDetails' ? 'active' : '' }}"
+        href="{{ url('houseGrantListClerk') }}">
+        <i class="side-menu__icon fe fe-menu"> </i>
+        <span class="side-menu__label">House Grant Applications</span>
 
+    </a>
+
+</li>
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'tuitionFeeListClerk' || \Request::route()->getName() == 'tuitionFeeClerkDetails' ? 'active' : '' }}"
+        href="{{ url('tuitionFeeListClerk') }}">
+        <i class="side-menu__icon fe fe-menu"> </i>
+        <span class="side-menu__label">Tuition Fee Applications</span>
+
+    </a>
+
+</li>
 <li class="slide">
     <a class="side-menu__item {{ \Request::route()->getName() == 'studentFundListClerk' ? 'active' : '' }}"
         href="{{ route('studentFundListClerk') }}">

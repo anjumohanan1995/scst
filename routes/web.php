@@ -377,6 +377,18 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/marriageGrantClerkApprove','marriageGrantClerkApprove')->name('marriageGrantClerk.approve');
     Route::post('/marriageGrantClerkReject','marriageGrantClerkReject')->name('marriageGrantClerk.reject');
 
+    Route::get('/houseGrantListClerk','houseGrantListClerk')->name('houseGrantListClerk');
+    Route::get('/gethouseGrantListClerk','gethouseGrantListClerk')->name('gethouseGrantListClerk');
+    Route::get('/houseGrantDetails/{id}','houseGrantClerkDetails')->name('houseGrantClerkDetails');
+    Route::post('/houseGrantClerkApprove','houseGrantClerkApprove')->name('houseGrant.clerk.approve');
+    Route::post('/houseGrantClerkReject','houseGrantClerkReject')->name('houseGrant.clerk.reject');
+
+
+    Route::get('/tuitionFeeListClerk','tuitionFeeListClerk')->name('tuitionFeeListClerk');
+    Route::get('/gettuitionFeeClerk','gettuitionFeeClerk')->name('gettuitionFeeClerk');
+    Route::get('/tuitionFeeDetails/{id}','tuitionFeeClerkDetails')->name('tuitionFeeClerkDetails');
+    Route::post('/tuitionFeeClerkApprove','tuitionFeeClerkApprove')->name('tuitionFee.clerk.approve');
+    Route::post('/tuitionFeeClerkReject','tuitionFeeClerkReject')->name('tuitionFee.clerk.reject');
 
 
 
@@ -471,8 +483,20 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/marriageGrantRejectAssistant','marriageGrantRejectAssistant')->name('marriageGrant.assistant.reject');
    
 
+    Route::get('/houseGrantListAssistant','houseGrantListAssistant')->name('houserantListAssistant');
+    Route::get('/gethouseGrantListAssistant','gethouseGrantListAssistant')->name('gethouseGrantListAssistant');
+    Route::get('/houseGrantDetailsAssistant/{id}','houseGrantDetailsAssistant')->name('houseGrantDetailsAssistant');
+    Route::post('/houseGrantApproveAssistant','houseGrantApproveAssistant')->name('houseGrant.assistant.approve');
+    Route::post('/houseGrantRejectAssistant','houseGrantRejectAssistant')->name('houseGrant.assistant.reject');
+   
 
-    
+    Route::get('/tuitionFeeListAssistant','tuitionFeeListAssistant')->name('tuitionFeeListAssistant');
+    Route::get('/gettuitionFeeListAssistant','gettuitionFeeListAssistant')->name('gettuitionFeeListAssistant');
+    Route::get('/tuitionFeeDetailsAssistant/{id}','tuitionFeeDetailsAssistant')->name('tuitionFeeDetailsAssistant');
+    Route::post('/tuitionFeeApproveAssistant','tuitionFeeApproveAssistant')->name('tuitionFee.assistant.approve');
+    Route::post('/tuitionFeeRejectAssistant','tuitionFeeRejectAssistant')->name('tuitionFee.assistant.reject');
+   
+
 
 
 

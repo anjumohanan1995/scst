@@ -574,30 +574,18 @@ $formattedDate = $currentDate->toDateString();
       $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = HouseManagement::where('_id', $request->id)->first();
 
-      if(Auth::user()->role == "TEO"){
+    
         $houseGrant->update([
             'teo_status' => 1,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
             'teo_status_reason' => $reason,
         ]);
-      }
+      
 
-       else  if(Auth::user()->role == "TDO"){
-        $houseGrant->update([
-            'tdo_status' => 1,
-            'tdo_status_date' => $currenttime,
-            'tdo_status_id' => Auth::user()->id,
-        ]);
-      }
+      
 
-      else  if(Auth::user()->role == "Project Officer"){
-        $houseGrant->update([
-            'pjct_offcr_status' => 1,
-            'pjct_offcr_status_date' => $currenttime,
-            'pjct_offcr_status_id' => Auth::user()->id,
-        ]);
-      }
+     
 
         return response()->json([
             'success' => 'House Grant Scheme Application approved successfully.'
@@ -615,30 +603,15 @@ $formattedDate = $currentDate->toDateString();
         $houseGrant = HouseManagement::where('_id', $request->id)->first();
 
       
-        if(Auth::user()->role == "TEO"){
+       
         $houseGrant->update([
             'teo_status' => 2,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
             'teo_status_reason' => $reason,
         ]);
-        }
-        else  if(Auth::user()->role == "TDO"){
-            $houseGrant->update([
-                'tdo_status' => 2,
-                'tdo_status_date' => $currenttime,
-                'tdo_status_id' => Auth::user()->id,
-                'tdo_status_reason' => $reason,
-            ]);
-        }
-        else  if(Auth::user()->role == "Project Officer"){
-            $houseGrant->update([
-                'pjct_offcr_status' => 2,
-                'pjct_offcr_status_date' => $currenttime,
-                'pjct_offcr_status_id' => Auth::user()->id,
-                'pjct_offcr_status_reason' => $reason,
-            ]);
-          }
+   
+      
 
         return response()->json([
             'success' => 'House Grant Scheme Application Rejected successfully.'
