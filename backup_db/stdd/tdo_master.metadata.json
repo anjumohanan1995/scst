@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"a1ed53c209954e21b5865480cac6836b","collectionName":"tdo_master","type":"collection"}

@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"0c12a15b0494468695d92328a20092d3","collectionName":"student_fund_scheme","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"686614fc9f0c4f428a42e5fd86185d6e","collectionName":"student_fund_scheme","type":"collection"}
