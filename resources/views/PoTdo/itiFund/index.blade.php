@@ -176,7 +176,7 @@ $(document).on("click", ".approveItem", function() {
         var reqId = $('#requestId').val();
         var reason = $('#approved_reason').val();
     $.ajax({
-                url: "{{ route('itiScholarshipAssistant.approve') }}",
+                url: "{{ route('itiScholarshipOfficer.approve') }}",
                 type: "POST",
                 data: {
                     "id": reqId,
@@ -209,7 +209,7 @@ function reject() {
         console.log(reqId);
         $.ajax({
           
-            url: "{{ route('itiScholarshipAssistant.reject') }}",
+            url: "{{ route('itiScholarshipOfficer.reject') }}",
             type: "POST",
                 data: {
                     "id": reqId,
@@ -250,7 +250,7 @@ function reject() {
 	        ],
              "ajax": {
 
-			       	"url": "{{route('getAssistantItiFundList')}}",
+			       	"url": "{{route('getOfficerItiFundList')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {

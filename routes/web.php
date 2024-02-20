@@ -428,6 +428,9 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/StudentFund/clerkApprove', 'studentFundClerkApprove')->name('studentFund-clerk.approve');
     Route::post('/StudentFund/clerkReject', 'studentFundClerkReject')->name('studentFund-clerk.reject');
 
+   
+
+
 });
 
 
@@ -496,9 +499,36 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/tuitionFeeApproveAssistant','tuitionFeeApproveAssistant')->name('tuitionFee.assistant.approve');
     Route::post('/tuitionFeeRejectAssistant','tuitionFeeRejectAssistant')->name('tuitionFee.assistant.reject');
    
+    Route::get('/StudentFundListAssistant', 'StudentFundListAssistant')->name('StudentFundListAssistant');
+    Route::get('/getStudentFundListAssistant', 'getStudentFundListAssistant')->name('getStudentFundListAssistant');
+    Route::get('/StudentFund/{id}/assistantview', 'studentFundAssistantView')->name('studentFundAssistantView');
+    Route::post('/StudentFund/assistantApprove', 'studentFundAssistantApprove')->name('studentFund-assistant.approve');
+    Route::post('/StudentFund/assistantReject', 'studentFundAssistantReject')->name('studentFund-assistant.reject');
 
+    Route::get('/singleEarnerListAssistant', 'singleEarnerListAssistant')->name('singleEarnerListAssistant');
+    Route::get('/getSingleEarnerListAssistant', 'getSingleEarnerListAssistant')->name('getSingleEarnerListAssistant');
+    Route::get('/singleEarner/{id}/assistantview', 'singleEarnerAssistantView')->name('singleEarnerAssistantView');
+    Route::post('/singleEarner/assistantApprove', 'singleEarnerAssistantApprove')->name('singleEarner-assistant.approve');
+    Route::post('/singleEarner/assistantReject', 'singleEarnerAssistantReject')->name('singleEarner-assistant.reject');
 
+    Route::get('/anemiaFinanceListAssistant', 'anemiaFinanceListAssistant')->name('anemiaFinanceListAssistant');
+    Route::get('/getAnemiaFinanceListAssistant', 'getAnemiaFinanceListAssistant')->name('getAnemiaFinanceListAssistant');
+    Route::get('/anemiaFinance/{id}/Assistantview', 'anemiaFinanceAssistantView')->name('anemiaFinanceAssistantView');
+    Route::post('/anemiaFinance/AssistantApprove', 'anemiaFinanceAssistantApprove')->name('anemiaFinance-assistant.approve');
+    Route::post('/anemiaFinance/assistantReject', 'anemiaFinanceAssistantReject')->name('anemiaFinance-assistant.reject');
 
+    Route::get('/assistantItiFundList', 'assistantItiFundList')->name('assistantItiFundList');
+    Route::get('/getAssistantItiFundList', 'getAssistantItiFundList')->name('getAssistantItiFundList');
+    Route::get('/itiFeeAssistantView/{id}', 'itiFeeAssistantView')->name('itiFeeAssistantView');
+    Route::post('/itiScholarshipAssistantApprove','itiScholarshipAssistantApprove')->name('itiScholarshipAssistant.approve');
+    Route::post('/itiScholarshipAssistantReject','itiScholarshipAssistantReject')->name('itiScholarshipAssistant.reject');
+   
+    Route::get('/studentAwardListAssistant', 'studentAwardListAssistant')->name('studentAwardListAssistant');
+    Route::get('/getStudentAwardListAssistant', 'getStudentAwardListAssistant')->name('getStudentAwardListAssistant');
+    Route::get('/studentAward/{id}/assistantview', 'studentAwardAssistantView')->name('studentAwardAssistantView');
+    Route::post('/studentAward/assistantApprove', 'studentAwardAssistantApprove')->name('studentAward-assistant.approve');
+    Route::post('/studentAward/assistantReject', 'studentAwardAssistantReject')->name('studentAward-assistant.reject');
+    
 
 });
 
@@ -544,5 +574,62 @@ Route::controller(PoTdoController::class)->group(function(){
     
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Route::get('/StudentFundListOfficer', 'StudentFundListOfficer')->name('StudentFundListOfficer');
+    Route::get('/getStudentFundListOfficer', 'getStudentFundListOfficer')->name('getStudentFundListOfficer');
+    Route::get('/StudentFund/{id}/officerview', 'studentFundOfficerView')->name('studentFundOfficerView');
+    Route::post('/StudentFund/officerApprove', 'studentFundOfficerApprove')->name('studentFund-officer.approve');
+    Route::post('/StudentFund/officerReject', 'studentFundOfficerReject')->name('studentFund-officer.reject');
+
+    Route::get('/singleEarnerListOfficer', 'singleEarnerListOfficer')->name('singleEarnerListOfficer');
+    Route::get('/getSingleEarnerListOfficer', 'getSingleEarnerListOfficer')->name('getSingleEarnerListOfficer');
+    Route::get('/singleEarner/{id}/officerview', 'singleEarnerOfficerView')->name('singleEarnerOfficerView');
+    Route::post('/singleEarner/officerApprove', 'singleEarnerOfficerApprove')->name('singleEarner-officer.approve');
+    Route::post('/singleEarner/officerReject', 'singleEarnerOfficerReject')->name('singleEarner-officer.reject');
+
+    Route::get('/anemiaFinanceListOfficer', 'anemiaFinanceListOfficer')->name('anemiaFinanceListOfficer');
+    Route::get('/getAnemiaFinanceListOfficer', 'getAnemiaFinanceListOfficer')->name('getAnemiaFinanceListOfficer');
+    Route::get('/anemiaFinance/{id}/officerview', 'anemiaFinanceOfficerView')->name('anemiaFinanceOfficerView');
+    Route::post('/anemiaFinance/officerApprove', 'anemiaFinanceOfficerApprove')->name('anemiaFinance-officer.approve');
+    Route::post('/anemiaFinance/officerReject', 'anemiaFinanceOfficerReject')->name('anemiaFinance-officer.reject');
+
+    Route::get('/officerItiFundList', 'officerItiFundList')->name('officerItiFundList');
+    Route::get('/getOfficerItiFundList', 'getOfficerItiFundList')->name('getOfficerItiFundList');
+    Route::get('/itiFeeOfficerView/{id}', 'itiFeeOfficerView')->name('itiFeeOfficerView');
+    Route::post('/itiScholarshipOfficerApprove','itiScholarshipOfficerApprove')->name('itiScholarshipOfficer.approve');
+    Route::post('/itiScholarshipOfficerReject','itiScholarshipOfficerReject')->name('itiScholarshipOfficer.reject');
+   
+    Route::get('/studentAwardListOfficer', 'studentAwardListOfficer')->name('studentAwardListOfficer');
+    Route::get('/getStudentAwardListOfficer', 'getStudentAwardListOfficer')->name('getStudentAwardListOfficer');
+    Route::get('/studentAward/{id}/officerview', 'studentAwardOfficerView')->name('studentAwardOfficerView');
+    Route::post('/studentAward/officerApprove', 'studentAwardOfficerApprove')->name('studentAward-officer.approve');
+    Route::post('/studentAward/officerReject', 'studentAwardOfficerReject')->name('studentAward-officer.reject');
+    
 
 });

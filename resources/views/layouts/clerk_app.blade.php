@@ -78,9 +78,7 @@
         href="{{ route('singleEarnerListClerk') }}">
         <i class="side-menu__icon fe fe-menu"> </i>
         <span class="side-menu__label">Proving death of sole earner applications</span>
-
     </a>
-
 </li>
 
 <li class="slide">

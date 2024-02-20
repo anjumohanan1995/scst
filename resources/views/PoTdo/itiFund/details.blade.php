@@ -353,10 +353,20 @@
                             <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                             <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->clerk_status_reason}}</p>
                          </li>
-                         @if( @$studentFund->assistant_status == null)
+                         <li class="ApproveTimeline">
+                            <a href="#!">APO / ATDO</a>
+                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
+                            <br>
+                            <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                            <p  class="mt-2"><span class= "spanclr"> APO/ATDO Name :   </span>{{ @$studentFund->assistantUser->name }}</p>
+                          
+                            <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                            <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->assistant_status_reason}}</p>
+                         </li>
+                         @if( @$studentFund->officer_status == null)
                          <li class="pendingTimeline">
                             <a href="#!">{{ auth::user()->name }}</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
+                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
                             <br>
                             <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
                             <div class="settings-icon">
@@ -364,24 +374,24 @@
                                &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
                             </div>
                          </li>
-                         @elseif( @$studentFund->assistant_status == 1)
+                         @elseif( @$studentFund->officer_status == 1)
                          <li class="ApproveTimeline">
                             <a href="#!">{{ auth::user()->name }}</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
+                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
                             <br>
                             <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
         
-                            <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                            <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->assistant_status_reason}}</p>
+                            <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                            <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->officer_status_reason}}</p>
                          </li>
-                         @elseif( @$studentFund->assistant_status == 2)
+                         @elseif( @$studentFund->officer_status == 2)
                          <li class="rejectTimeline">
                             <a href="#!">{{ auth::user()->name }}</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
+                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
                             <br>
                             <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                            <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                            <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->assistant_status_reason}}</p>
+                            <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                            <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->officer_status_reason}}</p>
                          </li>
                          @endif
                      </ul>
@@ -474,7 +484,7 @@
             var reqId = $('#requestId').val();
             var reason = $('#approved_reason').val();
         $.ajax({
-                    url: "{{ route('itiScholarshipAssistant.approve') }}",
+                    url: "{{ route('itiScholarshipOfficer.approve') }}",
                     type: "POST",
                     data: {
                         "id": reqId,
@@ -509,7 +519,7 @@
             console.log(reqId);
             $.ajax({
               
-                url: "{{ route('itiScholarshipAssistant.reject') }}",
+                url: "{{ route('itiScholarshipOfficer.reject') }}",
                 type: "POST",
                     data: {
                         "id": reqId,

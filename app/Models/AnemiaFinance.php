@@ -42,4 +42,16 @@ class AnemiaFinance extends Eloquent
     {
         return $this->belongsTo(User::class,'tdo_status_id');
     }
+    public function clerkUser()
+    {
+        return $this->belongsTo(User::class,'clerk_status_id');
+    }
+    public function assistantUser()
+    {
+        return $this->belongsTo(User::class,'assistant_status_id');
+    }
+    public function officerUser()
+    {
+        return $this->belongsTo(User::class,'officer_status_id');
+    }
 }
