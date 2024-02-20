@@ -830,7 +830,7 @@ class ApoTdoController extends Controller
             'success' => 'Marriage grant Scheme Application Rejected successfully.'
         ]);
     }
-    public function houseGrantListClerk(){
+    public function houseGrantListAssistant (){
         return view('ApoAtdo.houseGrant.index');
     }
 
