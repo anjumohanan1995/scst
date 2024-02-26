@@ -52,11 +52,48 @@
         href="{{ url('tuitionFeeListAssistant') }}">
         <i class="side-menu__icon fe fe-menu"> </i>
         <span class="side-menu__label">Tuition Fee Applications</span>
-
     </a>
-
 </li>
 
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'studentFundListAssistant' ? 'active' : '' }}"
+        href="{{ route('StudentFundListAssistant') }}">
+        <i class="side-menu__icon fe fe-menu"> </i>
+        <span class="side-menu__label">Medical /Engineering Student Fund Scheme
+            Applications</span>
+    </a>
+</li>
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'singleEarnerListAssistant' ? 'active' : '' }}"
+        href="{{ route('singleEarnerListAssistant') }}">
+        <i class="side-menu__icon fe fe-menu"> </i>
+        <span class="side-menu__label">Proving death of sole earner applications</span>
+    </a>
+</li>
+
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'anemiaFinanceListAssistant' ? 'active' : '' }}"
+     href="{{ url('anemiaFinanceListAssistant') }}">
+ <i class="side-menu__icon fe fe-menu"> </i>
+ <span class="side-menu__label">Sickle-cell anemia patients finance
+    applications</span>
+</a>
+</li>
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'studentAwardListAssistant' ? 'active' : '' }}"
+     href="{{ url('studentAwardListAssistant') }}">
+ <i class="side-menu__icon fe fe-menu"> </i>
+ <span class="side-menu__label">Student Award applications</span>
+</a>
+</li>
+
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'assistantItiFundList' ? 'active' : '' }}"
+     href="{{ url('assistantItiFundList') }}">
+ <i class="side-menu__icon fe fe-menu"> </i>
+ <span class="side-menu__label">ITI Student Fund Scheme Applications</span>
+</a>
+</li>
 
 
 

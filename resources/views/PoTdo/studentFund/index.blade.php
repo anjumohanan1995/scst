@@ -7,7 +7,7 @@
 		    <!-- breadcrumb -->
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 				<div class="col-xl-6">
-					<h4 class="content-title mb-2">ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്
+					<h4 class="content-title mb-2">മെഡിക്കൽ / എഞ്ചിനിയറിംഗ് കോഴ്‌സുകളിലെ പട്ടികജാതി വിദ്യാർത്ഥികൾക്ക് പ്രാരംഭചെലവുകൾക്ക് ധനസഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷ 
 
   </h4>
                     <nav aria-label="breadcrumb">
@@ -49,7 +49,19 @@
                 <div class="row row-sm">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card"><div class="card-body  table-new">
-                               
+                                <div id="success_message" class="ajax_response" style="display: none;"></div>
+                                <div class="row mb-3">
+                            
+                                <div class="col-md-1 col-6 text-center" id="refresh">
+                                    <div class="task-box success  mb-0">
+                                            <p class="mb-0 tx-12">Refresh  </p>
+                                            <h3 class="mb-0"><i class="fa fa-spinner"></i></h3>
+                                    </div>
+                                </div>
+                                
+
+
+                            </div>
 
 
 
@@ -79,7 +91,6 @@
 
                                     </tbody>
                                 </table>
-
                                 <div class="modal fade" id="approve-popup" style="display: none">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content country-select-modal border-0">
@@ -133,6 +144,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -159,7 +172,6 @@
 @endif
 <script type="text/javascript">
 
-
 $(document).on("click", ".approveItem", function() {
     var id =$(this).attr('data-id');
         $('#requestId').val($(this).attr('data-id') );
@@ -176,7 +188,7 @@ $(document).on("click", ".approveItem", function() {
         var reqId = $('#requestId').val();
         var reason = $('#approved_reason').val();
     $.ajax({
-                url: "{{ route('itiScholarshipAssistant.approve') }}",
+                url: "{{ route('studentFund-officer.approve') }}",
                 type: "POST",
                 data: {
                     "id": reqId,
@@ -209,7 +221,7 @@ function reject() {
         console.log(reqId);
         $.ajax({
           
-            url: "{{ route('itiScholarshipAssistant.reject') }}",
+            url: "{{ route('studentFund-officer.reject') }}",
             type: "POST",
                 data: {
                     "id": reqId,
@@ -232,8 +244,15 @@ function reject() {
 
         }
      }
+$(document).on("click",".deleteItem",function() {
 
-        
+     var id =$(this).attr('data-id');
+     $('#requestId').val($(this).attr('data-id') );
+     $('#confirmation-popup').modal('show');
+});
+
+
+
 
 
      $(document).ready(function(){
@@ -250,7 +269,7 @@ function reject() {
 	        ],
              "ajax": {
 
-			       	"url": "{{route('getAssistantItiFundList')}}",
+			       	"url": "{{route('getStudentFundListOfficer')}}",
 			       	// "data": { mobile: $("#mobile").val()}
 			       	"data": function ( d ) {
 			        	return $.extend( {}, d, {
@@ -273,7 +292,7 @@ function reject() {
                 { data: 'income' },
 				{ data: 'caste' },
                 
-                { data: 'date' },
+                { data: 'date'},
 
                 { data: 'edit' }
 

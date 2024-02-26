@@ -34,5 +34,17 @@ class ItiFund extends Eloquent
     {
         return $this->belongsTo(District::class,'submitted_district');
     }
+    public function clerkUser()
+    {
+        return $this->belongsTo(User::class,'clerk_status_id');
+    }
+    public function assistantUser()
+    {
+        return $this->belongsTo(User::class,'assistant_status_id');
+    }
+    public function officerUser()
+    {
+        return $this->belongsTo(User::class,'officer_status_id');
+    }
 
 }
