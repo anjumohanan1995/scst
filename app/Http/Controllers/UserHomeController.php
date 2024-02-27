@@ -517,8 +517,7 @@ class UserHomeController extends Controller
                 "dob" => $age . ' / ' . $dob,
                 "caste" => $caste,
                 "village" => $village,
-
-                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i:s'),
+                "created_at" => @$created_at,
                 "edit" => '<div class="settings-main-icon"><a  href="' . url('userMotherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
             );

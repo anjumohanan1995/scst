@@ -283,6 +283,10 @@
 <script>
 
     $(document).ready(function () {
+
+        $('input[name="mobile"]').on('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10);
+        });
 		$('#email').on('blur', function () {
             validateEmail();
         });
@@ -307,7 +311,9 @@
         }
 
 
-
+        $('#name').on('blur', function () {
+            checkNameMatch();
+        });
 
         $('#name_confirmation').on('blur', function () {
 			
@@ -318,17 +324,19 @@
             var name = $('#name').val();
             var nameConfirmation = $('#name_confirmation').val();
 			  if (name != nameConfirmation) {
-				 $('#nameError').text('Names do not match.').css('color', 'red');
+				 $('#nameError').text('Name does not match.').css('color', 'red');
                  $("#submit").prop("disabled", true);
 			  }else{
 
-				$('#nameError').text('Names match.').css('color', 'green');
+				$('#nameError').text('');
                 $("#submit").prop("disabled", false);
 			  }
 
            
         }
-
+        $('#dob').on('blur', function () {
+            checkDobMatch();
+        });
 		$('#dob1').on('blur', function () {
             checkDobMatch();
         });
@@ -338,10 +346,10 @@
             var dob1 = $('#dob1').val();
 
             if (dob === dob1) {
-                $('#dobError').text('Dates of birth match.').css('color', 'green');
+                $('#dobError').text('');
                 $("#submit").prop("disabled", false);
             } else {
-                $('#dobError').text('Dates of birth do not match.').css('color', 'red');
+                $('#dobError').text('Date of birth does not match.').css('color', 'red');
                 $("#submit").prop("disabled", true);
             }
         }
