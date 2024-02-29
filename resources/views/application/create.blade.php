@@ -51,7 +51,7 @@
 										<div class="row">
 											<div class="col-md-6 mb-6">
 												<label class="form-label">പേര് / Name</label>
-        										<input type="text" autocomplete="off"  value="{{ old('name') }}"  class="form-control" placeholder="Name" name="name" id="name" />
+        										<input type="text" pattern="[A-Za-z\s]+" autocomplete="off"  value="{{ old('name') }}"  class="form-control" placeholder="Name" name="name" id="name" />
 												@error('name')
 													<span class="text-danger">{{$message}}</span>
 												@enderror
@@ -213,7 +213,7 @@
 										<div class="row">
 											<div class="col-md-6 mb-6">
 												<label class="form-label">Password (<strong>8 numbers, 1 uppercase,1 lowercase,1 symbol and 1 number</strong> )</label>
-												<input value="{{ old('password') }}" autocomplete="off" type="password" class="form-control" placeholder="Password" name="password" id="password"/>
+												<input value="{{ old('password') }}" autocomplete="new-password" type="password" class="form-control" placeholder="Password" name="password" id="password"/>
 												<span class="text-danger" id="passwordError"></span>
 												@error('password')
 													<span class="text-danger">{{$message}}</span>
@@ -283,6 +283,16 @@
 <script>
 
     $(document).ready(function () {
+
+        $('#name').on('input', function(){
+            var inputValue = $(this).val();
+            if(!/^[A-Za-z\s]+$/.test(inputValue)){
+              $(this).val(inputValue.replace(/[^A-Za-z\s]+/g, ''));
+            //  alert('Please enter only non-numeric characters');
+            }
+          });
+
+         
 
         $('input[name="mobile"]').on('input', function() {
             this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10);
@@ -376,7 +386,14 @@
 
         function validateAadharNumber() {
             var aadharNumber = $('#aadhar_number').val();
-
+          //  var aadharNumber = $(this).val();
+          var aadharPattern = /^\d{4}\s?\d{4}\s?\d{4}$/; // Regular expression for Aadhar number pattern
+            if (!aadharPattern.test(aadharNumber)) {
+                $('#aadharError').text('Please enter a valid Aadhar number');
+            } else {
+                $('#aadharError').text('');
+            }
+            if (aadharPattern.test(aadharNumber)) {
             $.ajax({
                 type: 'POST',
                 url: '/check-aadhar-number',
@@ -397,6 +414,7 @@
                     console.error(xhr.responseText);
                 }
             });
+        }
         }
 
 		  $('#id_proof').on('change', function () {

@@ -270,7 +270,7 @@ $(document).on("click",".deleteItem",function() {
 
 
 			],
-            "order": [1, 'desc'],
+            "order": [3, 'desc'],
             'ordering': true,
          });
 
