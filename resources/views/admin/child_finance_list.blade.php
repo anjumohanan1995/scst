@@ -273,7 +273,7 @@
                         setTimeout(function() {
                             $('#success_message').fadeOut("slow");
                         }, 2000 );
-
+                        $('#approve_reason').val('');     
                     $('#example').DataTable().ajax.reload();
 
 
@@ -306,7 +306,7 @@
                         setTimeout(function() {
                             $('#success_message').fadeOut("slow");
                         }, 2000 );
-
+                        $('#reason').val('');    
                     $('#example').DataTable().ajax.reload();
 
             }
