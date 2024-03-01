@@ -6,7 +6,7 @@
         <div class="main-container container-fluid">
             <!-- breadcrumb -->
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
-                <div class="col-xl-3">
+                <div class="col-xl-8">
                     <h4 class="content-title mb-2">അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം പ്രവേശന പരീക്ഷക്കുള്ള
                         അപേക്ഷ</h4>
                     <nav aria-label="breadcrumb">
