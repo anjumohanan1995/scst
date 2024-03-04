@@ -515,7 +515,7 @@ function approve() {
     var reason = $('#approved_reason').val();
 
 $.ajax({
-            url: "{{ route('anemiaFinance-teo.approve') }}",
+            url: "{{ route('anemiaFinance-clerk.approve') }}",
             type: "POST",
             data: {
                 "id": reqId,
@@ -531,7 +531,9 @@ $.ajax({
                     $('#success_message').fadeOut("slow");
                 }, 2000);
 
-                $('#example').DataTable().ajax.reload();
+                setTimeout(function() {
+                    window.location.reload();
+                    }, 2000);
 
             }
         });
@@ -548,7 +550,7 @@ function reject() {
     console.log(reqId);
     $.ajax({
       
-        url: "{{ route('anemiaFinance-teo.reject') }}",
+        url: "{{ route('anemiaFinance-clerk.reject') }}",
         type: "POST",
             data: {
                 "id": reqId,
@@ -564,7 +566,9 @@ function reject() {
                         $('#success_message').fadeOut("slow");
                     }, 2000 );
 
-                $('#example').DataTable().ajax.reload();
+                    setTimeout(function() {
+                        window.location.reload();
+                        }, 2000);
 
         }
     })
