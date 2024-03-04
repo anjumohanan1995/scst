@@ -546,7 +546,7 @@
                <form id="ownForm">
                   @csrf
                   <div class="text-center">
-                     <h5>Reason for Approved</h5>
+                     <h5>Reason for Approval</h5>
                      <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
                      <span id="rejection"></span>
                   </div>

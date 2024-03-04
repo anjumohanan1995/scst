@@ -461,7 +461,8 @@ $formattedDate = $currentDate->toDateString();
               $edit ='';
               if($role == "TEO"){
                 if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $teo_status_reason = Str::limit($record->teo_status_reason, 10);
+                    $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$teo_status_reason.'</span></div>';
                 }
                 else if($record->teo_status ==2){
                     $teo_status_reason = Str::limit($record->teo_status_reason, 10);
@@ -526,7 +527,7 @@ $formattedDate = $currentDate->toDateString();
     }
     public function teoApprove(Request $request){
         $id = $request->id;
-
+        $reason =$request->reason;
        // $currentTime = Carbon::now();
         $studentFund = MedEngStudentFund::where('_id', $request->id)->first();
 
@@ -537,6 +538,7 @@ $formattedDate = $currentDate->toDateString();
             'teo_status' => 1,
             'teo_status_date' =>$currenttime,
             'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
         ]);
 
 

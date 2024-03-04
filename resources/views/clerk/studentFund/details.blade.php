@@ -411,9 +411,13 @@
                                 <div class="text-center">
                                     <h4>Are you sure to Approve this Application?</h4>
                                 </div>
-                                <form id="ownForm">
-            
+                                <form id="ownForm">            
                                     @csrf
+                                    <div class="text-center">
+                                        <h5>Reason for Approval</h5>
+                                        <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
+                                        <span id="approval"></span>
+                                    </div>
                                 <input type="hidden" id="requestId" name="requestId" value="" />
                                 <div class="text-center">
                                     <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
@@ -475,7 +479,7 @@
             $('#rejection-popup').modal('show');
             });
             function approve() {
-    
+                var reason = $('#approved_reason').val();
             var reqId = $('#requestId').val();
     
         $.ajax({
@@ -483,6 +487,7 @@
                     type: "POST",
                     data: {
                         "id": reqId,
+                        "reason" :reason,
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(response) {
