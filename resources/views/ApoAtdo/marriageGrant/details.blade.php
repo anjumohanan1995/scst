@@ -8,8 +8,7 @@
       <!-- breadcrumb -->
       <div class="breadcrumb-header justify-content-between row me-0 ms-0" >
          <div class="col-xl-9">
-            {{-- <h4 class="content-title mb-2">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട  പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം</h4>
-       --}}   </div>
+            </div>
          <div class="col-xl-3">
          </div>
       </div>
@@ -32,7 +31,7 @@
                   <div class="card-body pd-y-7">
                      <h1
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
-                        പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്
+                        പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക്
                         വിവാഹധനസഹായം<br>നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
                      </h1>
                      <h2 style="text-align: center;"> പാർട്ട് -എ

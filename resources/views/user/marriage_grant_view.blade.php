@@ -38,7 +38,7 @@
                             <div id="print_content" >
 							<h1
                                     style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
-                                    പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പാവപ്പെട്ട പെണ്കുട്ടികൾക്ക്
+                                    പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക്
                                     വിവാഹധനസഹായം<br>നൽകുന്നതിനുള്ള അപേക്ഷഫോറം
 
 
