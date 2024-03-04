@@ -57,8 +57,8 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label>  {{ @$formData['husband_name'] }} <br>
-                        {{ @$formData['husband_address'] }}</label>
+                        <label>  {{ @$financialHelp['husband_name'] }} <br>
+                        {{ @$financialHelp['husband_address'] }}</label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -69,8 +69,8 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['wife_name'] }}  <br>
-                        {{ @$formData['wife_address'] }}
+                        <label>{{ @$financialHelp['wife_name'] }}  <br>
+                        {{ @$financialHelp['wife_address'] }}
                         </label>
                      </div>
                   </div>
@@ -94,8 +94,8 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label> {{ @$formData['husband_address_old'] }} <br>
-                        {{ @$formData['hus_district_name'] }} {{ @$formData['hus_taluk_name'] }} {{ @$formData['hus_pincode'] }}</label>
+                        <label> {{ @$financialHelp['husband_address_old'] }} <br>
+                        {{ @$financialHelp['hus_district_name'] }} {{ @$financialHelp['hus_taluk_name'] }} {{ @$financialHelp['hus_pincode'] }}</label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -106,8 +106,8 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['wife_address_old'] }}  <br>
-                        {{ @$formData['wife_district_name'] }} {{ @$formData['wife_taluk_name'] }} {{ @$formData['wife_pincode'] }}
+                        <label>{{ @$financialHelp['wife_address_old'] }}  <br>
+                        {{ @$financialHelp['wife_district_name'] }} {{ @$financialHelp['wife_taluk_name'] }} {{ @$financialHelp['wife_pincode'] }}
                         </label>
                      </div>
                   </div>
@@ -131,7 +131,7 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label> {{ @$formData['husband_caste'] }}</label>
+                        <label> {{ @$financialHelp['husband_caste'] }}</label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -142,7 +142,7 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['wife_caste'] }}
+                        <label>{{ @$financialHelp['wife_caste'] }}
                         </label>
                      </div>
                   </div>
@@ -166,7 +166,7 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label> {{ @$formData['husband_panchayath'] }}</label>
+                        <label> {{ @$financialHelp['husband_panchayath'] }}</label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -177,7 +177,7 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['wife_panchayath'] }}
+                        <label>{{ @$financialHelp['wife_panchayath'] }}
                         </label>
                      </div>
                   </div>
@@ -201,7 +201,7 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['hus_work_before_marriage'] }}  / {{ @$formData['hus_income_before_marriage'] }} </label>
+                        <label>{{ @$financialHelp['hus_work_before_marriage'] }}  / {{ @$financialHelp['hus_income_before_marriage'] }} </label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -212,7 +212,7 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['wife_work_before_marriage'] }}  / {{ @$formData['wife_income_before_marriage'] }}
+                        <label>{{ @$financialHelp['wife_work_before_marriage'] }}  / {{ @$financialHelp['wife_income_before_marriage'] }}
                         </label>
                      </div>
                   </div>
@@ -236,7 +236,7 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['hus_work_after_marriage'] }}  / {{ @$formData['hus_income_after_marriage'] }} </label>
+                        <label>{{ @$financialHelp['hus_work_after_marriage'] }}  / {{ @$financialHelp['hus_income_after_marriage'] }} </label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -247,7 +247,7 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['wife_work_after_marriage'] }}  / {{ @$formData['wife_income_after_marriage'] }}
+                        <label>{{ @$financialHelp['wife_work_after_marriage'] }}  / {{ @$financialHelp['wife_income_after_marriage'] }}
                         </label>
                      </div>
                   </div>
@@ -271,7 +271,7 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['husband_age'] }}</label>
+                        <label>{{ @$financialHelp['husband_age'] }}</label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -282,7 +282,7 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['wife_age'] }}
+                        <label>{{ @$financialHelp['wife_age'] }}
                         </label>
                      </div>
                   </div>
@@ -300,7 +300,7 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['register_marriage'] }} - {{ @$formData['register_details'] }}  {{ @$formData['register_date'] }}  {{ @$formData['register_office_name'] }} </label>
+                        <label>{{ @$financialHelp['register_marriage'] }} - {{ @$financialHelp['register_details'] }}  {{ @$financialHelp['register_date'] }}  {{ @$financialHelp['register_office_name'] }} </label>
                      </div>
                   </div>
                </div>
@@ -318,9 +318,9 @@
                      </div>
                      <div class="col-6">
                         <label> 
-                        @if($formData['marriage_certificate'])
-                        <a href="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" target="_blank">View</a>
-                        {{-- <iframe src="{{ asset('marriage_certificate/' . @$formData['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
+                        @if($financialHelp['marriage_certificate'])
+                        <a href="{{ asset('marriage_certificate/' . @$financialHelp['marriage_certificate']) }}" target="_blank">View</a>
+                        {{-- <iframe src="{{ asset('marriage_certificate/' . @$financialHelp['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
                         @endif 
                         </label>
                      </div>
@@ -341,13 +341,13 @@
                      </div>
                      <div class="col-6">
                         <label> 
-                        {{ @$formData['apart_for_any_period'] }}
+                        {{ @$financialHelp['apart_for_any_period'] }}
                         </label>
                      </div>
                   </div>
                </div>
             </div>
-            @if(@$formData['apart_for_any_period'] == 'Yes') 
+            @if(@$financialHelp['apart_for_any_period'] == 'Yes') 
             <div class="paper-1">
                <div class="w-100">
                   <div class="row w-100">
@@ -359,7 +359,7 @@
                         </label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['duration'] }}</label>
+                        <label>{{ @$financialHelp['duration'] }}</label>
                      </div>
                   </div>
                   <div class="row w-100">
@@ -370,7 +370,7 @@
                         <label> :</label>
                      </div>
                      <div class="col-6">
-                        <label>{{ @$formData['reason'] }}
+                        <label>{{ @$financialHelp['reason'] }}
                         </label>
                      </div>
                   </div>
@@ -391,7 +391,7 @@
                      </div>
                      <div class="col-6">
                         <label> 
-                        {{ @$formData['financial_assistance'] }}
+                        {{ @$financialHelp['financial_assistance'] }}
                         </label>
                      </div>
                   </div>
@@ -409,7 +409,7 @@
                      </div>
                      <div class="col-6">
                         <label> 
-                        {{ @$formData['difficulties'] }}
+                        {{ @$financialHelp['difficulties'] }}
                         </label>
                      </div>
                   </div>
@@ -433,7 +433,7 @@
                         <label> : </label>
                      </div>
                      <div class="col-8">
-                        <label> {{ @$formData['dist_name'] }} </label>
+                        <label> {{ @$financialHelp['dist_name'] }} </label>
                      </div>
                   </div>
                </div>
@@ -446,51 +446,51 @@
                         <label> : </label>
                      </div>
                      <div class="col-8">
-                        <label> {{ @$formData['teo_name'] }} </label>
+                        <label> {{ @$financialHelp['teo_name'] }} </label>
                      </div>
                   </div>
                </div>
             </div>
             <br>
             <div>
-               <p>ശ്രീമാൻ {{ @$formData['husband_name'] }} ശ്രീമതി {{ @$formData['wife_name'] }}
+               <p>ശ്രീമാൻ {{ @$financialHelp['husband_name'] }} ശ്രീമതി {{ @$financialHelp['wife_name'] }}
                   എന്നിവരായ ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശേരിയുമാണുന്ന
                   ഇതിനാൽ പ്രതിജ്ഞ ചെയ്ത്‌കൊള്ളുന്നു 
                </p>
             </div>
             <div class="text">
                <div>
-                  <label>സ്ഥലം </label>  : {{ @$formData['place'] }}
+                  <label>സ്ഥലം </label>  : {{ @$financialHelp['place'] }}
                </div>
                <div>
-                  <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> :  @if($formData['husband_photo'])
-                  {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="400" height="200"></iframe> --}}
-                  <img src="{{ asset('sign/huband/' . @$formData['husband_photo']) }}" width="120px" height="60px">
+                  <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> :  @if($financialHelp['husband_photo'])
+                  {{-- <iframe src="{{ asset('sign/huband/' . @$financialHelp['husband_photo']) }}" width="400" height="200"></iframe> --}}
+                  <img src="{{ asset('sign/huband/' . @$financialHelp['husband_photo']) }}" width="120px" height="60px">
                   @endif
                </div>
                <div>
-                  <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($formData['husband_sign'])
-                  {{-- <iframe src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="400" height="200"></iframe> --}}
-                  <img src="{{ asset('sign/huband/' . @$formData['husband_sign']) }}" width="120px" height="60px">
+                  <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($financialHelp['husband_sign'])
+                  {{-- <iframe src="{{ asset('sign/huband/' . @$financialHelp['husband_sign']) }}" width="400" height="200"></iframe> --}}
+                  <img src="{{ asset('sign/huband/' . @$financialHelp['husband_sign']) }}" width="120px" height="60px">
                   @endif
                </div>
             </div>
             <br>
             <div class="text">
                <div>
-                  <label>തീയതി </label> :  {{ @$formData['date'] }}
+                  <label>തീയതി </label> :  {{ @$financialHelp['date'] }}
                </div>
                <div>
-                  <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if($formData['wife_photo'])
-                  <img src="{{ asset('sign/wife/' . @$formData['wife_photo']) }}" width="120px" height="60px">
+                  <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if($financialHelp['wife_photo'])
+                  <img src="{{ asset('sign/wife/' . @$financialHelp['wife_photo']) }}" width="120px" height="60px">
                   @endif
                </div>
                <div class="text">
                   <div>
                      <label> ഭാര്യയുടെ ഒപ്പ് </label>:  
-                     @if($formData['wife_sign'])
-                     {{-- <iframe src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="400" height="200"></iframe> --}}
-                     <img src="{{ asset('sign/wife/' . @$formData['wife_sign']) }}" width="120px" height="60px">
+                     @if($financialHelp['wife_sign'])
+                     {{-- <iframe src="{{ asset('sign/wife/' . @$financialHelp['wife_sign']) }}" width="400" height="200"></iframe> --}}
+                     <img src="{{ asset('sign/wife/' . @$financialHelp['wife_sign']) }}" width="120px" height="60px">
                      @endif
                   </div>
                </div>
@@ -499,94 +499,313 @@
       </div>
    </div>
 </div>
+
+
 @if(auth::user()->role=='TEO' && @$financialHelp->teo_view_status==1)
 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-   <div class="pt-2 card overflow-hidden">
-      <div class="card-body">
-         <div class="pb-2 row ">
-            <div class="col-5">
-               <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
-            </div>
-            <div class="col-1 w-100">
-               <label> :  
-               </label>
-            </div>
-            <div class="col-6">
-               <label> 
-               {{ @$financialHelp['teo_view_date'] }}
-               </label>
-            </div>
+    <div class="pt-2 card overflow-hidden">                            
+       <div class="card-body">
+         <ul class="timeline-3">                                 
+        
+             @if( @$financialHelp->teo_status == null)
+
+             <li class="pendingTimeline">
+              <a href="#!">TEO</a>
+              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['teo_view_date'] }}</a>
+              <br>       
+              <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
+                     <div class="settings-icon">
+                         <a class="approveItem" data-id="{{ @$financialHelp->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                         &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$financialHelp->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                      </div>
+                    
+                 </li>
+               
+                 @elseif( @$financialHelp->teo_status == 1)
+
+                 <li class="ApproveTimeline">
+                  <a href="#!">TEO</a>
+                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['teo_view_date'] }}</a>
+                  <br>
+                  <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+             
+                  <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$financialHelp['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$financialHelp->teo_status_reason}}</p>
+                
+                     </li>
+                     @elseif( @$financialHelp->teo_status == 2)
+
+                     <li class="rejectTimeline">
+                      <a href="#!">TEO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['teo_view_date'] }}</a>
+                      <br>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                 
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->teo_status_reason}}</p>
+                    
+                         </li>
+                     @endif
+                     @if(@$financialHelp->teo_status == 1)
+                     @if( @$financialHelp->clerk_status == 1)
+    
+                     <li class="ApproveTimeline">
+                       <a href="#!">Clerk</a>
+                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['clerk_view_date'] }}</a>
+                       <p></p>
+                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->clerkUser->name }}</p>
+                      
+                       <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$financialHelp['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$financialHelp->clerk_status_reason}}</p>
+                    </li>
+                    @elseif( @$financialHelp->clerk_status == 2)
+    
+                    <li class="rejectTimeline">
+                      <a href="#!">Clerk</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['clerk_view_date'] }}</a>
+                      <p></p>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->clerkUser->name }}</p>
+                      
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->clerk_status_reason}}</p>
+                   </li>
+                   @elseif( @$financialHelp->clerk_status == null)
+    
+                   <li class="pendingTimeline">
+                     <a href="#!">Clerk</a>
+                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['clerk_view_date'] }}</a>
+                    <p></p>
+                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                      </li>
+                      @endif
+                      @endif
+
+                     @if(@$financialHelp->clerk_status == 1)
+                     @if( @$financialHelp->assistant_status == 1)
+    
+                     <li class="ApproveTimeline">
+                       <a href="#!">APO / ATDO</a>
+                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['assistant_view_date'] }}</a>
+                       <p></p>
+                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->assistantUser->name }}</p>
+                      
+                       <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$financialHelp['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$financialHelp->teo_status_reason}}</p>
+                    </li>
+                    @elseif( @$financialHelp->assistant_status == 2)
+    
+                    <li class="rejectTimeline">
+                      <a href="#!">APO / ATDO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['assistant_view_date'] }}</a>
+                      <p></p>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->assistantUser->name }}</p>
+                      
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->assistant_status_reason}}</p>
+                   </li>
+                   @elseif( @$financialHelp->assistant_status == null)
+    
+                   <li class="pendingTimeline">
+                     <a href="#!">APO / ATDO</a>
+                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['assistant_view_date'] }}</a>
+                    <p></p>
+                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                      </li>
+                      @endif
+                      @endif
+                      @if(@$financialHelp->assistant_status == 1)
+                      @if( @$financialHelp->officer_status == 1)
+     
+                      <li class="ApproveTimeline">
+                        <a href="#!">PO / TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['officer_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->officerUser->name }}</p>
+                       
+                        <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
+                     </li>
+                     @elseif( @$financialHelp->officer_status == 2)
+     
+                     <li class="rejectTimeline">
+                       <a href="#!">PO / TDO</a>
+                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['officer_view_date'] }}</a>
+                       <p></p>
+                       <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->officerUser->name }}</p>
+                       
+                       <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
+                    </li>
+                    @elseif( @$financialHelp->officer_status == null)
+     
+                    <li class="pendingTimeline">
+                      <a href="#!">PO / TDO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['officer_view_date'] }}</a>
+                     <p></p>
+                      <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                       </li>
+                       @endif
+                       @endif
+         </ul>  
+     </div>
+ </div>
+</div>
+
+@endif
+
+
+
+<div class="modal fade" id="approve-popup" style="display: none">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content country-select-modal border-0">
+         <div class="modal-header offcanvas-header">
+            <h6 class="modal-title">Are you sure?</h6>
+            <button aria-label="Close"
+               class="btn-close" data-bs-dismiss="modal" type="button"><span
+               aria-hidden="true">×</span></button>
          </div>
-         <hr>
-         <div class="pb-2 row ">
-            <div class="col-5">
-               <label>Status  </label><br>
+         <div class="modal-body p-5">
+            <div class="text-center">
+               <h4>Are you sure to Approve this Application?</h4>
             </div>
-            <div class="col-1 w-100">
-               <label> :  
-               </label>
-            </div>
-            <div class="col-6">
-               @if(@$financialHelp->teo_status == null)
-               <button class="btn btn-warning" >Pending</button>
-               @elseif(@$financialHelp->teo_status == 1)
-               <button class="btn btn-success" >Approved</button>
-               @elseif(@$financialHelp->teo_status == 2)
-               <button class="btn btn-danger" >Rejected</button> 
-               @endif
-            </div>
+            <form id="ownForm">
+               @csrf
+               <div class="text-center">
+                  <h5>Reason for Approve</h5>
+                  <textarea class="form-control" name="approve_reason" id="approve_reason" requred></textarea>
+                  <span id="rejection"></span>
+               </div>
+               <input type="hidden" id="requestId" name="requestId" value="" />
+               <div class="text-center">
+                  <button type="button" onclick="approve()"
+                     class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                  <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal"
+                     type="button">No</button>
+               </div>
+            </form>
          </div>
-         @if(@$financialHelp->teo_status == 2 )
-         <div class="pb-2 row ">
-            <div class="col-5">
-               <label>Rejected Reason  </label><br>
-            </div>
-            <div class="col-1 w-100">
-               <label> :  
-               </label>
-            </div>
-            <div class="col-6">
-               {{ @$financialHelp->teo_status_reason }}
-            </div>
-         </div>
-         @endif
-         @if(@$financialHelp->teo_status == 1 )
-         <div class="pb-2 row ">
-            <div class="col-5">
-               <label>Approved Reason  </label><br>
-            </div>
-            <div class="col-1 w-100">
-               <label> :  
-               </label>
-            </div>
-            <div class="col-6">
-               {{ @$financialHelp->teo_status_reason }}
-            </div>
-         </div>
-         @endif
-         @if(@$financialHelp->teo_status != null)
-         <div class=" pb-2 row ">
-            <div class="col-5">
-               @if(@$financialHelp->teo_status == 1)
-               <label>Approved Date  </label>
-               @elseif(@$financialHelp->teo_status == 2)
-               <label>Rejected Date  </label>
-               @endif
-               <br>
-            </div>
-            <div class="col-1 w-100">
-               <label> :  
-               </label>
-            </div>
-            <div class="col-6">
-               @if(@$financialHelp['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['teo_status_date'])->format('d-m-Y h:i a') }}@endif
-            </div>
-         </div>
-         @endif
-         @endif
       </div>
    </div>
 </div>
+<div class="modal fade" id="rejection-popup">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content country-select-modal border-0">
+         <div class="modal-header offcanvas-header">
+            <h6 class="modal-title">Are you sure to reject this Application?</h6>
+            <button
+               aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+               type="button"><span aria-hidden="true">×</span></button>
+         </div>
+         <div class="modal-body p-5">
+            <form id="ownForm">
+               @csrf
+               <div class="text-center">
+                  <h5>Reason for Rejection</h5>
+                  <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                  <span id="rejection"></span>
+               </div>
+               <input type="hidden" id="requestId2" name="requestId2"
+                  value="" />
+               <div class="text-center">
+                  <button type="button" onclick="reject()"
+                     class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                  <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal"
+                     type="button">No</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+<link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
+<script type="text/javascript">
+   $(document).on("click", ".approveItem", function() {
+       var id = $(this).attr('data-id');
+       $('#requestId').val($(this).attr('data-id'));
+       $('#approve-popup').modal('show');
+
+
+   });
+   $(document).on("click", ".rejectItem", function() {
+       $('#requestId2').val($(this).attr('data-id'));
+       $('#rejection-popup').modal('show');
+   });
+
+
+
+
+   function approve() {
+       var reason = $('#approve_reason').val();
+      var reqId = $('#requestId').val();
+
+  $.ajax({
+              url: "{{ route('financial-teo.approve') }}",
+              type: "POST",
+              data: {
+                  "id": reqId,
+                  "reason" :reason,
+                  "_token": "{{ csrf_token() }}"
+              },
+              success: function(response) {
+                  toastr.success(response.success, 'Success!')
+                  $('#success').show();
+                  $('#approve-popup').modal('hide');
+                  $('#success_message').fadeIn().html(response.success);
+                  setTimeout(function() {
+                      $('#success_message').fadeOut("slow");
+                  }, 2000);
+
+                  setTimeout(function() {
+window.location.reload();
+}, 2000);
+
+              }
+          });
+}
+function reject() {
+      var reason = $('#reason').val();
+    
+      if($('#reason').val() == ""){
+          rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+      }
+      else{
+          rejection.innerHTML ="";
+          var reqId = $('#requestId2').val();
+      console.log(reqId);
+      $.ajax({
+        
+          url: "{{ route('financial-teo.reject') }}",
+          type: "POST",
+              data: {
+                  "id": reqId,
+                  "reason" :reason,
+                  "_token": "{{ csrf_token() }}"
+              },
+          success: function(response) {
+              console.log(response.success);
+              toastr.success(response.success, 'Success!')
+                  $('#rejection-popup').modal('hide');
+                  $('#success_message').fadeIn().html(response.success);
+                      setTimeout(function() {
+                          $('#success_message').fadeOut("slow");
+                      }, 2000 );
+
+                      setTimeout(function() {
+window.location.reload();
+}, 2000);
+
+          }
+      })
+
+      }
+   }
+</script>
 <script>
    function validateForm() {
        // Check if the required fields are filled

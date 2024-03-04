@@ -299,105 +299,161 @@
                 </div>
                 @if(auth::user()->role=='TEO' && @$formData->teo_view_status==1)
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                   <div class="pt-2 card overflow-hidden">
-                   
-                      <div class="card-body">
-                         
-                               <div class="pb-2 row ">
-                                  <div class="col-5">
-                                     <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
-                                  </div>
-                                  <div class="col-1 w-100">
-                                     <label> :  
-                                     </label>
-                                  </div>
-                                  <div class="col-6">
-                                     <label> 
-                                     {{ @$formData['teo_view_date'] }}
-                                     </label>
+                    <div class="pt-2 card overflow-hidden">                            
+                       <div class="card-body">
+                         <ul class="timeline-3">                                 
+                        
+                             @if( @$formData->teo_status == null)
+    
+                             <li class="pendingTimeline">
+                              <a href="#!">TEO</a>
+                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                              <br>       
+                              <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
+                                     <div class="settings-icon">
+                                         <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                                         &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                                      </div>
+                                    
+                                 </li>
+                               
+                                 @elseif( @$formData->teo_status == 1)
+    
+                                 <li class="ApproveTimeline">
+                                  <a href="#!">TEO</a>
+                                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                                  <br>
+                                  <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                             
+                                  <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
                                 
-                            </div>
-                         </div>
-                         <hr>
-                         <div class="pb-2 row ">
-                            <div class="col-5">
-                               <label>Status  </label><br>
-                            </div>
-                            <div class="col-1 w-100">
-                               <label> :  
-                               </label>
-                            </div>
-                            <div class="col-6">
-                             @if(@$formData->teo_status == null)
-                             <button class="btn btn-warning" >Pending</button>
-                             @elseif(@$formData->teo_status == 1)
-                             <button class="btn btn-success" >Approved</button>
-                             @elseif(@$formData->teo_status == 2)
-                             <button class="btn btn-danger" >Rejected</button> 
-                            @endif
-                            </div>
-                   </div>
-                   @if(@$formData->teo_status == null)
-                   <div class="pb-2 row ">
-                    <div class="col-5">
-                       <label>Action </label><br>
-                    </div>
-                    <div class="col-1 w-100">
-                       <label> :  
-                       </label>
-                    </div>
-                    <div class="col-6">
-                        <div class="settings-main-icon">
-                        <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                        &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
-                  
+                                     </li>
+                                     @elseif( @$formData->teo_status == 2)
+    
+                                     <li class="rejectTimeline">
+                                      <a href="#!">TEO</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                                      <br>
+                                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                 
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                                    
+                                         </li>
+                                     @endif
+                                     @if(@$formData->teo_status == 1)
+                                     @if( @$formData->clerk_status == 1)
                     
-                    </div>
-                    </div>
-                 
-           </div>
-               @endif
-                   @if(@$formData->teo_status == 2)
-                   <div class="pb-2 row ">
-                      <div class="col-5">
-                         <label>Rejected Reason  </label><br>
-                      </div>
-                      <div class="col-1 w-100">
-                         <label> :  
-                         </label>
-                      </div>
-                      <div class="col-6">
-                   {{ @$formData->teo_status_reason }}
-                   
-                      </div>
-             </div>
-             @endif
-                   @if(@$formData->teo_status != null)
-                   <div class=" pb-2 row ">
-                      <div class="col-5">
-                         @if(@$formData->teo_status == 1)
-                         <label>Approved Date  </label>
-                         @elseif(@$formData->teo_status == 2)
-                         <label>Rejected Date  </label>
-                        @endif
-                         
-                         <br>
-                      </div>
-                      <div class="col-1 w-100">
-                         <label> :  
-                         </label>
-                      </div>
-                      <div class="col-6">
-                         @if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+                                     <li class="ApproveTimeline">
+                                       <a href="#!">Clerk</a>
+                                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                                       <p></p>
+                                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->clerkUser->name }}</p>
+                                      
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
+                                    </li>
+                                    @elseif( @$formData->clerk_status == 2)
+                    
+                                    <li class="rejectTimeline">
+                                      <a href="#!">Clerk</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                                      <p></p>
+                                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->clerkUser->name }}</p>
+                                      
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
+                                   </li>
+                                   @elseif( @$formData->clerk_status == null)
+                    
+                                   <li class="pendingTimeline">
+                                     <a href="#!">Clerk</a>
+                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                                    <p></p>
+                                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                      </li>
+                                      @endif
+                                      @endif
+    
+                                     @if(@$formData->clerk_status == 1)
+                                     @if( @$formData->assistant_status == 1)
+                    
+                                     <li class="ApproveTimeline">
+                                       <a href="#!">APO / ATDO</a>
+                                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                                       <p></p>
+                                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->assistantUser->name }}</p>
+                                      
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                                    </li>
+                                    @elseif( @$formData->assistant_status == 2)
+                    
+                                    <li class="rejectTimeline">
+                                      <a href="#!">APO / ATDO</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                                      <p></p>
+                                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->assistantUser->name }}</p>
+                                      
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->assistant_status_reason}}</p>
+                                   </li>
+                                   @elseif( @$formData->assistant_status == null)
+                    
+                                   <li class="pendingTimeline">
+                                     <a href="#!">APO / ATDO</a>
+                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                                    <p></p>
+                                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                      </li>
+                                      @endif
+                                      @endif
+                                      @if(@$formData->assistant_status == 1)
+                                      @if( @$formData->officer_status == 1)
                      
-                      
-                      </div>
+                                      <li class="ApproveTimeline">
+                                        <a href="#!">PO / TDO</a>
+                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                                        <p></p>
+                                        <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                                       
+                                        <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                        <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->officer_status_reason}}</p>
+                                     </li>
+                                     @elseif( @$formData->officer_status == 2)
+                     
+                                     <li class="rejectTimeline">
+                                       <a href="#!">PO / TDO</a>
+                                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                                       <p></p>
+                                       <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                                       
+                                       <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                       <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->officer_status_reason}}</p>
+                                    </li>
+                                    @elseif( @$formData->officer_status == null)
+                     
+                                    <li class="pendingTimeline">
+                                      <a href="#!">PO / TDO</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                                     <p></p>
+                                      <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                       </li>
+                                       @endif
+                                       @endif
+                         </ul>  
+                     </div>
+                 </div>
              </div>
-             @endif
-                      </div>
-                   </div>
-                </div>
-                 @endif
+    
+    @endif
 
                  <div class="modal fade" id="approve-popup" style="display: none">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -454,8 +510,8 @@
         </div>
     </div>
 </div>
-
-
+<link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 <script>
 
     $(document).on("click", ".approveItem", function() {

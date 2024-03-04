@@ -264,105 +264,161 @@
                 </div>
                 @if(auth::user()->role=='TEO' && @$studentFund->teo_view_status==1)
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                   <div class="pt-2 card overflow-hidden">
-                   
-                      <div class="card-body">
-                         
-                               <div class="pb-2 row ">
-                                  <div class="col-5">
-                                     <label><i class="fas fa-eye" style="color: blue"></i> Viewed Date  </label><br>
-                                  </div>
-                                  <div class="col-1 w-100">
-                                     <label> :  
-                                     </label>
-                                  </div>
-                                  <div class="col-6">
-                                     <label> 
-                                     {{ @$studentFund['teo_view_date'] }}
-                                     </label>
+                    <div class="pt-2 card overflow-hidden">                            
+                       <div class="card-body">
+                         <ul class="timeline-3">                                 
+                        
+                             @if( @$studentFund->teo_status == null)
+    
+                             <li class="pendingTimeline">
+                              <a href="#!">TEO</a>
+                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['teo_view_date'] }}</a>
+                              <br>       
+                              <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
+                                     <div class="settings-icon">
+                                         <a class="approveItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                                         &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                                      </div>
+                                    
+                                 </li>
+                               
+                                 @elseif( @$studentFund->teo_status == 1)
+    
+                                 <li class="ApproveTimeline">
+                                  <a href="#!">TEO</a>
+                                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['teo_view_date'] }}</a>
+                                  <br>
+                                  <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                             
+                                  <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->teo_status_reason}}</p>
                                 
-                            </div>
-                         </div>
-                         <hr>
-                         <div class="pb-2 row ">
-                            <div class="col-5">
-                               <label>Status  </label><br>
-                            </div>
-                            <div class="col-1 w-100">
-                               <label> :  
-                               </label>
-                            </div>
-                            <div class="col-6">
-                             @if(@$studentFund->teo_status == null)
-                             <button class="btn btn-warning" >Pending</button>
-                             @elseif(@$studentFund->teo_status == 1)
-                             <button class="btn btn-success" >Approved</button>
-                             @elseif(@$studentFund->teo_status == 2)
-                             <button class="btn btn-danger" >Rejected</button> 
-                            @endif
-                            </div>
-                   </div>
-                   @if(@$studentFund->teo_status == null)
-                   <div class="pb-2 row ">
-                    <div class="col-5">
-                       <label>Action </label><br>
-                    </div>
-                    <div class="col-1 w-100">
-                       <label> :  
-                       </label>
-                    </div>
-                    <div class="col-6">
-                        <div class="settings-main-icon">
-                        <a class="approveItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                        &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
-                  
+                                     </li>
+                                     @elseif( @$studentFund->teo_status == 2)
+    
+                                     <li class="rejectTimeline">
+                                      <a href="#!">TEO</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['teo_view_date'] }}</a>
+                                      <br>
+                                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                 
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->teo_status_reason}}</p>
+                                    
+                                         </li>
+                                     @endif
+                                     @if(@$studentFund->teo_status == 1)
+                                     @if( @$studentFund->clerk_status == 1)
                     
-                    </div>
-                    </div>
-                 
-           </div>
-               @endif
-                   @if(@$studentFund->teo_status == 2)
-                   <div class="pb-2 row ">
-                      <div class="col-5">
-                         <label>Rejected Reason  </label><br>
-                      </div>
-                      <div class="col-1 w-100">
-                         <label> :  
-                         </label>
-                      </div>
-                      <div class="col-6">
-                   {{ @$studentFund->teo_status_reason }}
-                   
-                      </div>
-             </div>
-             @endif
-                   @if(@$studentFund->teo_status != null)
-                   <div class=" pb-2 row ">
-                      <div class="col-5">
-                         @if(@$studentFund->teo_status == 1)
-                         <label>Approved Date  </label>
-                         @elseif(@$studentFund->teo_status == 2)
-                         <label>Rejected Date  </label>
-                        @endif
-                         
-                         <br>
-                      </div>
-                      <div class="col-1 w-100">
-                         <label> :  
-                         </label>
-                      </div>
-                      <div class="col-6">
-                         @if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}@endif
+                                     <li class="ApproveTimeline">
+                                       <a href="#!">Clerk</a>
+                                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
+                                       <p></p>
+                                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->clerkUser->name }}</p>
+                                      
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->clerk_status_reason}}</p>
+                                    </li>
+                                    @elseif( @$studentFund->clerk_status == 2)
+                    
+                                    <li class="rejectTimeline">
+                                      <a href="#!">Clerk</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
+                                      <p></p>
+                                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->clerkUser->name }}</p>
+                                      
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->clerk_status_reason}}</p>
+                                   </li>
+                                   @elseif( @$studentFund->clerk_status == null)
+                    
+                                   <li class="pendingTimeline">
+                                     <a href="#!">Clerk</a>
+                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
+                                    <p></p>
+                                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                      </li>
+                                      @endif
+                                      @endif
+    
+                                     @if(@$studentFund->clerk_status == 1)
+                                     @if( @$studentFund->assistant_status == 1)
+                    
+                                     <li class="ApproveTimeline">
+                                       <a href="#!">APO / ATDO</a>
+                                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
+                                       <p></p>
+                                       <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->assistantUser->name }}</p>
+                                      
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                       <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->teo_status_reason}}</p>
+                                    </li>
+                                    @elseif( @$studentFund->assistant_status == 2)
+                    
+                                    <li class="rejectTimeline">
+                                      <a href="#!">APO / ATDO</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
+                                      <p></p>
+                                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->assistantUser->name }}</p>
+                                      
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->assistant_status_reason}}</p>
+                                   </li>
+                                   @elseif( @$studentFund->assistant_status == null)
+                    
+                                   <li class="pendingTimeline">
+                                     <a href="#!">APO / ATDO</a>
+                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
+                                    <p></p>
+                                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                      </li>
+                                      @endif
+                                      @endif
+                                      @if(@$studentFund->assistant_status == 1)
+                                      @if( @$studentFund->officer_status == 1)
                      
-                      
-                      </div>
+                                      <li class="ApproveTimeline">
+                                        <a href="#!">PO / TDO</a>
+                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
+                                        <p></p>
+                                        <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->officerUser->name }}</p>
+                                       
+                                        <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                        <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->officer_status_reason}}</p>
+                                     </li>
+                                     @elseif( @$studentFund->officer_status == 2)
+                     
+                                     <li class="rejectTimeline">
+                                       <a href="#!">PO / TDO</a>
+                                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
+                                       <p></p>
+                                       <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->officerUser->name }}</p>
+                                       
+                                       <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                                       <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->officer_status_reason}}</p>
+                                    </li>
+                                    @elseif( @$studentFund->officer_status == null)
+                     
+                                    <li class="pendingTimeline">
+                                      <a href="#!">PO / TDO</a>
+                                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
+                                     <p></p>
+                                      <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                                       </li>
+                                       @endif
+                                       @endif
+                         </ul>  
+                     </div>
+                 </div>
              </div>
-             @endif
-                      </div>
-                   </div>
-                </div>
-                 @endif
+    
+    @endif
 
                  <div class="modal fade" id="approve-popup" style="display: none">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -418,6 +474,7 @@
 </div>
 </div>
 <meta name="csrf_token" content="{{ csrf_token() }}" />
+<link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
 <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
 <script src="{{ asset('js/toastr.js') }}"></script>
