@@ -301,7 +301,8 @@ class AnemiaFinanceController extends Controller
               $edit ='';
               if(Auth::user()->role== "TEO"){
                 if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $teo_status_reason = Str::limit($record->teo_status_reason, 10);
+                    $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$teo_status_reason.'</span></div>';
                 }
                 else if($record->teo_status ==2){
                     $teo_status_reason = Str::limit($record->teo_status_reason, 10);

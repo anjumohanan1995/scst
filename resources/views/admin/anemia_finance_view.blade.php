@@ -548,7 +548,10 @@ $.ajax({
                     $('#success_message').fadeOut("slow");
                 }, 2000);
 
-                $('#example').DataTable().ajax.reload();
+                $('#approve_reason').val('');     
+                setTimeout(function() {
+                    window.location.reload();
+                    }, 2000);
 
             }
         });
@@ -581,7 +584,10 @@ function reject() {
                         $('#success_message').fadeOut("slow");
                     }, 2000 );
 
-                $('#example').DataTable().ajax.reload();
+                    $('#reason').val('');    
+                    setTimeout(function() {
+                        window.location.reload();
+                        }, 2000);
 
         }
     })
