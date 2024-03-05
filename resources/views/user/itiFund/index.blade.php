@@ -81,9 +81,9 @@
                                             </th>
                                             <th>Course Name / കോഴ്‌സിന്റെ പേര് 
                                             </th>
-                                            <th>Applicant's Income / അപേക്ഷകന്റെ വരുമാനം 
+                                            <th>Duration Of Course / കോഴ്‌സിൻ്റെ  ദൈർഘ്യം 
                                             </th>
-                                            <th>Caste/Religion / ജാതി/ മതം 
+                                            <th>Type Of Institution (സ്ഥാപനത്തിൻ്റെ തരം )
                                             </th>
                                             <th>Date / തീയതി   </th>
                                             <th >Action / ആക്ഷൻ</th>
@@ -164,8 +164,8 @@
                 { data: 'name' },
                 { data: 'address' },
 				{ data: 'course_name' },
-                { data: 'income' },
-				{ data: 'caste' },
+                { data: 'course_duration' },
+				{ data: 'institution_type' },
                 
                 { data: 'created_at' },
 

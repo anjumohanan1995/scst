@@ -356,8 +356,8 @@ $i=$start;
              $course_name = $record->course_name;
              $place = $record->place;
              $date=$record->date;
-             $income=$record->income;
-             $caste = $record->caste;
+             $course_duration=$record->course_duration;
+             $institution_type = $record->institution_type;
               $created_at =  $record->created_at;
               $carbonDate = Carbon::parse($record->created_at);
 
@@ -369,8 +369,8 @@ $i=$start;
                 "name" => $name,
                 "address" => $address,
                 "course_name" => $course_name,
-                "caste" => $caste,
-                "income" =>$income,
+                "course_duration" => $course_duration,
+                "institution_type" => $institution_type,
                 "created_at" => $date .' ' .$record->time,               
                 "edit" => '<div class="settings-main-icon"><a  href="' . route('userItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
 
@@ -486,7 +486,8 @@ $i=$start;
               $edit ='';
               if(Auth::user()->role== "TEO"){
                 if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div></div>';
+                    $teo_status_reason = Str::limit($record->teo_status_reason, 10);
+                    $edit='<div class="settings-main-icon"><a  href="' . route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$teo_status_reason.'</span></div>';
                 }
                 else if($record->teo_status ==2){
                     $teo_status_reason = Str::limit($record->teo_status_reason, 10);
@@ -550,7 +551,7 @@ $i=$start;
 
     public function teoApprove(Request $request){
         $id = $request->id;
-
+        $reason =$request->reason;
        // $currentTime = Carbon::now();
         $studentFund = ItiFund::where('_id', $request->id)->first();
 
@@ -561,6 +562,7 @@ $i=$start;
             'teo_status' => 1,
             'teo_status_date' =>$currenttime,
             'teo_status_id' => Auth::user()->id,
+            'teo_status_reason' => $reason,
         ]);
 
 
