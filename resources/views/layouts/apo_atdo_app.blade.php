@@ -27,7 +27,15 @@
     </a>
 
 </li>
+<li class="slide">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'ChildFinanceListAssistant' || \Request::route()->getName() == 'childFinanceDetailsAssistant' ? 'active' : '' }}"
+        href="{{ url('ChildFinanceListAssistant') }}">
+     <i class="side-menu__icon fe fe-menu"> </i>
+     <span class="side-menu__label">Child Finance Applications</span>
 
+    </a>
+
+</li>
 
 <li class="slide">
     <a class="side-menu__item {{ \Request::route()->getName() == 'marriageGrantListAssistant'  || \Request::route()->getName() == 'marriageGrantDetailsAssistant' ? 'active' : '' }}"

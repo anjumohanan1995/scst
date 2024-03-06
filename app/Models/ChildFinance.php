@@ -57,6 +57,21 @@ class ChildFinance extends Eloquent
         'clerk_status_date',
         'clerk_status_reason',
 
+        'assistant_view_status',
+        'assistant_view_id',
+        'assistant_view_date',
+        'assistant_status',
+        'assistant_status_id',
+        'assistant_status_date',
+        'assistant_status_reason',
+
+        'officer_view_status',
+        'officer_view_id',
+        'officer_view_date',
+        'officer_status',
+        'officer_status_id',
+        'officer_status_date',
+        'officer_status_reason',
 
     ];
 

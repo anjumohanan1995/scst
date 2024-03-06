@@ -39218,7 +39218,7 @@ slide is-expanded side-menu__item {
 }
 
 .side-menu__label {
-    white-space: nowrap;
+   /* white-space: nowrap; */
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
@@ -39226,7 +39226,7 @@ slide is-expanded side-menu__item {
     display: flex;
     -webkit-align-items: center;
     align-items: center;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     color: #2d3144;
     transition-property: color;
     -webkit-transition-property: color;
