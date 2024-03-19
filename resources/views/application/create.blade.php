@@ -50,7 +50,7 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">പേര് / Name</label>
+												<label class="form-label">പേര് <br><span class="small"> Name</span></label></div><div class="col-md-6 mb-6">
         										<input type="text" pattern="[A-Za-z\s]+" autocomplete="off"  value="{{ old('name') }}"  class="form-control" placeholder="Name" name="name" id="name" />
 												@error('name')
 													<span class="text-danger">{{$message}}</span>
@@ -58,7 +58,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ഒരിക്കൽ കൂടി പേര് /Name once Again</label>
+												<label class="form-label">ഒരിക്കൽ കൂടി പേര് <br><span class="small">Name once Again</span></label></div><div class="col-md-6 mb-6">
         										<input type="text" autocomplete="off" value="{{ old('name_confirmation') }}" class="form-control" placeholder="Name" name="name_confirmation" id="name_confirmation" />
 												<span id="nameError" ></span>
 												@error('name_confirmation')
@@ -67,10 +67,10 @@
 											</div>
 
 											
-										</div><br>
+										</div> 
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ജനനതീയതി / Date of Birth</label>
+												<label class="form-label">ജനനതീയതി<br> <span class="small">Date of Birth</span></label></div><div class="col-md-6 mb-6">
         										<input type="date" value="{{ old('dob') }}"  class="form-control" placeholder="Date of birth" name="dob" id="dob" max="{{ date('Y-m-d') }}" />
 												@error('dob')
 													<span class="text-danger">{{$message}}</span>
@@ -78,7 +78,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ഒരിക്കൽ കൂടി ജനനത്തീയതി / Date of Birth once Again</label>
+												<label class="form-label">ഒരിക്കൽ കൂടി ജനനത്തീയതി <br> <span class="small">Date of Birth once Again</span></label></div><div class="col-md-6 mb-6">
 												<input type="date"  value="{{ old('dob1') }}"  class="form-control" placeholder="Date of birth" name="dob1" id="dob1" max="{{ date('Y-m-d') }}"/>
 												<span id="dobError"></span>	
 												@error('dob1')
@@ -87,10 +87,10 @@
 											</div>
 
 											
-										</div><br>
+										</div> 
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ലിംഗഭേദം / Gender</label>
+												<label class="form-label">ലിംഗഭേദം <br><span class="small"> Gender</span></label></div><div class="col-md-6 mb-6">
 												<select class="form-control" name="gender" autocomplete="off" >
 													<option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
 													<option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
@@ -104,7 +104,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">മൊബൈൽ നമ്പർ / Mobile Number</label>
+												<label class="form-label">മൊബൈൽ നമ്പർ  <br><span class="small"> Mobile Number</span></label></div><div class="col-md-6 mb-6">
 												<input type="text" autocomplete="off" class="form-control" placeholder="Mobile Number" name="mobile" id="mobile" value="{{ old('mobile') }}" />
     											<span id="mobileError" class="text-danger"></span>
 												@error('mobile')
@@ -113,10 +113,10 @@
 											</div>
 
 											
-										</div><br>
+										</div> 
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">പിതാവിന്റെ പേര് / Father's Name</label>
+												<label class="form-label">പിതാവിന്റെ പേര് <br><span class="small"> Father's Name</span></label></div><div class="col-md-6 mb-6">
 												<input type="text" autocomplete="off" class="form-control" placeholder="Father's Name" name="father_name" value="{{ old('father_name') }}" />
 												@error('father_name')
 														<span class="text-danger">{{$message}}</span>
@@ -124,7 +124,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">അമ്മയുടെ പേര് / Mother's Name</label>
+												<label class="form-label">അമ്മയുടെ പേര് <br><span class="small"> Mother's Name</span></label></div><div class="col-md-6 mb-6">
 												<input type="text" autocomplete="off" class="form-control" placeholder="Mother's Name" name="mother_name" value="{{ old('mother_name') }}" />
 												@error('mother_name')
 														<span class="text-danger">{{$message}}</span>
@@ -132,12 +132,12 @@
 											</div>
 
 											
-										</div><br>
+										</div >
 										<div class="row">
 										
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ജാതി / Caste</label>
+												<label class="form-label">ജാതി <br><span class="small">  Caste</span></label></div><div class="col-md-6 mb-6">
 												<select class="form-control" name="caste" autocomplete="off">
 													<option value="SC" {{ old('caste') == 'SC' ? 'selected' : '' }}>SC</option>
 													<option value="ST" {{ old('caste') == 'ST' ? 'selected' : '' }}>ST</option>
@@ -150,7 +150,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ആധാർ നമ്പർ / Aadhar Number</label>
+												<label class="form-label">ആധാർ നമ്പർ <br><span class="small"> Aadhar Number</span></label></div><div class="col-md-6 mb-6">
 												<input type="text" autocomplete="off" class="form-control" placeholder="Aadhar Number" name="aadhar_number" id="aadhar_number" value="{{ old('aadhar_number') }}"  />
 												<span id="aadharError" class="text-danger"></span>	
                                                 @error('aadhar_number')
@@ -160,10 +160,10 @@
 											
 
 											
-										</div><br>
+										</div> 
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ഐഡി പ്രൂഫ് / Id Proof</label>
+												<label class="form-label">ഐഡി പ്രൂഫ് <br><span class="small"> Id Proof</span></label></div><div class="col-md-6 mb-6">
 												<select class="form-control" name="id_proof" autocomplete="off" >
 													<option value="AADHAR" {{ old('id_proof') == 'AADHAR' ? 'selected' : '' }}>AADHAR</option>
             										<option value="Account No of Nationalised/Scheduled Bank" {{ old('id_proof') == 'Account No of Nationalised/Scheduled Bank' ? 'selected' : '' }}>Account No of Nationalised/Scheduled Bank</option>
@@ -189,7 +189,7 @@
 											</div>
 
 											<div class="col-md-6 mb-6">
-												<label class="form-label">ഐഡി പ്രൂഫ് നമ്പർ വിശദാംശങ്ങൾ / Id Proof Number Details</label>
+												<label class="form-label">ഐഡി പ്രൂഫ് നമ്പർ വിശദാംശങ്ങൾ <br><span class="small"> Id Proof Number Details</span></label></div><div class="col-md-6 mb-6">
 												<input type="text" class="form-control" autocomplete="off" placeholder="Id Proof Details" name="id_proof_details"  value="{{ old('id_proof_details') }}"/>
 												@error('id_proof_details')
 														<span class="text-danger">{{$message}}</span>
@@ -197,10 +197,10 @@
 											</div>
 
 											
-										</div><br>
+										</div> 
 										<div class="row">
 												<div class="col-md-6 mb-6">
-												<label class="form-label">ഇമെയിൽ / Email</label>
+												<label class="form-label">ഇമെയിൽ <br><span class="small"> Email</span></label></div><div class="col-md-6 mb-6">
 												  	<input type="email" class="form-control" autocomplete="off"  value="{{ old('email') }}"  placeholder="Email" name="email" id="email"/>
 													<span id="emailError" class="text-danger"></span>
 													@error('email')
@@ -209,22 +209,23 @@
 																								
 												
 											</div>
-										</div><br><br>
+										</div> 
 										<div class="row">
 											<div class="col-md-6 mb-6">
-												<label class="form-label">Password (<strong>8 numbers, 1 uppercase,1 lowercase,1 symbol and 1 number</strong> )</label>
-												<input value="{{ old('password') }}" autocomplete="new-password" type="password" class="form-control" placeholder="Password" name="password" id="password"/>
+												<label class="form-label">Password <br><span class="small">(<strong>8 numbers, 1 uppercase,1 lowercase,1 symbol and 1 number</strong> )</span></label>
+												
+												
+												
+											</div>
+                                            
+											<div class="col-md-6 mb-6">
+                                                <input value="{{ old('password') }}" autocomplete="new-password" type="password" class="form-control mb-3" placeholder="**********" name="password" id="password"/>
 												<span class="text-danger" id="passwordError"></span>
 												@error('password')
 													<span class="text-danger">{{$message}}</span>
 												@enderror
-												
-												
-											</div>
-
-											<div class="col-md-6 mb-6">
-												<label class="form-label"> Confirm Password </label>
-    											<input type="password" autocomplete="off"  value="{{ old('confirm_password') }}" class="form-control" placeholder="Confirm Password" name="confirm_password" id="confirm_password" />
+                                                
+    											<input type="password" autocomplete="off"  value="{{ old('confirm_password') }}" class="form-control" placeholder="**********" name="confirm_password" id="confirm_password" />
 												<span class="text-danger" id="confirmPasswordError"></span>
 											</div>
 											@error('confirm_password')
@@ -236,6 +237,7 @@
 										<div class="row">
 											<div class="col-md-6 mb-6">
 												<label for="captcha">ക്യാപ്ച നൽകുക / Enter the Captcha:</label>
+                                            </div><div class="col-md-6 mb-6">
 												<div class="captcha">
 
 												 	<span>{!! captcha_img() !!}</span>
@@ -243,19 +245,19 @@
 														&#x21bb;
 													</button>
 												</div> 
-											</div> 
+											</div> <div class="col-md-6 mb-6">&nbsp;</div>
 											<div class="col-md-6 mb-6">
 												<label class="form-label"></label>
-												<input type="text" id="captcha" name="captcha" required>
+												<input type="text" id="captcha" name="captcha" required class="form-control">
 												    @error('captcha')
 														<span class="text-danger">{{ $message }}</span>
 													@enderror
 											</div> 
 
-										</div><br>
+										</div> 
 									</div>
-									<br><br><br>
-                                    <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light float-end">Save</button>
+									 
+                                    <button type="submit" id="submit" class="btn btn-danger waves-effect waves-light float-end w-25">Save</button>
 								</form>
 						    </div>
 						</div>
