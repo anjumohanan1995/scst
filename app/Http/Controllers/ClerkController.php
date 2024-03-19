@@ -1687,6 +1687,13 @@ class ClerkController extends Controller
 
 
 
+
+
+
+
+             
+
+
          $data_arr = array();
 
          foreach($records as $record){
