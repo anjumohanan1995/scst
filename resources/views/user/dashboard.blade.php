@@ -51,13 +51,13 @@
     }
 
     .card-desc {
-        padding: 1.25rem;
+        padding: 1.25rem;height: 200px;
     }
 
     .card-desc h3 {
         color: #000000;
         font-weight: 600;
-        font-size: 1.5em;
+        font-size: 1em;
         line-height: 1.3em;
         margin-top: 0;
         margin-bottom: 5px;
@@ -72,15 +72,15 @@
         line-height: 1.5;
         margin: 0px;
         margin-bottom: 20px;
-        padding: 0;
+        padding: 0;height: 85px;
         font-family: 'Raleway', sans-serif;
     }
 
     .btn-card {
-        background-color: #1ABC9C;
+        background-color: #232956;
         color: #fff;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-        padding: .84rem 2.14rem;
+        padding: .44rem 1.14rem;
         font-size: .81rem;
         -webkit-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
         transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
@@ -97,9 +97,12 @@
         word-wrap: break-word;
         color: #fff;
     }
-
+h3 a{
+    color: #f54266
+}
     .btn-card:hover {
-        background: orange;
+        background: #f54266;
+        color: #ffffff
     }
 
     a.btn-card {

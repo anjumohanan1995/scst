@@ -83,7 +83,7 @@ body {
     line-height: 1.5;
     color: #031b4e;
     text-align: left;
-    background-color: #e9e7f7;
+    background-color: #fff;
 }
 
 [tabindex="-1"]:focus {
@@ -1995,10 +1995,10 @@ pre code {
     font-weight: 400;
     line-height: 1.5;
     -webkit-appearance: auto;
-    color: #817ba7;
+    color: #000;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #dedcfb !important;
+    border: 1px solid #e3e3e3 !important;
     border-radius: 3px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -2009,7 +2009,7 @@ pre code {
 }
 
 .form-control:focus {
-    color: #817ba7;
+    color: #000;
     background-color: #fff;
     border-color: #cdcbe6 !important;
     outline: 0;
@@ -2017,7 +2017,7 @@ pre code {
 }
 
 .form-control::placeholder {
-    color: #aba7d0;
+    color: #999;
     opacity: 1;
 }
 
@@ -7705,11 +7705,20 @@ a.btn.close.disabled {
 .shadow-lg {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
-
+.font-22{
+    font-size:20px;
+    line-height: 20px;
+}
 .shadow-none {
     box-shadow: none !important;
 }
-
+#additionalDiv1, #additionalDiv {
+    background: #efefef;
+    padding: 14px;
+  }
+.w-15 {
+    width: 15% !important;
+}
 .w-25 {
     width: 25% !important;
 }
@@ -15604,10 +15613,15 @@ fieldset:disabled a.btn {
 
 .form-label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
     color: #000;
+    font-size: 18px;
+    line-height: 18px;
 }
-
+.form-label .small {
+  font-size: 11px;
+  color: #b44e26;
+}
 .form-group-rdiobox {
     display: flex;
     align-items: center;
@@ -32358,7 +32372,7 @@ a.tag-addon:hover {
 .main-content:after {
     content: "";
     height: 220px;
-    background: linear-gradient(45deg, #00b3b0, #3858f9);
+    background: linear-gradient(45deg, #232956, #0d1028);
     position: absolute;
     z-index: -1;
     width: 100%;
@@ -32559,7 +32573,7 @@ a.tag-addon:hover {
 .main-content-label,
 .card-table-two .card-title,
 .card-dashboard-eight .card-title {
-    color: #302e40;
+    color: #7a2f18;
     font-weight: 700;
     text-transform: uppercase;
     line-height: 1;
@@ -98389,7 +98403,15 @@ div#success_message {
     }
     
     #preview_student_fund th, td {
-        border: 1px solid #ddd;
+       
         padding: 8px;
         text-align: left;
     }
+h5.heading{
+    background: #232956;
+    padding:10px;font-size: 1.3125rem;
+    color: #fff;
+}
+.float-left{
+    float:left;
+}
