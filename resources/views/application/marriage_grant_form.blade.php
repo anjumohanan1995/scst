@@ -8,8 +8,8 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			
-				<h4 class="content-title mb-2">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം <br>
-                    Application form for marriage grant to poor girls belonging to Scheduled Tribes </h4>
+				<h4 class="content-title mb-2">പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക്  വിവാഹധനസഹായം  നൽകുന്നതിനുള്ള അപേക്ഷഫോറം </h4>
+                   <h4  class="content-title mb-2 small"> Application form for marriage grant to poor girls belonging to Scheduled Tribes </h4>
 				
 
             @if ($message = Session::get('error'))
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകന്റെ പൂർണ്ണമായ പേര് / Applicant's full name </label>
+                                    <label class="form-label">അപേക്ഷകന്റെ പൂർണ്ണമായ പേര്  <br><span class="small">Applicant's full name </span></label>
                                     <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="" name="name" required />
                                     @error('name')
                                         <span class="text-danger">{{$message}}</span>
@@ -40,7 +40,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വയസ് / Age  </label>
+                                    <label class="form-label">വയസ്  <br><span class="small">Age </span>  </label>
                                     <input type="number" value="{{ old('age') }}" class="form-control" placeholder="" name="age" />
                                     
                                     @error('age')
@@ -50,7 +50,7 @@
                             </div><br>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ഇപ്പോഴത്തെ മേൽവിലാസം / Current address  </label>
+                                    <label class="form-label">ഇപ്പോഴത്തെ മേൽവിലാസം <br><span class="small">  Current address </span> </label>
                                     <textarea type="text" id="current_address" value="{{ old('current_address') }}"  class="form-control" placeholder="" name="current_address" >{{ old('current_address') }}</textarea>
                                     @error('current_address')
                                         <span class="text-danger">{{$message}}</span>
@@ -58,7 +58,7 @@
                                 </div>
                              
                                 <div class="col-md-6 mb-6"> 
-                                    <label class="form-label">സ്ഥിരമായ മേൽവിലാസം / Permanent address &nbsp;&nbsp;  <input type="checkbox" id="copyAddress" onclick="copyCurrentAddress()" style="align:left;"> (നിലവിലെ ഇപ്പോഴത്തെ മേൽവിലാസം) </label>
+                                    <label class="form-label">സ്ഥിരമായ മേൽവിലാസം  &nbsp;&nbsp;  <input type="checkbox" id="copyAddress" onclick="copyCurrentAddress()" style="align:left;"><br> (നിലവിലെ ഇപ്പോഴത്തെ മേൽവിലാസം) <br><span class="small"> Permanent address </span> </label>
                                    
                                     <textarea type="text" id="permanent_address" value="{{ old('permanent_address') }}" class="form-control" placeholder="" name="permanent_address" >{{ old('permanent_address') }}</textarea>
                                     
@@ -69,7 +69,7 @@
                             </div>
                                <div class="row">   
                                     <div class="col-md-2 mb-2">
-                                        <label class="form-label">ജില്ല / District  </label>
+                                        <label class="form-label">ജില്ല <br><span class="small"> District </span> </label>
                                         <select id="current_district" name="current_district" class="form-control" >
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
@@ -82,7 +82,7 @@
                                         <input type="hidden" name="current_district_name" id="current_district_name" value="{{ old('current_district_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
-                                        <label class="form-label">താലൂക്ക് / Taluk  </label>
+                                        <label class="form-label">താലൂക്ക് <br><span class="small"> Taluk </span> </label>
                                         <select id="current_taluk" name="current_taluk" class="form-control">
                                             <option value="">Choose Taluk</option>
                                         </select>                                 
@@ -92,14 +92,14 @@
                                         <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="{{ old('current_taluk_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
-                                        <label class="form-label">പിൻകോഡ് / Pincode  </label>
+                                        <label class="form-label">പിൻകോഡ് <br><span class="small">Pincode</span> </label>
                                         <input type="text" value="{{ old('current_pincode') }}"  class="form-control"  name="current_pincode" />
                                         @error('current_pincode')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                     <div class="col-md-2 mb-2">
-                                        <label class="form-label">ജില്ല /District  </label>
+                                        <label class="form-label">ജില്ല  <br><span class="small">District </span> </label>
                                         <select id="permanent_district" name="permanent_district" class="form-control" >
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
@@ -112,7 +112,7 @@
                                         <input type="hidden" name="permanent_district_name" id="permanent_district_name" value="{{ old('permanent_district_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
-                                        <label class="form-label">താലൂക്ക് /Taluk  </label>
+                                        <label class="form-label">താലൂക്ക് <br><span class="small">Taluk </span> </label>
                                         <select id="permanent_taluk" name="permanent_taluk" class="form-control">
                                             <option value="">Choose Taluk</option>
                                         </select>                                 
@@ -122,7 +122,7 @@
                                         <input type="hidden" name="permanent_taluk_name" id="permanent_taluk_name" value="{{ old('permanent_taluk_name') }}">
                                     </div>
                                     <div class="col-md-2 mb-2">
-                                        <label class="form-label">പിൻകോഡ് / Pincode </label>
+                                        <label class="form-label">പിൻകോഡ് <br><span class="small"> Pincode </span></label>
                                         <input type="text" value="{{ old('permanent_pincode') }}"  class="form-control"  name="permanent_pincode" />
                                         @error('permanent_pincode')
                                             <span class="text-danger">{{$message}}</span>
@@ -131,7 +131,7 @@
                                 </div><br>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">കുടുംബങ്ങളെ സംബന്ധിച്ച വിശദവിവരങ്ങൾ (മരിച്ചുപോയവരുടേതുൾപ്പെടെ ) /Details of families (including deceased)  </label>
+                                    <label class="form-label">കുടുംബങ്ങളെ സംബന്ധിച്ച വിശദവിവരങ്ങൾ (മരിച്ചുപോയവരുടേതുൾപ്പെടെ ) <br><span class="small">Details of families (including deceased) </span> </label>
                                     <input type="text" value="{{ old('family_details') }}"  class="form-control" placeholder="" name="family_details" />
                                     @error('family_details')
                                         <span class="text-danger">{{$message}}</span>
@@ -139,7 +139,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">അപേക്ഷകന്റെ ജാതി  (തഹസിൽദാരിൽനിന്നും ജാതി തെളിയിക്കുന്ന സാക്ഷ്യപത്രം (അസൽ )ഹാജരാക്കണം ) /Caste of the applicant (Proof caste certificate (asal) from Tehsildar should be produced)   </label>
+                                    <label class="form-label">അപേക്ഷകന്റെ ജാതി  (തഹസിൽദാരിൽനിന്നും ജാതി തെളിയിക്കുന്ന സാക്ഷ്യപത്രം (അസൽ )ഹാജരാക്കണം ) <br><span class="small">Caste of the applicant (Proof caste certificate (asal) from Tehsildar should be produced)  </span> </label>
                                     <div class="row">
                                     <div class="col-md-6 mb-6">
                                     <input type="text" value="{{ old('caste') }}" class="form-control" placeholder="" name="caste" />
@@ -161,14 +161,14 @@
                             </div><br>   
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹം ഉറപ്പിച്ചിരിക്കുന്ന പെൺകുട്ടിയുടെ പേര് / Name of girl whose marriage is fixed </label>
+                                    <label class="form-label">വിവാഹം ഉറപ്പിച്ചിരിക്കുന്ന പെൺകുട്ടിയുടെ പേര് <br><span class="small"> Name of girl whose marriage is fixed</span> </label>
                                     <input type="text" value="{{ old('fiancee_name') }}"  class="form-control" placeholder="" name="fiancee_name" />
                                     @error('fiancee_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹം ഉറപ്പിച്ചിരിക്കുന്ന പെൺകുട്ടിയുടെ മേൽവിലാസം / Address of girl whose marriage is fixed  </label>
+                                    <label class="form-label">വിവാഹം ഉറപ്പിച്ചിരിക്കുന്ന പെൺകുട്ടിയുടെ മേൽവിലാസം <br><span class="small"> Address of girl whose marriage is fixed </span> </label>
                                     <textarea type="text"  class="form-control" placeholder="" name="fiancee_address" >{{ old('fiancee_address') }}</textarea>
                                     @error('fiancee_address')
                                         <span class="text-danger">{{$message}}</span>
@@ -177,7 +177,7 @@
                             </div>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ആരുടെ വിവാഹമാണോ ഉറപ്പിച്ചിരിക്കുന്നത് ആ പെൺകുട്ടിക്ക് അപേക്ഷകനുമായുള്ള ബന്ധം /The relationship of the girl with the applicant whose marriage is fixed   </label>
+                                    <label class="form-label">ആരുടെ വിവാഹമാണോ ഉറപ്പിച്ചിരിക്കുന്നത് ആ പെൺകുട്ടിക്ക് അപേക്ഷകനുമായുള്ള ബന്ധം <br><span class="small"> The relationship of the girl with the applicant whose marriage is fixed  </span> </label>
                                     <!-- <input type="text" value="{{ old('relation_with_applicant') }}" class="form-control" placeholder="" name="relation_with_applicant" /> -->
                                     <select class="form-select" name="relation_with_applicant">
                                                 <option value="" disabled>Select a relationship</option>
@@ -209,7 +209,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">ജില്ല / District  </label>
+                                    <label class="form-label">ജില്ല <br><span class="small">District </span> </label>
                                     <select id="fiancee_district" name="fiancee_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
@@ -222,7 +222,7 @@
                                     <input type="hidden" name="fiancee_district_name" id="fiancee_district_name" value="{{ old('fiancee_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">താലൂക്ക് / Taluk </label>
+                                    <label class="form-label">താലൂക്ക് <br><span class="small"> Taluk</span> </label>
                                     <select id="fiancee_taluk" name="fiancee_taluk" class="form-control">
                                         <option value="">Choose Taluk</option>
                                     </select>                                 
@@ -232,7 +232,7 @@
                                     <input type="hidden" name="fiancee_taluk_name" id="fiancee_taluk_name" value="{{ old('fiancee_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">പിൻകോഡ് / Pincode </label>
+                                    <label class="form-label">പിൻകോഡ് <br><span class="small"> Pincode</span> </label>
                                     <input type="text" value="{{ old('fiancee_pincode') }}"  class="form-control"  name="fiancee_pincode" />
                                     @error('fiancee_pincode')
                                         <span class="text-danger">{{$message}}</span>
@@ -241,14 +241,14 @@
                             </div><br> 
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">പെൺകുട്ടിയുടെ ആദ്യവിവാഹമോ പുനർവിവാഹമോ? /Girl's first marriage or remarriage?  </label>
+                                    <label class="form-label">പെൺകുട്ടിയുടെ ആദ്യവിവാഹമോ പുനർവിവാഹമോ?<br><span class="small"> Girl's first marriage or remarriage?</span>  </label>
                                     <div>
                                         <input type="radio" id="firstMarriage" name="marriage_type" value="first" {{ old('marriage_type') == 'first' ? 'checked' : '' }}>
-                                        <label for="firstMarriage">ആദ്യവിവാഹം (First marriage)</label>
+                                        <label for="firstMarriage">ആദ്യവിവാഹം<br><span class="small"> (First marriage)</span></label>
                                     </div>
                                     <div>
                                         <input type="radio" id="remarriage" name="marriage_type" value="remarriage" {{ old('marriage_type') == 'remarriage' ? 'checked' : '' }} >
-                                        <label for="remarriage">പുനർവിവാഹം (Remarriage)</label>
+                                        <label for="remarriage">പുനർവിവാഹം <br><span class="small">(Remarriage)</span></label>
                                     </div>
                                     {{--  <textarea type="text" value="{{ old('marriage_count') }}"  class="form-control" placeholder="" name="marriage_count" ></textarea>  --}}
                                     @error('marriage_type')
@@ -257,7 +257,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ഗുണഭോക്താവ് വിധവയാണോ? /Is the beneficiary a widow?  </label>
+                                    <label class="form-label">ഗുണഭോക്താവ് വിധവയാണോ? <br><span class="small">Is the beneficiary a widow?</span>  </label>
                                     <div>
                                         <input type="radio" id="yes" name="is_widow" value="Yes" {{ old('is_widow') == 'Yes' ? 'checked' : '' }} >
                                         <label for="yes">അതെ/Yes</label>
@@ -273,14 +273,14 @@
                             </div><br> 
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">അച്ഛൻ/അമ്മ/ രക്ഷാകർത്താവിന്റെ തൊഴിൽ /Occupation of Father/Mother/Guardian  </label>
+                                    <label class="form-label">അച്ഛൻ/അമ്മ/ രക്ഷാകർത്താവിന്റെ തൊഴിൽ  <br><span class="small">Occupation of Father/Mother/Guardian </span> </label>
                                     <textarea type="text" class="form-control" placeholder="" name="parent_occupation" >{{ old('parent_occupation') }}</textarea>
                                     @error('parent_occupation')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">കുടുംബത്തിൽ എല്ലാ മാർഗത്തിൽ നിന്നുമുള്ള ആകെ വാർഷിക വരുമാനം (വില്ലേജ് ആഫീസറിൽ നിന്നും ലഭിച്ച സർട്ടിഫിക്കറ്റ് (അസൽ) ഹാജരാക്കണം ) /Total annual income of the family from all sources (Certificate (Original) obtained from Village Officer should be produced)   </label>
+                                    <label class="form-label">കുടുംബത്തിൽ എല്ലാ മാർഗത്തിൽ നിന്നുമുള്ള ആകെ വാർഷിക വരുമാനം (വില്ലേജ് ആഫീസറിൽ നിന്നും ലഭിച്ച സർട്ടിഫിക്കറ്റ് (അസൽ) ഹാജരാക്കണം )  <br><span class="small">Total annual income of the family from all sources (Certificate (Original) obtained from Village Officer should be produced) </span>  </label>
                                     <div class="row">
                                     <div class="col-md-6 mb-6">
                                     <input type="text" value="{{ old('annual_income') }}" class="form-control" placeholder="" name="annual_income" />
@@ -301,7 +301,7 @@
                             </div><br> 
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">നിശ്ചയിച്ചിരിക്കുന്ന വിവഹ സ്ഥലവും തീയതിയും / Place and date of marriage fixed  </label>
+                                    <label class="form-label">നിശ്ചയിച്ചിരിക്കുന്ന വിവഹ സ്ഥലവും തീയതിയും  <br><span class="small"> Place and date of marriage fixed </span> </label>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
                                         <input type="text" value="{{ old('marriage_place') }}" class="form-control" placeholder="സ്ഥലം" name="marriage_place" />
@@ -319,7 +319,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹിതയാകാൻ പോകുന്ന പെൺകുട്ടിയുടെ മാതാവ് / പിതാവ് മരിച്ചുപോയിട്ടുടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ:/ Information regarding the deceased mother/father of the girl to be married: </label>
+                                    <label class="form-label">വിവാഹിതയാകാൻ പോകുന്ന പെൺകുട്ടിയുടെ മാതാവ് / പിതാവ് മരിച്ചുപോയിട്ടുടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ: <br><span class="small"> Information regarding the deceased mother/father of the girl to be married:</span> </label>
                                     <textarea type="text" class="form-control" placeholder="" name="fiancee_family_details" >{{ old('fiancee_family_details') }}</textarea>
                                     
                                     @error('fiancee_family_details')
@@ -329,14 +329,14 @@
                             </div><br> 
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">മാതാപിതാക്കളിലാർക്കെങ്കിലും തൊഴിലിൽ ഏർപ്പെടാൻ  കഴിയാത്തവിധം അംഗവൈകല്യം സംഭവിച്ചിട്ടുണ്ടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ / Information about if either of the parents is disabled so that they are unable to engage in employment  </label>
+                                    <label class="form-label">മാതാപിതാക്കളിലാർക്കെങ്കിലും തൊഴിലിൽ ഏർപ്പെടാൻ  കഴിയാത്തവിധം അംഗവൈകല്യം സംഭവിച്ചിട്ടുണ്ടെങ്കിൽ ആയത് സംബന്ധിച്ച വിവരങ്ങൾ  <br><span class="small"> Information about if either of the parents is disabled so that they are unable to engage in employment </span> </label>
                                     <textarea type="text" class="form-control" placeholder="" name="disabled_parent_info" >{{ old('disabled_parent_info') }}</textarea>
                                     @error('disabled_parent_info')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹം കഴിക്കുന്ന പെണ്കുട്ടിയോ മാതാപിതാക്കളോ അടിമപ്പണിയിൽ നിന്നും വിമുക്തരാക്കപ്പെട്ടവരാണെങ്കിൽ ആയതിന്റെ വിശദവിവരം / Details of whether the girl to be married or her parents are freedmen </label>
+                                    <label class="form-label">വിവാഹം കഴിക്കുന്ന പെണ്കുട്ടിയോ മാതാപിതാക്കളോ അടിമപ്പണിയിൽ നിന്നും വിമുക്തരാക്കപ്പെട്ടവരാണെങ്കിൽ ആയതിന്റെ വിശദവിവരം  <br><span class="small"> Details of whether the girl to be married or her parents are freedmen </span></label>
                                     <textarea type="text" class="form-control" placeholder="" name="freedmen_parent_details" >{{ old('freedmen_parent_details') }}</textarea>
                                     @error('freedmen_parent_details')
                                         <span class="text-danger">{{$message}}</span>
@@ -345,14 +345,14 @@
                             </div><br>  
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺക്കുട്ടിയോ മാതാപിതാക്കളോ പട്ടികവർഗക്കാരല്ലാത്തവരുടെ അതിക്രമങ്ങൾക്കിരയായിട്ടുള്ളവരാണെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ / Information about whether the girl child getting married or her parents have been victims of violence by non-Scheduled Tribes</label>
+                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺക്കുട്ടിയോ മാതാപിതാക്കളോ പട്ടികവർഗക്കാരല്ലാത്തവരുടെ അതിക്രമങ്ങൾക്കിരയായിട്ടുള്ളവരാണെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ  <br><span class="small"> Information about whether the girl child getting married or her parents have been victims of violence by non-Scheduled Tribes </span></label>
                                     <textarea type="text" class="form-control" placeholder="" name="violence_by_non_scheduled_tribes_info" >{{ old('violence_by_non_scheduled_tribes_info') }}</textarea>
                                     @error('violence_by_non_scheduled_tribes_info')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെയോ ഭൂമി അന്യാധീനപ്പെട്ട് നിർദ്ധനരായിട്ടുള്ളപക്ഷം ആയതിന്റെ വിവരങ്ങൾ / Details of the girl getting married or if the land has been alienated and destitute  </label>
+                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെയോ ഭൂമി അന്യാധീനപ്പെട്ട് നിർദ്ധനരായിട്ടുള്ളപക്ഷം ആയതിന്റെ വിവരങ്ങൾ  <br><span class="small"> Details of the girl getting married or if the land has been alienated and destitute </span> </label>
                                     <textarea type="text" class="form-control" placeholder="" name="land_alienated_details" >{{ old('land_alienated_details') }}</textarea>
                                     @error('land_alienated_details')
                                         <span class="text-danger">{{$message}}</span>
@@ -361,14 +361,14 @@
                             </div><br>   
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ സമുദായഭ്രഷ്ടരാണെങ്കിൽ ആയതിന്റെ പൂർണവിവരം / Full details of the mother/father of the girl to be married if they are outcasts</label>
+                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ സമുദായഭ്രഷ്ടരാണെങ്കിൽ ആയതിന്റെ പൂർണവിവരം  <br><span class="small"> Full details of the mother/father of the girl to be married if they are outcasts </span></label>
                                     <textarea type="text" class="form-control" placeholder="" name="outcast_parent_details" >{{ old('outcast_parent_details') }}</textarea>
                                     @error('outcast_parent_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ പുനർവിവാഹം ചെയ്ത് ജീവിക്കുന്നുവെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ / Details of mother/father of the girl to be married if remarried and living  </label>
+                                    <label class="form-label">വിവാഹിതയാകുന്ന പെൺകുട്ടിയുടെ മാതാവോ  / പിതാവോ പുനർവിവാഹം ചെയ്ത് ജീവിക്കുന്നുവെങ്കിൽ ആയതിന്റെ വിവരങ്ങൾ  <br><span class="small"> Details of mother/father of the girl to be married if remarried and living </span> </label>
                                     <textarea type="text" class="form-control" placeholder="" name="remarried_parent_details" >{{ old('remarried_parent_details') }}</textarea>
                                     @error('remarried_parent_details')
                                         <span class="text-danger">{{$message}}</span>
@@ -377,21 +377,21 @@
                             </div><br> <hr>
                             <div class="row">   
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">വരന്റെ പേര് / Groom's Name</label>
+                                    <label class="form-label">വരന്റെ പേര്  <br><span class="small"> Groom's Name </span></label>
                                     <input type="text" value="{{ old('groom_name') }}" class="form-control" placeholder="" name="groom_name" />
                                     @error('groom_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">വരന്റെ മേൽവിലാസം / Groom's Address</label>
+                                    <label class="form-label">വരന്റെ മേൽവിലാസം  <br><span class="small"> Groom's Address </span></label>
                                     <textarea type="text" class="form-control" placeholder="" name="groom_address" >{{ old('groom_address') }}</textarea>
                                     @error('groom_address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">ജില്ല / District </label>
+                                    <label class="form-label">ജില്ല  <br><span class="small"> District </span></label>
                                     <select id="groom_district" name="groom_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
@@ -404,7 +404,7 @@
                                     <input type="hidden" name="groom_district_name" id="groom_district_name" value="{{ old('groom_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">താലൂക്ക്  Taluk </label>
+                                    <label class="form-label">താലൂക്ക്  <br><span class="small"> Taluk</span> </label>
                                     <select id="groom_taluk" name="groom_taluk" class="form-control">
                                         <option value="">Choose Taluk</option>
                                     </select>                                 
@@ -414,7 +414,7 @@
                                     <input type="hidden" name="groom_taluk_name" id="groom_taluk_name" value="{{ old('groom_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">പിൻകോഡ് / Pincode  </label>
+                                    <label class="form-label">പിൻകോഡ്  <br><span class="small"> Pincode </span> </label>
                                     <input type="text" value="{{ old('groom_pincode') }}"  class="form-control"  name="groom_pincode" />
                                     @error('groom_pincode')
                                         <span class="text-danger">{{$message}}</span>
@@ -424,21 +424,21 @@
                             </div><br><hr>
                             <div class="row">   
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">വരന്റെ അച്ഛന്റെ / അമ്മയുടെ /രക്ഷാകർത്താവിന്റെ പേര് / Groom's Father's/Mother's/Guardian's Name </label>
+                                    <label class="form-label">വരന്റെ അച്ഛന്റെ / അമ്മയുടെ /രക്ഷാകർത്താവിന്റെ പേര്  <br><span class="small"> Groom's Father's/Mother's/Guardian's Name</span> </label>
                                     <input type="text" value="{{ old('groom_parent_name') }}" class="form-control" placeholder="" name="groom_parent_name" />
                                     @error('groom_parent_name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">വരന്റെ അച്ഛന്റെ / അമ്മയുടെ /രക്ഷാകർത്താവിന്റെ മേൽവിലാസം / Address of Groom's Father/Mother/Guardian</label>
+                                    <label class="form-label">വരന്റെ അച്ഛന്റെ / അമ്മയുടെ /രക്ഷാകർത്താവിന്റെ മേൽവിലാസം  <br><span class="small"> Address of Groom's Father/Mother/Guardian </span></label>
                                     <textarea type="text" class="form-control" placeholder="" name="groom_parent_address" >{{ old('groom_parent_address') }}</textarea>
                                     @error('groom_parent_address')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">ജില്ല / District </label>
+                                    <label class="form-label">ജില്ല  <br><span class="small"> District </span> </label>
                                     <select id="groom_parent_district" name="groom_parent_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
@@ -451,7 +451,7 @@
                                     <input type="hidden" name="groom_parent_district_name" id="groom_parent_district_name" value="{{ old('groom_parent_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">താലൂക്ക് / Taluk </label>
+                                    <label class="form-label">താലൂക്ക്  <br><span class="small"> Taluk </span> </label>
                                     <select id="groom_parent_taluk" name="groom_parent_taluk" class="form-control">
                                         <option value="">Choose Taluk</option>
                                     </select>                                 
@@ -461,7 +461,7 @@
                                     <input type="hidden" name="groom_parent_taluk_name" id="groom_parent_taluk_name" value="{{ old('groom_parent_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">പിൻകോഡ് / Pincode  </label>
+                                    <label class="form-label">പിൻകോഡ്  <br><span class="small"> Pincode </span> </label>
                                     <input type="text" value="{{ old('groom_parent_pincode') }}"  class="form-control"  name="groom_parent_pincode" />
                                     @error('groom_parent_pincode')
                                         <span class="text-danger">{{$message}}</span>
@@ -471,14 +471,14 @@
                             </div><br><hr>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">ഈ ആവശ്യത്തിന് സർക്കാരിൽനിന്നോ സംഘടനകളിൽനിന്നോ ഏജൻസികളിൽനിന്നോ ധനസഹായം ലഭിച്ചിട്ടുണ്ടെങ്കിൽ ആയതിന്റെ പൂർണവിവരം / Full details of any financial assistance, if any, received from the Government, organizations or agencies for this purpose</label>
+                                    <label class="form-label">ഈ ആവശ്യത്തിന് സർക്കാരിൽനിന്നോ സംഘടനകളിൽനിന്നോ ഏജൻസികളിൽനിന്നോ ധനസഹായം ലഭിച്ചിട്ടുണ്ടെങ്കിൽ ആയതിന്റെ പൂർണവിവരം  <br><span class="small"> Full details of any financial assistance, if any, received from the Government, organizations or agencies for this purpose </span></label>
                                     <textarea type="text" class="form-control" placeholder="" name="financial_assistance_details" >{{ old('financial_assistance_details') }}</textarea>
                                     @error('financial_assistance_details')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">പഞ്ചായത്തിൻ്റെ/കോ-ഓർപ്പറേഷൻ്റെ പേര് / Name of Panchayath/Co-orporation  </label>
+                                    <label class="form-label">പഞ്ചായത്തിൻ്റെ/കോ-ഓർപ്പറേഷൻ്റെ പേര്  <br><span class="small"> Name of Panchayath/Co-orporation </span> </label>
                                     <input type="text" value="{{ old('panchayath_name') }}"  class="form-control"  name="panchayath_name" />
                                     @error('panchayath_name')
                                         <span class="text-danger">{{$message}}</span>
@@ -490,7 +490,7 @@
                             </div><br>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">വിവാഹത്തിന് ശേഷമാണോ അപേക്ഷ സമർപ്പിക്കുന്നത്? / Is the application submitted after marriage?</label>
+                                    <label class="form-label">വിവാഹത്തിന് ശേഷമാണോ അപേക്ഷ സമർപ്പിക്കുന്നത്?  <br><span class="small"> Is the application submitted after marriage? </span></label>
                                     <div>
                                         <input type="radio" id="submitted_after_marriage_yes" name="submitted_after_marriage" value="Yes" {{ old('submitted_after_marriage') == 'Yes' ? 'checked' : '' }} >
                                         <label for="submitted_after_marriage_yes">അതെ/Yes</label>
@@ -539,14 +539,14 @@
                              
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">സ്ഥലം / Place</label>
+                                    <label class="form-label">സ്ഥലം  <br><span class="small"> Place </span></label>
                                     <input type="text" value="{{ old('place') }}" class="form-control" placeholder="സ്ഥലം" name="place" />
                                     @error('place')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                            <label class="form-label">അപേക്ഷകന്റെ ഫോട്ടോ / Applicant's photo</label>
+                                            <label class="form-label">അപേക്ഷകന്റെ ഫോട്ടോ  <br><span class="small"> Applicant's photo </span></label>
                                             <input type="file" class="form-control" name="applicant_photo" id="applicant_photo"
                                                 value="" placeholder="" onchange="validatePhoto()" accept=".jpg, .jpeg, .png" required />
                                                 <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
@@ -556,7 +556,7 @@
                                             <div id="errorPhoto" style="color:red;"></div>
                                         </div>
                                 <div class="col-md-4 mb-4">
-                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം / Applicant's Signature/Fingerprint </label>
+                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം  <br><span class="small"> Applicant's Signature/Fingerprint</span> </label>
                                     <input type="file" onchange="validateSignature()" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature" id="signature" />
                                     <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
                                     @error('signature')
@@ -577,7 +577,7 @@
     
                         </h1>
                             <div class="col-md-6 mb-6">
-                                <label class="form-label">ജില്ല / District </label>
+                                <label class="form-label">ജില്ല  <br><span class="small"> District</span> </label>
                                 <select id="submitted_district" name="submitted_district" class="form-control" required />
                                     <option value="">Select</option>
                                         @foreach($districts as $district)
@@ -590,7 +590,7 @@
                                 <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
                             </div>
                             <div class="col-md-6 mb-6">
-                                <label class="form-label">ടി.ഇ.ഒ / TEO  </label>
+                                <label class="form-label">ടി.ഇ.ഒ  <br><span class="small"> TEO </span> </label>
                                 <select id="submitted_teo" name="submitted_teo" class="form-control" required />
                                     <option value="">Choose TEO</option>
                                 </select>                                 
@@ -606,8 +606,8 @@
                     <div class="col-md-3 mb-3">
                         
                             </div>
-                            <div class="col-md-8 mb-8">
-                                <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                            <div class="col-md-12 mb-12">
+                                <button type="submit" id="submit" class="btn btn-danger w-15 waves-effect waves-light text-center submit">Save</button>
                             </div>
                             
 
