@@ -98415,3 +98415,7 @@ h5.heading{
 .float-left{
     float:left;
 }
+form {
+  font-size: 15px !important;
+  padding: 20px !important;
+}
