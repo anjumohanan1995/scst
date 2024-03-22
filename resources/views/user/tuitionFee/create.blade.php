@@ -8,7 +8,7 @@
 		<!-- breadcrumb -->
 		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 			
-				<h4 class="content-title mb-2">പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11 ,12  ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ
+				<h4 class="content-title mb-2" >പട്ടിക വർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും 8 ,9 ,10 ,11 ,12  ക്ലാസ്സുകളിൽ പഠിക്കുന്നു കുട്ടികൾക്ക് ട്യൂഷൻ ഫീസിനുള്ള അപേക്ഷ
 
 </h4>
 				
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Applicant's Name/അപേക്ഷകന്റെ പേര് 
+                                    <label class="form-label">അപേക്ഷകന്റെ പേര് <br><span class="small"> Applicant's Name</span>
                                     </label>
                                     <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ പേര് " name="name" />
                                     @error('name')
@@ -43,7 +43,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Address/മേൽവിലാസം 
+                                    <label class="form-label">മേൽവിലാസം <br><span class="small">Address</span>
                                     </label>
                                     <textarea type="text"  class="form-control" placeholder="മേൽവിലാസം" name="address" >{{ old('address') }}</textarea>
                                     @error('address')
@@ -54,7 +54,7 @@
                             <div class="row">   
                                
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">District/ജില്ല  </label>
+                                    <label class="form-label">ജില്ല <br><span class="small">District</span> </label>
                                     <select id="current_district" name="current_district" class="form-control" >
                                         <option value="">Select</option>
                                             @foreach($districts as $district)
@@ -67,7 +67,7 @@
                                     <input type="hidden" name="current_district_name" id="current_district_name" value="{{ old('current_district_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">Taluk/താലൂക്ക്  </label>
+                                    <label class="form-label">താലൂക്ക് <br><span class="small">Taluk</span> </label>
                                     <select id="current_taluk" name="current_taluk" class="form-control">
                                         <option value="">Choose Taluk</option>
                                     </select>                                 
@@ -77,14 +77,14 @@
                                     <input type="hidden" name="current_taluk_name" id="current_taluk_name" value="{{ old('current_taluk_name') }}">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label class="form-label">Pincode/പിൻകോഡ്  </label>
+                                    <label class="form-label">പിൻകോഡ് <br><span class="small">Pincode</span> </label>
                                     <input type="text" value="{{ old('current_pincode') }}"  class="form-control"  name="current_pincode" />
                                     @error('current_pincode')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div> 
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Name of Panchayath / പഞ്ചായത്തിൻ്റെ പേര് 
+                                    <label class="form-label"> പഞ്ചായത്തിൻ്റെ പേര് <br><span class="small">Name of Panchayath </span>
 
 
                                     </label>
@@ -99,7 +99,7 @@
                             </div><br>
                                <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Mobile/ഫോൺ നമ്പർ 
+                                    <label class="form-label">ഫോൺ നമ്പർ <br><span class="small">Mobile No</span>
 
 
                                     </label>
@@ -110,7 +110,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Caste/Religion/ജാതി /മതം 
+                                    <label class="form-label">ജാതി /മതം <br><span class="small"> Caste/Religion</span>
                                     </label>
                                     <input type="text" value="{{ old('caste') }}"  class="form-control" placeholder="ജാതി /മതം" name="caste" />
                                
@@ -126,7 +126,7 @@
                                 </div><br>
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Income/വരുമാനം 
+                                    <label class="form-label">വരുമാനം <br><span class="small">Income</span>
 
 
                                     </label>
@@ -138,7 +138,7 @@
                                    
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Name of the student / വിദ്യാർത്ഥിയുടെ പേര് 
+                                    <label class="form-label"> വിദ്യാർത്ഥിയുടെ പേര് <br><span class="small"> Name of the student </span>
 
                                         
                                     </label>
@@ -159,7 +159,7 @@
                            
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Relationship with the Applicant/അപേക്ഷകനുമായുള്ള ബന്ധം 
+                                    <label class="form-label">അപേക്ഷകനുമായുള്ള ബന്ധം <br><span class="small"> Relationship with the Applicant</span>
 
                                         
                                         
@@ -200,7 +200,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Name of school Studying / പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് 
+                                    <label class="form-label"> പഠിക്കുന്ന സ്‌കൂളിന്റെ പേര് <br><span class="small">Name of school Studying </span>
  
                                         </label>
 
@@ -222,7 +222,7 @@
                            
                             <div class="row">   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label"> Class/ ക്ലാസ് 
+                                    <label class="form-label">  ക്ലാസ് <br><span class="small">Class</span>
  
                                         </label>
                                         <input type="number" class="form-control"   name="class_number" id="class_number" value="{{ old('class_number') }}" placeholder="ക്ലാസ് " />
@@ -231,7 +231,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Name of Tuition Centre/ട്യുഷൻ സെന്ററിന്റെ പേര്  
+                                    <label class="form-label">ട്യുഷൻ സെന്ററിന്റെ പേര് <br><span class="small"> Name of Tuition Centre</span>
  
                                         </label>
                                         <input type="text" class="form-control"   name="tuition_center" id="tuition_center" value="{{ old('tuition_center') }}" placeholder="ട്യുഷൻ സെന്ററിന്റെ പേര് " />
@@ -246,7 +246,7 @@
                             </div><br> 
                             <div class="row"> 
                                 <div class="col-md-6 mb-6">
-                                <label class="form-label">Declaration of Principal(File Upload) / പ്രിൻസിപ്പലിൻ്റെ പ്രഖ്യാപനം (ഫയൽ അപ്‌ലോഡ്)</label>
+                                <label class="form-label">പ്രിൻസിപ്പലിൻ്റെ പ്രഖ്യാപനം (ഫയൽ അപ്‌ലോഡ്) <br><span class="small">Declaration of Principal(File Upload) </span> </label>
                                 <input type="file" value="{{ old('principal_declaration') }}"  class="form-control" placeholder="പ്രിൻസിപ്പലിൻ്റെ പ്രഖ്യാപനം (ഫയൽ അപ്‌ലോഡ്)" name="principal_declaration"  id="principal_declaration" onchange="validatePrincipalFile()"    accept=".pdf,.docs" />
                                 @error('principal_declaration')
                                     <span class="text-danger">{{$message}}</span>
@@ -254,7 +254,7 @@
                                 <div id="errorMessagePrincipalFile" style="color:red;"></div>
                             </div>   
                                 <div class="col-md-6 mb-6">
-                                    <label class="form-label">Place/ സ്ഥലം  
+                                    <label class="form-label">സ്ഥലം <br><span class="small"> Place</span>
  
                                         </label>
                                         <input type="text" class="form-control"   name="place" id="place" value="{{ old('place') }}" placeholder="സ്ഥലം " />
@@ -269,7 +269,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">Applicant's Signature/Fingerprint/അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം </label>
+                                    <label class="form-label">അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം <br><span class="small">Applicant's Signature/Fingerprint</span></label>
                                     <input type="file" value="{{ old('signature') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഒപ്പ്/വിരലടയാളം" name="signature"  id="signature" onchange="validateImage()"    accept="image/*" />
                                     @error('signature')
                                         <span class="text-danger">{{$message}}</span>
@@ -277,7 +277,7 @@
                                     <div id="errorMessage" style="color:red;"></div>
                                 </div>   
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">Applicant's Photo/അപേക്ഷകന്റെ ഫോട്ടോ </label>
+                                    <label class="form-label">അപേക്ഷകന്റെ ഫോട്ടോ <br><span class="small">Applicant's Photo</span></label>
                                     <input type="file" value="{{ old('photo') }}"  class="form-control" placeholder="അപേക്ഷകന്റെ ഫോട്ടോ" name="photo"  id="photo" onchange="validateImageOne()"    accept="image/*" />
                                     @error('photo')
                                         <span class="text-danger">{{$message}}</span>
@@ -287,11 +287,11 @@
                             </div>
                             <br>
                             <hr>
-                            <label class="form-label"><b>Parent account Details /മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ</b></label>
+                            <label class="form-label"><b>മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ <br><span class="small">Parent account Details </b></span></label>
                                 <br>
                             <div class="row">
                                 <div class="col-md-4 mb-4">
-                                    Bank Branch  (ബാങ്ക് ശാഖ)
+                                      ബാങ്ക് ശാഖ Bank Branch
                                 
                                     <input type="text" value="{{ old('parent_bank_branch') }}"  class="form-control" placeholder="ബാങ്ക് ശാഖ" name="parent_bank_branch" value="{{ old('parent_bank_branch') }}">
                                    
@@ -301,7 +301,7 @@
                                   @enderror
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                     Account Number (അകൗണ്ട് നമ്പർ  )
+                                  അകൗണ്ട് നമ്പർ     Account Number 
                                     
                                     
                                       
@@ -311,7 +311,7 @@
                                   @enderror
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        IFSC Code  (IFSC കോഡ്  )
+                                        IFSC കോഡ്   IFSC Code 
                                         
                                         
                                           
@@ -329,8 +329,9 @@
                                   <input type="checkbox" id="agree" name="agree" value="Yes" required {{ old('agree') == 'Yes' ? 'checked' : '' }}>
                               </div>
                               <div class="col-md-9 mb-9">
-                                  We hereby pledge that all the information we have added above is true and correct.
-                                (  ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.)
+                                  
+                                 ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.<br>
+                                We hereby pledge that all the information we have added above is true and correct.
                               </div>
                           </div>
                           
@@ -346,14 +347,14 @@
                             <div class="col-12">
                                 <h1
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 10px;line-height: 32px;font-weight: 600;">
-                        Submitting the application( അപേക്ഷ സമർപ്പിക്കുന്നത് )
+                        അപേക്ഷ സമർപ്പിക്കുന്നത് <br>Submitting the application
        
                     </h1>
                             </div>
                         </div>
                         <div class="row">   
                             <div class="col-md-6 mb-6">
-                                <label class="form-label">District (ജില്ല)  </label>
+                                <label class="form-label"> ജില്ല <br> <span class="small"> District </span></label>
                                 <select id="submitted_district" name="submitted_district" class="form-control" >
                                     <option value="">Select</option>
                                         @foreach($districts as $district)
@@ -366,7 +367,7 @@
                                 <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
                             </div>
                             <div class="col-md-6 mb-6">
-                                <label class="form-label">TEO (ടി .ഇ .ഓ)  </label>
+                                <label class="form-label"> ടി .ഇ .ഓ <br> <span class="small">TEO</span> </label>
                                 <select id="submitted_teo" name="submitted_teo" class="form-control">
                                     <option value="">Choose TEO</option>
                                 </select>                                 
@@ -384,8 +385,8 @@
                     <div class="col-md-3 mb-3">
                         
                             </div>
-                            <div class="col-md-8 mb-8">
-                                <button type="submit" id="submit" class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                            <div class="col-md-12 mb-12">
+                                <button type="submit" id="submit" class="btn btn-danger w-15 waves-effect waves-light text-center submit">Save</button>
                             </div>
                             
 

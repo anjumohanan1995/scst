@@ -36,7 +36,9 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
-                                                <label class="form-label"> Applicant's Name ( അപേക്ഷകന്റെ പേര് )
+                                                <label class="form-label"> അപേക്ഷകന്റെ പേര് <br> <span class="small">
+                                                        Applicant's
+                                                        Name</span>
                                                 </label>
                                                 <input type="text" value="{{ old('name') }}" class="form-control"
                                                     placeholder="Applicant's Name" name="name" />
@@ -47,7 +49,7 @@
 
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label">
-                                                    Address (മേൽവിലാസം )
+                                                    മേൽവിലാസം <br> <span class="small"> Address</span>
                                                 </label>
                                                 <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="Address" name="address">{{ old('address') }}</textarea>
                                                 @error('address')
@@ -58,7 +60,8 @@
                                         <div class="row">
 
                                             <div class="col-md-2 mb-2">
-                                                <label class="form-label">District (ജില്ല ) </label>
+                                                <label class="form-label"> ജില്ല <br> <span class="small">
+                                                        District</span></label>
                                                 <select id="current_district" name="current_district" class="form-control">
                                                     <option value="">Select</option>
                                                     @foreach ($districts as $district)
@@ -74,7 +77,8 @@
                                                     id="current_district_name" value="{{ old('current_district_name') }}">
                                             </div>
                                             <div class="col-md-2 mb-2">
-                                                <label class="form-label">Taluk (താലൂക്ക്) </label>
+                                                <label class="form-label"> താലൂക്ക് <br> <span class="small"> Taluk
+                                                    </span></label>
                                                 <select id="current_taluk" name="current_taluk" class="form-control">
                                                     <option value="">Choose Taluk</option>
                                                 </select>
@@ -85,7 +89,8 @@
                                                     value="{{ old('current_taluk_name') }}">
                                             </div>
                                             <div class="col-md-2 mb-2">
-                                                <label class="form-label">Pincode ( പിൻകോഡ് ) </label>
+                                                <label class="form-label">പിൻകോഡ് <br> <span class="small"> Pincode
+                                                    </span></label>
                                                 <input type="number" value="{{ old('current_pincode') }}"
                                                     class="form-control" name="current_pincode" placeholder="Pincode" />
                                                 @error('current_pincode')
@@ -93,7 +98,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-3 mb-3">
-                                                <label class="form-label">Grama Panchayat (ഗ്രാമപഞ്ചായത്ത് )
+                                                <label class="form-label">ഗ്രാമപഞ്ചായത്ത് <br> <span class="small"> Grama
+                                                        Panchayat</span>
                                                 </label>
                                                 <input type="text" value="{{ old('panchayath') }}" class="form-control"
                                                     placeholder="Grama Panchayat" name="panchayath" />
@@ -103,7 +109,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-3 mb-3">
-                                                <label class="form-label"> Ward No ( വാർഡ് നമ്പർ )
+                                                <label class="form-label"> വാർഡ് നമ്പർ <br> <span class="small"> Ward
+                                                        No</span>
                                                 </label>
                                                 <input type="number" value="{{ old('ward_no') }}" class="form-control"
                                                     placeholder="Ward No" name="ward_no" />
@@ -116,7 +123,7 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label">
-                                                    Caste (ജാതി)
+                                                    ജാതി <br> <span class="small">Caste </span>
                                                 </label>
                                                 <input type="text" value="{{ old('caste') }}" class="form-control"
                                                     placeholder="Caste" name="caste" />
@@ -126,7 +133,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 mb-6">
-                                                <label class="form-label">Annual Income (വാർഷിക വരുമാനം )
+                                                <label class="form-label"> വാർഷിക വരുമാനം <br> <span class="small">
+                                                        Annual Income</span>
                                                 </label>
                                                 <input type="number" value="{{ old('annual_income') }}"
                                                     class="form-control" placeholder="Annual Income"
@@ -155,8 +163,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-3 mb-3">
-                                                <label class="form-label">Allotting Agency/Department (അനുവദിച്ച ഏജൻസി/
-                                                    വകുപ്പ് )
+                                                <label class="form-label"> അനുവദിച്ച ഏജൻസി/
+                                                    വകുപ്പ് <br> <span class="small"> Allotting Agency/Department </span>
                                                 </label>
                                                 <input type="text" value="{{ old('agency') }}" class="form-control"
                                                     placeholder="Allotting Agency/Department" name="agency" />
@@ -204,10 +212,12 @@
                                             </div>
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label">
-                                                    Nature of work for which financial assistance is sought (Innovation /
-                                                    Additional convenience / Completion)
-                                                    <br>ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം
-                                                    (നവീകരണം / അധിക സൗകര്യം / പൂർത്തീകരണം )
+
+                                                    ധനസഹായം ആവശ്യപ്പെടുന്ന പ്രവർത്തിയുടെ സ്വഭാവം
+                                                    (നവീകരണം / അധിക സൗകര്യം / പൂർത്തീകരണം )<br> <span class="small">
+                                                        Nature of work for which
+                                                        financial assistance is sought (Innovation /
+                                                        Additional convenience / Completion)</span>
                                                 </label>
                                                 <div style="border: 1px solid black" class="form-control">
 
@@ -238,11 +248,14 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label">
-                                                    Has funding been received from other government departments/agencies or
-                                                    local self-government bodies for the specified purpose ?<br>
+
                                                     നിർദിഷ്ട്ട ആവശ്യത്തിനും മറ്റ് സർക്കാർ വകുപ്പ് /
                                                     ഏജൻസികളിൽനിന്നോ തദ്ദേശ സ്വയംഭരണാ സ്ഥാപനങ്ങളിൽ നിന്നോ
-                                                    ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ ?</label>
+                                                    ധനസഹായം ലഭിച്ചിട്ടുണ്ടോ ? <br> <span class="small"> Has funding been
+                                                        received from other
+                                                        government departments/agencies or
+                                                        local self-government bodies for the specified purpose ?
+                                                    </span></label>
                                                 <div style="border: 1px solid black" class="form-control">
                                                     <input type="radio" id="innovation" name="payment_details"
                                                         value="yes"
@@ -299,14 +312,15 @@
                                                     placeholder="Other matters to prove eligibility for preference" name="prove_eligibility">{{ old('prove_eligibility') }}</textarea>
 
                                                 @error('prove_eligibility')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                    <span class="text-danger">{{ $message }}</span><br> <span
+                                                        class="small">
+                                                    @enderror
                                             </div>
                                             <div class="col-md-3 mb-3">
-                                                <label class="form-label">
-                                                    ( Max size: 2 MB)
-                                                    &nbsp; &nbsp; &nbsp;
-
+                                                <label class="form-label"><small>
+                                                        ( Max size: 2 MB)
+                                                        &nbsp; &nbsp; &nbsp;
+                                                    </small>
                                                 </label>
                                                 <input type="file" class="form-control" accept="pdf/doc"
                                                     name="prove_eligibility_file" id="prove_eligibility_file"
@@ -326,7 +340,7 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label">
-                                                    Place (സ്ഥലം)
+                                                    സ്ഥലം <br><span class="small"> Place </span>
 
                                                 </label>
                                                 <input type="text" value="{{ old('place') }}" class="form-control"
@@ -336,11 +350,13 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 mb-6">
-                                                <label class="form-label">Applicant's signature( Max size: 2 MB)
-                                                    (അപേക്ഷകന്റെ ഒപ്പ് )</label>
+                                                <label class="form-label"> അപേക്ഷകന്റെ ഒപ്പ് <br><span
+                                                        class="small">Applicant's signature </span> <br><small>( Max
+                                                        size: 2 MB)</small>
+                                                </label>
                                                 <input type="file" class="form-control" accept="image/*"
                                                     name="signature" id="signature" value=""
-                                                    placeholder="Applicant's signature "  />
+                                                    placeholder="Applicant's signature " />
                                                 @error('signature')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -350,13 +366,15 @@
                                         </div><br>
                                         <br>
                                         <div class="row">
-                                            
+
                                             <div class="col-md-6 mb-6">
-                                                <label class="form-label">Applicant's Image( Max size: 2 MB)
-                                                    (അപേക്ഷകന്റെ ഫോട്ടോ )</label>
+                                                <label class="form-label"> അപേക്ഷകന്റെ ഫോട്ടോ <br><span
+                                                        class="small">Applicant's Image </span><br><small>( Max size:
+                                                        2 MB)</small>
+                                                </label>
                                                 <input type="file" class="form-control" accept="image/*"
                                                     name="applicant_image" id="applicant_image" value=""
-                                                    placeholder="Applicant's Image "  />
+                                                    placeholder="Applicant's Image " />
                                                 @error('applicant_image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -374,10 +392,11 @@
                                                     required {{ old('agree') == 'Yes' ? 'checked' : '' }}>
                                             </div>
                                             <div class="col-md-9 mb-9">
-
-                                                We hereby pledge that all the information we have added above is true and
-                                                correct. (ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ
-                                                പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.)
+                                                ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ
+                                                പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.
+                                                <br><span class="small"> We hereby pledge that all the information we have
+                                                    added above is true and
+                                                    correct.</span>
                                             </div>
                                         </div>
                                         <br>
@@ -395,14 +414,15 @@
                                         <div class="col-12">
                                             <h1
                                                 style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 10px;line-height: 32px;font-weight: 600;">
-                                                Submitting the application( അപേക്ഷ സമർപ്പിക്കുന്നത് )
+                                                അപേക്ഷ സമർപ്പിക്കുന്നത്
 
                                             </h1>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">District (ജില്ല) </label>
+                                            <label class="form-label">ജില്ല <br><span class="small">District
+                                                </span></label>
                                             <select id="submitted_district" name="submitted_district"
                                                 class="form-control">
                                                 <option value="">Select</option>
@@ -419,7 +439,8 @@
                                                 value="{{ old('dist_name') }}">
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">TEO (ടി .ഇ .ഓ) </label>
+                                            <label class="form-label"> ടി .ഇ .ഓ <br><span
+                                                    class="small">TEO</span></label>
                                             <select id="submitted_teo" name="submitted_teo" class="form-control">
                                                 <option value="">Choose TEO</option>
                                             </select>
@@ -437,12 +458,12 @@
                                 <div class="col-md-2 mb-2">
 
                                 </div>
-                                <div class="col-md-8 mb-8">
+                                <div class="col-md-12 mb-12">
 
                                     <button type="reset" id="submit1"
                                         class="btn btn-primary waves-effect waves-light text-start submit">Cancel</button>
                                     <button type="submit" id="submit"
-                                        class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                                        class="btn btn-danger waves-effect waves-light text-start submit">Save</button>
                                 </div>
 
 

@@ -280,7 +280,7 @@ Route::resource('/single-income-earner', SingleIncomeEarnerController::class);
 Route::post('/singleIncomeEarnerPreview', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleIncomeEarnerPreview'])->name('singleIncomeEarnerPreview');
 Route::post('/singleEarnerStore', [App\Http\Controllers\SingleIncomeEarnerController::class, 'singleEarnerStore'])->name('singleEarnerStore');
 
-//single income earner controller ends  here .
+//single income earner controller ends  here .MedicalEngineeringStudentFund
 
 
 //house Grant Scheme 

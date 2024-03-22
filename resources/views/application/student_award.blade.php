@@ -9,7 +9,7 @@
             <div class="breadcrumb-header justify-content-between row me-0 ms-0">
 
                 <h4 class="content-title mb-2"> മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo</h4>
-                <h4 class="content-title mb-2">APPLICATION FOR SSLC/PLUS TWO/ DEGREE/PG AWARD 2023-24</h4>
+                <h4 class="content-title mb-2 small">APPLICATION FOR SSLC/PLUS TWO/ DEGREE/PG AWARD 2023-24</h4>
 
                 @if ($message = Session::get('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -34,7 +34,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">പേര് / Name </label>
+                                                <label class="form-label">പേര്  <br> <span class="small"> Name</span> </label>
                                                 <input type="text" value="{{ old('name') }}" class="form-control"
                                                     placeholder="Name" name="name"  />
                                                 @error('name')
@@ -42,7 +42,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">ജനനത്തീയതി / Date of Birth </label>
+                                                <label class="form-label">ജനനത്തീയതി <br> <span class="small">  Date of Birth </label>
                                                 <input type="date" class="form-control" name="dob" id="dob"
                                                     value="{{ old('dob') }}" />
                                                 @error('dob')
@@ -50,7 +50,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">മേൽവിലാസം / Address </label>
+                                                <label class="form-label">മേൽവിലാസം <br> <span class="small"> Address </label>
                                                 <textarea type="text" class="form-control" name="address">{{ old('address') }}</textarea>
                                                 @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -61,7 +61,7 @@
 
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">ജില്ല / District </label>
+                                                <label class="form-label">ജില്ല <br> <span class="small">  District </label>
                                                 <select id="district" name="district" class="form-control">
                                                     <option value="">Select</option>
                                                     @foreach ($districts as $district)
@@ -77,7 +77,7 @@
                                                     value="{{ old('district_name') }}">
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">താലൂക്ക് / Taluk </label>
+                                                <label class="form-label">താലൂക്ക് <br> <span class="small"> Taluk </label>
                                                 <select id="taluk" name="taluk" class="form-control">
                                                     <option value="">Choose Taluk</option>
                                                 </select>
@@ -88,7 +88,7 @@
                                                     value="{{ old('taluk_name') }}">
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">പിൻകോഡ് / Pincode </label>
+                                                <label class="form-label">പിൻകോഡ് <br> <span class="small">  Pincode </label>
                                                 <input type="text" value="{{ old('pincode') }}" class="form-control"
                                                     name="pincode" id="pincode" />
                                                 @error('pincode')
@@ -98,7 +98,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">പാസ്സായ പരീക്ഷ / Examination Passed </label>
+                                                <label class="form-label">പാസ്സായ പരീക്ഷ <br> <span class="small"> Examination Passed </label>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-6">
                                                         <div>
@@ -135,7 +135,7 @@
                                             </div>
 
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">സംരക്ഷകന്റെ പേര് / Name of the Guardian</label>
+                                                <label class="form-label">സംരക്ഷകന്റെ പേര് <br> <span class="small">  Name of the Guardian</label>
                                                 <input type="text" class="form-control" name="guardian_name"
                                                     id="guardian_name" value="{{ old('guardian_name') }}"
                                                     placeholder="" />
@@ -144,7 +144,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">സമുദായം / Community</label>
+                                                <label class="form-label">സമുദായം <br> <span class="small"> Community</label>
                                                 <input type="text" class="form-control" name="community"
                                                     id="community" value="{{ old('community') }}" placeholder="" />
                                                 @error('community')
@@ -154,7 +154,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">പഞ്ചായത്തിന്റെ പേര് / Name of the
+                                                <label class="form-label">പഞ്ചായത്തിന്റെ പേര് <br> <span class="small">  Name of the
                                                     Panchayath</label>
                                                 <input type="text" class="form-control" name="panchayath_name"
                                                     id="panchayath_name" value="{{ old('panchayath_name') }}"
@@ -164,7 +164,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">സ്ഥാപനത്തിന്റെ പേര് / Name of the
+                                                <label class="form-label">സ്ഥാപനത്തിന്റെ പേര് <br> <span class="small"> Name of the
                                                     Institution</label>
                                                 <input type="text" class="form-control" name="institution_name"
                                                     id="institution_name" value="{{ old('institution_name') }}"
@@ -174,7 +174,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-2 mb-2">
-                                                <label class="form-label">പാസ് ആയ മാസം / Month of Pass</label>
+                                                <label class="form-label">പാസ് ആയ മാസം <br> <span class="small">  Month of Pass</label>
                                                 <input type="text" class="form-control" name="pass_month"
                                                     id="pass_month" value="{{ old('pass_month') }}" placeholder="" />
                                                 @error('pass_month')
@@ -182,7 +182,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-2 mb-2">
-                                                <label class="form-label">പാസ് ആയ വര്ഷം / Year of Pass</label>
+                                                <label class="form-label">പാസ് ആയ വര്ഷം <br> <span class="small">  Year of Pass</label>
                                                 <input type="number" class="form-control" name="pass_year"
                                                     id="pass_year" value="{{ old('pass_year') }}" placeholder="" />
                                                 @error('pass_year')
@@ -193,7 +193,7 @@
                                         <div class="row">
                                         
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">മാർക്ക്/ഗ്രേഡിൻ്റെ ശതമാനം/  Percentage of Mark/grade</label>
+                                                <label class="form-label">മാർക്ക്/ഗ്രേഡിൻ്റെ ശതമാനം <br> <span class="small">   Percentage of Mark/grade</label>
                                                 <input type="text" class="form-control" name="mark"
                                                     id="mark" value="{{ old('mark') }}"
                                                     placeholder="Percentage of Mark/grade" />
@@ -202,7 +202,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">സിലബസ് / Syllabus</label>
+                                                <label class="form-label">സിലബസ് <br> <span class="small">  Syllabus</label>
                                                 <select class="form-control" name="syllabus">
                                                     <option value="">Select Syllabus</option>
                                                     <option value="Kerala" {{ old('syllabus') == 'Kerala' ? 'selected' : '' }}>Kerala</option>
@@ -213,7 +213,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">സിലബസ് സർട്ടിഫിക്കറ്റ് അപ്‌ലോഡ് ചെയ്യുക / Upload Syllabus certificate</label>
+                                                <label class="form-label">സിലബസ് സർട്ടിഫിക്കറ്റ് അപ്‌ലോഡ് ചെയ്യുക <br> <span class="small"> Upload Syllabus certificate</label>
                                                 <input type="file" class="form-control" name="syllabus_certificate"
                                                     id="syllabus_certificate" value="{{ old('syllabus_certificate') }}" placeholder="" />
                                                 @error('syllabus_certificate')
@@ -223,7 +223,7 @@
                                         </div><br>
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">ഫോൺ നമ്പർ / Phone No.</label>
+                                                <label class="form-label">ഫോൺ നമ്പർ <br> <span class="small">  Phone No.</label>
                                                 <input type="number" class="form-control" name="phone" id="phone"
                                                     value="{{ old('phone') }}" placeholder="" />
                                                 @error('phone')
@@ -231,7 +231,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">അക്കൗണ്ട് നമ്പർ / Account No.</label>
+                                                <label class="form-label">അക്കൗണ്ട് നമ്പർ <br> <span class="small">  Account No.</label>
                                                 <input type="number" class="form-control" name="account_number"
                                                     id="account_number" value="{{ old('account_number') }}"
                                                     placeholder="" />
@@ -240,7 +240,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <label class="form-label">IFSC കോഡ് / IFSC Code </label>
+                                                <label class="form-label">IFSC കോഡ് <br> <span class="small">  IFSC Code </label>
                                                 <input type="text" class="form-control" name="ifsc_code"
                                                     id="ifsc_code" value="{{ old('ifsc_code') }}" placeholder="" />
                                                 @error('ifsc_code')
@@ -250,7 +250,7 @@
                                         </div><br>
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
-                                                <label class="form-label">ആധാർ നമ്പർ / Aadhar No. </label>
+                                                <label class="form-label">ആധാർ നമ്പർ <br> <span class="small"> Aadhar No. </label>
                                                 <input type="number" class="form-control" name="aadhar_number"
                                                     id="aadhar_number" value="{{ old('aadhar_number') }}"
                                                     placeholder="" />
@@ -259,7 +259,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 mb-6">
-                                                <label class="form-label">ഒപ്പ് / Signature</label>
+                                                <label class="form-label">ഒപ്പ് <br> <span class="small"> Signature</label>
                                                 <input type="file" onchange="validateSignature()" accept="image/*"
                                                     class="form-control" name="signature" id="signature" value=""
                                                     placeholder="" required />
@@ -274,7 +274,7 @@
 
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
-                                                <label class="form-label">Applicant's Image /
+                                                <label class="form-label">Applicant's Image<br> <span class="small"> 
                                                     അപേക്ഷകന്റെ ഫോട്ടോ </label>
                                                 <input type="file" class="form-control" accept="image/*"
                                                     name="applicant_image" id="applicant_image" required />
@@ -299,8 +299,8 @@
                                               <input type="checkbox" id="agree" name="agree" value="Yes" required {{ old('agree') == 'Yes' ? 'checked' : '' }}>
                                           </div>
                                           <div class="col-md-9 mb-9">
-                                              We hereby pledge that all the information we have added above is true and correct.
-                                            (  ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.)
+                                              
+                                              ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശരിയുമാണെന്ന് ഇതിനാൽ പ്രതിജ്ഞ ചെയ്തുകൊള്ളുന്നു.<br>We hereby pledge that all the information we have added above is true and correct.
                                           </div>
                                       </div>
                                          
@@ -313,7 +313,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">ജില്ല / District </label>
+                                            <label class="form-label">ജില്ല   <br> <span class="small"> District </span></label>
                                             <select id="submitted_district" name="submitted_district"
                                                 class="form-control" required />
                                             <option value="">Select</option>
@@ -330,7 +330,7 @@
                                                 value="{{ old('dist_name') }}">
                                         </div>
                                         <div class="col-md-6 mb-6">
-                                            <label class="form-label">ടി.ഇ.ഒ / TEO </label>
+                                            <label class="form-label">ടി.ഇ.ഒ <br> <span class="small">  TEO </span></label>
                                             <select id="submitted_teo" name="submitted_teo" class="form-control"
                                                 required />
                                             <option value="">Choose TEO</option>
@@ -347,9 +347,9 @@
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                 </div>
-                                <div class="col-md-8 mb-8">
+                                <div class="col-md-12 mb-12">
                                     <button type="submit" id="submit"
-                                        class="btn btn-warning waves-effect waves-light text-start submit">Save</button>
+                                        class="btn btn-danger w-15 waves-effect waves-light text-center submit">Save</button>
                                 </div>
                             </div><br>
 
