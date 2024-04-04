@@ -45,22 +45,20 @@
                                 
 
                                     <div class="paper-1">
-                                        <div class="row">
+                                        <div class="row w-100 ">
                                             <div class="col-12">
-                                                <label>1. അപേക്ഷകന്റെ പേരും പൂർണ്ണ 
-                                                    മേൽ വിലാസവും </label>
+                                                <h4> അപേക്ഷകന്റെ പേരും പൂർണ്ണ 
+                                                    മേൽ വിലാസവും </h4>
                                             </div>
 
                                 
-                                        </div>
-                                    </div>
-
-                                    <div class="paper-1">
+                                      
+       
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label> എ ) ഭർത്താവ് </label><br>
+                                                    <label> ഭർത്താവ് </label><br>
 
                                                 </div>
 
@@ -80,7 +78,7 @@
                                             </div>
                                             <div class="row w-100">
                                                 <div class="col-5">
-                                                    <label> ബി ) ഭാര്യ </label>
+                                                    <label> ഭാര്യ </label>
                                                 </div>
 
 
@@ -97,25 +95,23 @@
                                             </div>
 
                                         </div>
-
+                                    </div>
                                     </div>
 
                                     <div class="paper-1">
-                                        <div class="row">
+                                        <div class="row w-100 ">
                                             <div class="col-12">
-                                                <label>2.വിവാഹത്തിനുമുമ്പുള്ള പൂർണ്ണ മേൽവിലാസം </label>
+                                                <h4>വിവാഹത്തിനുമുമ്പുള്ള പൂർണ്ണ മേൽവിലാസം </h4>
                                             </div>
 
                                 
-                                        </div>
-                                    </div>
-
-                                    <div class="paper-1">
+                                       
+                                   
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label> എ ) ഭർത്താവ് </label><br>
+                                                    <label> ഭർത്താവ് </label><br>
 
                                                 </div>
 
@@ -135,7 +131,7 @@
                                             </div>
                                             <div class="row w-100">
                                                 <div class="col-5">
-                                                    <label> ബി ) ഭാര്യ </label>
+                                                    <label>  ഭാര്യ </label>
                                                 </div>
 
 
@@ -152,27 +148,25 @@
                                             </div>
 
                                         </div>
-
+                                    </div>
                                     </div>
 
 
 
                                     <div class="paper-1">
-                                        <div class="row">
+                                        <div class="row w-100 ">
                                             <div class="col-12">
-                                                <label>3.സമുദായം </label>
+                                                <h4>സമുദായം </h4>
                                             </div>
 
                                 
-                                        </div>
-                                    </div>
-
-                                    <div class="paper-1">
+                                        
+                                   
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label> എ ) ഭർത്താവ് </label><br>
+                                                    <label> ഭർത്താവ് </label><br>
 
                                                 </div>
 
@@ -191,7 +185,7 @@
                                             </div>
                                             <div class="row w-100">
                                                 <div class="col-5">
-                                                    <label> ബി ) ഭാര്യ </label>
+                                                    <label> ഭാര്യ </label>
                                                 </div>
 
 
@@ -207,26 +201,24 @@
                                             </div>
 
                                         </div>
-
+                                    </div>
                                     </div>
 
 
                                     <div class="paper-1">
-                                        <div class="row">
+                                        <div class="row  w-100">
                                             <div class="col-12">
-                                                <label>4. പഞ്ചായത്തിൻ്റെ അല്ലെങ്കിൽ കോ-ഓർപ്പറേഷൻ്റെ പേര്  </label>
+                                                <h4> പഞ്ചായത്തിൻ്റെ അല്ലെങ്കിൽ കോ-ഓർപ്പറേഷൻ്റെ പേര്  </h4>
                                             </div>
 
                                 
-                                        </div>
-                                    </div>
-
-                                    <div class="paper-1">
-                                        <div class="w-100">
+                                      
+                                    
+                                       
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label> എ ) ഭർത്താവ് </label><br>
+                                                    <label>  ഭർത്താവ് </label><br>
 
                                                 </div>
 
@@ -245,7 +237,7 @@
                                             </div>
                                             <div class="row w-100">
                                                 <div class="col-5">
-                                                    <label> ബി ) ഭാര്യ </label>
+                                                    <label> ഭാര്യ </label>
                                                 </div>
 
 
@@ -260,32 +252,30 @@
                                                 </div>
                                             </div>
 
-                                        </div>
+ 
 
                                     </div>
 
-
+                                </div>
 
 
                                     
 
 
                                     <div class="paper-1">
-                                        <div class="row">
+                                        <div class="row w-100">
                                             <div class="col-12">
-                                                <label>5. വിവാഹത്തിനുമുമ്പുള്ള തൊഴിലും മാസ വരുമാനവും </label>
+                                                <h4> വിവാഹത്തിനുമുമ്പുള്ള തൊഴിലും മാസ വരുമാനവും </h4>
                                             </div>
 
                                 
-                                        </div>
-                                    </div>
-
-                                    <div class="paper-1">
+                                       
+                                   
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label> എ ) ഭർത്താവ് </label><br>
+                                                    <label>  ഭർത്താവ് </label><br>
 
                                                 </div>
 
@@ -304,7 +294,7 @@
                                             </div>
                                             <div class="row w-100">
                                                 <div class="col-5">
-                                                    <label> ബി ) ഭാര്യ </label>
+                                                    <label>  ഭാര്യ </label>
                                                 </div>
 
 
@@ -321,26 +311,23 @@
 
                                         </div>
 
-                                    </div>
+                                    </div> </div>
 
 
 
                                      <div class="paper-1">
-                                        <div class="row">
+                                        <div class="row w-100">
                                             <div class="col-12">
-                                                <label>6.അപേക്ഷ സമർപ്പിക്കുമ്പോഴത്തെ തൊഴിലും മാസവരമാനവും </label>
+                                                <h4>അപേക്ഷ സമർപ്പിക്കുമ്പോഴത്തെ തൊഴിലും മാസവരമാനവും </h4>
                                             </div>
 
                                 
-                                        </div>
-                                    </div>
-
-                                    <div class="paper-1">
+                                      
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label> എ ) ഭർത്താവ് </label><br>
+                                                    <label> ഭർത്താവ് </label><br>
 
                                                 </div>
 
@@ -359,7 +346,7 @@
                                             </div>
                                             <div class="row w-100">
                                                 <div class="col-5">
-                                                    <label> ബി ) ഭാര്യ </label>
+                                                    <label>  ഭാര്യ </label>
                                                 </div>
 
 
@@ -376,24 +363,22 @@
 
                                         </div>
 
-                                    </div>
+                                    </div>    </div>
 
                                     <div class="paper-1">
-                                        <div class="row">
+                                        <div class="row w-100">
                                             <div class="col-12">
-                                                <label>7. വിവാഹത്തിന്റെ വിശദ വിവരങ്ങൾ<br>എ) വിവാഹ സമയത്തെ പ്രായം</label>
+                                                <h4>വിവാഹത്തിന്റെ വിശദ വിവരങ്ങൾ വിവാഹ സമയത്തെ പ്രായം</h4>
                                             </div>
 
                                 
-                                        </div>
-                                    </div>
-
-                                     <div class="paper-1">
+                                      
+                                  
                                         <div class="w-100">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label> എ ) ഭർത്താവ് </label><br>
+                                                    <label>  ഭർത്താവ് </label><br>
 
                                                 </div>
 
@@ -412,7 +397,7 @@
                                             </div>
                                             <div class="row w-100">
                                                 <div class="col-5">
-                                                    <label> ബി ) ഭാര്യ </label>
+                                                    <label>  ഭാര്യ </label>
                                                 </div>
 
 
@@ -430,17 +415,17 @@
                                         </div>
 
                                     </div>
-
+                                </div>
 
                                      
 
                                     <div class="paper-1">
-                                        <div class="w-100">
+                                        <div class="w-100 row">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>ബി) രജിസ്റ്റർ വിവാഹം ആയിരുന്നവാ എങ്കിൽ രെജിസ്ട്രേഷൻ നമ്പറും
-                                                <br>തീയതിയും രജിസ്‌ട്രാറാഫീന്റെ പേരും</label><br>
+                                                    <label> രജിസ്റ്റർ വിവാഹം ആയിരുന്നവാ എങ്കിൽ രെജിസ്ട്രേഷൻ നമ്പറും
+                                                <br>തീയതിയും <br> രജിസ്‌ട്രാറാഫീന്റെ പേരും</label><br>
 
                                                 </div>
 
@@ -453,7 +438,7 @@
                                                 </div>
 
                                                 <div class="col-6">
-                                                    <label>{{ @$formData['register_marriage'] }} - {{ @$formData['register_details'] }}  {{ @$formData['register_date'] }}  {{ @$formData['register_office_name'] }} </label>
+                                                    <label>{{ @$formData['register_marriage'] }} <br> {{ @$formData['register_details'] }} <br>  {{ @$formData['register_date'] }} <br>  {{ @$formData['register_office_name'] }} </label>
 
                                                 </div>
                                             </div>
@@ -464,11 +449,11 @@
                                     </div>
 
                                     <div class="paper-1">
-                                        <div class="w-100">
+                                        <div class="w-100 row">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>സി) വിവാഹത്തിന്റെ സാധ്യത 
+                                                    <label> വിവാഹത്തിന്റെ സാധ്യത 
                                                 തെളിയിക്കുന്നതിന് രേഖ ഹാജരാക്കിട്ടുണ്ടാങ്കിൽ അതിന്റെ വിവരം</label><br>
 
                                                 </div>
@@ -501,11 +486,11 @@
 
 
                                     <div class="paper-1">
-                                        <div class="w-100">
+                                        <div class="w-100 row">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>8. വിവാഹത്തിനു ശേഷം ദമ്പതികൾ 
+                                                    <label> വിവാഹത്തിനു ശേഷം ദമ്പതികൾ 
                                                 ഏതെങ്കിലും കാലയളവിൽ വേർപിരിഞ്ഞു തമാശിച്ചിട്ടുണ്ടോ?
                                                 ഉണ്ടങ്കിൽ </label><br>
 
@@ -533,11 +518,11 @@
                                     </div>
                                     @if(@$formData['apart_for_any_period'] == 'Yes') 
                                         <div class="paper-1">
-                                            <div class="w-100">
+                                            <div class="w-100 row">
                                                 <div class="row w-100">
                                                     <div class="col-5">
 
-                                                        <label> എ) വേർപിരിഞ്ഞു താമസിച്ച കാലയളവ് </label><br>
+                                                        <label>  വേർപിരിഞ്ഞു താമസിച്ച കാലയളവ് </label><br>
 
                                                     </div>
 
@@ -556,7 +541,7 @@
                                                 </div>
                                                 <div class="row w-100">
                                                     <div class="col-5">
-                                                        <label>ബി) വേർപിരിഞ്ഞു താമസിക്കാൻ ഉണ്ടായ<br> കാരണം</label>
+                                                        <label>വേർപിരിഞ്ഞു താമസിക്കാൻ ഉണ്ടായ<br> കാരണം</label>
                                                     </div>
 
 
@@ -578,11 +563,11 @@
 
 
                                     <div class="paper-1">
-                                        <div class="w-100">
+                                        <div class="w-100 row">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>9. ധനസഹായം ലഭിക്കുന്ന പക്ഷം എന്തു 
+                                                    <label> ധനസഹായം ലഭിക്കുന്ന പക്ഷം എന്തു 
                                                 കാര്യത്തിനു വേണ്ടി ചെലവഴിക്കാനാണ് 
                                                 ഉദ്ദേശിക്കുന്നത് </label><br>
 
@@ -611,11 +596,11 @@
 
 
                                     <div class="paper-1">
-                                        <div class="w-100">
+                                        <div class="w-100 row">
                                             <div class="row w-100">
                                                 <div class="col-5">
 
-                                                    <label>10. മിശ്രവിവാഹം മൂലം ദമ്പതികൾക്ക്
+                                                    <label> മിശ്രവിവാഹം മൂലം ദമ്പതികൾക്ക്
                                                 അനുഭവിക്കേണ്ടി വന്നിട്ടുള്ള കഷ്ടതകളം
                                                 പ്രയാസങ്ങളം എന്തെല്ലാം </label><br>
 
@@ -824,7 +809,7 @@
                                     <div class="row justify-content-center">
                                         <div class="col-md-3">
                                             <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
-                                            <button type="submit" class="btn-block btn btn-success" onclick="return confirm('Do you want to continue?')">Submit</button>
+                                            <button type="submit" class="btn-block btn btn-danger" onclick="return confirm('Do you want to continue?')">Submit</button>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="btn_wrapper">

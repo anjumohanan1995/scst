@@ -98389,6 +98389,7 @@ div#success_message {
 .paper-1 {
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px dashed #ff0000;
 }
 .ctm-height{
     min-height: 70px;

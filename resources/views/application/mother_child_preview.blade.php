@@ -48,7 +48,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>1. പേര് </label>
+                                            <label>പേര് </label>
                                         </div>
 
                                         <div class="col-1">
@@ -61,7 +61,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>1. മേൽവിലാസം (പിൻകോഡ് സഹിതം) </label>
+                                            <label>മേൽവിലാസം (പിൻകോഡ് സഹിതം) </label>
                                         </div>
 
                                         <div class="col-1">
@@ -114,7 +114,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>3.വയസ്, ജനനതീയതി</label>
+                                            <label>വയസ്, ജനനതീയതി</label>
                                         </div>
 
                                         <div class="col-1">
@@ -127,7 +127,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>4. .ഭർത്താവിന്റെ പേര് </label>
+                                            <label>ഭർത്താവിന്റെ പേര് </label>
                                         </div>
 
                                         <div class="col-1">
@@ -140,7 +140,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>5. സമുദായം / ജാതി</label>
+                                            <label> സമുദായം / ജാതി</label>
                                         </div>
 
                                         <div class="col-1">
@@ -153,7 +153,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>6.വില്ലേജ് </label>
+                                            <label>വില്ലേജ് </label>
                                         </div>
 
                                         <div class="col-1">
@@ -166,7 +166,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>7.എത്രാമത്തെ പ്രസവം </label>
+                                            <label>എത്രാമത്തെ പ്രസവം </label>
                                         </div>
 
                                         <div class="col-1">
@@ -179,7 +179,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>8.പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി </label>
+                                            <label>പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി </label>
                                         </div>
 
                                         <div class="col-1">
@@ -192,7 +192,7 @@
                                     <div class=" row paper-1">
                                         <div class="col-5">
 
-                                            <label>9. ഗർഭ /പ്രസവ ശുശ്രുഷക്ക്<br> ആശ്രയിക്കുന്ന ആശുപത്രി /<br>കുടുംബക്ഷേമ
+                                            <label> ഗർഭ /പ്രസവ ശുശ്രുഷക്ക്<br> ആശ്രയിക്കുന്ന ആശുപത്രി /<br>കുടുംബക്ഷേമ
                                                 കേന്ദ്രം </label>
                                         </div>
 
@@ -323,7 +323,7 @@
                                     <div class="row justify-content-center">
                                         <div class="col-md-3">
                                             <input type="hidden" name="formData" value="{{ json_encode($formData) }}">
-                                            <button type="submit" class="btn-block btn btn-success"
+                                            <button type="submit" class="btn-block btn btn-danger"
                                                 onclick="return confirm('Do you want to continue?')">Submit</button>
                                         </div>
                                         <div class="col-md-3">
