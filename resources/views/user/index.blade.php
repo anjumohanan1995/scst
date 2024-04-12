@@ -126,8 +126,8 @@
 														<th>Name</th>
 														<th>Email ID</th>
 														<th>Mobile</th>
-                                                       {{--  <th>Role</th>
-                                                        <th>District</th>
+                                                        <th>Role</th>
+                                                        {{-- <th>District</th>
 														<th>Hospital Name</th> --}}
                                                         <th>Created Date</th>
                                                         <th >Action</th>
@@ -261,7 +261,7 @@ $(document).on("click",".deleteItem",function() {
                 { data: 'name' },
                 { data: 'email' },
 				{ data: 'mobile' },
-				//{ data: 'role' },
+				{ data: 'role' },
                 //{ data: 'district' },
 				//{ data: 'hospital_name' },
                 { data: 'created_at', visible: false },
