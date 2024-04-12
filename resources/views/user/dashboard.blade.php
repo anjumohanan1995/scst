@@ -220,7 +220,7 @@ h3 a{
                                             <div class="card-content">
 
                                                 <div class="card-desc">
-                                                    <h3>Application 5 -<a href="{{ route('userchildFinanceList') }}">Applied({{ $data['childFinanceCount'] }})</h3>
+                                                    <h3>Application 5 -<a href="{{ route('userchildFinanceList') }}">Applied({{ $data['childFinanceCount'] }})</a></h3>
                                                     <p class="ctm-height">അനാധകർക്ക്പ്രതിമാസം 2000 രൂപ ധനസഹായം നൽകുന്ന പദ്ധതി കൈത്താങ്ങ് </p>
                                                          
                                                         {{-- <a href="{{url('childFinancialAssistanceForm')}}" class="btn-card">Apply Now</a>    --}}
