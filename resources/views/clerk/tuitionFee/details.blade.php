@@ -613,7 +613,12 @@
 
                                         </div>
 
-                                    </div>
+                                    </div><br>
+
+                                    <div class="col-md-6 mb-6">
+                                        <a href="{{ route('tuitionFeeListClerk') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                        </a>  </div>
+                                               
 
 
 

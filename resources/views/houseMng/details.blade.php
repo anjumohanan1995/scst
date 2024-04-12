@@ -17,7 +17,6 @@
          @endif
       </div>
       <!-- /breadcrumb -->
-  
       <div class="main-content-body">
          @if (session('success'))
          <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -374,7 +373,7 @@
                         <div class="col-md-4 mb-4">
                         </div>
                         <div class="col-md-6 mb-6">
-                           <a href="{{ route('adminHouseGrantList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                           <a href="{{ route('userHouseGrantList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
                            </a>  
                         </div>
                      </div>

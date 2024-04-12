@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> വിലാസം <br><span class="small"> Address</span> </label>
-                                            <label class="form-label"> വീട്ടുപേര് <br><span class="small"> House Name </span></label>
+                                            {{-- <label class="form-label"> വീട്ടുപേര് <br><span class="small"> House Name </span></label> --}}
                                             <textarea class="form-control" placeholder="House Name" name="address"></textarea>
                                             <span id="nameError" class="text-danger"></span>
                                             @error('address')
@@ -360,9 +360,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <br>
-
+                                    </div><br>
                                     <div class="row">
                                        
                                         <div class="col-md-6 mb-6">
@@ -395,60 +393,53 @@
                                             <br>
                                             <span class="text-danger" id="errorimage"></span>
                                         </div>
+                                    </div><br>                       
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">ജില്ല<br><span class="small">District</span></label>
+                                            <select id="submitted_district" name="submitted_district" class="form-control" required>
+                                                <option value="">Select</option>
+                                                @foreach ($districts as $district)
+                                                <option value="{{ $district->id }}" {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
+                                                    {{ $district->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('dist')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <input type="hidden" name="dist_name" id="dist_name" value="">
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">ടി.ഇ.ഓ<br><span class="small">TEO</span></label>
+                                            <select id="submitted_teo" name="submitted_teo" class="form-control" required>
+                                                <option value="">Choose TEO</option>
+                                            </select>
+                                            @error('teo')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <input type="hidden" name="teo_name" id="teo_name" value="">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                        </div>
+                                        <div class="  col-md-12 mb-12">
+                                            <button type="submit" id="submit"
+                                                class="btn btn-danger w-15 waves-effect waves-light text-center submit">Save</button>
+                                        </div>
                                     </div><br>
-                                 
-                                </div><br>
-                            </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label"> ജില്ല <br><span class="small">District</span> </label>
-                                    <select id="submitted_district" name="submitted_district" class="form-control"
-                                        required>
-                                        <option value="">Select</option>
-                                        @foreach ($districts as $district)
-                                            <option value="{{ $district->id }}"
-                                                {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
-                                                {{ $district->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('dist')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                    <input type="hidden" name="dist_name" id="dist_name" value="">
-                                </div>
-                                <div class="col-md-6 mb-6">
-                                    <label class="form-label"> ടി . ഇ . ഓ  <br><span class="small">TEO</span> </label>
-                                    <select id="submitted_teo" name="submitted_teo" class="form-control" required>
-                                        <option value="">Choose TEO</option>
-                                    </select>
-                                    @error('teo')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                    <input type="hidden" name="teo_name" id="teo_name" value="">
-                                </div>
-                            </div><br>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                        </div>
-                        <div class="  col-md-12 mb-12">
-                            <button type="submit" id="submit"
-                                class="btn btn-danger w-15 waves-effect waves-light text-center submit">Save</button>
-                        </div>
-                    </div><br>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    {{-- </div>
     </div>
-    </div>
-    </div>
+    </div> --}}
     <script>
         $(document).ready(function() {
             $('input[name="apart_for_any_period"]').change(function() {

@@ -30,6 +30,14 @@
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
                <div class="card overflow-hidden">
                   <div class="card-body pd-y-7">
+                     <div id="btnHide" class="row justify-content-end m-3">
+                        <a style="width: 50px" onclick="printDiv()"><img
+                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                    </div>
+
+                    <div id="print_content">
+                        <div id="success_message" class="ajax_response" style="display: none;"></div>
+                        <div class="mb-4 main-content-label">
                      <h1
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
                         പട്ടികവർഗ്ഗത്തിൽപ്പെട്ട പെണ്കുട്ടികൾക്ക്
@@ -39,6 +47,7 @@
                      </h2>
                      <p style="text-align: center;"> ( അപേക്ഷകൻ പൂരിപ്പിക്കേണ്ടത് )
                      </p>
+                        </div>
                      <table>
                         <thead>
                         </thead>
@@ -384,7 +393,21 @@
                            </div>
                         </div>
                      </div>
+                     <div class="row">
+                        <div class="col-md-4 mb-4">
+                          
+                             
+
+                        <div class="col-md-6 mb-6">
+                         <a href="{{ route('marriageGrantListClerk') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                         </a>  </div>
+                                
+                                
+
+                            </div><br>
+                     </div>
                      <br>
+                  </div>
                   </div>
                </div>
                <br>
@@ -691,5 +714,16 @@
        }
        return
    }
+
+   function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
 </script>
 @endsection

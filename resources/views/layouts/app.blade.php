@@ -487,7 +487,7 @@
                                 @include('layouts.clerk_app')
                                 @elseif ( Auth::user()->role == 'ATDO' || Auth::user()->role == 'APO')
                                 @include('layouts.apo_atdo_app')
-                              @elseif ( Auth::user()->role == 'TDO' || Auth::user()->role == 'Project Officer')
+                              @elseif ( Auth::user()->role == 'TDO' || Auth::user()->role == 'PO')
                             @include('layouts.po_tdo_app')
                               @endif
 

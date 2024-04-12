@@ -469,16 +469,16 @@ $i=$start;
 $i=$start;
          foreach($records as $record){
             $i++;
-             $id = $record->id;
-             $name = $record->name;
-             $address = $record->address;
-             $course_name = $record->course_name;
-             $place = $record->place;
-             $date=$record->date;
-             $income=$record->income;
-             $caste = $record->caste;
-              $created_at =  $record->created_at;
-              $carbonDate = Carbon::parse($record->created_at);
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $course_name = $record->course_name;
+            $place = $record->place;
+            $date=$record->date;
+            $course_duration=$record->course_duration;
+            $institution_type = $record->institution_type;
+             $created_at =  $record->created_at;
+             $carbonDate = Carbon::parse($record->created_at);
 
               $date = $carbonDate->format('d-m-Y');
               $time = $carbonDate->format('g:i a');
@@ -504,16 +504,27 @@ $i=$start;
              
               }
             $data_arr[] = array(
+            //     "id" => $id,
+            //    "sl_no" => $i,
+            //     "name" => $name,
+            //     "address" => $address,
+            //     "course_name" => $course_name,
+            //     "income" =>$income,
+            //     "caste" => $caste,
+            //     "date" => $date .' ' .$record->time, 
+                
                 "id" => $id,
-               "sl_no" => $i,
-                "name" => $name,
-                "address" => $address,
-                "course_name" => $course_name,
-                "caste" => $caste,
-                "income" =>$income,
-                "date" => $date .' ' .$record->time, 
+                "sl_no" =>$i,
+                 "name" => $name,
+                 "address" => $address,
+                 "course_name" => $course_name,
+                 "course_duration" => $course_duration,
+                 "institution_type" => $institution_type,
+                 "created_at" => $date .' ' .$record->time, 
+
                                 
                 "edit" => $edit
+
 
             );
          }

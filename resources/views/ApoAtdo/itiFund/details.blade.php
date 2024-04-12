@@ -314,7 +314,7 @@
                                      
                                          </div>
                                 <div class="col-md-6 mb-6">
-                                 <a href="{{ route('adminItiFundList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                 <a href="{{ route('assistantItiFundList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
                                  </a>  </div>
                                         
                                         

@@ -621,6 +621,10 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                <div class="col-md-6 mb-6">
+                                    <a href="{{ route('ChildFinanceListOfficer') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                    </a>  </div>
                                         {{-- <div class="m-5">
                                             <h6 class="text-center"><u><b>രക്ഷിതാവിന്റെ സമ്മതപത്രം</b>
                                                 </u>

@@ -844,11 +844,28 @@ class UserHomeController extends Controller
 
         return response()->json($response);
     }
+
+ 
     public function userAnemiaFinanceView(Request $request, $id)
     {
+
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('h:i A');
+     
+        $anemiafinance=AnemiaFinance::find($id);
+        if($anemiafinance->teo_view_status==null && Auth::user()->role=='TEO'){
+            $anemiafinance->update([
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         $formData = AnemiaFinance::where('_id', $id)->first();
 
-        return view('user.anemia_finance_view', compact('formData'));
+        return view('user.anemia_finance_view', compact('formData','anemiafinance'));
     }
     public function userSingleEarnerList(Request $request)
     {

@@ -31,13 +31,21 @@
          <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
             <div class="card overflow-hidden" >
                <div class="card-body pd-y-5">
-                  <div id="print_content">
+                  <div id="btnHide" class="row justify-content-end m-3">
+                     <a style="width: 50px" onclick="printDiv()"><img
+                             src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                 </div>
+
+                 <div id="print_content">
+                     <div id="success_message" class="ajax_response" style="display: none;"></div>
+                     <div class="mb-4 main-content-label">
                      <h1
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
                         മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് <br>
                         പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നം സാമ്പത്തിക സഹായം<br>
                         അനുവദിക്കുന്നതിനുള്ള അപേക്ഷാഫോം
                      </h1>
+                     </div>
                      <div class="paper-1">
                         <div class="row">
                            <div class="col-12">
@@ -494,6 +502,13 @@
                               @endif
                            </div>
                         </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-4 mb-4">
+                        <div class="col-md-6 mb-6">
+                         <a href="{{ route('couplefinancialListAssistant') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                         </a>  </div>
+                         </div><br>
                      </div>
                   </div>
                   <div class="modal fade" id="approve-popup" style="display: none">

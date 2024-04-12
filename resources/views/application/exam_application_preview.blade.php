@@ -488,7 +488,10 @@
     <script>
         // edit button function
         function goback() {
-            return confirm('Are you sure? Do you want to edit this form!');
+            if (confirm('Are you sure ? Do you want to edit this form!. ')) {
+                window.history.back();
+            }
+            return
         }
     </script>
 @endsection

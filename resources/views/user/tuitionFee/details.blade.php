@@ -614,14 +614,17 @@
                                             
 
                                         </div>
+                                                   
 
-                                    </div>
+                                    </div><br>
+
+                                    <div class="col-md-6 mb-6">
+                                        <a href="{{ route('userTuitionFeeList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                        </a>  </div>
+                                               
 
 
-
-                                        
-                                        
-
+                            
                                        {{-- <br>
                                         <div>
                                             <p>പഠിക്കുന്ന സ്‌കൂളിന്റെ മേലധികാരിയുടെ ഒപ്പും സീലും 
@@ -646,6 +649,7 @@
 
                                 
                             </div>
+
                             <!-- /row -->
                             <!-- row -->
                             

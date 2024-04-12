@@ -51,13 +51,13 @@
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
                                 <div class="row mb-3">
-                                    <div class="col-md-1 col-6 text-center" id="">
+                                    {{-- <div class="col-md-1 col-6 text-center" id="">
                                         <a href="iti-scholarship">
                                         <div class="task-box  primary mb-0">
                                                 <p class="mb-0 tx-12">Add  </p>
                                                 <h3 class="mb-0"><i class="fa fa-plus"></i></h3>
                                         </div></a>
-                                    </div>
+                                    </div> --}}
                                 <div class="col-md-1 col-6 text-center" id="refresh">
                                     <div class="task-box success  mb-0">
                                             <p class="mb-0 tx-12">Refresh  </p>

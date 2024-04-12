@@ -415,6 +415,10 @@
                               </div>
                            </div>
                         </div>
+                        <div class="col-md-6 mb-6">
+                           <a href="{{ route('userchildFinanceList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                           </a>  
+                        </div>
                         {{-- 
                         <div class="m-5">
                            <h6 class="text-center"><u><b>രക്ഷിതാവിന്റെ സമ്മതപത്രം</b>
@@ -481,132 +485,155 @@
                <!-- /row -->
                <!-- row -->
             </div>
+
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                <div class="pt-2 card overflow-hidden">
-                   <div class="card-body">
-                      <ul class="timeline-3">
-                         @if(@$formData->teo_status == 1)
-                         <li class="ApproveTimeline">
-                            <a href="#!">TEO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
-                            <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-                            <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
-                            <p class="mt-2"><span class= "spanclr"> Name : </span>{{ @$formData->teoUser->name }}</p>
-                            <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
-                            <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                            <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
-                         </li>
-                         @elseif(@$formData->teo_status == 2)
-                         <li class="rejectTimeline">
-                            <a href="#!">TEO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
-                            <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
-                            <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
-                            <p class="mt-2"><span class= "spanclr"> Name : </span>{{ @$formData->teoUser->name }}</p>
-                            <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
-                            <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                            <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->teo_status_reason}}</p>
-                         </li>
-                         @elseif(@$formData->teo_status == null)
-                         <li class="pendingTimeline">
-                            <a href="#!">TEO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
-                            <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                            {{-- <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p> --}}
-                         </li>
-                         @endif
-                         @if(@$formData->teo_status == 1)
-                         @if( @$formData->clerk_status == 1)
-
-                         <li class="ApproveTimeline">
-                           <a href="#!">Clerk</a>
-                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+               <div class="pt-2 card overflow-hidden">
+                  <div class="card-body">
+                     <ul class="timeline-3">
+                        @if(@$formData->teo_status == 1)
+                        <li class="ApproveTimeline">
+                           <a href="#!">TEO</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                           <p></p>
                            <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-                           <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                           <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
+                           <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                           <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                           <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                           <p  class="mt-2"><span class= "spanclr">TEO Approved Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                           <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
                         </li>
-                        @elseif( @$formData->clerk_status == 2)
-
+                        @elseif(@$formData->teo_status == 2)
                         <li class="rejectTimeline">
+                           <a href="#!">TEO</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                           <p></p>
+                           <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
+                           <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
+                           <p class="mt-2"><span class= "spanclr">TEO Name : </span>{{ @$formData->teoUser->name }}</p>
+                           <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
+                           <p  class="mt-2"><span class= "spanclr">TEO Rejected Date :   </span>@if(@$formData['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                           <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                        </li>
+                        @elseif(@$formData->teo_status == null)
+                        <li class="pendingTimeline">
+                           <a href="#!">TEO</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['teo_view_date'] }}</a>
+                           <p></p>
+                           <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                           {{-- 
+                           <p class="mt-2"><span class= "spanclr">TEO View Date :   </span> {{ @$formData['teo_view_date'] }}</p>
+                           --}}
+                        </li>
+                        @endif
+                        @if(@$formData->teo_status == 1)
+                        @if( @$formData->clerk_status == 1)
+       
+                        <li class="ApproveTimeline">
                           <a href="#!">Clerk</a>
                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
-                          <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                          <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                          <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
+                          <p></p>
+                          <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                          <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->clerkUser->name }}</p>
+                          <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                          <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
                        </li>
-                       @elseif( @$formData->clerk_status == null)
-
-                       <li class="pendingTimeline">
+                       @elseif( @$formData->clerk_status == 2)
+       
+                       <li class="rejectTimeline">
                          <a href="#!">Clerk</a>
                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
-                       
+                         <p></p>
+                         <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                         <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->clerkUser->name }}</p>
+                          
+                         <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                         <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->clerk_status_reason}}</p>
+                      </li>
+                      @elseif( @$formData->clerk_status == null)
+       
+                      <li class="pendingTimeline">
+                        <a href="#!">Clerk</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                         </li>
+                         @endif
+       
+                         @endif 
+                         @if(@$formData->clerk_status == 1)
+                         @if( @$formData->assistant_status == 1)
+        
+                         <li class="ApproveTimeline">
+                           <a href="#!">APO / ATDO</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                           <p></p>
+                           <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                           <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->assistantUser->name }}</p>
+                          
+                           <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                           <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+                        </li>
+                        @elseif( @$formData->assistant_status == 2)
+        
+                        <li class="rejectTimeline">
+                          <a href="#!">APO / ATDO</a>
+                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                          <p></p>
+                          <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                          <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->assistantUser->name }}</p>
+                          
+                          <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                          <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->assistant_status_reason}}</p>
+                       </li>
+                       @elseif( @$formData->assistant_status == null)
+        
+                       <li class="pendingTimeline">
+                         <a href="#!">APO / ATDO</a>
+                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                        <p></p>
                          <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
                           </li>
                           @endif
-
-
-
-
-                         {{-- @if( @$formData->pjct_offcr_status == 1)
-                         <li class="ApproveTimeline">
-                            <a href="#!">Project Officer</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['pjct_offcr_view_date'] }}</a>
-                            <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
-                            <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
-                            <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
-                            <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                         </li>
-                         @elseif( @$formData->tdo_status == 1)
-                         <li class="ApproveTimeline">
-                            <a href="#!">TDO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['tdo_view_date'] }}</a>
-                            <p class="inputText badge bg-success" style="font-size: 12px">Approved</p>
-                            <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
-                            <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
-                            <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
-                            <p class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                         </li>
-                         @endif
-                         @if( @$formData->tdo_status == 2 )
-                         <li class="rejectTimeline">
-                            <a href="#!">TDO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['tdo_view_date'] }}</a>
-                            <p class="mt-2"><span class= "spanclr">TDO Name  : </span>{{ @$formData->tdoUser->name }}</p>
-                            <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
-                            <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
-                            <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['tdo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['tdo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                            <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->tdo_status_reason}}</p>
-                         </li>
-                         @elseif( @$formData->pjct_offcr_status == 2)
-                         <li class="rejectTimeline">
-                            <a href="#!">TDO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['pjct_offcr_view_date'] }}</a>
-                            <p class="inputText badge bg-danger" style="font-size: 12px">Rejected</p>
-                            <p class="mt-2"><span class= "spanclr">Project Officer Name  : </span>{{ @$formData->prjUser->name }}</p>
-                            <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$formData->teo->teo_name }}</p>
-                            <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$formData->district->name }}</p>
-                            <p class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['pjct_offcr_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['pjct_offcr_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                            <p class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->pjct_offcr_status_reason}}</p>
-                         </li>
-                         @endif
-                         @if(@$formData->tdo_status == null && @$formData->pjct_offcr_status == null)
-                         <li class="pendingTimeline">
+                          @endif
+                          @if(@$formData->assistant_status == 1)
+                          @if( @$formData->officer_status == 1)
+         
+                          <li class="ApproveTimeline">
                             <a href="#!">PO / TDO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                            @if(@$formData->pjct_offcr_view_date != null)
-                            PO :  {{ @$formData['pjct_offcr_view_date'] }}
-                            @endif
-                            @if(@$formData->tdo_view_date != null)
-                            TDO :  {{ @$formData['teo_view_date'] }} 
-                            @endif
-                            </a>
+                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                            <p></p>
+                            <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                            <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                           
+                            <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                            <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->officer_status_reason}}</p>
                          </li>
-                         @endif --}}
-                         @endif 
-                      </ul>
-                   </div>
-                </div>
-             </div>
+                         @elseif( @$formData->officer_status == 2)
+         
+                         <li class="rejectTimeline">
+                           <a href="#!">PO / TDO</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                           <p></p>
+                           <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                           <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                           
+                           <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                           <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$formData->officer_status_reason}}</p>
+                        </li>
+                        @elseif( @$formData->officer_status == null)
+         
+                        <li class="pendingTimeline">
+                          <a href="#!">PO / TDO</a>
+                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                         <p></p>
+                          <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                           </li>
+                           @endif
+                           @endif
+                     </ul>
+                  </div>
+               </div>
+            </div>
             <!-- /row -->
          </div>
       </div>

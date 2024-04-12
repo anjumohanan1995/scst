@@ -32,12 +32,22 @@
 			<!-- row -->
             <div class="row row-sm w-100">
                 <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
-                    <div class=" card">
-                        <div class="card-body  p-5">                    
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <div id="btnHide" class="row justify-content-end m-3">
+                                <a style="width: 50px" onclick="printDiv()">
+                                    <img src="{{ asset('admin/uploads/icons/printer.png') }}" alt="">
+                                </a>
+                            </div>
+    
+                            <div id="print_content">
+                                <div id="success_message" class="ajax_response" style="display: none;"></div>
+                                <div class="mb-4 main-content-label">                    
                             <h1
                             style="text-align: center;color: rgb(0, 0, 0);font-size: medium;  padding: 20px;line-height: 32px;font-weight: 600;">
                             APPLICATION FOR SSLC/PLUS TWO/ DEGREE/PG AWARD 2023-24
                         </h1>
+                                </div>
 
                         <div class="paper-1 pt-4">
                             <div class="w-100">
@@ -221,6 +231,7 @@
                         </label><br>
                          
                         </div>
+                    </form>
                         <div class="row mt-5">
                             <div class="col-12">
                                 <h1
@@ -267,10 +278,14 @@
                                 </div>
                             </div>
                         </div><br></br>
-
+                        <div class="col-md-6 mb-6">
+                            <a href="{{ route('studentAwardListOfficer') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                            </a>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <div class="pt-2 card overflow-hidden">
                     
@@ -494,6 +509,17 @@ function reject() {
         }
         return
     }
+
+    function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
 
 
 

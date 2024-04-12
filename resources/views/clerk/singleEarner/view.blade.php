@@ -49,6 +49,14 @@
                                     <div id="success_message" class="ajax_response" style="display: none;"></div>
 
                                     <div class="card-body pd-y-7">
+                                        <div id="btnHide" class="row justify-content-end m-3">
+                                            <a style="width: 50px" onclick="printDiv()"><img
+                                                    src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                                        </div>
+                
+                                        <div id="print_content">
+                                            <div id="success_message" class="ajax_response" style="display: none;"></div>
+                                            <div class="mb-4 main-content-label">
 
                                         <h4 class="medical__form--h1 text-center m-3">
                                             <b>പട്ടിക വർഗ്ഗ വികസന വകുപ്പ്<br>
@@ -56,6 +64,7 @@
 
                                             </b>
                                         </h4>
+                                    </div>
                                         <div class="m-5">
                                             <h6 class="text-center"><u>അപേക്ഷ ഫോറം</u></h6>
                                         </div>
@@ -675,15 +684,16 @@
                                                 </div>
                                             </div>
                                             <br>
-                                            <div class="row" id="btnHide">
-                                                <button class="btn btn-primary" onclick="printDiv()">Print Part</button>
-                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <a href="{{ route('singleEarnerListClerk') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                                </a>  </div>
 
                                         </div>
 
                                     </div>
 
                                 </div>
+                            </div>
 
                             </div>
                         </div>
@@ -973,5 +983,16 @@
             }
             return
         }
+
+        function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
     </script>
 @endsection

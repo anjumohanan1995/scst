@@ -33,10 +33,19 @@
                 <div class="col-sm-12 col-md-12 col-lg-8">
                     <div class="card overflow-hidden">
                        <div class="card-body pd-y-7">
+                        <div id="btnHide" class="row justify-content-end m-3">
+                           <a style="width: 50px" onclick="printDiv()"><img
+                                   src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                       </div>
+
+                       <div id="print_content">
+                           <div id="success_message" class="ajax_response" style="display: none;"></div>
+                           <div class="mb-4 main-content-label">
                           <h1
                              style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
                              അയ്യങ്കാളി ടാലന്റ് സേർച്ച് &ഡെവലപ്പ്മെന്റ് സ്‌കീം പ്രവേശന പരീക്ഷക്കുള്ള അപേക്ഷ
                           </h1>
+                           </div>
                           <div class="paper-1 pt-4">
                              <div class="w-100">
                                 <div class="row w-100">
@@ -355,7 +364,15 @@
                                    ഉറപ്പുതന്നുകുള്ളുന്നു.</span>
                                 </div>
                              </div> --}}
+                             <div class="row">
+                              <div class="col-md-4 mb-4">
+                              <div class="col-md-6 mb-6">
+                               <a href="{{ route('examApplicationListClerk') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                               </a>  </div>
+                               </div><br>
+                           </div>
                           </form>
+                       </div>
 
                           <div class="modal fade" id="approve-popup" style="display: none">
                             <div class="modal-dialog modal-dialog-centered" role="document">

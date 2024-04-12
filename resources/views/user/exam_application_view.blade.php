@@ -357,6 +357,15 @@
                                  നിർത്തുകയോ കുട്ടിയെ പിന്വലിക്കുകയോ ചെയ്യുകയില്ല എന്നു ഇതിനാൽ
                                  ഉറപ്പുതന്നുകുള്ളുന്നു.</span>
                               </div>
+                           </div><br>
+                           <div class="row">
+                              <div class="col-md-4 mb-4">  
+
+                              <div class="col-md-6 mb-6">
+                               <a href="{{ route('userExamList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                               </a>  </div>
+                                      
+                                  </div><br>
                            </div>
                         </form>
                      </div>

@@ -19,10 +19,19 @@
             <div class="card overflow-hidden" >
                <div class="card-body pd-y-7">
                   <div class="card-body pd-y-7">
+                     <div id="btnHide" class="row justify-content-end m-3">
+                        <a style="width: 50px" onclick="printDiv()"><img
+                                src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
+                    </div>
+
+                    <div id="print_content">
+                        <div id="success_message" class="ajax_response" style="display: none;"></div>
+                        <div class="mb-4 main-content-label">
                      <h1
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
                         ജനനി-ജനനി -ജന്മരക്ഷ <br> പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി <br> അപേക്ഷഫോറം
                      </h1>
+                        </div>
                      <form action="#" method="post" style="font-weight: 500;font-size: 12px;padding: 90px;">
                         <div class=" row paper-1">
                            <div class="col-5">
@@ -235,10 +244,18 @@
                                     <label> {{ @$formData['submittedTeo']['teo_name'] }} </label>
                                  </div>
                               </div>
+                           </div><br>
+                           <div class="row">
+                              <div class="col-md-4 mb-4">
+                              <div class="col-md-6 mb-6">
+                               <a href="{{ route('motherChildSchemeListAssistant') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                               </a>  </div>
+                               </div><br>
                            </div>
                         </div>
                      </form>
                   </div>
+               </div>
                </div>
             </div>
          </div>
@@ -485,6 +502,17 @@
    $(document).ready(function() {
        	$('#example').DataTable();
    });
+
+   function printDiv() {
+        var printContents = document.getElementById('print_content').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+            }
     
 </script>
 <!-- main-content-body -->

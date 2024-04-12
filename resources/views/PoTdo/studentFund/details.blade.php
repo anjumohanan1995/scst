@@ -248,7 +248,7 @@
                                              
                                                  </div>
                                         <div class="col-md-6 mb-6">
-                                         <a href="/Medical/Engineering/StudentFundList">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                         <a href="{{ route('StudentFundListOfficer') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
                                          </a>  </div>
                                                 
                                                 

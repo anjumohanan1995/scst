@@ -72,8 +72,7 @@
                                             <th>Age </th>
                                             <th> Address </th>
                                             <th>Caste</th>
-                                            <th>Created Date</th>
-                                           
+                                            <th>Created Date</th>                                           
                                             <th >Date & Time</th>
                                             <th >Action</th>
 
@@ -200,15 +199,13 @@
                 { data: 'age' },
 				{ data: 'address' },
 				{ data: 'caste' },
-                { data: 'created_at', visible: false },
+                { data: 'created_at'},
                  { data: 'date' },
-               
-
                 { data: 'action' }
 
 
 			],
-            "order": [5, 'desc'],
+            "order": [4, 'desc'],
             'ordering': true,
          });
 

@@ -199,7 +199,9 @@
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label">റേഷൻ കാർഡ് ഉണ്ടെങ്കിൽ ആയതിന്റെ നമ്പർ <br> <span class="small"> Ration card number if any </span></label>
                                                 <input type="text" value="{{ old('ration_card_number') }}"  class="form-control" placeholder="" name="ration_card_number" />
-                                                @error('ration_card_number')childFinancialAssistanceFormള്ള കാരണം <br> <span class="small"> Reason for Orphan </span></label>
+                                                @error('ration_card_number')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                             <select class="form-select" name="reason_for_orphan" id="reason_for_orphan">
                                                 <option value="" disabled>Select</option>
                                                 <option value="Death of father" @if (old('relation') == 'Death of father') selected @endif>

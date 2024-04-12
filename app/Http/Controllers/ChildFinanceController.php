@@ -278,7 +278,7 @@ class ChildFinanceController extends Controller
             $time = $record->time;
               $created_at =  $record->created_at;
               if($status ==1) $statusvalue='<span class="badge bg-success" style="height: 17px;">Approved</span>'.'<br>'.'Reason: '.@$record->teo_status_reason;
-              else  if($status ==2) $statusvalue='<span class="badge bg-danger" style="height: 17px;">Rejected by'.$record->RejectedUser->name.'</span>'.'<br>'.'Reason: '.@$record->teo_status_reason;
+              elseif($status ==2) $statusvalue='<span class="badge bg-danger" style="height: 17px;">Rejected by'.@$record->RejectedUser->name.'</span>'.'<br>'.'Reason: '.@$record->teo_status_reason;
              $edit='';
               if($role == "TEO"){
                 if($status == 1 || $status == 2){
@@ -300,8 +300,8 @@ class ChildFinanceController extends Controller
                     "sl_no" => $i,
                     "id" => $id,
                     "name" => $name,
-                    "address" => $address,
                     "age" => $age,
+                    "address" => $address,
                     "caste" => $caste,
                     "date" => $date." ".$time,  
                     "created_at" => $created_at,                  

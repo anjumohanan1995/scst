@@ -69,7 +69,7 @@
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Sl No</th>
+                                            {{-- <th>Sl No</th>
                                             <th>Applicant's Name / അപേക്ഷകന്റെ പേര് </th>
                                             <th>Address / മേൽവിലാസം 
                                             </th>
@@ -78,6 +78,19 @@
                                             <th>Applicant's Income / അപേക്ഷകന്റെ വരുമാനം 
                                             </th>
                                             <th>Caste/Religion / ജാതി/ മതം 
+                                            </th>
+                                            <th>Date / തീയതി   </th>
+                                            <th >Action / ആക്ഷൻ</th> --}}
+
+                                            <th>Sl No</th>
+                                            <th>Applicant's Name / അപേക്ഷകന്റെ പേര് </th>
+                                            <th>Address / മേൽവിലാസം 
+                                            </th>
+                                            <th>Course Name / കോഴ്‌സിന്റെ പേര് 
+                                            </th>
+                                            <th>Duration Of Course / കോഴ്‌സിൻ്റെ  ദൈർഘ്യം 
+                                            </th>
+                                            <th>Type Of Institution (സ്ഥാപനത്തിൻ്റെ തരം )
                                             </th>
                                             <th>Date / തീയതി   </th>
                                             <th >Action / ആക്ഷൻ</th>
@@ -275,18 +288,17 @@ function reject() {
 			          	});
        				}
        			},
-
-             columns: [
-                { data: 'sl_no' },
-                { data: 'name' },
-                { data: 'address' },
-				{ data: 'course_name' },
-                { data: 'income' },
-				{ data: 'caste' },
+                columns: [
+                    { data: 'sl_no' },
+                    { data: 'name' },
+                    { data: 'address' },
+				    { data: 'course_name' },
+                    { data: 'course_duration' },
+				    { data: 'institution_type' },
                 
-                { data: 'date' },
+                    { data: 'created_at' },
 
-                { data: 'edit' }
+                    { data: 'edit' }
 
 
 			],

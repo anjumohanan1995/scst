@@ -49,7 +49,7 @@ class HouseManagementController extends Controller
     {
         // dd($request->current_taluk);
         $validator = Validator::make($request->all(), [
-            'name' => 'required|regex:/^[a-zA-Z]+$/',
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/',
             'submitted_district' => 'required',
             'submitted_teo' => 'required', 
             'signature' => 'required|max:2048',

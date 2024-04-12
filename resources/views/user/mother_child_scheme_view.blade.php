@@ -308,7 +308,15 @@ sdeasdsdsdsd
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><br>
+
+                                    <div class="row">
+                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-6 mb-6">
+                                         <a href="{{ route('userMotherChildList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
+                                         </a>  </div>
+                                         </div><br>
+                                     </div>
 
 
 
