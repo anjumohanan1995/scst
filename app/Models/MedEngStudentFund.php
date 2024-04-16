@@ -37,6 +37,10 @@ class MedEngStudentFund extends Eloquent
     {
         return $this->belongsTo(User::class,'clerk_status_id');
     }
+    public function JsSeoUser()
+    {
+        return $this->belongsTo(User::class,'JsSeo_status_id');
+    }
     public function assistantUser()
     {
         return $this->belongsTo(User::class,'assistant_status_id');

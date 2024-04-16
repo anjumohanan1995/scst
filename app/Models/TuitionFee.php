@@ -54,6 +54,14 @@ class TuitionFee extends Eloquent
         'date_received',
 
         
+        'JsSeo_view_status',
+        'JsSeo_view_id',
+        'JsSeo_view_date',
+        'JsSeo_status',
+        'JsSeo_status_id',
+        'JsSeo_status_date',
+        'JsSeo_status_reason',
+
         'clerk_view_status',
         'clerk_view_id',
         'clerk_view_date',
@@ -100,6 +108,10 @@ class TuitionFee extends Eloquent
     public function clerkUser()
     {
         return $this->belongsTo(User::class,'clerk_status_id');
+    }
+    public function JsSeoUser()
+    {
+        return $this->belongsTo(User::class,'JsSeo_status_id');
     }
     public function assistantUser()
     {

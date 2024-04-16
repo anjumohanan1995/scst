@@ -66,6 +66,14 @@ class FinancialHelp extends Eloquent
         'clerk_status_id',
         'clerk_status_date',
         'clerk_status_reason',
+
+        'JsSeo_view_status',
+        'JsSeo_view_id',
+        'JsSeo_view_date',
+        'JsSeo_status',
+        'JsSeo_status_id',
+        'JsSeo_status_date',
+        'JsSeo_status_reason',
         
         'assistant_view_status',
         'assistant_view_id',
@@ -108,6 +116,10 @@ class FinancialHelp extends Eloquent
     public function clerkUser()
     {
         return $this->belongsTo(User::class,'clerk_status_id');
+    }
+    public function JsSeoUser()
+    {
+        return $this->belongsTo(User::class,'JsSeo_status_id');
     }
     public function assistantUser()
     {

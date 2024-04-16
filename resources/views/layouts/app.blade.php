@@ -485,6 +485,8 @@
                             @if (auth::user()->role === 'Clerk')
                             
                                 @include('layouts.clerk_app')
+                                @elseif ( Auth::user()->role == 'JS' || Auth::user()->role == 'SEO')
+                                @include('layouts.js_seo_app')
                                 @elseif ( Auth::user()->role == 'ATDO' || Auth::user()->role == 'APO')
                                 @include('layouts.apo_atdo_app')
                               @elseif ( Auth::user()->role == 'TDO' || Auth::user()->role == 'PO')

@@ -26,6 +26,7 @@ use App\Http\Controllers\PoTdoController;
 use App\Http\Controllers\TDOMasterController;
 use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
+use App\Http\Controllers\JsSeoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -435,20 +436,6 @@ Route::controller(ClerkController::class)->group(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Clerk Section
 Route::controller(ApoTdoController::class)->group(function(){
 
@@ -582,35 +569,6 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/tuitionFeeDetailsOfficer/{id}','tuitionFeeDetailsOfficer')->name('tuitionFeeDetailsOfficer');
     Route::post('/tuitionFeeApproveOfficer','tuitionFeeApproveOfficer')->name('tuitionFee.officer.approve');
     Route::post('/tuitionFeeRejectOfficer','tuitionFeeRejectOfficer')->name('tuitionFee.officer.reject');
-   
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     Route::get('/StudentFundListOfficer', 'StudentFundListOfficer')->name('StudentFundListOfficer');
@@ -643,5 +601,181 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::post('/studentAward/officerApprove', 'studentAwardOfficerApprove')->name('studentAward-officer.approve');
     Route::post('/studentAward/officerReject', 'studentAwardOfficerReject')->name('studentAward-officer.reject');
     
+
+});
+
+
+//JS/SEO Section
+
+Route::controller(JsSeoController::class)->group(function(){
+
+	Route::get('/childFinanceListJsSeo','childFinanceListJsSeo')->name('childFinanceListJsSeo');
+    Route::get('/getchildFinanceListJsSeo','getchildFinanceListJsSeo')->name('getchildFinanceListJsSeo');
+    Route::get('/childFinancialJsSeoDetails/{id}','childFinancialJsSeoDetails')->name('childFinancialJsSeoDetails');
+    Route::post('/childFinanceJsSeoApprove','childFinanceJsSeoApprove')->name('childFinance.JsSeo.approve');
+    Route::post('/childFinanceJsSeoReject','childFinanceJsSeoReject')->name('childFinance.JsSeo.reject');
+
+    Route::get('/examApplicationListJsSeo','examApplicationListJsSeo')->name('examApplicationListJsSeo');
+    Route::get('/getexamApplicationListJsSeo','getexamApplicationListJsSeo')->name('getexamApplicationListJsSeo');
+    Route::get('/examApplicationJsSeoDetails/{id}','examApplicationJsSeoDetails')->name('examApplicationJsSeoDetails');
+    Route::post('/examApplicationJsSeoApprove','examApplicationJsSeoApprove')->name('examApplication.JsSeo.approve');
+    Route::post('/examApplicationJsSeoReject','examApplicationJsSeoReject')->name('examApplication.JsSeo.reject');
+   
+    Route::get('/couplefinancialListJsSeo','couplefinancialListJsSeo')->name('couplefinancialListJsSeo');
+    Route::get('/getcouplefinancialListJsSeo','getcouplefinancialListJsSeo')->name('getcouplefinancialListJsSeo');
+    Route::get('/couplefinancialJsSeoDetails/{id}','couplefinancialJsSeoDetails')->name('couplefinancialJsSeoDetails');
+    Route::post('/couplefinancialJsSeoApprove','couplefinancialJsSeoApprove')->name('couplefinancial.JsSeo.approve');
+    Route::post('/couplefinancialJsSeoReject','couplefinancialJsSeoReject')->name('couplefinancial.JsSeo.reject');
+   
+	Route::get('/motherChildSchemeListJsSeo','motherChildSchemeListJsSeo')->name('motherChildSchemeListJsSeo');
+    Route::get('/getmotherChildSchemeListJsSeo','getmotherChildSchemeListJsSeo')->name('getmotherChildSchemeListJsSeo');
+    Route::get('/motherChildSchemeJsSeoDetails/{id}','motherChildSchemeJsSeoDetails')->name('motherChildSchemeJsSeoDetails');
+    Route::post('/motherChildSchemeJsSeoApprove','motherChildSchemeJsSeoApprove')->name('motherChildScheme.JsSeo.approve');
+    Route::post('/motherChildSchemeJsSeoReject','motherChildSchemeJsSeoReject')->name('motherChildScheme.JsSeo.reject'); 
+  
+	Route::get('/marriageGrantListJsSeo','marriageGrantListJsSeo')->name('marriageGrantListJsSeo');
+    Route::get('/getmarriageGrantListJsSeo','getmarriageGrantListJsSeo')->name('getmarriageGrantListJsSeo');
+    Route::get('/marriageGrantDetails/{id}','marriageGrantDetails')->name('marriageGrantDetails');
+    Route::post('/marriageGrantJsSeoApprove','marriageGrantJsSeoApprove')->name('marriageGrantJsSeo.approve');
+    Route::post('/marriageGrantJsSeoReject','marriageGrantJsSeoReject')->name('marriageGrantJsSeo.reject');
+
+    Route::get('/houseGrantListJsSeo','houseGrantListClerk')->name('houseGrantListJsSeo');
+    Route::get('/gethouseGrantListJsSeo','gethouseGrantListJsSeo')->name('gethouseGrantListJsSeo');
+    Route::get('/houseGrantJsSeoDetails/{id}','houseGrantJsSeoDetails')->name('houseGrantJsSeoDetails');
+    Route::post('/houseGrantJsSeoApprove','houseGrantJsSeoApprove')->name('houseGrant.JsSeo.approve');
+    Route::post('/houseGrantJsSeoReject','houseGrantJsSeoReject')->name('houseGrant.JsSeo.reject');
+
+    Route::get('/tuitionFeeListJsSeo','tuitionFeeListJsSeo')->name('tuitionFeeListJsSeo');
+    Route::get('/gettuitionFeeJsSeo','gettuitionFeeJsSeo')->name('gettuitionFeeJsSeo');
+    Route::get('/tuitionFeeJsSeoDetails/{id}','tuitionFeeJsSeoDetails')->name('tuitionFeeJsSeoDetails');
+    Route::post('/tuitionFeeJsSeoApprove','tuitionFeeJsSeoApprove')->name('tuitionFee.JsSeo.approve');
+    Route::post('/tuitionFeeJsSeoReject','tuitionFeeJsSeoReject')->name('tuitionFee.JsSeo.reject');
+
+    Route::get('/JsSeoItiFundList', 'JsSeoItiFundList')->name('JsSeoItiFundList');
+    Route::get('/getJsSeoItiFundList', 'getJsSeoItiFundList')->name('getJsSeoItiFundList');
+    Route::get('/itiFeeJsSeoView/{id}', 'itiFeeJsSeoView')->name('JsSeoItiFundList.show');
+    Route::post('/itiScholarshipJsSeoApprove','itiScholarshipJsSeoApprove')->name('itiScholarshipJsSeo.approve');
+    Route::post('/itiScholarshipJsSeoReject','itiScholarshipJsSeoReject')->name('itiScholarshipJsSeo.reject');
+   
+    Route::get('/studentAwardListJsSeo', 'studentAwardListJsSeo')->name('studentAwardListJsSeo');
+    Route::get('/getStudentAwardListJsSeo', 'getStudentAwardListJsSeo')->name('getStudentAwardListJsSeo');
+    Route::get('/studentAward/{id}/JsSeoview', 'studentAwardJsSeoView')->name('studentAwardJsSeoView');
+    Route::post('/studentAward/JsSeoApprove', 'studentAwardJsSeoApprove')->name('studentAward-JsSeo.approve');
+    Route::post('/studentAward/JsSeoReject', 'studentAwardJsSeoReject')->name('studentAward-JsSeo.reject');
+    
+    Route::get('/anemiaFinanceListJsSeo', 'anemiaFinanceListJsSeo')->name('anemiaFinanceListJsSeo');
+    Route::get('/getAnemiaFinanceListJsSeo', 'getAnemiaFinanceListJsSeo')->name('getAnemiaFinanceListJsSeo');
+    Route::get('/anemiaFinance/{id}/JsSeoview', 'anemiaFinanceJsSeoView')->name('anemiaFinanceJsSeoView');
+    Route::post('/anemiaFinance/JsSeoApprove', 'anemiaFinanceJsSeoApprove')->name('anemiaFinance-JsSeo.approve');
+    Route::post('/anemiaFinance/JsSeoReject', 'anemiaFinanceJsSeoReject')->name('anemiaFinance-JsSeo.reject');
+
+    Route::get('/singleEarnerListJsSeo', 'singleEarnerListJsSeo')->name('singleEarnerListJsSeo');
+    Route::get('/getSingleEarnerListJsSeo', 'getSingleEarnerListJsSeo')->name('getSingleEarnerListJsSeo');
+    Route::get('/singleEarner/{id}/JsSeoview', 'singleEarnerJsSeoView')->name('singleEarnerJsSeoView');
+    Route::post('/singleEarner/JsSeoApprove', 'singleEarnerJsSeoApprove')->name('singleEarner-JsSeo.approve');
+    Route::post('/singleEarner/JsSeoReject', 'singleEarnerJsSeoReject')->name('singleEarner-JsSeo.reject');
+
+    Route::get('/StudentFundListJsSeo', 'studentFundListJsSeo')->name('studentFundListJsSeo');
+    Route::get('/getStudentFundListJsSeo', 'getStudentFundListJsSeo')->name('getStudentFundListJsSeo');
+    Route::get('/StudentFund/{id}/JsSeoview', 'studentFundClerJsSeo')->name('studentFundJsSeoView');
+    Route::post('/StudentFund/JsSeoApprove', 'studentFundJsSeoApprove')->name('studentFund-JsSeo.approve');
+    Route::post('/StudentFund/JsSeoReject', 'studentFundCJsSeoeject')->name('studentFund-JsSeo.reject');
+
+});
+
+
+
+
+//Clerk Section
+Route::controller(ClerkController::class)->group(function(){
+
+	Route::get('/ChildFinanceListClerk','ChildFinanceListClerk')->name('ChildFinanceListClerk');
+    Route::get('/getchildFinanceListClerk','getchildFinanceListClerk')->name('getchildFinanceListClerk');
+    Route::get('/childFinancialDetails/{id}','childFinancialClerkDetails')->name('childFinancialClerkDetails');
+    Route::post('/childFinanceApprove','childFinanceApprove')->name('childFinance.approve');
+    Route::post('/childFinanceReject','childFinanceReject')->name('childFinance.reject');
+   
+
+    Route::get('/examApplicationListClerk','examApplicationListClerk')->name('examApplicationListClerk');
+    Route::get('/getexamApplicationListClerk','getexamApplicationListClerk')->name('getexamApplicationListClerk');
+    Route::get('/examApplicationDetails/{id}','examApplicationDetails')->name('examApplicationDetails');
+    Route::post('/examApplicationApprove','examApplicationApprove')->name('examApplication.approve');
+    Route::post('/examApplicationReject','examApplicationReject')->name('examApplication.reject');
+   
+    Route::get('/couplefinancialListClerk','couplefinancialListClerk')->name('couplefinancialListClerk');
+    Route::get('/getcouplefinancialListClerk','getcouplefinancialListClerk')->name('getcouplefinancialListClerk');
+    Route::get('/couplefinancialDetails/{id}','couplefinancialDetails')->name('couplefinancialDetails');
+    Route::post('/couplefinancialApprove','couplefinancialApprove')->name('couplefinancial.approve');
+    Route::post('/couplefinancialReject','couplefinancialReject')->name('couplefinancial.reject');
+   
+    
+	Route::get('/motherChildSchemeListClerk','motherChildSchemeListClerk')->name('motherChildSchemeListClerk');
+    Route::get('/getmotherChildSchemeListClerk','getmotherChildSchemeListClerk')->name('getmotherChildSchemeListClerk');
+    Route::get('/motherChildSchemeDetails/{id}','motherChildSchemeDetails')->name('motherChildSchemeDetails');
+    Route::post('/motherChildSchemeApprove','motherChildSchemeApprove')->name('motherChildScheme.approve');
+    Route::post('/motherChildSchemeReject','motherChildSchemeReject')->name('motherChildScheme.reject');
+   
+    
+      
+  
+	Route::get('/marriageGrantListClerk','marriageGrantListClerk')->name('marriageGrantListClerk');
+    Route::get('/getmarriageGrantListClerk','getmarriageGrantListClerk')->name('getmarriageGrantListClerk');
+    Route::get('/marriageGrantDetails/{id}','marriageGrantDetails')->name('marriageGrantDetails');
+    Route::post('/marriageGrantClerkApprove','marriageGrantClerkApprove')->name('marriageGrantClerk.approve');
+    Route::post('/marriageGrantClerkReject','marriageGrantClerkReject')->name('marriageGrantClerk.reject');
+
+    Route::get('/houseGrantListClerk','houseGrantListClerk')->name('houseGrantListClerk');
+    Route::get('/gethouseGrantListClerk','gethouseGrantListClerk')->name('gethouseGrantListClerk');
+    Route::get('/houseGrantDetails/{id}','houseGrantClerkDetails')->name('houseGrantClerkDetails');
+    Route::post('/houseGrantClerkApprove','houseGrantClerkApprove')->name('houseGrant.clerk.approve');
+    Route::post('/houseGrantClerkReject','houseGrantClerkReject')->name('houseGrant.clerk.reject');
+
+
+    Route::get('/tuitionFeeListClerk','tuitionFeeListClerk')->name('tuitionFeeListClerk');
+    Route::get('/gettuitionFeeClerk','gettuitionFeeClerk')->name('gettuitionFeeClerk');
+    Route::get('/tuitionFeeDetails/{id}','tuitionFeeClerkDetails')->name('tuitionFeeClerkDetails');
+    Route::post('/tuitionFeeClerkApprove','tuitionFeeClerkApprove')->name('tuitionFee.clerk.approve');
+    Route::post('/tuitionFeeClerkReject','tuitionFeeClerkReject')->name('tuitionFee.clerk.reject');
+
+
+
+
+
+
+
+
+
+    Route::get('/clerkItiFundList', 'clerkItiFundList')->name('clerkItiFundList');
+    Route::get('/getClerkItiFundList', 'getClerkItiFundList')->name('getClerkItiFundList');
+    Route::get('/itiFeeClerkView/{id}', 'itiFeeClerkView')->name('clerkItiFundList.show');
+    Route::post('/itiScholarshipClerkApprove','itiScholarshipClerkApprove')->name('itiScholarshipClerk.approve');
+    Route::post('/itiScholarshipClerkReject','itiScholarshipClerkReject')->name('itiScholarshipClerk.reject');
+   
+    Route::get('/studentAwardListClerk', 'studentAwardListClerk')->name('studentAwardListClerk');
+    Route::get('/getStudentAwardListClerk', 'getStudentAwardListClerk')->name('getStudentAwardListClerk');
+    Route::get('/studentAward/{id}/Clerkview', 'studentAwardClerkView')->name('studentAwardClerkView');
+    Route::post('/studentAward/clerkApprove', 'studentAwardClerkApprove')->name('studentAward-clerk.approve');
+    Route::post('/studentAward/clerkReject', 'studentAwardClerkReject')->name('studentAward-clerk.reject');
+    
+    Route::get('/anemiaFinanceListClerk', 'anemiaFinanceListClerk')->name('anemiaFinanceListClerk');
+    Route::get('/getAnemiaFinanceListClerk', 'getAnemiaFinanceListClerk')->name('getAnemiaFinanceListClerk');
+    Route::get('/anemiaFinance/{id}/Clerkview', 'anemiaFinanceClerkView')->name('anemiaFinanceClerkView');
+    Route::post('/anemiaFinance/clerkApprove', 'anemiaFinanceClerkApprove')->name('anemiaFinance-clerk.approve');
+    Route::post('/anemiaFinance/clerkReject', 'anemiaFinanceClerkReject')->name('anemiaFinance-clerk.reject');
+
+    Route::get('/singleEarnerListClerk', 'singleEarnerListClerk')->name('singleEarnerListClerk');
+    Route::get('/getSingleEarnerListClerk', 'getSingleEarnerListClerk')->name('getSingleEarnerListClerk');
+    Route::get('/singleEarner/{id}/clerkview', 'singleEarnerClerkView')->name('singleEarnerClerkView');
+    Route::post('/singleEarner/clerkApprove', 'singleEarnerClerkApprove')->name('singleEarner-clerk.approve');
+    Route::post('/singleEarner/clerkReject', 'singleEarnerClerkReject')->name('singleEarner-clerk.reject');
+
+    Route::get('/StudentFundListClerk', 'studentFundListClerk')->name('studentFundListClerk');
+    Route::get('/getStudentFundListClerk', 'getStudentFundListClerk')->name('getStudentFundListClerk');
+    Route::get('/StudentFund/{id}/clerkview', 'studentFundClerkView')->name('studentFundClerkView');
+    Route::post('/StudentFund/clerkApprove', 'studentFundClerkApprove')->name('studentFund-clerk.approve');
+    Route::post('/StudentFund/clerkReject', 'studentFundClerkReject')->name('studentFund-clerk.reject');
+
+   
+
 
 });
