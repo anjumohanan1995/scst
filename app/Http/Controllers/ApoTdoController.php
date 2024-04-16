@@ -61,7 +61,7 @@ class ApoTdoController extends Controller
              $totalRecord = ExamApplication::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -74,7 +74,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = ExamApplication::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1);
 
            
              if($name != ""){
@@ -91,7 +91,7 @@ class ApoTdoController extends Controller
              $items = ExamApplication::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -264,7 +264,7 @@ class ApoTdoController extends Controller
              $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -277,7 +277,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1);
 
            
              if($name != ""){
@@ -294,7 +294,7 @@ class ApoTdoController extends Controller
              $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -472,7 +472,7 @@ class ApoTdoController extends Controller
              $totalRecord = MotherChildScheme::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -485,7 +485,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1);
 
            
              if($name != ""){
@@ -502,7 +502,7 @@ class ApoTdoController extends Controller
              $items = MotherChildScheme::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -674,7 +674,7 @@ class ApoTdoController extends Controller
              $totalRecord = MarriageGrant::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -687,7 +687,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = MarriageGrant::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1);
 
            
              if($name != ""){
@@ -704,7 +704,7 @@ class ApoTdoController extends Controller
              $items = MarriageGrant::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -871,7 +871,7 @@ class ApoTdoController extends Controller
              $totalRecord = HouseManagement::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -884,7 +884,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = HouseManagement::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1);
 
            
              if($name != ""){
@@ -901,7 +901,7 @@ class ApoTdoController extends Controller
              $items = HouseManagement::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -1071,7 +1071,7 @@ class ApoTdoController extends Controller
              $totalRecord = TuitionFee::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1084,7 +1084,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = TuitionFee::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1);
 
            
              if($name != ""){
@@ -1101,7 +1101,7 @@ class ApoTdoController extends Controller
              $items = TuitionFee::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -1270,7 +1270,7 @@ class ApoTdoController extends Controller
              $totalRecord = MedEngStudentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1282,7 +1282,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = MedEngStudentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
 
           
              if($name != ""){
@@ -1296,7 +1296,7 @@ class ApoTdoController extends Controller
              $items = MedEngStudentFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
            
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -1461,7 +1461,7 @@ class ApoTdoController extends Controller
              $totalRecord = SingleIncomeEarner::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
            
              if($name != ""){
                  $totalRecord->where('applicant_name','like',"%".$name."%");
@@ -1473,7 +1473,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = SingleIncomeEarner::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
 
           
              if($name != ""){
@@ -1486,7 +1486,7 @@ class ApoTdoController extends Controller
              $items = SingleIncomeEarner::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                 $items->where('applicant_name','like',"%".$name."%");
@@ -1643,7 +1643,7 @@ class ApoTdoController extends Controller
              $totalRecord = AnemiaFinance::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1655,7 +1655,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = AnemiaFinance::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
 
           
              if($name != ""){
@@ -1669,7 +1669,7 @@ class ApoTdoController extends Controller
              $items = AnemiaFinance::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -1831,7 +1831,7 @@ class ApoTdoController extends Controller
              $totalRecord = StudentAward::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
              // Total records
             
              if($name != ""){
@@ -1844,7 +1844,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = StudentAward::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
 
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -1861,7 +1861,7 @@ class ApoTdoController extends Controller
              $items = StudentAward::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -2024,7 +2024,7 @@ class ApoTdoController extends Controller
              $totalRecord = ItiFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
          
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -2037,7 +2037,7 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = ItiFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
           
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -2051,7 +2051,7 @@ class ApoTdoController extends Controller
              $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1);
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
@@ -2270,7 +2270,7 @@ class ApoTdoController extends Controller
              $address = $record->address;
              $age = $record->age;
              $caste = $record->caste;
-           //  $status = $record->clerk_status;
+           //  $status = $record->JsSeo_status;
             $date = $record->date;
             $time = $record->time;
            // $teo_name=$record->teo->teo_name;
