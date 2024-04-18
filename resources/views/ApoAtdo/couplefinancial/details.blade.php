@@ -660,7 +660,7 @@
                      @endif
                      @endif
 
-                     {{--  @if(@$formData->assistant_return == null)
+                     @if(@$formData->assistant_return == null)
                      @if( @$formData->officer_return == null)
                      <li class="ApproveTimeline">
                         <a href="#!">PO / TDO</a>
@@ -677,12 +677,12 @@
                         <a href="#!">PO / TDO</a>
                         <p></p>
                         <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                        <div class="settings-icon">
+                        {{--  <div class="settings-icon">
                            <a class="approveItem" data-id="{{ @$formData->id }}"><button><span style="text-align: center;">Approve</span> <i class="fa fa-check bg-success me-1" style="right: ;align-content: ;float: right;"></i></button></a>
-                        </div>
+                        </div>  --}}
                      </li>      
                      @endif
-                     @endif  --}}
+                     @endif
 
       
                      @endif
