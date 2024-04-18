@@ -54405,10 +54405,10 @@ textarea.parsley-success:focus {
     border-radius: 5%;
 }
 
-.tab-content i,
+/* .tab-content i,
 .tabs-menu2 ul li .active {
-    color: var(--primary-bg-color);
-}
+  //  color: var(--primary-bg-color);
+} */
 
 /* ######  util ###### */
 /*Color variables*/
