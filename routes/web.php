@@ -86,6 +86,9 @@ Route::post('/financial-teo/approve', [App\Http\Controllers\TeoController::class
 Route::post('/financial-teo/reject', [App\Http\Controllers\TeoController::class, 'coupleApplicationReject'])->name('financial-teo.reject');
 
 
+Route::get('/getCoupleReturnList', [App\Http\Controllers\ApplicationController::class, 'getCoupleReturnList'])->name('getCoupleReturnList');
+Route::get('/couple-application-edit/{id}', [App\Http\Controllers\ApplicationController::class, 'coupleApplicationEdit'])->name('coupleApplicationEdit');
+Route::post('/financialHelpUpdate', [App\Http\Controllers\ApplicationController::class, 'financialHelpUpdate'])->name('financialHelpUpdate');
 
 
 
@@ -362,6 +365,8 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/couplefinancialApprove','couplefinancialApprove')->name('couplefinancial.approve');
     Route::post('/couplefinancialReject','couplefinancialReject')->name('couplefinancial.reject');
    
+    Route::get('/getcouplefinancialListClerkReturned','getcouplefinancialListClerkReturned')->name('getcouplefinancialListClerkReturned');
+
     
 	Route::get('/motherChildSchemeListClerk','motherChildSchemeListClerk')->name('motherChildSchemeListClerk');
     Route::get('/getmotherChildSchemeListClerk','getmotherChildSchemeListClerk')->name('getmotherChildSchemeListClerk');

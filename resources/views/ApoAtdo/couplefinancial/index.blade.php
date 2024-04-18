@@ -48,19 +48,7 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
-                                <div class="row mb-3">
-                            
-                                <div class="col-md-1 col-6 text-center" id="refresh">
-                                    <div class="task-box success  mb-0">
-                                            <p class="mb-0 tx-12">Refresh  </p>
-                                            <h3 class="mb-0"><i class="fa fa-spinner"></i></h3>
-                                    </div>
-                                </div>
-                                
-
-
-                            </div>
-
+                             
 
 
 
@@ -132,13 +120,13 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content country-select-modal border-0">
                             <div class="modal-header offcanvas-header">
-                                <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                                <h6 class="modal-title">Are you sure to return this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                             </div>
                             <div class="modal-body p-5">
                                 <form id="ownForm">
                                     @csrf
                                 <div class="text-center">
-                                    <h5>Reason for Rejection</h5>
+                                    <h5>Reason for Return</h5>
                                     <textarea class="form-control" name="reason" id="reason" requred></textarea>
                                     <span id="rejection"></span>
                                 </div>
@@ -210,8 +198,7 @@
              
                 { data: 'teo_name' },
                 { data: 'created_at', visible: false },
-                 { data: 'date' },
-               
+                 { data: 'date' },               
 
                 { data: 'action' }
 

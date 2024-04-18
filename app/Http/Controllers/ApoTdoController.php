@@ -330,8 +330,8 @@ class ApoTdoController extends Controller
               if($status == 1){
                 $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
             }
-            else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
+            else if($status ==3){
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Returned</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
           
             }
             else if($status ==null){
@@ -422,10 +422,16 @@ class ApoTdoController extends Controller
       
        
         $marriage->update([
-            'assistant_status' => 2,
-            'assistant_status_date' => $currenttime,
-            'assistant_status_id' => Auth::user()->id,
-            'assistant_status_reason' => $reason,
+            'assistant_status' => 3,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'jsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            //'return_status' =>1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
+            'return_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Couple Financial Application Rejected successfully.'

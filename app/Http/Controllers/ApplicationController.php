@@ -248,6 +248,168 @@ class ApplicationController extends Controller
         return view('application.form2', compact('districts'));
     }
 
+    public function coupleApplicationEdit(Request $request)
+    {
+
+        $data = Auth::user();
+        $districts = District::get();
+        $datas = FinancialHelp::where('_id',$request->id)->first();
+      //  dd($datas);
+        return view('application.financial-help-edit', compact('data', 'districts','datas'));
+    }
+
+    public function financialHelpUpdate(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'husband_name' => 'required',
+                'submitted_district' => 'required',
+                'submitted_teo' => 'required',
+                'wife_name' => 'required',
+
+            ]
+
+        );
+        $data = FinancialHelp::where('_id',$request->id)->first();
+
+        if ($validator->fails()) {
+            // Captcha validation failed
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        if ($request->hasfile('husband_sign')) {
+
+            $image = $request->husband_sign;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/huband'), $imgfileName);
+
+            $husband_sign = $imgfileName;
+        } else {
+            $husband_sign = @$data->husband_sign;
+        }
+
+
+        if ($request->hasfile('wife_sign')) {
+
+            $image = $request->wife_sign;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/wife'), $imgfileName);
+
+            $wife_sign = $imgfileName;
+        } else {
+            $wife_sign = @$data->wife_sign;
+        }
+
+
+        if ($request->hasfile('marriage_certificate')) {
+
+            $image = $request->marriage_certificate;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/marriage_certificate'), $imgfileName);
+
+            $marriage_certificate = $imgfileName;
+        } else {
+            $marriage_certificate = @$data->marriage_certificate;
+        }
+
+        if ($request->hasfile('husband_photo')) {
+
+            $image = $request->husband_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/huband'), $imgfileName1);
+
+            $husband_photo = $imgfileName1;
+        } else {
+            $husband_photo = @$data->husband_photo;
+        }
+
+        if ($request->hasfile('wife_photo')) {
+
+            $image = $request->wife_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/sign/wife'), $imgfileName1);
+
+            $wife_photo = $imgfileName1;
+        } else {
+            $wife_photo = @$data->wife_photo;
+        }
+       
+        $data = $request->all();
+        $datainsert = FinancialHelp::where('_id',$request->id)->first();
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+        $datainsert->update([
+            'husband_address' => $data['husband_address'],
+            'hus_district' => @$data['hus_district'],
+            'hus_taluk' => @$data['hus_taluk'],
+            'hus_pincode' => @$data['hus_pincode'],
+            'wife_address' => @$data['wife_address'],
+            'wife_district' => @$data['wife_district'],
+            'wife_taluk' => @$data['wife_taluk'],
+            'wife_pincode' => @$data['wife_pincode'],
+            'husband_address_old' => @$data['husband_address_old'],
+            'wife_address_old' => @$data['wife_address_old'],
+            'husband_caste' => @$data['husband_caste'],
+            'wife_caste' => @$data['wife_caste'],
+            'hus_work_before_marriage' => @$data['hus_work_before_marriage'],
+            'hus_work_after_marriage' => @$data['hus_work_after_marriage'],
+            'husband_age' => @$data['husband_age'],
+            'wife_age' => @$data['wife_age'],
+            'register_details' => @$data['register_details'],
+            'certificate_details' => @$data['certificate_details'],
+            'apart_for_any_period' => @$data['apart_for_any_period'],
+            'duration' => @$data['duration'],
+            'reason' => @$data['reason'],
+            'financial_assistance' => @$data['financial_assistance'],
+            'difficulties' => @$data['difficulties'],
+            'user_id' => Auth::user()->id,
+            'husband_name' => @$data['husband_name'],
+            'wife_name' => @$data['wife_name'],
+            'agree' => @$data['agree'],
+            'wife_sign' => @$wife_sign,
+            'husband_sign' => @$husband_sign,
+            'submitted_district' => @$data['submitted_district'],
+            'submitted_teo' => @$data['submitted_teo'],
+            'dist_name' => @$data['dist_name'],
+            'teo_name' => @$data['teo_name'],
+            'hus_income_before_marriage' => @$data['hus_income_before_marriage'],
+            'wife_income_before_marriage' => @$data['wife_income_before_marriage'],
+            'hus_income_after_marriage' => @$data['hus_income_after_marriage'],
+            'wife_income_after_marriage' => @$data['wife_income_after_marriage'],
+            'register_marriage' => @$data['register_marriage'],
+            // 'register_number' => $data['register_number'],
+            'register_date' => @$data['register_date'],
+            'register_office_name' => @$data['register_office_name'],
+            'marriage_certificate' => @$marriage_certificate,
+            'place' => @$data['place'],
+            'husband_photo' => @$husband_photo,
+            'wife_photo' => @$wife_photo,
+            'date' => date("d-m-Y"),
+            'time' => date("H:i:s"),
+            'status' => 0,
+            'husband_panchayath' => @$data['husband_panchayath'],
+            'wife_panchayath' => @$data['wife_panchayath'],
+            'teo_return' => null,
+            'return_status' =>1,
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime
+        ]);
+
+        return redirect()->route('couplefinancialList')->with('status', 'Application Submitted Successfully.');
+
+        
+    }
+
     public function coupleFinancialHelp(Request $request)
     {
 
@@ -470,7 +632,7 @@ class ApplicationController extends Controller
             //echo "khk";exit;
             $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
         }
-
+        $totalRecord->where('teo_return', null);
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
@@ -489,7 +651,7 @@ class ApplicationController extends Controller
             //echo "khk";exit;
             $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
         }
-
+        $totalRecordswithFilte->where('teo_return', null);
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
@@ -507,6 +669,7 @@ class ApplicationController extends Controller
             //echo "khk";exit;
             $items->whereBetween('created_at', [$stDate, $edDate]);
         }
+        $items->where('teo_return', null);
 
         $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
 
@@ -545,6 +708,147 @@ class ApplicationController extends Controller
                 $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
            
               }
+            $data_arr[] = array(
+                "sl_no"=>$i,
+                "id" => $id,
+                "husband_name" => $husband_name,
+                "wife_name" => $wife_name,
+                "register_details" => $register_details,
+                "certificate_details" => $certificate_details,
+                "husband_caste" => $husband_caste,
+                "wife_caste" => $wife_caste,
+                "date" => $date . ' ' . $time,
+                "created_at" => $created_at,
+
+                //  "more"=>'<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal'.$id.'" data-bs-whatever="@mdo">More Details</button><div class="modal fade" id="exampleModal'.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">'.$name.'('.$age.')  </h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="eva eva-close-outline header-icons"><g data-name="Layer 2"><g data-name="close"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"></path></g></g></svg></button></div><div class="modal-body"><table id="example" class="table table-striped table-bordered" style="width:100%"><tbody><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Name</h6></div></td><td><div class="image-grouped"> '.$name.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Name</h6></div></td><td><div class="image-grouped">'.$gname.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Relationship</h6></div></td><td><div class="image-grouped">'.$g_relation.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Age</h6></div></td><td><div class="image-grouped"> '.$age.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Gender</h6></div></td><td><div class="image-grouped">'.$gender.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Mobile Number</h6></div></td><td><div class="image-grouped"> '.$mobile.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Adhar Number</h6></div></td><td><div class="image-grouped"> '.$adhar.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Scheme Id</h6></div></td><td><div class="image-grouped">  '.$sc_id.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Email Id</h6></div></td><td><div class="image-grouped"> '.$email.' </div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Abha Number</h6></div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Ration card Number</h6></div></td><td><div class="image-grouped"> '.$ration_card.' </div></td></tr></tbody></table></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div></div></div></div>',
+                "edit" => $edit,
+
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        return response()->json($response);
+    }
+
+    public function getCoupleReturnList(Request $request)
+    {
+        $name = $request->name;
+        $mobile = $request->mobile;
+
+        $role =  Auth::user()->role;
+        $teo =  Auth::user()->teo_name;
+
+        if ($request->from_date != '') {
+
+            $from_date  = date("M d,Y", strtotime($request->from_date));
+            $stDate = new Carbon($from_date);
+        }
+        if ($request->to_date != '') {
+            $to_date  =   date("Y-m-d", strtotime($request->to_date));
+            $edDate = new Carbon($to_date);
+        }
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+
+
+
+        // Total records
+        $totalRecord = FinancialHelp::where('deleted_at', null);
+        if ($mobile != "") {
+            $totalRecord->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $totalRecord->where('submitted_teo', $teo);
+        }
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
+        }
+        $totalRecord->where('teo_return', 1);
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = FinancialHelp::where('deleted_at', null);
+
+        if ($mobile != "") {
+            $totalRecordswithFilte->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $totalRecordswithFilte->where('submitted_teo', $teo);
+        }
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
+        }
+        $totalRecordswithFilte->where('teo_return', 1);
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+        $items = FinancialHelp::where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
+        if ($mobile != "") {
+            $items->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $items->where('submitted_teo', $teo);
+        }
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $items->whereBetween('created_at', [$stDate, $edDate]);
+        }
+        $items->where('teo_return', 1);
+
+        $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
+
+
+
+
+        $data_arr = array();
+        $i=$start;
+        foreach ($records as $record) {
+            $i++;
+            $id = $record->id;
+            $husband_name = $record->husband_name;
+            $wife_name = $record->wife_name;
+            $register_details = $record->register_details;
+            $certificate_details = $record->certificate_details;
+            $husband_caste = $record->husband_caste;
+            $wife_caste =  $record->wife_caste;
+            $created_at =  $record->created_at;
+            $date =  $record->date;
+            $time =  $record->time;
+            $edit = " ";
+          
+                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('couple-application-edit/' . $id) . '">Resubmit</a></div>';
+              
             $data_arr[] = array(
                 "sl_no"=>$i,
                 "id" => $id,
