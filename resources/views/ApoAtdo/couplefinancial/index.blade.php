@@ -49,37 +49,68 @@
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
                              
-
-
-
-                                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                           
-                                            <th>Sl No</th>
-                                            <th>Husband Name </th>
-                                            <th>Wife Name </th>
-                                            {{-- <th>Marriage Registration Details </th>
-                                            <th>Marriage Certification </th> --}}
-                                            <th>Husband Caste</th>
-                                            <th>Wife Caste</th> 
-                                            <th>TEO</th>
-                                             <th>Date & Time</th> 
-                                            <th>Applied Date</th>
-                                           
-                                            <th>Action</th>
-
-
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-
-
+                                <div class="panel panel-primary">
+                                    <div class=" tab-menu-heading">
+                                        <div class="tabs-menu1">
+                                            <ul class="nav panel-tabs">
+                                                <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
+                                                <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
+                                               </ul>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body tabs-menu-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tabNew">
+                                                <div class="table-responsive">
+                                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>                                                               
+                                                                <th>Sl No</th>
+                                                                <th>Husband Name </th>
+                                                                <th>Wife Name </th>
+                                                                {{-- <th>Marriage Registration Details </th>
+                                                                <th>Marriage Certification </th> --}}
+                                                                <th>Husband Caste</th>
+                                                                <th>Wife Caste</th> 
+                                                                <th>TEO</th>
+                                                                 <th>Date & Time</th> 
+                                                                <th>Applied Date</th>                                                               
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                    
+                                                        <tbody>
+                    
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tabReturned">
+                                                <div class="table-responsive">
+                                                    <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>                                                               
+                                                                <th>Sl No</th>
+                                                                <th>Husband Name </th>
+                                                                <th>Wife Name </th>
+                                                                <th>Husband Caste</th>
+                                                                <th>Wife Caste</th> 
+                                                                <th>TEO</th>
+                                                                 <th>Date & Time</th> 
+                                                                <th>Applied Date</th>                                                               
+                                                                <th>Action</th>  
+                                                            </tr>
+                                                        </thead>
+                    
+                                                        <tbody>
+                    
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -236,6 +267,77 @@
          // DataTable
 
 
+         var table = $('#example1').DataTable({
+            processing: true,
+            serverSide: true,
+
+	        buttons: [
+	            'copyHtml5',
+	            'excelHtml5',
+	            'csvHtml5',
+	            'pdfHtml5'
+	        ],
+             "ajax": {
+
+			       	"url": "{{route('getcouplefinancialListAssistantReturn')}}",
+			       	// "data": { mobile: $("#mobile").val()}
+			       	"data": function ( d ) {
+			        	return $.extend( {}, d, {
+				            "mobile": $("#mobile").val(),
+				            "name": $("#name").val(),
+				            "role": $("#role").val(),
+				            //"from_date": $("#datepicker").val(),
+				            "delete_ctm": $("#delete_ctm").val(),
+
+
+			          	});
+       				}
+       			},
+
+             columns: [
+                { data: 'sl_no' },
+                { data: 'husband_name' },
+                { data: 'wife_name' },
+				//{ data: 'register_details' },
+				//{ data: 'certificate_details' },
+                { data: 'husband_caste' },
+				{ data: 'wife_caste' },
+               
+             
+                { data: 'teo_name' },
+                { data: 'created_at', visible: false },
+                 { data: 'date' },               
+
+                { data: 'action' }
+
+
+			],
+            "order": [7, 'desc'],
+            'ordering': true,
+         });
+
+
+
+      	 table.draw();
+
+      	$('#submit').click(function(){
+
+        	table.draw();
+    	});
+    	$('#refresh').click(function(){
+      		$("#delete_ctm").val('');
+        	table.draw();
+    	});
+
+
+
+
+    	$('#delete').click(function(){
+    		$("#delete_ctm").val(1);
+        	table.draw();
+    	});
+
+
       });
 
       $(document).on("click",".approveItem",function() {
@@ -272,6 +374,8 @@
                     }, 2000);
 
                     $('#example').DataTable().ajax.reload();
+                     // Refresh the page
+            location.reload(true); // Pass true to reload from the server
 
                 }
             });

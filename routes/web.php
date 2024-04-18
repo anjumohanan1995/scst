@@ -463,6 +463,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/couplefinancialApproveAssistant','couplefinancialApproveAssistant')->name('couplefinancial.assistant.approve');
     Route::post('/couplefinancialRejectAssistant','couplefinancialRejectAssistant')->name('couplefinancial.assistant.reject');
    
+    Route::get('/getcouplefinancialListAssistantReturn','getcouplefinancialListAssistantReturn')->name('getcouplefinancialListAssistantReturn');
+
     
 	Route::get('/motherChildSchemeListAssistant','motherChildSchemeListAssistant')->name('motherChildSchemeListAssistant');
     Route::get('/getmotherChildSchemeListAssistant','getmotherChildSchemeListAssistant')->name('getmotherChildSchemeListAssistant');
@@ -547,6 +549,8 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::post('/couplefinancialApproveOfficer','couplefinancialApproveOfficer')->name('couplefinancial.officer.approve');
     Route::post('/couplefinancialRejectOfficer','couplefinancialRejectOfficer')->name('couplefinancial.officer.reject');
    
+    Route::get('/getcouplefinancialListOfficerReturn','getcouplefinancialListOfficerReturn')->name('getcouplefinancialListOfficerReturn');
+
     
 	Route::get('/motherChildSchemeListOfficer','motherChildSchemeListOfficer')->name('motherChildSchemeListOfficer');
     Route::get('/getmotherChildSchemeListOfficer','getmotherChildSchemeListOfficer')->name('getmotherChildSchemeListOfficer');
@@ -632,6 +636,9 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::post('/couplefinancialJsSeoApprove','couplefinancialJsSeoApprove')->name('couplefinancial.JsSeo.approve');
     Route::post('/couplefinancialJsSeoReject','couplefinancialJsSeoReject')->name('couplefinancial.JsSeo.reject');
    
+    Route::get('/getcouplefinancialListJsSeoReturn','getcouplefinancialListJsSeoReturn')->name('getcouplefinancialListJsSeoReturn');
+
+
 	Route::get('/motherChildSchemeListJsSeo','motherChildSchemeListJsSeo')->name('motherChildSchemeListJsSeo');
     Route::get('/getmotherChildSchemeListJsSeo','getmotherChildSchemeListJsSeo')->name('getmotherChildSchemeListJsSeo');
     Route::get('/motherChildSchemeJsSeoDetails/{id}','motherChildSchemeJsSeoDetails')->name('motherChildSchemeJsSeoDetails');
