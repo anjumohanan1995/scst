@@ -431,7 +431,7 @@
                                         <label class="form-label">ഭർത്താവിന്റെ ഫോട്ടോ <br> <span class="small">Husband's Photo</span> </label>
                                         <label class="form-label"><small>(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
-                                        <input type="file" class="form-control"  name="husband_photo"  id="husband_photo" onchange="validateHusbandPhoto()"  accept="image/*" required />
+                                        <input type="file" class="form-control"  name="husband_photo"  id="husband_photo" onchange="validateHusbandPhoto()"  accept="image/*"  />
                                         @error('husband_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -442,7 +442,7 @@
                                         <label class="form-label"> ഭാര്യയുടെ ഫോട്ടോ <br> <span class="small"> Wife's Photo</span> </label>
                                         <label class="form-label"><small>(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
-                                        <input type="file"   accept="image/*" class="form-control"  name="wife_photo"  id="wife_photo"  onchange="validateWifePhoto()" required />
+                                        <input type="file"   accept="image/*" class="form-control"  name="wife_photo"  id="wife_photo"  onchange="validateWifePhoto()"  />
                                         @error('wife_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -458,7 +458,7 @@
                                         <label class="form-label"> ഭർത്താവിന്റെ ഒപ്പ് <br> <span class="small"> Husband's Sign</span></label>
                                         <label class="form-label"><small>(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
-                                        <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*" required />
+                                        <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*"  />
                                         @error('husband_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -469,7 +469,7 @@
                                         <label class="form-label">  ഭാര്യയുടെ ഒപ്പ് <br> <span class="small">Wife's Sign</span></label>
                                         <label class="form-label"><small>(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
-                                        <input type="file"   accept="image/*" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()" required />
+                                        <input type="file"   accept="image/*" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()"  />
                                         @error('wife_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror

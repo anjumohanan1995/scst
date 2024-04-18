@@ -388,7 +388,7 @@
                     }, 2000);
 
                     $('#example').DataTable().ajax.reload();
-
+                    window.location.reload();
                 }
             });
         }
@@ -421,7 +421,7 @@
                         }, 2000);
 
                         $('#example').DataTable().ajax.reload();
-
+                        window.location.reload();
                     }
                 })
 

@@ -323,22 +323,9 @@ class ApoTdoController extends Controller
             $teo_name=$record->teo->teo_name;
           
               $edit='';
-              if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
-            }
-            else if($status ==3){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Returned</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
-          
-            }
-            else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
-            }
-
-          
-              
-        
-        
              
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            
            
                 $data_arr[] = array(
                     "sl_no" => $i,
@@ -568,12 +555,12 @@ class ApoTdoController extends Controller
       
        
         $marriage->update([
+            'assistant_status' => 2,
             'teo_return' => 1,
             'clerk_return' => 1,
             'jsSeo_return' => 1,
             'assistant_return' => 1,
             'officer_return' => 1,
-            //'return_status' =>1,
             'return_date' => $currenttime,
             'return_userid' => Auth::user()->id,
             'return_reason' => $reason,

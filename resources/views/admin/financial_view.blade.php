@@ -533,6 +533,53 @@
                   <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$financialHelp['date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['time'])->format('d-m-Y h:i a') }}@endif</p>
                 
                </li>
+               @if(@$financialHelp->teo_return == null)
+               @if( @$financialHelp->clerk_return == null)
+               <li class="ApproveTimeline">
+                  <a href="#!">Clerk</a>
+                  <p></p>
+                  <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                  <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->clerkUser->name }}</p>
+                 
+                  <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$financialHelp['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$financialHelp->clerk_status_reason}}</p>
+               </li>
+
+               @elseif( @$financialHelp->clerk_return == 1)
+               <li class="ApproveTimeline">
+                  <a href="#!">Clerk</a>
+                  <p></p>
+                  <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                 
+               </li>
+
+               @endif
+               @endif
+
+               {{--  @if(@$financialHelp->clerk_return == null)
+               @if( @$financialHelp->jsSeo_return == null)
+               <li class="ApproveTimeline">
+                  <a href="#!">JS/ SEO</a>
+                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                  <p></p>
+                  <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                  <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->assistantUser->name }}</p>
+                 
+                  <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
+               </li>
+
+               @elseif( @$financialHelp->clerk_return == 1)
+               <li class="ApproveTimeline">
+                  <a href="#!">JS/ SEO</a>
+                  <p></p>
+                  <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                 
+               </li>
+
+               @endif
+               @endif  --}}
+
                @endif
             </ul>
         @else
@@ -571,10 +618,10 @@
                       <a href="#!">TEO</a>
                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['teo_view_date'] }}</a>
                       <br>
-                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
                  
-                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->teo_status_reason}}</p>
+                      <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$financialHelp['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$financialHelp->teo_status_reason}}</p>
                     
                          </li>
                      @endif
@@ -597,11 +644,11 @@
                       <a href="#!">Clerk</a>
                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['clerk_view_date'] }}</a>
                       <p></p>
-                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->clerkUser->name }}</p>
                       
-                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->clerk_status_reason}}</p>
+                      <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$financialHelp['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$financialHelp->clerk_status_reason}}</p>
                    </li>
                    @elseif( @$financialHelp->clerk_status == null)
     
@@ -613,21 +660,45 @@
                       </li>
                       @endif
                       @endif
-
-                     @if(@$financialHelp->clerk_status == 1)
-                     @if( @$financialHelp->officer_return == 1)
+                      @if(@$formData->clerk_status == 1)
+                   
+                      @if( @$formData->JsSeo_status == 1)
      
-                     <li class="ApproveTimeline">
-                        <a href="#!">APO / ATDO</a>
+                      <li class="ApproveTimeline">
+                        <a href="#!">JS/ SEO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
                         <p></p>
-                        <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
-                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->returnUser->name }}</p>
+                        <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->assistantUser->name }}</p>
                        
-                        <p  class="mt-2"><span class= "spanclr"> Return Date :   </span>@if(@$financialHelp['return_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                        <p  class="mt-2"><span class= "spanclr"> Return Reason :   </span>{{ @$financialHelp->return_reason}}</p>
+                        <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->teo_status_reason}}</p>
                      </li>
-                     @else
-                  
+                     @elseif( @$formData->JsSeo_status == 2)
+     
+                     <li class="rejectTimeline">
+                       <a href="#!">JS/ SEO</a>
+                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['JsSeo_view_date'] }}</a>
+                       <p></p>
+                       <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
+                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->JsSeoUser->name }}</p>
+                       
+                       <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$formData['JsSeo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$formData->JsSeo_status_reason}}</p>
+                    </li>
+                    @elseif( @$formData->JsSeo_status == null)
+     
+                    <li class="pendingTimeline">
+                      <a href="#!">JS/ SEO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['assistant_view_date'] }}</a>
+                     <p></p>
+                      <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
+                       </li>
+                      
+                       @endif
+                       @endif
+
+                     @if(@$financialHelp->JsSeo_status == 1)     
                      @if( @$financialHelp->assistant_status == 1)
     
                      <li class="ApproveTimeline">
@@ -646,11 +717,11 @@
                       <a href="#!">APO / ATDO</a>
                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['assistant_view_date'] }}</a>
                       <p></p>
-                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->assistantUser->name }}</p>
                       
-                      <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                      <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->assistant_status_reason}}</p>
+                      <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$financialHelp['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                      <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$financialHelp->assistant_status_reason}}</p>
                    </li>
                    @elseif( @$financialHelp->assistant_status == null)
     
@@ -660,7 +731,7 @@
                     <p></p>
                      <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
                       </li>
-                      @endif
+               
                       @endif
                       @endif
                       @if(@$financialHelp->assistant_status == 1)                    
@@ -682,11 +753,11 @@
                        <a href="#!">PO / TDO</a>
                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['officer_view_date'] }}</a>
                        <p></p>
-                       <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                       <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->officerUser->name }}</p>
                        
-                       <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                       <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
+                       <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
                     </li>
                     @elseif( @$financialHelp->officer_status == null)
      
