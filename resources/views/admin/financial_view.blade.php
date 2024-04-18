@@ -520,6 +520,23 @@
 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
     <div class="pt-2 card overflow-hidden">                            
        <div class="card-body">
+
+         @if( @$financialHelp->return_status == 1)
+            <ul class="timeline-3"> 
+               @if( @$financialHelp->teo_return == null)
+               <li class="ApproveTimeline">
+                  <a href="#!">TEO</a>
+                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['teo_view_date'] }}</a>
+                  <br>
+                  <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+             
+                  <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$financialHelp['date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['time'])->format('d-m-Y h:i a') }}@endif</p>
+                
+               </li>
+               @endif
+            </ul>
+        @else
+
          <ul class="timeline-3">                                 
         
              @if( @$financialHelp->teo_status == null)
@@ -598,6 +615,19 @@
                       @endif
 
                      @if(@$financialHelp->clerk_status == 1)
+                     @if( @$financialHelp->officer_return == 1)
+     
+                     <li class="ApproveTimeline">
+                        <a href="#!">APO / ATDO</a>
+                        <p></p>
+                        <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
+                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->returnUser->name }}</p>
+                       
+                        <p  class="mt-2"><span class= "spanclr"> Return Date :   </span>@if(@$financialHelp['return_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Return Reason :   </span>{{ @$financialHelp->return_reason}}</p>
+                     </li>
+                     @else
+                  
                      @if( @$financialHelp->assistant_status == 1)
     
                      <li class="ApproveTimeline">
@@ -632,7 +662,8 @@
                       </li>
                       @endif
                       @endif
-                      @if(@$financialHelp->assistant_status == 1)
+                      @endif
+                      @if(@$financialHelp->assistant_status == 1)                    
                       @if( @$financialHelp->officer_status == 1)
      
                       <li class="ApproveTimeline">
@@ -668,6 +699,7 @@
                        @endif
                        @endif
          </ul>  
+         @endif
      </div>
  </div>
 </div>

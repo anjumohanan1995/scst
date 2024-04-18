@@ -89,6 +89,9 @@ Route::post('/financial-teo/approve', [App\Http\Controllers\TeoController::class
 Route::post('/financial-teo/reject', [App\Http\Controllers\TeoController::class, 'coupleApplicationReject'])->name('financial-teo.reject');
 
 
+Route::get('/getCoupleReturnList', [App\Http\Controllers\ApplicationController::class, 'getCoupleReturnList'])->name('getCoupleReturnList');
+Route::get('/couple-application-edit/{id}', [App\Http\Controllers\ApplicationController::class, 'coupleApplicationEdit'])->name('coupleApplicationEdit');
+Route::post('/financialHelpUpdate', [App\Http\Controllers\ApplicationController::class, 'financialHelpUpdate'])->name('financialHelpUpdate');
 
 
 
@@ -365,6 +368,8 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/couplefinancialApprove','couplefinancialApprove')->name('couplefinancial.approve');
     Route::post('/couplefinancialReject','couplefinancialReject')->name('couplefinancial.reject');
    
+    Route::get('/getcouplefinancialListClerkReturned','getcouplefinancialListClerkReturned')->name('getcouplefinancialListClerkReturned');
+
     
 	Route::get('/motherChildSchemeListClerk','motherChildSchemeListClerk')->name('motherChildSchemeListClerk');
     Route::get('/getmotherChildSchemeListClerk','getmotherChildSchemeListClerk')->name('getmotherChildSchemeListClerk');
@@ -461,6 +466,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/couplefinancialApproveAssistant','couplefinancialApproveAssistant')->name('couplefinancial.assistant.approve');
     Route::post('/couplefinancialRejectAssistant','couplefinancialRejectAssistant')->name('couplefinancial.assistant.reject');
    
+    Route::get('/getcouplefinancialListAssistantReturn','getcouplefinancialListAssistantReturn')->name('getcouplefinancialListAssistantReturn');
+
     
 	Route::get('/motherChildSchemeListAssistant','motherChildSchemeListAssistant')->name('motherChildSchemeListAssistant');
     Route::get('/getmotherChildSchemeListAssistant','getmotherChildSchemeListAssistant')->name('getmotherChildSchemeListAssistant');
@@ -545,6 +552,8 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::post('/couplefinancialApproveOfficer','couplefinancialApproveOfficer')->name('couplefinancial.officer.approve');
     Route::post('/couplefinancialRejectOfficer','couplefinancialRejectOfficer')->name('couplefinancial.officer.reject');
    
+    Route::get('/getcouplefinancialListOfficerReturn','getcouplefinancialListOfficerReturn')->name('getcouplefinancialListOfficerReturn');
+
     
 	Route::get('/motherChildSchemeListOfficer','motherChildSchemeListOfficer')->name('motherChildSchemeListOfficer');
     Route::get('/getmotherChildSchemeListOfficer','getmotherChildSchemeListOfficer')->name('getmotherChildSchemeListOfficer');
@@ -630,6 +639,9 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::post('/couplefinancialJsSeoApprove','couplefinancialJsSeoApprove')->name('couplefinancial.JsSeo.approve');
     Route::post('/couplefinancialJsSeoReject','couplefinancialJsSeoReject')->name('couplefinancial.JsSeo.reject');
    
+    Route::get('/getcouplefinancialListJsSeoReturn','getcouplefinancialListJsSeoReturn')->name('getcouplefinancialListJsSeoReturn');
+
+
 	Route::get('/motherChildSchemeListJsSeo','motherChildSchemeListJsSeo')->name('motherChildSchemeListJsSeo');
     Route::get('/getmotherChildSchemeListJsSeo','getmotherChildSchemeListJsSeo')->name('getmotherChildSchemeListJsSeo');
     Route::get('/motherChildSchemeJsSeoDetails/{id}','motherChildSchemeJsSeoDetails')->name('motherChildSchemeJsSeoDetails');

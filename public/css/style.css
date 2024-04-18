@@ -54405,10 +54405,10 @@ textarea.parsley-success:focus {
     border-radius: 5%;
 }
 
-.tab-content i,
+/* .tab-content i,
 .tabs-menu2 ul li .active {
-    color: var(--primary-bg-color);
-}
+  //  color: var(--primary-bg-color);
+} */
 
 /* ######  util ###### */
 /*Color variables*/
@@ -98420,3 +98420,8 @@ form {
   font-size: 15px !important;
   padding: 20px !important;
 }
+.tabs-menu1 ul li a {
+    padding: 10px 20px 11px 20px;
+    display: block;
+    color: #282f53;
+  }

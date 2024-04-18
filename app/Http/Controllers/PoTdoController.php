@@ -226,7 +226,148 @@ class PoTdoController extends Controller
     }
 
 
+    public function getcouplefinancialListOfficerReturn(Request $request){
+        $role =  Auth::user()->role;       
+       $district =  Auth::user()->district;
+       $tdo= Auth::user()->po_tdo_office;
 
+        $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+         
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = FinancialHelp::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_status',1);
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('assistant_status',1);
+
+           
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             
+            
+             $items = FinancialHelp::where('deleted_at', null)
+                 ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('assistant_status',1)
+                 ->orderBy($columnName, $columnSortOrder);
+             
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+            $items->where('assistant_return', null)->where('officer_return', 1);
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+             
+         foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $husband_name = $record->husband_name;
+             $wife_name = $record->wife_name;
+             $register_details = $record->register_details;
+             $certificate_details = $record->certificate_details;
+             $husband_caste = $record->husband_caste;
+             $wife_caste =  $record->wife_caste;
+             $created_at =  $record->created_at;
+             $date =  $record->date;
+             $time =  $record->time;
+             $status = $record->officer_status;
+           
+            $teo_name=$record->teo->teo_name;
+          
+              $edit='';
+              if($status == 1){
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+            }
+            else if($status ==2){
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
+            else if($status ==null){
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            }
+
+          
+              
+        
+        
+             
+           
+                $data_arr[] = array(
+                    "sl_no" => $i,
+                    "id" => $id,
+                    "husband_name" => $husband_name,
+                "wife_name" => $wife_name,
+                "register_details" => $register_details,
+                "certificate_details" => $certificate_details,
+                "husband_caste" => $husband_caste,
+                "wife_caste" => $wife_caste,
+                "date" => $date . ' ' . $time,
+                "created_at" => $created_at,
+
+                    "teo_name" =>$teo_name,
+                                    
+                    "action" => $edit
+    
+                );
+          
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
     public function couplefinancialListOfficer(){
         return view('PoTdo.couplefinancial.index');
     }
@@ -300,7 +441,7 @@ class PoTdoController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-           
+            $items->where('officer_return', null);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -404,6 +545,7 @@ class PoTdoController extends Controller
        
         $marriage->update([
             'officer_status' => 1,
+            'officer_return' => null,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -423,6 +565,11 @@ class PoTdoController extends Controller
        
         $marriage->update([
             'officer_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'jsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
