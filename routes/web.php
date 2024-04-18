@@ -640,7 +640,7 @@ Route::controller(JsSeoController::class)->group(function(){
   
 	Route::get('/marriageGrantListJsSeo','marriageGrantListJsSeo')->name('marriageGrantListJsSeo');
     Route::get('/getmarriageGrantListJsSeo','getmarriageGrantListJsSeo')->name('getmarriageGrantListJsSeo');
-    Route::get('/marriageGrantDetails/{id}','marriageGrantDetails')->name('marriageGrantDetails');
+    Route::get('/marriageGrantJsSeoDetails/{id}','marriageGrantJsSeoDetails')->name('marriageGrantJsSeoDetails');
     Route::post('/marriageGrantJsSeoApprove','marriageGrantJsSeoApprove')->name('marriageGrantJsSeo.approve');
     Route::post('/marriageGrantJsSeoReject','marriageGrantJsSeoReject')->name('marriageGrantJsSeo.reject');
 

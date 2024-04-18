@@ -121,10 +121,10 @@ class JsSeoController extends Controller
               $created_at =  $record->created_at;
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('childFinancialJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('childFinancialJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('childFinancialJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('childFinancialJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
           
             }
             else if($status ==null){
@@ -161,7 +161,7 @@ class JsSeoController extends Controller
          );
 
          return response()->json($response);
-    }#done
+    }
     public function childFinancialJsSeoDetails($id){
         $currentTime = Carbon::now();
 
@@ -170,7 +170,7 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =ChildFinance::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->JsSeo_view_status==null ){
             $formData->update([
             "JsSeo_view_status"=>1,
             "JsSeo_view_id" =>Auth::user()->id,
@@ -201,7 +201,7 @@ class JsSeoController extends Controller
             'success' => 'Child Finance Scheme Application Approved successfully.'
         ]);
     }
-    public function childFinanceReject (Request $request){
+    public function childFinanceJsSeoReject (Request $request){
         $marriage = ChildFinance::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -223,11 +223,11 @@ class JsSeoController extends Controller
 
 
 
-    public function examApplicationListClerk(){
-        return view('clerk.examApplication.index');
+    public function examApplicationListJsSeo(){
+        return view('JsSeo.examApplication.index');
     }
 
-    public function getexamApplicationListClerk(Request $request){
+    public function getexamApplicationListJsSeo(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
        $tdo= Auth::user()->po_tdo_office;
@@ -260,7 +260,7 @@ class JsSeoController extends Controller
              $totalRecord = ExamApplication::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -273,7 +273,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = ExamApplication::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -290,7 +290,7 @@ class JsSeoController extends Controller
              $items = ExamApplication::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -317,21 +317,21 @@ class JsSeoController extends Controller
             $mother_name =  $record->mother_name;
             $created_at =  $record->created_at;
            
-             $status = $record->clerk_status;
+             $status = $record->JsSeo_status;
             $date = $record->date;
             $time = $record->time;
             $teo_name=@$record->submittedTeo->teo_name;
               $created_at =  $record->created_at;
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -365,7 +365,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function examApplicationDetails($id){
+    public function examApplicationJsSeoDetails($id){
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
@@ -373,19 +373,19 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =ExamApplication::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->JsSeo_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+            "JsSeo_view_status"=>1,
+            "JsSeo_view_id" =>Auth::user()->id,
+            "JsSeo_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
-        return view('clerk.examApplication.details',compact('formData'));
+        return view('JsSeo.examApplication.details',compact('formData'));
 
 
     }
-    public function examApplicationApprove (Request $request){
+    public function examApplicationJsSeoApprove (Request $request){
         $marriage = ExamApplication::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -395,16 +395,16 @@ class JsSeoController extends Controller
       
        
         $marriage->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Exam Application Approved successfully.'
         ]);
     }
-    public function examApplicationReject (Request $request){
+    public function examApplicationJsSeoReject (Request $request){
         $marriage = ExamApplication::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -414,10 +414,10 @@ class JsSeoController extends Controller
       
        
         $marriage->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Exam Application Rejected successfully.'
@@ -426,11 +426,11 @@ class JsSeoController extends Controller
 
 
 
-    public function couplefinancialListClerk(){
-        return view('clerk.couplefinancial.index');
+    public function couplefinancialListJsSeo(){
+        return view('JsSeo.couplefinancial.index');
     }
 
-    public function getcouplefinancialListClerk(Request $request){
+    public function getcouplefinancialListJsSeo(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
        $tdo= Auth::user()->po_tdo_office;
@@ -463,7 +463,7 @@ class JsSeoController extends Controller
              $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -476,7 +476,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -493,7 +493,7 @@ class JsSeoController extends Controller
              $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -521,20 +521,20 @@ class JsSeoController extends Controller
              $created_at =  $record->created_at;
              $date =  $record->date;
              $time =  $record->time;
-             $status = $record->clerk_status;
+             $status = $record->JsSeo_status;
            
             $teo_name=$record->teo->teo_name;
           
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -572,7 +572,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function couplefinancialDetails($id){
+    public function couplefinancialJsSeoDetails($id){
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
@@ -580,19 +580,19 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =FinancialHelp::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->JsSeo_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+            "JsSeo_view_status"=>1,
+            "JsSeo_view_id" =>Auth::user()->id,
+            "JsSeo_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
-        return view('clerk.couplefinancial.details',compact('formData'));
+        return view('JsSeo.couplefinancial.details',compact('formData'));
 
 
     }
-    public function couplefinancialApprove (Request $request){
+    public function couplefinancialJsSeoApprove (Request $request){
         $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -602,16 +602,16 @@ class JsSeoController extends Controller
       
        
         $marriage->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Couple Financial Scheme Application Approved successfully.'
         ]);
     }
-    public function couplefinancialReject (Request $request){
+    public function couplefinancialJsSeoReject (Request $request){
         $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -621,10 +621,10 @@ class JsSeoController extends Controller
       
        
         $marriage->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Couple Financial Application Rejected successfully.'
@@ -634,11 +634,11 @@ class JsSeoController extends Controller
 
 
 
-    public function motherChildSchemeListClerk(){
-        return view('clerk.motherChild.index');
+    public function motherChildSchemeListJsSeo(){
+        return view('JsSeo.motherChild.index');
     }
 
-    public function getmotherChildSchemeListClerk(Request $request){
+    public function getmotherChildSchemeListJsSeo(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
        $tdo= Auth::user()->po_tdo_office;
@@ -671,7 +671,7 @@ class JsSeoController extends Controller
              $totalRecord = MotherChildScheme::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -684,7 +684,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -701,7 +701,7 @@ class JsSeoController extends Controller
              $items = MotherChildScheme::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -729,21 +729,21 @@ class JsSeoController extends Controller
             $village =  $record->village;
             $created_at =  $record->created_at;
            
-             $status = $record->clerk_status;
+             $status = $record->JsSeo_status;
             $date = $record->date;
             $time = $record->time;
             $teo_name=@$record->submittedTeo->teo_name;
               $created_at =  $record->created_at;
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -776,7 +776,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function motherChildSchemeDetails($id){
+    public function motherChildSchemeJsSeoDetails($id){
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
@@ -784,19 +784,19 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =MotherChildScheme::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->JsSeo_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+            "JsSeo_view_status"=>1,
+            "JsSeo_view_id" =>Auth::user()->id,
+            "JsSeo_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
-        return view('clerk.motherChild.details',compact('formData'));
+        return view('JsSeo.motherChild.details',compact('formData'));
 
 
     }
-    public function motherChildSchemeApprove (Request $request){
+    public function motherChildSchemeJsSeoApprove (Request $request){
         $motherChild = MotherChildScheme::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -806,16 +806,16 @@ class JsSeoController extends Controller
       
        
         $motherChild->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Mother Child Scheme Application.'
         ]);
     }
-    public function motherChildSchemeReject (Request $request){
+    public function motherChildSchemeJsSeoReject (Request $request){
         $motherChild = MotherChildScheme::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -825,10 +825,10 @@ class JsSeoController extends Controller
       
        
         $motherChild->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Mother Child Scheme Application Rejected successfully.'
@@ -836,11 +836,11 @@ class JsSeoController extends Controller
     }
 
 
-    public function marriageGrantListClerk(){
-        return view('clerk.marriageGrant.index');
+    public function marriageGrantListJsSeo(){
+        return view('JsSeo.marriageGrant.index');
     }
 
-    public function getmarriageGrantListClerk(Request $request){
+    public function getmarriageGrantListJsSeo(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
        $tdo= Auth::user()->po_tdo_office;
@@ -873,7 +873,7 @@ class JsSeoController extends Controller
              $totalRecord = MarriageGrant::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -886,7 +886,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = MarriageGrant::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -903,7 +903,7 @@ class JsSeoController extends Controller
              $items = MarriageGrant::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -928,20 +928,20 @@ class JsSeoController extends Controller
             $caste = $record->caste;
             $created_at =  $record->created_at;
            
-             $status = $record->clerk_status;
+             $status = $record->JsSeo_status;
            $teo_name=$record->submittedTeo->teo_name;
             $teo_name=@$record->submittedTeo->teo_name;
              
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('marriageGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('marriageGrantJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('marriageGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('marriageGrantJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('marriageGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('marriageGrantJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -975,7 +975,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function marriageGrantDetails($id){
+    public function marriageGrantJsSeoDetails($id){
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
@@ -983,19 +983,19 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =MarriageGrant::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->JsSeo_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+            "JsSeo_view_status"=>1,
+            "JsSeo_view_id" =>Auth::user()->id,
+            "JsSeo_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
-        return view('clerk.marriageGrant.details',compact('formData'));
+        return view('JsSeo.marriageGrant.details',compact('formData'));
 
 
     }
-    public function marriageGrantClerkApprove (Request $request){
+    public function marriageGrantJsSeoApprove (Request $request){
         $marriage = MarriageGrant::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -1005,16 +1005,16 @@ class JsSeoController extends Controller
       
        
         $marriage->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Marriage grant  Scheme Application approved Successfully.'
         ]);
     }
-    public function marriageGrantClerkReject (Request $request){
+    public function marriageGrantJsSeoReject (Request $request){
         $marriage = MarriageGrant::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -1024,22 +1024,22 @@ class JsSeoController extends Controller
       
        
         $marriage->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Marriage grant Scheme Application Rejected successfully.'
         ]);
     }
 
-    public function clerkItiFundList(Request $request)
+    public function JsSeoItiFundList(Request $request)
     {
-        return view('clerk.itiFund.index');
+        return view('JsSeo.itiFund.index');
   
     }
-    public function getClerkItiFundList(Request $request)
+    public function getJsSeoItiFundList(Request $request)
     {
         
         $name = $request->name;
@@ -1071,7 +1071,7 @@ class JsSeoController extends Controller
              $totalRecord = ItiFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
          
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1084,7 +1084,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = ItiFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
           
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -1098,7 +1098,7 @@ class JsSeoController extends Controller
              $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
@@ -1128,20 +1128,20 @@ class JsSeoController extends Controller
               $time = $carbonDate->format('g:i a');
   
            
-              $status = $record->clerk_status;
+              $status = $record->JsSeo_status;
             
              $teo_name=$record->teo->teo_name;
            
                $edit='';
                if($status == 1){
-                 $edit='<div class="settings-main-icon"><a  href="' . route('clerkItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                 $edit='<div class="settings-main-icon"><a  href="' . route('JsSeoItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
              }
              else if($status ==2){
-                 $edit='<div class="settings-main-icon"><a  href="' . route('clerkItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                 $edit='<div class="settings-main-icon"><a  href="' . route('JsSeoItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
            
              }
              else if($status ==null){
-                 $edit='<div class="settings-main-icon"><a  href="' . route('clerkItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                 $edit='<div class="settings-main-icon"><a  href="' . route('JsSeoItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
              }
 
             $data_arr[] = array(
@@ -1170,7 +1170,7 @@ class JsSeoController extends Controller
          return response()->json($response);
     }
   
-    public function itiFeeClerkView(Request $request,$id)
+    public function itiFeeJsSeoView(Request $request,$id)
     {
       
         $currentTime = Carbon::now();
@@ -1180,17 +1180,17 @@ class JsSeoController extends Controller
       $currenttime = $currentTimeInKerala->format('h:i A');
      
       $studentFund=ItiFund::find($id);
-      if($studentFund->clerk_view_status==null ){
+      if($studentFund->JsSeo_view_status==null ){
         $studentFund->update([
-        "clerk_view_status"=>1,
-        "clerk_view_id" =>Auth::user()->id,
-        "clerk_view_date" =>$date .' ' .$currenttime
+        "JsSeo_view_status"=>1,
+        "JsSeo_view_id" =>Auth::user()->id,
+        "JsSeo_view_date" =>$date .' ' .$currenttime
         ]);
     }
       
-        return view('clerk.itiFund.details', compact('studentFund'));
+        return view('JsSeo.itiFund.details', compact('studentFund'));
     }
-    public function itiScholarshipClerkApprove (Request $request){
+    public function itiScholarshipJsSeoApprove (Request $request){
         $data = ItiFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -1200,16 +1200,16 @@ class JsSeoController extends Controller
       
        
         $data->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Application approved Successfully.'
         ]);
     }
-    public function itiScholarshipClerkReject (Request $request){
+    public function itiScholarshipJsSeoReject (Request $request){
         $data = ItiFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -1219,22 +1219,22 @@ class JsSeoController extends Controller
       
        
         $data->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Application Rejected successfully.'
         ]);
     }
 
-    public function studentAwardListClerk(Request $request)
+    public function studentAwardListJsSeo(Request $request)
     {
-        return view('clerk.studentAward.index');
+        return view('JsSeo.studentAward.index');
   
     }
-    public function getStudentAwardListClerk(Request $request)
+    public function getStudentAwardListJsSeo(Request $request)
     {
         
         $name = $request->name;
@@ -1269,7 +1269,7 @@ class JsSeoController extends Controller
              $totalRecord = StudentAward::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
              // Total records
             
              if($name != ""){
@@ -1282,7 +1282,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = StudentAward::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
           
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -1299,7 +1299,7 @@ class JsSeoController extends Controller
              $items = StudentAward::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -1324,20 +1324,20 @@ class JsSeoController extends Controller
              $district = @$record->districtRelation->name;
               $created_at =  $record->created_at;
 
-              $status = @$record->clerk_status;
+              $status = @$record->JsSeo_status;
             
               $teo_name=@$record->submittedTeo->teo_name;
             
                 $edit='';
                 if($status == 1){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
               }
               else if($status ==2){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             
               }
               else if($status ==null){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
               }
 
             $data_arr[] = array(
@@ -1362,7 +1362,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function studentAwardClerkView(Request $request, $id)
+    public function studentAwardJsSeoView(Request $request, $id)
     {   
         $currentTime = Carbon::now();
 
@@ -1371,20 +1371,20 @@ class JsSeoController extends Controller
       $currenttime = $currentTimeInKerala->format('h:i A');
      
       $formData=StudentAward::find($id);
-      if($formData->clerk_view_status==null ){
+      if($formData->JsSeo_view_status==null ){
         $formData->update([
-        "clerk_view_status"=>1,
-        "clerk_view_id" =>Auth::user()->id,
-        "clerk_view_date" =>$date .' ' .$currenttime
+        "JsSeo_view_status"=>1,
+        "JsSeo_view_id" =>Auth::user()->id,
+        "JsSeo_view_date" =>$date .' ' .$currenttime
         ]);
     }
               
         $formData = StudentAward::where('_id',$id)->first();
        
-        return view('clerk.studentAward.view', compact('formData'));
+        return view('JsSeo.studentAward.view', compact('formData'));
 
     }
-    public function studentAwardClerkApprove(Request $request){
+    public function studentAwardJsSeoApprove(Request $request){
      
         $reason =$request->reason;
         $studentAward = StudentAward::where('_id', $request->id)->first();
@@ -1393,10 +1393,10 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
 
         $studentAward->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
 
@@ -1405,7 +1405,7 @@ class JsSeoController extends Controller
         ]);
     
     }
-    public function studentAwardClerkReject(Request $request){
+    public function studentAwardJsSeoReject(Request $request){
        
         $reason =$request->reason;
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
@@ -1415,10 +1415,10 @@ class JsSeoController extends Controller
       
 
         $studentAward->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
 
@@ -1427,11 +1427,11 @@ class JsSeoController extends Controller
         ]);
     
     }
-    public function anemiaFinanceListClerk(Request $request)
+    public function anemiaFinanceListJsSeo(Request $request)
     {
-        return view('clerk.anemiaFinance.index');
+        return view('JsSeo.anemiaFinance.index');
     }
-    public function getAnemiaFinanceListClerk(Request $request)
+    public function getAnemiaFinanceListJsSeo(Request $request)
     {
         
         $name = $request->name;
@@ -1465,7 +1465,7 @@ class JsSeoController extends Controller
              $totalRecord = AnemiaFinance::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1477,7 +1477,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = AnemiaFinance::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
 
           
              if($name != ""){
@@ -1491,7 +1491,7 @@ class JsSeoController extends Controller
              $items = AnemiaFinance::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -1513,20 +1513,20 @@ class JsSeoController extends Controller
              $district = @$record->districtRelation->name;
               $created_at =  $record->created_at;
 
-              $status = @$record->clerk_status;
+              $status = @$record->JsSeo_status;
             
               $teo_name=@$record->submittedTeo->teo_name;
             
                 $edit='';
                 if($status == 1){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
               }
               else if($status ==2){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             
               }
               else if($status ==null){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
               }
               
             $data_arr[] = array(
@@ -1551,7 +1551,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function anemiaFinanceClerkView(Request $request, $id)
+    public function anemiaFinanceJsSeoView(Request $request, $id)
     {           
         $currentTime = Carbon::now();
 
@@ -1560,19 +1560,19 @@ class JsSeoController extends Controller
       $currenttime = $currentTimeInKerala->format('h:i A');
      
       $formData=AnemiaFinance::find($id);
-      if($formData->clerk_view_status==null ){
+      if($formData->JsSeo_view_status==null ){
         $formData->update([
-        "clerk_view_status"=>1,
-        "clerk_view_id" =>Auth::user()->id,
-        "clerk_view_date" =>$date .' ' .$currenttime
+        "JsSeo_view_status"=>1,
+        "JsSeo_view_id" =>Auth::user()->id,
+        "JsSeo_view_date" =>$date .' ' .$currenttime
         ]);
     }
         $formData = AnemiaFinance::where('_id',$id)->first();
        
-        return view('clerk.anemiaFinance.view', compact('formData'));
+        return view('JsSeo.anemiaFinance.view', compact('formData'));
 
     }
-    public function anemiaFinanceClerkApprove(Request $request){
+    public function anemiaFinanceJsSeoApprove(Request $request){
      
         $reason =$request->reason;
         $data = AnemiaFinance::where('_id', $request->id)->first();
@@ -1581,10 +1581,10 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
 
         $data->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
 
@@ -1593,7 +1593,7 @@ class JsSeoController extends Controller
         ]);
     
     }
-    public function anemiaFinanceClerkReject(Request $request){
+    public function anemiaFinanceJsSeoReject(Request $request){
        
         $reason =$request->reason;
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
@@ -1603,10 +1603,10 @@ class JsSeoController extends Controller
       
 
         $data->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
 
@@ -1615,11 +1615,11 @@ class JsSeoController extends Controller
         ]);
     
     }
-    public function singleEarnerListClerk(Request $request)
+    public function singleEarnerListJsSeo(Request $request)
     {
-        return view('clerk.singleEarner.index');
+        return view('JsSeo.singleEarner.index');
     }
-    public function getSingleEarnerListClerk(Request $request)
+    public function getSingleEarnerListJsSeo(Request $request)
     {
         
         $name = $request->name;
@@ -1652,7 +1652,7 @@ class JsSeoController extends Controller
              $totalRecord = SingleIncomeEarner::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
            
              if($name != ""){
                  $totalRecord->where('applicant_name','like',"%".$name."%");
@@ -1664,7 +1664,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = SingleIncomeEarner::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
 
           
              if($name != ""){
@@ -1677,7 +1677,7 @@ class JsSeoController extends Controller
              $items = SingleIncomeEarner::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                 $items->where('applicant_name','like',"%".$name."%");
@@ -1705,22 +1705,21 @@ class JsSeoController extends Controller
              $district = @$record->districtRelation->name;
               $created_at =  $record->created_at;
 
-              $status = @$record->clerk_status;
+              $status = @$record->JsSeo_status;
             
               $teo_name=@$record->teo->teo_name;
             
                 $edit='';
                 if($status == 1){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
               }
               else if($status ==2){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             
               }
               else if($status ==null){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('singleEarnerJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
               }
-
 
             $data_arr[] = array(
                 "id" => $id,
@@ -1745,7 +1744,7 @@ class JsSeoController extends Controller
          return response()->json($response);
     }
 
-    public function singleEarnerClerkView(Request $request, $id)
+    public function singleEarnerJsSeoView(Request $request, $id)
     {       
         $currentTime = Carbon::now();
 
@@ -1754,18 +1753,18 @@ class JsSeoController extends Controller
       $currenttime = $currentTimeInKerala->format('h:i A');
      
       $formData=SingleIncomeEarner::find($id);
-      if($formData->clerk_view_status==null ){
+      if($formData->JsSeo_view_status==null ){
         $formData->update([
-        "clerk_view_status"=>1,
-        "clerk_view_id" =>Auth::user()->id,
-        "clerk_view_date" =>$date .' ' .$currenttime
+        "JsSeo_view_status"=>1,
+        "JsSeo_view_id" =>Auth::user()->id,
+        "JsSeo_view_date" =>$date .' ' .$currenttime
         ]);
     } 
        
-        return view('clerk.singleEarner.view', compact('formData'));
+        return view('JsSeo.singleEarner.view', compact('formData'));
 
     }
-    public function singleEarnerClerkApprove(Request $request){
+    public function singleEarnerJsSeoApprove(Request $request){
      
         $reason =$request->reason;
         $data = SingleIncomeEarner::where('_id', $request->id)->first();
@@ -1774,10 +1773,10 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
 
         $data->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
 
@@ -1786,7 +1785,7 @@ class JsSeoController extends Controller
         ]);
     
     }
-    public function singleEarnerClerkReject(Request $request){
+    public function singleEarnerJsSeoReject(Request $request){
        
         $reason =$request->reason;
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
@@ -1796,10 +1795,10 @@ class JsSeoController extends Controller
       
 
         $data->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
         return response()->json([
@@ -1807,10 +1806,10 @@ class JsSeoController extends Controller
         ]);
     
     }
-    public function studentFundListClerk(){
-        return view("clerk.studentFund.index");
+    public function studentFundListJsSeo(){
+        return view("JsSeo.studentFund.index");
     }
-    public function getStudentFundListClerk(Request $request){
+    public function getStudentFundListJsSeo(Request $request){
         $name = $request->name;
         $user_id=Auth::user()->id;
         $role =  Auth::user()->role;       
@@ -1841,7 +1840,7 @@ class JsSeoController extends Controller
              $totalRecord = MedEngStudentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1853,7 +1852,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = MedEngStudentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
 
           
              if($name != ""){
@@ -1867,7 +1866,7 @@ class JsSeoController extends Controller
              $items = MedEngStudentFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
            
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -1896,20 +1895,20 @@ class JsSeoController extends Controller
               $date = $carbonDate->format('d-m-Y');
               $time = $carbonDate->format('g:i a');
 
-              $status = @$record->clerk_status;
+              $status = @$record->JsSeo_status;
             
               $teo_name=@$record->teo->teo_name;
             
                 $edit='';
                 if($status == 1){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('studentFundClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('studentFundJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
               }
               else if($status ==2){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('studentFundClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('studentFundJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             
               }
               else if($status ==null){
-                  $edit='<div class="settings-main-icon"><a  href="' . route('studentFundClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                  $edit='<div class="settings-main-icon"><a  href="' . route('studentFundJsSeoView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
               }
 
 
@@ -1938,7 +1937,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function studentFundClerkView ($id){
+    public function studentFundJsSeoView ($id){
 
 
         $currentTime = Carbon::now();
@@ -1948,18 +1947,18 @@ class JsSeoController extends Controller
       $currenttime = $currentTimeInKerala->format('h:i A');
      
       $studentFund=MedEngStudentFund::find($id);
-      if($studentFund->clerk_view_status==null ){
+      if($studentFund->JsSeo_view_status==null ){
         $studentFund->update([
-        "clerk_view_status"=>1,
-        "clerk_view_id" =>Auth::user()->id,
-        "clerk_view_date" =>$date .' ' .$currenttime
+        "JsSeo_view_status"=>1,
+        "JsSeo_view_id" =>Auth::user()->id,
+        "JsSeo_view_date" =>$date .' ' .$currenttime
         ]);
     } 
        
-        return view('clerk.studentFund.details', compact('studentFund'));
+        return view('JsSeo.studentFund.details', compact('studentFund'));
 
     }
-    public function studentFundClerkApprove(Request $request){
+    public function studentFundJsSeoApprove(Request $request){
         $id = $request->id;
         $reason = $request->reason;
        // $currentTime = Carbon::now();
@@ -1969,10 +1968,10 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
 
         $studentFund->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
 
@@ -1981,7 +1980,7 @@ class JsSeoController extends Controller
         ]);
     
     }
-    public function studentFundClerkReject(Request $request){
+    public function studentFundJsSeoReject(Request $request){
         $id = $request->id;
         $reason =$request->reason;
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
@@ -1989,10 +1988,10 @@ class JsSeoController extends Controller
         $studentFund = MedEngStudentFund::where('_id', $request->id)->first();
 
         $studentFund->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
 
 
@@ -2004,10 +2003,10 @@ class JsSeoController extends Controller
     }
    
     public function houseGrantListClerk(){
-        return view('clerk.houseGrant.index');
+        return view('JsSeo.houseGrant.index');
     }
 
-    public function gethouseGrantListClerk(Request $request){
+    public function gethouseGrantListJsSeo(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
        $tdo= Auth::user()->po_tdo_office;
@@ -2040,7 +2039,7 @@ class JsSeoController extends Controller
              $totalRecord = HouseManagement::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -2053,7 +2052,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = HouseManagement::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -2070,7 +2069,7 @@ class JsSeoController extends Controller
              $items = HouseManagement::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -2094,21 +2093,21 @@ class JsSeoController extends Controller
              $place = $record->place;
              $panchayath = $record->panchayath;
              $caste = $record->caste;
-             $status = $record->clerk_status;
+             $status = $record->JsSeo_status;
             $date = $record->date;
             $time = $record->time;
             $teo_name=$record->teo->teo_name;
               $created_at =  $record->created_at;
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -2144,7 +2143,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function houseGrantClerkDetails($id){
+    public function houseGrantJsSeoDetails($id){
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
@@ -2152,19 +2151,19 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =HouseManagement::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->JsSeo_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+            "JsSeo_view_status"=>1,
+            "JsSeo_view_id" =>Auth::user()->id,
+            "JsSeo_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
-        return view('clerk.houseGrant.details',compact('formData'));
+        return view('JsSeo.houseGrant.details',compact('formData'));
 
 
     }
-    public function houseGrantClerkApprove  (Request $request){
+    public function houseGrantJsSeoApprove  (Request $request){
         $house = HouseManagement::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -2174,16 +2173,16 @@ class JsSeoController extends Controller
       
        
         $house->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'House Grant Scheme Application Approved successfully.'
         ]);
     }
-    public function houseGrantClerkReject (Request $request){
+    public function houseGrantJsSeoReject (Request $request){
         $house = HouseManagement::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -2193,21 +2192,21 @@ class JsSeoController extends Controller
       
        
         $house->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'House Grant Scheme Application Rejected successfully.'
         ]);
     }
 
-    public function tuitionFeeListClerk(){
-        return view('clerk.tuitionFee.index');
+    public function tuitionFeeListJsSeo(){
+        return view('JsSeo.tuitionFee.index');
     }
 
-    public function gettuitionFeeClerk(Request $request){
+    public function gettuitionFeeJsSeo(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
        $tdo= Auth::user()->po_tdo_office;
@@ -2240,7 +2239,7 @@ class JsSeoController extends Controller
              $totalRecord = TuitionFee::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('clerk_status',1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -2253,7 +2252,7 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = TuitionFee::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('clerk_status',1);
 
            
              if($name != ""){
@@ -2270,7 +2269,7 @@ class JsSeoController extends Controller
              $items = TuitionFee::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1)
+                 ->where('clerk_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -2293,21 +2292,21 @@ class JsSeoController extends Controller
              $address = $record->address;
              $student_name = $record->student_name;
              $caste = $record->caste;
-             $status = $record->clerk_status;
+             $status = $record->JsSeo_status;
             $date = $record->date;
             $time = $record->time;
             $teo_name=$record->teo->teo_name;
               $created_at =  $record->created_at;
               $edit='';
               if($status == 1){
-                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
             }
             else if($status ==2){
-                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->clerk_status_reason.'</span></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -2342,7 +2341,7 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
-    public function tuitionFeeClerkDetails($id){
+    public function tuitionFeeJsSeoDetails($id){
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
@@ -2350,19 +2349,19 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =TuitionFee::find($id);
-        if($formData->clerk_view_status==null ){
+        if($formData->JsSeo_view_status==null ){
             $formData->update([
-            "clerk_view_status"=>1,
-            "clerk_view_id" =>Auth::user()->id,
-            "clerk_view_date" =>$date .' ' .$currenttime
+            "JsSeo_view_status"=>1,
+            "JsSeo_view_id" =>Auth::user()->id,
+            "JsSeo_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
-        return view('clerk.tuitionFee.details',compact('formData'));
+        return view('JsSeo.tuitionFee.details',compact('formData'));
 
 
     }
-    public function tuitionFeeClerkApprove  (Request $request){
+    public function tuitionFeeJsSeoApprove  (Request $request){
         $tuition = TuitionFee::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -2372,16 +2371,16 @@ class JsSeoController extends Controller
       
        
         $tuition->update([
-            'clerk_status' => 1,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 1,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Tuition Fee Scheme Application Approved successfully.'
         ]);
     }
-    public function tuitionFeeClerkReject (Request $request){
+    public function tuitionFeeJsSeoReject (Request $request){
         $tuition = TuitionFee::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -2391,10 +2390,10 @@ class JsSeoController extends Controller
       
        
         $tuition->update([
-            'clerk_status' => 2,
-            'clerk_status_date' => $currenttime,
-            'clerk_status_id' => Auth::user()->id,
-            'clerk_status_reason' => $reason,
+            'JsSeo_status' => 2,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Tuition Fee Application Rejected successfully.'

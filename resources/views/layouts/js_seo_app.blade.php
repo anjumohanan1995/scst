@@ -1,7 +1,7 @@
 
 <li class="slide">
-    <a class="side-menu__item {{ \Request::route()->getName() == 'coupleFinanceListJsSeo' || \Request::route()->getName() == 'childFinancialJsSeoDetails' ? 'active' : '' }}"
-        href="{{ url('coupleFinanceListJsSeo') }}">
+    <a class="side-menu__item {{ \Request::route()->getName() == 'couplefinancialListJsSeo' || \Request::route()->getName() == 'childFinancialJsSeoDetails' ? 'active' : '' }}"
+        href="{{ url('couplefinancialListJsSeo') }}">
         <i class="side-menu__icon fe fe-menu"> </i>
         <span class="side-menu__label">Couple Financial Applications</span>
 
