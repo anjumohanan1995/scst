@@ -63,5 +63,45 @@ class SingleIncomeEarner extends Eloquent
     {
         return $this->belongsTo(User::class,'officer_status_id');
     }
-
+    public function DcUser()
+    {
+        return $this->belongsTo(User::class,'Dc_status_id');
+    }
+    public function D_JsSeoUser()
+    {
+        return $this->belongsTo(User::class,'D_JsSeo_status_id');
+    }
+    public function D_adUser()
+    {
+        return $this->belongsTo(User::class,'D_ad_status_id');
+    }
+    public function D_jdUser()
+    {
+        return $this->belongsTo(User::class,'D_jd_status_id');
+    }
+    public function SaUser()
+    {
+        return $this->belongsTo(User::class,'Sa_status_id');
+    }
+    public function S_soUser()
+    {
+        return $this->belongsTo(User::class,'S_so_status_id');
+    }
+    public function S_usUser()
+    {
+        return $this->belongsTo(User::class,'S_us_status_id');
+    }
+    public function S_asUser()
+    {
+        return $this->belongsTo(User::class,'S_as_status_id');
+    }
+    public function S_acsUser()
+    {
+        return $this->belongsTo(User::class,'S_acs_status_id');
+    }
+    public function MoUser()
+    {
+        return $this->belongsTo(User::class,'Mo_status_id');
+    }
+    
 }

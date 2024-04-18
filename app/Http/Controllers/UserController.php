@@ -203,7 +203,7 @@ class UserController extends Controller
                 'name' => 'required|regex:/^[\pL\s\-]+$/u|max:50',
                 'email' => 'required|email|unique:users',
                 'mobile' => 'nullable|numeric',
-                'role' => 'required|regex:/^[\pL\s\-]+$/u|max:15',
+                'role' => 'required',
              
                  'password' =>'required' //['required', Password::min(8)
                 // ->mixedCase()
@@ -281,7 +281,7 @@ class UserController extends Controller
             'name' => 'required|regex:/^[\pL\s\-]+$/u|max:50',
             'email' => 'required',
             'mobile' => 'nullable|numeric',
-            'role' => 'required|regex:/^[\pL\s\-]+$/u|max:15',
+            'role' => 'required',
             // 'district' => 'alpha_num',
             // 'hospital_name' => 'alpha_num',
             // 'password' => ['required', Password::min(8)
