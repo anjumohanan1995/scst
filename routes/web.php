@@ -27,6 +27,9 @@ use App\Http\Controllers\TDOMasterController;
 use App\Http\Controllers\TuitionFeeController;
 use App\Models\MedEngStudentFund;
 use App\Http\Controllers\JsSeoController;
+use App\Http\Controllers\DirectorateController;
+use App\Http\Controllers\SecretariatController;
+use App\Http\Controllers\MinisterOfficeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -696,3 +699,75 @@ Route::controller(JsSeoController::class)->group(function(){
 });
 
 
+Route::controller(DirectorateController::class)->group(function(){
+
+    Route::get('/singleEarnerListDc', 'singleEarnerListDc')->name('singleEarnerListDc');
+    Route::get('/getSingleEarnerListDc', 'getSingleEarnerListDc')->name('getSingleEarnerListDc');
+    Route::get('/singleEarner/{id}/Dcview', 'singleEarnerDcView')->name('singleEarnerDcView');
+    Route::post('/singleEarner/DcApprove', 'singleEarnerDcApprove')->name('singleEarner-Dc.approve');
+    Route::post('/singleEarner/DcReject', 'singleEarnerDcReject')->name('singleEarner-Dc.reject');
+
+    Route::get('/singleEarnerListD_JsSeo', 'singleEarnerListD_JsSeo')->name('singleEarnerListD_JsSeo');
+    Route::get('/getSingleEarnerListD_JsSeo', 'getSingleEarnerListD_JsSeo')->name('getSingleEarnerListD_JsSeo');
+    Route::get('/singleEarner/{id}/D_JsSeoview', 'singleEarnerD_JsSeoView')->name('singleEarnerD_JsSeoView');
+    Route::post('/singleEarner/D_JsSeoApprove', 'singleEarnerD_JsSeoApprove')->name('singleEarner-D_JsSeo.approve');
+    Route::post('/singleEarner/D_JsSeoReject', 'singleEarnerD_JsSeoReject')->name('singleEarner-D_JsSeo.reject');
+
+    Route::get('/singleEarnerListD_ad', 'singleEarnerListD_ad')->name('singleEarnerListD_ad');
+    Route::get('/getSingleEarnerListD_ad', 'getSingleEarnerListD_ad')->name('getSingleEarnerListD_ad');
+    Route::get('/singleEarner/{id}/D_adview', 'singleEarnerD_adView')->name('singleEarnerD_adView');
+    Route::post('/singleEarner/D_adApprove', 'singleEarnerD_adApprove')->name('singleEarner-D_ad.approve');
+    Route::post('/singleEarner/D_adReject', 'singleEarnerD_adReject')->name('singleEarner-D_ad.reject');
+
+    Route::get('/singleEarnerListD_jd', 'singleEarnerListD_jd')->name('singleEarnerListD_jd');
+    Route::get('/getSingleEarnerListD_jd', 'getSingleEarnerListD_jd')->name('getSingleEarnerListD_jd');
+    Route::get('/singleEarner/{id}/D_jdview', 'singleEarnerD_jdView')->name('singleEarnerD_jdView');
+    Route::post('/singleEarner/D_jdApprove', 'singleEarnerD_jdApprove')->name('singleEarner-D_jd.approve');
+    Route::post('/singleEarner/D_jdReject', 'singleEarnerD_jdReject')->name('singleEarner-D_jd.reject');
+
+
+});
+
+
+Route::controller(SecretariatController::class)->group(function(){
+
+    Route::get('/singleEarnerListSa', 'singleEarnerListSa')->name('singleEarnerListSa');
+    Route::get('/getSingleEarnerListSa', 'getSingleEarnerListSa')->name('getSingleEarnerListSa');
+    Route::get('/singleEarner/{id}/Saview', 'singleEarnerSaView')->name('singleEarnerSaView');
+    Route::post('/singleEarner/SaApprove', 'singleEarnerSaApprove')->name('singleEarner-Sa.approve');
+    Route::post('/singleEarner/SaReject', 'singleEarnerSaReject')->name('singleEarner-Sa.reject');
+
+    Route::get('/singleEarnerListS_so', 'singleEarnerListS_so')->name('singleEarnerListS_so');
+    Route::get('/getSingleEarnerListS_so', 'getSingleEarnerListS_so')->name('getSingleEarnerListS_so');
+    Route::get('/singleEarner/{id}/S_soview', 'singleEarnerS_soView')->name('singleEarnerS_soView');
+    Route::post('/singleEarner/S_soApprove', 'singleEarnerS_soApprove')->name('singleEarner-S_so.approve');
+    Route::post('/singleEarner/S_soReject', 'singleEarnerS_soReject')->name('singleEarner-S_so.reject');
+
+    Route::get('/singleEarnerListS_us', 'singleEarnerListS_us')->name('singleEarnerListS_us');
+    Route::get('/getSingleEarnerListS_us', 'getSingleEarnerListS_us')->name('getSingleEarnerListS_us');
+    Route::get('/singleEarner/{id}/S_usview', 'singleEarnerS_usView')->name('singleEarnerS_usView');
+    Route::post('/singleEarner/S_usApprove', 'singleEarnerS_usApprove')->name('singleEarner-S_us.approve');
+    Route::post('/singleEarner/S_usReject', 'singleEarnerS_usReject')->name('singleEarner-S_us.reject');
+
+    Route::get('/singleEarnerListS_as', 'singleEarnerListS_as')->name('singleEarnerListS_as');
+    Route::get('/getSingleEarnerListS_as', 'getSingleEarnerListS_as')->name('getSingleEarnerListS_as');
+    Route::get('/singleEarner/{id}/S_asview', 'singleEarnerS_asView')->name('singleEarnerS_asView');
+    Route::post('/singleEarner/S_asApprove', 'singleEarnerS_asApprove')->name('singleEarner-S_as.approve');
+    Route::post('/singleEarner/S_asReject', 'singleEarnerS_asReject')->name('singleEarner-S_as.reject');
+
+    Route::get('/singleEarnerListS_acs', 'singleEarnerListS_acs')->name('singleEarnerListS_acs');
+    Route::get('/getSingleEarnerListS_acs', 'getSingleEarnerListS_acs')->name('getSingleEarnerListS_acs');
+    Route::get('/singleEarner/{id}/S_acsview', 'singleEarnerS_acsView')->name('singleEarnerS_acsView');
+    Route::post('/singleEarner/S_acsApprove', 'singleEarnerS_acsApprove')->name('singleEarner-S_acs.approve');
+    Route::post('/singleEarner/S_acsReject', 'singleEarnerS_acsReject')->name('singleEarner-S_acs.reject');
+
+});
+
+Route::controller(MinisterOfficeController::class)->group(function(){
+
+    Route::get('/singleEarnerListMo', 'singleEarnerListMo')->name('singleEarnerListMo');
+    Route::get('/getSingleEarnerListMo', 'getSingleEarnerListMo')->name('getSingleEarnerListMo');
+    Route::get('/singleEarner/{id}/Moview', 'singleEarnerMoView')->name('singleEarnerMoView');
+    Route::post('/singleEarner/MoApprove', 'singleEarnerMoApprove')->name('singleEarner-Mo.approve');
+    Route::post('/singleEarner/MoReject', 'singleEarnerMoReject')->name('singleEarner-Mo.reject');
+});

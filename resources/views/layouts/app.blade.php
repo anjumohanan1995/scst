@@ -491,6 +491,28 @@
                                 @include('layouts.apo_atdo_app')
                               @elseif ( Auth::user()->role == 'TDO' || Auth::user()->role == 'PO')
                             @include('layouts.po_tdo_app')
+                            {{-- Directorate --}}
+                            @elseif ( Auth::user()->role == 'Directorate Clerk')
+                            @include('layouts.dc_app')
+                            @elseif ( Auth::user()->role == 'Directorate JS' || Auth::user()->role == 'Directorate SEO')
+                            @include('layouts.d_jsseo_app')
+                            @elseif ( Auth::user()->role == 'Directorate AD')
+                            @include('layouts.d_ad_app')
+                            @elseif ( Auth::user()->role == 'Directorate JD')
+                            @include('layouts.d_jd_app')
+                            {{-- Secreteriate --}}
+                            @elseif ( Auth::user()->role == 'Secretariat Asst')
+                            @include('layouts.s_ass_app')
+                            @elseif ( Auth::user()->role == 'Secretariat SO')
+                            @include('layouts.s_so_app')
+                            @elseif ( Auth::user()->role == 'Secretariat US')
+                            @include('layouts.s_us_app')
+                            @elseif ( Auth::user()->role == 'Secretariat AS')
+                            @include('layouts.s_as_app')
+                            @elseif ( Auth::user()->role == 'Secretariat ACS')
+                            @include('layouts.s_acs_app')
+                            @elseif ( Auth::user()->role == 'Minister Office')
+                            @include('layouts.mo_app')
                               @endif
 
 
