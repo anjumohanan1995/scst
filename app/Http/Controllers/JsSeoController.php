@@ -763,9 +763,13 @@ class JsSeoController extends Controller
            'jsSeo_return' => 1,
            'assistant_return' => 1,
            'officer_return' => 1,
-            'JsSeo_status_date' => $currenttime,
-            'JsSeo_status_id' => Auth::user()->id,
-            'JsSeo_status_reason' => $reason,
+           'return_date' => $currenttime,
+           'return_userid' => Auth::user()->id,
+           'return_reason' => $reason,
+            // 'JsSeo_status_date' => $currenttime,
+            // 'JsSeo_status_id' => Auth::user()->id,
+            // 'JsSeo_status_reason' => $reason,
+            
         ]);
         return response()->json([
             'success' => 'Couple Financial Application Rejected successfully.'

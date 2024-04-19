@@ -522,6 +522,11 @@
        <div class="card-body">
 
          @if( @$financialHelp->return_status == 1)
+         @php
+         $role = DB::table('users')->where('_id', $financialHelp->return_userid)->value('role');
+        
+     @endphp
+         <p class="inputText badge bg-danger" style="font-size: 12px">Returned Application - by {{ @$financialHelp->returnUser->name }} ({{ @$role }})</p>
             <ul class="timeline-3"> 
                @if( @$financialHelp->teo_return == null)
                <li class="ApproveTimeline">
@@ -681,10 +686,10 @@
                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['JsSeo_view_date'] }}</a>
                        <p></p>
                        <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
-                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->JsSeoUser->name }}</p>
+                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->returnUser->name }}</p>
                        
-                       <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$formData['JsSeo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                       <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$formData->JsSeo_status_reason}}</p>
+                       <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$formData['return_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                       <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$formData->return_reason}}</p>
                     </li>
                     @elseif( @$formData->JsSeo_status == null)
      

@@ -571,6 +571,12 @@
             <div class="pt-2 card overflow-hidden">
                <div class="card-body">
                   @if( @$formData->return_status == 1)
+                  @php
+                  $role = DB::table('users')->where('_id', $formData->return_userid)->value('role');
+                 
+              @endphp
+                  <p class="inputText badge bg-danger" style="font-size: 12px">Returned Application - by {{ @$formData->returnUser->name }} ({{ @$role }})</p>
+                 
                   <ul class="timeline-3"> 
                      @if( @$formData->teo_return == null)
                      <li class="ApproveTimeline">
@@ -586,7 +592,8 @@
                      @if( @$formData->clerk_return == null)
                      <li class="ApproveTimeline">
                         <a href="#!">Clerk</a>
-                        <p></p>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
+                        <br>
                         <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
                         <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->clerkUser->name }}</p>
                        
