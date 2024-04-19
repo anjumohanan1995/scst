@@ -896,6 +896,10 @@
                                       <p></p>
                                        <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
                                         </li>
+                                        <div class="settings-icon">
+                                            <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                                            &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                                         </div>
                                         @endif
                                         @endif
 
