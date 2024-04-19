@@ -847,7 +847,7 @@ class ApplicationController extends Controller
             $time =  $record->time;
             $edit = " ";
           
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('couple-application-edit/' . $id) . '">Resubmit</a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('couple-application-edit/' . $id) . '">Resubmit</a></div>';
               
             $data_arr[] = array(
                 "sl_no"=>$i,
