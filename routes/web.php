@@ -139,11 +139,12 @@ Route::get('/itiAdminFeeView/{id}', [App\Http\Controllers\ItiScholarshipControll
 
 
 
+Route::get('/motherChild-Scheme-edit/{id}', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeEdit'])->name('motherChildSchemeEdit');
+Route::post('/motherChildSchemeUpdate', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeUpdate'])->name('motherChildSchemeUpdate');
 
 
 
-
-
+Route::get('/getMotherChildReturnList', [App\Http\Controllers\ApplicationController::class, 'getMotherChildReturnList'])->name('getMotherChildReturnList');
 Route::get('/motherChildSchemeList', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeList'])->name('motherChildSchemeList');
 Route::get('/getMotherChildList', [App\Http\Controllers\ApplicationController::class, 'getMotherChildList'])->name('getMotherChildList');
 Route::get('/motherChildScheme/{id}/view', [App\Http\Controllers\ApplicationController::class, 'motherChildSchemeView'])->name('motherChildSchemeView');
@@ -378,6 +379,7 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/motherChildSchemeReject','motherChildSchemeReject')->name('motherChildScheme.reject');
    
     
+    Route::get('/getmotherChildSchemeReturnListClerk','getmotherChildSchemeReturnListClerk')->name('getmotherChildSchemeReturnListClerk');
       
   
 	Route::get('/marriageGrantListClerk','marriageGrantListClerk')->name('marriageGrantListClerk');
@@ -646,7 +648,9 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::get('/getmotherChildSchemeListJsSeo','getmotherChildSchemeListJsSeo')->name('getmotherChildSchemeListJsSeo');
     Route::get('/motherChildSchemeJsSeoDetails/{id}','motherChildSchemeJsSeoDetails')->name('motherChildSchemeJsSeoDetails');
     Route::post('/motherChildSchemeJsSeoApprove','motherChildSchemeJsSeoApprove')->name('motherChildScheme.JsSeo.approve');
-    Route::post('/motherChildSchemeJsSeoReject','motherChildSchemeJsSeoReject')->name('motherChildScheme.JsSeo.reject'); 
+    Route::post('/motherChildSchemeJsSeoReject','motherChildSchemeJsSeoReject')->name('motherChildScheme.JsSeo.reject');
+    
+    Route::get('/getmotherChildSchemeListJsSeoReturn','getmotherChildSchemeListJsSeoReturn')->name('getmotherChildSchemeListJsSeoReturn');
   
 	Route::get('/marriageGrantListJsSeo','marriageGrantListJsSeo')->name('marriageGrantListJsSeo');
     Route::get('/getmarriageGrantListJsSeo','getmarriageGrantListJsSeo')->name('getmarriageGrantListJsSeo');

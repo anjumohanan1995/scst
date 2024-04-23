@@ -409,6 +409,7 @@
                         }, 2000);
 
                         $('#example').DataTable().ajax.reload();
+                        location.reload(true); 
 
                     }
                 })

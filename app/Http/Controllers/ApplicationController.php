@@ -1226,6 +1226,7 @@ class ApplicationController extends Controller
     }
 
 
+
     public function motherChildProtectionSchemeStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -1390,15 +1391,8 @@ class ApplicationController extends Controller
         ]);
     
     }
-    public function motherChildSchemeList(Request $request)
-    {
-        $data  = FinancialHelp::with('User')->get();
-        //dd($data);
-        return view('admin.motherchild_list', compact('data'));
-    }
 
-
-    public function getMotherChildList(Request $request)
+    public function getMotherChildReturnList(Request $request)
     {
 
         $name = $request->name;
@@ -1454,10 +1448,11 @@ class ApplicationController extends Controller
             $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
         }
 
+        $totalRecord->where('teo_return', 1);
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-        $totalRecordswithFilte = MotherChildScheme::where('deleted_at', null);
+        $totalRecordswithFilte = MotherChildScheme::where('teo_return', 1)->where('deleted_at', null);
 
         if ($mobile != "") {
             $totalRecordswithFilte->where('mobile', $mobile);
@@ -1480,6 +1475,267 @@ class ApplicationController extends Controller
 
         // Fetch records
         $items = MotherChildScheme::where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
+        if ($mobile != "") {
+            $items->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $items->where('submitted_teo', $teo);
+        }
+        if($role == "TDO" || $role == "Project Officer"){
+            $items->where('submitted_teo',$teo)->where('teo_status',1);
+        }
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $items->whereBetween('created_at', [$stDate, $edDate]);
+        }
+
+        $items->where('teo_return', 1);
+        $records = $items->skip($start)->take($rowperpage)->get();
+
+
+
+
+        $data_arr = array();
+        $i=$start;
+        foreach ($records as $record) {
+            $i++;
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $age = $record->age;
+            $dob = $record->dob;
+            $hus_name = $record->hus_name;
+            $caste = $record->caste;
+            $village =  $record->village;
+            $created_at =  $record->created_at;
+            if (@$record->dob != null) {
+                $dob = Carbon::parse(@$record->dob)->format('d-m-Y');
+            }
+            $edit='';
+
+            $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('motherChild-Scheme-edit/' . $id) . '">Resubmit</a></div>';
+
+            $data_arr[] = array(
+                "sl_no" =>$i,
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "dob" => $age . '/' . $dob,
+                "caste" => $caste,
+                "village" => $village,
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i:s '),
+                // "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                "edit" =>$edit,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        return response()->json($response);
+
+
+    }
+
+    public function motherChildSchemeEdit(Request $request)
+    {
+
+        $data = Auth::user();
+        $districts = District::get();
+        $datas = MotherChildScheme::where('_id',$request->id)->first();
+      
+      //  dd($datas);
+        return view('application.motherChild-Scheme-edit', compact('data', 'districts','datas'));
+    }
+
+    public function motherChildSchemeUpdate(Request $request)
+    {
+      
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',
+
+            // Add more fields and their validation rules as needed
+        ]);
+        $data = MotherChildScheme::where('_id',$request->id)->first();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+       }
+       $data = $request->all();
+       if ($request->hasfile('signature')) {
+
+           $image = $request->signature;
+           $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+           $image->move(public_path('/applications/mother_child_protection'), $imgfileName);
+
+           $signature = $imgfileName;
+       } else {
+           $signature = '';
+       }
+       if ($request->hasfile('applicant_photo')) {
+
+           $applicant_photo = $request->applicant_photo;
+           $imgfileName1 = time() . rand(100, 999) . '.' . $applicant_photo->extension();
+
+           $applicant_photo->move(public_path('/applications/mother_child_protection'), $imgfileName1);
+
+           $applicant_photos = $imgfileName1;
+       } else {
+           $applicant_photos = '';
+       }
+
+       $formData = $data;
+       if ($request->district != '') {
+           $dis = District::where('_id', $request->district)->first();
+           $formData['district_name'] = $dis->name;
+       }
+       if ($request->taluk != '') {
+           $taluk = Taluk::where('_id', $request->taluk)->first();
+           $formData['taluk_name'] = $taluk->taluk_name;
+       }
+       
+        $data = $request->all();
+        $datainsert =  MotherChildScheme::where('_id',$request->id)->first();
+       // dd($request->id);
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+        $datainsert->update([
+            'name' => $data['name'],
+            'district' => $data['district'],
+            'taluk' => $data['taluk'],
+            'pincode' => $data['pincode'],
+            'address' => @$data['address'],
+            'age' => $data['age'],
+            'dob' => $data['dob'],
+            'hus_name' => $data['hus_name'],
+            'caste' => $data['caste'],
+            'village' => $data['village'],
+            'births' => $data['births'],
+            'expected_date_of_delivery' => $data['expected_date_of_delivery'],
+            'dependent_hospital' => $data['dependent_hospital'],
+            'place' => $data['place'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
+            'date' => date('d-m-Y'),
+            'signature' => @$data['signature'],
+            'applicant_photo' => @$data['applicant_photo'],
+            'teo_return' => null,
+            'return_status' =>1,
+            "teo_view_status"=>1,
+            'user_id' => Auth::user()->id,
+            'status' => 0
+        ]);
+
+
+        return redirect()->route('motherChildSchemeList')->with('status', 'Application Submitted Successfully.');
+    }
+
+
+
+
+    public function motherChildSchemeList(Request $request)
+    {
+        $data  = FinancialHelp::with('User')->get();
+        //dd($data);
+        return view('admin.motherchild_list', compact('data'));
+    }
+
+
+    public function getMotherChildList(Request $request)
+    {
+
+        $name = $request->name;
+        $mobile = $request->mobile;
+
+        $role =  Auth::user()->role;
+        $teo =  Auth::user()->teo_name;
+
+        if ($request->from_date != '') {
+
+            $from_date  = date("M d,Y", strtotime($request->from_date));
+            $stDate = new Carbon($from_date);
+        }
+        if ($request->to_date != '') {
+            $to_date  =   date("Y-m-d", strtotime($request->to_date));
+            $edDate = new Carbon($to_date);
+        }
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+
+
+
+        // Total records
+        $totalRecord = MotherChildScheme::where('deleted_at', null)->where('teo_return', null);
+        if ($mobile != "") {
+            $totalRecord->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $totalRecord->where('submitted_teo', $teo);
+        }
+        if($role == "TDO" || $role == "Project Officer"){
+            $totalRecord->where('submitted_teo',$teo)->where('teo_status',1);
+        }
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
+        }
+
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = MotherChildScheme::where('deleted_at', null)->where('teo_return', null);
+
+        if ($mobile != "") {
+            $totalRecordswithFilte->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $totalRecordswithFilte->where('submitted_teo', $teo);
+        }
+        if($role == "TDO" || $role == "Project Officer"){
+            $totalRecordswithFilte->where('submitted_teo',$teo)->where('teo_status',1);
+        }
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
+        }
+
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+        $items = MotherChildScheme::where('deleted_at', null)->where('teo_return', null)->orderBy($columnName, $columnSortOrder);
         if ($mobile != "") {
             $items->where('mobile', $mobile);
         }

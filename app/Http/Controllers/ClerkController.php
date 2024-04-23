@@ -330,7 +330,7 @@ class ClerkController extends Controller
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
             }
 
           
@@ -520,7 +520,7 @@ class ClerkController extends Controller
           
               $edit='';
           
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
             
              
            
@@ -761,6 +761,132 @@ class ClerkController extends Controller
         ]);
     }
 
+    public function getmotherChildSchemeReturnListClerk(Request $request){
+        $role =  Auth::user()->role;       
+       $district =  Auth::user()->district;
+       $tdo= Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+         
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = MotherChildScheme::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('teo_status',1);
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+             $totalRecord->where('teo_return', null)->where('clerk_return', 1);
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('teo_status',1);
+
+           
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+            $totalRecordswithFilte->where('teo_return', null)->where('clerk_return', 1);
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             
+            
+             $items = MotherChildScheme::where('deleted_at', null)
+                 ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('teo_status',1)
+                 ->orderBy($columnName, $columnSortOrder);
+             
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+            $items->where('teo_return', null)->where('clerk_return', 1);
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+             
+         foreach($records as $record){
+            $i++;
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $age = $record->age;
+            $dob = $record->dob;
+            $hus_name = $record->hus_name;
+            $caste = $record->caste;
+            $village =  $record->village;
+            $created_at =  $record->created_at;
+           
+             $status = $record->clerk_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name=@$record->submittedTeo->teo_name;
+              $created_at =  $record->created_at;
+              $edit='';
+
+              $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
+    
+           
+                $data_arr[] = array(
+                    "sl_no" => $i,
+                    "name" => $name,
+                    "address" => $address,
+                    "dob" => $age . '/' . $dob,
+                    "caste" => $caste,
+                    "village" => $village,
+                    "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i a '),
+                    // "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                    "edit" =>$edit,
+    
+                );
+          
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
 
 
 
@@ -801,7 +927,8 @@ class ClerkController extends Controller
              $totalRecord = MotherChildScheme::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('teo_status',1);
+             ->where('teo_status',1)
+             ->Where('clerk_return',null);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -814,7 +941,8 @@ class ClerkController extends Controller
              $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('teo_status',1);
+                 ->where('teo_status',1)
+                 ->Where('clerk_return',null);
 
            
              if($name != ""){
@@ -832,6 +960,7 @@ class ClerkController extends Controller
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('teo_status',1)
+                 ->Where('clerk_return',null)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -873,7 +1002,7 @@ class ClerkController extends Controller
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
             }
 
           
@@ -906,6 +1035,10 @@ class ClerkController extends Controller
 
          return response()->json($response);
     }
+
+
+
+
     public function motherChildSchemeDetails($id){
         $currentTime = Carbon::now();
 
@@ -937,6 +1070,7 @@ class ClerkController extends Controller
        
         $motherChild->update([
             'clerk_status' => 1,
+            'clerk_return' => null,
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,
@@ -959,6 +1093,7 @@ class ClerkController extends Controller
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,
+
         ]);
         return response()->json([
             'success' => 'Mother Child Scheme Application Rejected successfully.'
