@@ -555,7 +555,7 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::post('/couplefinancialRejectOfficer','couplefinancialRejectOfficer')->name('couplefinancial.officer.reject');
    
     Route::get('/getcouplefinancialListOfficerReturn','getcouplefinancialListOfficerReturn')->name('getcouplefinancialListOfficerReturn');
-
+    Route::post('/couplefinancialRemoveOfficer','couplefinancialRemoveOfficer')->name('couplefinancial.officer.remove');
     
 	Route::get('/motherChildSchemeListOfficer','motherChildSchemeListOfficer')->name('motherChildSchemeListOfficer');
     Route::get('/getmotherChildSchemeListOfficer','getmotherChildSchemeListOfficer')->name('getmotherChildSchemeListOfficer');
