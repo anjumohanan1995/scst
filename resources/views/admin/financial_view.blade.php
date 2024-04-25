@@ -572,7 +572,7 @@
                   <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->JsSeoUser->name }}</p>
                  
                   <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['JsSeo_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['JsSeo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData-JsSeo_status_reason}}</p>
+                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->JsSeo_status_reason}}</p>
                </li>
 
                @elseif( @$financialHelp->JsSeo_return == 1)
@@ -596,7 +596,7 @@
                   <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->JsSeoUser->name }}</p>
                  
                   <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData-assistant_status_reason}}</p>
+                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->assistant_status_reason}}</p>
                </li>
 
                @elseif( @$financialHelp->assistant_return == 1)
@@ -620,7 +620,7 @@
                   <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->JsSeoUser->name }}</p>
                  
                   <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['JsSeo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData-officer_status_reason}}</p>
+                  <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->officer_status_reason}}</p>
                </li>
 
                @elseif( @$financialHelp->officer_return == 1)
