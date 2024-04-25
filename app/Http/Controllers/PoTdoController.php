@@ -624,7 +624,7 @@ class PoTdoController extends Controller
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
             }
 
           
@@ -748,6 +748,7 @@ class PoTdoController extends Controller
        
         $marriage->update([
             'officer_status' => 3,
+            'officer_return' => 1,
             'teo_return' => null,
             'clerk_return' => null,
             'jsSeo_return' => null,

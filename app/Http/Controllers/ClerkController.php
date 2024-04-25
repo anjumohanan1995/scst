@@ -812,7 +812,7 @@ class ClerkController extends Controller
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
             }
 
           
@@ -873,7 +873,7 @@ class ClerkController extends Controller
             "clerk_return_view_date" =>$date .' ' .$currenttime
             ]);
         }
-        
+        $formData = FinancialHelp::where('_id', $id)->first();
         return view('clerk.couplefinancial.details',compact('formData'));
 
 

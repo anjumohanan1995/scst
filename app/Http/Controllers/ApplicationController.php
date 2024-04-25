@@ -700,7 +700,7 @@ class ApplicationController extends Controller
               
                 }
                 else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
                
               }
@@ -901,8 +901,8 @@ class ApplicationController extends Controller
             ]);
         }
 
-        $formData = FinancialHelp::where('_id', $id)->first();
-        return view('admin.financial_view', compact('formData','financialHelp'));
+       // $financialHelp = FinancialHelp::where('_id', $id)->first();
+        return view('admin.financial_view', compact('financialHelp'));
     }
 
 
