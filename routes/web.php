@@ -96,6 +96,7 @@ Route::post('/financialHelpUpdate', [App\Http\Controllers\ApplicationController:
 
 
 //exam application routes starts here.
+Route::get('/getExamListReturned', [App\Http\Controllers\ApplicationController::class, 'getExamListReturned'])->name('getExamListReturned');
 Route::get('/exam-application', [App\Http\Controllers\ApplicationController::class, 'examApplication'])->name('exam-application');
 Route::post('/examApplicationPreview', [App\Http\Controllers\ApplicationController::class, 'examApplicationPreview'])->name('examApplicationPreview');
 Route::post('/examApplicationStore', [App\Http\Controllers\ApplicationController::class, 'examApplicationStore'])->name('examApplicationStore');
@@ -104,6 +105,10 @@ Route::get('/getExamList', [App\Http\Controllers\ApplicationController::class, '
 Route::get('/exam-application/{id}', [App\Http\Controllers\ApplicationController::class, 'examApplicationView'])->name('examApplicationView');
 Route::post('/exam-application/teoApprove', [ApplicationController::class, 'teoApprove'])->name('exam-application-teo.approve');
 Route::post('/exam-application/teoReject', [ApplicationController::class, 'teoReject'])->name('exam-application-teo.reject');
+
+Route::get('/getExamListReturned', [App\Http\Controllers\ApplicationController::class, 'getExamListReturned'])->name('getExamListReturned');
+Route::get('/exam-application-edit/{id}', [App\Http\Controllers\ApplicationController::class, 'examApplicationEdit'])->name('examApplicationEdit');
+Route::post('/examApplicationUpdate', [App\Http\Controllers\ApplicationController::class, 'examApplicationUpdate'])->name('examApplicationUpdate');
 //exam application routes ends here.
 
 
@@ -359,6 +364,7 @@ Route::controller(ClerkController::class)->group(function(){
 
     Route::get('/examApplicationListClerk','examApplicationListClerk')->name('examApplicationListClerk');
     Route::get('/getexamApplicationListClerk','getexamApplicationListClerk')->name('getexamApplicationListClerk');
+    Route::get('/getexamApplicationListClerkReturned','getexamApplicationListClerkReturned')->name('getexamApplicationListClerkReturned');
     Route::get('/examApplicationDetails/{id}','examApplicationDetails')->name('examApplicationDetails');
     Route::post('/examApplicationApprove','examApplicationApprove')->name('examApplication.approve');
     Route::post('/examApplicationReject','examApplicationReject')->name('examApplication.reject');
@@ -458,6 +464,7 @@ Route::controller(ApoTdoController::class)->group(function(){
 
     Route::get('/examApplicationListAssistant','examApplicationListAssistant')->name('examApplicationListAssistant');
     Route::get('/getexamApplicationListAssistant','getexamApplicationListAssistant')->name('getexamApplicationListAssistant');
+    Route::get('/getexamApplicationListAssistantReturned','getexamApplicationListAssistantReturned')->name('getexamApplicationListAssistantReturned');
     Route::get('/examApplicationDetailsAssistant/{id}','examApplicationDetailsAssistant')->name('examApplicationDetailsAssistant');
     Route::post('/examApplicationApproveAssistant','examApplicationApproveAssistant')->name('examApplication.assistant.approve');
     Route::post('/examApplicationRejectAssistant','examApplicationRejectAssistant')->name('examApplication.assistant.reject');
@@ -473,10 +480,12 @@ Route::controller(ApoTdoController::class)->group(function(){
     
 	Route::get('/motherChildSchemeListAssistant','motherChildSchemeListAssistant')->name('motherChildSchemeListAssistant');
     Route::get('/getmotherChildSchemeListAssistant','getmotherChildSchemeListAssistant')->name('getmotherChildSchemeListAssistant');
+    Route::get('/getmotherChildSchemeListAssistantReturned','getmotherChildSchemeListAssistantReturned')->name('getmotherChildSchemeListAssistantReturned');
     Route::get('/motherChildSchemeDetailsAssistant/{id}','motherChildSchemeDetailsAssistant')->name('motherChildSchemeDetailsAssistant');
     Route::post('/motherChildSchemeApproveAssistant','motherChildSchemeApproveAssistant')->name('motherChildScheme.assistant.approve');
-    Route::post('/motherChildSchemeRejectAssistant','motherChildSchemeRejectAssistant')->name('motherChildScheme.assistant.reject');
+    Route::post('/motherChildSchemeRejectAssistant','motherChildSchemeReturnAssistant')->name('motherChildScheme.assistant.return');
    
+    Route::get('/getmotherChildSchemeListAssistantReturned','getmotherChildSchemeListAssistantReturned')->name('getmotherChildSchemeListAssistantReturned');
 
     Route::get('/marriageGrantListAssistant','marriageGrantListAssistant')->name('marriageGrantListAssistant');
     Route::get('/getmarriageGrantListAssistant','getmarriageGrantListAssistant')->name('getmarriageGrantListAssistant');
@@ -544,6 +553,7 @@ Route::controller(PoTdoController::class)->group(function(){
 
     Route::get('/examApplicationListOfficer','examApplicationListOfficer')->name('examApplicationListOfficer');
     Route::get('/getexamApplicationListOfficer','getexamApplicationListOfficer')->name('getexamApplicationListOfficer');
+    Route::get('/getexamApplicationListOfficerReturned','getexamApplicationListOfficerReturned')->name('getexamApplicationListOfficerReturned');
     Route::get('/examApplicationDetailsOfficer/{id}','examApplicationDetailsOfficer')->name('examApplicationDetailsOfficer');
     Route::post('/examApplicationApproveOfficer','examApplicationApproveOfficer')->name('examApplication.officer.approve');
     Route::post('/examApplicationRejectOfficer','examApplicationRejectOfficer')->name('examApplication.officer.reject');
@@ -563,6 +573,7 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::post('/motherChildSchemeApproveOfficer','motherChildSchemeApproveOfficer')->name('motherChildScheme.officer.approve');
     Route::post('/motherChildSchemeRejectOfficer','motherChildSchemeRejectOfficer')->name('motherChildScheme.officer.reject');
    
+    Route::get('/getmotherChildSchemeListOfficerReturned','getmotherChildSchemeListOfficerReturned')->name('getmotherChildSchemeListOfficerReturned');
 
     Route::get('/marriageGrantListOfficer','marriageGrantListOfficer')->name('marriageGrantListOfficer');
     Route::get('/getmarriageGrantListOfficer','getmarriageGrantListOfficer')->name('getmarriageGrantListOfficer');
@@ -631,6 +642,7 @@ Route::controller(JsSeoController::class)->group(function(){
 
     Route::get('/examApplicationListJsSeo','examApplicationListJsSeo')->name('examApplicationListJsSeo');
     Route::get('/getexamApplicationListJsSeo','getexamApplicationListJsSeo')->name('getexamApplicationListJsSeo');
+    Route::get('/getexamApplicationListJsSeoReturned','getexamApplicationListJsSeoReturned')->name('getexamApplicationListJsSeoReturned');
     Route::get('/examApplicationJsSeoDetails/{id}','examApplicationJsSeoDetails')->name('examApplicationJsSeoDetails');
     Route::post('/examApplicationJsSeoApprove','examApplicationJsSeoApprove')->name('examApplication.JsSeo.approve');
     Route::post('/examApplicationJsSeoReject','examApplicationJsSeoReject')->name('examApplication.JsSeo.reject');

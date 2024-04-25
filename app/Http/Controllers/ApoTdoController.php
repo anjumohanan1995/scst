@@ -61,7 +61,8 @@ class ApoTdoController extends Controller
              $totalRecord = ExamApplication::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1)
+             ->where('assistant_return',null);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -74,7 +75,8 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = ExamApplication::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1)
+                 ->where('assistant_return',null);
 
            
              if($name != ""){
@@ -91,7 +93,8 @@ class ApoTdoController extends Controller
              $items = ExamApplication::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
+                 ->where('assistant_return',null)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -166,6 +169,151 @@ class ApoTdoController extends Controller
 
          return response()->json($response);
     }
+
+    public function getexamApplicationListAssistantReturned(Request $request){
+        $role =  Auth::user()->role;       
+       $district =  Auth::user()->district;
+       $tdo= Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+         
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = ExamApplication::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('JsSeo_return',null)
+             ->where('assistant_return',1);
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = ExamApplication::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('JsSeo_return',null)
+                 ->where('assistant_return',1);
+
+           
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             
+            
+             $items = ExamApplication::where('deleted_at', null)
+                 ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('JsSeo_return',null)
+                 ->where('assistant_return',1)
+                 ->orderBy($columnName, $columnSortOrder);
+             
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+             
+         foreach($records as $record){
+            $i++;
+            $id = $record->id;
+            $school_name = $record->school_name;
+            $student_name = $record->student_name;
+            $gender = $record->gender;
+            $address = $record->address;
+            $relation = $record->relation;
+            $mother_name =  $record->mother_name;
+            $created_at =  $record->created_at;
+           
+             $status = $record->assistant_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name=@$record->submittedTeo->teo_name;
+              $created_at =  $record->created_at;
+              $edit='';
+
+              $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            //   if($status == 1){
+            //     $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
+            // }
+            // else if($status ==2){
+            //     $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
+          
+            // }
+            // else if($status ==null){
+            //     $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            // }
+
+          
+              
+        
+        
+             
+           
+                $data_arr[] = array(
+                    "sl_no" => $i,
+                    "school_name" => $school_name,
+                    "student_name" => $student_name,
+                    "gender" => $gender,
+                    "address" => $address,
+                    "relation" => $relation,
+                    "mother_name" => $mother_name,
+                    "date" => $date." ".$time,                 
+                    "action" => $edit,
+                    "teo_name" =>$teo_name
+    
+                );
+          
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
     public function examApplicationDetailsAssistant($id){
         $currentTime = Carbon::now();
 
@@ -197,6 +345,7 @@ class ApoTdoController extends Controller
        
         $marriage->update([
             'assistant_status' => 1,
+            'assistant_return' => null,
             'assistant_status_date' => $currenttime,
             'assistant_status_id' => Auth::user()->id,
             'assistant_status_reason' => $reason,
@@ -205,7 +354,7 @@ class ApoTdoController extends Controller
             'success' => 'Exam Application Approved successfully.'
         ]);
     }
-    public function examApplicationRejectAssistant  (Request $request){
+    public function examApplicationRejectAssistant(Request $request){
         $marriage = ExamApplication::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -216,6 +365,13 @@ class ApoTdoController extends Controller
        
         $marriage->update([
             'assistant_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
             'assistant_status_date' => $currenttime,
             'assistant_status_id' => Auth::user()->id,
             'assistant_status_reason' => $reason,
@@ -259,7 +415,8 @@ class ApoTdoController extends Controller
              $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_return',null)
+             ->where('assistant_return', 1);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -272,7 +429,8 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_return',null)
+                 ->where('assistant_return', 1);
 
            
              if($name != ""){
@@ -289,14 +447,14 @@ class ApoTdoController extends Controller
              $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_return',null)
+                 ->where('assistant_return', 1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
            
-            $items->where('jsSeo_return', null)->where('assistant_return', 1);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -395,7 +553,8 @@ class ApoTdoController extends Controller
              $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1)
+             ->where('assistant_return', null);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -408,7 +567,8 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1)
+                 ->where('assistant_return', null);
 
            
              if($name != ""){
@@ -425,13 +585,13 @@ class ApoTdoController extends Controller
              $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
+                 ->where('assistant_return', null)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            $items->where('assistant_return', null);
 
 
              $records = $items->skip($start)->take($rowperpage)->get();
@@ -520,6 +680,14 @@ class ApoTdoController extends Controller
             "assistant_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
+        if($formData->assistant_view_status==null ){
+            $formData->update([
+            "assistant_return_view_status"=>1,
+            "assistant_view_id" =>Auth::user()->id,
+            "assistant_return_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         
         return view('ApoAtdo.couplefinancial.details',compact('formData'));
 
@@ -558,7 +726,7 @@ class ApoTdoController extends Controller
             'assistant_status' => 2,
             'teo_return' => 1,
             'clerk_return' => 1,
-            'jsSeo_return' => 1,
+            'JsSeo_return' => 1,
             'assistant_return' => 1,
             'officer_return' => 1,
             'return_date' => $currenttime,
@@ -610,7 +778,8 @@ class ApoTdoController extends Controller
              $totalRecord = MotherChildScheme::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('JsSeo_status',1)
+             ->where('assistant_return',null);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -623,7 +792,8 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('JsSeo_status',1)
+                 ->where('assistant_return',null);
 
            
              if($name != ""){
@@ -640,7 +810,8 @@ class ApoTdoController extends Controller
              $items = MotherChildScheme::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1)
+                 ->where('JsSeo_status',1)
+                 ->where('assistant_return',null)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -715,6 +886,136 @@ class ApoTdoController extends Controller
 
          return response()->json($response);
     }
+
+    public function getmotherChildSchemeListAssistantReturned(Request $request){
+        $role =  Auth::user()->role;       
+       $district =  Auth::user()->district;
+       $tdo= Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+         
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = MotherChildScheme::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('JsSeo_return',null)
+             ->where('assistant_return',1);
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = MotherChildScheme::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('JsSeo_return',null)
+                 ->where('assistant_return',1);
+
+           
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             
+            
+             $items = MotherChildScheme::where('deleted_at', null)
+                 ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('JsSeo_return',null)
+                 ->where('assistant_return',1)
+                 ->orderBy($columnName, $columnSortOrder);
+             
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+             
+         foreach($records as $record){
+            $i++;
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $age = $record->age;
+            $dob = $record->dob;
+            $hus_name = $record->hus_name;
+            $caste = $record->caste;
+            $village =  $record->village;
+            $created_at =  $record->created_at;
+           
+             $status = $record->assistant_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name=@$record->submittedTeo->teo_name;
+              $created_at =  $record->created_at;
+              $edit='';  
+              
+              $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+        
+             
+           
+                $data_arr[] = array(
+                    "sl_no" => $i,
+                    "name" => $name,
+                    "address" => $address,
+                    "dob" => $age . '/' . $dob,
+                    "caste" => $caste,
+                    "village" => $village,
+                    "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i a '),
+                    // "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
+                    "edit" =>$edit,
+    
+                );
+          
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
     public function motherChildSchemeDetailsAssistant($id){
         $currentTime = Carbon::now();
 
@@ -746,6 +1047,7 @@ class ApoTdoController extends Controller
        
         $motherChild->update([
             'assistant_status' => 1,
+            'assistant_return' => null,
             'assistant_status_date' => $currenttime,
             'assistant_status_id' => Auth::user()->id,
             'assistant_status_reason' => $reason,
@@ -754,7 +1056,7 @@ class ApoTdoController extends Controller
             'success' => 'Mother Child Scheme Application Approved Successfully.'
         ]);
     }
-    public function motherChildSchemeRejectAssistant (Request $request){
+    public function motherChildSchemeReturnAssistant (Request $request){
         $motherChild = MotherChildScheme::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
@@ -765,12 +1067,19 @@ class ApoTdoController extends Controller
        
         $motherChild->update([
             'assistant_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
             'assistant_status_date' => $currenttime,
             'assistant_status_id' => Auth::user()->id,
             'assistant_status_reason' => $reason,
         ]);
         return response()->json([
-            'success' => 'Mother Child Scheme Application Rejected successfully.'
+            'success' => 'Mother Child Scheme Application Return successfully.'
         ]);
     }
 

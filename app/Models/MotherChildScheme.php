@@ -93,7 +93,7 @@ class MotherChildScheme extends Eloquent
 
         'teo_return',
         'clerk_return',
-        'jsSeo_return',
+        'JsSeo_return',
         'assistant_return',
         'officer_return',
         'return_date',

@@ -889,7 +889,15 @@ class ApplicationController extends Controller
             $financialHelp->update([
             "teo_view_status"=>1,
             "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime
+            "teo_view_date" =>$date .' ' .$currenttime,
+            ]);
+        }
+
+        if($financialHelp->teo_return_view_status==null && Auth::user()->role=='TEO'){
+            $financialHelp->update([
+            "teo_return_view_status" => 1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
             ]);
         }
 
@@ -1046,7 +1054,7 @@ class ApplicationController extends Controller
 
 
         // Total records
-        $totalRecord = ExamApplication::where('deleted_at', null);
+        $totalRecord = ExamApplication::where('deleted_at', null)->where('teo_return',null);
         if ($role == "TEO") {
             $totalRecord->where('submitted_teo', $teo);
         }
@@ -1065,7 +1073,7 @@ class ApplicationController extends Controller
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-        $totalRecordswithFilte = ExamApplication::where('deleted_at', null);
+        $totalRecordswithFilte = ExamApplication::where('deleted_at', null)->where('teo_return',null);
         if ($role == "TEO") {
             $totalRecordswithFilte->where('submitted_teo', $teo);
         }
@@ -1085,7 +1093,7 @@ class ApplicationController extends Controller
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
-        $items = ExamApplication::where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
+        $items = ExamApplication::where('deleted_at', null)->where('teo_return',null)->orderBy($columnName, $columnSortOrder);
         if ($role == "TEO") {
             $items->where('submitted_teo', $teo);
         }
@@ -1158,6 +1166,267 @@ class ApplicationController extends Controller
 
         return response()->json($response);
     }
+
+
+    public function getExamListReturned(Request $request)
+    {
+        $role =  Auth::user()->role;
+
+        $teo =  Auth::user()->teo_name;
+
+        $name = $request->name;
+        $mobile = $request->mobile;
+
+        if ($request->from_date != '') {
+
+            $from_date  = date("M d,Y", strtotime($request->from_date));
+            $stDate = new Carbon($from_date);
+        }
+        if ($request->to_date != '') {
+            $to_date  =   date("Y-m-d", strtotime($request->to_date));
+            $edDate = new Carbon($to_date);
+        }
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+
+
+
+        // Total records
+        $totalRecord = ExamApplication::where('deleted_at', null)->where('teo_return',1);
+        if ($role == "TEO") {
+            $totalRecord->where('submitted_teo', $teo);
+        }
+        if ($mobile != "") {
+            $totalRecord->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $totalRecord->whereBetween('created_at', [$stDate, $edDate]);
+        }
+
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = ExamApplication::where('deleted_at', null)->where('teo_return',1);
+        if ($role == "TEO") {
+            $totalRecordswithFilte->where('submitted_teo', $teo);
+        }
+
+        if ($mobile != "") {
+            $totalRecordswithFilte->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $totalRecordswithFilte->whereBetween('created_at', [$stDate, $edDate]);
+        }
+
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+        $items = ExamApplication::where('deleted_at', null)->where('teo_return',1)->orderBy($columnName, $columnSortOrder);
+        if ($role == "TEO") {
+            $items->where('submitted_teo', $teo);
+        }
+        if ($mobile != "") {
+            $items->where('mobile', $mobile);
+        }
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+
+        if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
+            //echo "khk";exit;
+            $items->whereBetween('created_at', [$stDate, $edDate]);
+        }
+
+        $records = $items->skip($start)->take($rowperpage)->get();
+
+
+
+
+        $data_arr = array();
+        $i=$start;
+        foreach ($records as $record) {
+            $i++;
+            $id = $record->id;
+            $school_name = $record->school_name;
+            $student_name = $record->student_name;
+            $gender = $record->gender;
+            $address = $record->address;
+            $relation = $record->relation;
+            $mother_name =  $record->mother_name;
+            $created_at =  $record->created_at;
+            $edit = " ";
+          
+            $edit='<div class="settings-main-icon"><a  href="' .  url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('exam-application-edit/' . $id) . '">Resubmit</a></div>';
+
+            // if ($role == "TEO") {
+            //     if ($record->teo_status == 1) {
+            //         $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+            //     } else if ($record->teo_status == 2) {
+            //         $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+            //     } else if ($record->teo_status == null) {
+            //         $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
+            //     }
+            // } else {
+            //     $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+            // }
+
+            $data_arr[] = array(
+                "sl_no" =>$i,
+                "id" => $id,
+                "school_name" => $school_name,
+                "student_name" => $student_name,
+                "gender" => $gender,
+                "address" => $address,
+                "relation" => $relation,
+                "mother_name" => $mother_name,
+                "created_at" => $created_at,
+                "edit" => $edit
+
+                //  "more"=>'<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal'.$id.'" data-bs-whatever="@mdo">More Details</button><div class="modal fade" id="exampleModal'.$id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">'.$name.'('.$age.')  </h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="eva eva-close-outline header-icons"><g data-name="Layer 2"><g data-name="close"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"></path></g></g></svg></button></div><div class="modal-body"><table id="example" class="table table-striped table-bordered" style="width:100%"><tbody><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Name</h6></div></td><td><div class="image-grouped"> '.$name.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Name</h6></div></td><td><div class="image-grouped">'.$gname.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Guardian Relationship</h6></div></td><td><div class="image-grouped">'.$g_relation.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Age</h6></div></td><td><div class="image-grouped"> '.$age.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Gender</h6></div></td><td><div class="image-grouped">'.$gender.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Mobile Number</h6></div></td><td><div class="image-grouped"> '.$mobile.'</div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Adhar Number</h6></div></td><td><div class="image-grouped"> '.$adhar.'</div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Scheme Id</h6></div></td><td><div class="image-grouped">  '.$sc_id.' </div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Email Id</h6></div></td><td><div class="image-grouped"> '.$email.' </div></td><td><div class="project-contain"><h6 class="mb-1 tx-13">Abha Number</h6></div></td></tr><tr><td><div class="project-contain"><h6 class="mb-1 tx-13">Ration card Number</h6></div></td><td><div class="image-grouped"> '.$ration_card.' </div></td></tr></tbody></table></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div></div></div></div>',
+                // "edit" => '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fe fe-eye bg-info me-1"></i></a></div>'
+
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        return response()->json($response);
+    }
+
+
+    public function examApplicationEdit(Request $request)
+    {
+
+        $data = Auth::user();
+        $districts = District::get();
+        $datas = ExamApplication::where('_id',$request->id)->first();
+      
+      //  dd($datas);
+        return view('application.exam-application-edit', compact('data', 'districts','datas'));
+    }
+
+    public function examApplicationUpdate(Request $request)
+    {
+      
+        $validator = Validator::make($request->all(),[
+            'student_name' => 'required',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',
+            'signature' => 'required|file|mimes:jpg,pdf|max:2048',
+        ]);
+        $data = ExamApplication::where('_id',$request->id)->first();
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+    
+        if ($request->hasfile('applicant_image')) {
+    
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+    
+            $image->move(public_path('/img'), $applicant_img);
+    
+            $applicant_image = $applicant_img;
+    
+        }else{
+            $applicant_image = '';
+        }
+    
+        if ($request->hasfile('signature')) {
+    
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+    
+            $image->move(public_path('/signature'), $imgfileName);
+    
+            $signature = $imgfileName;
+        } else {
+            $signature = '';
+        }
+       
+        $data = $request->all();
+        $datainsert =  ExamApplication::where('_id',$request->id)->first();
+       // dd($request->id);
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+        $datainsert->update([
+            'school_name' => $data['school_name'],
+            'student_name' => @$data['student_name'],
+            'gender' => @$data['gender'],
+            'district' => @$data['district'],
+            'taluk' => @$data['taluk'],
+            'pincode' => @$data['pincode'],
+            'address' => @$data['address'],
+            'relation' => @$data['relation'],
+            'mother_name' => @$data['mother_name'],
+            'father_name' => @$data['father_name'],
+    
+            // 'birth_district' => $data['birth_district'],
+            'age' => @$data['age'],
+    
+            'annual_income' => @$data['annual_income'],
+            'occupation_parent' => @$data['occupation_parent'],
+            'dob' => @$data['dob'],
+            'caste' => @$data['caste'],
+            'other' => @$data['other'],
+            'school_address' => @$data['school_address'],
+            // 'birth_place' => @$data['birth_place'],
+            'mother_tonge' => @$data['mother_tonge'],
+            'date' => date('d-m-Y'),
+            'place' => @$data['place'],
+            'user_id' => Auth::user()->id,
+            'agree' => $request->input('agree'),
+            'parent_name'  => @$data['parent_name'],
+            'signature' => @$data['signature'],
+             'applicant_image' => @$data['applicant_image'],
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
+            'teo_return' => null,
+            'return_status' =>1,
+            "teo_view_status"=>1,
+            'user_id' => Auth::user()->id,
+            'status' => 0
+        ]);
+
+
+        return redirect()->route('userExamList')->with('status', 'Application Submitted Successfully.');
+    }
+
 
 
     public function examApplicationView($id)

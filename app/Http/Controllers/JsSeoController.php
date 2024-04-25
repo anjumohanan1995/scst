@@ -260,7 +260,8 @@ class JsSeoController extends Controller
              $totalRecord = ExamApplication::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('clerk_status',1);
+             ->where('clerk_status',1)
+             ->where('JsSeo_return',null);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -273,7 +274,8 @@ class JsSeoController extends Controller
              $totalRecordswithFilte = ExamApplication::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('clerk_status',1);
+                 ->where('clerk_status',1)
+                 ->where('JsSeo_return',null);
 
            
              if($name != ""){
@@ -291,6 +293,7 @@ class JsSeoController extends Controller
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1)
+                 ->where('JsSeo_return',null)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -365,6 +368,151 @@ class JsSeoController extends Controller
 
          return response()->json($response);
     }
+
+    public function getexamApplicationListJsSeoReturned(Request $request){
+        $role =  Auth::user()->role;       
+       $district =  Auth::user()->district;
+       $tdo= Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+         
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = ExamApplication::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('clerk_return',null)
+             ->where('JsSeo_return',1);
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = ExamApplication::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('clerk_return',null)
+                 ->where('JsSeo_return',1);
+
+           
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             
+            
+             $items = ExamApplication::where('deleted_at', null)
+                 ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('clerk_return',null)
+                 ->where('JsSeo_return',1)
+                 ->orderBy($columnName, $columnSortOrder);
+             
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+             
+         foreach($records as $record){
+            $i++;
+            $id = $record->id;
+            $school_name = $record->school_name;
+            $student_name = $record->student_name;
+            $gender = $record->gender;
+            $address = $record->address;
+            $relation = $record->relation;
+            $mother_name =  $record->mother_name;
+            $created_at =  $record->created_at;
+           
+             $status = $record->JsSeo_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name=@$record->submittedTeo->teo_name;
+              $created_at =  $record->created_at;
+              $edit='';
+
+              $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            //   if($status == 1){
+            //     $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
+            // }
+            // else if($status ==2){
+            //     $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->JsSeo_status_reason.'</span></div>';
+          
+            // }
+            // else if($status ==null){
+            //     $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationJsSeoDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            // }
+
+          
+              
+        
+        
+             
+           
+                $data_arr[] = array(
+                    "sl_no" => $i,
+                    "school_name" => $school_name,
+                    "student_name" => $student_name,
+                    "gender" => $gender,
+                    "address" => $address,
+                    "relation" => $relation,
+                    "mother_name" => $mother_name,
+                    "date" => $date." ".$time,                 
+                    "action" => $edit,
+                    "teo_name" =>$teo_name
+    
+                );
+          
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
     public function examApplicationJsSeoDetails($id){
         $currentTime = Carbon::now();
 
@@ -396,6 +544,7 @@ class JsSeoController extends Controller
        
         $marriage->update([
             'JsSeo_status' => 1,
+            'JsSeo_return' => null,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,
@@ -415,6 +564,13 @@ class JsSeoController extends Controller
        
         $marriage->update([
             'JsSeo_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,
@@ -462,7 +618,7 @@ class JsSeoController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-             $totalRecord->where('clerk_return', null)->where('jsSeo_return', 1);
+             $totalRecord->where('clerk_return', null)->where('JsSeo_return', 1);
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -477,7 +633,7 @@ class JsSeoController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-            $totalRecordswithFilte->where('clerk_return', null)->where('jsSeo_return', 1);
+            $totalRecordswithFilte->where('clerk_return', null)->where('JsSeo_return', 1);
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -494,7 +650,7 @@ class JsSeoController extends Controller
                 $items->where('name','like',"%".$name."%");
             }
            
-            $items->where('clerk_return', null)->where('jsSeo_return', 1);
+            $items->where('clerk_return', null)->where('JsSeo_return', 1);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -602,7 +758,7 @@ class JsSeoController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-             $totalRecord->where('jsSeo_return', null);
+             $totalRecord->where('JsSeo_return', null);
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -617,7 +773,7 @@ class JsSeoController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-            $totalRecordswithFilte->where('jsSeo_return', null);
+            $totalRecordswithFilte->where('JsSeo_return', null);
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -634,7 +790,7 @@ class JsSeoController extends Controller
                 $items->where('name','like',"%".$name."%");
             }
            
-            $items->where('jsSeo_return', null);
+            $items->where('JsSeo_return', null);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -722,6 +878,14 @@ class JsSeoController extends Controller
             "JsSeo_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
+        if($formData->JsSeo_view_status==null ){
+            $formData->update([
+            "JsSeo_return_view_status"=>1,
+            "JsSeo_view_id" =>Auth::user()->id,
+            "JsSeo_return_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         
         return view('JsSeo.couplefinancial.details',compact('formData'));
 
@@ -738,7 +902,7 @@ class JsSeoController extends Controller
        
         $marriage->update([
             'JsSeo_status' => 1,
-            'jsSeo_return' => null,
+            'JsSeo_return' => null,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,
@@ -760,7 +924,7 @@ class JsSeoController extends Controller
             'JsSeo_status' => 2,
            'teo_return' => 1,
            'clerk_return' => 1,
-           'jsSeo_return' => 1,
+           'JsSeo_return' => 1,
            'assistant_return' => 1,
            'officer_return' => 1,
            'return_date' => $currenttime,
@@ -815,7 +979,7 @@ class JsSeoController extends Controller
                  $totalRecord->where('name','like',"%".$name."%");
              }
             
-             $totalRecord->where('clerk_return', null)->where('jsSeo_return', 1);
+             $totalRecord->where('clerk_return', null)->where('JsSeo_return', 1);
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
@@ -830,7 +994,7 @@ class JsSeoController extends Controller
             }
            
            
-             $totalRecordswithFilte->where('clerk_return', null)->where('jsSeo_return', 1);
+             $totalRecordswithFilte->where('clerk_return', null)->where('JsSeo_return', 1);
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
@@ -846,7 +1010,7 @@ class JsSeoController extends Controller
                 $items->where('name','like',"%".$name."%");
             }
            
-            $items->where('clerk_return', null)->where('jsSeo_return', 1);
+            $items->where('clerk_return', null)->where('JsSeo_return', 1);
              $records = $items->skip($start)->take($rowperpage)->get();
          
 
@@ -1081,7 +1245,7 @@ class JsSeoController extends Controller
 
         $motherChild->update([
             'JsSeo_status' => 1,
-            'jsSeo_return' => null,
+            'JsSeo_return' => null,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,
@@ -1102,7 +1266,7 @@ class JsSeoController extends Controller
             'JsSeo_status' => 2,
            'teo_return' => 1,
            'clerk_return' => 1,
-           'jsSeo_return' => 1,
+           'JsSeo_return' => 1,
            'assistant_return' => 1,
            'officer_return' => 1,
             'JsSeo_status_date' => $currenttime,

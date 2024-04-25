@@ -51,8 +51,10 @@ class FinancialHelp extends Eloquent
         'marriage_certificate',
       
         'teo_view_status',
+        'teo_return_view_status',
         'teo_view_id',
         'teo_view_date',
+        'teo_return_view_date',
         'teo_status',
         'teo_status_id',
         'teo_status_date',
@@ -60,24 +62,31 @@ class FinancialHelp extends Eloquent
         'date_received',
 
         'clerk_view_status',
+        'clerk_return_view_status',
         'clerk_view_id',
         'clerk_view_date',
+        'clerk_return_view_date',
         'clerk_status',
         'clerk_status_id',
         'clerk_status_date',
         'clerk_status_reason',
 
         'JsSeo_view_status',
+        'JsSeo_return_view_status',
         'JsSeo_view_id',
         'JsSeo_view_date',
+        'JsSeo_return_view_date',
         'JsSeo_status',
         'JsSeo_status_id',
         'JsSeo_status_date',
         'JsSeo_status_reason',
+        'JsSeo_return_date',
         
         'assistant_view_status',
+        'assistant_return_view_status',
         'assistant_view_id',
         'assistant_view_date',
+        'assistant_return_view_date',
         'assistant_status',
         'assistant_status_id',
         'assistant_status_date',
@@ -93,13 +102,15 @@ class FinancialHelp extends Eloquent
         
         'teo_return',
         'clerk_return',
-        'jsSeo_return',
+        'JsSeo_return',
         'assistant_return',
         'officer_return',
         'return_date',
         'return_userid',
         'return_reason',
         'return_status'
+
+
 
 
     ];
@@ -141,4 +152,5 @@ class FinancialHelp extends Eloquent
     {
         return $this->belongsTo(User::class,'return_userid');
     }
+
 }
