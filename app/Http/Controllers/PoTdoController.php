@@ -479,7 +479,7 @@ class PoTdoController extends Controller
           
               $edit='';
            
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
            
              
            
@@ -616,11 +616,15 @@ class PoTdoController extends Controller
                 $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
             }
             else if($status ==2){
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Returned</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
+            else if($status ==3){
                 $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
 
           
@@ -732,7 +736,31 @@ class PoTdoController extends Controller
             'success' => 'Couple Financial Application Rejected successfully.'
         ]);
     }
-
+    public function couplefinancialRemoveOfficer (Request $request){
+      //  dd($request);
+        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $id = $request->id;
+        $reason =$request->reason;
+      //  $currentTime = Carbon::now();
+      $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+      
+       
+        $marriage->update([
+            'officer_status' => 3,
+            'teo_return' => null,
+            'clerk_return' => null,
+            'jsSeo_return' => null,
+            'assistant_return' => null,
+            'officer_return' => null,
+            'officer_status_date' => $currenttime,
+            'officer_status_id' => Auth::user()->id,
+            'officer_status_reason' => $reason,
+        ]);
+        return response()->json([
+            'success' => 'Couple Financial Application Rejected successfully.'
+        ]);
+    }
 
 
 
