@@ -624,7 +624,7 @@
                   <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
                </li>
 
-               @elseif( @$financialHelp->officer_status == 3)
+               @elseif( @$financialHelp->rejection_status == null)
               
                <li class="rejectTimeline">
                  <a href="#!">PO / TDO</a>
@@ -827,7 +827,7 @@
                        <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                        <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
                     </li>
-                    @elseif( @$financialHelp->officer_status == 3)
+                    @elseif( @$financialHelp->rejection_status == null)
               
                     <li class="rejectTimeline">
                       <a href="#!">PO / TDO</a>

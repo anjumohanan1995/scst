@@ -371,7 +371,7 @@ class ApplicationController extends Controller
             'reason' => @$data['reason'],
             'financial_assistance' => @$data['financial_assistance'],
             'difficulties' => @$data['difficulties'],
-            'user_id' => Auth::user()->id,
+           // 'user_id' => Auth::user()->id,
             'husband_name' => @$data['husband_name'],
             'wife_name' => @$data['wife_name'],
             'agree' => @$data['agree'],

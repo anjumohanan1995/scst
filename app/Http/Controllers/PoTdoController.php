@@ -451,7 +451,13 @@ class PoTdoController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            $items->where('assistant_return', null)->where('officer_return', 1);
+            // $items->where('assistant_return', null)->where('officer_return', 1  || 'rejection_status', 1);
+
+            $items->where('assistant_return', null)
+            ->where(function($query) {
+                $query->where('officer_return', 1)
+                ->orWhere('rejection_status', 1);
+            });
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -550,6 +556,7 @@ class PoTdoController extends Controller
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('assistant_status',1);
+
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -562,7 +569,8 @@ class PoTdoController extends Controller
              $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('assistant_status',1);
+                 ->where('assistant_status',1)
+                 ->where('rejection_status',null);
 
            
              if($name != ""){
@@ -585,7 +593,10 @@ class PoTdoController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            $items->where('officer_return', null);
+            // $items->where('officer_return', null || 'rejection_status',null);
+
+            $items->where('officer_return', null)->orWhere('rejection_status', null);
+
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -747,13 +758,13 @@ class PoTdoController extends Controller
       
        
         $marriage->update([
-            'officer_status' => 3,
-            'officer_return' => 1,
-            'teo_return' => null,
-            'clerk_return' => null,
-            'jsSeo_return' => null,
-            'assistant_return' => null,
-            'officer_return' => null,
+            'rejection_status' => null,
+            // 'officer_status' => 3,
+            // 'teo_return' => 2,////////////////
+            // 'clerk_return' => 1,
+            // 'jsSeo_return' => 1,
+            // 'assistant_return' => 1,
+            // 'officer_return' => 1,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,

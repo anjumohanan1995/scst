@@ -607,7 +607,7 @@
                         @if( $formData->teo_return == null)
                         <li class="ApproveTimeline">
                            <a href="#!">TEO</a>
-                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $formData['teo_return_view_date'] }}</a> "teo_return_view_status" => 1,
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $formData['teo_return_view_date'] }}</a>
                            <br>
                            <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
                       
@@ -1011,40 +1011,6 @@
              }
          });
      }
-     function remove() {
-            var reason = $('#reject-reason').val();
-
-            if ($('#reject-reason').val() == "") {
-                rejection.innerHTML = "<span style='color: red;'>" + "Please enter the reason for rejection</span>";
-            } else {
-                rejection.innerHTML = "";
-                var reqId = $('#requestId3').val();
-              //  console.log(reqId);
-                $.ajax({
-
-                    url: "{{ route('couplefinancial.officer.remove') }}",
-                    type: "POST",
-                    data: {
-                        "id": reqId,
-                        "reason": reason,
-                        "_token": "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        console.log(response.success);
-                        toastr.success(response.success, 'Success!')
-                        $('#rejection-popup').modal('hide');
-                        $('#success_message').fadeIn().html(response.success);
-                        setTimeout(function() {
-                            $('#success_message').fadeOut("slow");
-                        }, 2000);
-
-                        $('#example').DataTable().ajax.reload();
-                        window.location.reload();
-                    }
-                })
-
-            }
-        }
    
      function reject() {
          var reason = $('#reason').val();
@@ -1074,6 +1040,42 @@
                      }, 2000);
    
                      setTimeout(function() {
+   window.location.reload();
+   }, 2000);
+   
+                 }
+             })
+   
+         }
+     }
+     function remove() {
+            var reason = $('#reject-reason').val();
+
+            if ($('#reject-reason').val() == "") {
+                rejection.innerHTML = "<span style='color: red;'>" + "Please enter the reason for rejection</span>";
+            } else {
+                rejection.innerHTML = "";
+                var reqId = $('#requestId3').val();
+              //  console.log(reqId);
+                $.ajax({
+
+                    url: "{{ route('couplefinancial.officer.remove') }}",
+                    type: "POST",
+                    data: {
+                        "id": reqId,
+                        "reason": reason,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        console.log(response.success);
+                        toastr.success(response.success, 'Success!')
+                        $('#rejection-popup').modal('hide');
+                        $('#success_message').fadeIn().html(response.success);
+                        setTimeout(function() {
+                            $('#success_message').fadeOut("slow");
+                        }, 2000);
+
+                        setTimeout(function() {
    window.location.reload();
    }, 2000);
    

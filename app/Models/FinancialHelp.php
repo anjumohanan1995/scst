@@ -108,7 +108,8 @@ class FinancialHelp extends Eloquent
         'return_date',
         'return_userid',
         'return_reason',
-        'return_status'
+        'return_status',
+        'rejection_status'
 
 
 
