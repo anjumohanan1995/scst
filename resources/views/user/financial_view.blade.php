@@ -629,7 +629,7 @@
                         <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['JsSeo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                         <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->officer_status_reason}}</p>
                      </li>
-                     @elseif( @$formData->officer_status == 3)
+                     @elseif( @$formData->rejection_status  == null)
            
                      <li class="rejectTimeline">
                        <a href="#!">PO / TDO</a>
@@ -736,11 +736,11 @@
                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['clerk_view_date'] }}</a>
                           <p></p>
                            <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                           <div class="settings-icon">
+                           {{-- <div class="settings-icon">
                               <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
                               &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
                            </div>
-                         
+                          --}}
                             </li>
                             @endif
                             @endif
@@ -853,7 +853,7 @@
                              <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                              <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$formData->officer_status_reason}}</p>
                           </li>
-                          @elseif( @$formData->officer_status == 3)
+                          @elseif( @$formData->rejection_status  == null)
            
                           <li class="rejectTimeline">
                             <a href="#!">PO / TDO</a>

@@ -681,7 +681,7 @@
                            <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['JsSeo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                            <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->officer_status_reason}}</p>
                         </li>
-                        @elseif( @$formData->officer_status == 3)
+                        @elseif( @$formData->rejection_status  == null)
               
                         <li class="rejectTimeline">
                           <a href="#!">PO / TDO</a>
@@ -894,7 +894,7 @@
                                 <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if($formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse($formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                                 <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ $formData->officer_status_reason}}</p>
                              </li>
-                             @elseif( @$formData->officer_status == 3)
+                             @elseif( @$formData->rejection_status  == null)
               
                              <li class="rejectTimeline">
                                <a href="#!">PO / TDO</a>

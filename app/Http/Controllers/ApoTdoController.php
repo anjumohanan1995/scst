@@ -728,7 +728,7 @@ class ApoTdoController extends Controller
             'clerk_return' => 1,
             'JsSeo_return' => 1,
             'assistant_return' => 1,
-            'officer_return' => 1,
+            // 'officer_return' => 1,
             'return_date' => $currenttime,
             'return_userid' => Auth::user()->id,
             'return_reason' => $reason,

@@ -562,6 +562,7 @@
                @endif
                @endif
 
+
                 @if(@$financialHelp->clerk_return == null)
                @if( @$financialHelp->JsSeo_return == null)
                <li class="ApproveTimeline">
@@ -610,9 +611,22 @@
                @endif
                @endif 
 
+               @if($financialHelp->rejection_status  == 1)
+               <li class="rejectTimeline">
+                  <a href="#!">PO / TDO</a>
+                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $financialHelp['officer_view_date'] }}</a>
+                  <p></p>
+                  <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                  <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->officerUser->name }}</p>
+                  
+                  <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if($financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse($financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                  <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ $financialHelp->officer_status_reason}}</p>
+               </li>
+               @else
+
                @if(@$financialHelp->assistant_return == null)
                @if( @$financialHelp->officer_return == null)
-
+              
                <li class="ApproveTimeline">
                   <a href="#!">PO/ TDO</a>
                   <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['officer_return_view_date'] }}</a>
@@ -624,19 +638,6 @@
                   <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
                </li>
 
-               @elseif( @$financialHelp->rejection_status == null)
-              
-               <li class="rejectTimeline">
-                 <a href="#!">PO / TDO</a>
-                 <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $financialHelp['officer_view_date'] }}</a>
-                 <p></p>
-                 <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                 <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ $financialHelp->officerUser->name }}</p>
-                 
-                 <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if($financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse($financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                 <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ $financialHelp->officer_status_reason}}</p>
-              </li>
-
                @elseif( @$financialHelp->officer_return == 1)
                <li class="ApproveTimeline">
                   <a href="#!">PO/ TDO</a>
@@ -647,7 +648,7 @@
 
                @endif
                @endif 
-
+               @endif
                @endif
             </ul>
         @else
@@ -802,6 +803,20 @@
                
                       @endif
                       @endif
+
+                      @if($financialHelp->rejection_status  == 1)
+                      <li class="rejectTimeline">
+                         <a href="#!">PO / TDO</a>
+                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $financialHelp['officer_view_date'] }}</a>
+                         <p></p>
+                         <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                         <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->officerUser->name }}</p>
+                         
+                         <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if($financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse($financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                         <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ $financialHelp->officer_status_reason}}</p>
+                      </li>
+                      @else
+
                       @if(@$financialHelp->assistant_status == 1)                    
                       @if( @$financialHelp->officer_status == 1)
      
@@ -827,18 +842,7 @@
                        <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                        <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
                     </li>
-                    @elseif( @$financialHelp->rejection_status == null)
-              
-                    <li class="rejectTimeline">
-                      <a href="#!">PO / TDO</a>
-                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $financialHelp['officer_view_date'] }}</a>
-                      <p></p>
-                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                      <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ $financialHelp->officerUser->name }}</p>
-                      
-                      <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if($financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse($financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                      <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ $financialHelp->officer_status_reason}}</p>
-                   </li>
+
                     @elseif( @$financialHelp->officer_status == null)
      
                     <li class="pendingTimeline">
@@ -847,6 +851,7 @@
                      <p></p>
                       <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
                        </li>
+                       @endif
                        @endif
                        @endif
          </ul>  
