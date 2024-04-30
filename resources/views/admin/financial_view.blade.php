@@ -326,7 +326,7 @@
                      </div>
                      <div class="col-6">
                         <label> 
-                        @if($financialHelp['marriage_certificate'])
+                        @if(@$financialHelp['marriage_certificate'])
                         <a href="{{ asset('marriage_certificate/' . @$financialHelp['marriage_certificate']) }}" target="_blank">View</a>
                         {{-- <iframe src="{{ asset('marriage_certificate/' . @$financialHelp['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
                         @endif 
@@ -471,13 +471,13 @@
                   <label>സ്ഥലം </label>  : {{ @$financialHelp['place'] }}
                </div>
                <div>
-                  <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> :  @if($financialHelp['husband_photo'])
+                  <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> :  @if(@$financialHelp['husband_photo'])
                   {{-- <iframe src="{{ asset('sign/huband/' . @$financialHelp['husband_photo']) }}" width="400" height="200"></iframe> --}}
                   <img src="{{ asset('sign/huband/' . @$financialHelp['husband_photo']) }}" width="120px" height="60px">
                   @endif
                </div>
                <div>
-                  <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if($financialHelp['husband_sign'])
+                  <label> ഭർത്താവിന്റെ ഒപ്പ് </label> :  @if(@$financialHelp['husband_sign'])
                   {{-- <iframe src="{{ asset('sign/huband/' . @$financialHelp['husband_sign']) }}" width="400" height="200"></iframe> --}}
                   <img src="{{ asset('sign/huband/' . @$financialHelp['husband_sign']) }}" width="120px" height="60px">
                   @endif
@@ -489,14 +489,14 @@
                   <label>തീയതി </label> :  {{ @$financialHelp['date'] }}
                </div>
                <div>
-                  <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if($financialHelp['wife_photo'])
+                  <label> ഭാര്യയുടെ ഫോട്ടോ </label> :  @if(@$financialHelp['wife_photo'])
                   <img src="{{ asset('sign/wife/' . @$financialHelp['wife_photo']) }}" width="120px" height="60px">
                   @endif
                </div>
                <div class="text">
                   <div>
                      <label> ഭാര്യയുടെ ഒപ്പ് </label>:  
-                     @if($financialHelp['wife_sign'])
+                     @if(@$financialHelp['wife_sign'])
                      {{-- <iframe src="{{ asset('sign/wife/' . @$financialHelp['wife_sign']) }}" width="400" height="200"></iframe> --}}
                      <img src="{{ asset('sign/wife/' . @$financialHelp['wife_sign']) }}" width="120px" height="60px">
                      @endif
@@ -523,7 +523,7 @@
 
          @if( @$financialHelp->return_status == 1)
          @php
-         $role = DB::table('users')->where('_id', $financialHelp->return_userid)->value('role');
+         $role = DB::table('users')->where('_id', @$financialHelp->return_userid)->value('role');
         
      @endphp
          <p class="inputText badge bg-danger" style="font-size: 12px">Returned Application - by {{ @$financialHelp->returnUser->name }} ({{ @$role }})</p>
@@ -611,16 +611,16 @@
                @endif
                @endif 
 
-               @if($financialHelp->rejection_status  == 1)
+               @if(@$financialHelp->rejection_status  == 1)
                <li class="rejectTimeline">
                   <a href="#!">PO / TDO</a>
-                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $financialHelp['officer_view_date'] }}</a>
+                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['officer_view_date'] }}</a>
                   <p></p>
                   <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
                   <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->officerUser->name }}</p>
                   
-                  <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if($financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse($financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                  <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ $financialHelp->officer_status_reason}}</p>
+                  <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                  <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
                </li>
                @else
 
@@ -804,16 +804,16 @@
                       @endif
                       @endif
 
-                      @if($financialHelp->rejection_status  == 1)
+                      @if(@$financialHelp->rejection_status  == 1)
                       <li class="rejectTimeline">
                          <a href="#!">PO / TDO</a>
-                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ $financialHelp['officer_view_date'] }}</a>
+                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$financialHelp['officer_view_date'] }}</a>
                          <p></p>
                          <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
                          <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$financialHelp->officerUser->name }}</p>
                          
-                         <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if($financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse($financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                         <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ $financialHelp->officer_status_reason}}</p>
+                         <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if(@$financialHelp['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                         <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ @$financialHelp->officer_status_reason}}</p>
                       </li>
                       @else
 

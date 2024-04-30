@@ -616,6 +616,19 @@
       
                      @endif
                      @endif 
+
+                     @if(@$formData->rejection_status  == 1)
+                     <li class="rejectTimeline">
+                        <a href="#!">PO / TDO</a>
+                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                        <p></p>
+                        <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                        <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                        
+                        <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                        <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ @$formData->officer_status_reason}}</p>
+                     </li>
+                     @else
       
                      @if(@$formData->assistant_return == null)
                      @if( @$formData->officer_return == null)
@@ -629,18 +642,7 @@
                         <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['JsSeo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                         <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$formData->officer_status_reason}}</p>
                      </li>
-                     @elseif( @$formData->rejection_status  == null)
-           
-                     <li class="rejectTimeline">
-                       <a href="#!">PO / TDO</a>
-                       <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
-                       <p></p>
-                       <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                       <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
-                       
-                       <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                       <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ @$formData->officer_status_reason}}</p>
-                    </li>
+
       
                      @elseif( @$formData->officer_return == 1)
                      <li class="ApproveTimeline">
@@ -658,7 +660,7 @@
       
                      @endif
                      @endif 
-      
+                     @endif
                      @endif
                   </ul>
               @else
@@ -828,6 +830,20 @@
                      
                             @endif
                             @endif
+
+                            @if(@$formData->rejection_status  == 1)
+                            <li class="rejectTimeline">
+                               <a href="#!">PO / TDO</a>
+                               <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                               <p></p>
+                               <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                               <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
+                               
+                               <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
+                               <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ @$formData->officer_status_reason}}</p>
+                            </li>
+                            @else
+
                             @if(@$formData->assistant_status == 1)                    
                             @if( @$formData->officer_status == 1)
            
@@ -853,18 +869,7 @@
                              <p  class="mt-2"><span class= "spanclr"> Returned Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
                              <p  class="mt-2"><span class= "spanclr"> Returned Reason :   </span>{{ @$formData->officer_status_reason}}</p>
                           </li>
-                          @elseif( @$formData->rejection_status  == null)
-           
-                          <li class="rejectTimeline">
-                            <a href="#!">PO / TDO</a>
-                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
-                            <p></p>
-                            <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                            <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
-                            
-                            <p  class="mt-2"><span class= "spanclr"> Rejection Date :   </span>@if(@$formData['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$formData['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                            <p  class="mt-2"><span class= "spanclr"> Rejection Reason :   </span>{{ @$formData->officer_status_reason}}</p>
-                         </li>
+
                           @elseif( @$formData->officer_status == null)
            
                           <li class="pendingTimeline">
@@ -879,6 +884,7 @@
                               
                            </div>
                              </li>
+                             @endif
                              @endif
                              @endif
                </ul>  
