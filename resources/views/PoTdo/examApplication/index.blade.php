@@ -188,6 +188,32 @@
                     </div>
                 </div>
 
+                <div class="modal fade" id="remove-popup">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content country-select-modal border-0">
+                            <div class="modal-header offcanvas-header">
+                                <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body p-5">
+                                <form id="ownForm">
+                                    @csrf
+                                <div class="text-center">
+                                    <h5>Reason for Rejection</h5>
+                                    <textarea class="form-control" name="reject-reason" id="reject-reason" requred></textarea>
+                                    <span id="rejection"></span>
+                                </div>
+            
+                                <input type="hidden" id="requestId3" name="requestId3" value="" />
+                                <div class="text-center">
+                                    <button type="button" onclick="remove()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
 			</div>
 		<!-- /row -->
@@ -457,6 +483,41 @@ table.draw();
                         $('#example').DataTable().ajax.reload();
                         location.reload(true);
 
+                    }
+                })
+
+            }
+        }
+
+        function remove() {
+            var reason = $('#reject-reason').val();
+
+            if ($('#reject-reason').val() == "") {
+                rejection.innerHTML = "<span style='color: red;'>" + "Please enter the reason for rejection</span>";
+            } else {
+                rejection.innerHTML = "";
+                var reqId = $('#requestId3').val();
+              //  console.log(reqId);
+                $.ajax({
+
+                    url: "{{ route('examApplication.officer.remove') }}",
+                    type: "POST",
+                    data: {
+                        "id": reqId,
+                        "reason": reason,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        console.log(response.success);
+                        toastr.success(response.success, 'Success!')
+                        $('#rejection-popup').modal('hide');
+                        $('#success_message').fadeIn().html(response.success);
+                        setTimeout(function() {
+                            $('#success_message').fadeOut("slow");
+                        }, 2000);
+
+                        $('#example').DataTable().ajax.reload();
+                        window.location.reload();
                     }
                 })
 
