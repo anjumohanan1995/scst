@@ -137,6 +137,10 @@ Route::get('/adminItiFundList', [App\Http\Controllers\ItiScholarshipController::
 Route::get('/getAdminItiFundList', [App\Http\Controllers\ItiScholarshipController::class, 'getAdminItiFundList'])->name('getAdminItiFundList');
 Route::get('/itiAdminFeeView/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'itiAdminFeeView'])->name('adminItiFundList.show');
 
+Route::get('/getItiFundReturnList', [App\Http\Controllers\ItiScholarshipController::class, 'getItiFundReturnList'])->name('getItiFundReturnList');
+Route::get('/iti-fund-application-edit/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundApplicationEdit'])->name('itiFundApplicationEdit');
+Route::post('/itiFundUpdate', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundUpdate'])->name('itiFundUpdate');
+
 
 
 
@@ -420,7 +424,10 @@ Route::controller(ClerkController::class)->group(function(){
     Route::get('/itiFeeClerkView/{id}', 'itiFeeClerkView')->name('clerkItiFundList.show');
     Route::post('/itiScholarshipClerkApprove','itiScholarshipClerkApprove')->name('itiScholarshipClerk.approve');
     Route::post('/itiScholarshipClerkReject','itiScholarshipClerkReject')->name('itiScholarshipClerk.reject');
-   
+    
+    Route::get('/getItiFundListClerkReturned','getItiFundListClerkReturned')->name('getItiFundListClerkReturned');
+
+
     Route::get('/studentAwardListClerk', 'studentAwardListClerk')->name('studentAwardListClerk');
     Route::get('/getStudentAwardListClerk', 'getStudentAwardListClerk')->name('getStudentAwardListClerk');
     Route::get('/studentAward/{id}/Clerkview', 'studentAwardClerkView')->name('studentAwardClerkView');
@@ -687,7 +694,9 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::get('/itiFeeJsSeoView/{id}', 'itiFeeJsSeoView')->name('JsSeoItiFundList.show');
     Route::post('/itiScholarshipJsSeoApprove','itiScholarshipJsSeoApprove')->name('itiScholarshipJsSeo.approve');
     Route::post('/itiScholarshipJsSeoReject','itiScholarshipJsSeoReject')->name('itiScholarshipJsSeo.reject');
-   
+    Route::get('/getItiFundListJsSeoReturn','getItiFundListJsSeoReturn')->name('getItiFundListJsSeoReturn');
+
+
     Route::get('/studentAwardListJsSeo', 'studentAwardListJsSeo')->name('studentAwardListJsSeo');
     Route::get('/getStudentAwardListJsSeo', 'getStudentAwardListJsSeo')->name('getStudentAwardListJsSeo');
     Route::get('/studentAward/{id}/JsSeoview', 'studentAwardJsSeoView')->name('studentAwardJsSeoView');

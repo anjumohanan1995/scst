@@ -433,7 +433,7 @@ $i=$start;
                  $totalRecord->where('name','like',"%".$name."%");
              }
             
-
+             $totalRecord->where('teo_return', null);
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
@@ -446,7 +446,7 @@ $i=$start;
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-           
+            $totalRecordswithFilte->where('teo_return', null);
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -458,7 +458,7 @@ $i=$start;
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-           
+            $items->where('teo_return', null);
 
              $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
@@ -537,6 +537,147 @@ $i=$start;
          );
 
          return response()->json($response);
+    }
+
+    public function getItiFundReturnList(Request $request)
+    {
+        
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = ItiFund::where('deleted_at',null);
+             if(Auth::user()->role =="TEO"){
+                $totalRecord =  $totalRecord ->where('submitted_teo',Auth::user()->teo_name);
+             }
+            
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+             $totalRecord->where('teo_return', 1);
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = ItiFund::where('deleted_at',null);
+             if(Auth::user()->role =="TEO"){
+                $totalRecordswithFilte =  $totalRecordswithFilte ->where('submitted_teo',Auth::user()->teo_name);
+             }
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+            $totalRecordswithFilte->where('teo_return', 1);
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             if(Auth::user()->role =="TEO"){
+                $items =  $items ->where('submitted_teo',Auth::user()->teo_name);
+             }
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+            $items->where('teo_return', 1);
+
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
+         
+            
+
+
+         $data_arr = array();
+$i=$start;
+         foreach($records as $record){
+            $i++;
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $course_name = $record->course_name;
+            $place = $record->place;
+            $date=$record->date;
+            $course_duration=$record->course_duration;
+            $institution_type = $record->institution_type;
+             $created_at =  $record->created_at;
+             $carbonDate = Carbon::parse($record->created_at);
+
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
+
+              $edit ='';
+              if(Auth::user()->role== "TEO"){
+                $edit='<div class="settings-main-icon"><a  href="' .  route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('iti-fund-application-edit/' . $id) . '">Resubmit</a></div>';
+
+               
+              }
+              else{
+                $edit='<div class="settings-main-icon"><a  href="' . route('adminItiFundList.show',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+             
+              }
+            $data_arr[] = array(
+            //     "id" => $id,
+            //    "sl_no" => $i,
+            //     "name" => $name,
+            //     "address" => $address,
+            //     "course_name" => $course_name,
+            //     "income" =>$income,
+            //     "caste" => $caste,
+            //     "date" => $date .' ' .$record->time, 
+                
+                "id" => $id,
+                "sl_no" =>$i,
+                 "name" => $name,
+                 "address" => $address,
+                 "course_name" => $course_name,
+                 "course_duration" => $course_duration,
+                 "institution_type" => $institution_type,
+                 "created_at" => $date .' ' .$record->time, 
+
+                                
+                "edit" => $edit
+
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function itiFundApplicationEdit(Request $request)
+    {
+
+        $data = Auth::user();
+        $districts = District::get();
+        $datas = ItiFund::where('_id',$request->id)->first();
+      //  dd($datas);
+        return view('itiFund.edit', compact('data', 'districts','datas'));
     }
 
     public function itiAdminFeeView(Request $request,$id)
