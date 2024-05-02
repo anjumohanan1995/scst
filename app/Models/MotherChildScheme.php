@@ -99,7 +99,8 @@ class MotherChildScheme extends Eloquent
         'return_date',
         'return_userid',
         'return_reason',
-        'return_status'
+        'return_status',
+        'rejection_status'
 
     ];
 
@@ -135,10 +136,10 @@ class MotherChildScheme extends Eloquent
     {
         return $this->belongsTo(User::class,'teo_status_id');
     }
-    public function district()
-    {
-        return $this->belongsTo(District::class,'submitted_district');
-    }
+    // public function district()
+    // {
+    //     return $this->belongsTo(District::class,'submitted_district');
+    // }
     public function teo()
     {
         return $this->belongsTo(Teo::class,'submitted_teo');

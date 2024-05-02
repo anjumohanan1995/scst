@@ -406,6 +406,7 @@ class PoTdoController extends Controller
               'officer_status_date' => $currenttime,
               'officer_status_id' => Auth::user()->id,
               'officer_status_reason' => $reason,
+
           ]);
           return response()->json([
               'success' => 'Exam Application Rejected successfully.'

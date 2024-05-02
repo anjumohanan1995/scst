@@ -41,7 +41,7 @@
 
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> സ്ക്കൂളിന്റെ പേര് <br><span class="small"> Name</span> </label>
-                                            <input type="text" value="{{ old('school_name') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->school_name }}" class="form-control"
                                                 placeholder="School Name" name="school_name" />
                                             @error('school_name')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -50,7 +50,7 @@
 
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">വിദ്യാർത്ഥിയുടെ പേര് <br><span class="small">Student Name</span></label>
-                                            <input type="text" value="{{ old('student_name') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->student_name }}" class="form-control"
                                                 placeholder="Student Name" name="student_name" />
 
                                             @error('student_name')
@@ -66,17 +66,17 @@
                                             <div class="col-md-6 d-flex">
                                                 <label class="form-label">Male</label>
                                                 <input class="form-control" type="radio" name="gender" value="Male"
-                                                    @if (old('gender') == 'Male') checked @endif>
+                                                    @if (@$datas->gender == 'Male') checked @endif>
 
                                                 <label class="form-label">Female</label>
                                                 <input class="form-control" type="radio" name="gender" value="Female"
-                                                    @if (old('gender') == 'Female') checked @endif>
+                                                    @if (@$datas->gender == 'Female') checked @endif>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> വിലാസം <br><span class="small"> Address</span> </label>
                                             {{-- <label class="form-label"> വീട്ടുപേര് <br><span class="small"> House Name </span></label> --}}
-                                            <textarea class="form-control" placeholder="House Name" name="address"></textarea>
+                                            <textarea type="text" value="{{ @$datas->address }}" class="form-control" placeholder="House Name" name="address">{{ @$datas->address }}</textarea>
                                             <span id="nameError" class="text-danger"></span>
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -96,7 +96,7 @@
                                                         <option value="">Select</option>
                                                         @foreach ($districts as $district)
                                                             <option value="{{ $district->id }}"
-                                                                {{ old('district') == $district->id ? 'selected' : '' }}>
+                                                                {{ @$datas->district == $district->id ? 'selected' : '' }}>
                                                                 {{ $district->name }}
                                                             </option>
                                                         @endforeach
@@ -120,7 +120,7 @@
                                                 <div class="col-md-4 mb-4">
                                                     <label class="form-label"> പിൻകോഡ് <br><span class="small">Pincode</span> </label>
                                                     <input placeholder="Pincode" type="text" pattern="[0-9]{6}" maxlength="6"
-                                                    value="{{ old('pincode') }}" class="form-control"
+                                                    value="{{ @$datas->pincode }}" class="form-control"
                                                     name="pincode" title="Please enter a 6-digit numeric pin code"
                                                     inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
                                          
@@ -136,7 +136,7 @@
                                             <label class="form-label"> 
                                                 രക്ഷാധികാരിയുടെ പേര് <br><span class="small"> Guardian  Name</span> </label>
                                             <input class="form-control" placeholder="Guardian Name"
-                                                value="{{ old('parent_name') }}" name="parent_name" />
+                                                value="{{ @$datas->parent_name }}" name="parent_name" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('parent_name')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -149,26 +149,26 @@
                                             <label class="form-label"> രക്ഷിതാവിനു കുട്ടിയുമായുള്ള ബന്ധം <br><span class="small"> Relation</span> </label>
                                             <select class="form-select" name="relation">
                                                 <option value="" disabled>Select a relationship</option>
-                                                <option value="father" @if (old('relation') == 'father') selected @endif>
+                                                <option value="father" @if (@$datas->relation == 'father') selected @endif>
                                                     Father / അച്ഛൻ</option>
-                                                <option value="mother" @if (old('relation') == 'mother') selected @endif>
+                                                <option value="mother" @if (@$datas->relation == 'mother') selected @endif>
                                                     Mother / അമ്മ</option>
                                                 <option value="grandfather"
-                                                    @if (old('relation') == 'grandfather') selected @endif>Grandfather /
+                                                    @if (@$datas->relation == 'grandfather') selected @endif>Grandfather /
                                                     മുത്തച്ഛൻ</option>
                                                 <option value="grandmother"
-                                                    @if (old('relation') == 'grandmother') selected @endif>Grandmother /
+                                                    @if (@$datas->relation == 'grandmother') selected @endif>Grandmother /
                                                     മുത്തശ്ശി</option>
-                                                <option value="uncle" @if (old('relation') == 'uncle') selected @endif>
+                                                <option value="uncle" @if (@$datas->relation == 'uncle') selected @endif>
                                                     Uncle / മാമൻ </option>
-                                                <option value="aunt" @if (old('relation') == 'aunt') selected @endif>
+                                                <option value="aunt" @if (@$datas->relation == 'aunt') selected @endif>
                                                     Aunt / മാമി </option>
-                                                <option value="cousin" @if (old('relation') == 'cousin') selected @endif>
+                                                <option value="cousin" @if (@$datas->relation == 'cousin') selected @endif>
                                                     Cousin / സഹോദര / സഹോദരി</option>
                                                 <option value="siblings"
-                                                    @if (old('relation') == 'siblings') selected @endif>Siblings / സഹോദര /
+                                                    @if (@$datas->relation == 'siblings') selected @endif>Siblings / സഹോദര /
                                                     സഹോദരി</option>
-                                                <option value="others" @if (old('relation') == 'others') selected @endif>
+                                                <option value="others" @if (@$datas->relation == 'others') selected @endif>
                                                     Others / മറ്റുള്ളവ </option>
                                             </select>
 
@@ -179,7 +179,7 @@
 
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> അച്ഛൻ്റെ  പേര് <br><span class="small"> Father's Name </span></label>
-                                            <input type="text" value="{{ old('father_name') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->father_name }}" class="form-control"
                                                 placeholder="Father's Name" name="father_name" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('father_name')
@@ -191,7 +191,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> മാതാവിന്റെ പേര് <br><span class="small"> Mother's Name </span></label>
-                                            <input type="text" value="{{ old('mother_name') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->mother_name }}" class="form-control"
                                                 placeholder="Mothers's Name" name="mother_name" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('mother_name')
@@ -200,7 +200,7 @@
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> കുടുംബ വാർഷിക വരുമാനം <br><span class="small"> Annual Income </span></label>
-                                            <input type="number" value="{{ old('annual_income') }}"
+                                            <input type="number" value="{{ @$datas->annual_income }}"
                                                 class="form-control" placeholder="Annual Income" name="annual_income" />
                                             @error('annual_income')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -214,7 +214,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> രക്ഷിതാവിന്റെ തൊഴിൽ <br><span class="small"> Occupation of Parent</span></label>
-                                            <input type="text" value="{{ old('occupation_parent') }}"
+                                            <input type="text" value="{{ @$datas->occupation_parent }}"
                                                 class="form-control" placeholder="Occupation of Parent"
                                                 name="occupation_parent" />
                                             <span id="nameError" class="text-danger"></span>
@@ -225,7 +225,7 @@
                                         <div class="col-md-6 mb-6 d-flex align-items-end">
                                             <div class="col-6">
                                                 <label class="form-label">വിദ്യാർത്ഥിയുടെ ജനനതിയതി <br><span class="small"> Date of Birth</span></label>
-                                                <input type="date" value="{{ old('dob') }}" class="form-control"
+                                                <input type="date" value="{{ @$datas->dob }}" class="form-control"
                                                     placeholder="Date of Birth" name="dob"
                                                     max="{{ date('Y-m-d') }}" />
                                                 @error('dob')
@@ -235,7 +235,7 @@
 
                                             <div class="col-6">
                                                 <label class="form-label"> വിദ്യാർത്ഥിയുടെ വയസ്സു <br><span class="small">Age</span> </label>
-                                                <input type="text" value="{{ old('age') }}" pattern="[0-9]{1,3}"
+                                                <input type="text" value="{{ @$datas->age }}" pattern="[0-9]{1,3}"
                                                     maxlength="3" class="form-control" placeholder="Age"
                                                     name="age" />
                                                 @error('age')
@@ -252,7 +252,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">ST Category / ST  വിഭാഗം  </label>
-                                            <input type="text" value="{{ old('caste') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->caste }}" class="form-control"
                                                 placeholder="ST Category" name="caste" />
                                             <span id="nameError" class="text-danger"></span>
                                             @error('caste')
@@ -262,7 +262,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">  പട്ടികജാതി/
                                                 പട്ടികവർഗ/ മറ്റിതര സമുദായം ഇവയിൽ ഏത് <br><span class="small"> Caste / Category / Other Community </span></label>
-                                            <input type="text" value="{{ old('other') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->other }}" class="form-control"
                                                 placeholder="Caste / Category / Other Community" name="other" />
                                             @error('other')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -326,22 +326,22 @@
                                             <select class="form-select" name="mother_tonge">
                                                 <option value="" disabled selected>Select a mother tongue</option>
                                                 <option value="malayalam"
-                                                    @if (old('mother_tonge') == 'malayalam') selected @endif>Malayalam / മലയാളം
+                                                    @if (@$datas->mother_tonge == 'malayalam') selected @endif>Malayalam / മലയാളം
                                                 </option>
-                                                <option value="tamil" @if (old('mother_tonge') == 'tamil') selected @endif>
+                                                <option value="tamil" @if (@$datas->mother_tonge == 'tamil') selected @endif>
                                                     Tamil / தமிழ்</option>
                                                 <option value="kannada"
-                                                    @if (old('mother_tonge') == 'kannada') selected @endif>Kannada / ಕನ್ನಡ
+                                                    @if (@$datas->mother_tonge == 'kannada') selected @endif>Kannada / ಕನ್ನಡ
                                                 </option>
                                                 <option value="konkani"
-                                                    @if (old('mother_tonge') == 'konkani') selected @endif>Konkani / कोंकणी
+                                                    @if (@$datas->mother_tonge == 'konkani') selected @endif>Konkani / कोंकणी
                                                 </option>
-                                                <option value="tulu" @if (old('mother_tonge') == 'tulu') selected @endif>
+                                                <option value="tulu" @if (@$datas->mother_tonge == 'tulu') selected @endif>
                                                     Tulu / ತುಳು</option>
                                                 <option value="marathi"
-                                                    @if (old('mother_tonge') == 'marathi') selected @endif>Marathi / मराठी
+                                                    @if (@$datas->mother_tonge == 'marathi') selected @endif>Marathi / मराठी
                                                 </option>
-                                                <option value="urdu" @if (old('mother_tonge') == 'urdu') selected @endif>
+                                                <option value="urdu" @if (@$datas->mother_tonge == 'urdu') selected @endif>
                                                     Urdu / اردو</option>
                                             </select>
 
@@ -353,7 +353,7 @@
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label"> സ്ഥലം <br><span class="small">Place </span></label>
-                                            <input type="text" value="{{ old('place') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->place }}" class="form-control"
                                                 placeholder="Place" name="place" />
 
                                             @error('place')
@@ -402,7 +402,7 @@
                                             <select id="submitted_district" name="submitted_district" class="form-control" required>
                                                 <option value="">Select</option>
                                                 @foreach ($districts as $district)
-                                                <option value="{{ $district->id }}" {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
+                                                <option value="{{ $district->id }}" {{ @$datas->submitted_district == $district->id ? 'selected' : '' }}>
                                                     {{ $district->name }}
                                                 </option>
                                                 @endforeach
@@ -511,7 +511,7 @@
                         $opt.val(value._id).text(value.taluk_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('taluk') }}' == value._id) {
+                        if ('{{ @$datas->taluk }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 
@@ -625,7 +625,7 @@
                         $opt.val(value._id).text(value.teo_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('submitted_teo') }}' == value._id) {
+                        if ('{{ @$datas->submitted_teo }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 

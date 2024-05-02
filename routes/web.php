@@ -483,7 +483,7 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::get('/getmotherChildSchemeListAssistantReturned','getmotherChildSchemeListAssistantReturned')->name('getmotherChildSchemeListAssistantReturned');
     Route::get('/motherChildSchemeDetailsAssistant/{id}','motherChildSchemeDetailsAssistant')->name('motherChildSchemeDetailsAssistant');
     Route::post('/motherChildSchemeApproveAssistant','motherChildSchemeApproveAssistant')->name('motherChildScheme.assistant.approve');
-    Route::post('/motherChildSchemeRejectAssistant','motherChildSchemeReturnAssistant')->name('motherChildScheme.assistant.return');
+    Route::post('/motherChildSchemeReturnAssistant','motherChildSchemeReturnAssistant')->name('motherChildScheme.assistant.return');
    
     Route::get('/getmotherChildSchemeListAssistantReturned','getmotherChildSchemeListAssistantReturned')->name('getmotherChildSchemeListAssistantReturned');
 

@@ -69,7 +69,7 @@
                                             <label class="form-label">താലൂക്ക് <br> <span class="small">Taluk</span> </label>
                                             <select id="taluk" name="taluk" class="form-control">
                                                 <option value="">Choose Taluk</option>
-                                            </select>#########################################
+                                            </select>
                                             @error('taluk')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -174,7 +174,7 @@
                                             <input type="file" class="form-control" name="applicant_photo" id="applicant_photo"
                                                 value="" placeholder="" onchange="validatePhoto()" accept=".jpg, .jpeg, .png" required />
                                                 <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
-                                            @error('signature')###########################
+                                            @error('signature')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                             <div id="errorPhoto" style="color:red;"></div>
@@ -430,7 +430,7 @@
                         $opt.val(value._id).text(value.taluk_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('taluk') }}' == value._id) {
+                        if ('{{ @$datas->taluk }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 

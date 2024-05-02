@@ -375,6 +375,7 @@ class ApoTdoController extends Controller
             'assistant_status_date' => $currenttime,
             'assistant_status_id' => Auth::user()->id,
             'assistant_status_reason' => $reason,
+
         ]);
         return response()->json([
             'success' => 'Exam Application Rejected successfully.'

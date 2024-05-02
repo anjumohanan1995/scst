@@ -664,14 +664,14 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                <div class="modal-content country-select-modal border-0">
                   <div class="modal-header offcanvas-header">
-                     <h6 class="modal-title">Are you sure to reject this Application?</h6>
+                     <h6 class="modal-title">Are you sure to return this Application?</h6>
                      <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                   </div>
                   <div class="modal-body p-5">
                      <form id="ownForm">
                         @csrf
                         <div class="text-center">
-                           <h5>Reason for Rejection</h5>
+                           <h5>Reason for Return</h5>
                            <textarea class="form-control" name="reason" id="reason" requred></textarea>
                            <span id="rejection"></span>
                         </div>
@@ -731,6 +731,10 @@
            $(document).on("click", ".rejectItem", function() {
                $('#requestId2').val($(this).attr('data-id') );
            $('#rejection-popup').modal('show');
+           });
+           $(document).on("click", ".remove", function() {
+               $('#requestId3').val($(this).attr('data-id') );
+           $('#remove-popup').modal('show');
            });
            function approve() {
             var reason = $('#approve_reason').val();
@@ -819,7 +823,7 @@
                     success: function(response) {
                         console.log(response.success);
                         toastr.success(response.success, 'Success!')
-                        $('#rejection-popup').modal('hide');
+                        $('#remove-popup').modal('hide');
                         $('#success_message').fadeIn().html(response.success);
                         setTimeout(function() {
                             $('#success_message').fadeOut("slow");

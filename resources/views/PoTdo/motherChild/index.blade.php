@@ -211,6 +211,13 @@
         $('#rejection-popup').modal('show');
        });
 
+       $(document).on("click",".remove",function() {
+   
+   var id =$(this).attr('data-id');
+   $('#requestId3').val($(this).attr('data-id') );
+   $('#remove-popup').modal('show');
+  });
+
        function approve() {
             var reason = $('#approve_reason').val();
             var reqId = $('#requestId').val();
@@ -294,7 +301,7 @@
                     success: function(response) {
                         console.log(response.success);
                         toastr.success(response.success, 'Success!')
-                        $('#rejection-popup').modal('hide');
+                        $('#remove-popup').modal('hide');
                         $('#success_message').fadeIn().html(response.success);
                         setTimeout(function() {
                             $('#success_message').fadeOut("slow");

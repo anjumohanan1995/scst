@@ -212,6 +212,14 @@ class JsSeoController extends Controller
        
         $marriage->update([
             'JsSeo_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
+            'return_reason' => $reason,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,
@@ -571,6 +579,7 @@ class JsSeoController extends Controller
             'officer_return' => 1,
             'return_date' => $currenttime,
             'return_userid' => Auth::user()->id,
+            'return_reason' => $reason,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,
@@ -921,19 +930,19 @@ class JsSeoController extends Controller
       
        
         $marriage->update([
+
             'JsSeo_status' => 2,
-           'teo_return' => 1,
-           'clerk_return' => 1,
-           'JsSeo_return' => 1,
-           'assistant_return' => 1,
-           'officer_return' => 1,
-           'return_date' => $currenttime,
-           'return_userid' => Auth::user()->id,
-           'return_reason' => $reason,
-            // 'JsSeo_status_date' => $currenttime,
-            // 'JsSeo_status_id' => Auth::user()->id,
-            // 'JsSeo_status_reason' => $reason,
-            
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
+            'return_reason' => $reason,
+            'JsSeo_status_date' => $currenttime,
+            'JsSeo_status_id' => Auth::user()->id,
+            'JsSeo_status_reason' => $reason,
         ]);
         return response()->json([
             'success' => 'Couple Financial Application Rejected successfully.'
@@ -1264,11 +1273,14 @@ class JsSeoController extends Controller
       
         $motherChild->update([
             'JsSeo_status' => 2,
-           'teo_return' => 1,
-           'clerk_return' => 1,
-           'JsSeo_return' => 1,
-           'assistant_return' => 1,
-           'officer_return' => 1,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
+            'return_reason' => $reason,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,

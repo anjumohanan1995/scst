@@ -1139,7 +1139,7 @@ class ApplicationController extends Controller
                 } else if ($record->teo_status == 2) {
                     $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
                 } else if ($record->teo_status == null) {
-                    $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
             } else {
                 $edit = '<div class="settings-main-icon"><a  href="' . url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
@@ -1430,7 +1430,7 @@ class ApplicationController extends Controller
         ]);
 
 
-        return redirect()->route('userExamList')->with('status', 'Application Submitted Successfully.');
+        return redirect()->route('examApplicationList')->with('status', 'Application Submitted Successfully.');
     }
 
 
@@ -1794,7 +1794,7 @@ class ApplicationController extends Controller
             }
             $edit='';
 
-            $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('motherChild-Scheme-edit/' . $id) . '">Resubmit</a></div>';
+            $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('motherChild-Scheme-edit/' . $id) . '">Resubmit</a></div>';
 
             $data_arr[] = array(
                 "sl_no" =>$i,
@@ -1908,8 +1908,8 @@ class ApplicationController extends Controller
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
             'date' => date('d-m-Y'),
-            'signature' => @$data['signature'],
-            'applicant_photo' => @$data['applicant_photo'],
+            'signature' => @$signature,
+            'applicant_photo' => @$applicant_photos,
             'teo_return' => null,
             'return_status' =>1,
             "teo_view_status"=>1,
