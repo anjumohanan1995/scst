@@ -564,6 +564,7 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/examApplicationDetailsOfficer/{id}','examApplicationDetailsOfficer')->name('examApplicationDetailsOfficer');
     Route::post('/examApplicationApproveOfficer','examApplicationApproveOfficer')->name('examApplication.officer.approve');
     Route::post('/examApplicationRejectOfficer','examApplicationRejectOfficer')->name('examApplication.officer.reject');
+    Route::post('/examApplicationRemoveOfficer','examApplicationRemoveOfficer')->name('examApplication.officer.remove');
    
     Route::get('/couplefinancialListOfficer','couplefinancialListOfficer')->name('couplefinancialListOfficer');
     Route::get('/getcouplefinancialListOfficer','getcouplefinancialListOfficer')->name('getcouplefinancialListOfficer');
@@ -579,6 +580,7 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/motherChildSchemeDetailsOfficer/{id}','motherChildSchemeDetailsOfficer')->name('motherChildSchemeDetailsOfficer');
     Route::post('/motherChildSchemeApproveOfficer','motherChildSchemeApproveOfficer')->name('motherChildScheme.officer.approve');
     Route::post('/motherChildSchemeRejectOfficer','motherChildSchemeRejectOfficer')->name('motherChildScheme.officer.reject');
+    Route::post('/motherChildSchemeRemoveOfficer','motherChildSchemeRemoveOfficer')->name('motherChildScheme.officer.remove');
    
     Route::get('/getmotherChildSchemeListOfficerReturned','getmotherChildSchemeListOfficerReturned')->name('getmotherChildSchemeListOfficerReturned');
 

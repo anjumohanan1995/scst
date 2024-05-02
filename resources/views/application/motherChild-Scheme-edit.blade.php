@@ -37,7 +37,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">പേര് <br><span class="small"> Name</span> </label>
-                                            <input type="text" value="{{ old('name') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->name }}" class="form-control"
                                                 placeholder="പേര്" name="name" required />
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -45,7 +45,7 @@
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">മേൽവിലാസം <br><span class="small"> Address</span> </label>
-                                            <textarea type="text" value="{{ old('address') }}" class="form-control" name="address">{{ old('address') }}</textarea>
+                                            <textarea type="text" value="{{ @$datas->address }}" class="form-control" name="address">{{ @$datas->address }}</textarea>
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -57,7 +57,7 @@
                                             <select id="district" name="district" class="form-control">
                                                 <option value="">Select</option>
                                                 @foreach ($districts as $district)
-                                                    <option value="{{ $district->id }}" @if($district->id == old('district')) selected @endif>{{ $district->name }}</option>
+                                                    <option value="{{ $district->id }}" @if($district->id == @$datas->district) selected @endif>{{ $district->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('district')
@@ -69,7 +69,7 @@
                                             <label class="form-label">താലൂക്ക് <br> <span class="small">Taluk</span> </label>
                                             <select id="taluk" name="taluk" class="form-control">
                                                 <option value="">Choose Taluk</option>
-                                            </select>
+                                            </select>#########################################
                                             @error('taluk')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="col-md-4 mb-4">
                                             <label class="form-label">പിൻകോഡ് <br><span class="small">Pincode</span></label>
-                                            <input type="text" value="{{ old('pincode') }}" class="form-control"
+                                            <input type="text" value="{{ @$datas->pincode }}" class="form-control"
                                                 name="pincode" id="pincode" />
                                             @error('pincode')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -87,7 +87,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">വയസ് <br><span class="small"> Age</span> </label>
-                                            <input type="number" value="{{ old('age') }}" class="form-control"
+                                            <input type="number" value="{{ @$datas->age }}" class="form-control"
                                                 name="age" />
                                             @error('age')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -96,7 +96,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">ജനനതീയതി <br><span class="small">Date Of Birth</span> </label>
                                             <input type="date" class="form-control" name="dob" id="dob"
-                                                value="{{ old('dob') }}"  max="{{ now()->format('Y-m-d') }}" />
+                                                value="{{ @$datas->dob }}"  max="{{ now()->format('Y-m-d') }}" />
                                             @error('dob')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -106,7 +106,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">ഭർത്താവിന്റെ പേര് <br> <span class="small">Husband's Name </span> </label>
                                             <input type="text" class="form-control" name="hus_name" id="hus_name"
-                                                value="{{ old('hus_name') }}" placeholder="ഭർത്താവിന്റെ പേര് "  />
+                                                value="{{ @$datas->hus_name }}" placeholder="ഭർത്താവിന്റെ പേര് "  />
                                             @error('hus_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -115,7 +115,7 @@
                                             <label class="form-label">സമുദായം / ജാതി
                                                 <br> <span class="small"> (Community / Caste)</span> </label>
                                             <input type="text" class="form-control" name="caste" id="caste"
-                                                value="{{ old('caste') }}" placeholder="സമുദായം / ജാതി " />
+                                                value="{{ @$datas->caste }}" placeholder="സമുദായം / ജാതി " />
                                             @error('Caste')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -125,7 +125,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">വില്ലേജ്<br> <span class="small"> Village</span> </label>
                                             <input type="text" class="form-control" name="village" id="village"
-                                                value="{{ old('village') }}" placeholder="വില്ലേജ്" />
+                                                value="{{ @$datas->village }}" placeholder="വില്ലേജ്" />
                                             @error('village')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -133,7 +133,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">എത്രാമത്തെ പ്രസവം <br> <span class="small"> How many births?</span> </label>
                                             <input type="number" class="form-control" name="births" id="births"
-                                                value="{{ old('births') }}" placeholder="എത്രാമത്തെ പ്രസവം" />
+                                                value="{{ @$datas->births }}" placeholder="എത്രാമത്തെ പ്രസവം" />
                                             @error('births')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -143,7 +143,7 @@
                                         <div class="col-md-6 mb-6">
                                             <label class="form-label">പ്രസവം നടക്കുമെന്ന് പ്രതീക്ഷിക്കുന്ന തിയതി <br><span class="small"> Expected date of delivery </span></label>
                                             <input type="date" class="form-control" name="expected_date_of_delivery"
-                                                id="expected_date_of_delivery" value="{{ old('expected_date_of_delivery') }}"
+                                                id="expected_date_of_delivery" value="{{ @$datas->expected_date_of_delivery }}"
                                                 placeholder="" />
                                             @error('expected_date_of_delivery')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -153,7 +153,7 @@
                                             <label class="form-label">ഗർഭ /പ്രസവ ശുശ്രുഷക്ക് ആശ്രയിക്കുന്ന ആശുപത്രി
                                                 /കുടുംബക്ഷേമ കേന്ദ്രം<br><span class="small"> Dependent hospital/family welfare center for pregnancy/antenatal care </span></label>
                                             <input type="text" class="form-control" name="dependent_hospital"
-                                                id="dependent_hospital" value="{{ old('dependent_hospital') }}"
+                                                id="dependent_hospital" value="{{ @$datas->dependent_hospital }}"
                                                 placeholder="" />
                                             @error('dependent_hospital')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -164,7 +164,7 @@
                                         <div class="col-md-4 mb-4">
                                             <label class="form-label">സ്ഥലം <br><span class="small"> Place </span> </label>
                                             <input type="text" class="form-control" name="place" id="place"
-                                                value="{{ old('place') }}" placeholder="" />
+                                                value="{{ @$datas->place }}" placeholder="" />
                                             @error('place')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -174,7 +174,7 @@
                                             <input type="file" class="form-control" name="applicant_photo" id="applicant_photo"
                                                 value="" placeholder="" onchange="validatePhoto()" accept=".jpg, .jpeg, .png" required />
                                                 <p style="font-size: 11px;">Max. filesize: 2 MB • Format: JPG, PNG </p>
-                                            @error('signature')
+                                            @error('signature')###########################
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                             <div id="errorPhoto" style="color:red;"></div>
@@ -207,9 +207,9 @@
                                         <select id="submitted_district" name="submitted_district" class="form-control" required>
                                             <option value="">Select</option>
                                                 @foreach($districts as $district)
-                                                   <option value="{{ $district->id }}" {{ (old('submitted_district') == $district->id) ? 'selected' : '' }}>
-    {{ $district->name }}
-</option>
+                                                   <option value="{{ $district->id }}" {{ @$datas->submitted_district == $district->id ? 'selected' : '' }}>
+                                                    {{ $district->name }}
+                                                </option>
                                                    
                                                     {{-- <option value="{{$district->id}}"  @if(old('submitted_district') == $district->id) selected @endif>{{$district->name}}</option> --}}
                                                 @endforeach
@@ -217,7 +217,7 @@
                                         @error('submitted_district')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
-                                        <input type="hidden" name="dist_name" id="dist_name" value="{{ old('dist_name') }}">
+                                        <input type="hidden" name="dist_name" id="dist_name" value="{{ @$datas->dist_name }}">
                                     </div>
                                     <div class="col-md-6 mb-6">
                                         <label class="form-label"> ടി.ഇ.ഒ <br> <span class="small">TEO </span> </label>
@@ -232,6 +232,7 @@
                                 </div><br>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-md-3 mb-3">
                             </div>
@@ -254,6 +255,8 @@
 </div>
 
 <script type="text/javascript">
+
+
 
         function validateSignature() {
             var input = document.getElementById('signature');
@@ -457,7 +460,7 @@
                         $opt.val(value._id).text(value.teo_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('submitted_teo') }}' == value._id) {
+                        if ('{{ @$datas->submitted_teo }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 
@@ -466,6 +469,8 @@
                 }
             });
         }
+
+
     </script>
     <!-- main-content-body -->
 @endsection

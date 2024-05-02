@@ -134,6 +134,10 @@ class PoTdoController extends Controller
                 $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
           
             }
+            else if($status ==3){
+                $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
             else if($status ==null){
                 $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
             }
@@ -270,7 +274,7 @@ class PoTdoController extends Controller
               $created_at =  $record->created_at;
               $edit='';
 
-              $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+              $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
             //   if($status == 1){
             //     $edit='<div class="settings-main-icon"><a  href="' . route('examApplicationDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
             // }
@@ -381,6 +385,33 @@ class PoTdoController extends Controller
         ]);
     }
 
+    public function examApplicationRemoveOfficer (Request $request){
+        //  dd($request);
+          $marriage = ExamApplication::where('_id', $request->id)->first();
+          $id = $request->id;
+          $reason =$request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        
+         
+          $marriage->update([
+              'rejection_status' => 1,
+              'officer_status' => 3,
+              'teo_return' => null,////////////////
+              'clerk_return' => null,
+              'jsSeo_return' => null,
+              'assistant_return' => null,
+              'officer_return' => null,
+              'officer_status_date' => $currenttime,
+              'officer_status_id' => Auth::user()->id,
+              'officer_status_reason' => $reason,
+          ]);
+          return response()->json([
+              'success' => 'Exam Application Rejected successfully.'
+          ]);
+      }
+
 
     public function getcouplefinancialListOfficerReturn(Request $request){
         $role =  Auth::user()->role;       
@@ -414,8 +445,7 @@ class PoTdoController extends Controller
              // Total records
              $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
-             ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('submitted_district', $district);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -427,8 +457,8 @@ class PoTdoController extends Controller
 
              $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
-                 ->where('submitted_district', $district)
-                 ->where('assistant_status',1);
+                 ->where('submitted_district', $district);
+
 
            
              if($name != ""){
@@ -441,17 +471,23 @@ class PoTdoController extends Controller
 
              // Fetch records
              
+
             
              $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('assistant_status',1)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-            $items->where('assistant_return', null)->where('officer_return', 1);
+            // $items->where('assistant_return', null)->where('officer_return', 1  || 'rejection_status', 1);
+            
+
+            $items->where('assistant_return', null)
+            ->where(function($query) {
+                $query->where('officer_return', 1);
+            });
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -550,6 +586,7 @@ class PoTdoController extends Controller
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('assistant_status',1);
+
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -585,7 +622,10 @@ class PoTdoController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
+            // $items->where('officer_return', null || 'rejection_status',null);
+
             $items->where('officer_return', null);
+
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -624,7 +664,7 @@ class PoTdoController extends Controller
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('couplefinancialDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
             }
 
           
@@ -747,8 +787,9 @@ class PoTdoController extends Controller
       
        
         $marriage->update([
+            'rejection_status' => 1,
             'officer_status' => 3,
-            'teo_return' => null,
+            'teo_return' => null,////////////////
             'clerk_return' => null,
             'jsSeo_return' => null,
             'assistant_return' => null,
@@ -872,6 +913,10 @@ class PoTdoController extends Controller
                 $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
             }
             else if($status ==2){
+                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
+            else if($status ==3){
                 $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
           
             }
@@ -1011,7 +1056,7 @@ class PoTdoController extends Controller
               $created_at =  $record->created_at;
               $edit='';
 
-              $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+              $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
 
 
             //   if($status == 1){
@@ -1121,6 +1166,34 @@ class PoTdoController extends Controller
             'success' => 'Mother Child Scheme Application Return successfully.'
         ]);
     }
+
+    public function motherChildSchemeRemoveOfficer (Request $request){
+        //  dd($request);
+        $motherChild = MotherChildScheme::where('_id', $request->id)->first();
+          $id = $request->id;
+          $reason =$request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        
+         
+        $motherChild->update([
+              'rejection_status' => 1,
+              'officer_status' => 3,
+              'teo_return' => null,////////////////
+              'clerk_return' => null,
+              'jsSeo_return' => null,
+              'assistant_return' => null,
+              'officer_return' => null,
+              'officer_status_date' => $currenttime,
+              'officer_status_id' => Auth::user()->id,
+              'officer_status_reason' => $reason,
+          ]);
+          return response()->json([
+              'success' => 'Mother Child Scheme Application Rejected successfully.'
+          ]);
+      }
+  
 
 
     public function marriageGrantListOfficer(){

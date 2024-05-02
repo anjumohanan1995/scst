@@ -242,6 +242,8 @@ class ApplicationController extends Controller
         return response()->json(['message' => $message]);
     }
 
+    // COUPLEFINANCE START
+
     public function applicationForm2()
     {
         $districts = District::get();
@@ -700,7 +702,7 @@ class ApplicationController extends Controller
               
                 }
                 else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
                
               }
@@ -901,9 +903,13 @@ class ApplicationController extends Controller
             ]);
         }
 
-        $formData = FinancialHelp::where('_id', $id)->first();
-        return view('admin.financial_view', compact('formData','financialHelp'));
+       // $financialHelp = FinancialHelp::where('_id', $id)->first();
+        return view('admin.financial_view', compact('financialHelp'));
     }
+
+    // COUPLEFINANCE END
+
+    // EXAMAPPLICATION START
 
 
     public function examApplication(Request $request)
@@ -1494,7 +1500,10 @@ class ApplicationController extends Controller
         ]);
     }
 
+    // EXAMAPPLICATION END
 
+
+// MOTHERCHILD START
 
     public function motherChildProtectionSchemeStore(Request $request)
     {
@@ -2088,7 +2097,7 @@ class ApplicationController extends Controller
               
                 }
                 else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' .   url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' .   url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
                
               }
@@ -2102,7 +2111,7 @@ class ApplicationController extends Controller
               
                 }
                 else {
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
                
               }
@@ -2167,6 +2176,11 @@ class ApplicationController extends Controller
         }
         return view('application.application_view', compact('formData'));
     }
+
+    // MOTHER CHILD END
+
+    // MARRIAGEGRANT FORM START
+
     public function marriageGrantForm()
     {
         $districts = District::get();
@@ -2473,3 +2487,5 @@ class ApplicationController extends Controller
         return view('application.marriage_grant_view', compact('formData'));
     }
 }
+
+// MarriageGrantForm END
