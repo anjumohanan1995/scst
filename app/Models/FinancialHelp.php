@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class studentFund extends Eloquent
+class FinancialHelp extends Eloquent
 {
     use SoftDeletes;
 

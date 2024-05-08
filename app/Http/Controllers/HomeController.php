@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ItiFund;
 use App\Models\AnemiaFinance;
 use App\Models\ExamApplication;
-use App\Models\studentFund;
+use App\Models\FinancialHelp;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
 
@@ -54,7 +54,7 @@ class HomeController extends Controller
         if (auth()->user()->role == 'User') {
 
             $user_id = Auth::user()->id;
-            $data['coupleFinanceCount'] = studentFund::where('user_id', $user_id)->count();
+            $data['coupleFinanceCount'] = FinancialHelp::where('user_id', $user_id)->count();
             $data['examCount'] = ExamApplication::where('user_id', $user_id)->count();
             $data['motherChildCount'] = MotherChildScheme::where('user_id', $user_id)->count();
             $data['marriageGrantCount'] = MarriageGrant::where('user_id', $user_id)->count();
