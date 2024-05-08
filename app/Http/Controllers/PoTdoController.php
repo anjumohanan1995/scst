@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnemiaFinance;
+use App\Models\FinancialHelp;
 use App\Models\MedEngStudentFund;
 use App\Models\SingleIncomeEarner;
 use App\Models\StudentAward;
@@ -451,7 +452,7 @@ class PoTdoController extends Controller
          
 
              // Total records
-             $totalRecord = studentFund::where('deleted_at',null)
+             $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district);
             
@@ -463,7 +464,7 @@ class PoTdoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = studentFund::where('deleted_at',null)
+             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district);
 
@@ -481,7 +482,7 @@ class PoTdoController extends Controller
              
 
             
-             $items = studentFund::where('deleted_at', null)
+             $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->orderBy($columnName, $columnSortOrder);
@@ -590,7 +591,7 @@ class PoTdoController extends Controller
          
 
              // Total records
-             $totalRecord = studentFund::where('deleted_at',null)
+             $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('assistant_status',1);
@@ -604,7 +605,7 @@ class PoTdoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = studentFund::where('deleted_at',null)
+             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('assistant_status',1);
@@ -621,7 +622,7 @@ class PoTdoController extends Controller
              // Fetch records
              
             
-             $items = studentFund::where('deleted_at', null)
+             $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('assistant_status',1)
@@ -717,7 +718,7 @@ class PoTdoController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $formData =studentFund::find($id);
+        $formData =FinancialHelp::find($id);
         if($formData->officer_view_status==null ){
             $formData->update([
             "officer_view_status"=>1,
@@ -739,7 +740,7 @@ class PoTdoController extends Controller
 
     }
     public function couplefinancialApproveOfficer (Request $request){
-        $marriage = studentFund::where('_id', $request->id)->first();
+        $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -759,7 +760,7 @@ class PoTdoController extends Controller
         ]);
     }
     public function couplefinancialRejectOfficer (Request $request){
-        $marriage = studentFund::where('_id', $request->id)->first();
+        $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -786,7 +787,7 @@ class PoTdoController extends Controller
     }
     public function couplefinancialRemoveOfficer (Request $request){
       //  dd($request);
-        $marriage = studentFund::where('_id', $request->id)->first();
+        $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
