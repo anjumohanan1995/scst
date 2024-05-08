@@ -636,7 +636,7 @@
                      <form id="ownForm">
                         @csrf
                         <div class="text-center">
-                           <h5>Reason for Rejection</h5>
+                           <h5>Reason for Approve</h5>
                            <textarea class="form-control" name="approve_reason" id="approve_reason" requred></textarea>
                            <span id="rejection"></span>
                         </div>
@@ -654,14 +654,14 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                <div class="modal-content country-select-modal border-0">
                   <div class="modal-header offcanvas-header">
-                     <h6 class="modal-title">Are you sure to reject this Application?</h6>
+                     <h6 class="modal-title">Are you sure to return this Application?</h6>
                      <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                   </div>
                   <div class="modal-body p-5">
                      <form id="ownForm">
                         @csrf
                         <div class="text-center">
-                           <h5>Reason for Rejection</h5>
+                           <h5>Reason for Return</h5>
                            <textarea class="form-control" name="reason" id="reason" requred></textarea>
                            <span id="rejection"></span>
                         </div>
@@ -727,7 +727,7 @@
            var reason = $('#reason').val();
          
            if($('#reason').val() == ""){
-               rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+               rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for return</span>";
            }
            else{
                rejection.innerHTML ="";
@@ -735,7 +735,7 @@
            console.log(reqId);
            $.ajax({
              
-               url: "{{ route('motherChildScheme.assistant.reject') }}",
+               url: "{{ route('motherChildScheme.assistant.return') }}",
                type: "POST",
                    data: {
                        "id": reqId,

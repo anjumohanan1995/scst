@@ -90,7 +90,8 @@ class ExamApplication extends Eloquent
         'return_date',
         'return_userid',
         'return_reason',
-        'return_status'
+        'return_status',
+        'rejection_status'
     ];
 
     public function User()
