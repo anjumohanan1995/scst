@@ -404,7 +404,9 @@ class ApplicationController extends Controller
             'return_status' =>1,
             "teo_view_status"=>1,
             "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime
+            "teo_view_date" =>$date .' ' .$currenttime,
+            "teo_status_date"=>$date .' ' .$currenttime,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
         ]);
 
         return redirect()->route('couplefinancialList')->with('status', 'Application Submitted Successfully.');
@@ -892,14 +894,6 @@ class ApplicationController extends Controller
             "teo_view_status"=>1,
             "teo_view_id" =>Auth::user()->id,
             "teo_view_date" =>$date .' ' .$currenttime,
-            ]);
-        }
-
-        if($financialHelp->teo_return_view_status==null && Auth::user()->role=='TEO'){
-            $financialHelp->update([
-            "teo_return_view_status" => 1,
-            "teo_view_id" =>Auth::user()->id,
-            "teo_return_view_date" =>$date .' ' .$currenttime 
             ]);
         }
 
@@ -1426,7 +1420,9 @@ class ApplicationController extends Controller
             'return_status' =>1,
             "teo_view_status"=>1,
             // 'user_id' => Auth::user()->id,
-            'status' => 0
+            'status' => 0,
+            "teo_status_date"=>$date .' ' .$currenttime ,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
         ]);
 
 
@@ -1451,6 +1447,7 @@ class ApplicationController extends Controller
             "teo_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
         return view('admin.exam_application_view', compact('formData'));
     }
 
@@ -1914,7 +1911,9 @@ class ApplicationController extends Controller
             'return_status' =>1,
             "teo_view_status"=>1,
             // 'user_id' => Auth::user()->id,
-            'status' => 0
+            'status' => 0,
+            "teo_status_date"=>$date .' ' .$currenttime ,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
         ]);
 
 
@@ -2174,6 +2173,7 @@ class ApplicationController extends Controller
             "pjct_offcr_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
         return view('application.application_view', compact('formData'));
     }
 
@@ -2612,7 +2612,9 @@ class ApplicationController extends Controller
           'return_status' =>1,
           "teo_view_status"=>1,
         //  'user_id' => Auth::user()->id,
-          'status' => 0
+          'status' => 0,
+          "teo_status_date"=>$date .' ' .$currenttime ,
+          "teo_return_view_date" =>$date .' ' .$currenttime 
       ]);
 
       return redirect()->route('marriageGrantList')->with('status', 'Application Submitted Successfully.');
@@ -2759,6 +2761,7 @@ class ApplicationController extends Controller
             "teo_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
         return view('application.marriage_grant_view', compact('formData'));
     }
 }

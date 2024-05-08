@@ -111,13 +111,19 @@ Route::get('/exam-application-edit/{id}', [App\Http\Controllers\ApplicationContr
 Route::post('/examApplicationUpdate', [App\Http\Controllers\ApplicationController::class, 'examApplicationUpdate'])->name('examApplicationUpdate');
 //exam application routes ends here.
 
-
+//CHILD FINANCE START 
 Route::get('/childFinancialAssistanceForm', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceForm'])->name('childFinancialAssistanceForm');
 Route::post('/childFinancialAssistanceStore', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialAssistanceStore'])->name('childFinancialAssistanceStore');
 Route::post('/childFinancialStoreDetails', [App\Http\Controllers\ChildFinanceController::class, 'childFinancialStoreDetails'])->name('childFinancialStoreDetails');
 Route::get('/ChildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'ChildFinanceList'])->name('ChildFinanceList');
 Route::get('/getchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getchildFinanceList'])->name('getchildFinanceList');
 Route::get('/childFinance/{id}/view', [App\Http\Controllers\ChildFinanceController::class, 'childFinanceView'])->name('childFinanceView');
+
+Route::get('/childFinance-edit/{id}', [App\Http\Controllers\ChildFinanceController::class, 'childFinanceEdit'])->name('childFinanceEdit');
+Route::post('/childFinanceUpdate', [App\Http\Controllers\ChildFinanceController::class, 'childFinanceUpdate'])->name('childFinanceUpdate');
+
+Route::get('/getchildFinanceReturnList', [App\Http\Controllers\ChildFinanceController::class, 'getchildFinanceReturnList'])->name('getchildFinanceReturnList');
+//CHILD FINANCE END
 
 Route::get('/userchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'userchildFinanceList'])->name('userchildFinanceList');
 Route::get('/getUserchildFinanceList', [App\Http\Controllers\ChildFinanceController::class, 'getUserchildFinanceList'])->name('getUserchildFinanceList');
@@ -366,7 +372,8 @@ Route::controller(ClerkController::class)->group(function(){
     Route::get('/childFinancialDetails/{id}','childFinancialClerkDetails')->name('childFinancialClerkDetails');
     Route::post('/childFinanceApprove','childFinanceApprove')->name('childFinance.approve');
     Route::post('/childFinanceReject','childFinanceReject')->name('childFinance.reject');
-   
+    
+    Route::get('/getchildFinanceReturnListClerk','getchildFinanceReturnListClerk')->name('getchildFinanceReturnListClerk');
 
     Route::get('/examApplicationListClerk','examApplicationListClerk')->name('examApplicationListClerk');
     Route::get('/getexamApplicationListClerk','getexamApplicationListClerk')->name('getexamApplicationListClerk');
@@ -471,7 +478,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::get('/childFinancialDetailsAssistant/{id}','childFinancialDetailsAssistant')->name('childFinancialDetailsAssistant');
     Route::post('/childFinanceApproveAssistant','childFinanceApproveAssistant')->name('childFinance.assistant.approve');
     Route::post('/childFinanceRejectAssistant','childFinanceRejectAssistant')->name('childFinance.assistant.reject');
-   
+    
+    Route::get('/getchildFinanceListAssistantReturned','getchildFinanceListAssistantReturned')->name('getchildFinanceListAssistantReturned');
 
     Route::get('/examApplicationListAssistant','examApplicationListAssistant')->name('examApplicationListAssistant');
     Route::get('/getexamApplicationListAssistant','getexamApplicationListAssistant')->name('getexamApplicationListAssistant');
@@ -561,6 +569,9 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/childFinancialDetailsOfficer/{id}','childFinancialDetailsOfficer')->name('childFinancialDetailsOfficer');
     Route::post('/childFinanceApproveOfficer','childFinanceApproveOfficer')->name('childFinance.officer.approve');
     Route::post('/childFinanceRejectOfficer','childFinanceRejectOfficer')->name('childFinance.officer.reject');
+
+    Route::get('/getchildFinanceListOfficerReturned','getchildFinanceListOfficerReturned')->name('getchildFinanceListOfficerReturned');
+    Route::post('/childFinanceRemoveOfficer','childFinanceRemoveOfficer')->name('childFinance.officer.remove');
    
 
     Route::get('/examApplicationListOfficer','examApplicationListOfficer')->name('examApplicationListOfficer');
@@ -656,6 +667,8 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::get('/childFinancialJsSeoDetails/{id}','childFinancialJsSeoDetails')->name('childFinancialJsSeoDetails');
     Route::post('/childFinanceJsSeoApprove','childFinanceJsSeoApprove')->name('childFinance.JsSeo.approve');
     Route::post('/childFinanceJsSeoReject','childFinanceJsSeoReject')->name('childFinance.JsSeo.reject');
+  
+    Route::get('/getchildFinanceListJsSeoReturn','getchildFinanceListJsSeoReturn')->name('getchildFinanceListJsSeoReturn');
 
     Route::get('/examApplicationListJsSeo','examApplicationListJsSeo')->name('examApplicationListJsSeo');
     Route::get('/getexamApplicationListJsSeo','getexamApplicationListJsSeo')->name('getexamApplicationListJsSeo');
