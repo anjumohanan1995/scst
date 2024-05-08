@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\FinancialHelp;
 use App\Models\Taluk;
 use App\Models\Teo;
 use Illuminate\Http\Request;
@@ -256,7 +257,7 @@ class TeoController extends Controller
 
 
     public function coupleApplicationApprove(Request $request){
-        $coupleApplication = studentFund::where('_id', $request->id)->first();
+        $coupleApplication = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -275,7 +276,7 @@ class TeoController extends Controller
         ]);
     }
     public function coupleApplicationReject(Request $request){
-        $coupleApplication = studentFund::where('_id', $request->id)->first();
+        $coupleApplication = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();

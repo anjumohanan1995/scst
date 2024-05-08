@@ -1021,7 +1021,7 @@ class JsSeoController extends Controller
         $currenttime = $currentTimeInKerala->format('h:i A');
      
         $formData =FinancialHelp::find($id);
-        if($formData->JsSeo_view_status==null && $formData->return_status==1){
+        if($formData->JsSeo_view_status==null){
             $formData->update([
             "JsSeo_view_status"=>1,
             "JsSeo_view_id" =>Auth::user()->id,

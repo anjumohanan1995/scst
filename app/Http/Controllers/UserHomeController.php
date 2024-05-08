@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\District;
+use App\Models\FinancialHelp;
 use App\Models\Taluk;
 use App\Models\AnemiaFinance;
 use App\Models\MarriageGrant;
@@ -16,7 +17,7 @@ use App\Permission;
 use App\User;
 use App\Models\ExamApplication;
 
-use App\Models\studentFund;
+
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -44,7 +45,7 @@ class UserHomeController extends Controller
 
     public function userCoupleFinanceList(Request $request)
     {
-        $data  = studentFund::with('User')->get();
+        $data  = FinancialHelp::with('User')->get();
         //dd($data);
         return view('user.financial_list', compact('data'));
     }
@@ -84,7 +85,7 @@ class UserHomeController extends Controller
 
 
         // Total records
-        $totalRecord = studentFund::where('user_id', $user_id)->where('deleted_at', null);
+        $totalRecord = FinancialHelp::where('user_id', $user_id)->where('deleted_at', null);
         if ($mobile != "") {
             $totalRecord->where('mobile', $mobile);
         }
@@ -102,7 +103,7 @@ class UserHomeController extends Controller
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-        $totalRecordswithFilte = studentFund::where('user_id', $user_id)->where('deleted_at', null);
+        $totalRecordswithFilte = FinancialHelp::where('user_id', $user_id)->where('deleted_at', null);
 
         if ($mobile != "") {
             $totalRecordswithFilte->where('mobile', $mobile);
@@ -121,7 +122,7 @@ class UserHomeController extends Controller
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
-        $items = studentFund::where('user_id', $user_id)->where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
+        $items = FinancialHelp::where('user_id', $user_id)->where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
         if ($mobile != "") {
             $items->where('mobile', $mobile);
         }
@@ -187,7 +188,7 @@ class UserHomeController extends Controller
     public function userCoupleApplicationView($id)
     {
 
-        $formData = studentFund::where('_id', $id)->first();
+        $formData = FinancialHelp::where('_id', $id)->first();
         //dd($formData);
         return view('user.financial_view', compact('formData'));
     }
