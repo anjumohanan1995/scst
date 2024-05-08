@@ -81,6 +81,17 @@ class ChildFinance extends Eloquent
         'officer_status_date',
         'officer_status_reason',
 
+        'teo_return',
+        'clerk_return',
+        'JsSeo_return',
+        'assistant_return',
+        'officer_return',
+        'return_date',
+        'return_userid',
+        'return_reason',
+        'return_status',
+        'rejection_status'
+
     ];
 
     public function User()
@@ -118,6 +129,10 @@ class ChildFinance extends Eloquent
     public function officerUser()
     {
         return $this->belongsTo(User::class,'officer_status_id');
+    }
+    public function returnUser()
+    {
+        return $this->belongsTo(User::class,'return_userid');
     }
    
 }

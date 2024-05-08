@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\FinancialHelp;
 use App\Models\Taluk;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
@@ -12,7 +13,7 @@ use App\Permission;
 use App\User;
 use App\Models\ExamApplication;
 
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -404,7 +405,9 @@ class ApplicationController extends Controller
             'return_status' =>1,
             "teo_view_status"=>1,
             "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime
+            "teo_view_date" =>$date .' ' .$currenttime,
+            "teo_status_date"=>$date .' ' .$currenttime,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
         ]);
 
         return redirect()->route('couplefinancialList')->with('status', 'Application Submitted Successfully.');
@@ -886,20 +889,12 @@ class ApplicationController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
       $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $financialHelp=FinancialHelp::find($id);
-        if($financialHelp->teo_view_status==null && Auth::user()->role=='TEO'){
-            $financialHelp->update([
+        $studentFund=FinancialHelp::find($id);
+        if($studentFund->teo_view_status==null && Auth::user()->role=='TEO'){
+            $studentFund->update([
             "teo_view_status"=>1,
             "teo_view_id" =>Auth::user()->id,
             "teo_view_date" =>$date .' ' .$currenttime,
-            ]);
-        }
-
-        if($financialHelp->teo_return_view_status==null && Auth::user()->role=='TEO'){
-            $financialHelp->update([
-            "teo_return_view_status" => 1,
-            "teo_view_id" =>Auth::user()->id,
-            "teo_return_view_date" =>$date .' ' .$currenttime 
             ]);
         }
 
@@ -1426,7 +1421,9 @@ class ApplicationController extends Controller
             'return_status' =>1,
             "teo_view_status"=>1,
             // 'user_id' => Auth::user()->id,
-            'status' => 0
+            'status' => 0,
+            "teo_status_date"=>$date .' ' .$currenttime ,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
         ]);
 
 
@@ -1451,6 +1448,7 @@ class ApplicationController extends Controller
             "teo_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
         return view('admin.exam_application_view', compact('formData'));
     }
 
@@ -1914,7 +1912,9 @@ class ApplicationController extends Controller
             'return_status' =>1,
             "teo_view_status"=>1,
             // 'user_id' => Auth::user()->id,
-            'status' => 0
+            'status' => 0,
+            "teo_status_date"=>$date .' ' .$currenttime ,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
         ]);
 
 
@@ -1926,7 +1926,7 @@ class ApplicationController extends Controller
 
     public function motherChildSchemeList(Request $request)
     {
-        $data  = FinancialHelp::with('User')->get();
+        $data  = studentFund::with('User')->get();
         //dd($data);
         return view('admin.motherchild_list', compact('data'));
     }
@@ -2174,6 +2174,7 @@ class ApplicationController extends Controller
             "pjct_offcr_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
         return view('application.application_view', compact('formData'));
     }
 
@@ -2612,7 +2613,9 @@ class ApplicationController extends Controller
           'return_status' =>1,
           "teo_view_status"=>1,
         //  'user_id' => Auth::user()->id,
-          'status' => 0
+          'status' => 0,
+          "teo_status_date"=>$date .' ' .$currenttime ,
+          "teo_return_view_date" =>$date .' ' .$currenttime 
       ]);
 
       return redirect()->route('marriageGrantList')->with('status', 'Application Submitted Successfully.');
@@ -2759,6 +2762,7 @@ class ApplicationController extends Controller
             "teo_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
         return view('application.marriage_grant_view', compact('formData'));
     }
 }

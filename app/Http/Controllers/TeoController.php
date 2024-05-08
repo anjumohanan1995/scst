@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use Excel;
 
 use App\Hospital;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\MarriageGrant;
 use Illuminate\Support\Facades\Hash;
 use App\Role;
@@ -256,7 +256,7 @@ class TeoController extends Controller
 
 
     public function coupleApplicationApprove(Request $request){
-        $coupleApplication = FinancialHelp::where('_id', $request->id)->first();
+        $coupleApplication = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -275,7 +275,7 @@ class TeoController extends Controller
         ]);
     }
     public function coupleApplicationReject(Request $request){
-        $coupleApplication = FinancialHelp::where('_id', $request->id)->first();
+        $coupleApplication = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();

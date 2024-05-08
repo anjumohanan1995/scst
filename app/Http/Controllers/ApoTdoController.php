@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\ChildFinance;
 use App\Models\District;
 use App\Models\ExamApplication;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\ItiFund;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
@@ -329,6 +329,14 @@ class ApoTdoController extends Controller
             "assistant_view_date" =>$date .' ' .$currenttime
             ]);
         }
+        if($formData->assistant_return_view_status==null && $formData->return_status==1){
+            $formData->update([
+            "assistant_return_view_status"=>1,
+            "assistant_view_id" =>Auth::user()->id,
+            "assistant_return_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+        
         
         return view('ApoAtdo.examApplication.details',compact('formData'));
 
@@ -414,7 +422,7 @@ class ApoTdoController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('JsSeo_return',null)
@@ -428,7 +436,7 @@ class ApoTdoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('JsSeo_return',null)
@@ -446,7 +454,7 @@ class ApoTdoController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('JsSeo_return',null)
@@ -552,7 +560,7 @@ class ApoTdoController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('JsSeo_status',1)
@@ -566,7 +574,7 @@ class ApoTdoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('JsSeo_status',1)
@@ -584,7 +592,7 @@ class ApoTdoController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('JsSeo_status',1)
@@ -674,7 +682,7 @@ class ApoTdoController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $formData =FinancialHelp::find($id);
+        $formData =studentFund::find($id);
         if($formData->assistant_view_status==null ){
             $formData->update([
             "assistant_view_status"=>1,
@@ -682,8 +690,7 @@ class ApoTdoController extends Controller
             "assistant_view_date" =>$date .' ' .$currenttime
             ]);
         }
-
-        if($formData->assistant_view_status==null ){
+        if($formData->assistant_return_view_status==null && $formData->return_status==1){
             $formData->update([
             "assistant_return_view_status"=>1,
             "assistant_view_id" =>Auth::user()->id,
@@ -691,12 +698,13 @@ class ApoTdoController extends Controller
             ]);
         }
         
+        
         return view('ApoAtdo.couplefinancial.details',compact('formData'));
 
 
     }
     public function couplefinancialApproveAssistant (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -716,7 +724,7 @@ class ApoTdoController extends Controller
         ]);
     }
     public function couplefinancialRejectAssistant (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -1037,6 +1045,14 @@ class ApoTdoController extends Controller
             "assistant_view_date" =>$date .' ' .$currenttime
             ]);
         }
+        if($formData->assistant_return_view_status==null && $formData->return_status==1){
+            $formData->update([
+            "assistant_return_view_status"=>1,
+            "assistant_view_id" =>Auth::user()->id,
+            "assistant_return_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+        
         
         return view('ApoAtdo.motherChild.details',compact('formData'));
 
@@ -1374,6 +1390,14 @@ class ApoTdoController extends Controller
             "assistant_view_date" =>$date .' ' .$currenttime
             ]);
         }
+        if($formData->assistant_return_view_status==null && $formData->return_status==1){
+            $formData->update([
+            "assistant_return_view_status"=>1,
+            "assistant_view_id" =>Auth::user()->id,
+            "assistant_return_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+        
         
         return view('ApoAtdo.marriageGrant.details',compact('formData'));
 
@@ -2622,6 +2646,137 @@ class ApoTdoController extends Controller
                  $totalRecord->where('name','like',"%".$name."%");
              }
             
+             $totalRecord->where('assistant_return', null);
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+  
+  
+             $totalRecordswithFilte = ItiFund::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('clerk_status',1);
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+            $totalRecordswithFilte->where('assistant_return', null);
+  
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+  
+             // Fetch records
+             $items = ItiFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('clerk_status',1);
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           $items->where('assistant_return', null);
+  
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
+         
+            
+  
+  
+         $data_arr = array();
+  $i=$start;
+         foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $course_name = $record->course_name;
+             $place = $record->place;
+             $date=$record->date;
+             $income=$record->income;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
+  
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
+  
+           
+              $status = $record->assistant_status;
+            
+              $teo_name=@$record->teo->teo_name;
+             
+                $edit='';
+                if($status == 1){
+                  $edit='<div class="settings-main-icon"><a  href="' . route('itiFeeAssistantView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
+              }
+              else if($status ==2){
+                  $edit='<div class="settings-main-icon"><a  href="' . route('itiFeeAssistantView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->assistant_status_reason.'</span></div>';
+            
+              }
+              else if($status ==null){
+                  $edit='<div class="settings-main-icon"><a  href="' . route('itiFeeAssistantView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+              }
+
+            $data_arr[] = array(
+                "id" => $id,
+               "sl_no" => $i,
+                "name" => $name,
+                "address" => $address,
+                "course_name" => $course_name,
+                "caste" => $caste,
+                "income" =>$income,
+                "teo" =>$teo_name,
+                "date" => $date .' ' .$record->time, 
+                                
+                "edit" => $edit
+  
+            );
+         }
+  
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+  
+         return response()->json($response);
+    }
+
+    public function getAssistantItiFundListReturn(Request $request)
+    {
+        
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+        $district=Auth::user()->district;
+  
+  
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+  
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+  
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+  
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+           
+         $teoIds = $teos->pluck('_id')->toArray();
+         
+  
+             // Total records
+             $totalRecord = ItiFund::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('clerk_status',1);
+         
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+             $totalRecord->where('JsSeo_return',null)->where('assistant_return', 1);
   
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
   
@@ -2635,7 +2790,7 @@ class ApoTdoController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-           
+            $totalRecordswithFilte->where('JsSeo_return',null)->where('assistant_return', 1);
   
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
   
@@ -2646,9 +2801,9 @@ class ApoTdoController extends Controller
              ->where('clerk_status',1);
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
-            }
-           
-  
+            }           
+            $items->where('JsSeo_return',null)->where('assistant_return', 1);
+
              $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
          
             
@@ -2732,6 +2887,13 @@ class ApoTdoController extends Controller
         "assistant_view_date" =>$date .' ' .$currenttime
         ]);
     }
+    if($studentFund->assistant_return_view_status==null && $studentFund->return_status==1){
+        $studentFund->update([
+        "assistant_return_view_status"=>1,
+        "assistant_view_id" =>Auth::user()->id,
+        "assistant_return_view_status" =>$date .' ' .$currenttime
+        ]);
+    }
       
         return view('ApoAtdo.itiFund.details', compact('studentFund'));
     }
@@ -2745,6 +2907,7 @@ class ApoTdoController extends Controller
 
       $data->update([
         'assistant_status' => 1,
+        'assistant_return' => null,
         'assistant_status_date' => $currenttime,
         'assistant_status_id' => Auth::user()->id,
         'assistant_status_reason' => $reason,
@@ -2763,6 +2926,13 @@ class ApoTdoController extends Controller
       
       $data->update([
         'assistant_status' => 2,
+        'teo_return' => 1,
+        'clerk_return' => 1,
+        'JsSeo_return' => 1,
+        'assistant_return' => 1,
+        'officer_return' => 1,
+        'return_date' => $currenttime,
+        'return_userid' => Auth::user()->id,
         'assistant_status_date' => $currenttime,
         'assistant_status_id' => Auth::user()->id,
         'assistant_status_reason' => $reason,
@@ -2771,6 +2941,8 @@ class ApoTdoController extends Controller
             'success' => 'Application Rejected successfully.'
         ]);
     }
+
+
 
     public function ChildFinanceListAssistant(){
         return view('ApoAtdo.childFinance.index');
@@ -2809,7 +2981,8 @@ class ApoTdoController extends Controller
              $totalRecord = ChildFinance::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('JsSeo_status',1);
+             ->where('JsSeo_status',1)
+             ->where('assistant_return',null);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -2822,7 +2995,8 @@ class ApoTdoController extends Controller
              $totalRecordswithFilte = ChildFinance::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('JsSeo_status',1);
+             ->where('JsSeo_status',1)
+             ->where('assistant_return',null);
 
            
              if($name != ""){
@@ -2840,7 +3014,8 @@ class ApoTdoController extends Controller
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('JsSeo_status',1)
-                 ->orderBy($columnName, $columnSortOrder);
+             ->where('assistant_return',null)
+             ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -2909,6 +3084,136 @@ class ApoTdoController extends Controller
 
          return response()->json($response);
     }
+
+    public function getchildFinanceListAssistantReturned(Request $request)
+    {
+        $role =  Auth::user()->role;       
+        $district =  Auth::user()->district;
+        $tdo= Auth::user()->po_tdo_office;
+ 
+         $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+          
+         $teoIds = $teos->pluck('_id')->toArray();
+ 
+ 
+          ## Read value
+          $draw = $request->get('draw');
+          $start = $request->get("start");
+          $rowperpage = $request->get("length"); // Rows display per page
+ 
+          $columnIndex_arr = $request->get('order');
+          $columnName_arr = $request->get('columns');
+          $order_arr = $request->get('order');
+          $search_arr = $request->get('search');
+ 
+          $columnIndex = $columnIndex_arr[0]['column']; // Column index
+          $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+          $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+          $searchValue = $search_arr['value']; // Search value
+ 
+ 
+          
+ 
+              // Total records
+              $totalRecord = ChildFinance::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+              ->where('submitted_district', $district)
+              ->where('JsSeo_return',null)
+              ->where('assistant_return',1);
+             
+              if($name != ""){
+                  $totalRecord->where('name','like',"%".$name."%");
+              }
+             
+ 
+              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+ 
+ 
+              $totalRecordswithFilte = ChildFinance::where('deleted_at',null)
+               ->whereIn('submitted_teo', $teoIds)
+              ->where('submitted_district', $district)
+              ->where('JsSeo_return',null)
+              ->where('assistant_return',1);
+ 
+            
+              if($name != ""){
+                 $totalRecordswithFilte->where('name','like',"%".$name."%");
+             }
+            
+            
+ 
+              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+ 
+              // Fetch records
+              
+             
+              $items = ChildFinance::where('deleted_at', null)
+              ->whereIn('submitted_teo', $teoIds)
+              ->where('submitted_district', $district)
+              ->where('JsSeo_return',null)
+              ->where('assistant_return',1)
+              ->orderBy($columnName, $columnSortOrder);
+              
+              if($name != ""){
+                 $items->where('name','like',"%".$name."%");
+             }
+            
+ 
+              $records = $items->skip($start)->take($rowperpage)->get();
+          
+ 
+ 
+ 
+          $data_arr = array();
+             $i=$start;
+              
+          foreach($records as $record){
+             $i++;
+              $id = $record->id;
+              $name = $record->name;
+              $address = $record->address;
+              $age = $record->age;
+              $caste = $record->caste;
+            //  $status = $record->clerk_status;
+             $date = $record->date;
+             $time = $record->time;
+            // $teo_name=$record->teo->teo_name;
+               $created_at =  $record->created_at;
+           
+               $status = $record->assistant_status;
+ 
+               $teo_name=@$record->teo->teo_name;
+             $edit='';
+
+             $edit='<div class="settings-main-icon"><a  href="' . route('childFinancialDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>'; 
+            
+                 $data_arr[] = array(
+                     "sl_no" => $i,
+                     "id" => $id,
+                     "name" => $name.'/'.$status,
+                     "address" => $address,
+                     "age" => $age,
+                     "caste" => $caste,
+                     "teo_name" =>$teo_name,
+                     "date" => $date." ".$time,  
+                     "created_at" => $created_at,                  
+                     "action" => $edit
+     
+                 );
+           
+          }
+ 
+          $response = array(
+             "draw" => intval($draw),
+             "iTotalRecords" => $totalRecords,
+             "iTotalDisplayRecords" => $totalRecordswithFilter,
+             "aaData" => $data_arr
+          );
+ 
+          return response()->json($response);
+
+    }
     public function childFinancialDetailsAssistant($id){
         $currentTime = Carbon::now();
 
@@ -2922,6 +3227,13 @@ class ApoTdoController extends Controller
             "assistant_view_status"=>1,
             "assistant_view_id" =>Auth::user()->id,
             "assistant_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+        if($formData->assistant_return_view_status==null && $formData->return_status==1){
+            $formData->update([
+            "assistant_return_view_status"=>1,
+            "assistant_view_id" =>Auth::user()->id,
+            "assistant_return_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
@@ -2941,6 +3253,7 @@ class ApoTdoController extends Controller
 
       $data->update([
         'assistant_status' => 1,
+        'assistant_return' => null,
         'assistant_status_date' => $currenttime,
         'assistant_status_id' => Auth::user()->id,
         'assistant_status_reason' => $reason,
@@ -2959,6 +3272,14 @@ class ApoTdoController extends Controller
       
       $data->update([
         'assistant_status' => 2,
+        'teo_return' => 1,
+        'clerk_return' => 1,
+        'JsSeo_return' => 1,
+        'assistant_return' => 1,
+        'officer_return' => 1,
+        'return_date' => $currenttime,
+        'return_userid' => Auth::user()->id,
+        'return_reason' => $reason,
         'assistant_status_date' => $currenttime,
         'assistant_status_id' => Auth::user()->id,
         'assistant_status_reason' => $reason,

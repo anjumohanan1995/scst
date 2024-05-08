@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ChildFinance;
 use App\Models\District;
 use App\Models\ExamApplication;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\HouseManagement;
 use App\Models\ItiFund;
 use App\Models\MarriageGrant;
@@ -257,7 +257,7 @@ class PoTdoController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('assistant_status',1);
@@ -270,7 +270,7 @@ class PoTdoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('assistant_status',1);
@@ -287,7 +287,7 @@ class PoTdoController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('assistant_status',1)
@@ -376,7 +376,7 @@ class PoTdoController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $formData =FinancialHelp::find($id);
+        $formData =studentFund::find($id);
         if($formData->officer_view_status==null ){
             $formData->update([
             "officer_view_status"=>1,
@@ -390,7 +390,7 @@ class PoTdoController extends Controller
 
     }
     public function couplefinancialApproveOfficer (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -409,7 +409,7 @@ class PoTdoController extends Controller
         ]);
     }
     public function couplefinancialRejectOfficer (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();

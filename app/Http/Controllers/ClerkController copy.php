@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ChildFinance;
 use App\Models\District;
 use App\Models\ExamApplication;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
 use App\Models\TDOMaster;
@@ -452,7 +452,7 @@ class ClerkController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('teo_status',1);
@@ -465,7 +465,7 @@ class ClerkController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('teo_status',1);
@@ -482,7 +482,7 @@ class ClerkController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('teo_status',1)
@@ -571,7 +571,7 @@ class ClerkController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $formData =FinancialHelp::find($id);
+        $formData =studentFund::find($id);
         if($formData->clerk_view_status==null ){
             $formData->update([
             "clerk_view_status"=>1,
@@ -585,7 +585,7 @@ class ClerkController extends Controller
 
     }
     public function couplefinancialApprove (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -604,7 +604,7 @@ class ClerkController extends Controller
         ]);
     }
     public function couplefinancialReject (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();

@@ -1,629 +1,989 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- main-content -->
-<div class="main-content app-content">
-	<!-- container -->
-	<div class="main-container container-fluid">
-		<!-- breadcrumb -->
-		<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-			
-				{{-- <h4 class="content-title mb-2"> ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്
+    <!-- main-content -->
+    <div class="main-content app-content">
+        <!-- container -->
+        <div class="main-container container-fluid">
+            <!-- breadcrumb -->
+            <div class="breadcrumb-header justify-content-between row me-0 ms-0">
+
+                {{-- <h4 class="content-title mb-2"> ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്
 
 </h4> --}}
-				
-
-            @if ($message = Session::get('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fa fa-window-close"></i></button> {{ $message }}
-                </div>
-            @endif
-		</div>
-		<!-- /breadcrumb -->
 
 
-    <div class="main-content-body">
-			
-
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                                class="fa fa-window-close"></i></button> {{ $message }}
+                    </div>
+                @endif
             </div>
-        @endif  
+            <!-- /breadcrumb -->
 
-        <!-- row -->
-        <!-- row -->
-        <div class="row row-sm">
-            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
-                <div class=" card">
-                    <div class="card-body  p-5">
-                        <div id="btnHide" class="row justify-content-end m-3">
-                            <a style="width: 50px" onclick="printDiv()"><img
-                                    src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
-                        </div>
-                         <div id="print_content">
-                            <div id="success_message" class="ajax_response" style="display: none;"></div>
-                            <div class="mb-4 main-content-label">
-                                <h4 class="medical__form--h1 text-center m-3">
-                                    <b><u>ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്</u></b>
-                                </h4>
+
+            <div class="main-content-body">
+
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                <!-- row -->
+                <!-- row -->
+                <div class="row row-sm">
+                    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
+                        <div class=" card">
+                            <div class="card-body  p-5">
+                                <div id="btnHide" class="row justify-content-end m-3">
+                                    <a style="width: 50px" onclick="printDiv()"><img
+                                            src="{{ asset('admin/uploads/icons/printer.png') }}" alt=""></a>
                                 </div>
-                                <div class="paper-1 pt-4">
-                                    <div class="w-100">
-                                       <div class="row w-100">
-                                          <div class="col-12" style="text-align: right;">
-                                             @if(@$studentFund['applicant_image'])
-                                                <img src="{{ asset('itiStudentFund/' . @$studentFund['applicant_image']) }}" width= "100mm" height= "100mm";>
-                                             @endif
-                                          </div>
-                                       </div>
+                                <div id="print_content">
+                                    <div id="success_message" class="ajax_response" style="display: none;"></div>
+                                    <div class="mb-4 main-content-label">
+                                        <h4 class="medical__form--h1 text-center m-3">
+                                            <b><u>ഐ .റ്റി.ഐ /ട്രൈനിംഗ് സെന്ററുകളിലെ പഠിതാക്കൾക്കുള്ള സ്കോളർഷിപ്പ്</u></b>
+                                        </h4>
                                     </div>
-                                 </div>
-                               <br>
-                                <table id="preview_student_fund">
-                                    <thead>
+                                    <div class="paper-1 pt-4">
+                                        <div class="w-100">
+                                            <div class="row w-100">
+                                                <div class="col-12" style="text-align: right;">
+                                                    @if (@$studentFund['applicant_image'])
+                                                        <img src="{{ asset('itiStudentFund/' . @$studentFund['applicant_image']) }}"
+                                                            width= "100mm" height= "100mm";>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <table id="preview_student_fund">
+                                        <thead>
 
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>അപേക്ഷകന്റെ പേര് <br>
-                                                <br>
-                                                മേൽവിലാസം
-                                            </td>
-                                            <td>{{ @$studentFund['name'] }} <br> <br>{{ @$studentFund['address'] }}, {{ @$studentFund['current_taluk_name'] }}
-                                                , {{ @$studentFund['current_district_name'] }}  , {{ @$studentFund['current_pincode'] }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>പഞ്ചായത്തിൻ്റെ പേര്
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>അപേക്ഷകന്റെ പേര് <br>
+                                                    <br>
+                                                    മേൽവിലാസം
+                                                </td>
+                                                <td>{{ @$studentFund['name'] }} <br> <br>{{ @$studentFund['address'] }},
+                                                    {{ @$studentFund['current_taluk_name'] }}
+                                                    , {{ @$studentFund['current_district_name'] }} ,
+                                                    {{ @$studentFund['current_pincode'] }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>പഞ്ചായത്തിൻ്റെ പേര്
 
-                                            </td>
-                                            <td>{{ @$studentFund['panchayath'] }} </td>
-                                        </tr>
-                                        <tr>
-                                        
-                                        <tr>
-                                            <td>3</td>
-                                            <td>കോഴ്‌സിന്റെ പേര്
+                                                </td>
+                                                <td>{{ @$studentFund['panchayath'] }} </td>
+                                            </tr>
+                                            <tr>
 
-                                            </td>
-                                            <td>{{ @$studentFund['course_name'] }} </td>
-                                        </tr>
-                                        <tr>
-                                        <td>4</td>
-                                        <td>മെട്രിക് അല്ലെങ്കിൽ നോൺ മെട്രിക് ?
+                                            <tr>
+                                                <td>3</td>
+                                                <td>കോഴ്‌സിന്റെ പേര്
 
-                                        </td>
-                                        <td>{{ @$studentFund['metric_type'] }} </td>
-                                    </tr>
-                                    <tr>
-                                    <td>5</td>
-                                    <td>കോഴ്‌സിൻ്റെ ദൈർഘ്യം 
+                                                </td>
+                                                <td>{{ @$studentFund['course_name'] }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>മെട്രിക് അല്ലെങ്കിൽ നോൺ മെട്രിക് ?
 
-                                    </td>
-                                    <td>{{ @$studentFund['course_duration'] }} </td>
-                                </tr>
+                                                </td>
+                                                <td>{{ @$studentFund['metric_type'] }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>കോഴ്‌സിൻ്റെ ദൈർഘ്യം
 
-                                <tr>
-                                    <td>6</td>
-                                    <td>പ്രവേശന തീയതി
-                                    </td>
-                                    <td>@if(@$studentFund['admission_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['admission_date'])->format('d-m-Y') }}@endif</td>
-                                </tr>
-                                
+                                                </td>
+                                                <td>{{ @$studentFund['course_duration'] }} </td>
+                                            </tr>
 
-                                        <tr>
-                                            <td>7</td>
-                                            <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
-                                            </td>
-                                            <td>@if(@$studentFund['class_start_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['class_start_date'])->format('d-m-Y') }}@endif</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത്
-                                            </td>
-                                            <td> @if(@$studentFund['admission_type'] == 'merit') 
-                    
-                                                മെരിറ്റ്
-                                                @elseif(@$studentFund['admission_type'] == 'innovation') 
-                                                സംവരണം
-                                                @elseif(@$studentFund['admission_type'] == 'management') 
-                                                മാനേജ്‌മന്റ്
-                                                @elseif(@$studentFund['admission_type'] == 'others') 
-                                                മറ്റുള്ളവ
-                                                @endif
-                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>അപേക്ഷകന്റെ ജാതി/ മതം <br>
-                                                (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
+                                            <tr>
+                                                <td>6</td>
+                                                <td>പ്രവേശന തീയതി
+                                                </td>
+                                                <td>
+                                                    @if (@$studentFund['admission_date'] != null)
+                                                        {{ \Carbon\Carbon::parse(@$studentFund['admission_date'])->format('d-m-Y') }}
+                                                    @endif
+                                                </td>
+                                            </tr>
 
-                                            </td>
-                                            <td>{{ @$studentFund['caste'] }} <br> @if($studentFund['caste_certificate'])
-                                                <a href="{{ asset('itiStudentFund/' . @$studentFund['caste_certificate']) }}" target="_blank">View</a>
-                                                @endif</td>
-                                        </tr>
-                                        {{-- <tr>
+
+                                            <tr>
+                                                <td>7</td>
+                                                <td>നടപ്പ് അദ്ധ്യയന വർഷം <br>ക്ലാസ് ആരംഭിച്ച തീയതി
+                                                </td>
+                                                <td>
+                                                    @if (@$studentFund['class_start_date'] != null)
+                                                        {{ \Carbon\Carbon::parse(@$studentFund['class_start_date'])->format('d-m-Y') }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>അപേക്ഷകനെ പ്രവേശനം ലഭിച്ചത്
+                                                </td>
+                                                <td>
+                                                    @if (@$studentFund['admission_type'] == 'merit')
+                                                        മെരിറ്റ്
+                                                    @elseif(@$studentFund['admission_type'] == 'innovation')
+                                                        സംവരണം
+                                                    @elseif(@$studentFund['admission_type'] == 'management')
+                                                        മാനേജ്‌മന്റ്
+                                                    @elseif(@$studentFund['admission_type'] == 'others')
+                                                        മറ്റുള്ളവ
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>അപേക്ഷകന്റെ ജാതി/ മതം <br>
+                                                    (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
+
+                                                </td>
+                                                <td>{{ @$studentFund['caste'] }} <br>
+                                                    @if ($studentFund['caste_certificate'])
+                                                        <a href="{{ asset('itiStudentFund/' . @$studentFund['caste_certificate']) }}"
+                                                            target="_blank">View</a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            {{-- <tr>
                                             <td>6</td>
                                             <td>അപേക്ഷകന്റെ വരുമാനം <br>
                                                 (സർട്ടിഫിക്കറ്റ് ഹാജരാക്കണം )
 
                                             </td>
-                                            <td> {{ @$studentFund['income'] }} <br> @if($studentFund['income_certificate'])
+                                            <td> {{ @$studentFund['income'] }} <br> @if ($studentFund['income_certificate'])
                                                 <a href="{{ asset('itiStudentFund/' . @$studentFund['income_certificate']) }}" target="_blank">View</a>
                                                 @endif</td>
                                         </tr> --}}
-                                        <tr>
-                                            <td>10</td>
-                                            <td>വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് <br>നമ്പർ ഉണ്ടെങ്കിൽ
-                                                ബാങ്ക്
-                                                ശാഖ<br> /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം
-                                            </td>
-                                            <td>
-                                            
-                                                @if(@$studentFund['account_details'] =='yes')Yes ,
-                                                @else 
-                                                No 
-                                                @endif 
-                                                @if(@$studentFund['account_details'] =='yes')
-                                                <br>Bank Branch  : {{ @$studentFund['bank_branch']  }}
-                                                <br>Account Number   : {{ @$studentFund['account_no']  }}
-                                                <br>IFSC Code : {{ @$studentFund['ifsc_code']  }}
-                                                @endif 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>11</td>
-                                            <td>മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ
-                                            </td>
-                                            <td>
-                                            
-                                              
-                                                <br>Bank Branch  : {{ @$studentFund['parent_bank_branch']  }}
-                                                <br>Account Number   : {{ @$studentFund['parent_account_no']  }}
-                                                <br>IFSC Code : {{ @$studentFund['parent_ifsc_code']  }}
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>പ്രിൻസിപ്പൽ  അക്കൗണ്ട് വിശദാംശങ്ങൾ
-                                            </td>
-                                            <td>
-                                            
-                                              
-                                                <br>Bank Branch  : {{ @$studentFund['principal_bank_branch']  }}
-                                                <br>Account Number   : {{ @$studentFund['principal_account_no']  }}
-                                                <br>IFSC Code : {{ @$studentFund['principal_ifsc_code']  }}
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>13</td>
-                                            <td>ഹാജർ വിശദാംശങ്ങൾ 
-                                            </td>
-                                            <td>
-                                            
-                                              
-                                                @if($studentFund['attendance_doc'])
-                                                <a href="{{ asset('itiStudentFund/' . @$studentFund['attendance_doc']) }}" target="_blank"> View </a>
-                                                @endif 
-                                                
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>വിദ്യാർത്ഥികൾക്ക് ഇ-ഗ്രാൻഡ് അകൗണ്ട് <br>നമ്പർ ഉണ്ടെങ്കിൽ
+                                                    ബാങ്ക്
+                                                    ശാഖ<br> /ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം
+                                                </td>
+                                                <td>
 
-                                    </tbody>
-                                </table>
-                                
-                            
+                                                    @if (@$studentFund['account_details'] == 'yes')
+                                                        Yes ,
+                                                    @else
+                                                        No
+                                                    @endif
+                                                    @if (@$studentFund['account_details'] == 'yes')
+                                                        <br>Bank Branch : {{ @$studentFund['bank_branch'] }}
+                                                        <br>Account Number : {{ @$studentFund['account_no'] }}
+                                                        <br>IFSC Code : {{ @$studentFund['ifsc_code'] }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>മാതാപിതാക്കളുടെ അക്കൗണ്ട് വിശദാംശങ്ങൾ
+                                                </td>
+                                                <td>
 
-                          <br><br>
-                          <div class="row ">
 
-                            <div class="col-6 d-flex">
-                                <span class="col-5"> അപേക്ഷന്റെ ഒപ്പ്
-                                </span>
-                                <span class="col-1"> :</span>
-                                <span class="col-6"> @if($studentFund['signature'])
-                                    <img src="{{ asset('itiStudentFund/' . @$studentFund['signature']) }}" width="150px" height="70px">
-                                    @endif </span>
+                                                    <br>Bank Branch : {{ @$studentFund['parent_bank_branch'] }}
+                                                    <br>Account Number : {{ @$studentFund['parent_account_no'] }}
+                                                    <br>IFSC Code : {{ @$studentFund['parent_ifsc_code'] }}
 
-                            </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>12</td>
+                                                <td>പ്രിൻസിപ്പൽ അക്കൗണ്ട് വിശദാംശങ്ങൾ
+                                                </td>
+                                                <td>
 
-                            <div class="col-6 d-flex">
-                                <span class="col-5"> അപേക്ഷന്റെ  പേര്</span>
-                                <span class="col-1"> :</span>
-                                <span class="col-6">{{@$studentFund['name']}} </span>
 
-                            </div>
+                                                    <br>Bank Branch : {{ @$studentFund['principal_bank_branch'] }}
+                                                    <br>Account Number : {{ @$studentFund['principal_account_no'] }}
+                                                    <br>IFSC Code : {{ @$studentFund['principal_ifsc_code'] }}
 
-                        </div>
-                        <br> <br>
-                             
-                                <div class="row ">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>13</td>
+                                                <td>ഹാജർ വിശദാംശങ്ങൾ
+                                                </td>
+                                                <td>
 
-                                  {{-- <div class="col-6 d-flex">
+
+                                                    @if ($studentFund['attendance_doc'])
+                                                        <a href="{{ asset('itiStudentFund/' . @$studentFund['attendance_doc']) }}"
+                                                            target="_blank"> View </a>
+                                                    @endif
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+
+                                    <br><br>
+                                    <div class="row ">
+
+                                        <div class="col-6 d-flex">
+                                            <span class="col-5"> അപേക്ഷന്റെ ഒപ്പ്
+                                            </span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6">
+                                                @if ($studentFund['signature'])
+                                                    <img src="{{ asset('itiStudentFund/' . @$studentFund['signature']) }}"
+                                                        width="150px" height="70px">
+                                                @endif
+                                            </span>
+
+                                        </div>
+
+                                        <div class="col-6 d-flex">
+                                            <span class="col-5"> അപേക്ഷന്റെ പേര്</span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6">{{ @$studentFund['name'] }} </span>
+
+                                        </div>
+
+                                    </div>
+                                    <br> <br>
+
+                                    <div class="row ">
+
+                                        {{-- <div class="col-6 d-flex">
                                         <span class="col-5"> രക്ഷാകർത്താവിന്റെ ഒപ്പ് 
                                         </span>
                                         <span class="col-1"> :</span>
-                                        <span class="col-6"> @if($studentFund['parent_signature'])
+                                        <span class="col-6"> @if ($studentFund['parent_signature'])
                                             <img src="{{ asset('itiStudentFund/' . @$studentFund['parent_signature']) }}" width="150px" height="70px">
                                             @endif </span> 
 
                                    </div>  --}}
 
-                                    <div class="col-6 d-flex">
-                                        <span class="col-5"> രക്ഷാകർത്താവിന്റെ  പേര്</span>
-                                        <span class="col-1"> :</span>
-                                        <span class="col-6">{{@$studentFund['parent_name']}} </span>
+                                        <div class="col-6 d-flex">
+                                            <span class="col-5"> രക്ഷാകർത്താവിന്റെ പേര്</span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6">{{ @$studentFund['parent_name'] }} </span>
+
+                                        </div>
 
                                     </div>
 
-                                </div>
-                               
-                                <br><br>
-                                    
-                             
-                            
-                              
-                          
-                               <div class="row mt-5">
-                                <div class="col-12">
-                                    <h1
-                            style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
-                            അപേക്ഷ സമർപ്പിക്കുന്നത് 
+                                    <br><br>
 
-                        </h1>
+
+
+
+
+                                    <div class="row mt-5">
+                                        <div class="col-12">
+                                            <h1
+                                                style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
+                                                അപേക്ഷ സമർപ്പിക്കുന്നത്
+
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+
+                                        <div class="col-4 d-flex">
+                                            <span class="col-5"> ജില്ല
+                                            </span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6"> {{ @$studentFund['submitted_district_name'] }} </span>
+
+                                        </div>
+
+                                        <div class="col-4 d-flex">
+                                            <span class="col-5"> ടി .ഇ .ഓ</span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6">{{ @$studentFund['submitted_teo_name'] }} </span>
+
+                                        </div>
+                                        <div class="col-4 d-flex">
+                                            <span class="col-5"> സ്ഥാപനം</span>
+                                            <span class="col-1"> :</span>
+                                            <span class="col-6">{{ @$studentFund['institution_name'] }} </span>
+
+                                        </div>
+
+                                    </div>
+                                    <br><br>
+                                    <br>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-4">
+
+
+                                    </div>
+                                    <div class="col-md-6 mb-6">
+                                        <a href="{{ route('clerkItiFundList') }}"> <input type="button"
+                                                class="btn btn-primary" value="Back >>">
+                                        </a>
+                                    </div>
+
+
+
+                                </div><br>
                             </div>
-                            <div class="row ">
-
-                                <div class="col-4 d-flex">
-                                    <span class="col-5"> ജില്ല
-                                    </span>
-                                    <span class="col-1"> :</span>
-                                    <span class="col-6"> {{ @$studentFund['submitted_district_name'] }}  </span>
-
-                                </div>
-
-                                <div class="col-4 d-flex">
-                                    <span class="col-5"> ടി .ഇ .ഓ</span>
-                                    <span class="col-1"> :</span>
-                                    <span class="col-6">{{ @$studentFund['submitted_teo_name'] }} </span>
-
-                                </div>
-                                <div class="col-4 d-flex">
-                                    <span class="col-5"> സ്ഥാപനം</span>
-                                    <span class="col-1"> :</span>
-                                    <span class="col-6">{{ @$studentFund['institution_name'] }} </span>
-
-                                </div>
-
-                            </div>
-                               <br><br>
-                            <br>
                         </div>
-                            <div class="row">
-                                <div class="col-md-4 mb-4">
-                                  
-                                     
-                                         </div>
-                                <div class="col-md-6 mb-6">
-                                 <a href="{{ route('clerkItiFundList') }}">  <input type="button" class="btn btn-primary" value="Back >>" >
-                                 </a>  </div>
-                                        
-                                        
-
-                                    </div><br>
                     </div>
-                </div>
-            </div>
-           
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                <div class="pt-2 card overflow-hidden">
-                
-                   <div class="card-body">
-                     <ul class="timeline-3">
-                      
-                         <li class="ApproveTimeline">
-                           <a href="#!">TEO</a>
-                           <a href="#!" class="float-end">@if( @$studentFund['teo_view_date'] !='')<i class="fa fa-eye"></i>  {{ @$studentFund['teo_view_date'] }}@endif</a>
-                           <br>
-                           <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-                           <p class="mt-2"><span class= "spanclr">TEO  :  </span>{{ @$studentFund->teo->teo_name }}</p>
-                           <p class="mt-2"><span class= "spanclr"> Name : </span>{{ @$studentFund->teoUser->name }}</p>
-                           <p class="mt-2"><span class= "spanclr">District :  </span>{{ @$studentFund->district->name }}</p>
-                           <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['teo_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                           <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->teo_status_reason}}</p>
-                         
-                         </li>
-                         @if( @$studentFund->clerk_status == null)
 
-                         <li class="pendingTimeline">
-                          <a href="#!">{{ auth::user()->name }}</a>
-                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
-                          <br>       
-                          <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
-                                 <div class="settings-icon">
-                                     <a class="approveItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                                     &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
-                                  </div>
-                                
-                             </li>
-                           
-                             @elseif( @$studentFund->clerk_status == 1)
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                        <div class="pt-2 card overflow-hidden">
 
-                             <li class="ApproveTimeline">
-                              <a href="#!">{{ auth::user()->name }}</a>
-                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
-                              <br>
-                              <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-                         
-                              <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                              <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->clerk_status_reason}}</p>
-                            
-                                 </li>
-                                 @elseif( @$studentFund->clerk_status == 2)
+                            <div class="card-body">
+                                @if (@$studentFund->return_status == 1)
+                                    @php
+                                        $role = DB::table('users')
+                                            ->where('_id', @$studentFund->return_userid)
+                                            ->value('role');
 
-                                 <li class="rejectTimeline">
-                                  <a href="#!">{{ auth::user()->name }}</a>
-                                  <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['clerk_view_date'] }}</a>
-                                  <br>
-                                  <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                             
-                                  <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['clerk_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                  <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->clerk_status_reason}}</p>
-                                
-                                     </li>
-                                 @endif
-
-                                 @if(@$studentFund->clerk_status == 1)
-                                            @if( @$studentFund->assistant_status == 1)
-                           
+                                    @endphp
+                                    <p class="inputText badge bg-danger" style="font-size: 12px">Returned Application - by
+                                        {{ @$studentFund->returnUser->name }} ({{ @$role }})</p>
+                                    <ul class="timeline-3">
+                                        @if (@$studentFund->teo_return == null)
                                             <li class="ApproveTimeline">
-                                              <a href="#!">APO / ATDO</a>
-                                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
-                                              <p></p>
-                                              <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-                                              <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->assistantUser->name }}</p>
-                                             
-                                              <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                              <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->teo_status_reason}}</p>
-                                           </li>
-                                           @elseif( @$studentFund->assistant_status == 2)
-                           
-                                           <li class="rejectTimeline">
-                                             <a href="#!">APO / ATDO</a>
-                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
-                                             <p></p>
-                                             <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                                             <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->assistantUser->name }}</p>
-                                             
-                                             <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['assistant_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                             <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->assistant_status_reason}}</p>
-                                          </li>
-                                          @elseif( @$studentFund->assistant_status == null)
-                           
-                                          <li class="pendingTimeline">
-                                            <a href="#!">APO / ATDO</a>
-                                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['assistant_view_date'] }}</a>
-                                           <p></p>
-                                            <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                                             </li>
-                                             @endif
-                                             @endif
-                                             @if(@$studentFund->assistant_status == 1)
-                                             @if( @$studentFund->officer_status == 1)
-                            
-                                             <li class="ApproveTimeline">
-                                               <a href="#!">PO / TDO</a>
-                                               <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
-                                               <p></p>
-                                               <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
-                                               <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->officerUser->name }}</p>
-                                              
-                                               <p  class="mt-2"><span class= "spanclr"> Approved Date :   </span>@if(@$studentFund['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                               <p  class="mt-2"><span class= "spanclr"> Approved Reason :   </span>{{ @$studentFund->officer_status_reason}}</p>
+                                                <a href="#!">TEO</a>
+                                                <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                    {{ @$studentFund['teo_return_view_date'] }}</a>
+                                                <br>
+                                                <p class="inputText badge bg-success" style="font-size: 12px">Approved </p>
+
+                                                <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                    @if (@$studentFund['teo_status_date'] != null)
+                                                        {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}
+                                                    @endif
+                                                </p>
+
                                             </li>
-                                            @elseif( @$studentFund->officer_status == 2)
-                            
+                                            @if (@$studentFund->teo_return == null)
+                                                @if (@$studentFund->clerk_return == null)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">Clerk</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$studentFund['clerk_return_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-success" style="font-size: 12px">
+                                                            Approved </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Name :
+                                                            </span>{{ @$studentFund->clerkUser->name }}</p>
+
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                            @if (@$studentFund['clerk_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}
+                                                            @endif
+                                                        </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                            </span>{{ @$studentFund->clerk_status_reason }}</p>
+                                                    </li>
+                                                @elseif(@$studentFund->clerk_return == 1)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">Clerk</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-warning" style="font-size: 12px">
+                                                            Pending </p>
+                                                        <div class="settings-icon">
+                                                            <a class="approveItem" data-id="{{ @$studentFund->id }}"><i
+                                                                    class="fa fa-check bg-success me-1"></i></a>
+                                                        </div>
+
+                                                    </li>
+                                                @endif
+                                            @endif
+
+                                            @if (@$studentFund->clerk_return == null)
+                                                @if (@$studentFund->JsSeo_return == null)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">JS/ SEO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$studentFund['JsSeo_return_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-success" style="font-size: 12px">
+                                                            Approved </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Name :
+                                                            </span>{{ @$studentFund->JsSeoUser->name }}</p>
+
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                            @if (@$studentFund['JsSeo_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                            @endif
+                                                        </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                            </span>{{ @$studentFund->JsSeo_status_reason }}</p>
+                                                    </li>
+                                                @elseif(@$studentFund->JsSeo_return == 1)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">JS/ SEO</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-warning" style="font-size: 12px">
+                                                            Pending </p>
+
+                                                    </li>
+                                                @endif
+                                            @endif
+
+                                            @if (@$studentFund->JsSeo_return == null)
+                                                @if (@$studentFund->assistant_return == null)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">APO/ ATDO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$studentFund['assistant_return_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-success" style="font-size: 12px">
+                                                            Approved </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Name :
+                                                            </span>{{ @$studentFund->JsSeoUser->name }}</p>
+
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                            @if (@$studentFund['assistant_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}
+                                                            @endif
+                                                        </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                            </span>{{ @$studentFund->assistant_status_reason }}</p>
+                                                    </li>
+                                                @elseif(@$studentFund->assistant_return == 1)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">APO/ ATDO</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-warning" style="font-size: 12px">
+                                                            Pending </p>
+
+                                                    </li>
+                                                @endif
+                                            @endif
+
+                                            @if (@$studentFund->rejection_status == 1)
+                                                <li class="rejectTimeline">
+                                                    <a href="#!">PO / TDO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['officer_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-danger" style="font-size: 12px">Rejected
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Name :
+                                                        </span>{{ @$studentFund->officerUser->name }}</p>
+
+                                                    <p class="mt-2"><span class= "spanclr"> Rejection Date : </span>
+                                                        @if (@$studentFund['officer_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Rejection Reason :
+                                                        </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                </li>
+                                            @else
+                                                @if (@$studentFund->assistant_return == null)
+                                                    @if (@$studentFund->officer_return == null)
+                                                        <li class="ApproveTimeline">
+                                                            <a href="#!">PO/ TDO</a>
+                                                            <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                                {{ @$studentFund['officer_return_view_date'] }}</a>
+                                                            <p></p>
+                                                            <p class="inputText badge bg-success" style="font-size: 12px">
+                                                                Approved </p>
+                                                            <p class="mt-2"><span class= "spanclr"> Name :
+                                                                </span>{{ @$studentFund->JsSeoUser->name }}</p>
+
+                                                            <p class="mt-2"><span class= "spanclr"> Approved Date :
+                                                                </span>
+                                                                @if (@$studentFund['officer_status_date'] != null)
+                                                                    {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                                @endif
+                                                            </p>
+                                                            <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                                </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                        </li>
+                                                    @elseif(@$studentFund->officer_return == 1)
+                                                        <li class="ApproveTimeline">
+                                                            <a href="#!">PO/ TDO</a>
+                                                            <p></p>
+                                                            <p class="inputText badge bg-warning" style="font-size: 12px">
+                                                                Pending </p>
+
+                                                        </li>
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        @endif
+                                    </ul>
+                                @else
+                                    <ul class="timeline-3">
+
+                                        @if (@$studentFund->teo_status == null)
+                                            <li class="pendingTimeline">
+                                                <a href="#!">TEO</a>
+                                                <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                    {{ @$studentFund['teo_view_date'] }}</a>
+                                                <br>
+                                                <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
+                                                {{-- <div class="settings-icon">
+                                    <a class="approveItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-check bg-success me-1"></i></a>
+                                    &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                                 </div>
+                                --}}
+                                            </li>
+                                        @elseif(@$studentFund->teo_status == 1)
+                                            <li class="ApproveTimeline">
+                                                <a href="#!">TEO</a>
+                                                <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                    {{ @$studentFund['teo_view_date'] }}</a>
+                                                <br>
+                                                <p class="inputText badge bg-success" style="font-size: 12px">Approved
+                                                </p>
+
+                                                <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                    @if (@$studentFund['teo_status_date'] != null)
+                                                        {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}
+                                                    @endif
+                                                </p>
+                                                <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                    </span>{{ @$studentFund->teo_status_reason }}</p>
+
+                                            </li>
+                                        @elseif(@$studentFund->teo_status == 2)
                                             <li class="rejectTimeline">
-                                              <a href="#!">PO / TDO</a>
-                                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
-                                              <p></p>
-                                              <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
-                                              <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$studentFund->officerUser->name }}</p>
-                                              
-                                              <p  class="mt-2"><span class= "spanclr"> Rejected Date :   </span>@if(@$studentFund['officer_status_date']!=null) {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}@endif</p>
-                                              <p  class="mt-2"><span class= "spanclr"> Rejected Reason :   </span>{{ @$studentFund->officer_status_reason}}</p>
-                                           </li>
-                                           @elseif( @$studentFund->officer_status == null)
-                            
-                                           <li class="pendingTimeline">
-                                             <a href="#!">PO / TDO</a>
-                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$studentFund['officer_view_date'] }}</a>
-                                            <p></p>
-                                             <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                                              </li>
-                                              @endif
-                                              @endif
-                     </ul>
-         
-             <!-- /row -->
-         </div>
-         
-</div>
-</div>
+                                                <a href="#!">TEO</a>
+                                                <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                    {{ @$studentFund['teo_view_date'] }}</a>
+                                                <br>
+                                                <p class="inputText badge bg-danger" style="font-size: 12px">Returned </p>
 
+                                                <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
+                                                    @if (@$studentFund['teo_status_date'] != null)
+                                                        {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}
+                                                    @endif
+                                                </p>
+                                                <p class="mt-2"><span class= "spanclr"> Returned Reason :
+                                                    </span>{{ @$studentFund->teo_status_reason }}</p>
 
+                                            </li>
+                                        @endif
+                                        @if (@$studentFund->teo_status == 1)
+                                            @if (@$studentFund->clerk_status == 1)
+                                                <li class="ApproveTimeline">
+                                                    <a href="#!">Clerk</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['clerk_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-success" style="font-size: 12px">Approved
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Name :
+                                                        </span>{{ @$studentFund->clerkUser->name }}</p>
 
-             <div class="modal fade" id="approve-popup" style="display: none">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content country-select-modal border-0">
-                        <div class="modal-header offcanvas-header">
-                            <h6 class="modal-title">Are you sure?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body p-5">
-                            <div class="text-center">
-                                <h4>Are you sure to Approve this Application?</h4>
+                                                    <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                        @if (@$studentFund['clerk_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                        </span>{{ @$studentFund->clerk_status_reason }}</p>
+                                                </li>
+                                            @elseif(@$studentFund->clerk_status == 2)
+                                                <li class="rejectTimeline">
+                                                    <a href="#!">Clerk</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['clerk_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-danger" style="font-size: 12px">Returned
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Name :
+                                                        </span>{{ @$studentFund->clerkUser->name }}</p>
+
+                                                    <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
+                                                        @if (@$studentFund['clerk_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Returned Reason :
+                                                        </span>{{ @$studentFund->clerk_status_reason }}</p>
+                                                </li>
+                                            @elseif(@$studentFund->clerk_status == null)
+                                                <li class="pendingTimeline">
+                                                    <a href="#!">Clerk</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['clerk_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-warning" style="font-size: 12px">Pending
+                                                    </p>
+                                                    <div class="settings-icon">
+                                                        <a class="approveItem" data-id="{{ @$studentFund->id }}"><i
+                                                                class="fa fa-check bg-success me-1"></i></a>
+                                                        {{-- &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a> --}}
+                                                    </div>
+
+                                                </li>
+                                            @endif
+                                        @endif
+                                        @if (@$studentFund->clerk_status == 1)
+
+                                            @if (@$studentFund->JsSeo_status == 1)
+                                                <li class="ApproveTimeline">
+                                                    <a href="#!">JS/ SEO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['JsSeo_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-success" style="font-size: 12px">Approved
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Name :
+                                                        </span>{{ @$studentFund->assistantUser->name }}</p>
+
+                                                    <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                        @if (@$studentFund['JsSeo_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                        </span>{{ @$studentFund->JsSeo_status_reason }}</p>
+                                                </li>
+                                            @elseif(@$studentFund->JsSeo_status == 2)
+                                                <li class="rejectTimeline">
+                                                    <a href="#!">JS/ SEO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['JsSeo_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-danger" style="font-size: 12px">Returned
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Name :
+                                                        </span>{{ @$studentFund->JsSeoUser->name }}</p>
+
+                                                    <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
+                                                        @if (@$studentFund['JsSeo_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Returned Reason :
+                                                        </span>{{ @$studentFund->JsSeo_status_reason }}</p>
+                                                </li>
+                                            @elseif(@$studentFund->JsSeo_status == null)
+                                                <li class="pendingTimeline">
+                                                    <a href="#!">JS/ SEO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['JsSeo_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-warning" style="font-size: 12px">Pending
+                                                    </p>
+                                                </li>
+                                            @endif
+                                        @endif
+
+                                        @if (@$studentFund->JsSeo_status == 1)
+                                            @if (@$studentFund->assistant_status == 1)
+                                                <li class="ApproveTimeline">
+                                                    <a href="#!">APO / ATDO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['assistant_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-success" style="font-size: 12px">Approved
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Name :
+                                                        </span>{{ @$studentFund->assistantUser->name }}</p>
+
+                                                    <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                        @if (@$studentFund['assistant_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                        </span>{{ @$studentFund->assistant_status_reason }}</p>
+                                                </li>
+                                            @elseif(@$studentFund->assistant_status == 2)
+                                                <li class="rejectTimeline">
+                                                    <a href="#!">APO / ATDO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['assistant_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-danger" style="font-size: 12px">Returned
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Name :
+                                                        </span>{{ @$studentFund->assistantUser->name }}</p>
+
+                                                    <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
+                                                        @if (@$studentFund['assistant_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Returned Reason :
+                                                        </span>{{ @$studentFund->assistant_status_reason }}</p>
+                                                </li>
+                                            @elseif(@$studentFund->assistant_status == null)
+                                                <li class="pendingTimeline">
+                                                    <a href="#!">APO / ATDO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$studentFund['assistant_view_date'] }}</a>
+                                                    <p></p>
+                                                    <p class="inputText badge bg-warning" style="font-size: 12px">Pending
+                                                    </p>
+                                                </li>
+                                            @endif
+                                        @endif
+
+                                        @if (@$studentFund->rejection_status == 1)
+                                            <li class="rejectTimeline">
+                                                <a href="#!">PO / TDO</a>
+                                                <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                    {{ @$studentFund['officer_view_date'] }}</a>
+                                                <p></p>
+                                                <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
+                                                <p class="mt-2"><span class= "spanclr"> Name :
+                                                    </span>{{ @$studentFund->officerUser->name }}</p>
+
+                                                <p class="mt-2"><span class= "spanclr"> Rejection Date : </span>
+                                                    @if (@$studentFund['officer_status_date'] != null)
+                                                        {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                    @endif
+                                                </p>
+                                                <p class="mt-2"><span class= "spanclr"> Rejection Reason :
+                                                    </span>{{ @$studentFund->officer_status_reason }}</p>
+                                            </li>
+                                        @else
+                                            @if (@$studentFund->assistant_status == 1)
+                                                @if (@$studentFund->officer_status == 1)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">PO / TDO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$studentFund['officer_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-success" style="font-size: 12px">
+                                                            Approved </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Name :
+                                                            </span>{{ @$studentFund->officerUser->name }}</p>
+
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                            @if (@$studentFund['officer_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                            @endif
+                                                        </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                            </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                    </li>
+                                                @elseif(@$studentFund->officer_status == 2)
+                                                    <li class="rejectTimeline">
+                                                        <a href="#!">PO / TDO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$studentFund['officer_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-danger" style="font-size: 12px">
+                                                            Returned </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Name :
+                                                            </span>{{ @$studentFund->officerUser->name }}</p>
+
+                                                        <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
+                                                            @if (@$studentFund['officer_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                            @endif
+                                                        </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Returned Reason :
+                                                            </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                    </li>
+                                                @elseif(@$studentFund->officer_status == null)
+                                                    <li class="pendingTimeline">
+                                                        <a href="#!">PO / TDO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$studentFund['officer_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-warning" style="font-size: 12px">
+                                                            Pending </p>
+                                                    </li>
+                                                @endif
+                                            @endif
+                                        @endif
+                                    </ul>
+                                @endif
+
+                                <!-- /row -->
                             </div>
-                            <form id="ownForm">
-        
-                                @csrf
-                                <div class="text-center">
-                                    <h5>Reason for Approval</h5>
-                                    <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
-                                    <span id="approval"></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal fade" id="approve-popup" style="display: none">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content country-select-modal border-0">
+                                <div class="modal-header offcanvas-header">
+                                    <h6 class="modal-title">Are you sure?</h6><button aria-label="Close"
+                                        class="btn-close" data-bs-dismiss="modal" type="button"><span
+                                            aria-hidden="true">×</span></button>
                                 </div>
-                            <input type="hidden" id="requestId" name="requestId" value="" />
-                            <div class="text-center">
-                                <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
-                                <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="rejection-popup">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content country-select-modal border-0">
-                        <div class="modal-header offcanvas-header">
-                            <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body p-5">
-                            <form id="ownForm">
-                                @csrf
-                            <div class="text-center">
-                                <h5>Reason for Rejection</h5>
-                                <textarea class="form-control" name="reason" id="reason" requred></textarea>
-                                <span id="rejection"></span>
-                            </div>
-        
-                            <input type="hidden" id="requestId2" name="requestId2" value="" />
-                            <div class="text-center">
-                                <button type="button" onclick="reject()" class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
-                                <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <div class="modal-body p-5">
+                                    <div class="text-center">
+                                        <h4>Are you sure to Approve this Application?</h4>
+                                    </div>
+                                    <form id="ownForm">
 
+                                        @csrf
+                                        <div class="text-center">
+                                            <h5>Reason for Approval</h5>
+                                            <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
+                                            <span id="approval"></span>
+                                        </div>
+                                        <input type="hidden" id="requestId" name="requestId" value="" />
+                                        <div class="text-center">
+                                            <button type="button" onclick="approve()"
+                                                class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                            <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal"
+                                                type="button">No</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="rejection-popup">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content country-select-modal border-0">
+                                <div class="modal-header offcanvas-header">
+                                    <h6 class="modal-title">Are you sure to reject this Application?</h6><button
+                                        aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+                                        type="button"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body p-5">
+                                    <form id="ownForm">
+                                        @csrf
+                                        <div class="text-center">
+                                            <h5>Reason for Rejection</h5>
+                                            <textarea class="form-control" name="reason" id="reason" requred></textarea>
+                                            <span id="rejection"></span>
+                                        </div>
+
+                                        <input type="hidden" id="requestId2" name="requestId2" value="" />
+                                        <div class="text-center">
+                                            <button type="button" onclick="reject()"
+                                                class="btn btn-primary mt-4 mb-0 me-2">Yes</button>
+                                            <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal"
+                                                type="button">No</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
-<meta name="csrf_token" content="{{ csrf_token() }}" />
-<link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
-<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
+    <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
-<script src="{{ asset('js/toastr.js') }}"></script>
-<script type="text/javascript">
-
-
-    $(document).on("click", ".approveItem", function() {
-        var id =$(this).attr('data-id');
-            $('#requestId').val($(this).attr('data-id') );
+    <script src="{{ asset('js/toastr.js') }}"></script>
+    <script type="text/javascript">
+        $(document).on("click", ".approveItem", function() {
+            var id = $(this).attr('data-id');
+            $('#requestId').val($(this).attr('data-id'));
             $('#approve-popup').modal('show');
-              
-          
-            });
-            $(document).on("click", ".rejectItem", function() {
-                $('#requestId2').val($(this).attr('data-id') );
+
+
+        });
+        $(document).on("click", ".rejectItem", function() {
+            $('#requestId2').val($(this).attr('data-id'));
             $('#rejection-popup').modal('show');
-            });
-            function approve() {
-                var reason = $('#approved_reason').val();
+        });
+
+        function approve() {
+            var reason = $('#approved_reason').val();
             var reqId = $('#requestId').val();
-    
-        $.ajax({
-                    url: "{{ route('itiScholarshipClerk.approve') }}",
+
+            $.ajax({
+                url: "{{ route('itiScholarshipClerk.approve') }}",
+                type: "POST",
+                data: {
+                    "id": reqId,
+                    "reason": reason,
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    toastr.success(response.success, 'Success!')
+                    $('#success').show();
+                    $('#approve-popup').modal('hide');
+                    $('#success_message').fadeIn().html(response.success);
+                    setTimeout(function() {
+                        $('#success_message').fadeOut("slow");
+                    }, 2000);
+
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+
+                }
+            });
+        }
+
+        function reject() {
+            var reason = $('#reason').val();
+
+            if ($('#reason').val() == "") {
+                rejection.innerHTML = "<span style='color: red;'>" + "Please enter the reason for rejection</span>";
+            } else {
+                rejection.innerHTML = "";
+                var reqId = $('#requestId2').val();
+                console.log(reqId);
+                $.ajax({
+
+                    url: "{{ route('itiScholarshipClerk.reject') }}",
                     type: "POST",
                     data: {
                         "id": reqId,
-                        "reason" :reason,
+                        "reason": reason,
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(response) {
+                        console.log(response.success);
                         toastr.success(response.success, 'Success!')
-                        $('#success').show();
-                        $('#approve-popup').modal('hide');
+                        $('#rejection-popup').modal('hide');
                         $('#success_message').fadeIn().html(response.success);
                         setTimeout(function() {
                             $('#success_message').fadeOut("slow");
                         }, 2000);
-    
+
                         setTimeout(function() {
-                    window.location.reload();
-                }, 2000);
-    
+                            window.location.reload();
+                        }, 2000);
+
                     }
-                });
-    }
-    function reject() {
-            var reason = $('#reason').val();
-          
-            if($('#reason').val() == ""){
-                rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+                })
+
             }
-            else{
-                rejection.innerHTML ="";
-                var reqId = $('#requestId2').val();
-            console.log(reqId);
-            $.ajax({
-              
-                url: "{{ route('itiScholarshipClerk.reject') }}",
-                type: "POST",
-                    data: {
-                        "id": reqId,
-                        "reason" :reason,
-                        "_token": "{{ csrf_token() }}"
-                    },
-                success: function(response) {
-                    console.log(response.success);
-                    toastr.success(response.success, 'Success!')
-                        $('#rejection-popup').modal('hide');
-                        $('#success_message').fadeIn().html(response.success);
-                            setTimeout(function() {
-                                $('#success_message').fadeOut("slow");
-                            }, 2000 );
-    
-                            setTimeout(function() {
-    window.location.reload();
-}, 2000);
-    
-                }
-            })
-    
-            }
-         }
-    
-            
-</script>    
-<script>
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
 
+        function printDiv() {
+            var printContents = document.getElementById('print_content').innerHTML;
+            var originalContents = document.body.innerHTML;
 
-	$(document).ready(function() {
-     	$('#example').DataTable();
-	});
-     function printDiv() {
-        var printContents = document.getElementById('print_content').innerHTML;
-    var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
 
-    document.body.innerHTML = printContents;
+            window.print();
 
-    window.print();
-
-    document.body.innerHTML = originalContents;
-            }
-  </script>
-<!-- main-content-body -->
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    <!-- main-content-body -->
 @endsection
