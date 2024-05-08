@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"2f0b62307ba147c0a66b4a7b1000f52c","collectionName":"iti_fund_scheme","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"c4416d06cf184717a2f5c1f1da7be64c","collectionName":"iti_fund_scheme","type":"collection"}
