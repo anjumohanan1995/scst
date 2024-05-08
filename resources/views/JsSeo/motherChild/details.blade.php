@@ -657,7 +657,7 @@
                      <form id="ownForm">
                         @csrf
                         <div class="text-center">
-                           <h5>Reason for Rejection</h5>
+                           <h5>Reason for Return</h5>
                            <textarea class="form-control" name="reason" id="reason" requred></textarea>
                            <span id="rejection"></span>
                         </div>

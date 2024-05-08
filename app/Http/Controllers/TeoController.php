@@ -309,6 +309,8 @@ class TeoController extends Controller
                 'teo_status_id' => Auth::user()->id,
                 'teo_status_reason' => $reason,
             ]);
+
+
             return response()->json([
                 'success' => 'Marriage Grant Scheme Application Approved successfully.'
             ]);
