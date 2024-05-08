@@ -459,7 +459,7 @@ class PoTdoController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-            
+             $totalRecord->where('assistant_return', null)->where('officer_return', 1);
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -474,7 +474,7 @@ class PoTdoController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-           
+            $totalRecordswithFilte->where('assistant_return', null)->where('officer_return', 1);
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -493,10 +493,8 @@ class PoTdoController extends Controller
             // $items->where('assistant_return', null)->where('officer_return', 1  || 'rejection_status', 1);
             
 
-            $items->where('assistant_return', null)
-            ->where(function($query) {
-                $query->where('officer_return', 1);
-            });
+            $items->where('assistant_return', null)->where('officer_return', 1);
+          
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -600,7 +598,8 @@ class PoTdoController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-            
+             $totalRecord->where('officer_return', null);
+
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -615,7 +614,8 @@ class PoTdoController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-           
+            $totalRecordswithFilte->where('officer_return', null);
+
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -1794,7 +1794,7 @@ class PoTdoController extends Controller
         return view('PoTdo.tuitionFee.index');
     }
 
-    public function gettuitionFeeListOfficer(Request $request){
+    public function gettuitionFeeListOfficerReturn(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
        $tdo= Auth::user()->po_tdo_office;
@@ -1833,6 +1833,130 @@ class PoTdoController extends Controller
                  $totalRecord->where('name','like',"%".$name."%");
              }
             
+             $totalRecord->where('assistant_return', null)->where('officer_return', 1);
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = TuitionFee::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('assistant_status',1);
+
+           
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+            $totalRecordswithFilte->where('assistant_return', null)->where('officer_return', 1);
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             
+            
+             $items = TuitionFee::where('deleted_at', null)
+                 ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('assistant_status',1)
+                 ->orderBy($columnName, $columnSortOrder);
+             
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }           
+            $items->where('assistant_return', null)->where('officer_return', 1);
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+             
+         foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $student_name = $record->student_name;
+             $caste = $record->caste;
+             $status = $record->officer_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name=$record->teo->teo_name;
+              $created_at =  $record->created_at;
+              $edit='';
+             
+          
+            $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
+
+        
+                $data_arr[] = array(
+
+                    "sl_no" =>$i,
+                    "id" => $id,
+                    "name" => $name,
+                    "address" => $address,
+                    "student_name" => $student_name,
+                    "caste" => $caste,
+                    "date" => $date .' ' .$time,     
+                    "teo_name" =>$teo_name,              
+                    "edit" => $edit,
+                    
+    
+                );
+          
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
+    public function gettuitionFeeListOfficer(Request $request){
+        $role =  Auth::user()->role;       
+       $district =  Auth::user()->district;
+       $tdo= Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+         
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = TuitionFee::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_status',1);
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+             $totalRecord->where('officer_return', null);
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -1847,7 +1971,7 @@ class PoTdoController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-           
+            $totalRecordswithFilte->where('officer_return', null);
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -1863,7 +1987,7 @@ class PoTdoController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-           
+            $items->where('officer_return', null);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -1890,11 +2014,15 @@ class PoTdoController extends Controller
                 $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
             }
             else if($status ==2){
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Returnend</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
+            else if($status ==3){
                 $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
             }
 
           
@@ -1945,6 +2073,13 @@ class PoTdoController extends Controller
                 "officer_view_date" =>$date .' ' .$currenttime
             ]);
         }
+        if($formData->officer_return_view_status==null && $formData->return_status==1){
+            $formData->update([
+                "officer_return_view_status"=>1,
+                "officer_view_id" =>Auth::user()->id,
+                "officer_return_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         
         return view('PoTdo.tuitionFee.details',compact('formData'));
 
@@ -1961,6 +2096,7 @@ class PoTdoController extends Controller
        
         $tuition->update([
             'officer_status' => 1,
+            'officer_return' => null,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -1980,6 +2116,11 @@ class PoTdoController extends Controller
        
         $tuition->update([
             'officer_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -1988,6 +2129,32 @@ class PoTdoController extends Controller
             'success' => 'Tuition Fee Application Rejected successfully.'
         ]);
     }
+    public function tuitionFeeRemoveOfficer (Request $request){
+        //  dd($request);
+          $marriage = TuitionFee::where('_id', $request->id)->first();
+          $id = $request->id;
+          $reason =$request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        
+         
+          $marriage->update([
+              'rejection_status' => 1,
+              'officer_status' => 3,
+              'teo_return' => null,////////////////
+              'clerk_return' => null,
+              'jsSeo_return' => null,
+              'assistant_return' => null,
+              'officer_return' => null,
+              'officer_status_date' => $currenttime,
+              'officer_status_id' => Auth::user()->id,
+              'officer_status_reason' => $reason,
+          ]);
+          return response()->json([
+              'success' => 'Tuition Fee Application Rejected successfully.'
+          ]);
+      }
 
     public function StudentFundListOfficer(Request $request)
     {

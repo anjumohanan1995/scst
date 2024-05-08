@@ -344,6 +344,10 @@ Route::get('/tuitionAdminFeeView/{id}/view', [TuitionFeeController::class, 'tuit
 Route::post('/tuitionFee/teoApprove', [App\Http\Controllers\TuitionFeeController::class, 'tuitionFeeTeoApprove'])->name('tuitionFee-teo.approve');
 Route::post('/tuitionFee/teoReject', [App\Http\Controllers\TuitionFeeController::class, 'tuitionFeeTeoReject'])->name('tuitionFee-teo.reject');
 
+Route::get('/getTuitionFeeListReturn', [TuitionFeeController::class, 'getTuitionFeeListReturn'])->name('getTuitionFeeListReturn');
+Route::get('/tuitionfee-application-edit/{id}', [TuitionFeeController::class, 'tuitionFeeApplicationEdit'])->name('tuitionFeeApplicationEdit');
+Route::post('/tuitionFeeUpdate', [TuitionFeeController::class, 'tuitionFeeUpdate'])->name('tuitionFeeUpdate');
+
 
 
 //Institution
@@ -422,6 +426,7 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/tuitionFeeClerkApprove','tuitionFeeClerkApprove')->name('tuitionFee.clerk.approve');
     Route::post('/tuitionFeeClerkReject','tuitionFeeClerkReject')->name('tuitionFee.clerk.reject');
 
+    Route::get('/gettuitionFeeClerkReturn','gettuitionFeeClerkReturn')->name('gettuitionFeeClerkReturn');
 
 
 
@@ -527,6 +532,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/tuitionFeeApproveAssistant','tuitionFeeApproveAssistant')->name('tuitionFee.assistant.approve');
     Route::post('/tuitionFeeRejectAssistant','tuitionFeeRejectAssistant')->name('tuitionFee.assistant.reject');
    
+    Route::get('/gettuitionFeeListAssistantReturn','gettuitionFeeListAssistantReturn')->name('gettuitionFeeListAssistantReturn');
+
     Route::get('/StudentFundListAssistant', 'StudentFundListAssistant')->name('StudentFundListAssistant');
     Route::get('/getStudentFundListAssistant', 'getStudentFundListAssistant')->name('getStudentFundListAssistant');
     Route::get('/StudentFund/{id}/assistantview', 'studentFundAssistantView')->name('studentFundAssistantView');
@@ -624,7 +631,9 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/tuitionFeeDetailsOfficer/{id}','tuitionFeeDetailsOfficer')->name('tuitionFeeDetailsOfficer');
     Route::post('/tuitionFeeApproveOfficer','tuitionFeeApproveOfficer')->name('tuitionFee.officer.approve');
     Route::post('/tuitionFeeRejectOfficer','tuitionFeeRejectOfficer')->name('tuitionFee.officer.reject');
-
+    
+    Route::get('/gettuitionFeeListOfficerReturn','gettuitionFeeListOfficerReturn')->name('gettuitionFeeListOfficerReturn');
+    Route::post('/tuitionFeeRemoveOfficer','tuitionFeeRemoveOfficer')->name('tuitionFee.officer.remove');
 
     Route::get('/StudentFundListOfficer', 'StudentFundListOfficer')->name('StudentFundListOfficer');
     Route::get('/getStudentFundListOfficer', 'getStudentFundListOfficer')->name('getStudentFundListOfficer');
@@ -719,6 +728,7 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::get('/tuitionFeeJsSeoDetails/{id}','tuitionFeeJsSeoDetails')->name('tuitionFeeJsSeoDetails');
     Route::post('/tuitionFeeJsSeoApprove','tuitionFeeJsSeoApprove')->name('tuitionFee.JsSeo.approve');
     Route::post('/tuitionFeeJsSeoReject','tuitionFeeJsSeoReject')->name('tuitionFee.JsSeo.reject');
+    Route::get('/gettuitionFeeJsSeoReturn','gettuitionFeeJsSeoReturn')->name('gettuitionFeeJsSeoReturn');
 
     Route::get('/JsSeoItiFundList', 'JsSeoItiFundList')->name('JsSeoItiFundList');
     Route::get('/getJsSeoItiFundList', 'getJsSeoItiFundList')->name('getJsSeoItiFundList');

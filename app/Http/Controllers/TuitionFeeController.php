@@ -341,8 +341,226 @@ class TuitionFeeController extends Controller
 
     }
 
+    public function getTuitionFeeListReturn(Request $request)
+    {
+        
+        $name = $request->name;
 
 
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = TuitionFee::where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+             $totalRecord->where('teo_return', 1);
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = TuitionFee::where('deleted_at',null);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+            $totalRecordswithFilte->where('teo_return', 1);
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = TuitionFee::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+
+            $items->where('teo_return', 1);
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+         foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $student_name = $record->student_name;
+             $caste = $record->caste;
+             $date = $record->date;
+             $time = $record->time;
+              $created_at =  $record->created_at;
+              $edit ='';             
+
+              $edit='<div class="settings-main-icon"><a  href="' .  route('tuitionAdminFeeView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('tuitionfee-application-edit/' . $id) . '">Resubmit</a></div>';
+
+            $data_arr[] = array(
+                "sl_no" => $i,
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "student_name" => $student_name,
+                "caste" => $caste,
+                "created_at" => $created_at, 
+                "date"=>  $date." ".$time,             
+                "edit" => $edit
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }    
+    public function tuitionFeeApplicationEdit(Request $request)
+    {
+
+        $data = Auth::user();
+        $districts = District::get();
+        $datas = TuitionFee::where('_id',$request->id)->first();
+      //  dd($datas);
+        return view('admin.tuitionFee.edit', compact('data', 'districts','datas'));
+    }
+
+    public function tuitionFeeUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+         
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',          
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();    
+
+        $dat = TuitionFee::where('_id',$request->id)->first();
+
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/tuition'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = $dat->signature;
+        }
+        if ($request->hasfile('principal_declaration')) {
+
+            $image = $request->principal_declaration;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/tuition'), $imgfileName);
+
+            $principal_declaration = $imgfileName;
+
+        }else{
+            $principal_declaration = $dat->principal_declaration;
+        }
+
+
+        if ($request->hasfile('photo')) {
+
+            $image = $request->photo;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/photo'), $imgfileName);
+
+            $photo = $imgfileName;
+
+        }else{
+            $photo = $dat->photo;
+        }
+     
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+      $datainsert = TuitionFee::where('_id',$request->id)->first();
+
+        $datainsert->update([
+            'name' => $data['name'],
+            'address' => @$data['address'],
+            'current_district' => @$data['current_district'],
+            'current_district_name' => @$data['current_district_name'],
+            'current_taluk' => @$data['current_taluk'],
+            'current_taluk_name' => @$data['current_taluk_name'],
+            'current_pincode' => @$data['current_pincode'],
+            'mobile' => @$data['mobile'],
+            'caste' => @$data['caste'], 
+            'relegion' => @$data['relegion'],
+            'annual_income' => @$data['annual_income'],
+
+            'student_name' => @$data['student_name'],
+            'relation' => @$data['relation'],
+            'school_name' => @$data['school_name'],
+            'class_number' => @$data['class_number'],
+            'tuition_center' => @$data['tuition_center'],
+            'place' => @$data['place'],
+
+            'signature' => @$signature,
+            'photo' => @$photo,
+
+            'submitted_district' => @$data['submitted_district'],
+            'submitted_teo' => @$data['submitted_teo'],
+            'dist_name' => @$data['dist_name'],
+            'teo_name' => @$data['dob'],
+            'date' =>date('d-m-Y'),
+            'time'=>date('H:i:s'),
+           // 'user_id' =>Auth::user()->id, 
+            'status' =>0,
+            'principal_declaration' => @$principal_declaration,
+            'panchayath' => @$data['panchayath'],
+            'parent_bank_branch' => @$data['parent_bank_branch'],
+            'parent_account_no' => @$data['parent_account_no'],
+            'parent_ifsc_code' => @$data['parent_ifsc_code'],
+            'teo_return' => null,
+            'return_status' =>1,
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime,
+            "teo_status_date"=>$date .' ' .$currenttime,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
+        ]);
+
+        return redirect('userTuitionFeeList')->with('status','Application Submitted Successfully.');
+
+    }
     
     public function getTuitionFeeList(Request $request)
     {
@@ -375,7 +593,7 @@ class TuitionFeeController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-            
+             $totalRecord->where('teo_return', null);
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -387,7 +605,7 @@ class TuitionFeeController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-           
+            $totalRecordswithFilte->where('teo_return', null);
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -397,7 +615,7 @@ class TuitionFeeController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-           
+            $items->where('teo_return', null);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -428,7 +646,7 @@ class TuitionFeeController extends Controller
               
                 }
                 else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('tuitionAdminFeeView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' . route('tuitionAdminFeeView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
                
               }
