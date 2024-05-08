@@ -6,6 +6,7 @@ use App\Models\AnemiaFinance;
 use App\Models\ChildFinance;
 use App\Models\District;
 use App\Models\ExamApplication;
+use App\Models\FinancialHelp;
 use App\Models\studentFund;
 use App\Models\HouseManagement;
 use App\Models\ItiFund;
@@ -764,7 +765,7 @@ class JsSeoController extends Controller
          
 
              // Total records
-             $totalRecord = studentFund::where('deleted_at',null)
+             $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('clerk_status',1);
@@ -777,7 +778,7 @@ class JsSeoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = studentFund::where('deleted_at',null)
+             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1);
@@ -794,7 +795,7 @@ class JsSeoController extends Controller
              // Fetch records
              
             
-             $items = studentFund::where('deleted_at', null)
+             $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1)
@@ -899,7 +900,7 @@ class JsSeoController extends Controller
          
 
              // Total records
-             $totalRecord = studentFund::where('deleted_at',null)
+             $totalRecord = FinancialHelp::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('clerk_status',1);
@@ -912,7 +913,7 @@ class JsSeoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = studentFund::where('deleted_at',null)
+             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1);
@@ -929,7 +930,7 @@ class JsSeoController extends Controller
              // Fetch records
              
             
-             $items = studentFund::where('deleted_at', null)
+             $items = FinancialHelp::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1)
@@ -1041,7 +1042,7 @@ class JsSeoController extends Controller
 
     }
     public function couplefinancialJsSeoApprove (Request $request){
-        $marriage = studentFund::where('_id', $request->id)->first();
+        $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -1061,7 +1062,7 @@ class JsSeoController extends Controller
         ]);
     }
     public function couplefinancialJsSeoReject (Request $request){
-        $marriage = studentFund::where('_id', $request->id)->first();
+        $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
