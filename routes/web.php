@@ -139,7 +139,7 @@ Route::get('/itiAdminFeeView/{id}', [App\Http\Controllers\ItiScholarshipControll
 
 Route::get('/getItiFundReturnList', [App\Http\Controllers\ItiScholarshipController::class, 'getItiFundReturnList'])->name('getItiFundReturnList');
 Route::get('/iti-fund-application-edit/{id}', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundApplicationEdit'])->name('itiFundApplicationEdit');
-Route::post('/itiFundUpdate', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundUpdate'])->name('itiFundUpdate');
+Route::post('/itiFundUpdate', [App\Http\Controllers\ItiScholarshipController::class, 'itiFundUpdate'])->name('iti-scholarship.update');
 
 
 
@@ -538,6 +538,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/itiScholarshipAssistantApprove','itiScholarshipAssistantApprove')->name('itiScholarshipAssistant.approve');
     Route::post('/itiScholarshipAssistantReject','itiScholarshipAssistantReject')->name('itiScholarshipAssistant.reject');
    
+    Route::get('/getAssistantItiFundListReturn','getAssistantItiFundListReturn')->name('getAssistantItiFundListReturn');
+
     Route::get('/studentAwardListAssistant', 'studentAwardListAssistant')->name('studentAwardListAssistant');
     Route::get('/getStudentAwardListAssistant', 'getStudentAwardListAssistant')->name('getStudentAwardListAssistant');
     Route::get('/studentAward/{id}/assistantview', 'studentAwardAssistantView')->name('studentAwardAssistantView');
@@ -629,6 +631,10 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::post('/itiScholarshipOfficerApprove','itiScholarshipOfficerApprove')->name('itiScholarshipOfficer.approve');
     Route::post('/itiScholarshipOfficerReject','itiScholarshipOfficerReject')->name('itiScholarshipOfficer.reject');
    
+    Route::get('/getOfficerItiFundListReturn', 'getOfficerItiFundListReturn')->name('getOfficerItiFundListReturn');
+    Route::post('/itiScholarshipOfficerRemove','itiScholarshipOfficerRemove')->name('itiScholarshipOfficer.remove');
+
+
     Route::get('/studentAwardListOfficer', 'studentAwardListOfficer')->name('studentAwardListOfficer');
     Route::get('/getStudentAwardListOfficer', 'getStudentAwardListOfficer')->name('getStudentAwardListOfficer');
     Route::get('/studentAward/{id}/officerview', 'studentAwardOfficerView')->name('studentAwardOfficerView');

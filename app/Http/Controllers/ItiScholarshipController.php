@@ -676,8 +676,142 @@ $i=$start;
         $data = Auth::user();
         $districts = District::get();
         $datas = ItiFund::where('_id',$request->id)->first();
+        $institutions=Institution::where('deleted_at',null)->get();
       //  dd($datas);
-        return view('itiFund.edit', compact('data', 'districts','datas'));
+        return view('admin.itiFund.edit', compact('data', 'districts','datas','institutions'));
+    }
+
+    public function itiFundUpdate(Request $request)
+    {
+        $data = $request->all();
+        
+        $datainsert = ItiFund::where('_id',$request->id)->first();
+      //  dd($request->id);
+
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/itiStudentFund'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = @$data->applicant_image;
+        }
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/itiStudentFund'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = @$data->signature;
+        }
+        if ($request->hasfile('attendance_doc')) {
+
+            $image1 = $request->attendance_doc;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $image1->extension();
+
+            $image1->move(public_path('/itiStudentFund'), $imgfileName1);
+
+            $attendance_doc = $imgfileName1;
+
+        }else{
+            $attendance_doc = @$data->attendance_doc;
+        }
+        if ($request->hasfile('income_certificate')) {
+
+            $image2 = $request->income_certificate;
+            $imgfileName2 = time() . rand(100, 999) . '.' . $image2->extension();
+
+            $image2->move(public_path('/itiStudentFund'), $imgfileName2);
+
+            $income_certificate = $imgfileName2;
+            // session(['file_details' => [
+            //     'path' => '/itiStudentFund/'.$income_certificate,
+            //     'original_name' => $imgfileName2,
+            // ]]);
+
+        }else{
+            $income_certificate = @$data->income_certificate;
+        }
+        if ($request->hasfile('caste_certificate')) {
+
+            $image3 = $request->caste_certificate;
+            $imgfileName3 = time() . rand(100, 999) . '.' . $image3->extension();
+
+           $path= $image3->move(public_path('/itiStudentFund'), $imgfileName3);
+
+            $caste_certificate = $imgfileName3;
+
+        }else{
+            $caste_certificate = @$data->caste_certificate;
+        }
+
+
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+
+        $datainsert->update([
+            'name' => @$data['name'],
+            'address' => @$data['address'],
+            'course_name' => @$data['course_name'],
+            'class_start_date' => @$data['class_start_date'],
+            'admission_type' => @$data['admission_type'],
+            'caste' => $data['caste'],
+            'caste_certificate' => $caste_certificate,
+            'income' => @$data['income'],
+            'income_certificate' => @$income_certificate,
+            'account_details' => @$data['account_details'],
+            'signature' => @$signature,
+            'parent_name' => @$data['parent_name'],
+            'attendance_doc' => @$attendance_doc,
+            'applicant_image' => @$applicant_image,
+            'date' => @$data['date'],
+            //'user_id' =>Auth::user()->id, 
+            'status' =>0,
+            'current_district_name' => @$data['current_district_name'],
+            'current_taluk_name' => @$data['current_taluk_name'],
+            'current_pincode' => @$data['current_pincode'],
+            'submitted_district' => @$data['submitted_district'],
+            'submitted_teo' => @$data['submitted_teo'],
+            'submitted_district_name' => @$data['dist_name'],
+            'submitted_teo_name' => @$data['teo_name'],
+            'current_district' => $data['current_district'],
+            'current_taluk' => @$data['current_taluk'],
+            'institution_name' => @$data['institution_name'],
+            'current_institution' => @$data['current_institution'],
+            'time' => @$data['time'],
+
+            'panchayath' => $data['panchayath'],
+            'metric_type' => @$data['metric_type'],
+            'course_duration' => @$data['course_duration'],
+            'institution_type' => @$data['institution_type'],
+            'admission_date' => @$data['admission_date'],
+            'parent_bank_branch' => $data['parent_bank_branch'],
+            'parent_account_no' => @$data['parent_account_no'],
+            'parent_ifsc_code' => @$data['parent_ifsc_code'],
+            'principal_bank_branch' => @$data['principal_bank_branch'],
+            'principal_account_no' => @$data['principal_account_no'],
+            'principal_ifsc_code' => @$data['principal_ifsc_code'],
+            'teo_return' => null,
+            'return_status' =>1,
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_return_view_status" =>$date .' ' .$currenttime
+        ]);
+
+
+        return redirect('userItiFundList')->with('status','Application Submitted Successfully.');
+
     }
 
     public function itiAdminFeeView(Request $request,$id)

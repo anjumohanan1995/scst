@@ -16,7 +16,7 @@ use App\Permission;
 use App\User;
 use App\Models\ExamApplication;
 
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -44,7 +44,7 @@ class UserHomeController extends Controller
 
     public function userCoupleFinanceList(Request $request)
     {
-        $data  = FinancialHelp::with('User')->get();
+        $data  = studentFund::with('User')->get();
         //dd($data);
         return view('user.financial_list', compact('data'));
     }
@@ -84,7 +84,7 @@ class UserHomeController extends Controller
 
 
         // Total records
-        $totalRecord = FinancialHelp::where('user_id', $user_id)->where('deleted_at', null);
+        $totalRecord = studentFund::where('user_id', $user_id)->where('deleted_at', null);
         if ($mobile != "") {
             $totalRecord->where('mobile', $mobile);
         }
@@ -102,7 +102,7 @@ class UserHomeController extends Controller
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-        $totalRecordswithFilte = FinancialHelp::where('user_id', $user_id)->where('deleted_at', null);
+        $totalRecordswithFilte = studentFund::where('user_id', $user_id)->where('deleted_at', null);
 
         if ($mobile != "") {
             $totalRecordswithFilte->where('mobile', $mobile);
@@ -121,7 +121,7 @@ class UserHomeController extends Controller
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
-        $items = FinancialHelp::where('user_id', $user_id)->where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
+        $items = studentFund::where('user_id', $user_id)->where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
         if ($mobile != "") {
             $items->where('mobile', $mobile);
         }
@@ -187,7 +187,7 @@ class UserHomeController extends Controller
     public function userCoupleApplicationView($id)
     {
 
-        $formData = FinancialHelp::where('_id', $id)->first();
+        $formData = studentFund::where('_id', $id)->first();
         //dd($formData);
         return view('user.financial_view', compact('formData'));
     }
@@ -394,7 +394,7 @@ class UserHomeController extends Controller
 
     public function userMotherChildList(Request $request)
     {
-        $data  = FinancialHelp::with('User')->get();
+        $data  = studentFund::with('User')->get();
         //dd($data);
         return view('user.motherchild_list', compact('data'));
     }

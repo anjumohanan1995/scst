@@ -6,7 +6,7 @@ use App\Models\AnemiaFinance;
 use App\Models\ChildFinance;
 use App\Models\District;
 use App\Models\ExamApplication;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\HouseManagement;
 use App\Models\ItiFund;
 use App\Models\MarriageGrant;
@@ -610,7 +610,7 @@ class JsSeoController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('clerk_status',1);
@@ -623,7 +623,7 @@ class JsSeoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1);
@@ -640,7 +640,7 @@ class JsSeoController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1)
@@ -745,7 +745,7 @@ class JsSeoController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('clerk_status',1);
@@ -758,7 +758,7 @@ class JsSeoController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1);
@@ -775,7 +775,7 @@ class JsSeoController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('clerk_status',1)
@@ -865,7 +865,7 @@ class JsSeoController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $formData =FinancialHelp::find($id);
+        $formData =studentFund::find($id);
         if($formData->JsSeo_view_status==null ){
             $formData->update([
             "JsSeo_view_status"=>1,
@@ -887,7 +887,7 @@ class JsSeoController extends Controller
 
     }
     public function couplefinancialJsSeoApprove (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -907,7 +907,7 @@ class JsSeoController extends Controller
         ]);
     }
     public function couplefinancialJsSeoReject (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -1747,6 +1747,13 @@ class JsSeoController extends Controller
         "JsSeo_view_date" =>$date .' ' .$currenttime
         ]);
     }
+    if($studentFund->JsSeo_return_view_status==null && $studentFund->return_status==1){
+        $studentFund->update([
+        "JsSeo_return_view_status"=>1,
+        "JsSeo_view_id" =>Auth::user()->id,
+        "JsSeo_return_view_date" =>$date .' ' .$currenttime
+        ]);
+    }
       
         return view('JsSeo.itiFund.details', compact('studentFund'));
     }
@@ -1761,6 +1768,7 @@ class JsSeoController extends Controller
        
         $data->update([
             'JsSeo_status' => 1,
+            'JsSeo_return' => null,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,

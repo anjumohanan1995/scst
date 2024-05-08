@@ -12,7 +12,7 @@ use App\Permission;
 use App\User;
 use App\Models\ExamApplication;
 
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -357,7 +357,7 @@ class ApplicationController extends Controller
 
 
 
-        $datainsert = FinancialHelp::create([
+        $datainsert = studentFund::create([
             'husband_address' => $data['husband_address'],
             'hus_district' => @$data['hus_district'],
             'hus_taluk' => @$data['hus_taluk'],
@@ -413,7 +413,7 @@ class ApplicationController extends Controller
 
     public function couplefinancialList(Request $request)
     {
-        $data  = FinancialHelp::with('User')->get();
+        $data  = studentFund::with('User')->get();
         //dd($data);
         return view('admin.financial_list', compact('data'));
     }
@@ -454,7 +454,7 @@ class ApplicationController extends Controller
 
 
         // Total records
-        $totalRecord = FinancialHelp::where('deleted_at', null);
+        $totalRecord = studentFund::where('deleted_at', null);
         if ($mobile != "") {
             $totalRecord->where('mobile', $mobile);
         }
@@ -472,7 +472,7 @@ class ApplicationController extends Controller
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-        $totalRecordswithFilte = FinancialHelp::where('deleted_at', null);
+        $totalRecordswithFilte = studentFund::where('deleted_at', null);
 
         if ($mobile != "") {
             $totalRecordswithFilte->where('mobile', $mobile);
@@ -491,7 +491,7 @@ class ApplicationController extends Controller
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
-        $items = FinancialHelp::where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
+        $items = studentFund::where('deleted_at', null)->orderBy($columnName, $columnSortOrder);
         if ($mobile != "") {
             $items->where('mobile', $mobile);
         }
@@ -559,17 +559,17 @@ class ApplicationController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
       $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $financialHelp=FinancialHelp::find($id);
-        if($financialHelp->teo_view_status==null && Auth::user()->role=='TEO'){
-            $financialHelp->update([
+        $studentFund=studentFund::find($id);
+        if($studentFund->teo_view_status==null && Auth::user()->role=='TEO'){
+            $studentFund->update([
             "teo_view_status"=>1,
             "teo_view_id" =>Auth::user()->id,
             "teo_view_date" =>$date .' ' .$currenttime
             ]);
         }
 
-        $formData = FinancialHelp::where('_id', $id)->first();
-        return view('admin.financial_view', compact('formData','financialHelp'));
+        $formData = studentFund::where('_id', $id)->first();
+        return view('admin.financial_view', compact('formData','studentFund'));
     }
 
 
@@ -972,7 +972,7 @@ class ApplicationController extends Controller
 
     public function motherChildSchemeList(Request $request)
     {
-        $data  = FinancialHelp::with('User')->get();
+        $data  = studentFund::with('User')->get();
         //dd($data);
         return view('admin.motherchild_list', compact('data'));
     }

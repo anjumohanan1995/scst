@@ -6,7 +6,7 @@ use App\Models\AnemiaFinance;
 use App\Models\ChildFinance;
 use App\Models\District;
 use App\Models\ExamApplication;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\HouseManagement;
 use App\Models\ItiFund;
 use App\Models\MarriageGrant;
@@ -602,7 +602,7 @@ class ClerkController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('teo_status',1);
@@ -615,7 +615,7 @@ class ClerkController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('teo_status',1);
@@ -632,7 +632,7 @@ class ClerkController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('teo_status',1)
@@ -738,7 +738,7 @@ class ClerkController extends Controller
          
 
              // Total records
-             $totalRecord = FinancialHelp::where('deleted_at',null)
+             $totalRecord = studentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
              ->where('teo_status',1);
@@ -751,7 +751,7 @@ class ClerkController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = FinancialHelp::where('deleted_at',null)
+             $totalRecordswithFilte = studentFund::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('teo_status',1);
@@ -768,7 +768,7 @@ class ClerkController extends Controller
              // Fetch records
              
             
-             $items = FinancialHelp::where('deleted_at', null)
+             $items = studentFund::where('deleted_at', null)
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('teo_status',1)
@@ -857,7 +857,7 @@ class ClerkController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
      
-        $formData =FinancialHelp::find($id);
+        $formData =studentFund::find($id);
         if($formData->clerk_view_status==null ){
             $formData->update([
             "clerk_view_status"=>1,
@@ -873,13 +873,13 @@ class ClerkController extends Controller
             "clerk_return_view_date" =>$date .' ' .$currenttime
             ]);
         }
-        $formData = FinancialHelp::where('_id', $id)->first();
+        $formData = studentFund::where('_id', $id)->first();
         return view('clerk.couplefinancial.details',compact('formData'));
 
 
     }
     public function couplefinancialApprove (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -899,7 +899,7 @@ class ClerkController extends Controller
         ]);
     }
     public function couplefinancialReject (Request $request){
-        $marriage = FinancialHelp::where('_id', $request->id)->first();
+        $marriage = studentFund::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
       //  $currentTime = Carbon::now();
@@ -1733,6 +1733,13 @@ class ClerkController extends Controller
         "clerk_view_date" =>$date .' ' .$currenttime
         ]);
     }
+    if($studentFund->clerk_return_view_status==null && $studentFund->return_status==1){
+        $studentFund->update([
+        "clerk_return_view_status"=>1,
+        "clerk_view_id" =>Auth::user()->id,
+        "clerk_return_view_date" =>$date .' ' .$currenttime
+        ]);
+    }
       
         return view('clerk.itiFund.details', compact('studentFund'));
     }
@@ -1747,6 +1754,7 @@ class ClerkController extends Controller
        
         $data->update([
             'clerk_status' => 1,
+            'clerk_return' => null,
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,

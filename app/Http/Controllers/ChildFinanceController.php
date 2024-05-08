@@ -12,7 +12,7 @@ use App\User;
 use App\Models\ExamApplication;
 use Carbon\Carbon;
 
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\ChildFinance;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;

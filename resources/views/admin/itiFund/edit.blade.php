@@ -32,7 +32,8 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
 
                         <form name="patientForm" id="patientForm" method="post"
-                            action="{{ route('iti-scholarship.store') }}" enctype="multipart/form-data">
+                            action="{{ route('iti-scholarship.update', ['id' => $datas->id]) }}"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="card">
                                 <div class="card-body">
@@ -42,7 +43,7 @@
                                                 <label class="form-label"> അപേക്ഷകന്റെ പേര് <br><span class="small">
                                                         Applicant's Name </span>
                                                 </label>
-                                                <input type="text" value="{{ old('name') }}" class="form-control"
+                                                <input type="text" value="{{ @$datas->name }}" class="form-control"
                                                     placeholder="അപേക്ഷകന്റെ പേര് " name="name" />
                                                 @error('name')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -53,7 +54,7 @@
                                                 <label class="form-label">മേൽവിലാസം <br><span class="small"> Address
                                                     </span>
                                                 </label>
-                                                <textarea type="text" value="{{ old('address') }}" class="form-control" placeholder="മേൽവിലാസം" name="address">{{ old('address') }}</textarea>
+                                                <textarea type="text" value="{{ @$datas->address }}" class="form-control" placeholder="മേൽവിലാസം" name="address">{{ old('address') }}</textarea>
                                                 @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -68,7 +69,7 @@
                                                     <option value="">Select</option>
                                                     @foreach ($districts as $district)
                                                         <option value="{{ $district->id }}"
-                                                            {{ old('current_district') == $district->id ? 'selected' : '' }}>
+                                                            {{ @$datas->current_district == $district->id ? 'selected' : '' }}>
                                                             {{ $district->name }}
                                                         </option>
                                                     @endforeach
@@ -93,7 +94,7 @@
                                             <div class="col-md-2 mb-2">
                                                 <label class="form-label"> പിൻകോഡ് <br><span class="small"> Pincode
                                                     </span></label>
-                                                <input type="number" value="{{ old('current_pincode') }}"
+                                                <input type="number" value="{{ @$datas->current_pincode }}"
                                                     class="form-control" name="current_pincode" placeholder="പിൻകോഡ്" />
 
 
@@ -106,8 +107,9 @@
                                                         of panchayath </span>
 
                                                 </label>
-                                                <input type="text" value="{{ old('panchayath') }}" class="form-control"
-                                                    placeholder="പഞ്ചായത്തിൻ്റെ പേര്" name="panchayath" />
+                                                <input type="text" value="{{ @$datas->panchayath }}"
+                                                    class="form-control" placeholder="പഞ്ചായത്തിൻ്റെ പേര്"
+                                                    name="panchayath" />
 
                                                 @error('panchayath')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -122,8 +124,9 @@
                                                         Name </span>
 
                                                 </label>
-                                                <input type="text" value="{{ old('course_name') }}" class="form-control"
-                                                    placeholder="കോഴ്‌സിൻ്റെ പേര് " name="course_name" />
+                                                <input type="text" value="{{ @$datas->course_name }}"
+                                                    class="form-control" placeholder="കോഴ്‌സിൻ്റെ പേര് "
+                                                    name="course_name" />
 
                                                 @error('course_name')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -136,12 +139,13 @@
                                                 <div style="border: 1px solid black" class="form-control">
                                                     <input type="radio" id="yes" name="metric_type"
                                                         value="Metric"
-                                                        {{ old('metric_type') == 'Metric' ? 'checked' : '' }}>&nbsp; &nbsp;
+                                                        {{ @$datas->metric_type == 'Metric' ? 'checked' : '' }}>&nbsp;
+                                                    &nbsp;
                                                     <label for="yes">മെട്രിക് / Metric </label> &nbsp; &nbsp;
 
                                                     <input type="radio" id="no" name="metric_type"
                                                         value="Non Metric"
-                                                        {{ old('metric_type') == 'Non Metric' ? 'checked' : '' }}>
+                                                        {{ @$datas->metric_type == 'Non Metric' ? 'checked' : '' }}>
 
                                                     &nbsp; &nbsp;<label for="No">
                                                         നോൺ മെട്രിക് / Non Metric </label>
@@ -157,7 +161,7 @@
                                                         Duration Of Course </span>
 
                                                 </label>
-                                                <input type="text" value="{{ old('course_duration') }}"
+                                                <input type="text" value="{{ @$datas->course_duration }}"
                                                     class="form-control" placeholder="കോഴ്‌സിൻ്റെ  ദൈർഘ്യം"
                                                     name="course_duration" />
 
@@ -176,16 +180,16 @@
 
                                                     <option value="">Select Type Of Institution</option>
                                                     <option value="Government"
-                                                        {{ old('institution_type') == 'Government' ? 'selected' : '' }}>
+                                                        {{ @$datas->institution_type == 'Government' ? 'selected' : '' }}>
                                                         Government</option>
                                                     <option value="Aided"
-                                                        {{ old('institution_type') == 'Aided' ? 'selected' : '' }}>Aided
+                                                        {{ @$datas->institution_type == 'Aided' ? 'selected' : '' }}>Aided
                                                     </option>
                                                     <option value="Self-Financing"
-                                                        {{ old('institution_type') == 'Self-Financing' ? 'selected' : '' }}>
+                                                        {{ @$datas->institution_type == 'Self-Financing' ? 'selected' : '' }}>
                                                         Self-Financing</option>
                                                     <option value="Private"
-                                                        {{ old('institution_type') == 'Private' ? 'selected' : '' }}>
+                                                        {{ @$datas->institution_type == 'Private' ? 'selected' : '' }}>
                                                         Private</option>
 
                                                 </select>
@@ -202,7 +206,7 @@
                                                         Admission
                                                     </span>
                                                 </label>
-                                                <input type="date" value="{{ old('admission_date') }}"
+                                                <input type="date" value="{{ @$datas->admission_date }}"
                                                     class="form-control" placeholder="പ്രവേശന തീയതി "
                                                     name="admission_date" />
 
@@ -214,7 +218,7 @@
                                                 <label class="form-label">ക്ലാസ് ആരംഭിക്കുന്ന തീയതി <br><span
                                                         class="small"> Date of Commence of class </span>
                                                 </label>
-                                                <input type="date" value="{{ old('class_start_date') }}"
+                                                <input type="date" value="{{ @$datas->class_start_date }}"
                                                     class="form-control" placeholder="ക്ലാസ് ആരംഭിക്കുന്ന തീയതി"
                                                     name="class_start_date" />
 
@@ -246,22 +250,22 @@
 
                                                         <input type="radio" id="merit" name="admission_type"
                                                             value="merit"
-                                                            {{ old('admission_type') == 'merit' ? 'checked' : '' }}>
+                                                            {{ @$datas->admission_type == 'merit' ? 'checked' : '' }}>
                                                         <label for="merit">merit / മെരിറ്റ് </label> &nbsp; &nbsp;
                                                         <input type="radio" id="reservation" name="admission_type"
                                                             value="reservation"
-                                                            {{ old('admission_type') == 'reservation' ? 'checked' : '' }}>
+                                                            {{ @$datas->admission_type == 'reservation' ? 'checked' : '' }}>
                                                         <label for="innovation">reservation / സംവരണം </label> &nbsp; &nbsp;
 
                                                         <input type="radio" id="management" name="admission_type"
                                                             value="management"
-                                                            {{ old('admission_type') == 'management' ? 'checked' : '' }}>
+                                                            {{ @$datas->admission_type == 'management' ? 'checked' : '' }}>
                                                         <label for="management">management / മാനേജ്‌മന്റ്</label>&nbsp;
                                                         &nbsp;
 
                                                         <input type="radio" id="option3" name="admission_type"
                                                             value="others"
-                                                            {{ old('admission_type') == 'others' ? 'checked' : '' }}>
+                                                            {{ @$datas->admission_type == 'others' ? 'checked' : '' }}>
                                                         <label for="others">others / മറ്റുള്ളവ</label>&nbsp; &nbsp;
                                                     </div>
                                                     @error('admission_type')
@@ -278,8 +282,7 @@
                                                     </label>
                                                     <div class="d-flex">
                                                         <div class="col-6">
-                                                            <textarea type="text" value="{{ old('caste') }}" class="form-control" placeholder="അപേക്ഷകന്റെ ജാതി/ മതം"
-                                                                name="caste">{{ old('caste') }}</textarea>
+                                                            <textarea type="text" class="form-control" placeholder="അപേക്ഷകന്റെ ജാതി/ മതം" name="caste">{{ @$datas->caste }}</textarea>
                                                             @error('caste')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -312,7 +315,7 @@
                                                 <div class="d-flex">
                                                     <div class="col-6">
 
-                                                        <input type="number" value="{{ old('income') }}" class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം "
+                                                        <input type="number" value="{{ @$datas->income }}" class="form-control" placeholder="അപേക്ഷകന്റെ വരുമാനം "
                                                             name="income">
 
                                                         @error('income')
@@ -349,13 +352,13 @@
                                                     <div style="border: 1px solid black" class="form-control">
                                                         <input type="radio" id="yes" name="account_details"
                                                             value="yes"
-                                                            {{ old('account_details') == 'yes' ? 'checked' : '' }}>&nbsp;
+                                                            {{ @$datas->account_details == 'yes' ? 'checked' : '' }}>&nbsp;
                                                         &nbsp;
                                                         <label for="yes">Yes ( അതെ)</label> &nbsp; &nbsp;
 
                                                         <input type="radio" id="no" name="account_details"
                                                             value="no"
-                                                            {{ old('account_details') == 'no' ? 'checked' : '' }}>
+                                                            {{ @$datas->account_details == 'no' ? 'checked' : '' }}>
 
                                                         &nbsp; &nbsp;<label for="No">No (ഇല്ല)</label>
 
@@ -368,7 +371,7 @@
 
                                                             <input type="text" value="{{ old('bank_branch') }}"
                                                                 class="form-control" placeholder="ബാങ്ക് ശാഖ"
-                                                                name="bank_branch" value="{{ old('bank_branch') }}">
+                                                                name="bank_branch" value="{{ @$datas->bank_branch }}">
 
 
                                                             @error('bank_branch')
@@ -380,7 +383,7 @@
 
 
 
-                                                            <input type="number" value="{{ old('account_no') }}"
+                                                            <input type="number" value="{{ @$datas->account_no }}"
                                                                 class="form-control" placeholder="ഇ -ഗ്രാൻഡ് അകൗണ്ട് നം "
                                                                 name="account_no">
                                                             @error('account_no')
@@ -392,7 +395,7 @@
 
 
 
-                                                            <input type="text" value="{{ old('ifsc_code') }}"
+                                                            <input type="text" value="{{ @$datas->ifsc_code }}"
                                                                 class="form-control" placeholder="IFSC കോഡ്"
                                                                 name="ifsc_code">
                                                             @error('ifsc_code')
@@ -431,7 +434,7 @@
 
                                                     </label>
                                                     <input type="text" class="form-control" name="parent_name"
-                                                        id="parent_name" value="{{ old('parent_name') }}"
+                                                        id="parent_name" value="{{ @$datas->parent_name }}"
                                                         placeholder="രക്ഷാകർത്താവിന്റെ പേര് " />
                                                     @error('parent_name')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -502,7 +505,7 @@
                                                     <option value="">Select</option>
                                                     @foreach ($institutions as $institution)
                                                         <option value="{{ $institution->id }}"
-                                                            {{ old('current_institution') == $institution->id ? 'selected' : '' }}>
+                                                            {{ @$datas->current_institution == $institution->id ? 'selected' : '' }}>
                                                             {{ $institution->name }}
                                                         </option>
                                                     @endforeach
@@ -522,7 +525,7 @@
                                                 <div class="col-md-4 mb-4">
                                                     ബാങ്ക് ശാഖ <br><span class="small"> Bank Branch</span>
 
-                                                    <input type="text" value="{{ old('parent_bank_branch') }}"
+                                                    <input type="text" value="{{ @$datas->parent_bank_branch }}"
                                                         class="form-control" placeholder="ബാങ്ക് ശാഖ"
                                                         name="parent_bank_branch"
                                                         value="{{ old('parent_bank_branch') }}">
@@ -537,7 +540,7 @@
 
 
 
-                                                    <input type="number" value="{{ old('parent_account_no') }}"
+                                                    <input type="number" value="{{ @$datas->parent_account_no }}"
                                                         class="form-control" placeholder="അകൗണ്ട് നമ്പർ "
                                                         name="parent_account_no">
                                                     @error('parent_account_no')
@@ -549,7 +552,7 @@
 
 
 
-                                                    <input type="text" value="{{ old('parent_ifsc_code') }}"
+                                                    <input type="text" value="{{ @$datas->parent_ifsc_code }}"
                                                         class="form-control" placeholder="IFSC കോഡ്"
                                                         name="parent_ifsc_code">
                                                     @error('parent_ifsc_code')
@@ -566,7 +569,7 @@
                                                 <div class="col-md-4 mb-4">
                                                     ബാങ്ക് ശാഖ <br><span class="small"> Bank Branch </span>
 
-                                                    <input type="text" value="{{ old('principal_bank_branch') }}"
+                                                    <input type="text" value="{{ @$datas->principal_bank_branch }}"
                                                         class="form-control" placeholder="ബാങ്ക് ശാഖ"
                                                         name="principal_bank_branch"
                                                         value="{{ old('principal_bank_branch') }}">
@@ -581,7 +584,7 @@
 
 
 
-                                                    <input type="number" value="{{ old('principal_account_no') }}"
+                                                    <input type="number" value="{{ @$datas->principal_account_no }}"
                                                         class="form-control" placeholder="അകൗണ്ട് നമ്പർ "
                                                         name="principal_account_no">
                                                     @error('principal_account_no')
@@ -593,7 +596,7 @@
 
 
 
-                                                    <input type="text" value="{{ old('principal_ifsc_code') }}"
+                                                    <input type="text" value="{{ @$datas->principal_ifsc_code }}"
                                                         class="form-control" placeholder="IFSC കോഡ്"
                                                         name="principal_ifsc_code">
                                                     @error('principal_ifsc_code')
@@ -645,7 +648,7 @@
                                                 <option value="">Select</option>
                                                 @foreach ($districts as $district)
                                                     <option value="{{ $district->id }}"
-                                                        {{ old('submitted_district') == $district->id ? 'selected' : '' }}>
+                                                        {{ @$datas->submitted_district == $district->id ? 'selected' : '' }}>
                                                         {{ $district->name }}</option>
                                                 @endforeach
                                             </select>
@@ -797,7 +800,12 @@
 
         // });
 
-
+        $(document).ready(function() {
+            fetchTeo();
+            fetchTaluk();
+            // fetchHusbandDistrict();
+            //fetchWifeDistrict();
+        });
 
         // NEW CODE 
         $('#current_district').change(function() {
@@ -853,7 +861,7 @@
                         $opt.val(value._id).text(value.taluk_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('current_taluk') }}' == value._id) {
+                        if ('{{ @$datas->current_taluk }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 
@@ -943,6 +951,7 @@
 
 
         function fetchTeo() {
+
             var val = document.getElementById("submitted_district").value;
 
             $.ajax({
@@ -962,7 +971,7 @@
                         $opt.val(value._id).text(value.teo_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('submitted_teo') }}' == value._id) {
+                        if ('{{ @$datas->submitted_teo }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 

@@ -13,7 +13,7 @@ use App\Permission;
 use App\User;
 use App\Models\ExamApplication;
 use Carbon\Carbon;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;

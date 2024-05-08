@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ItiFund;
 use App\Models\AnemiaFinance;
 use App\Models\ExamApplication;
-use App\Models\FinancialHelp;
+use App\Models\studentFund;
 use App\Models\MarriageGrant;
 use App\Models\MotherChildScheme;
 
@@ -54,7 +54,7 @@ class HomeController extends Controller
         if (auth()->user()->role == 'User') {
 
             $user_id = Auth::user()->id;
-            $data['coupleFinanceCount'] = FinancialHelp::where('user_id', $user_id)->count();
+            $data['coupleFinanceCount'] = studentFund::where('user_id', $user_id)->count();
             $data['examCount'] = ExamApplication::where('user_id', $user_id)->count();
             $data['motherChildCount'] = MotherChildScheme::where('user_id', $user_id)->count();
             $data['marriageGrantCount'] = MarriageGrant::where('user_id', $user_id)->count();
@@ -77,7 +77,7 @@ class HomeController extends Controller
 
             if (auth()->user()->role == 'TEO') {
                 $teo = Auth::user()->teo_name;
-                $data['coupleFinanceCount'] = FinancialHelp::where('submitted_teo', $teo)->where('status', 0)->count();
+                $data['coupleFinanceCount'] = studentFund::where('submitted_teo', $teo)->where('status', 0)->count();
                 $data['examCount'] = ExamApplication::where('submitted_teo', $teo)->where('status', 0)->count();
                 $data['motherChildCount'] = MotherChildScheme::where('submitted_teo', $teo)->where('status', 0)->count();
                 $data['marriageGrantCount'] = MarriageGrant::where('submitted_teo', $teo)->where('status', 0)->count();
@@ -90,7 +90,7 @@ class HomeController extends Controller
                 $data['childFinanceCount'] = ChildFinance::where('submitted_teo', $teo)->where('status', 0)->count();
                 $data['tuitionFeeCount'] = TuitionFee::where('submitted_teo', $teo)->where('status', 0)->count();
 
-                $data['approvedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo', $teo)->where('status', 1)->count();
+                $data['approvedCoupleFinanceCount'] = studentFund::where('submitted_teo', $teo)->where('status', 1)->count();
                 $data['approvedExamCount'] = ExamApplication::where('submitted_teo', $teo)->where('status', 1)->count();
                 $data['approvedMotherChildCount'] = MotherChildScheme::where('submitted_teo', $teo)->where('status', 1)->count();
                 $data['approvedMarriageGrantCount'] = MarriageGrant::where('submitted_teo', $teo)->where('status', 1)->count();
@@ -103,7 +103,7 @@ class HomeController extends Controller
                 $data['approvedChildFinanceCount'] = ChildFinance::where('submitted_teo', $teo)->where('status', 1)->count();
                 $data['approvedTuitionFeeCount'] = TuitionFee::where('submitted_teo', $teo)->where('status', 1)->count();
 
-                $data['rejectedCoupleFinanceCount'] = FinancialHelp::where('submitted_teo', $teo)->where('status', 2)->count();
+                $data['rejectedCoupleFinanceCount'] = studentFund::where('submitted_teo', $teo)->where('status', 2)->count();
                 $data['rejectedExamCount'] = ExamApplication::where('submitted_teo', $teo)->where('status', 2)->count();
                 $data['rejectedMotherChildCount'] = MotherChildScheme::where('submitted_teo', $teo)->where('status', 2)->count();
                 $data['rejectedMarriageGrantCount'] = MarriageGrant::where('submitted_teo', $teo)->where('status', 2)->count();
