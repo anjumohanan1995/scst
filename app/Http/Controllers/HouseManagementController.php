@@ -344,6 +344,346 @@ $formattedDate = $currentDate->toDateString();
         return redirect()->route('userHouseGrantList')->with('status','Application Submitted Successfully.');
        // return redirect()->route('home')->with('success','Application Submitted Successfully.');
     }
+
+    // HOUSE MANAGMENT FORM RETURN LIST
+
+    public function getAdminHouseGrantListReturned(Request $request)
+    {
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = HouseManagement::where('deleted_at',null)->where('teo_return', 1);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
+            if($role == "TDO" || $role == "Project Officer"){
+                $totalRecord->where('submitted_teo',$teo)->where('teo_status',1);
+            }
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = HouseManagement::where('deleted_at',null)->where('teo_return', 1);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
+           
+            if($role == "TDO" || $role == "Project Officer"){
+                $totalRecordswithFilte->where('submitted_teo',$teo)->where('teo_status',1);
+            }
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = HouseManagement::where('deleted_at',null)->where('teo_return', 1)->orderBy($columnName,$columnSortOrder);
+           
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
+            if($role == "TDO" || $role == "Project Officer"){
+                $items->where('submitted_teo',$teo)->where('teo_status',1);
+            }
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+         foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $panchayath = $record->panchayath;
+             $place = $record->place;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
+
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
+              $edit='';
+
+              
+            $edit='<div class="settings-main-icon"><a  href="' .  route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('housegrant-edit/' . $id) . '">Resubmit</a></div>';
+
+              if($role == "TDO" && $record->pjct_offcr_status == 1) {
+                $approved_status =" Approved By Project Officer";
+              }
+              else if($role == "Project Officer" && $record->tdo_status == 1){
+                $approved_status ="Approved By TDO ";
+              }
+              else{
+                $approved_status ="Approved  ";
+              }
+
+              if($role == "TDO" && $record->pjct_offcr_status == 2) {
+                $rejected_status =" Rejected By Project Officer";
+                $status_reason =Str::limit($record->pjct_offcr_status_reason, 10);
+              }
+              else if($role == "TDO" && $record->tdo_status == 2){
+                $rejected_status =" Rejected";
+                $status_reason =Str::limit($record->tdo_status_reason, 10);
+              
+              }
+              else if($role == "Project Officer" && $record->tdo_status == 2){
+                $rejected_status ="Rejected By TDO ";
+                $status_reason =Str::limit($record->tdo_status_reason, 10);
+              
+              }
+              else if($role == "Project Officer" && $record->pjct_offcr_status == 2){
+                $rejected_status ="Rejected ";
+                $status_reason =Str::limit($record->pjct_offcr_status_reason, 10);
+               
+              }
+              else{
+                $rejected_status ="Rejected ";
+              }
+
+
+
+            //   if($role == "TEO"){
+            //     if($record->teo_status== 1){
+            //         $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+            //     }
+            //     else if($record->teo_status ==2){
+            //         $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+              
+            //     }
+            //     else if($record->teo_status ==null){
+            //         $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            //     }
+               
+            //   }
+            //   else if($role == "TDO" || $role == "Project Officer"){
+               
+            //     if($record->tdo_status== 1 || $record->pjct_offcr_status== 1 ){
+            //         $edit = '<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">'.$approved_status.'</div>&nbsp;&nbsp;<span>'.$status_reason.'</span></div>';
+            //     }
+            //     else if($record->tdo_status ==2 || $record->pjct_offcr_status== 2){
+            //         $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">'.$rejected_status.'</div>&nbsp;&nbsp;<span>'.$status_reason.'</span></div>';
+              
+            //     }
+            //     else {
+            //         $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+            //     }
+               
+            //   }
+            //   else{
+            //     $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+             
+            //   }
+
+            $data_arr[] = array(
+                "sl_no" =>$i,
+                "id" => $id,
+                "place" => $place,
+                "name" => $name,
+                "address" => $address,
+                "panchayath" => $panchayath,
+                "caste" => $caste,
+                "date" => $date .' ' .$time,                   
+                "edit" => $edit,
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+
+    }
+
+         // HOUSE GRAND FORM RETURN EDIT
+
+    public function houseGrantEdit(Request $request)
+         {
+            $data = Auth::user();
+            $districts = District::get();
+            $datas = HouseManagement::where('_id',$request->id)->first();
+          
+          //  dd($datas);
+            return view('application.housemanagement-edit', compact('data', 'districts','datas'));
+         }
+
+    // HOUSE GRAND FORM RETURN UPDATE
+
+    public function houseGrantUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required', 
+            'signature' => 'required|max:2048',
+            'applicant_image' => 'required|max:2048',
+            'prove_eligibility_file' => 'max:2048',
+            
+           
+                 
+        ]);
+        if ($request->input('payment_details') == 'yes') {
+            $validator->sometimes('payment_amount', 'required', function ($input) {
+                return $input->payment_details == 'yes';
+            });
+        
+            $validator->sometimes('date_received', 'required', function ($input) {
+                return $input->payment_details == 'yes';
+            });
+        }
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/homeMng'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
+      
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/homeMng'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = '';
+        }
+        if ($request->hasfile('prove_eligibility_file')) {
+
+            $eligibility = $request->prove_eligibility_file;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $eligibility->extension();
+
+            $eligibility->move(public_path('/homeMng'), $imgfileName1);
+
+            $eligibility_file = $imgfileName1;
+
+        }else{
+            $eligibility_file = '';
+        }
+        $formData = $data;
+      if($request->payment_details==''){
+        $formData['payment_details']="no";
+      }
+      if($request->current_district!=''){
+       $dis=District::where('_id',$request->current_district)->first();
+       $formData['current_district_name']= $dis->name;
+      }
+      if($request->current_taluk!=''){
+        $taluk=Taluk::where('_id',$request->current_taluk)->first();
+        $formData['current_taluk_name']= $taluk->taluk_name;
+       }
+       if($request->submitted_district!=''){
+        $dis1=District::where('_id',$request->submitted_district)->first();
+        $formData['dist_name']= $dis1->name;
+       }
+       if($request->submitted_teo!=''){
+         $teo=Teo::where('_id',$request->submitted_teo)->first();
+         $formData['teo_name']= $teo->teo_name;
+        }
+       
+        $data = $request->all();
+        $datainsert =  HouseManagement::where('_id',$request->id)->first();
+       // dd($request->id);
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+        $datainsert->update([
+            'name' => $data['name'],
+            'address' => @$data['address'],
+            'panchayath' => @$data['panchayath'],
+            'ward_no' => @$data['ward_no'],
+            'caste' => @$data['caste'],
+            'annual_income' => @$data['annual_income'],
+            'house_details' => @$data['house_details'],
+            'agency' => @$data['agency'],
+            'last_payment_year' => @$data['last_payment_year'],
+            'family_details' => @$data['family_details'],
+            'nature_payment' => @$data['nature_payment'],
+            'payment_details' => @$data['payment_details'],
+            'payment_amount' => @$data['payment_amount'],
+            'date_received' => @$data['date_received'],
+            'prove_eligibility_file' => @$data['prove_eligibility_file'],
+            'prove_eligibility' => @$data['prove_eligibility'],
+            'place' => @$data['place'],
+            'date' => @$data['date'],
+            'signature' => @$data['signature'],
+            'applicant_image' => @$data['applicant_image'],
+            // 'user_id' =>Auth::user()->id, 
+            'status' =>0,
+            'current_district_name' => @$data['current_district_name'],
+            'current_taluk_name' => @$data['current_taluk_name'],
+            'current_pincode' => @$data['current_pincode'],
+            'submitted_district' => @$data['submitted_district'],
+            'submitted_teo' => @$data['submitted_teo'],
+            'dist_name' => $data['dist_name'],
+            'teo_name' => @$data['teo_name'],
+            'current_district' => $data['current_district'],
+            'current_taluk' => @$data['current_taluk'],
+            'time' =>@$data['time'],
+            'status' =>0,
+            'teo_return' => null,
+            'return_status' =>1,
+            "teo_view_status"=>1,
+            "teo_status_date"=>$date .' ' .$currenttime ,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
+        ]);
+
+
+        return redirect()->route('adminHouseGrantList')->with('status', 'Application Submitted Successfully.');
+    }
+
+            
     public function adminHouseGrantList(Request $request)
     {
         return view('admin.houseMng.house_grant_list');
@@ -376,7 +716,7 @@ $formattedDate = $currentDate->toDateString();
          
 
              // Total records
-             $totalRecord = HouseManagement::where('deleted_at',null);
+             $totalRecord = HouseManagement::where('deleted_at',null)->where('teo_return', null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -391,7 +731,7 @@ $formattedDate = $currentDate->toDateString();
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = HouseManagement::where('deleted_at',null);
+             $totalRecordswithFilte = HouseManagement::where('deleted_at',null)->where('teo_return', null);
 
           
              if($name != ""){
@@ -407,7 +747,7 @@ $formattedDate = $currentDate->toDateString();
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = HouseManagement::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = HouseManagement::where('deleted_at',null)->where('teo_return', null)->orderBy($columnName,$columnSortOrder);
            
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -483,7 +823,7 @@ $formattedDate = $currentDate->toDateString();
               
                 }
                 else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
                
               }
@@ -497,7 +837,7 @@ $formattedDate = $currentDate->toDateString();
               
                 }
                 else {
-                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' . route('getAdminHouseGrantDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
                
               }
