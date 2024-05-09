@@ -3317,6 +3317,132 @@ class ClerkController extends Controller
         return view('clerk.tuitionFee.index');
     }
 
+    public function gettuitionFeeClerkReturn(Request $request){
+        $role =  Auth::user()->role;       
+       $district =  Auth::user()->district;
+       $tdo= Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+         
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = TuitionFee::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('teo_status',1);
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+             $totalRecord->where('teo_return', null)->where('clerk_return', 1);
+
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = TuitionFee::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('teo_status',1);
+
+           
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+            $totalRecordswithFilte->where('teo_return', null)->where('clerk_return', 1);
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             
+            
+             $items = TuitionFee::where('deleted_at', null)
+                 ->whereIn('submitted_teo', $teoIds)
+                 ->where('submitted_district', $district)
+                 ->where('teo_status',1)
+                 ->orderBy($columnName, $columnSortOrder);
+             
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+            $items->where('teo_return', null)->where('clerk_return', 1);
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+             
+         foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $student_name = $record->student_name;
+             $caste = $record->caste;
+             $status = $record->clerk_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name=$record->teo->teo_name;
+              $created_at =  $record->created_at;
+              $edit='';
+         
+            $edit='<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
+
+        
+        
+             
+           
+                $data_arr[] = array(
+
+                    "sl_no" =>$i,
+                    "id" => $id,
+                    "name" => $name,
+                    "address" => $address,
+                    "student_name" => $student_name,
+                    "caste" => $caste,
+                    "date" => $date .' ' .$time,     
+                    "teo_name" =>$teo_name,              
+                    "edit" => $edit,
+                    
+    
+                );
+          
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
     public function gettuitionFeeClerk(Request $request){
         $role =  Auth::user()->role;       
        $district =  Auth::user()->district;
@@ -3355,7 +3481,7 @@ class ClerkController extends Controller
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
              }
-            
+             $totalRecord->where('clerk_return', null);
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
@@ -3370,7 +3496,7 @@ class ClerkController extends Controller
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
             }
            
-           
+            $totalRecordswithFilte->where('clerk_return', null);
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
@@ -3386,7 +3512,7 @@ class ClerkController extends Controller
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-           
+            $items->where('clerk_return', null);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          
@@ -3467,6 +3593,14 @@ class ClerkController extends Controller
             "clerk_view_date" =>$date .' ' .$currenttime
             ]);
         }
+
+        if($formData->clerk_return_view_status==null && $formData->return_status==1){
+            $formData->update([
+            "clerk_return_view_status"=>1,
+            "clerk_view_id" =>Auth::user()->id,
+            "clerk_return_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
         
         return view('clerk.tuitionFee.details',compact('formData'));
 
@@ -3483,6 +3617,7 @@ class ClerkController extends Controller
        
         $tuition->update([
             'clerk_status' => 1,
+                'clerk_return' => null,
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,
