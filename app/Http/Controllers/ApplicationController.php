@@ -256,9 +256,9 @@ class ApplicationController extends Controller
 
         $data = Auth::user();
         $districts = District::get();
-        $datas = FinancialHelp::where('_id',$request->id)->first();
-      //  dd($datas);
-        return view('application.financial-help-edit', compact('data', 'districts','datas'));
+        $datas = FinancialHelp::where('_id', $request->id)->first();
+        //  dd($datas);
+        return view('application.financial-help-edit', compact('data', 'districts', 'datas'));
     }
 
     public function financialHelpUpdate(Request $request)
@@ -274,7 +274,7 @@ class ApplicationController extends Controller
             ]
 
         );
-        $data = FinancialHelp::where('_id',$request->id)->first();
+        $data = FinancialHelp::where('_id', $request->id)->first();
 
         if ($validator->fails()) {
             // Captcha validation failed
@@ -342,14 +342,14 @@ class ApplicationController extends Controller
         } else {
             $wife_photo = @$data->wife_photo;
         }
-       
+
         $data = $request->all();
-        $datainsert = FinancialHelp::where('_id',$request->id)->first();
+        $datainsert = FinancialHelp::where('_id', $request->id)->first();
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
+        $currenttime = $currentTimeInKerala->format('h:i A');
         $datainsert->update([
             'husband_address' => $data['husband_address'],
             'hus_district' => @$data['hus_district'],
@@ -374,7 +374,7 @@ class ApplicationController extends Controller
             'reason' => @$data['reason'],
             'financial_assistance' => @$data['financial_assistance'],
             'difficulties' => @$data['difficulties'],
-           // 'user_id' => Auth::user()->id,
+            // 'user_id' => Auth::user()->id,
             'husband_name' => @$data['husband_name'],
             'wife_name' => @$data['wife_name'],
             'agree' => @$data['agree'],
@@ -402,17 +402,15 @@ class ApplicationController extends Controller
             'husband_panchayath' => @$data['husband_panchayath'],
             'wife_panchayath' => @$data['wife_panchayath'],
             'teo_return' => null,
-            'return_status' =>1,
-            "teo_view_status"=>1,
-            "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime,
-            "teo_status_date"=>$date .' ' .$currenttime,
-            "teo_return_view_date" =>$date .' ' .$currenttime 
+            'return_status' => 1,
+            "teo_view_status" => 1,
+            "teo_view_id" => Auth::user()->id,
+            "teo_view_date" => $date . ' ' . $currenttime,
+            "teo_status_date" => $date . ' ' . $currenttime,
+            "teo_return_view_date" => $date . ' ' . $currenttime
         ]);
 
         return redirect()->route('couplefinancialList')->with('status', 'Application Submitted Successfully.');
-
-        
     }
 
     public function coupleFinancialHelp(Request $request)
@@ -682,7 +680,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -696,25 +694,19 @@ class ApplicationController extends Controller
             $date =  $record->date;
             $time =  $record->time;
             $edit = " ";
-            if($role == "TEO"){
-                if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+            if ($role == "TEO") {
+                if ($record->teo_status == 1) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } else if ($record->teo_status == 2) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } else if ($record->teo_status == null) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
-                else if($record->teo_status ==2){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
-              
-                }
-                else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
-                }
-               
-              }
-              else{
-                $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
-           
-              }
+            } else {
+                $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+            }
             $data_arr[] = array(
-                "sl_no"=>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
@@ -837,7 +829,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -851,11 +843,11 @@ class ApplicationController extends Controller
             $date =  $record->date;
             $time =  $record->time;
             $edit = " ";
-          
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('couple-application-edit/' . $id) . '">Resubmit</a></div>';
-              
+
+            $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('couple-application-edit/' . $id) . '">Resubmit</a></div>';
+
             $data_arr[] = array(
-                "sl_no"=>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
@@ -887,18 +879,18 @@ class ApplicationController extends Controller
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
-     
-        $studentFund=FinancialHelp::find($id);
-        if($studentFund->teo_view_status==null && Auth::user()->role=='TEO'){
+        $currenttime = $currentTimeInKerala->format('h:i A');
+
+        $studentFund = FinancialHelp::find($id);
+        if ($studentFund->teo_view_status == null && Auth::user()->role == 'TEO') {
             $studentFund->update([
-            "teo_view_status"=>1,
-            "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime,
+                "teo_view_status" => 1,
+                "teo_view_id" => Auth::user()->id,
+                "teo_view_date" => $date . ' ' . $currenttime,
             ]);
         }
 
-       // $financialHelp = FinancialHelp::where('_id', $id)->first();
+        // $financialHelp = FinancialHelp::where('_id', $id)->first();
         return view('admin.financial_view', compact('financialHelp'));
     }
 
@@ -940,8 +932,7 @@ class ApplicationController extends Controller
             $image->move(public_path('/img'), $applicant_img);
 
             $applicant_image = $applicant_img;
-
-        }else{
+        } else {
             $applicant_image = '';
         }
 
@@ -1000,7 +991,7 @@ class ApplicationController extends Controller
             'agree' => $request->input('agree'),
             'parent_name'  => @$data['parent_name'],
             'signature' => @$data['signature'],
-             'applicant_image' => @$data['applicant_image'],
+            'applicant_image' => @$data['applicant_image'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
             'status' => 0
@@ -1008,7 +999,7 @@ class ApplicationController extends Controller
 
         return redirect()->route('userExamList')->with('status', 'Application Submitted Successfully.');
 
-       // return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
+        // return redirect()->route('home')->with('success', 'Application Submitted Successfully.');
     }
 
     public function examApplicationList(Request $request)
@@ -1055,7 +1046,7 @@ class ApplicationController extends Controller
 
 
         // Total records
-        $totalRecord = ExamApplication::where('deleted_at', null)->where('teo_return',null);
+        $totalRecord = ExamApplication::where('deleted_at', null)->where('teo_return', null);
         if ($role == "TEO") {
             $totalRecord->where('submitted_teo', $teo);
         }
@@ -1074,7 +1065,7 @@ class ApplicationController extends Controller
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-        $totalRecordswithFilte = ExamApplication::where('deleted_at', null)->where('teo_return',null);
+        $totalRecordswithFilte = ExamApplication::where('deleted_at', null)->where('teo_return', null);
         if ($role == "TEO") {
             $totalRecordswithFilte->where('submitted_teo', $teo);
         }
@@ -1094,7 +1085,7 @@ class ApplicationController extends Controller
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
-        $items = ExamApplication::where('deleted_at', null)->where('teo_return',null)->orderBy($columnName, $columnSortOrder);
+        $items = ExamApplication::where('deleted_at', null)->where('teo_return', null)->orderBy($columnName, $columnSortOrder);
         if ($role == "TEO") {
             $items->where('submitted_teo', $teo);
         }
@@ -1116,7 +1107,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -1141,7 +1132,7 @@ class ApplicationController extends Controller
             }
 
             $data_arr[] = array(
-                "sl_no" =>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "school_name" => $school_name,
                 "student_name" => $student_name,
@@ -1207,7 +1198,7 @@ class ApplicationController extends Controller
 
 
         // Total records
-        $totalRecord = ExamApplication::where('deleted_at', null)->where('teo_return',1);
+        $totalRecord = ExamApplication::where('deleted_at', null)->where('teo_return', 1);
         if ($role == "TEO") {
             $totalRecord->where('submitted_teo', $teo);
         }
@@ -1226,7 +1217,7 @@ class ApplicationController extends Controller
         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-        $totalRecordswithFilte = ExamApplication::where('deleted_at', null)->where('teo_return',1);
+        $totalRecordswithFilte = ExamApplication::where('deleted_at', null)->where('teo_return', 1);
         if ($role == "TEO") {
             $totalRecordswithFilte->where('submitted_teo', $teo);
         }
@@ -1246,7 +1237,7 @@ class ApplicationController extends Controller
         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
         // Fetch records
-        $items = ExamApplication::where('deleted_at', null)->where('teo_return',1)->orderBy($columnName, $columnSortOrder);
+        $items = ExamApplication::where('deleted_at', null)->where('teo_return', 1)->orderBy($columnName, $columnSortOrder);
         if ($role == "TEO") {
             $items->where('submitted_teo', $teo);
         }
@@ -1268,7 +1259,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -1280,8 +1271,8 @@ class ApplicationController extends Controller
             $mother_name =  $record->mother_name;
             $created_at =  $record->created_at;
             $edit = " ";
-          
-            $edit='<div class="settings-main-icon"><a  href="' .  url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('exam-application-edit/' . $id) . '">Resubmit</a></div>';
+
+            $edit = '<div class="settings-main-icon"><a  href="' .  url('exam-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('exam-application-edit/' . $id) . '">Resubmit</a></div>';
 
             // if ($role == "TEO") {
             //     if ($record->teo_status == 1) {
@@ -1296,7 +1287,7 @@ class ApplicationController extends Controller
             // }
 
             $data_arr[] = array(
-                "sl_no" =>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "school_name" => $school_name,
                 "student_name" => $student_name,
@@ -1329,62 +1320,61 @@ class ApplicationController extends Controller
 
         $data = Auth::user();
         $districts = District::get();
-        $datas = ExamApplication::where('_id',$request->id)->first();
-      
-      //  dd($datas);
-        return view('application.exam-application-edit', compact('data', 'districts','datas'));
+        $datas = ExamApplication::where('_id', $request->id)->first();
+
+        //  dd($datas);
+        return view('application.exam-application-edit', compact('data', 'districts', 'datas'));
     }
 
     public function examApplicationUpdate(Request $request)
     {
-      
-        $validator = Validator::make($request->all(),[
+
+        $validator = Validator::make($request->all(), [
             'student_name' => 'required',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',
             'signature' => 'required|file|mimes:jpg,pdf|max:2048',
         ]);
-        $data = ExamApplication::where('_id',$request->id)->first();
+        $data = ExamApplication::where('_id', $request->id)->first();
 
         if ($validator->fails()) {
 
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
-    
+
         if ($request->hasfile('applicant_image')) {
-    
+
             $image = $request->applicant_image;
             $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
-    
+
             $image->move(public_path('/img'), $applicant_img);
-    
+
             $applicant_image = $applicant_img;
-    
-        }else{
+        } else {
             $applicant_image = '';
         }
-    
+
         if ($request->hasfile('signature')) {
-    
+
             $image = $request->signature;
             $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
-    
+
             $image->move(public_path('/signature'), $imgfileName);
-    
+
             $signature = $imgfileName;
         } else {
             $signature = '';
         }
-       
+
         $data = $request->all();
-        $datainsert =  ExamApplication::where('_id',$request->id)->first();
-       // dd($request->id);
+        $datainsert =  ExamApplication::where('_id', $request->id)->first();
+        // dd($request->id);
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
+        $currenttime = $currentTimeInKerala->format('h:i A');
         $datainsert->update([
             'school_name' => $data['school_name'],
             'student_name' => @$data['student_name'],
@@ -1396,10 +1386,10 @@ class ApplicationController extends Controller
             'relation' => @$data['relation'],
             'mother_name' => @$data['mother_name'],
             'father_name' => @$data['father_name'],
-    
+
             // 'birth_district' => $data['birth_district'],
             'age' => @$data['age'],
-    
+
             'annual_income' => @$data['annual_income'],
             'occupation_parent' => @$data['occupation_parent'],
             'dob' => @$data['dob'],
@@ -1414,16 +1404,16 @@ class ApplicationController extends Controller
             'agree' => $request->input('agree'),
             'parent_name'  => @$data['parent_name'],
             'signature' => @$data['signature'],
-             'applicant_image' => @$data['applicant_image'],
+            'applicant_image' => @$data['applicant_image'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
             'teo_return' => null,
-            'return_status' =>1,
-            "teo_view_status"=>1,
+            'return_status' => 1,
+            "teo_view_status" => 1,
             // 'user_id' => Auth::user()->id,
             'status' => 0,
-            "teo_status_date"=>$date .' ' .$currenttime ,
-            "teo_return_view_date" =>$date .' ' .$currenttime 
+            "teo_status_date" => $date . ' ' . $currenttime,
+            "teo_return_view_date" => $date . ' ' . $currenttime
         ]);
 
 
@@ -1440,12 +1430,12 @@ class ApplicationController extends Controller
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
-        if($formData->teo_view_status==null && Auth::user()->role=='TEO'){
+        $currenttime = $currentTimeInKerala->format('h:i A');
+        if ($formData->teo_view_status == null && Auth::user()->role == 'TEO') {
             $formData->update([
-            "teo_view_status"=>1,
-            "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime
+                "teo_view_status" => 1,
+                "teo_view_id" => Auth::user()->id,
+                "teo_view_date" => $date . ' ' . $currenttime
             ]);
         }
 
@@ -1501,7 +1491,7 @@ class ApplicationController extends Controller
     // EXAMAPPLICATION END
 
 
-// MOTHERCHILD START
+    // MOTHERCHILD START
 
     public function motherChildProtectionSchemeStore(Request $request)
     {
@@ -1588,84 +1578,78 @@ class ApplicationController extends Controller
     }
 
 
- 
-    public function motherChildSchemeApprove(Request $request){
+
+    public function motherChildSchemeApprove(Request $request)
+    {
         $id = $request->id;
-        $reason =$request->reason;
+        $reason = $request->reason;
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = MotherChildScheme::where('_id', $request->id)->first();
 
-      if(Auth::user()->role == "TEO"){
-        $houseGrant->update([
-            'teo_status' => 1,
-            'teo_status_date' => $currenttime,
-            'teo_status_id' => Auth::user()->id,
-            'teo_status_reason' => $reason,
-        ]);
-      }
-
-       else  if(Auth::user()->role == "TDO"){
-        $houseGrant->update([
-            'tdo_status' => 1,
-            'tdo_status_date' => $currenttime,
-            'tdo_status_id' => Auth::user()->id,
-        ]);
-      }
-
-      else  if(Auth::user()->role == "Project Officer"){
-        $houseGrant->update([
-            'pjct_offcr_status' => 1,
-            'pjct_offcr_status_date' => $currenttime,
-            'pjct_offcr_status_id' => Auth::user()->id,
-        ]);
-      }
+        if (Auth::user()->role == "TEO") {
+            $houseGrant->update([
+                'teo_status' => 1,
+                'teo_status_date' => $currenttime,
+                'teo_status_id' => Auth::user()->id,
+                'teo_status_reason' => $reason,
+            ]);
+        } else  if (Auth::user()->role == "TDO") {
+            $houseGrant->update([
+                'tdo_status' => 1,
+                'tdo_status_date' => $currenttime,
+                'tdo_status_id' => Auth::user()->id,
+            ]);
+        } else  if (Auth::user()->role == "Project Officer") {
+            $houseGrant->update([
+                'pjct_offcr_status' => 1,
+                'pjct_offcr_status_date' => $currenttime,
+                'pjct_offcr_status_id' => Auth::user()->id,
+            ]);
+        }
 
         return response()->json([
             'success' => 'Mother Child Scheme Application approved successfully.'
         ]);
-    
     }
-    public function motherChildSchemeReject(Request $request){
+    public function motherChildSchemeReject(Request $request)
+    {
 
         // dd('holo');
         $id = $request->id;
-        $reason =$request->reason;
-      //  $currentTime = Carbon::now();
-      $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        $reason = $request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
         $houseGrant = MotherChildScheme::where('_id', $request->id)->first();
 
-      
-        if(Auth::user()->role == "TEO"){
-        $houseGrant->update([
-            'teo_status' => 2,
-            'teo_status_date' => $currenttime,
-            'teo_status_id' => Auth::user()->id,
-            'teo_status_reason' => $reason,
-        ]);
-        }
-        else  if(Auth::user()->role == "TDO"){
+
+        if (Auth::user()->role == "TEO") {
+            $houseGrant->update([
+                'teo_status' => 2,
+                'teo_status_date' => $currenttime,
+                'teo_status_id' => Auth::user()->id,
+                'teo_status_reason' => $reason,
+            ]);
+        } else  if (Auth::user()->role == "TDO") {
             $houseGrant->update([
                 'tdo_status' => 2,
                 'tdo_status_date' => $currenttime,
                 'tdo_status_id' => Auth::user()->id,
                 'tdo_status_reason' => $reason,
             ]);
-        }
-        else  if(Auth::user()->role == "Project Officer"){
+        } else  if (Auth::user()->role == "Project Officer") {
             $houseGrant->update([
                 'pjct_offcr_status' => 2,
                 'pjct_offcr_status_date' => $currenttime,
                 'pjct_offcr_status_id' => Auth::user()->id,
                 'pjct_offcr_status_reason' => $reason,
             ]);
-          }
+        }
 
         return response()->json([
             'success' => 'Mother Child Scheme Application Rejected successfully.'
         ]);
-    
     }
 
     public function getMotherChildReturnList(Request $request)
@@ -1716,8 +1700,8 @@ class ApplicationController extends Controller
         if ($role == "TEO") {
             $totalRecord->where('submitted_teo', $teo);
         }
-        if($role == "TDO" || $role == "Project Officer"){
-            $totalRecord->where('submitted_teo',$teo)->where('teo_status',1);
+        if ($role == "TDO" || $role == "Project Officer") {
+            $totalRecord->where('submitted_teo', $teo)->where('teo_status', 1);
         }
         if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
             //echo "khk";exit;
@@ -1739,8 +1723,8 @@ class ApplicationController extends Controller
         if ($role == "TEO") {
             $totalRecordswithFilte->where('submitted_teo', $teo);
         }
-        if($role == "TDO" || $role == "Project Officer"){
-            $totalRecordswithFilte->where('submitted_teo',$teo)->where('teo_status',1);
+        if ($role == "TDO" || $role == "Project Officer") {
+            $totalRecordswithFilte->where('submitted_teo', $teo)->where('teo_status', 1);
         }
         if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
             //echo "khk";exit;
@@ -1760,8 +1744,8 @@ class ApplicationController extends Controller
         if ($role == "TEO") {
             $items->where('submitted_teo', $teo);
         }
-        if($role == "TDO" || $role == "Project Officer"){
-            $items->where('submitted_teo',$teo)->where('teo_status',1);
+        if ($role == "TDO" || $role == "Project Officer") {
+            $items->where('submitted_teo', $teo)->where('teo_status', 1);
         }
         if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
             //echo "khk";exit;
@@ -1775,7 +1759,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -1790,12 +1774,12 @@ class ApplicationController extends Controller
             if (@$record->dob != null) {
                 $dob = Carbon::parse(@$record->dob)->format('d-m-Y');
             }
-            $edit='';
+            $edit = '';
 
-            $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('motherChild-Scheme-edit/' . $id) . '">Resubmit</a></div>';
+            $edit = '<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('motherChild-Scheme-edit/' . $id) . '">Resubmit</a></div>';
 
             $data_arr[] = array(
-                "sl_no" =>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,
@@ -1804,7 +1788,7 @@ class ApplicationController extends Controller
                 "village" => $village,
                 "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i:s '),
                 // "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
-                "edit" =>$edit,
+                "edit" => $edit,
             );
         }
 
@@ -1816,8 +1800,6 @@ class ApplicationController extends Controller
         );
 
         return response()->json($response);
-
-
     }
 
     public function motherChildSchemeEdit(Request $request)
@@ -1825,15 +1807,15 @@ class ApplicationController extends Controller
 
         $data = Auth::user();
         $districts = District::get();
-        $datas = MotherChildScheme::where('_id',$request->id)->first();
-      
-      //  dd($datas);
-        return view('application.motherChild-Scheme-edit', compact('data', 'districts','datas'));
+        $datas = MotherChildScheme::where('_id', $request->id)->first();
+
+        //  dd($datas);
+        return view('application.motherChild-Scheme-edit', compact('data', 'districts', 'datas'));
     }
 
     public function motherChildSchemeUpdate(Request $request)
     {
-      
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'submitted_district' => 'required',
@@ -1841,53 +1823,53 @@ class ApplicationController extends Controller
 
             // Add more fields and their validation rules as needed
         ]);
-        $data = MotherChildScheme::where('_id',$request->id)->first();
+        $data = MotherChildScheme::where('_id', $request->id)->first();
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
-       }
-       $data = $request->all();
-       if ($request->hasfile('signature')) {
-
-           $image = $request->signature;
-           $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
-
-           $image->move(public_path('/applications/mother_child_protection'), $imgfileName);
-
-           $signature = $imgfileName;
-       } else {
-           $signature = '';
-       }
-       if ($request->hasfile('applicant_photo')) {
-
-           $applicant_photo = $request->applicant_photo;
-           $imgfileName1 = time() . rand(100, 999) . '.' . $applicant_photo->extension();
-
-           $applicant_photo->move(public_path('/applications/mother_child_protection'), $imgfileName1);
-
-           $applicant_photos = $imgfileName1;
-       } else {
-           $applicant_photos = '';
-       }
-
-       $formData = $data;
-       if ($request->district != '') {
-           $dis = District::where('_id', $request->district)->first();
-           $formData['district_name'] = $dis->name;
-       }
-       if ($request->taluk != '') {
-           $taluk = Taluk::where('_id', $request->taluk)->first();
-           $formData['taluk_name'] = $taluk->taluk_name;
-       }
-       
+        }
         $data = $request->all();
-        $datainsert =  MotherChildScheme::where('_id',$request->id)->first();
-       // dd($request->id);
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/applications/mother_child_protection'), $imgfileName);
+
+            $signature = $imgfileName;
+        } else {
+            $signature = '';
+        }
+        if ($request->hasfile('applicant_photo')) {
+
+            $applicant_photo = $request->applicant_photo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $applicant_photo->extension();
+
+            $applicant_photo->move(public_path('/applications/mother_child_protection'), $imgfileName1);
+
+            $applicant_photos = $imgfileName1;
+        } else {
+            $applicant_photos = '';
+        }
+
+        $formData = $data;
+        if ($request->district != '') {
+            $dis = District::where('_id', $request->district)->first();
+            $formData['district_name'] = $dis->name;
+        }
+        if ($request->taluk != '') {
+            $taluk = Taluk::where('_id', $request->taluk)->first();
+            $formData['taluk_name'] = $taluk->taluk_name;
+        }
+
+        $data = $request->all();
+        $datainsert =  MotherChildScheme::where('_id', $request->id)->first();
+        // dd($request->id);
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
+        $currenttime = $currentTimeInKerala->format('h:i A');
         $datainsert->update([
             'name' => $data['name'],
             'district' => $data['district'],
@@ -1909,12 +1891,12 @@ class ApplicationController extends Controller
             'signature' => @$signature,
             'applicant_photo' => @$applicant_photos,
             'teo_return' => null,
-            'return_status' =>1,
-            "teo_view_status"=>1,
+            'return_status' => 1,
+            "teo_view_status" => 1,
             // 'user_id' => Auth::user()->id,
             'status' => 0,
-            "teo_status_date"=>$date .' ' .$currenttime ,
-            "teo_return_view_date" =>$date .' ' .$currenttime 
+            "teo_status_date" => $date . ' ' . $currenttime,
+            "teo_return_view_date" => $date . ' ' . $currenttime
         ]);
 
 
@@ -1980,8 +1962,8 @@ class ApplicationController extends Controller
         if ($role == "TEO") {
             $totalRecord->where('submitted_teo', $teo);
         }
-        if($role == "TDO" || $role == "Project Officer"){
-            $totalRecord->where('submitted_teo',$teo)->where('teo_status',1);
+        if ($role == "TDO" || $role == "Project Officer") {
+            $totalRecord->where('submitted_teo', $teo)->where('teo_status', 1);
         }
         if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
             //echo "khk";exit;
@@ -2002,8 +1984,8 @@ class ApplicationController extends Controller
         if ($role == "TEO") {
             $totalRecordswithFilte->where('submitted_teo', $teo);
         }
-        if($role == "TDO" || $role == "Project Officer"){
-            $totalRecordswithFilte->where('submitted_teo',$teo)->where('teo_status',1);
+        if ($role == "TDO" || $role == "Project Officer") {
+            $totalRecordswithFilte->where('submitted_teo', $teo)->where('teo_status', 1);
         }
         if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
             //echo "khk";exit;
@@ -2023,8 +2005,8 @@ class ApplicationController extends Controller
         if ($role == "TEO") {
             $items->where('submitted_teo', $teo);
         }
-        if($role == "TDO" || $role == "Project Officer"){
-            $items->where('submitted_teo',$teo)->where('teo_status',1);
+        if ($role == "TDO" || $role == "Project Officer") {
+            $items->where('submitted_teo', $teo)->where('teo_status', 1);
         }
         if ($request->from_date != "1970-01-01" && $request->to_date != "1970-01-01" && $request->from_date != "" && $request->to_date != "") {
             //echo "khk";exit;
@@ -2037,7 +2019,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -2052,75 +2034,55 @@ class ApplicationController extends Controller
             if (@$record->dob != null) {
                 $dob = Carbon::parse(@$record->dob)->format('d-m-Y');
             }
-            $edit='';
-              if($role == "TDO" && $record->pjct_offcr_status == 1) {
-                $approved_status =" Approved By Project Officer";
-              }
-              else if($role == "Project Officer" && $record->tdo_status == 1){
-                $approved_status ="Approved By TDO ";
-              }
-              else{
-                $approved_status ="Approved  ";
-              }
+            $edit = '';
+            if ($role == "TDO" && $record->pjct_offcr_status == 1) {
+                $approved_status = " Approved By Project Officer";
+            } else if ($role == "Project Officer" && $record->tdo_status == 1) {
+                $approved_status = "Approved By TDO ";
+            } else {
+                $approved_status = "Approved  ";
+            }
 
-              if($role == "TDO" && $record->pjct_offcr_status == 2) {
-                $rejected_status =" Rejected By Project Officer";
-                $status_reason =Str::limit($record->pjct_offcr_status_reason, 10);
-              }
-              else if($role == "TDO" && $record->tdo_status == 2){
-                $rejected_status =" Rejected";
-                $status_reason =Str::limit($record->tdo_status_reason, 10);
-              
-              }
-              else if($role == "Project Officer" && $record->tdo_status == 2){
-                $rejected_status ="Rejected By TDO ";
-                $status_reason =Str::limit($record->tdo_status_reason, 10);
-              
-              }
-              else if($role == "Project Officer" && $record->pjct_offcr_status == 2){
-                $rejected_status ="Rejected ";
-                $status_reason =Str::limit($record->pjct_offcr_status_reason, 10);
-               
-              }
-              else{
-                $rejected_status ="Rejected ";
-              }
+            if ($role == "TDO" && $record->pjct_offcr_status == 2) {
+                $rejected_status = " Rejected By Project Officer";
+                $status_reason = Str::limit($record->pjct_offcr_status_reason, 10);
+            } else if ($role == "TDO" && $record->tdo_status == 2) {
+                $rejected_status = " Rejected";
+                $status_reason = Str::limit($record->tdo_status_reason, 10);
+            } else if ($role == "Project Officer" && $record->tdo_status == 2) {
+                $rejected_status = "Rejected By TDO ";
+                $status_reason = Str::limit($record->tdo_status_reason, 10);
+            } else if ($role == "Project Officer" && $record->pjct_offcr_status == 2) {
+                $rejected_status = "Rejected ";
+                $status_reason = Str::limit($record->pjct_offcr_status_reason, 10);
+            } else {
+                $rejected_status = "Rejected ";
+            }
 
 
 
-              if($role == "TEO"){
-                if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+            if ($role == "TEO") {
+                if ($record->teo_status == 1) {
+                    $edit = '<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } else if ($record->teo_status == 2) {
+                    $edit = '<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } else if ($record->teo_status == null) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .   url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
-                else if($record->teo_status ==2){
-                    $edit='<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
-              
+            } else if ($role == "TDO" || $role == "Project Officer") {
+
+                if ($record->tdo_status == 1 || $record->pjct_offcr_status == 1) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">' . $approved_status . '</div></div>';
+                } else if ($record->tdo_status == 2 || $record->pjct_offcr_status == 2) {
+                    $edit = '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">' . $rejected_status . '</div>&nbsp;&nbsp;<span>' . $status_reason . '</span></div>';
+                } else {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
-                else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' .   url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
-                }
-               
-              }
-              else if($role == "TDO" || $role == "Project Officer"){
-               
-                if($record->tdo_status== 1 || $record->pjct_offcr_status== 1 ){
-                    $edit = '<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view'). '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">'.$approved_status.'</div></div>';
-                }
-                else if($record->tdo_status ==2 || $record->pjct_offcr_status== 2){
-                    $edit='<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view'). '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">'.$rejected_status.'</div>&nbsp;&nbsp;<span>'.$status_reason.'</span></div>';
-              
-                }
-                else {
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
-                }
-               
-              }
-              else{
-                $edit='<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
-             
-              }
+            } else {
+                $edit = '<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+            }
             $data_arr[] = array(
-                "sl_no" =>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,
@@ -2129,7 +2091,7 @@ class ApplicationController extends Controller
                 "village" => $village,
                 "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y h:i:s '),
                 // "edit" => '<div class="settings-main-icon"><a  href="' . url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
-                "edit" =>$edit,
+                "edit" => $edit,
             );
         }
 
@@ -2150,28 +2112,26 @@ class ApplicationController extends Controller
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
-     
-       
-        if($formData->teo_view_status==null && Auth::user()->role=='TEO'){
+        $currenttime = $currentTimeInKerala->format('h:i A');
+
+
+        if ($formData->teo_view_status == null && Auth::user()->role == 'TEO') {
             $formData->update([
-            "teo_view_status"=>1,
-            "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime
+                "teo_view_status" => 1,
+                "teo_view_id" => Auth::user()->id,
+                "teo_view_date" => $date . ' ' . $currenttime
             ]);
-        }
-        else  if($formData->tdo_view_status==null && Auth::user()->role=='TDO'){
+        } else  if ($formData->tdo_view_status == null && Auth::user()->role == 'TDO') {
             $formData->update([
-            "tdo_view_status"=>1,
-            "tdo_view_id" =>Auth::user()->id,
-            "tdo_view_date" =>$date .' ' .$currenttime
+                "tdo_view_status" => 1,
+                "tdo_view_id" => Auth::user()->id,
+                "tdo_view_date" => $date . ' ' . $currenttime
             ]);
-        }
-        else  if($formData->pjct_offcr_view_status==null && Auth::user()->role=='Project Officer'){
+        } else  if ($formData->pjct_offcr_view_status == null && Auth::user()->role == 'Project Officer') {
             $formData->update([
-            "pjct_offcr_view_status"=>1,
-            "pjct_offcr_view_id" =>Auth::user()->id,
-            "pjct_offcr_view_date" =>$date .' ' .$currenttime
+                "pjct_offcr_view_status" => 1,
+                "pjct_offcr_view_id" => Auth::user()->id,
+                "pjct_offcr_view_date" => $date . ' ' . $currenttime
             ]);
         }
 
@@ -2414,7 +2374,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -2423,12 +2383,12 @@ class ApplicationController extends Controller
             $age = $record->age;
             $caste = $record->caste;
             $created_at =  $record->created_at;
-            $edit="";
+            $edit = "";
 
-            $edit='<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('marriageGrant-edit/' . $id) . '">Resubmit</a></div>';
-        
+            $edit = '<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="btn btn-primary" href="' .  url('marriageGrant-edit/' . $id) . '">Resubmit</a></div>';
+
             $data_arr[] = array(
-                "sl_no" =>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "name" => $name,
                 "current_address" => $current_address,
@@ -2436,7 +2396,7 @@ class ApplicationController extends Controller
                 "caste" => $caste,
                 "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s'),
                 //"edit" => '<div class="settings-main-icon"><a  href="' . url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
-                "edit" =>$edit
+                "edit" => $edit
             );
         }
 
@@ -2456,15 +2416,15 @@ class ApplicationController extends Controller
 
         $data = Auth::user();
         $districts = District::get();
-        $datas = MarriageGrant::where('_id',$request->id)->first();
-      
-      //  dd($datas);
-        return view('application.MarriageGrant-edit', compact('data', 'districts','datas'));
+        $datas = MarriageGrant::where('_id', $request->id)->first();
+
+        //  dd($datas);
+        return view('application.MarriageGrant-edit', compact('data', 'districts', 'datas'));
     }
 
     public function marriageGrantUpdate(Request $request)
     {
-      
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'submitted_district' => 'required',
@@ -2542,84 +2502,84 @@ class ApplicationController extends Controller
             $invitation_letter = '';
         }
 
-       
+
         $data = $request->all();
-        $datainsert =  MarriageGrant::where('_id',$request->id)->first();
-       // dd($request->id);
+        $datainsert =  MarriageGrant::where('_id', $request->id)->first();
+        // dd($request->id);
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
+        $currenttime = $currentTimeInKerala->format('h:i A');
 
 
-      $datainsert->update([
-          'name' => $data['name'],
-          'current_address' => @$data['current_address'],
-          'current_district' => @$data['current_district'],
-          'current_taluk' => @$data['current_taluk'],
-          'current_pincode' => @$data['current_pincode'],
-          'age' => @$data['age'],
-          'permanent_address' => $data['permanent_address'],
-          'permanent_district' => @$data['permanent_district'],
-          'permanent_taluk' => @$data['permanent_taluk'],
-          'permanent_pincode' => @$data['permanent_pincode'],
-          'family_details' => @$data['family_details'],
-          'caste' => @$data['caste'],
-          'caste_certificate' => $data['caste_certificate'],
-          'fiancee_name' => @$data['fiancee_name'],
-          'fiancee_address' => @$data['fiancee_address'],
-          'fiancee_district' => @$data['fiancee_district'],
-          'fiancee_taluk' => @$data['fiancee_taluk'],
-          'fiancee_pincode' => @$data['fiancee_pincode'],
-          'relation_with_applicant' => @$data['relation_with_applicant'],
-          'marriage_type' => @$data['marriage_type'],
-          'is_widow' => @$data['is_widow'],
-          'parent_occupation' => @$data['parent_occupation'],
-          'annual_income' => @$data['annual_income'],
-          'income_certificate' => @$data['income_certificate'],
-          'marriage_place' => @$data['marriage_place'],
-          'marriage_date' => @$data['marriage_date'],
-          'fiancee_family_details' => @$data['fiancee_family_details'],
-          'disabled_parent_info' => @$data['disabled_parent_info'],
-          'freedmen_parent_details' => @$data['freedmen_parent_details'],
-          'violence_by_non_scheduled_tribes_info' => $data['violence_by_non_scheduled_tribes_info'],
-          'land_alienated_details' => @$data['land_alienated_details'],
-          'outcast_parent_details' => @$data['outcast_parent_details'],
-          'remarried_parent_details' => @$data['remarried_parent_details'],
-          'groom_name' => @$data['groom_name'],
-          'groom_address' => @$data['groom_address'],
-          'groom_district' => @$data['groom_district'],
-          'groom_taluk' => @$data['groom_taluk'],
-          'groom_pincode' => @$data['groom_pincode'],
-          'groom_parent_name' => @$data['groom_parent_name'],
-          'groom_parent_address' => @$data['groom_parent_address'],
-          'groom_parent_district' => @$data['groom_parent_district'],
-          'groom_parent_taluk' => @$data['groom_parent_taluk'],
-          'groom_parent_pincode' => @$data['groom_parent_pincode'],
-          'financial_assistance_details' => $data['financial_assistance_details'],
-          'panchayath_name' => @$data['panchayath_name'],
-          'submitted_after_marriage' => @$data['submitted_after_marriage'],
-          'date_of_marriage' => @$data['date_of_marriage'],
-          'marriage_certificate' => @$data['marriage_certificate'],
-          'invitation_letter' => @$data['invitation_letter'],
-          'place' => @$data['place'],
-          'date' => date('d-m-Y'),
-          'submitted_district' => $data['submitted_district'],
-          'submitted_teo' => $data['submitted_teo'],
-          'signature' => @$data['signature'],
-          'applicant_photo' => @$data['applicant_photo'],
-          'teo_return' => null,
-          'return_status' =>1,
-          "teo_view_status"=>1,
-        //  'user_id' => Auth::user()->id,
-          'status' => 0,
-          "teo_status_date"=>$date .' ' .$currenttime ,
-          "teo_return_view_date" =>$date .' ' .$currenttime 
-      ]);
+        $datainsert->update([
+            'name' => $data['name'],
+            'current_address' => @$data['current_address'],
+            'current_district' => @$data['current_district'],
+            'current_taluk' => @$data['current_taluk'],
+            'current_pincode' => @$data['current_pincode'],
+            'age' => @$data['age'],
+            'permanent_address' => $data['permanent_address'],
+            'permanent_district' => @$data['permanent_district'],
+            'permanent_taluk' => @$data['permanent_taluk'],
+            'permanent_pincode' => @$data['permanent_pincode'],
+            'family_details' => @$data['family_details'],
+            'caste' => @$data['caste'],
+            'caste_certificate' => $data['caste_certificate'],
+            'fiancee_name' => @$data['fiancee_name'],
+            'fiancee_address' => @$data['fiancee_address'],
+            'fiancee_district' => @$data['fiancee_district'],
+            'fiancee_taluk' => @$data['fiancee_taluk'],
+            'fiancee_pincode' => @$data['fiancee_pincode'],
+            'relation_with_applicant' => @$data['relation_with_applicant'],
+            'marriage_type' => @$data['marriage_type'],
+            'is_widow' => @$data['is_widow'],
+            'parent_occupation' => @$data['parent_occupation'],
+            'annual_income' => @$data['annual_income'],
+            'income_certificate' => @$data['income_certificate'],
+            'marriage_place' => @$data['marriage_place'],
+            'marriage_date' => @$data['marriage_date'],
+            'fiancee_family_details' => @$data['fiancee_family_details'],
+            'disabled_parent_info' => @$data['disabled_parent_info'],
+            'freedmen_parent_details' => @$data['freedmen_parent_details'],
+            'violence_by_non_scheduled_tribes_info' => $data['violence_by_non_scheduled_tribes_info'],
+            'land_alienated_details' => @$data['land_alienated_details'],
+            'outcast_parent_details' => @$data['outcast_parent_details'],
+            'remarried_parent_details' => @$data['remarried_parent_details'],
+            'groom_name' => @$data['groom_name'],
+            'groom_address' => @$data['groom_address'],
+            'groom_district' => @$data['groom_district'],
+            'groom_taluk' => @$data['groom_taluk'],
+            'groom_pincode' => @$data['groom_pincode'],
+            'groom_parent_name' => @$data['groom_parent_name'],
+            'groom_parent_address' => @$data['groom_parent_address'],
+            'groom_parent_district' => @$data['groom_parent_district'],
+            'groom_parent_taluk' => @$data['groom_parent_taluk'],
+            'groom_parent_pincode' => @$data['groom_parent_pincode'],
+            'financial_assistance_details' => $data['financial_assistance_details'],
+            'panchayath_name' => @$data['panchayath_name'],
+            'submitted_after_marriage' => @$data['submitted_after_marriage'],
+            'date_of_marriage' => @$data['date_of_marriage'],
+            'marriage_certificate' => @$data['marriage_certificate'],
+            'invitation_letter' => @$data['invitation_letter'],
+            'place' => @$data['place'],
+            'date' => date('d-m-Y'),
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
+            'signature' => @$data['signature'],
+            'applicant_photo' => @$data['applicant_photo'],
+            'teo_return' => null,
+            'return_status' => 1,
+            "teo_view_status" => 1,
+            //  'user_id' => Auth::user()->id,
+            'status' => 0,
+            "teo_status_date" => $date . ' ' . $currenttime,
+            "teo_return_view_date" => $date . ' ' . $currenttime
+        ]);
 
-      return redirect()->route('marriageGrantList')->with('status', 'Application Submitted Successfully.');
-  }
+        return redirect()->route('marriageGrantList')->with('status', 'Application Submitted Successfully.');
+    }
 
 
     public function marriageGrantList(Request $request)
@@ -2694,7 +2654,7 @@ class ApplicationController extends Controller
 
 
         $data_arr = array();
-        $i=$start;
+        $i = $start;
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
@@ -2703,27 +2663,21 @@ class ApplicationController extends Controller
             $age = $record->age;
             $caste = $record->caste;
             $created_at =  $record->created_at;
-            $edit="";
-            if($role == "TEO"){
-                if($record->teo_status== 1){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
+            $edit = "";
+            if ($role == "TEO") {
+                if ($record->teo_status == 1) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } else if ($record->teo_status == 2) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } else if ($record->teo_status == null) {
+                    $edit = '<div class="settings-main-icon"><a  href="' . url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
                 }
-                else if($record->teo_status ==2){
-                    $edit='<div class="settings-main-icon"><a  href="' .  url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->teo_status_reason.'</span></div>';
-              
-                }
-                else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' . url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
-                }
-               
-              }
-              else{
-                $edit='<div class="settings-main-icon"><a  href="' . url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
-              
-              }
-              
+            } else {
+                $edit = '<div class="settings-main-icon"><a  href="' . url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
+            }
+
             $data_arr[] = array(
-                "sl_no" =>$i,
+                "sl_no" => $i,
                 "id" => $id,
                 "name" => $name,
                 "current_address" => $current_address,
@@ -2731,7 +2685,7 @@ class ApplicationController extends Controller
                 "caste" => $caste,
                 "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s'),
                 //"edit" => '<div class="settings-main-icon"><a  href="' . url('marriageGrant/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a></div>'
-                "edit" =>$edit
+                "edit" => $edit
             );
         }
 
@@ -2747,19 +2701,19 @@ class ApplicationController extends Controller
     public function marriageGrantView(Request $request, $id)
     {
 
-       
+
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-      $currenttime = $currentTimeInKerala->format('h:i A');
-     
-      $formData = MarriageGrant::where('_id', $id)->first();
-        if($formData->teo_view_status==null && Auth::user()->role=='TEO'){
+        $currenttime = $currentTimeInKerala->format('h:i A');
+
+        $formData = MarriageGrant::where('_id', $id)->first();
+        if ($formData->teo_view_status == null && Auth::user()->role == 'TEO') {
             $formData->update([
-            "teo_view_status"=>1,
-            "teo_view_id" =>Auth::user()->id,
-            "teo_view_date" =>$date .' ' .$currenttime
+                "teo_view_status" => 1,
+                "teo_view_id" => Auth::user()->id,
+                "teo_view_date" => $date . ' ' . $currenttime
             ]);
         }
 
