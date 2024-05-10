@@ -188,6 +188,8 @@ Route::post('/singleEarner/teoReject', [App\Http\Controllers\SingleIncomeEarnerC
 
 Route::get('/anemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceList'])->name('anemiaFinanceList');
 Route::get('/getAnemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceList'])->name('getAnemiaFinanceList');
+Route::get('/getAnemiaFinanceReturnList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceReturnList'])->name('getAnemiaFinanceReturnList');
+Route::get('/anemiaFinanceReturnList-edit/{id}', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceReturnListEdit'])->name('anemiaFinanceReturnList.edit');
 Route::get('/anemiaFinance/{id}/view', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceView'])->name('anemiaFinanceView');
 Route::post('/anemiaFinance/teoApprove', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoApprove'])->name('anemiaFinance-teo.approve');
 Route::post('/anemiaFinance/teoReject', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoReject'])->name('anemiaFinance-teo.reject');
@@ -464,6 +466,7 @@ Route::controller(ClerkController::class)->group(function(){
     
     Route::get('/anemiaFinanceListClerk', 'anemiaFinanceListClerk')->name('anemiaFinanceListClerk');
     Route::get('/getAnemiaFinanceListClerk', 'getAnemiaFinanceListClerk')->name('getAnemiaFinanceListClerk');
+    Route::get('/getAnemiaFinanceListClerkReturned', 'getAnemiaFinanceListClerkReturned')->name('getAnemiaFinanceListClerkReturned');
     Route::get('/anemiaFinance/{id}/Clerkview', 'anemiaFinanceClerkView')->name('anemiaFinanceClerkView');
     Route::post('/anemiaFinance/clerkApprove', 'anemiaFinanceClerkApprove')->name('anemiaFinance-clerk.approve');
     Route::post('/anemiaFinance/clerkReject', 'anemiaFinanceClerkReject')->name('anemiaFinance-clerk.reject');
@@ -772,6 +775,7 @@ Route::controller(JsSeoController::class)->group(function(){
     
     Route::get('/anemiaFinanceListJsSeo', 'anemiaFinanceListJsSeo')->name('anemiaFinanceListJsSeo');
     Route::get('/getAnemiaFinanceListJsSeo', 'getAnemiaFinanceListJsSeo')->name('getAnemiaFinanceListJsSeo');
+    Route::get('/getAnemiaFinanceListJsSeoReturn', 'getAnemiaFinanceListJsSeoReturn')->name('getAnemiaFinanceListJsSeoReturn');
     Route::get('/anemiaFinance/{id}/JsSeoview', 'anemiaFinanceJsSeoView')->name('anemiaFinanceJsSeoView');
     Route::post('/anemiaFinance/JsSeoApprove', 'anemiaFinanceJsSeoApprove')->name('anemiaFinance-JsSeo.approve');
     Route::post('/anemiaFinance/JsSeoReject', 'anemiaFinanceJsSeoReject')->name('anemiaFinance-JsSeo.reject');
