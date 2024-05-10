@@ -410,7 +410,8 @@ class ApplicationController extends Controller
             "teo_return_view_date" => $date . ' ' . $currenttime
         ]);
 
-        return redirect()->route('couplefinancialList')->with('status', 'Application Submitted Successfully.');
+
+        return redirect()->route('adminTuitionFeeList')->with('status', 'Application Submitted Successfully.');
     }
 
     public function coupleFinancialHelp(Request $request)

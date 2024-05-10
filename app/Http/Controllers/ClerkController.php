@@ -2062,6 +2062,126 @@ class ClerkController extends Controller
         ]);
     }
 
+    public function getStudentAwardListClerkReturned(Request $request)
+    {
+        $name = $request->name;
+        $user_id = Auth::user()->id;
+        $role =  Auth::user()->role;
+        $teo =  Auth::user()->teo_name;
+        $district =  Auth::user()->district;
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+
+
+        $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+        // Total records
+        $totalRecord = StudentAward::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_return', null)->where('clerk_return', 1);
+        // Total records
+
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = StudentAward::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_return', null)->where('clerk_return', 1);
+
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $totalRecordswithFilte->where('submitted_teo', $teo);
+        }
+
+
+
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+        $items = StudentAward::where('deleted_at', null)->orderBy($columnName, $columnSortOrder)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_return', null)->where('clerk_return', 1);
+
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+        if ($role == "TEO") {
+            $items->where('submitted_teo', $teo);
+        }
+
+
+        $records = $items->skip($start)->take($rowperpage)->get();
+
+
+
+
+        $data_arr = array();
+
+        foreach ($records as $record) {
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $dob = $record->dob;
+            $district = @$record->districtRelation->name;
+            $created_at =  $record->created_at;
+
+            $status = @$record->clerk_status;
+
+            $teo_name = @$record->submittedTeo->teo_name;
+
+            $edit = '';
+
+            $edit = '<div class="settings-main-icon"><a  href="' . route('studentAwardClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "dob" => $dob,
+                "district" => $district,
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s'),
+                "teo" => $teo_name,
+                "edit" => $edit
+
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        return response()->json($response);
+    }
+
     public function studentAwardListClerk(Request $request)
     {
         return view('clerk.studentAward.index');
@@ -2101,7 +2221,8 @@ class ClerkController extends Controller
         $totalRecord = StudentAward::where('deleted_at', null)
             ->whereIn('submitted_teo', $teoIds)
             ->where('submitted_district', $district)
-            ->where('teo_status', 1);
+            ->where('teo_status', 1)
+            ->Where('clerk_return', null);
         // Total records
 
         if ($name != "") {
@@ -2114,7 +2235,8 @@ class ClerkController extends Controller
         $totalRecordswithFilte = StudentAward::where('deleted_at', null)
             ->whereIn('submitted_teo', $teoIds)
             ->where('submitted_district', $district)
-            ->where('teo_status', 1);
+            ->where('teo_status', 1)
+            ->Where('clerk_return', null);
 
         if ($name != "") {
             $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
@@ -2131,7 +2253,8 @@ class ClerkController extends Controller
         $items = StudentAward::where('deleted_at', null)->orderBy($columnName, $columnSortOrder)
             ->whereIn('submitted_teo', $teoIds)
             ->where('submitted_district', $district)
-            ->where('teo_status', 1);
+            ->where('teo_status', 1)
+            ->Where('clerk_return', null);
 
         if ($name != "") {
             $items->where('name', 'like', "%" . $name . "%");
@@ -2166,8 +2289,9 @@ class ClerkController extends Controller
             } else if ($status == 2) {
                 $edit = '<div class="settings-main-icon"><a  href="' . route('studentAwardClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->clerk_status_reason . '</span></div>';
             } else if ($status == null) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('studentAwardClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit = '<div class="settings-main-icon"><a  href="' . route('studentAwardClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
             }
+
 
             $data_arr[] = array(
                 "id" => $id,
@@ -2207,6 +2331,26 @@ class ClerkController extends Controller
                 "clerk_view_date" => $date . ' ' . $currenttime
             ]);
         }
+        if ($formData->clerk_return_view_status == null && $formData->return_status == 1) {
+            $formData->update([
+                "clerk_return_view_status" => 1,
+                "clerk_view_id" => Auth::user()->id,
+                "clerk_return_view_date" => $date . ' ' . $currenttime
+            ]);
+        }
+
+        $formData = StudentAward::where('_id', $id)->first();
+
+        return view('clerk.studentAward.view', compact('formData'));
+
+        $formData = StudentAward::find($id);
+        if ($formData->clerk_view_status == null) {
+            $formData->update([
+                "clerk_view_status" => 1,
+                "clerk_view_id" => Auth::user()->id,
+                "clerk_view_date" => $date . ' ' . $currenttime
+            ]);
+        }
 
         $formData = StudentAward::where('_id', $id)->first();
 
@@ -2223,6 +2367,7 @@ class ClerkController extends Controller
 
         $studentAward->update([
             'clerk_status' => 1,
+            'clerk_return' => null,
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,
@@ -2326,7 +2471,7 @@ class ClerkController extends Controller
         }
 
         $items->where('clerk_return', null);
-        
+
         $records = $items->skip($start)->take($rowperpage)->get();
 
 
@@ -2444,7 +2589,7 @@ class ClerkController extends Controller
         }
 
         $items->where('teo_return', null)->where('clerk_return', 1);
-        
+
 
 
         $records = $items->skip($start)->take($rowperpage)->get();
@@ -2943,6 +3088,131 @@ class ClerkController extends Controller
         ]);
     }
 
+    public function gethouseGrantReturnListClerk(Request $request)
+    {
+        $role =  Auth::user()->role;
+        $district =  Auth::user()->district;
+        $tdo = Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+        $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+
+
+
+        // Total records
+        $totalRecord = HouseManagement::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_return', null)->where('clerk_return', 1);
+
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+
+
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = HouseManagement::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_return', null)->where('clerk_return', 1);
+
+
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+
+
+
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+
+
+        $items = HouseManagement::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_return', null)->where('clerk_return', 1)
+            ->orderBy($columnName, $columnSortOrder);
+
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+
+
+        $records = $items->skip($start)->take($rowperpage)->get();
+
+
+
+
+        $data_arr = array();
+        $i = $start;
+
+        foreach ($records as $record) {
+            $i++;
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $place = $record->place;
+            $panchayath = $record->panchayath;
+            $caste = $record->caste;
+            $status = $record->clerk_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name = $record->teo->teo_name;
+            $created_at =  $record->created_at;
+            $edit = '';
+
+            $edit = '<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+
+
+            $data_arr[] = array(
+
+                "sl_no" => $i,
+                "id" => $id,
+                "place" => $place,
+                "name" => $name,
+                "address" => $address,
+                "panchayath" => $panchayath,
+                "caste" => $caste,
+                "date" => $date . ' ' . $time,
+                "teo_name" => $teo_name,
+                "edit" => $edit,
+
+
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        return response()->json($response);
+    }
+
     public function houseGrantListClerk()
     {
         return view('clerk.houseGrant.index');
@@ -2974,6 +3244,57 @@ class ClerkController extends Controller
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = $search_arr['value']; // Search value
+
+
+
+
+        // Total records
+        $totalRecord = HouseManagement::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1)
+            ->Where('clerk_return', null);
+
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+
+
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = HouseManagement::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1)
+            ->Where('clerk_return', null);
+
+
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+
+
+
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+
+
+        $items = HouseManagement::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1)
+            ->Where('clerk_return', null)
+            ->orderBy($columnName, $columnSortOrder);
+
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+
+
+        $records = $items->skip($start)->take($rowperpage)->get();
+
 
 
 
@@ -3047,7 +3368,7 @@ class ClerkController extends Controller
             } else if ($status == 2) {
                 $edit = '<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->clerk_status_reason . '</span></div>';
             } else if ($status == null) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit = '<div class="settings-main-icon"><a  href="' . route('houseGrantClerkDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
             }
 
 
@@ -3099,6 +3420,14 @@ class ClerkController extends Controller
             ]);
         }
 
+        if ($formData->clerk_return_view_status == null && $formData->return_status == 1) {
+            $formData->update([
+                "clerk_return_view_status" => 1,
+                "clerk_view_id" => Auth::user()->id,
+                "clerk_return_view_date" => $date . ' ' . $currenttime
+            ]);
+        }
+
         return view('clerk.houseGrant.details', compact('formData'));
     }
     public function houseGrantClerkApprove(Request $request)
@@ -3110,9 +3439,9 @@ class ClerkController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
 
-
         $house->update([
             'clerk_status' => 1,
+            'clerk_return' => null,
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,
@@ -3147,6 +3476,132 @@ class ClerkController extends Controller
         return view('clerk.tuitionFee.index');
     }
 
+    public function gettuitionFeeClerkReturn(Request $request)
+    {
+        $role =  Auth::user()->role;
+        $district =  Auth::user()->district;
+        $tdo = Auth::user()->po_tdo_office;
+
+        $name = $request->name;
+        $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+
+        $teoIds = $teos->pluck('_id')->toArray();
+
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+
+
+
+        // Total records
+        $totalRecord = TuitionFee::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1);
+
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+        $totalRecord->where('teo_return', null)->where('clerk_return', 1);
+
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = TuitionFee::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1);
+
+
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+
+        $totalRecordswithFilte->where('teo_return', null)->where('clerk_return', 1);
+
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+
+
+        $items = TuitionFee::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1)
+            ->orderBy($columnName, $columnSortOrder);
+
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+
+        $items->where('teo_return', null)->where('clerk_return', 1);
+        $records = $items->skip($start)->take($rowperpage)->get();
+
+
+
+
+        $data_arr = array();
+        $i = $start;
+
+        foreach ($records as $record) {
+            $i++;
+            $id = $record->id;
+            $name = $record->name;
+            $address = $record->address;
+            $student_name = $record->student_name;
+            $caste = $record->caste;
+            $status = $record->clerk_status;
+            $date = $record->date;
+            $time = $record->time;
+            $teo_name = $record->teo->teo_name;
+            $created_at =  $record->created_at;
+            $edit = '';
+
+            $edit = '<div class="settings-main-icon"><a  href="' . route('tuitionFeeClerkDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+
+
+
+
+
+            $data_arr[] = array(
+
+                "sl_no" => $i,
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "student_name" => $student_name,
+                "caste" => $caste,
+                "date" => $date . ' ' . $time,
+                "teo_name" => $teo_name,
+                "edit" => $edit,
+
+
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        return response()->json($response);
+    }
+
     public function gettuitionFeeClerk(Request $request)
     {
         $role =  Auth::user()->role;
@@ -3173,6 +3628,54 @@ class ClerkController extends Controller
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
         $searchValue = $search_arr['value']; // Search value
+
+
+
+
+        // Total records
+        $totalRecord = TuitionFee::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1);
+
+        if ($name != "") {
+            $totalRecord->where('name', 'like', "%" . $name . "%");
+        }
+        $totalRecord->where('clerk_return', null);
+
+        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+        $totalRecordswithFilte = TuitionFee::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1);
+
+
+        if ($name != "") {
+            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+        }
+
+        $totalRecordswithFilte->where('clerk_return', null);
+
+        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+        // Fetch records
+
+
+        $items = TuitionFee::where('deleted_at', null)
+            ->whereIn('submitted_teo', $teoIds)
+            ->where('submitted_district', $district)
+            ->where('teo_status', 1)
+            ->orderBy($columnName, $columnSortOrder);
+
+        if ($name != "") {
+            $items->where('name', 'like', "%" . $name . "%");
+        }
+        $items->where('clerk_return', null);
+
+        $records = $items->skip($start)->take($rowperpage)->get();
+
 
 
 
@@ -3296,6 +3799,15 @@ class ClerkController extends Controller
             ]);
         }
 
+
+        if ($formData->clerk_return_view_status == null && $formData->return_status == 1) {
+            $formData->update([
+                "clerk_return_view_status" => 1,
+                "clerk_view_id" => Auth::user()->id,
+                "clerk_return_view_date" => $date . ' ' . $currenttime
+            ]);
+        }
+
         return view('clerk.tuitionFee.details', compact('formData'));
     }
     public function tuitionFeeClerkApprove(Request $request)
@@ -3310,6 +3822,7 @@ class ClerkController extends Controller
 
         $tuition->update([
             'clerk_status' => 1,
+            'clerk_return' => null,
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,
