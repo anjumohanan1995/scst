@@ -561,6 +561,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/StudentFund/assistantApprove', 'studentFundAssistantApprove')->name('studentFund-assistant.approve');
     Route::post('/StudentFund/assistantReject', 'studentFundAssistantReject')->name('studentFund-assistant.reject');
     
+    Route::get('/getStudentFundListAssistantReturn', 'getStudentFundListAssistantReturn')->name('getStudentFundListAssistantReturn');
+    
     
 
     Route::get('/singleEarnerListAssistant', 'singleEarnerListAssistant')->name('singleEarnerListAssistant');
@@ -590,13 +592,9 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::get('/studentAward/{id}/assistantview', 'studentAwardAssistantView')->name('studentAwardAssistantView');
     Route::post('/studentAward/assistantApprove', 'studentAwardAssistantApprove')->name('studentAward-assistant.approve');
     Route::post('/studentAward/assistantReject', 'studentAwardAssistantReject')->name('studentAward-assistant.reject');
-<<<<<<< HEAD
-    Route::get('/getStudentFundListAssistantReturn', 'getStudentFundListAssistantReturn')->name('getStudentFundListAssistantReturn');
-=======
 
     Route::get('/getStudentAwardListAssistantReturned', 'getStudentAwardListAssistantReturned')->name('getStudentAwardListAssistantReturned');
     
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
 
 });
 
