@@ -38,6 +38,16 @@
                         <div class="card">
                             <div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
+<<<<<<< HEAD
+                               
+                            <div class="panel panel-primary">
+                                <div class=" tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <ul class="nav panel-tabs">
+                                            <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
+                                            <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned">Returned</a></li>
+                                           </ul>
+=======
 
                                 <div class="panel panel-primary">
                                     <div class=" tab-menu-heading">
@@ -49,6 +59,7 @@
                                                         data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
                                             </ul>
                                         </div>
+>>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
                                     </div>
                                     <div class="panel-body tabs-menu-body">
                                         <div class="tab-content">
@@ -80,6 +91,25 @@
                                                     </table>
                                                 </div>
                                             </div>
+<<<<<<< HEAD
+                                        </div>
+                                        <div class="tab-pane" id="tabReturned">
+                                            <div class="table-responsive">
+                                                <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sl No</th>
+                                                            <th>Husband Name </th>
+                                                            <th>Wife Name </th>
+                                                            <th>Husband Caste</th>
+                                                            <th>Wife Caste</th> 
+                                                            <th>Date & Time</th> 
+                                                            <th>Applied Date</th>
+                                                            <th >Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+=======
                                             <div class="tab-pane" id="tabReturned">
                                                 <div class="table-responsive">
                                                     <table id="example1" class="table table-striped table-bordered"
@@ -98,6 +128,7 @@
                                                         </thead>
                                                     </table>
                                                 </div>
+>>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
                                             </div>
 
 

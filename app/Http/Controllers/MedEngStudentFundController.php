@@ -88,7 +88,7 @@ class MedEngStudentFundController extends Controller
 
 
          $data_arr = array();
-$i=$start;
+        $i=$start;
          foreach($records as $record){
             $i++;
              $id = $record->id;
@@ -409,12 +409,11 @@ $formattedDate = $currentDate->toDateString();
              if($role == "TEO"){
                 $totalRecord->where('submitted_teo',$teo);
             }
-
+             $totalRecord->where('teo_return', null);
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
              $totalRecordswithFilte = MedEngStudentFund::where('deleted_at',null);
-
           
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -423,7 +422,7 @@ $formattedDate = $currentDate->toDateString();
             if($role == "TEO"){
                 $totalRecordswithFilte->where('submitted_teo',$teo);
             }
-
+             $totalRecordswithFilte->where('teo_return', null);
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
@@ -435,15 +434,12 @@ $formattedDate = $currentDate->toDateString();
             if($role == "TEO"){
                 $items->where('submitted_teo',$teo);
             }
-
+            $items->where('teo_return', null);
              $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');;
-         
 
-
-
-         $data_arr = array();
-            $i=$start;
-         foreach($records as $record){
+        $data_arr = array();
+        $i=$start;
+        foreach($records as $record){
             $i++;
              $id = $record->id;
              $name = $record->name;
@@ -470,7 +466,7 @@ $formattedDate = $currentDate->toDateString();
               
                 }
                 else if($record->teo_status ==null){
-                    $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                    $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;</div>';
                 }
                
               }
@@ -478,6 +474,113 @@ $formattedDate = $currentDate->toDateString();
                 $edit='<div class="settings-main-icon"><a  href="' . route('adminStudentFundDetails',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
              
               }
+
+            $data_arr[] = array(
+                "id" => $id,
+               "sl_no" =>$i,
+                "name" => $name,
+                "address" => $address,
+                "course_name" => $course_name,
+                "caste" => $caste,
+                "income" =>$income,
+                "date" => $date .' ' .$record->time, 
+                
+                            
+                "edit" => $edit
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function getAdminStudentFundListReturn(Request $request){
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+
+             // Total records
+             $totalRecord = MedEngStudentFund::where('deleted_at',null);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+             if($role == "TEO"){
+                $totalRecord->where('submitted_teo',$teo);
+            }
+             $totalRecord->where('teo_return', null);
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = MedEngStudentFund::where('deleted_at',null);
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
+             $totalRecordswithFilte->where('teo_return', 1);
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = MedEngStudentFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+           
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
+            $items->where('teo_return',1);
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');;
+
+        $data_arr = array();
+        $i=$start;
+        foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $course_name = $record->course_name;
+             $place = $record->place;
+             $date=$record->date;
+             $income=$record->income;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
+
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
+              $edit ='';
+              
+              $edit='<div class="settings-main-icon"><a  href="' .  url('MedicalEngineeringStudentFund/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a><a class="btn btn-primary" href="' .  url('medical-engineering/' . $id) . '">Resubmit</a></div>';
 
             $data_arr[] = array(
                 "id" => $id,
@@ -568,5 +671,189 @@ $formattedDate = $currentDate->toDateString();
             'success' => 'Medical/Engineering Student Fund Scheme Application Rejected successfully.'
         ]);
     
+    }
+
+    public function medicalEngineeringEdit(Request $request){
+
+        $data = Auth::user();
+        $districts = District::get();
+        $datas = MedEngStudentFund::where('_id',$request->id)->first();
+
+        return view('admin.studentFund.edit',compact('districts','data','datas'));
+    }
+    public function MedicalEngineeringStudentFundupdate(Request $request ,$id)
+    {   
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+           // 'income' => 'required',
+         'income_certificate' => 'max:2048',
+            // 'caste' => 'required',
+             'caste_certificate' => 'max:2048',
+             'signature' => 'required|max:2048',
+            // 'parent_name' => 'required',
+             'allotment_demo' => 'nullable|max:2048',
+             'applicant_image' => 'required|max:2048',
+            'submitted_district' => 'required',
+            'submitted_teo' => 'required',
+            
+                 
+        ]);
+        if ($request->input('account_details') == 'yes') {
+            $validator->sometimes('account_no', 'required', function ($input) {
+                return $input->account_details == 'yes';
+            });
+        
+            $validator->sometimes('ifsc_code', 'required', function ($input) {
+                return $input->account_details == 'yes';
+            });
+            $validator->sometimes('bank_branch', 'required', function ($input) {
+                return $input->account_details == 'yes';
+            });
+        }
+        if ($request->input('admission_type') == 'others') {
+            $validator->sometimes('other_details', 'required', function ($input) {
+                return $input->admission_type == 'others';
+            });
+        
+           
+        }
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->all();
+       
+        if ($request->hasfile('applicant_image')) {
+
+            $image = $request->applicant_image;
+            $applicant_img = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/medEngStudentFund'), $applicant_img);
+
+            $applicant_image = $applicant_img;
+
+        }else{
+            $applicant_image = '';
+        }
+        if ($request->hasfile('signature')) {
+
+            $image = $request->signature;
+            $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
+
+            $image->move(public_path('/medEngStudentFund'), $imgfileName);
+
+            $signature = $imgfileName;
+
+        }else{
+            $signature = '';
+        }
+        if ($request->hasfile('allotment_memo')) {
+
+            $image1 = $request->allotment_memo;
+            $imgfileName1 = time() . rand(100, 999) . '.' . $image1->extension();
+
+            $image1->move(public_path('/medEngStudentFund'), $imgfileName1);
+
+            $allotment_memo = $imgfileName1;
+
+        }else{
+            $allotment_memo = '';
+        }
+        if ($request->hasfile('income_certificate')) {
+
+            $image2 = $request->income_certificate;
+            $imgfileName2 = time() . rand(100, 999) . '.' . $image2->extension();
+
+            $image2->move(public_path('/medEngStudentFund'), $imgfileName2);
+
+            $income_certificate = $imgfileName2;
+
+        }else{
+            $income_certificate = '';
+        }
+        if ($request->hasfile('caste_certificate')) {
+
+            $image3 = $request->caste_certificate;
+            $imgfileName3 = time() . rand(100, 999) . '.' . $image3->extension();
+
+            $image3->move(public_path('/medEngStudentFund'), $imgfileName3);
+
+            $caste_certificate = $imgfileName3;
+
+        }else{
+            $caste_certificate = '';
+        }
+      
+        $formData = $data;
+        if($request->account_details==''){
+            $formData['account_details']="no";
+          }
+          if($request->current_district!=''){
+            $dis=District::where('_id',$request->current_district)->first();
+            $formData['current_district_name']= $dis->name;
+           }
+           if($request->current_taluk!=''){
+             $taluk=Taluk::where('_id',$request->current_taluk)->first();
+             $formData['current_taluk_name']= $taluk->taluk_name;
+            }
+            if($request->submitted_district!=''){
+                $dis1=District::where('_id',$request->submitted_district)->first();
+                $formData['dist_name']= $dis1->name;
+               }
+               if($request->submitted_teo!=''){
+                 $teo=Teo::where('_id',$request->submitted_teo)->first();
+                 $formData['teo_name']= $teo->teo_name;
+                }
+
+        $datainsert = MedEngStudentFund::where('_id',$request->id)->first();
+        
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+      $currenttime = $currentTimeInKerala->format('h:i A');
+        $datainsert->update([
+            'name' => @$request['name'],
+            'address' => @$request['address'],
+            'course_name' => @$request['course_name'],
+            'class_start_date' => @$request['class_start_date'],
+            'admission_type' => @$request['admission_type'],
+            'caste' => @$request['caste'],
+            'caste_certificate' => @$request['caste_certificate'],
+            'income' => @$request['income'],
+            'income_certificate' => @$request['income_certificate'],
+            'account_details' => @$request['account_details'],
+            'account_no' => @$request['account_no'],
+            'ifsc_code' => @$request['ifsc_code'],
+            'bank_branch' => @$request['bank_branch'],
+            'signature' => @$request['signature'],
+            'parent_name' => @$request['parent_name'],
+            'applicant_image' => @$request['applicant_image'],
+            'allotment_memo' => @$request['allotment_memo'],
+            'date' => @$request['date'],
+            //'user_id' =>Auth::user()->id, 
+            'status' =>0,
+            'current_district_name' => @$request['current_district_name'],
+            'current_taluk_name' => @$request['current_taluk_name'],
+            'current_pincode' => @$request['current_pincode'],
+            'submitted_district' => @$request['submitted_district'],
+            'submitted_teo' => @$request['submitted_teo'],
+            'dist_name' => @$request['dist_name'],
+            'teo_name' => @$request['teo_name'],
+            'current_district' => $request['current_district'],
+            'current_taluk' => @$request['current_taluk'],
+            'time' => @$request['time'],
+            'panchayath' => @$request['panchayath'],
+            'institution_type' => @$request['institution_type'],
+            'other_details' => @$request['other_details'],
+            'teo_return' => null,
+            'return_status' =>1,
+            "teo_view_status"=>1,
+            "teo_view_id" =>Auth::user()->id,
+            "teo_view_date" =>$date .' ' .$currenttime,
+            "teo_status_date"=>$date .' ' .$currenttime,
+            "teo_return_view_date" =>$date .' ' .$currenttime 
+        ]);
+
+        return redirect()->route('adminStudentFundList')->with('status','Application updated Successfully.');
     }
 }
