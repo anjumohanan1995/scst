@@ -71,7 +71,7 @@
                                     <div class="tabs-menu1">
                                         <ul class="nav panel-tabs">
                                             <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
-                                            <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
+                                            <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned">Returned</a></li>
                                            </ul>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                                             <th>Wife Name </th>
                                                             <th>Husband Caste</th>
                                                             <th>Wife Caste</th> 
-                                                             <th>Date & Time</th> 
+                                                            <th>Date & Time</th> 
                                                             <th>Applied Date</th>
                                                             <th >Action</th>
                                                         </tr>
