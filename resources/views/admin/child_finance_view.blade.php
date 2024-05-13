@@ -799,7 +799,7 @@
                                        @if(@$childFinancialHelp->rejection_status  == 1)
                                        <li class="rejectTimeline">
                                           <a href="#!">PO / TDO</a>
-                                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$childFinancialHelp['officer_view_date'] }}</a>
+                                          <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$childFinancialHelp['officer_return_view_date'] }}</a>
                                           <p></p>
                                           <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
                                           <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$childFinancialHelp->officerUser->name }}</p>

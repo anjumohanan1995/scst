@@ -2612,13 +2612,8 @@ class ClerkController extends Controller
             $teo_name = @$record->submittedTeo->teo_name;
 
             $edit = '';
-            if ($status == 1) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->clerk_status_reason . '</span></div>';
-            } else if ($status == 2) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;';
-            } else if ($status == null) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;</div>';
-            }
+
+            $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
 
             $data_arr[] = array(
                 "id" => $id,
@@ -2658,6 +2653,13 @@ class ClerkController extends Controller
                 "clerk_view_date" => $date . ' ' . $currenttime
             ]);
         }
+        if ($formData->clerk_return_view_status == null && $formData->return_status == 1) {
+            $formData->update([
+                "clerk_return_view_status" => 1,
+                "clerk_view_id" => Auth::user()->id,
+                "clerk_return_view_date" => $date . ' ' . $currenttime
+            ]);
+        }
         $formData = AnemiaFinance::where('_id', $id)->first();
 
         return view('clerk.anemiaFinance.view', compact('formData'));
@@ -2673,6 +2675,7 @@ class ClerkController extends Controller
 
         $data->update([
             'clerk_status' => 1,
+            'clerk_return' => null,
             'clerk_status_date' => $currenttime,
             'clerk_status_id' => Auth::user()->id,
             'clerk_status_reason' => $reason,

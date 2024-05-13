@@ -26,8 +26,7 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
 
 
-                        <form name="patientForm" id="patientForm" method="post"
-                            action="{{ route('anemiaFinancePreview') }}" enctype="multipart/form-data">
+                        <form name="patientForm" id="patientForm" method="post" action="{{ route('anemiaFinanceReturnListUpdate',['id' => $datas->id]) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="card">
                                 <div class="card-body">
@@ -619,7 +618,7 @@
                         $opt.val(value._id).text(value.taluk_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('taluk') }}' == value._id) {
+                        if ('{{ $datas->taluk }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 
@@ -650,7 +649,7 @@
                         $opt.val(value._id).text(value.teo_name);
 
                         // Set the selected attribute based on the old submitted value
-                        if ('{{ old('submitted_teo') }}' == value._id) {
+                        if ('{{ $datas->submitted_teo }}' == value._id) {
                             $opt.attr('selected', 'selected');
                         }
 

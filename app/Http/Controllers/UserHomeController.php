@@ -395,7 +395,7 @@ class UserHomeController extends Controller
 
     public function userMotherChildList(Request $request)
     {
-        $data  = studentFund::with('User')->get();
+        $data  = MotherChildScheme::with('User')->get();
         //dd($data);
         return view('user.motherchild_list', compact('data'));
     }

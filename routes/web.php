@@ -190,6 +190,7 @@ Route::get('/anemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::
 Route::get('/getAnemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceList'])->name('getAnemiaFinanceList');
 Route::get('/getAnemiaFinanceReturnList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceReturnList'])->name('getAnemiaFinanceReturnList');
 Route::get('/anemiaFinanceReturnList-edit/{id}', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceReturnListEdit'])->name('anemiaFinanceReturnList.edit');
+Route::post('/anemiaFinanceReturnListUpdate', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceReturnListUpdate'])->name('anemiaFinanceReturnListUpdate');
 Route::get('/anemiaFinance/{id}/view', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceView'])->name('anemiaFinanceView');
 Route::post('/anemiaFinance/teoApprove', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoApprove'])->name('anemiaFinance-teo.approve');
 Route::post('/anemiaFinance/teoReject', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoReject'])->name('anemiaFinance-teo.reject');
@@ -569,6 +570,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/anemiaFinance/AssistantApprove', 'anemiaFinanceAssistantApprove')->name('anemiaFinance-assistant.approve');
     Route::post('/anemiaFinance/assistantReject', 'anemiaFinanceAssistantReject')->name('anemiaFinance-assistant.reject');
 
+    Route::get('/getAnemiaFinanceListAssistantReturned', 'getAnemiaFinanceListAssistantReturned')->name('getAnemiaFinanceListAssistantReturned');
+
     Route::get('/assistantItiFundList', 'assistantItiFundList')->name('assistantItiFundList');
     Route::get('/getAssistantItiFundList', 'getAssistantItiFundList')->name('getAssistantItiFundList');
     Route::get('/itiFeeAssistantView/{id}', 'itiFeeAssistantView')->name('itiFeeAssistantView');
@@ -674,6 +677,9 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/anemiaFinance/{id}/officerview', 'anemiaFinanceOfficerView')->name('anemiaFinanceOfficerView');
     Route::post('/anemiaFinance/officerApprove', 'anemiaFinanceOfficerApprove')->name('anemiaFinance-officer.approve');
     Route::post('/anemiaFinance/officerReject', 'anemiaFinanceOfficerReject')->name('anemiaFinance-officer.reject');
+    Route::post('/anemiaFinance/officerRemove', 'anemiaFinanceOfficerRemove')->name('anemiaFinance-officer.remove');
+   
+    Route::get('/getAnemiaFinanceListOfficerReturned','getAnemiaFinanceListOfficerReturned')->name('getAnemiaFinanceListOfficerReturned');
 
     Route::get('/officerItiFundList', 'officerItiFundList')->name('officerItiFundList');
     Route::get('/getOfficerItiFundList', 'getOfficerItiFundList')->name('getOfficerItiFundList');

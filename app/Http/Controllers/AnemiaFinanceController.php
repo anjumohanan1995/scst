@@ -470,109 +470,145 @@ class AnemiaFinanceController extends Controller
                 'submitted_district' => 'required',
                 'submitted_teo' => 'required',
             ]
-        );
 
+        );
         if ($request->input('is_medical_certificate_submitted') == 'Yes') {
             $validator->sometimes('medical_certificate', 'required', function ($input) {
                 return true;
             });
         }
-
         if ($validator->fails()) {
-            // Validation failed
+            // Captcha validation failed
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        $data = $request->all();
 
-        // to fetch date and time.
-        $currentTime = Carbon::now();
-        $date = $currentTime->format('d-m-Y');
-        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-        $currenttime = $currentTimeInKerala->format('h:i A');
+        if ($request->hasfile('caste_certificate')) {
 
-        $formData = $request->all();
-
-        if ($request->hasFile('caste_certificate')) {
             $image = $request->caste_certificate;
             $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
 
             $image->move(public_path('/applications/anemia_finance'), $imgfileName);
 
-            $formData['caste_certificate'] = $imgfileName;
+            $caste_certificate = $imgfileName;
+        } else {
+            $caste_certificate = '';
         }
+        if ($request->hasfile('adhaar_copy')) {
 
-        if ($request->hasFile('adhaar_copy')) {
             $adhar = $request->adhaar_copy;
             $imgfileName1 = time() . rand(100, 999) . '.' . $adhar->extension();
 
             $adhar->move(public_path('/applications/anemia_finance'), $imgfileName1);
 
-            $formData['adhaar_copy']  = $imgfileName1;
+            $adhaar_copy = $imgfileName1;
+        } else {
+            $adhaar_copy = '';
         }
+        if ($request->hasfile('passbook_copy')) {
 
-        if ($request->hasFile('passbook_copy')) {
             $passbook = $request->passbook_copy;
             $imgfileName2 = time() . rand(100, 999) . '.' . $passbook->extension();
 
             $passbook->move(public_path('/applications/anemia_finance'), $imgfileName2);
 
-            $formData['passbook_copy'] = $imgfileName2;
+            $passbook_copy = $imgfileName2;
+        } else {
+            $passbook_copy = '';
         }
+        if ($request->hasfile('ration_card')) {
 
-        if ($request->hasFile('ration_card')) {
             $ration = $request->ration_card;
             $imgfileName3 = time() . rand(100, 999) . '.' . $ration->extension();
 
             $ration->move(public_path('/applications/anemia_finance'), $imgfileName3);
 
-            $formData['ration_card'] = $imgfileName3;
+            $ration_card = $imgfileName3;
+        } else {
+            $ration_card = '';
         }
 
-        if ($request->hasFile('medical_certificate')) {
+        if ($request->hasfile('medical_certificate')) {
+
             $medical = $request->medical_certificate;
             $imgfileName4 = time() . rand(100, 999) . '.' . $medical->extension();
 
             $medical->move(public_path('/applications/anemia_finance'), $imgfileName4);
 
-            $formData['medical_certificate'] = $imgfileName4;
+            $medical_certificate = $imgfileName4;
+        } else {
+            $medical_certificate = '';
         }
+        if ($request->hasfile('signature')) {
 
-        if ($request->hasFile('signature')) {
             $image = $request->signature;
             $imgfileName = time() . rand(100, 999) . '.' . $image->extension();
 
             $image->move(public_path('applications/anemia_finance'), $imgfileName);
 
-            $formData['signature'] = $imgfileName;
+            $signature = $imgfileName;
+        } else {
+            $signature = '';
         }
 
-        if ($request->hasFile('applicant_photo')) {
+        if ($request->hasfile('applicant_photo')) {
+
             $applicant_photo = $request->applicant_photo;
             $imgfileName1 = time() . rand(100, 999) . '.' . $applicant_photo->extension();
 
             $applicant_photo->move(public_path('/applications/anemia_finance'), $imgfileName1);
 
-            $formData['applicant_photo'] = $imgfileName1;
+            $applicant_photos = $imgfileName1;
+        } else {
+            $applicant_photos = '';
         }
 
+        $data = $request->all();
+        $datainsert =  AnemiaFinance::where('_id', $request->id)->first();
+        // dd($request->id);
+        $currentTime = Carbon::now();
+
+        $date = $currentTime->format('d-m-Y');
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('h:i A');
+        $datainsert->update([
+            'name' => $data['name'],
+            'dob' => $data['dob'],
+            'age' => $data['age'],
+            'caste' => $data['caste'],
+            'caste_certificate' => $data['caste_certificate'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+            'district' => @$data['district'],
+            'taluk' => @$data['taluk'],
+            'pincode' => @$data['pincode'],
+            'email' => @$data['email'],
+            'adhaar_number' => @$data['adhaar_number'],
+            'adhaar_copy' => @$data['adhaar_copy'],
+            'bank_account_details' => @$data['bank_account_details'],
+            'passbook_copy' => @$data['passbook_copy'],
+            'ration_card_type' => @$data['ration_card_type'],
+            'ration_card' => $data['ration_card'],
+            'is_medical_certificate_submitted' => @$data['is_medical_certificate_submitted'],
+            'medical_certificate' => $data['medical_certificate'],
+            'signature' => $data['signature'],
+            'applicant_photo' => @$data['applicant_photo'],
+            'date' => date('d-m-Y'),
+            'place' => $data['place'],
+            'user_id' => Auth::user()->id,
+            'submitted_district' => $data['submitted_district'],
+            'submitted_teo' => $data['submitted_teo'],
+            'teo_return' => null,
+            'return_status' => 1,
+            "teo_view_status" => 1,
+            // 'user_id' => Auth::user()->id,
+            'status' => 0,
+            "teo_status_date" => $date . ' ' . $currenttime,
+            "teo_return_view_date" => $date . ' ' . $currenttime
+        ]);
 
 
-        $formData['date'] = date("d-m-Y");
-        $formData['time'] = date("H:i:s");
-        $formData['status'] = 0;
-        $formData['teo_return'] = null;
-        $formData['return_status'] = 1;
-        $formData["teo_view_status"] = 1;
-        $formData["teo_view_id"] = Auth::user()->id;
-        $formData["teo_view_date"] = $date . ' ' . $currenttime;
-        $formData["teo_status_date"] = $date . ' ' . $currenttime;
-        $formData["teo_return_view_date"] = $date . ' ' . $currenttime;
-
-
-
-        $data = AnemiaFinance::find($request->id);
-        $data->update($formData);
-
-        return redirect(url('anemiaFinanceList'))->with('status', 'Application Submitted Successfully.');
+        return redirect()->route('anemiaFinanceList')->with('status', 'Application Submitted Successfully.');
     }
 
 

@@ -2389,18 +2389,18 @@ class JsSeoController extends Controller
        
         return view('JsSeo.studentAward.view', compact('formData'));
 
-        $formData = StudentAward::find($id);
-        if ($formData->JsSeo_view_status == null) {
-            $formData->update([
-                "JsSeo_view_status" => 1,
-                "JsSeo_view_id" => Auth::user()->id,
-                "JsSeo_view_date" => $date . ' ' . $currenttime
-            ]);
-        }
+        // $formData = StudentAward::find($id);
+        // if ($formData->JsSeo_view_status == null) {
+        //     $formData->update([
+        //         "JsSeo_view_status" => 1,
+        //         "JsSeo_view_id" => Auth::user()->id,
+        //         "JsSeo_view_date" => $date . ' ' . $currenttime
+        //     ]);
+        // }
 
-        $formData = StudentAward::where('_id', $id)->first();
+        // $formData = StudentAward::where('_id', $id)->first();
 
-        return view('JsSeo.studentAward.view', compact('formData'));
+        // return view('JsSeo.studentAward.view', compact('formData'));
     }
     public function studentAwardJsSeoApprove(Request $request)
     {
@@ -2661,13 +2661,8 @@ class JsSeoController extends Controller
             $teo_name = @$record->submittedTeo->teo_name;
 
             $edit = '';
-            if ($status == 1) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceJsSeoView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->JsSeo_status_reason . '</span></div>';
-            } else if ($status == 2) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceJsSeoView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->JsSeo_status_reason . '</span></div>';
-            } else if ($status == null) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceJsSeoView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
-            }
+
+            $edit = '<div class="settings-main-icon"><a  href="' . route('anemiaFinanceJsSeoView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
 
             $data_arr[] = array(
                 "id" => $id,
@@ -2707,6 +2702,14 @@ class JsSeoController extends Controller
                 "JsSeo_view_date" => $date . ' ' . $currenttime
             ]);
         }
+        if ($formData->JsSeo_return_view_status == null && $formData->return_status == 1) {
+            $formData->update([
+                "JsSeo_return_view_status" => 1,
+                "JsSeo_view_id" => Auth::user()->id,
+                "JsSeo_return_view_date" => $date . ' ' . $currenttime
+            ]);
+        }
+
         $formData = AnemiaFinance::where('_id', $id)->first();
 
         return view('JsSeo.anemiaFinance.view', compact('formData'));
@@ -2722,6 +2725,7 @@ class JsSeoController extends Controller
 
         $data->update([
             'JsSeo_status' => 1,
+            'JsSeo_return' => null,
             'JsSeo_status_date' => $currenttime,
             'JsSeo_status_id' => Auth::user()->id,
             'JsSeo_status_reason' => $reason,
@@ -3544,7 +3548,7 @@ class JsSeoController extends Controller
     }
 
 
-    public function gettuitionFeeJsSeo(Request $request)
+    public function gettuitionFeeJsSeoReturn(Request $request)
     {
        $tdo= Auth::user()->po_tdo_office;
 
