@@ -188,6 +188,8 @@ Route::post('/singleEarner/teoReject', [App\Http\Controllers\SingleIncomeEarnerC
 
 Route::get('/anemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceList'])->name('anemiaFinanceList');
 Route::get('/getAnemiaFinanceList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceList'])->name('getAnemiaFinanceList');
+Route::get('/getAnemiaFinanceReturnList', [App\Http\Controllers\AnemiaFinanceController::class, 'getAnemiaFinanceReturnList'])->name('getAnemiaFinanceReturnList');
+Route::get('/anemiaFinanceReturnList-edit/{id}', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceReturnListEdit'])->name('anemiaFinanceReturnList.edit');
 Route::get('/anemiaFinance/{id}/view', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceView'])->name('anemiaFinanceView');
 Route::post('/anemiaFinance/teoApprove', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoApprove'])->name('anemiaFinance-teo.approve');
 Route::post('/anemiaFinance/teoReject', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinanceTeoReject'])->name('anemiaFinance-teo.reject');
@@ -197,6 +199,10 @@ Route::get('/getStudentAwardList', [App\Http\Controllers\StudentAwardController:
 Route::get('/studentAward/{id}/view', [App\Http\Controllers\StudentAwardController::class, 'studentAwardView'])->name('studentAwardView');
 Route::post('/studentAward/teoApprove', [App\Http\Controllers\StudentAwardController::class, 'studentAwardTeoApprove'])->name('studentAward-teo.approve');
 Route::post('/studentAward/teoReject', [App\Http\Controllers\StudentAwardController::class, 'studentAwardTeoReject'])->name('studentAward-teo.reject');
+
+Route::get('/studentAward-edit/{id}', [App\Http\Controllers\StudentAwardController::class, 'studentAwardEdit'])->name('studentAwardEdit');
+Route::post('/studentAwardUpdate', [App\Http\Controllers\StudentAwardController::class, 'studentAwardUpdate'])->name('studentAwardUpdate');
+Route::get('/getStudentAwardReturnList', [App\Http\Controllers\StudentAwardController::class, 'getStudentAwardReturnList'])->name('getStudentAwardReturnList');
 
 
 Route::get('/anemia-financial-assistance', [App\Http\Controllers\AnemiaFinanceController::class, 'anemiaFinancialAssistance'])->name('anemia-financial-assistance');
@@ -319,6 +325,11 @@ Route::post('/singleEarnerStore', [App\Http\Controllers\SingleIncomeEarnerContro
     Route::get('/redirect/back', [HouseManagementController::class, 'redirectBack'])->name('redirectBack');
     Route::post('/HouseGrant/teoApprove', [HouseManagementController::class, 'teoApprove'])->name('housegrant-teo.approve');
     Route::post('/HouseGrant/teoReject', [HouseManagementController::class, 'teoReject'])->name('housegrant-teo.reject');
+
+Route::get('/housegrant-edit/{id}', [App\Http\Controllers\HouseManagementController::class, 'houseGrantEdit'])->name('houseGrantEdit');
+Route::post('/houseGrantUpdate', [App\Http\Controllers\HouseManagementController::class, 'houseGrantUpdate'])->name('houseGrantUpdate');
+
+Route::get('/getAdminHouseGrantListReturned', [App\Http\Controllers\HouseManagementController::class, 'getAdminHouseGrantListReturned'])->name('getAdminHouseGrantListReturned');
     
     //Medical / Engineering student fund scheme
 Route::resource('/MedicalEngineeringStudentFund', MedEngStudentFundController::class);
@@ -345,6 +356,10 @@ Route::get('/getTuitionFeeList', [TuitionFeeController::class, 'getTuitionFeeLis
 Route::get('/tuitionAdminFeeView/{id}/view', [TuitionFeeController::class, 'tuitionAdminFeeView'])->name('tuitionAdminFeeView');
 Route::post('/tuitionFee/teoApprove', [App\Http\Controllers\TuitionFeeController::class, 'tuitionFeeTeoApprove'])->name('tuitionFee-teo.approve');
 Route::post('/tuitionFee/teoReject', [App\Http\Controllers\TuitionFeeController::class, 'tuitionFeeTeoReject'])->name('tuitionFee-teo.reject');
+
+Route::get('/getTuitionFeeListReturn', [TuitionFeeController::class, 'getTuitionFeeListReturn'])->name('getTuitionFeeListReturn');
+Route::get('/tuitionfee-application-edit/{id}', [TuitionFeeController::class, 'tuitionFeeApplicationEdit'])->name('tuitionFeeApplicationEdit');
+Route::post('/tuitionFeeUpdate', [TuitionFeeController::class, 'tuitionFeeUpdate'])->name('tuitionFeeUpdate');
 
 
 
@@ -416,7 +431,8 @@ Route::controller(ClerkController::class)->group(function(){
     Route::get('/houseGrantDetails/{id}','houseGrantClerkDetails')->name('houseGrantClerkDetails');
     Route::post('/houseGrantClerkApprove','houseGrantClerkApprove')->name('houseGrant.clerk.approve');
     Route::post('/houseGrantClerkReject','houseGrantClerkReject')->name('houseGrant.clerk.reject');
-
+    
+    Route::get('/gethouseGrantReturnListClerk','gethouseGrantReturnListClerk')->name('gethouseGrantReturnListClerk');
 
     Route::get('/tuitionFeeListClerk','tuitionFeeListClerk')->name('tuitionFeeListClerk');
     Route::get('/gettuitionFeeClerk','gettuitionFeeClerk')->name('gettuitionFeeClerk');
@@ -424,6 +440,7 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/tuitionFeeClerkApprove','tuitionFeeClerkApprove')->name('tuitionFee.clerk.approve');
     Route::post('/tuitionFeeClerkReject','tuitionFeeClerkReject')->name('tuitionFee.clerk.reject');
 
+    Route::get('/gettuitionFeeClerkReturn','gettuitionFeeClerkReturn')->name('gettuitionFeeClerkReturn');
 
 
 
@@ -446,9 +463,12 @@ Route::controller(ClerkController::class)->group(function(){
     Route::get('/studentAward/{id}/Clerkview', 'studentAwardClerkView')->name('studentAwardClerkView');
     Route::post('/studentAward/clerkApprove', 'studentAwardClerkApprove')->name('studentAward-clerk.approve');
     Route::post('/studentAward/clerkReject', 'studentAwardClerkReject')->name('studentAward-clerk.reject');
+
+    Route::get('/getStudentAwardListClerkReturned', 'getStudentAwardListClerkReturned')->name('getStudentAwardListClerkReturned');
     
     Route::get('/anemiaFinanceListClerk', 'anemiaFinanceListClerk')->name('anemiaFinanceListClerk');
     Route::get('/getAnemiaFinanceListClerk', 'getAnemiaFinanceListClerk')->name('getAnemiaFinanceListClerk');
+    Route::get('/getAnemiaFinanceListClerkReturned', 'getAnemiaFinanceListClerkReturned')->name('getAnemiaFinanceListClerkReturned');
     Route::get('/anemiaFinance/{id}/Clerkview', 'anemiaFinanceClerkView')->name('anemiaFinanceClerkView');
     Route::post('/anemiaFinance/clerkApprove', 'anemiaFinanceClerkApprove')->name('anemiaFinance-clerk.approve');
     Route::post('/anemiaFinance/clerkReject', 'anemiaFinanceClerkReject')->name('anemiaFinance-clerk.reject');
@@ -522,6 +542,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::get('/houseGrantDetailsAssistant/{id}','houseGrantDetailsAssistant')->name('houseGrantDetailsAssistant');
     Route::post('/houseGrantApproveAssistant','houseGrantApproveAssistant')->name('houseGrant.assistant.approve');
     Route::post('/houseGrantRejectAssistant','houseGrantRejectAssistant')->name('houseGrant.assistant.reject');
+
+    Route::get('/gethouseGrantListAssistantReturned','gethouseGrantListAssistantReturned')->name('gethouseGrantListAssistantReturned');
    
 
     Route::get('/tuitionFeeListAssistant','tuitionFeeListAssistant')->name('tuitionFeeListAssistant');
@@ -530,6 +552,8 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::post('/tuitionFeeApproveAssistant','tuitionFeeApproveAssistant')->name('tuitionFee.assistant.approve');
     Route::post('/tuitionFeeRejectAssistant','tuitionFeeRejectAssistant')->name('tuitionFee.assistant.reject');
    
+    Route::get('/gettuitionFeeListAssistantReturn','gettuitionFeeListAssistantReturn')->name('gettuitionFeeListAssistantReturn');
+
     Route::get('/StudentFundListAssistant', 'StudentFundListAssistant')->name('StudentFundListAssistant');
     Route::get('/getStudentFundListAssistant', 'getStudentFundListAssistant')->name('getStudentFundListAssistant');
     Route::get('/StudentFund/{id}/assistantview', 'studentFundAssistantView')->name('studentFundAssistantView');
@@ -563,7 +587,13 @@ Route::controller(ApoTdoController::class)->group(function(){
     Route::get('/studentAward/{id}/assistantview', 'studentAwardAssistantView')->name('studentAwardAssistantView');
     Route::post('/studentAward/assistantApprove', 'studentAwardAssistantApprove')->name('studentAward-assistant.approve');
     Route::post('/studentAward/assistantReject', 'studentAwardAssistantReject')->name('studentAward-assistant.reject');
+<<<<<<< HEAD
     Route::get('/getStudentFundListAssistantReturn', 'getStudentFundListAssistantReturn')->name('getStudentFundListAssistantReturn');
+=======
+
+    Route::get('/getStudentAwardListAssistantReturned', 'getStudentAwardListAssistantReturned')->name('getStudentAwardListAssistantReturned');
+    
+>>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
 
 });
 
@@ -622,6 +652,9 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/houseGrantDetailsOfficer/{id}','houseGrantDetailsOfficer')->name('houseGrantDetailsOfficer');
     Route::post('/houseGrantApproveOfficer','houseGrantApproveOfficer')->name('houseGrant.officer.approve');
     Route::post('/houseGrantRejectOfficer','houseGrantRejectOfficer')->name('houseGrant.officer.reject');
+
+    Route::post('/houseGrantRemoveOfficer','houseGrantRemoveOfficer')->name('houseGrant.officer.remove');
+    Route::get('/gethouseGrantListOfficerReturned','gethouseGrantListOfficerReturned')->name('gethouseGrantListOfficerReturned');
    
 
     Route::get('/tuitionFeeListOfficer','tuitionFeeListOfficer')->name('tuitionFeeListOfficer');
@@ -629,7 +662,9 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/tuitionFeeDetailsOfficer/{id}','tuitionFeeDetailsOfficer')->name('tuitionFeeDetailsOfficer');
     Route::post('/tuitionFeeApproveOfficer','tuitionFeeApproveOfficer')->name('tuitionFee.officer.approve');
     Route::post('/tuitionFeeRejectOfficer','tuitionFeeRejectOfficer')->name('tuitionFee.officer.reject');
-
+    
+    Route::get('/gettuitionFeeListOfficerReturn','gettuitionFeeListOfficerReturn')->name('gettuitionFeeListOfficerReturn');
+    Route::post('/tuitionFeeRemoveOfficer','tuitionFeeRemoveOfficer')->name('tuitionFee.officer.remove');
 
     Route::get('/StudentFundListOfficer', 'StudentFundListOfficer')->name('StudentFundListOfficer');
     Route::get('/getStudentFundListOfficer', 'getStudentFundListOfficer')->name('getStudentFundListOfficer');
@@ -666,6 +701,9 @@ Route::controller(PoTdoController::class)->group(function(){
     Route::get('/studentAward/{id}/officerview', 'studentAwardOfficerView')->name('studentAwardOfficerView');
     Route::post('/studentAward/officerApprove', 'studentAwardOfficerApprove')->name('studentAward-officer.approve');
     Route::post('/studentAward/officerReject', 'studentAwardOfficerReject')->name('studentAward-officer.reject');
+
+    Route::post('/studentAward/officerRemove', 'studentAwardOfficerRemove')->name('studentAward-officer.remove');
+    Route::get('/getStudentAwardListOfficerReturned', 'getStudentAwardListOfficerReturned')->name('getStudentAwardListOfficerReturned');
     
 
 });
@@ -721,11 +759,14 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::post('/houseGrantJsSeoApprove','houseGrantJsSeoApprove')->name('houseGrant.JsSeo.approve');
     Route::post('/houseGrantJsSeoReject','houseGrantJsSeoReject')->name('houseGrant.JsSeo.reject');
 
+    Route::get('/gethouseGrantListJsSeoReturn','gethouseGrantListJsSeoReturn')->name('gethouseGrantListJsSeoReturn');
+
     Route::get('/tuitionFeeListJsSeo','tuitionFeeListJsSeo')->name('tuitionFeeListJsSeo');
     Route::get('/gettuitionFeeJsSeo','gettuitionFeeJsSeo')->name('gettuitionFeeJsSeo');
     Route::get('/tuitionFeeJsSeoDetails/{id}','tuitionFeeJsSeoDetails')->name('tuitionFeeJsSeoDetails');
     Route::post('/tuitionFeeJsSeoApprove','tuitionFeeJsSeoApprove')->name('tuitionFee.JsSeo.approve');
     Route::post('/tuitionFeeJsSeoReject','tuitionFeeJsSeoReject')->name('tuitionFee.JsSeo.reject');
+    Route::get('/gettuitionFeeJsSeoReturn','gettuitionFeeJsSeoReturn')->name('gettuitionFeeJsSeoReturn');
 
     Route::get('/JsSeoItiFundList', 'JsSeoItiFundList')->name('JsSeoItiFundList');
     Route::get('/getJsSeoItiFundList', 'getJsSeoItiFundList')->name('getJsSeoItiFundList');
@@ -740,9 +781,12 @@ Route::controller(JsSeoController::class)->group(function(){
     Route::get('/studentAward/{id}/JsSeoview', 'studentAwardJsSeoView')->name('studentAwardJsSeoView');
     Route::post('/studentAward/JsSeoApprove', 'studentAwardJsSeoApprove')->name('studentAward-JsSeo.approve');
     Route::post('/studentAward/JsSeoReject', 'studentAwardJsSeoReject')->name('studentAward-JsSeo.reject');
+
+    Route::get('/getStudentAwardListJsSeoReturned', 'getStudentAwardListJsSeoReturned')->name('getStudentAwardListJsSeoReturned');
     
     Route::get('/anemiaFinanceListJsSeo', 'anemiaFinanceListJsSeo')->name('anemiaFinanceListJsSeo');
     Route::get('/getAnemiaFinanceListJsSeo', 'getAnemiaFinanceListJsSeo')->name('getAnemiaFinanceListJsSeo');
+    Route::get('/getAnemiaFinanceListJsSeoReturn', 'getAnemiaFinanceListJsSeoReturn')->name('getAnemiaFinanceListJsSeoReturn');
     Route::get('/anemiaFinance/{id}/JsSeoview', 'anemiaFinanceJsSeoView')->name('anemiaFinanceJsSeoView');
     Route::post('/anemiaFinance/JsSeoApprove', 'anemiaFinanceJsSeoApprove')->name('anemiaFinance-JsSeo.approve');
     Route::post('/anemiaFinance/JsSeoReject', 'anemiaFinanceJsSeoReject')->name('anemiaFinance-JsSeo.reject');

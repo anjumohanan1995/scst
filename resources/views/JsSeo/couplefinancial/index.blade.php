@@ -349,6 +349,7 @@
         $('#requestId').val($(this).attr('data-id') );
         $('#approve-popup').modal('show');
        });
+       
        $(document).on("click",".rejectItem",function() {
    
         var id =$(this).attr('data-id');

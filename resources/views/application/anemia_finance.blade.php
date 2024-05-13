@@ -33,7 +33,7 @@
                             <div class="row">   
                                 <div class="col-md-4 mb-4">
                                     <label class="form-label">പേര് <br><span class="small"> Name </span> </label>
-                                    <input type="text" value="{{ old('name') }}"  class="form-control" placeholder="പേര്" name="name"  />
+                                    <input type="text" value="{{old('name') }}"  class="form-control" placeholder="പേര്" name="name"  />
                                     @error('name')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror

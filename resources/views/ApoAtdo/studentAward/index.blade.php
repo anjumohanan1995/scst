@@ -7,7 +7,7 @@
 		    <!-- breadcrumb -->
 			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
 				<div class="col-xl-6">
-					<h4 class="content-title mb-2">മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo </h4>
+					<h4 class="content-title mb-2">മിടുക്കരായ വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പ്രോത്സാഹനo</h4>
                   
 				</div>
 				<div class="d-flex my-auto col-xl-6 pe-0">
@@ -44,27 +44,67 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
+
+                                <div class="panel panel-primary">
+                                    <div class=" tab-menu-heading">
+                                        <div class="tabs-menu1">
+                                            <ul class="nav panel-tabs">
+                                                <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
+                                                <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
+                                               </ul>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body tabs-menu-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tabNew">
+                                                <div class="table-responsive">
+                                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>DOB </th>
+                                                                <th>Address </th>
+                                                                <th>District</th>
+                                                                <th>Created Date</th>
+                                                                <th >Action</th>
+                    
+                    
+                    
+                                                            </tr>
+                                                        </thead>
+                    
+                                                        <tbody>
+                    
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tabReturned">
+                                                <div class="table-responsive">
+                                                    <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>                                                               
+                                                                <th>Name</th>
+                                                                <th>DOB </th>
+                                                                <th>Address </th>
+                                                                <th>District</th>
+                                                                <th>Created Date</th>
+                                                                <th >Action</th>
+                                                            </tr>
+                                                        </thead>
+                    
+                                                        <tbody>
+                    
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                
 
-                                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>DOB </th>
-                                            <th>Address </th>
-                                            <th>District</th>
-                                            <th>Created Date</th>
-                                            <th >Action</th>
 
-
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
                                 <div class="modal fade" id="approve-popup" style="display: none">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content country-select-modal border-0">
@@ -94,13 +134,13 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content country-select-modal border-0">
                                             <div class="modal-header offcanvas-header">
-                                                <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                                                <h6 class="modal-title">Are you sure to return this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                                             </div>
                                             <div class="modal-body p-5">
                                                 <form id="ownForm">
                                                     @csrf
                                                 <div class="text-center">
-                                                    <h5>Reason for Rejection</h5>
+                                                    <h5>Reason for Return</h5>
                                                     <textarea class="form-control" name="reason" id="reason" requred></textarea>
                                                     <span id="rejection"></span>
                                                 </div>
@@ -176,7 +216,7 @@
                 var reason = $('#reason').val();
               
                 if($('#reason').val() == ""){
-                    rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+                    rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for return</span>";
                 }
                 else{
                     rejection.innerHTML ="";
@@ -280,6 +320,79 @@
 
 
       });
+
+      $(document).ready(function(){
+
+var table = $('#example1').DataTable({
+processing: true,
+serverSide: true,
+
+buttons: [
+    'copyHtml5',
+    'excelHtml5',
+    'csvHtml5',
+    'pdfHtml5'
+],
+ "ajax": {
+
+           "url": "{{route('getStudentAwardListAssistantReturned')}}",
+           // "data": { mobile: $("#mobile").val()}
+           "data": function ( d ) {
+            return $.extend( {}, d, {
+              
+                "name": $("#name").val(),
+                //"from_date": $("#datepicker").val(),
+                "delete_ctm": $("#delete_ctm").val(),
+
+
+              });
+           }
+       },
+
+ columns: [
+    { data: 'name' },
+    { data: 'dob' },
+    { data: 'address' },
+    { data: 'district' },
+    { data: 'created_at' },
+
+    { data: 'edit' }
+
+
+],
+"order": [4, 'desc'],
+'ordering': true,
+});
+
+
+
+table.draw();
+
+$('#submit').click(function(){
+
+table.draw();
+});
+$('#refresh').click(function(){
+  $("#delete_ctm").val('');
+table.draw();
+});
+
+
+
+
+$('#delete').click(function(){
+$("#delete_ctm").val(1);
+table.draw();
+});
+
+
+
+
+
+// DataTable
+
+
+});
       </script>
 
 

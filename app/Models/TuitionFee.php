@@ -85,6 +85,29 @@ class TuitionFee extends Eloquent
         'officer_status_id',
         'officer_status_date',
         'officer_status_reason',
+
+        'teo_return',
+        'clerk_return',
+        'JsSeo_return',
+        'assistant_return',
+        'officer_return',
+        'return_date',
+        'return_userid',
+        'return_reason',
+        'return_status',
+        'rejection_status',
+
+        'teo_return_view_status',
+        'teo_return_view_date',
+        'clerk_return_view_status',
+        'clerk_return_view_date',
+        'JsSeo_return_view_status',
+        'JsSeo_return_view_date',
+        'assistant_return_view_status',
+        'assistant_return_view_date',
+        'officer_return_view_status',
+        'officer_return_view_date'
+        
         
         
     ];
@@ -120,5 +143,9 @@ class TuitionFee extends Eloquent
     public function officerUser()
     {
         return $this->belongsTo(User::class,'officer_status_id');
+    }
+    public function returnUser()
+    {
+        return $this->belongsTo(User::class,'return_userid');
     }
 }
