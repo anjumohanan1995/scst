@@ -49,5 +49,9 @@ class MedEngStudentFund extends Eloquent
     {
         return $this->belongsTo(User::class,'officer_status_id');
     }
+    public function returnUser()
+    {
+        return $this->belongsTo(User::class,'return_userid');
+    }
 
 }

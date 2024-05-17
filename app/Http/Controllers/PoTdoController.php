@@ -561,8 +561,8 @@ class PoTdoController extends Controller
 
     public function getcouplefinancialListOfficer(Request $request){
         $role =  Auth::user()->role;       
-       $district =  Auth::user()->district;
-       $tdo= Auth::user()->po_tdo_office;
+        $district =  Auth::user()->district;
+        $tdo= Auth::user()->po_tdo_office;
 
         $name = $request->name;
          $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
@@ -811,7 +811,6 @@ class PoTdoController extends Controller
             'success' => 'Couple Financial Application Rejected successfully.'
         ]);
     }
-
 
 
     public function motherChildSchemeListOfficer(){
@@ -1627,7 +1626,8 @@ class PoTdoController extends Controller
              $totalRecord = HouseManagement::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
             
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -1640,7 +1640,8 @@ class PoTdoController extends Controller
              $totalRecordswithFilte = HouseManagement::where('deleted_at',null)
               ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
-                 ->where('assistant_status',1);
+                 ->where('assistant_status',1)
+                 ->where('officer_return',null);
 
            
              if($name != ""){
@@ -1658,6 +1659,7 @@ class PoTdoController extends Controller
                  ->whereIn('submitted_teo', $teoIds)
                  ->where('submitted_district', $district)
                  ->where('assistant_status',1)
+                 ->where('officer_return',null)
                  ->orderBy($columnName, $columnSortOrder);
              
              if($name != ""){
@@ -1694,15 +1696,16 @@ class PoTdoController extends Controller
                 $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
           
             }
+            else if($status ==3){
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></a></div>';
             }
 
           
-              
-        
-        
-             
+                   
            
                 $data_arr[] = array(
 
@@ -1731,6 +1734,136 @@ class PoTdoController extends Controller
 
          return response()->json($response);
     }
+
+    public function gethouseGrantListOfficerReturned(Request $request)
+    {
+        $role =  Auth::user()->role;       
+        $district =  Auth::user()->district;
+        $tdo= Auth::user()->po_tdo_office;
+ 
+         $name = $request->name;
+          $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+          
+         $teoIds = $teos->pluck('_id')->toArray();
+ 
+ 
+          ## Read value
+          $draw = $request->get('draw');
+          $start = $request->get("start");
+          $rowperpage = $request->get("length"); // Rows display per page
+ 
+          $columnIndex_arr = $request->get('order');
+          $columnName_arr = $request->get('columns');
+          $order_arr = $request->get('order');
+          $search_arr = $request->get('search');
+ 
+          $columnIndex = $columnIndex_arr[0]['column']; // Column index
+          $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+          $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+          $searchValue = $search_arr['value']; // Search value
+ 
+ 
+          
+ 
+              // Total records
+              $totalRecord = HouseManagement::where('deleted_at',null)
+              ->whereIn('submitted_teo', $teoIds)
+              ->where('submitted_district', $district)
+              ->where('assistant_return',null)
+              ->where('officer_return',1);
+             
+              if($name != ""){
+                  $totalRecord->where('name','like',"%".$name."%");
+              }
+             
+ 
+              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+ 
+ 
+              $totalRecordswithFilte = HouseManagement::where('deleted_at',null)
+               ->whereIn('submitted_teo', $teoIds)
+                  ->where('submitted_district', $district)
+                  ->where('assistant_return',null)
+                  ->where('officer_return',1);
+ 
+            
+              if($name != ""){
+                 $totalRecordswithFilte->where('name','like',"%".$name."%");
+             }
+            
+            
+ 
+              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+ 
+              // Fetch records
+              
+             
+              $items = HouseManagement::where('deleted_at', null)
+                  ->whereIn('submitted_teo', $teoIds)
+                  ->where('submitted_district', $district)
+                  ->where('assistant_return',null)
+                  ->where('officer_return',1)
+                  ->orderBy($columnName, $columnSortOrder);
+              
+              if($name != ""){
+                 $items->where('name','like',"%".$name."%");
+             }
+            
+ 
+              $records = $items->skip($start)->take($rowperpage)->get();
+          
+ 
+ 
+ 
+          $data_arr = array();
+             $i=$start;
+              
+          foreach($records as $record){
+             $i++;
+              $id = $record->id;
+              $name = $record->name;
+              $address = $record->address;
+              $place = $record->place;
+              $panchayath = $record->panchayath;
+              $caste = $record->caste;
+              $status = $record->officer_status;
+             $date = $record->date;
+             $time = $record->time;
+             $teo_name=$record->teo->teo_name;
+               $created_at =  $record->created_at;
+               $edit='';
+
+               $edit='<div class="settings-main-icon"><a  href="' . route('houseGrantDetailsOfficer',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
+                    
+            
+                 $data_arr[] = array(
+ 
+                     "sl_no" =>$i,
+                     "id" => $id,
+                     "place" => $place,
+                     "name" => $name,
+                     "address" => $address,
+                     "panchayath" => $panchayath,
+                     "caste" => $caste,
+                     "date" => $date .' ' .$time,     
+                     "teo_name" =>$teo_name,              
+                     "edit" => $edit,
+                     
+     
+                 );
+           
+          }
+ 
+          $response = array(
+             "draw" => intval($draw),
+             "iTotalRecords" => $totalRecords,
+             "iTotalDisplayRecords" => $totalRecordswithFilter,
+             "aaData" => $data_arr
+          );
+ 
+          return response()->json($response);
+
+    }
     public function houseGrantDetailsOfficer($id){
         $currentTime = Carbon::now();
 
@@ -1744,6 +1877,13 @@ class PoTdoController extends Controller
                 "officer_view_status"=>1,
                 "officer_view_id" =>Auth::user()->id,
                 "officer_view_date" =>$date .' ' .$currenttime
+            ]);
+        }
+        if($formData->officer_return_view_status==null && $formData->return_status==1){
+            $formData->update([
+            "officer_return_view_status"=>1,
+            "officer_view_id" =>Auth::user()->id,
+            "officer_return_view_date" =>$date .' ' .$currenttime
             ]);
         }
         
@@ -1762,6 +1902,7 @@ class PoTdoController extends Controller
        
         $house->update([
             'officer_status' => 1,
+            'officer_return' => null,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -1781,6 +1922,13 @@ class PoTdoController extends Controller
        
         $house->update([
             'officer_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -1789,6 +1937,33 @@ class PoTdoController extends Controller
             'success' => 'House Grant Scheme Application Rejected successfully.'
         ]);
     }
+
+    public function houseGrantRemoveOfficer(Request $request){
+        //  dd($request);
+        $houseGrant= HouseManagement::where('_id', $request->id)->first();
+          $id = $request->id;
+          $reason =$request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        
+         
+        $houseGrant->update([
+              'rejection_status' => 1,
+              'officer_status' => 3,
+              'teo_return' => null,////////////////
+              'clerk_return' => null,
+              'jsSeo_return' => null,
+              'assistant_return' => null,
+              'officer_return' => null,
+              'officer_status_date' => $currenttime,
+              'officer_status_id' => Auth::user()->id,
+              'officer_status_reason' => $reason,
+          ]);
+          return response()->json([
+              'success' => 'Application Rejected successfully.'
+          ]);
+      }
 
     public function tuitionFeeListOfficer(){
         return view('PoTdo.tuitionFee.index');
@@ -2195,7 +2370,8 @@ class PoTdoController extends Controller
              $totalRecord = MedEngStudentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -2207,7 +2383,8 @@ class PoTdoController extends Controller
              $totalRecordswithFilte = MedEngStudentFund::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
 
           
              if($name != ""){
@@ -2221,12 +2398,13 @@ class PoTdoController extends Controller
              $items = MedEngStudentFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null)
+             ->orderBy($columnName, $columnSortOrder);
            
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
             }
-          
              $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');;
          
 
@@ -2262,11 +2440,141 @@ class PoTdoController extends Controller
                    $edit='<div class="settings-main-icon"><a  href="' . route('studentFundOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
              
                }
+               else if($status ==3){
+                $edit='<div class="settings-main-icon"><a  href="' . route('studentFundOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
                else if($status ==null){
-                   $edit='<div class="settings-main-icon"><a  href="' . route('studentFundOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                   $edit='<div class="settings-main-icon"><a  href="' . route('studentFundOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
                }
 
 
+
+            $data_arr[] = array(
+                "id" => $id,
+               "sl_no" =>$i,
+                "name" => $name,
+                "address" => $address,
+                "course_name" => $course_name,
+                "caste" => $caste,
+                "income" =>$income,
+                "date" => $date .' ' .$record->time, 
+                "teo" => $teo_name,                            
+                "edit" => $edit
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    public function getStudentFundListOfficerReturn(Request $request)
+    {
+        
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
+        $district =  Auth::user()->district;
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+           
+         $teoIds = $teos->pluck('_id')->toArray();
+        
+             // Total records
+             $totalRecord = MedEngStudentFund::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+      
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+           
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = MedEngStudentFund::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+          
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+           
+          
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = MedEngStudentFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1)
+             ->orderBy($columnName, $columnSortOrder);
+           
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+
+                       
+             $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');;
+         
+
+
+
+         $data_arr = array();
+            $i=$start;
+         foreach($records as $record){
+            $i++;
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $course_name = $record->course_name;
+             $place = $record->place;
+             $date=$record->date;
+             $income=$record->income;
+             $caste = $record->caste;
+              $created_at =  $record->created_at;
+              $carbonDate = Carbon::parse($record->created_at);
+
+              $date = $carbonDate->format('d-m-Y');
+              $time = $carbonDate->format('g:i a');
+
+              $status = $record->officer_status;
+              $teo_name=$record->teo->teo_name;
+               
+                
+                 $edit='';
+                 $edit='<div class="settings-main-icon"><a href="'.route('studentFundOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="removeItem" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
 
             $data_arr[] = array(
                 "id" => $id,
@@ -2309,6 +2617,14 @@ class PoTdoController extends Controller
         "officer_view_date" =>$date .' ' .$currenttime
         ]);
     }
+    if($studentFund->officer_return_view_status==null && $studentFund->return_status==1){
+        $studentFund->update([
+        "officer_return_view_status"=>1,
+        "officer_view_id" =>Auth::user()->id,
+        "officer_return_view_date" =>$date .' ' .$currenttime
+        ]);
+    }
+    
       
         return view('PoTdo.studentFund.details', compact('studentFund'));
     }
@@ -2322,6 +2638,7 @@ class PoTdoController extends Controller
       
       $data->update([
         'officer_status' => 1,
+        'officer_return' => null,
         'officer_status_date' => $currenttime,
         'officer_status_id' => Auth::user()->id,
         'officer_status_reason' => $reason,
@@ -2338,15 +2655,51 @@ class PoTdoController extends Controller
       $currentTimeInKerala = now()->timezone('Asia/Kolkata');
       $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
       $data->update([
-        'officer_status' => 2,
-        'officer_status_date' => $currenttime,
-        'officer_status_id' => Auth::user()->id,
-        'officer_status_reason' => $reason,
+        'assistant_status' => 2,
+        'teo_return' => 1,
+        'clerk_return' => 1,
+        'JsSeo_return' => 1,
+        'assistant_return' => 1,
+        'officer_return' => 1,
+        'return_date' => $currenttime,
+        'return_userid' => Auth::user()->id,
+        'return_reason' => $reason,
+        'assistant_status_date' => $currenttime,
+        'assistant_status_id' => Auth::user()->id,
+        'assistant_status_reason' => $reason,
     ]);
         return response()->json([
-            'success' => 'Application Rejected successfully.'
+            'success' => 'Application Returned successfully.'
         ]);
     }
+
+    public function studentfundRemoveOfficer (Request $request){
+        //  dd($request);
+          $studentfund = MedEngStudentFund::where('_id', $request->id)->first();
+          $id = $request->id;
+          $reason =$request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        
+         
+          $studentfund->update([
+              'rejection_status' => 1,
+              'officer_status' => 3,
+              'teo_return' => null,////////////////
+              'clerk_return' => null,
+              'jsSeo_return' => null,
+              'assistant_return' => null,
+              'officer_return' => null,
+              'officer_status_date' => $currenttime,
+              'officer_status_id' => Auth::user()->id,
+              'officer_status_reason' => $reason,
+          ]);
+          return response()->json([
+              'success' => 'Application Rejected successfully.'
+          ]);
+      }
+
     public function singleEarnerListOfficer(Request $request)
     {
         return view('PoTdo.singleEarner.index');
@@ -2566,7 +2919,8 @@ class PoTdoController extends Controller
              $totalRecord = AnemiaFinance::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
            
              if($name != ""){
                  $totalRecord->where('name','like',"%".$name."%");
@@ -2578,7 +2932,8 @@ class PoTdoController extends Controller
              $totalRecordswithFilte = AnemiaFinance::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
 
           
              if($name != ""){
@@ -2592,7 +2947,8 @@ class PoTdoController extends Controller
              $items = AnemiaFinance::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -2626,9 +2982,129 @@ class PoTdoController extends Controller
                    $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
              
                }
+               else if($status ==3){
+                $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
                else if($status ==null){
-                   $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                   $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
                }
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "dob" => $dob,
+                "district" => $district,
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,
+                "teo" => $teo_name,                   
+                "edit" => $edit
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+
+    public function getAnemiaFinanceListOfficerReturned(Request $request)
+    {
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
+        $district =  Auth::user()->district;
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+           
+         $teoIds = $teos->pluck('_id')->toArray();
+         
+  
+             // Total records
+             $totalRecord = AnemiaFinance::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+           
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+           
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = AnemiaFinance::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+
+          
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+          
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = AnemiaFinance::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+           
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $dob = $record->dob;
+             $district = @$record->districtRelation->name;
+              $created_at =  $record->created_at;
+
+              $status = $record->officer_status;
+              $teo_name=$record->submittedTeo->teo_name;
+               
+                
+                 $edit='';
+
+                 $edit='<div class="settings-main-icon"><a  href="' . route('anemiaFinanceOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
+
 
             $data_arr[] = array(
                 "id" => $id,
@@ -2668,6 +3144,13 @@ class PoTdoController extends Controller
         "officer_view_date" =>$date .' ' .$currenttime
         ]);
     }
+    if($formData->officer_return_view_status==null && $formData->return_status==1){
+        $formData->update([
+        "officer_return_view_status"=>1,
+        "officer_view_id" =>Auth::user()->id,
+        "officer_return_view_date" =>$date .' ' .$currenttime
+        ]);
+    }
         $formData = AnemiaFinance::where('_id',$id)->first();
        
         return view('PoTdo.anemiaFinance.view', compact('formData'));
@@ -2683,6 +3166,7 @@ class PoTdoController extends Controller
 
         $data->update([
             'officer_status' => 1,
+            'officer_return' => null,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -2704,6 +3188,13 @@ class PoTdoController extends Controller
 
         $data->update([
             'officer_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -2715,6 +3206,34 @@ class PoTdoController extends Controller
         ]);
     
     }
+
+    public function anemiaFinanceOfficerRemove (Request $request){
+        //  dd($request);
+        $anemiaFinance = AnemiaFinance::where('_id', $request->id)->first();
+          $id = $request->id;
+          $reason =$request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        
+         
+        $anemiaFinance->update([
+              'rejection_status' => 1,
+              'officer_status' => 3,
+              'teo_return' => null,////////////////
+              'clerk_return' => null,
+              'jsSeo_return' => null,
+              'assistant_return' => null,
+              'officer_return' => null,
+              'officer_status_date' => $currenttime,
+              'officer_status_id' => Auth::user()->id,
+              'officer_status_reason' => $reason,
+          ]);
+          return response()->json([
+              'success' => 'Mother Child Scheme Application Rejected successfully.'
+          ]);
+      }
+
     public function studentAwardListOfficer(Request $request)
     {
         return view('PoTdo.studentAward.index');
@@ -2755,7 +3274,8 @@ class PoTdoController extends Controller
              $totalRecord = StudentAward::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
              // Total records
             
              if($name != ""){
@@ -2768,7 +3288,8 @@ class PoTdoController extends Controller
              $totalRecordswithFilte = StudentAward::where('deleted_at',null)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
 
              if($name != ""){
                 $totalRecordswithFilte->where('name','like',"%".$name."%");
@@ -2785,7 +3306,8 @@ class PoTdoController extends Controller
              $items = StudentAward::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
              ->where('submitted_district', $district)
-             ->where('assistant_status',1);
+             ->where('assistant_status',1)
+             ->where('officer_return',null);
             
              if($name != ""){
                 $items->where('name','like',"%".$name."%");
@@ -2822,8 +3344,12 @@ class PoTdoController extends Controller
                    $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
              
                }
+               else if($status ==3){
+                $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>'.$record->officer_status_reason.'</span></div>';
+          
+            }
                else if($status ==null){
-                   $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                   $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
                }
 
             $data_arr[] = array(
@@ -2848,6 +3374,130 @@ class PoTdoController extends Controller
 
          return response()->json($response);
     }
+
+    public function getStudentAwardListOfficerReturned(Request $request)
+    {
+        $name = $request->name;
+        $user_id=Auth::user()->id;
+        $role =  Auth::user()->role;       
+        $teo =  Auth::user()->teo_name;
+        $district =  Auth::user()->district;
+
+         ## Read value
+         $draw = $request->get('draw');
+         $start = $request->get("start");
+         $rowperpage = $request->get("length"); // Rows display per page
+
+         $columnIndex_arr = $request->get('order');
+         $columnName_arr = $request->get('columns');
+         $order_arr = $request->get('order');
+         $search_arr = $request->get('search');
+
+         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+         $searchValue = $search_arr['value']; // Search value
+
+
+         
+         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+           
+         $teoIds = $teos->pluck('_id')->toArray();
+         
+  
+             // Total records
+             $totalRecord = StudentAward::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+             // Total records
+            
+             if($name != ""){
+                 $totalRecord->where('name','like',"%".$name."%");
+             }
+            
+             $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+             $totalRecordswithFilte = StudentAward::where('deleted_at',null)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+
+             if($name != ""){
+                $totalRecordswithFilte->where('name','like',"%".$name."%");
+            }
+            if($role == "TEO"){
+                $totalRecordswithFilte->where('submitted_teo',$teo);
+            }
+
+           
+
+             $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+             // Fetch records
+             $items = StudentAward::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
+             ->whereIn('submitted_teo', $teoIds)
+             ->where('submitted_district', $district)
+             ->where('assistant_return',null)
+             ->where('officer_return',1);
+            
+             if($name != ""){
+                $items->where('name','like',"%".$name."%");
+            }
+            if($role == "TEO"){
+                $items->where('submitted_teo',$teo);
+            }
+
+
+             $records = $items->skip($start)->take($rowperpage)->get();
+         
+
+
+
+         $data_arr = array();
+
+         foreach($records as $record){
+             $id = $record->id;
+             $name = $record->name;
+             $address = $record->address;
+             $dob = $record->dob;
+             $district = @$record->districtRelation->name;
+              $created_at =  $record->created_at;
+
+              $status = $record->officer_status;
+              $teo_name=$record->submittedTeo->teo_name;
+               
+                
+                 $edit='';
+
+                 $edit='<div class="settings-main-icon"><a  href="' . route('studentAwardOfficerView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a>&nbsp;&nbsp;<a class="remove" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
+
+            $data_arr[] = array(
+                "id" => $id,
+                "name" => $name,
+                "address" => $address,
+                "dob" => $dob,
+                "district" => $district,
+                "created_at" => @$created_at->timezone('Asia/Kolkata')->format('d-m-Y H:i:s') ,  
+                "teo" => $teo_name,               
+                "edit" => $edit
+
+            );
+         }
+
+         $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+
+         return response()->json($response);
+    }
+    
     public function studentAwardOfficerView(Request $request, $id)
     {   
         $currentTime = Carbon::now();
@@ -2862,6 +3512,13 @@ class PoTdoController extends Controller
         "officer_view_status"=>1,
         "officer_view_id" =>Auth::user()->id,
         "officer_view_date" =>$date .' ' .$currenttime
+        ]);
+    }
+    if($formData->officer_return_view_status==null && $formData->return_status==1){
+        $formData->update([
+        "officer_return_view_status"=>1,
+        "officer_view_id" =>Auth::user()->id,
+        "officer_return_view_date" =>$date .' ' .$currenttime
         ]);
     }
               
@@ -2880,6 +3537,7 @@ class PoTdoController extends Controller
 
         $studentAward->update([
             'officer_status' => 1,
+            'officer_return' => null,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -2900,6 +3558,13 @@ class PoTdoController extends Controller
 
         $studentAward->update([
             'officer_status' => 2,
+            'teo_return' => 1,
+            'clerk_return' => 1,
+            'JsSeo_return' => 1,
+            'assistant_return' => 1,
+            'officer_return' => 1,
+            'return_date' => $currenttime,
+            'return_userid' => Auth::user()->id,
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
@@ -2911,6 +3576,34 @@ class PoTdoController extends Controller
         ]);
     
     }
+
+    public function studentAwardOfficerRemove (Request $request){
+        //  dd($request);
+        $studentAward = StudentAward::where('_id', $request->id)->first();
+          $id = $request->id;
+          $reason =$request->reason;
+        //  $currentTime = Carbon::now();
+        $currentTimeInKerala = now()->timezone('Asia/Kolkata');
+        $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
+        
+         
+        $studentAward->update([
+              'rejection_status' => 1,
+              'officer_status' => 3,
+              'teo_return' => null,////////////////
+              'clerk_return' => null,
+              'jsSeo_return' => null,
+              'assistant_return' => null,
+              'officer_return' => null,
+              'officer_status_date' => $currenttime,
+              'officer_status_id' => Auth::user()->id,
+              'officer_status_reason' => $reason,
+          ]);
+          return response()->json([
+              'success' => 'Application Rejected successfully.'
+          ]);
+      }
+
     public function officerItiFundList(Request $request)
     {
         return view('PoTdo.itiFund.index');

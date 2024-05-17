@@ -470,7 +470,7 @@
                            @if(@$formData->rejection_status  == 1)
                            <li class="rejectTimeline">
                               <a href="#!">PO / TDO</a>
-                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                              <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_return_view_date'] }}</a>
                               <p></p>
                               <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
                               <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
@@ -727,12 +727,12 @@
                                   <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
                                  <p></p>
                                   <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
-                                  <div class="settings-icon">
+                                  {{-- <div class="settings-icon">
                                     <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
                                     &nbsp;&nbsp;<a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
                                     &nbsp;&nbsp;<a class="remove" data-id="{{ @$formData->id }}"><i class="fa fa-times bg-danger "></i></a>
                                     
-                                 </div>
+                                 </div> --}}
                                    </li>
                                    @endif
                                    @endif

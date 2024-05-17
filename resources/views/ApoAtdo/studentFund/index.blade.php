@@ -50,6 +50,80 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
+                                <div class="panel panel-primary">
+                                    <div class=" tab-menu-heading">
+                                        <div class="tabs-menu1">
+                                        <ul class="nav panel-tabs">
+                                            <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
+                                            <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned">Returned</a></li>
+                                           </ul>
+                                    </div>
+
+                                    <div class="panel-body tabs-menu-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tabNew">
+                                                <div class="table-responsive">
+                                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl No</th>
+                                                    <th>Applicant's Name / അപേക്ഷകന്റെ പേര് </th>
+                                                    <th>Address / മേൽവിലാസം 
+                                                    </th>
+                                                    <th>Course Name / കോഴ്‌സിന്റെ പേര് 
+                                                    </th>
+                                                    <th>Applicant's Income / അപേക്ഷകന്റെ വരുമാനം 
+                                                    </th>
+                                                    <th>Caste/Religion / ജാതി/ മതം 
+                                                    </th>
+                                                    <th>Date / തീയതി   </th>
+                                                    <th >Action / ആക്ഷൻ</th>
+
+
+
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                </tbody>
+                                                </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tabReturned">
+                                                <div class="table-responsive">
+                                                    <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl No</th>
+                                                    <th>Applicant's Name / അപേക്ഷകന്റെ പേര് </th>
+                                                    <th>Address / മേൽവിലാസം 
+                                                    </th>
+                                                    <th>Course Name / കോഴ്‌സിന്റെ പേര് 
+                                                    </th>
+                                                    <th>Applicant's Income / അപേക്ഷകന്റെ വരുമാനം 
+                                                    </th>
+                                                    <th>Caste/Religion / ജാതി/ മതം 
+                                                    </th>
+                                                    <th>Date / തീയതി   </th>
+                                                    <th >Action / ആക്ഷൻ</th>
+
+
+
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                </tbody>
+                                                </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                                </div>
                                 <div class="row mb-3">
                             
                                 <div class="col-md-1 col-6 text-center" id="refresh">
@@ -66,31 +140,7 @@
 
 
 
-                                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Sl No</th>
-                                            <th>Applicant's Name / അപേക്ഷകന്റെ പേര് </th>
-                                            <th>Address / മേൽവിലാസം 
-                                            </th>
-                                            <th>Course Name / കോഴ്‌സിന്റെ പേര് 
-                                            </th>
-                                            <th>Applicant's Income / അപേക്ഷകന്റെ വരുമാനം 
-                                            </th>
-                                            <th>Caste/Religion / ജാതി/ മതം 
-                                            </th>
-                                            <th>Date / തീയതി   </th>
-                                            <th >Action / ആക്ഷൻ</th>
-
-
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
+                                
                                 <div class="modal fade" id="approve-popup" style="display: none">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content country-select-modal border-0">
@@ -123,13 +173,13 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content country-select-modal border-0">
                                             <div class="modal-header offcanvas-header">
-                                                <h6 class="modal-title">Are you sure to reject this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                                                <h6 class="modal-title">Are you sure to return this Application?</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                                             </div>
                                             <div class="modal-body p-5">
                                                 <form id="ownForm">
                                                     @csrf
                                                 <div class="text-center">
-                                                    <h5>Reason for Rejection</h5>
+                                                    <h5>Reason for Return</h5>
                                                     <textarea class="form-control" name="reason" id="reason" requred></textarea>
                                                     <span id="rejection"></span>
                                                 </div>
@@ -213,7 +263,7 @@ function reject() {
         var reason = $('#reason').val();
       
         if($('#reason').val() == ""){
-            rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for rejection</span>";
+            rejection.innerHTML = "<span style='color: red;'>"+"Please enter the reason for return</span>";
         }
         else{
             rejection.innerHTML ="";
@@ -324,7 +374,50 @@ $(document).on("click",".deleteItem",function() {
     	});
 
 
+     	   var table = $('#example1').DataTable({
+            processing: true,
+            serverSide: true,
 
+	        buttons: [
+	            'copyHtml5',
+	            'excelHtml5',
+	            'csvHtml5',
+	            'pdfHtml5'
+	        ],
+             "ajax": {
+
+			       	"url": "{{route('getStudentFundListAssistantReturn')}}",
+			       	// "data": { mobile: $("#mobile").val()}
+			       	"data": function ( d ) {
+			        	return $.extend( {}, d, {
+				            "mobile": $("#mobile").val(),
+				            "name": $("#name").val(),
+				            "role": $("#role").val(),
+				            //"from_date": $("#datepicker").val(),
+				            "delete_ctm": $("#delete_ctm").val(),
+
+
+			          	});
+       				}
+       			},
+
+             columns: [
+                { data: 'sl_no' },
+                { data: 'name' },
+                { data: 'address' },
+				{ data: 'course_name' },
+                { data: 'income' },
+				{ data: 'caste' },
+                
+                { data: 'date'},
+
+                { data: 'edit' }
+
+
+			],
+            "order": [6, 'desc'],
+            'ordering': true,
+         });
 
 
          // DataTable

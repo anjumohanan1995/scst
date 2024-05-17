@@ -360,7 +360,7 @@
                         @if(@$formData->rejection_status  == 1)
                         <li class="rejectTimeline">
                            <a href="#!">PO / TDO</a>
-                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_view_date'] }}</a>
+                           <a href="#!" class="float-end"><i class="fa fa-eye"></i>  {{ @$formData['officer_return_view_date'] }}</a>
                            <p></p>
                            <p class="inputText badge bg-danger" style="font-size: 12px">Rejected </p>
                            <p  class="mt-2"><span class= "spanclr"> Name :   </span>{{ @$formData->officerUser->name }}</p>
@@ -627,7 +627,7 @@
                      <form id="ownForm">
                         @csrf
                         <div class="text-center">
-                           <h5>Reason for Rejection</h5>
+                           <h5>Reason for Approve</h5>
                            <textarea class="form-control" name="approve_reason" id="approve_reason" requred></textarea>
                            <span id="rejection"></span>
                         </div>

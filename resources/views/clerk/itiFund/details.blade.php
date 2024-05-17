@@ -477,7 +477,7 @@
                                                 <li class="rejectTimeline">
                                                     <a href="#!">PO / TDO</a>
                                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                        {{ @$studentFund['officer_view_date'] }}</a>
+                                                        {{ @$studentFund['officer_return_view_date'] }}</a>
                                                     <p></p>
                                                     <p class="inputText badge bg-danger" style="font-size: 12px">Rejected
                                                     </p>

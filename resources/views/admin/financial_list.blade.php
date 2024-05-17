@@ -1,108 +1,97 @@
 @extends('layouts.app')
 @section('content')
-<style>
-    .tabs-menu1 ul li a {
-        padding: 10px 20px 11px 20px;
-        display: block;
-        color: #282f53;
-      }
-</style>
+    <style>
+        .tabs-menu1 ul li a {
+            padding: 10px 20px 11px 20px;
+            display: block;
+            color: #282f53;
+        }
+    </style>
     <!-- main-content -->
     <div class="main-content app-content">
-		<!-- container -->
-		<div class="main-container container-fluid">
-		    <!-- breadcrumb -->
-			<div class="breadcrumb-header justify-content-between row me-0 ms-0" >
-				<div class="col-xl-12">
-					<h4 class="content-title mb-2">മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക് പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം</h4>
-                  
-				</div>
-				{{-- <div class="d-flex my-auto col-xl-9 pe-0">
-					<div class="card">
-                        <div class="main-content-body main-content-body-mail card-body p-0">
-                            <div class="card-body pt-2 pb-2">
-                                <div class="row row-sm">
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <input class="form-control" placeholder="Name" type="text" name="name" id="name">
-                                    </div>
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <input class="form-control" placeholder="Phone Number" type="text" name="mobile" id="mobile">
-                                    </div>
-                                   
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <select class="form-control"  name="role" id="role">
-                                            <option value="">Select</option>
-                                            <option value="Data Entry">Data Entry</option>
-                                            <option value="Verifier">Verifier</option>
-                                            <option value="Approver">Approver</option>
-                                            <option value="Super Admin">Super Admin</option>
-                                        </select>
-                                    </div>
 
-                                    
 
-                                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                                        <button class="btn ripple btn-success btn-block" type="submit" id="submit" >Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				</div> --}}
-			</div>
-			<!-- /breadcrumb -->
-			<!-- main-content-body -->
-			<div class="main-content-body">
+        <!-- container -->
+        <div class="main-container container-fluid">
+            <!-- breadcrumb -->
+            <div class="breadcrumb-header justify-content-between row me-0 ms-0">
+                <div class="col-xl-12">
+                    <h4 class="content-title mb-2">മിശ്ര വിവാഹം മൂലം ക്ലേശങ്ങൾ അനുഭവിക്കുന്ന പട്ടികവർഗ്ഗ ദമ്പതികൾക്ക്
+                        പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നും സാമ്പത്തിക സഹായം അനുവദിക്കുന്നതിനുള്ള അപേക്ഷഫോറം</h4>
+                </div>
+            </div>
+
+
+            <!-- /breadcrumb -->
+            <!-- main-content-body -->
+            <div class="main-content-body">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="fa fa-window-close"></i></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
+                                class="fa fa-window-close"></i></button>
                         {{ $message }}
                     </div>
-
                 @endif
                 <!-- row -->
                 <div class="row row-sm">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
-                        <div class="card"><div class="card-body  table-new">
+                        <div class="card">
+                            <div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
+<<<<<<< HEAD
                                
                             <div class="panel panel-primary">
                                 <div class=" tab-menu-heading">
                                     <div class="tabs-menu1">
                                         <ul class="nav panel-tabs">
                                             <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
-                                            <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
+                                            <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned">Returned</a></li>
                                            </ul>
+=======
+
+                                <div class="panel panel-primary">
+                                    <div class=" tab-menu-heading">
+                                        <div class="tabs-menu1">
+                                            <ul class="nav panel-tabs">
+                                                <li><a href="#tabNew" class="active" data-bs-toggle="tab"
+                                                        data-bs-target="#tabNew">New</a></li>
+                                                <li><a href="#tabReturned" data-bs-toggle="tab"
+                                                        data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
+                                            </ul>
+                                        </div>
+>>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
                                     </div>
-                                </div>
-                                <div class="panel-body tabs-menu-body">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tabNew">
-                                            <div class="table-responsive">
-                                                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sl No</th>
-                                                            <th>Husband Name </th>
-                                                            <th>Wife Name </th>
-                                                            {{-- <th>Marriage Registration Details </th>
+                                    <div class="panel-body tabs-menu-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tabNew">
+                                                <div class="table-responsive">
+                                                    <table id="example" class="table table-striped table-bordered"
+                                                        style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sl No</th>
+                                                                <th>Husband Name </th>
+                                                                <th>Wife Name </th>
+                                                                {{-- <th>Marriage Registration Details </th>
                                                             <th>Marriage Certification </th> --}}
-                                                            <th>Husband Caste</th>
-                                                            <th>Wife Caste</th> 
-                                                             <th>Date & Time</th> 
-                                                            <th>Applied Date</th>
-                                                            <th >Action</th>
-                
-                
-                
-                                                        </tr>
-                                                    </thead>
-                
-                                                    <tbody>
-                
-                                                    </tbody>
-                                                </table>
+                                                                <th>Husband Caste</th>
+                                                                <th>Wife Caste</th>
+                                                                <th>Date & Time</th>
+                                                                <th>Applied Date</th>
+                                                                <th>Action</th>
+
+
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
+<<<<<<< HEAD
                                         </div>
                                         <div class="tab-pane" id="tabReturned">
                                             <div class="table-responsive">
@@ -114,23 +103,42 @@
                                                             <th>Wife Name </th>
                                                             <th>Husband Caste</th>
                                                             <th>Wife Caste</th> 
-                                                             <th>Date & Time</th> 
+                                                            <th>Date & Time</th> 
                                                             <th>Applied Date</th>
                                                             <th >Action</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
+=======
+                                            <div class="tab-pane" id="tabReturned">
+                                                <div class="table-responsive">
+                                                    <table id="example1" class="table table-striped table-bordered"
+                                                        cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sl No</th>
+                                                                <th>Husband Name </th>
+                                                                <th>Wife Name </th>
+                                                                <th>Husband Caste</th>
+                                                                <th>Wife Caste</th>
+                                                                <th>Date & Time</th>
+                                                                <th>Applied Date</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+>>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
                                             </div>
+
+
+
                                         </div>
-                                     
-                                       
-        
                                     </div>
                                 </div>
-                            </div>
 
 
-                               
+
                                 <div class="modal fade" id="approve-popup" style="display: none">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content country-select-modal border-0">
@@ -202,70 +210,37 @@
 
                 </div>
                 <!-- /row -->
-			</div>
-		<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
     <!-- /main-content -->
-<meta name="csrf_token" content="{{ csrf_token() }}" />
-<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
-<script src="{{ asset('js/toastr.js') }}"></script>
+    <script src="{{ asset('js/toastr.js') }}"></script>
 
-<script type="text/javascript">
-    $(document).on("click", ".approveItem", function() {
-        var id = $(this).attr('data-id');
-        $('#requestId').val($(this).attr('data-id'));
-        $('#approve-popup').modal('show');
+    <script type="text/javascript">
+        $(document).on("click", ".approveItem", function() {
+            var id = $(this).attr('data-id');
+            $('#requestId').val($(this).attr('data-id'));
+            $('#approve-popup').modal('show');
 
 
-    });
-    $(document).on("click", ".rejectItem", function() {
-        $('#requestId2').val($(this).attr('data-id'));
-        $('#rejection-popup').modal('show');
-    });
-
-    function approve() {
-        var reason = $('#approve_reason').val();
-
-        var reqId = $('#requestId').val();
-
-        $.ajax({
-            url: "{{ route('financial-teo.approve') }}",
-            type: "POST",
-            data: {
-                "id": reqId,
-                "reason" :reason,
-                "_token": "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                toastr.success(response.success, 'Success!')
-                $('#success').show();
-                $('#approve-popup').modal('hide');
-                $('#success_message').fadeIn().html(response.success);
-                setTimeout(function() {
-                    $('#success_message').fadeOut("slow");
-                }, 2000);
-
-                $('#example').DataTable().ajax.reload();
-
-            }
         });
-    }
+        $(document).on("click", ".rejectItem", function() {
+            $('#requestId2').val($(this).attr('data-id'));
+            $('#rejection-popup').modal('show');
+        });
 
-    function reject() {
-        var reason = $('#reason').val();
+        function approve() {
+            var reason = $('#approve_reason').val();
 
-        if ($('#reason').val() == "") {
-            rejection.innerHTML = "<span style='color: red;'>" + "Please enter the reason for rejection</span>";
-        } else {
-            rejection.innerHTML = "";
-            var reqId = $('#requestId2').val();
-            console.log(reqId);
+            var reqId = $('#requestId').val();
+
             $.ajax({
-
-                url: "{{ route('financial-teo.reject') }}",
+                url: "{{ route('financial-teo.approve') }}",
                 type: "POST",
                 data: {
                     "id": reqId,
@@ -273,9 +248,9 @@
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    console.log(response.success);
                     toastr.success(response.success, 'Success!')
-                    $('#rejection-popup').modal('hide');
+                    $('#success').show();
+                    $('#approve-popup').modal('hide');
                     $('#success_message').fadeIn().html(response.success);
                     setTimeout(function() {
                         $('#success_message').fadeOut("slow");
@@ -284,43 +259,78 @@
                     $('#example').DataTable().ajax.reload();
 
                 }
-            })
-
+            });
         }
-    }
 
-$(document).on("click",".deleteItem",function() {
+        function reject() {
+            var reason = $('#reason').val();
 
-     var id =$(this).attr('data-id');
-     $('#requestId').val($(this).attr('data-id') );
-     $('#confirmation-popup').modal('show');
-});
+            if ($('#reason').val() == "") {
+                rejection.innerHTML = "<span style='color: red;'>" + "Please enter the reason for rejection</span>";
+            } else {
+                rejection.innerHTML = "";
+                var reqId = $('#requestId2').val();
+                console.log(reqId);
+                $.ajax({
+
+                    url: "{{ route('financial-teo.reject') }}",
+                    type: "POST",
+                    data: {
+                        "id": reqId,
+                        "reason": reason,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        console.log(response.success);
+                        toastr.success(response.success, 'Success!')
+                        $('#rejection-popup').modal('hide');
+                        $('#success_message').fadeIn().html(response.success);
+                        setTimeout(function() {
+                            $('#success_message').fadeOut("slow");
+                        }, 2000);
+
+                        $('#example').DataTable().ajax.reload();
+
+                    }
+                })
+
+            }
+        }
+
+        $(document).on("click", ".deleteItem", function() {
+
+            var id = $(this).attr('data-id');
+            $('#requestId').val($(this).attr('data-id'));
+            $('#confirmation-popup').modal('show');
+        });
 
 
-         function ownRequest() {
+        function ownRequest() {
 
             var reqId = $('#requestId').val();
             console.log(reqId);
             $.ajax({
-            	headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-                url: '{{ url("users/delete") }}'+'/'+reqId,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                },
+                url: '{{ url('users/delete') }}' + '/' + reqId,
                 method: 'post',
                 data: {
                     "_token": "{{ csrf_token() }}",
 
-                    },
+                },
                 contentType: false,
                 processData: false,
                 success: function(response) {
                     console.log(response.success);
 
-                        $('#confirmation-popup').modal('hide');
-                        $('#success_message').fadeIn().html(response.success);
-							setTimeout(function() {
-								$('#success_message').fadeOut("slow");
-							}, 2000 );
+                    $('#confirmation-popup').modal('hide');
+                    $('#success_message').fadeIn().html(response.success);
+                    setTimeout(function() {
+                        $('#success_message').fadeOut("slow");
+                    }, 2000);
 
-                        $('#example').DataTable().ajax.reload();
+                    $('#example').DataTable().ajax.reload();
 
 
 
@@ -330,164 +340,189 @@ $(document).on("click",".deleteItem",function() {
 
 
 
-     $(document).ready(function(){
+        $(document).ready(function() {
 
-     	   var table = $('#example').DataTable({
-            processing: true,
-            serverSide: true,
+            var table = $('#example').DataTable({
+                processing: true,
+                serverSide: true,
 
-	        buttons: [
-	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5'
-	        ],
-             "ajax": {
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ],
+                "ajax": {
 
-			       	"url": "{{route('getCoupleList')}}",
-			       	// "data": { mobile: $("#mobile").val()}
-			       	"data": function ( d ) {
-			        	return $.extend( {}, d, {
-				            "mobile": $("#mobile").val(),
-				            "name": $("#name").val(),
-				            "role": $("#role").val(),
-				            //"from_date": $("#datepicker").val(),
-				            "delete_ctm": $("#delete_ctm").val(),
-
-
-			          	});
-       				}
-       			},
-
-             columns: [
-                {data:'sl_no'},
-                { data: 'husband_name' },
-                { data: 'wife_name' },
-				//{ data: 'register_details' },
-				//{ data: 'certificate_details' },
-                { data: 'husband_caste' },
-				{ data: 'wife_caste' },
-                { data: 'created_at', visible: false },
-                { data: 'date' },
-                { data: 'edit' }
+                    "url": "{{ route('getCoupleList') }}",
+                    // "data": { mobile: $("#mobile").val()}
+                    "data": function(d) {
+                        return $.extend({}, d, {
+                            "mobile": $("#mobile").val(),
+                            "name": $("#name").val(),
+                            "role": $("#role").val(),
+                            //"from_date": $("#datepicker").val(),
+                            "delete_ctm": $("#delete_ctm").val(),
 
 
-			],
-            "order": [6, 'desc'],
-            'ordering': true,
-         });
+                        });
+                    }
+                },
+
+                columns: [{
+                        data: 'sl_no'
+                    },
+                    {
+                        data: 'husband_name'
+                    },
+                    {
+                        data: 'wife_name'
+                    },
+                    //{ data: 'register_details' },
+                    //{ data: 'certificate_details' },
+                    {
+                        data: 'husband_caste'
+                    },
+                    {
+                        data: 'wife_caste'
+                    },
+                    {
+                        data: 'created_at',
+                        visible: false
+                    },
+                    {
+                        data: 'date'
+                    },
+                    {
+                        data: 'edit'
+                    }
 
 
-
-      	 table.draw();
-
-      	$('#submit').click(function(){
-
-        	table.draw();
-    	});
-    	$('#refresh').click(function(){
-      		$("#delete_ctm").val('');
-        	table.draw();
-    	});
-
-
-
-
-    	$('#delete').click(function(){
-    		$("#delete_ctm").val(1);
-        	table.draw();
-    	});
+                ],
+                "order": [6, 'desc'],
+                'ordering': true,
+            });
 
 
 
+            table.draw();
 
+            $('#submit').click(function() {
 
-         // DataTable
-
-
-      });
-
-
-      $(document).ready(function(){
-
-        var table = $('#example1').DataTable({
-        processing: true,
-        serverSide: true,
-
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ],
-         "ajax": {
-
-                   "url": "{{route('getCoupleReturnList')}}",
-                   // "data": { mobile: $("#mobile").val()}
-                   "data": function ( d ) {
-                    return $.extend( {}, d, {
-                        "mobile": $("#mobile").val(),
-                        "name": $("#name").val(),
-                        "role": $("#role").val(),
-                        //"from_date": $("#datepicker").val(),
-                        "delete_ctm": $("#delete_ctm").val(),
-
-
-                      });
-                   }
-               },
-
-         columns: [
-            {data:'sl_no'},
-            { data: 'husband_name' },
-            { data: 'wife_name' },
-            //{ data: 'register_details' },
-            //{ data: 'certificate_details' },
-            { data: 'husband_caste' },
-            { data: 'wife_caste' },
-            { data: 'created_at', visible: false },
-            { data: 'date' },
-            { data: 'edit' }
-
-
-        ],
-        "order": [6, 'desc'],
-        'ordering': true,
-     });
-
-
-
-       table.draw();
-
-      $('#submit').click(function(){
-
-        table.draw();
-    });
-    $('#refresh').click(function(){
-          $("#delete_ctm").val('');
-        table.draw();
-    });
+                table.draw();
+            });
+            $('#refresh').click(function() {
+                $("#delete_ctm").val('');
+                table.draw();
+            });
 
 
 
 
-    $('#delete').click(function(){
-        $("#delete_ctm").val(1);
-        table.draw();
-    });
+            $('#delete').click(function() {
+                $("#delete_ctm").val(1);
+                table.draw();
+            });
 
 
 
 
 
-     // DataTable
+            // DataTable
 
 
-  });
+        });
+
+
+        $(document).ready(function() {
+
+            var table = $('#example1').DataTable({
+                processing: true,
+                serverSide: true,
+
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ],
+                "ajax": {
+
+                    "url": "{{ route('getCoupleReturnList') }}",
+                    // "data": { mobile: $("#mobile").val()}
+                    "data": function(d) {
+                        return $.extend({}, d, {
+                            "mobile": $("#mobile").val(),
+                            "name": $("#name").val(),
+                            "role": $("#role").val(),
+                            //"from_date": $("#datepicker").val(),
+                            "delete_ctm": $("#delete_ctm").val(),
+                        });
+                    }
+                },
+
+                columns: [{
+                        data: 'sl_no'
+                    },
+                    {
+                        data: 'husband_name'
+                    },
+                    {
+                        data: 'wife_name'
+                    },
+                    //{ data: 'register_details' },
+                    //{ data: 'certificate_details' },
+                    {
+                        data: 'husband_caste'
+                    },
+                    {
+                        data: 'wife_caste'
+                    },
+                    {
+                        data: 'created_at',
+                        visible: false
+                    },
+                    {
+                        data: 'date'
+                    },
+                    {
+                        data: 'edit'
+                    }
+
+
+                ],
+                "order": [6, 'desc'],
+                'ordering': true,
+            });
 
 
 
-      </script>
+            table.draw();
+
+            $('#submit').click(function() {
+
+                table.draw();
+            });
+            $('#refresh').click(function() {
+                $("#delete_ctm").val('');
+                table.draw();
+            });
 
 
+
+
+            $('#delete').click(function() {
+                $("#delete_ctm").val(1);
+                table.draw();
+            });
+
+
+
+
+
+            // DataTable
+
+
+        });
+    </script>
 @endsection

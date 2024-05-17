@@ -69,9 +69,10 @@ class MarriageGrant extends Eloquent
         'signature','applicant_photo','user_id','status',
 
         'teo_view_status',
+        'teo_return_view_status',
         'teo_view_id',
         'teo_view_date',
-
+        'teo_return_view_date',
         'teo_status',
         'teo_status_id',
         'teo_status_date',
@@ -79,8 +80,10 @@ class MarriageGrant extends Eloquent
 
 
         'clerk_view_status',
+        'clerk_return_view_status',
         'clerk_view_id',
         'clerk_view_date',
+        'clerk_return_view_date',
         'clerk_status',
         'clerk_status_id',
         'clerk_status_date',
@@ -88,24 +91,30 @@ class MarriageGrant extends Eloquent
 
 
         'JsSeo_view_status',
+        'JsSeo_return_view_status',
         'JsSeo_view_id',
         'JsSeo_view_date',
+        'JsSeo_return_view_date',
         'JsSeo_status',
         'JsSeo_status_id',
         'JsSeo_status_date',
         'JsSeo_status_reason',
         
         'assistant_view_status',
+        'assistant_return_view_status',
         'assistant_view_id',
         'assistant_view_date',
+        'assistant_return_view_date',
         'assistant_status',
         'assistant_status_id',
         'assistant_status_date',
         'assistant_status_reason',
 
         'officer_view_status',
+        'officer_return_view_status',
         'officer_view_id',
         'officer_view_date',
+        'officer_return_view_date',
         'officer_status',
         'officer_status_id',
         'officer_status_date',

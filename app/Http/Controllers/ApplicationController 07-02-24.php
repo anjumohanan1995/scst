@@ -972,7 +972,7 @@ class ApplicationController extends Controller
 
     public function motherChildSchemeList(Request $request)
     {
-        $data  = studentFund::with('User')->get();
+        $data  = MotherChildScheme::with('User')->get();
         //dd($data);
         return view('admin.motherchild_list', compact('data'));
     }
