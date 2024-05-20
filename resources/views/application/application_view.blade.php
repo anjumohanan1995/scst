@@ -620,7 +620,7 @@
                              @csrf
                              <div class="text-center">
                                  <h5>Reason for Approval</h5>
-                                 <textarea class="form-control" name="approved_reason" id="approved_reason" requred></textarea>
+                                 <textarea class="form-control" name="approve_reason" id="approve_reason" requred></textarea>
                                  <span id="rejection"></span>
                               </div>
                          <input type="hidden" id="requestId" name="requestId" value="" />

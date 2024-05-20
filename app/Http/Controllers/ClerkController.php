@@ -2924,7 +2924,6 @@ class ClerkController extends Controller
         $searchValue = $search_arr['value']; // Search value
 
 
-<<<<<<< HEAD
          $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
            
          $teoIds = $teos->pluck('_id')->toArray();
@@ -2940,23 +2939,6 @@ class ClerkController extends Controller
              }
              $totalRecord->where('clerk_return', null);
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
-=======
-        $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
-
-        $teoIds = $teos->pluck('_id')->toArray();
-
-        // Total records
-        $totalRecord = MedEngStudentFund::where('deleted_at', null)
-            ->whereIn('submitted_teo', $teoIds)
-            ->where('submitted_district', $district)
-            ->where('teo_status', 1);
-
-        if ($name != "") {
-            $totalRecord->where('name', 'like', "%" . $name . "%");
-        }
-
-        $totalRecords = $totalRecord->select('count(*) as allcount')->count();
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
 
 
         $totalRecordswithFilte = MedEngStudentFund::where('deleted_at', null)
@@ -2965,7 +2947,6 @@ class ClerkController extends Controller
             ->where('teo_status', 1);
 
 
-<<<<<<< HEAD
              // Fetch records
              $items = MedEngStudentFund::where('deleted_at',null)->orderBy($columnName,$columnSortOrder)
              ->whereIn('submitted_teo', $teoIds)
@@ -2978,28 +2959,6 @@ class ClerkController extends Controller
             }
             $items->where('clerk_return', null);
              $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');;
-=======
-        if ($name != "") {
-            $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
-        }
-
-
-        $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
-
-        // Fetch records
-        $items = MedEngStudentFund::where('deleted_at', null)->orderBy($columnName, $columnSortOrder)
-            ->whereIn('submitted_teo', $teoIds)
-            ->where('submitted_district', $district)
-            ->where('teo_status', 1);
-
-        if ($name != "") {
-            $items->where('name', 'like', "%" . $name . "%");
-        }
-
-        $records = $items->skip($start)->take($rowperpage)->get()->sortByDesc('created_at');;
-
-
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
 
 
         $data_arr = array();
@@ -3020,7 +2979,6 @@ class ClerkController extends Controller
             $date = $carbonDate->format('d-m-Y');
             $time = $carbonDate->format('g:i a');
 
-<<<<<<< HEAD
               $status = @$record->clerk_status;
             
               $teo_name=@$record->teo->teo_name;
@@ -3036,20 +2994,6 @@ class ClerkController extends Controller
               else if($status ==null){
                   $edit='<div class="settings-main-icon"><a  href="' . route('studentFundClerkView',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;</div>';
               }
-=======
-            $status = @$record->clerk_status;
-
-            $teo_name = @$record->teo->teo_name;
-
-            $edit = '';
-            if ($status == 1) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('studentFundClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->clerk_status_reason . '</span></div>';
-            } else if ($status == 2) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('studentFundClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->clerk_status_reason . '</span></div>';
-            } else if ($status == null) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('studentFundClerkView', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
-            }
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
 
 
 
@@ -3077,7 +3021,6 @@ class ClerkController extends Controller
 
         return response()->json($response);
     }
-<<<<<<< HEAD
     public function getStudentFundListClerkReturn(Request $request){
         $name = $request->name;
         $user_id=Auth::user()->id;
@@ -3195,17 +3138,12 @@ class ClerkController extends Controller
          return response()->json($response);
     }
     public function studentFundClerkView ($id){
-=======
-    public function studentFundClerkView($id)
-    {
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
 
 
         $currentTime = Carbon::now();
 
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
-<<<<<<< HEAD
       $currenttime = $currentTimeInKerala->format('h:i A');
      
       $studentFund=MedEngStudentFund::find($id);
@@ -3225,9 +3163,6 @@ class ClerkController extends Controller
     }
        
         return view('clerk.studentFund.details', compact('studentFund'));
-=======
-        $currenttime = $currentTimeInKerala->format('h:i A');
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
 
         $studentFund = MedEngStudentFund::find($id);
         if ($studentFund->clerk_view_status == null) {
