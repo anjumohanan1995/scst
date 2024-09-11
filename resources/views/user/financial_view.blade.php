@@ -42,6 +42,10 @@
                      പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നം സാമ്പത്തിക സഹായം<br>
                      അനുവദിക്കുന്നതിനുള്ള അപേക്ഷാഫോം
                   </h1>
+                  <h5 style="text-align: right;">
+                     Case Number: <span style="color: red;">{{ @$formData['case_id'] }}</span>
+                 </h5>
+                 
                   <div class="paper-1">
                      <div class="row">
                         <div class="col-12">
@@ -665,9 +669,27 @@
                   </ul>
               @else
 
-               <ul class="timeline-3">                                 
+               <ul class="timeline-3"> 
+                  @if(@$formData->teo_rejection_status == 1)
+                  <li class="rejectTimeline">
+                      <a href="#!">TEO</a>
+                      <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                          {{ @$formData['teo_view_date'] }}</a>
+                      <br>
+                      <p class="inputText badge bg-danger" style="font-size: 12px">Rejected
+                      </p>
+
+                      <p class="mt-2"><span class= "spanclr"> Rejected Date : </span>
+                          @if (@$formData['teo_status_date'] != null)
+                              {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}
+                          @endif
+                      </p>
+                      <p class="mt-2"><span class= "spanclr"> Rejected Reason :
+                          </span>{{ @$formData->teo_status_reason }}</p>
+
+                  </li>                                   
              
-                   @if( @$formData->teo_status == null)
+                   @elseif( @$formData->teo_status == null)
       
                    <li class="pendingTimeline">
                     <a href="#!">TEO</a>

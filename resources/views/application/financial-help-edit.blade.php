@@ -308,7 +308,7 @@
 
                                 
                               
-                                <div class="row"> <div class="col-md-6"><span class="font-22"> രജിസ്റ്റർ വിവാഹം ആയിരുന്നുവോ?</span> <br><span class="small"> Was it a registered marriage  </span> </div>
+                                <div class="row"> <div class="col-md-6"><span class="font-22"> വിവാഹം രജിസ്റ്റർ ചെയ്തിട്ടുണ്ടോ?</span> <br><span class="small"> Is the marriage registered?  </span> </div>
                                     <div class="col-md-6">
                                          <label class="form-label w-25 float-left">   
                                             <input class="form-control  w-auto float-left" type="radio" name="register_marriage" value="Yes" {{ @$datas->register_marriage === 'Yes' ? 'checked' : '' }}>
@@ -351,14 +351,36 @@
                             
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label class="form-label">വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ ഹാജരാക്കിയിട്ടുണ്ടെങ്കിൽ അതിന്റെ വിവരം <br><span class="small"> Information on the document, if any, has been produced to prove the possibility of marriage </span></label>
+                                        <label class="form-label">വിവാഹത്തിന്റെ സാധുത തെളിയിക്കുന്നതിന് രേഖ ഹാജരാക്കിയിട്ടുണ്ടെങ്കിൽ അതിന്റെ വിവരം <br><span class="small"> Information on the document, if any, has been produced to prove the possibility of marriage </span></label>
                                         <textarea class="form-control" placeholder="Details" name="certificate_details" >{{ @$datas->certificate_details }}</textarea>
                                     
                                     </div>
                                     <div class="col-md-6 mb-6">
-                                            <label class="form-label">വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ <br><span class="small"> Document to prove the possibility of marriage </span> <br><small>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <label class="form-label">വിവാഹത്തിന്റെ സാധുത തെളിയിക്കുന്നതിന് രേഖ <br><span class="small"> Document to prove the possibility of marriage </span> <br><small>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.) </small></label>
                                             <input type="file" class="form-control" id="marriage_certificate" onchange="validateImagetwo()"  name="marriage_certificate"  value="{{ old('marriage_certificate') }}"  accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+
+                                            @if(isset($datas->marriage_certificate))
+                                            @php
+                                                $filePath = asset('marriage_certificate/' . $datas->marriage_certificate); // Adjust the path as needed
+                                                $fileExtension = pathinfo($datas->marriage_certificate, PATHINFO_EXTENSION);
+                                            @endphp
+                                
+                                            @if(in_array($fileExtension, ['png', 'jpg', 'jpeg', 'gif']))
+                                                <div class="mt-2">
+                                                    <img src="{{ $filePath }}" alt="Passbook Image" style="max-width: 100%; height: auto;">
+                                                </div>
+                                            @elseif($fileExtension === 'pdf')
+                                                <div class="mt-2">
+                                                    <iframe src="{{ $filePath }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                                </div>
+                                            @else
+                                                <div class="mt-2">
+                                                    <p>Unsupported file type</p>
+                                                </div>
+                                            @endif
+                                        @endif
+
                                                 @error('marriage_certificate')
                                                     <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -431,8 +453,30 @@
                                         <label class="form-label">ഭർത്താവിന്റെ ഫോട്ടോ <br> <span class="small">Husband's Photo</span> </label>
                                         <label class="form-label"><small>(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
-                                        <input type="file" class="form-control"  name="husband_photo"  id="husband_photo" onchange="validateHusbandPhoto()"  accept="image/*"  />
-                                        @error('husband_sign')
+                                        <input type="file" class="form-control"  name="husband_photo"  id="husband_photo" onchange="validateHusbandPhoto()"  accept="image/*" />
+
+                                        @if(isset($datas->husband_photo))
+                                        @php
+                                            $filePath = asset('sign/huband/' . $datas->husband_photo); // Adjust the path as needed
+                                            $fileExtension = pathinfo($datas->husband_photo, PATHINFO_EXTENSION);
+                                        @endphp
+                            
+                                        @if(in_array($fileExtension, ['png', 'jpg', 'jpeg', 'gif']))
+                                            <div class="mt-2">
+                                                <img src="{{ $filePath }}" alt="Passbook Image" style="max-width: 100%; height: auto;">
+                                            </div>
+                                        @elseif($fileExtension === 'pdf')
+                                            <div class="mt-2">
+                                                <iframe src="{{ $filePath }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                            </div>
+                                        @else
+                                            <div class="mt-2">
+                                                <p>Unsupported file type</p>
+                                            </div>
+                                        @endif
+                                    @endif
+
+                                        @error('husband_photo')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div id="errorHusbandPhoto" style="color:red;"></div>
@@ -443,7 +487,27 @@
                                         <label class="form-label"><small>(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
                                         <input type="file"   accept="image/*" class="form-control"  name="wife_photo"  id="wife_photo"  onchange="validateWifePhoto()"  />
-                                        @error('wife_sign')
+                                        @if(isset($datas->wife_photo))
+                                        @php
+                                            $filePath = asset('sign/wife/' . $datas->wife_photo); // Adjust the path as needed
+                                            $fileExtension = pathinfo($datas->wife_photo, PATHINFO_EXTENSION);
+                                        @endphp
+                            
+                                        @if(in_array($fileExtension, ['png', 'jpg', 'jpeg', 'gif']))
+                                            <div class="mt-2">
+                                                <img src="{{ $filePath }}" alt="Passbook Image" style="max-width: 100%; height: auto;">
+                                            </div>
+                                        @elseif($fileExtension === 'pdf')
+                                            <div class="mt-2">
+                                                <iframe src="{{ $filePath }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                            </div>
+                                        @else
+                                            <div class="mt-2">
+                                                <p>Unsupported file type</p>
+                                            </div>
+                                        @endif
+                                    @endif
+                                        @error('wife_photo')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div id="errorWifePhoto" style="color:red;"></div>
@@ -459,6 +523,27 @@
                                         <label class="form-label"><small>(File less than 2 mb. jpg only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
                                         <input type="file" class="form-control"  name="husband_sign"  id="husband_sign" onchange="validateImage()"  accept="image/*"  />
+                                        @if(isset($datas->husband_sign))
+                                        @php
+                                            $filePath = asset('sign/huband/' . $datas->husband_sign); // Adjust the path as needed
+                                            $fileExtension = pathinfo($datas->husband_sign, PATHINFO_EXTENSION);
+                                        @endphp
+                            
+                                        @if(in_array($fileExtension, ['png', 'jpg', 'jpeg', 'gif']))
+                                            <div class="mt-2">
+                                                <img src="{{ $filePath }}" alt="Passbook Image" style="max-width: 100%; height: auto;">
+                                            </div>
+                                        @elseif($fileExtension === 'pdf')
+                                            <div class="mt-2">
+                                                <iframe src="{{ $filePath }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                            </div>
+                                        @else
+                                            <div class="mt-2">
+                                                <p>Unsupported file type</p>
+                                            </div>
+                                        @endif
+                                    @endif
+                                        
                                         @error('husband_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -470,6 +555,26 @@
                                         <label class="form-label"><small>(File less than 2 mb. jpg  only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG
                                                 മാത്രം.)</small></label>
                                         <input type="file"   accept="image/*" class="form-control"  name="wife_sign"  id="wife_sign"  onchange="validateImageOne()"  />
+                                        @if(isset($datas->wife_sign))
+                                        @php
+                                            $filePath = asset('sign/wife/' . $datas->wife_sign); // Adjust the path as needed
+                                            $fileExtension = pathinfo($datas->wife_sign, PATHINFO_EXTENSION);
+                                        @endphp
+                            
+                                        @if(in_array($fileExtension, ['png', 'jpg', 'jpeg', 'gif']))
+                                            <div class="mt-2">
+                                                <img src="{{ $filePath }}" alt="Passbook Image" style="max-width: 100%; height: auto;">
+                                            </div>
+                                        @elseif($fileExtension === 'pdf')
+                                            <div class="mt-2">
+                                                <iframe src="{{ $filePath }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                            </div>
+                                        @else
+                                            <div class="mt-2">
+                                                <p>Unsupported file type</p>
+                                            </div>
+                                        @endif
+                                    @endif
                                         @error('wife_sign')
                                                 <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -477,6 +582,79 @@
                                     </div>
 
                                 </div>
+                                <br>
+
+                                <h5 class="heading">Bank Details / ബാങ്ക് വിശദാംശങ്ങൾ</h5>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">ബാങ്ക് നാമം <br><span class="small"> Bank Name </span></label>
+                                        <input type="text" value="{{ @$datas->bank_name }}" class="form-control" placeholder="ബാങ്ക് നാമം" name="bank_name" id="bank_name" required />
+                                        @error('bank_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+        
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">അക്കൗണ്ട് നമ്പർ <br><span class="small"> Account Number </span></label>
+                                        <input type="text" value="{{ @$datas->account_no }}" class="form-control" placeholder="അക്കൗണ്ട് നമ്പർ" name="account_no" id="account_no" required />
+                                        @error('account_no')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div><br>
+        
+                                <div class="row">
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">IFSC കോഡ് <br><span class="small"> IFSC Code </span></label>
+                                        <input type="text" value="{{ @$datas->ifsc_code }}" class="form-control" placeholder="IFSC കോഡ്" name="ifsc_code" id="ifsc_code" required />
+                                        @error('ifsc_code')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+        
+                                    <div class="row">
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">IFSC കോഡ് <br><span class="small"> IFSC Code </span></label>
+                                            <input type="text" value="{{ @$datas->ifsc_code }}" class="form-control" placeholder="IFSC കോഡ്" name="ifsc_code" id="ifsc_code" required />
+                                            @error('ifsc_code')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label">പാസ്‌ബുക്ക് (Pdf/ചിത്രം പരമാവധി 2 MB) <br><span class="small"> Passbook (Pdf/Image Max Size: 2 MB) </span></label>
+                                            <input type="file" class="form-control" name="passbook" id="passbook" />
+                                            
+                                            @if(isset($datas->passbook))
+                                                @php
+                                                    $filePath = asset('passbooks/' . $datas->passbook); // Adjust the path as needed
+                                                    $fileExtension = pathinfo($datas->passbook, PATHINFO_EXTENSION);
+                                                @endphp
+                                    
+                                                @if(in_array($fileExtension, ['png', 'jpg', 'jpeg', 'gif']))
+                                                    <div class="mt-2">
+                                                        <img src="{{ $filePath }}" alt="Passbook Image" style="max-width: 100%; height: auto;">
+                                                    </div>
+                                                @elseif($fileExtension === 'pdf')
+                                                    <div class="mt-2">
+                                                        <iframe src="{{ $filePath }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                                    </div>
+                                                @else
+                                                    <div class="mt-2">
+                                                        <p>Unsupported file type</p>
+                                                    </div>
+                                                @endif
+                                            @endif
+                                            
+                                            @error('passbook')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+        
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12 mb-12">

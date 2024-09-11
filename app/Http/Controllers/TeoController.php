@@ -285,7 +285,7 @@ class TeoController extends Controller
       
        
         $coupleApplication->update([
-            'teo_status' => 2,
+            'teo_rejection_status' => 1,
             'teo_status_date' => $currenttime,
             'teo_status_id' => Auth::user()->id,
             'teo_status_reason' => $reason,

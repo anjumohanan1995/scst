@@ -143,7 +143,7 @@
                                     id="requestId">
 
                                 <div class="text-center">
-                                    <button type="button" onclick="userUpdate()"
+                                    <button type="button"
                                         class="btn btn-primary mt-4 mb-0 me-2">Submit</button>
                                     <button class="btn btn-default mt-4 mb-0" type="Reset">Reset</button>
                                 </div>
@@ -182,8 +182,27 @@
                             </div>
 
                         </div>
+                        @if (Auth::user()->role == 'User')
+                            <div>
+
+                                <a class="nav-link text-center m-2" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"><i
+                                    class="fe fe-power"> </i>
+
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+
+                            </div>
+                        @endif
+                        @if (Auth::user()->role != 'User')
                         <div class="sidebar-navs">
                             <ul class="nav nav-pills-circle" style="padding-left: 30px;">
+                                
                                 <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" title=""
                                     data-bs-original-title="Settings" aria-describedby="tooltip365540">
                                     <a class="nav-link text-center m-2" href="{{ route('password') }}">
@@ -197,7 +216,7 @@
                                         <i class="fe fe-user"> </i>
                                     </a>
                                 </li>
-
+                                
                                 <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="top" title=""
                                     data-bs-original-title="Logout">
 
@@ -218,6 +237,7 @@
                                 </li>
                             </ul>
                         </div>
+                        @endif
                         <div class="slide-left disabled active is-expanded d-none" id="slide-left">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
                                 viewBox="0 0 24 24">
@@ -462,7 +482,7 @@
                             @endif
 
                             @if (Auth::user()->role == 'User')
-                                <li class="slide">
+                                {{-- <li class="slide">
                                     <a class="side-menu__item {{ \Request::route()->getName() == 'user-profile' ? 'active' : '' }}"
                                         href="{{ url('user-profile') }}">
                                         <i class="side-menu__icon fe fe-users"> </i>
@@ -470,7 +490,7 @@
 
                                     </a>
 
-                                </li>
+                                </li> --}}
 
                                 {{-- <li class="slide">
 										<a class="side-menu__item {{ ((\Request::route()->getName() == 'application-forms')) ? 'active' : '' }}"  href="{{url('application-forms')}}">
@@ -938,7 +958,7 @@
 
 <script src="{{ asset('js/toastr.js') }}"></script>
 
-<script>
+{{-- <script>
     @if (auth()->check() && auth()->user()->role == 'User')
         @if (auth()->user()->bank_name == null && auth()->user()->account_no == null && auth()->user()->passbook == null)
 
@@ -947,7 +967,7 @@
             });
         @endif
     @endif
-</script>
+</script> --}}
 <script type="text/javascript">
     function userUpdate() {
         var id = $('#requestId').val();

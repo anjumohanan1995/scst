@@ -309,7 +309,7 @@
 
                                 
                               
-                                <div class="row"> <div class="col-md-6"><span class="font-22"> രജിസ്റ്റർ വിവാഹം ആയിരുന്നുവോ?</span> <br><span class="small"> Was it a registered marriage  </span> </div>
+                                <div class="row"> <div class="col-md-6"><span class="font-22"> വിവാഹം രജിസ്റ്റർ ചെയ്തിട്ടുണ്ടോ?</span> <br><span class="small"> Is the marriage registered?  </span> </div>
                                     <div class="col-md-6">
                                          <label class="form-label w-25 float-left">   
                                             <input class="form-control  w-auto float-left" type="radio" name="register_marriage" value="Yes" {{ old('register_marriage') === 'Yes' ? 'checked' : '' }}>
@@ -352,12 +352,12 @@
                             
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label class="form-label">വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ ഹാജരാക്കിയിട്ടുണ്ടെങ്കിൽ അതിന്റെ വിവരം <br><span class="small"> Information on the document, if any, has been produced to prove the possibility of marriage </span></label>
+                                        <label class="form-label">വിവാഹത്തിന്റെ സാധുത തെളിയിക്കുന്നതിന് രേഖ ഹാജരാക്കിയിട്ടുണ്ടെങ്കിൽ അതിന്റെ വിവരം <br><span class="small"> Information on the document, if any, has been produced to prove the possibility of marriage </span></label>
                                         <textarea class="form-control" placeholder="Details" name="certificate_details" >{{ old('certificate_details') }}</textarea>
                                     
                                     </div>
                                     <div class="col-md-6 mb-6">
-                                            <label class="form-label">വിവാഹത്തിന്റെ സാധ്യത തെളിയിക്കുന്നതിന് രേഖ <br><span class="small"> Document to prove the possibility of marriage </span> <br><small>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
+                                            <label class="form-label">വിവാഹത്തിന്റെ സാധുത തെളിയിക്കുന്നതിന് രേഖ <br><span class="small"> Document to prove the possibility of marriage </span> <br><small>(File less than 2 mb. jpg & pdf only. / ഫയൽ: 2 എംബി കുറഞ്ഞത്, JPG/PDF
                                                 മാത്രം.) </small></label>
                                             <input type="file" class="form-control" id="marriage_certificate" onchange="validateImagetwo()"  name="marriage_certificate"  value="{{ old('marriage_certificate') }}"  accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
                                                 @error('marriage_certificate')
@@ -479,6 +479,47 @@
 
                                 </div>
                                 <br>
+
+                                <h5 class="heading">Bank Details / ബാങ്ക് വിശദാംശങ്ങൾ</h5>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">ബാങ്ക് നാമം <br><span class="small"> Bank Name </span></label>
+                                        <input type="text" value="{{ old('bank_name') }}" class="form-control" placeholder="ബാങ്ക് നാമം" name="bank_name" id="bank_name" required />
+                                        @error('bank_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+        
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">അക്കൗണ്ട് നമ്പർ <br><span class="small"> Account Number </span></label>
+                                        <input type="text" value="{{ old('account_no') }}" class="form-control" placeholder="അക്കൗണ്ട് നമ്പർ" name="account_no" id="account_no" required />
+                                        @error('account_no')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div><br>
+        
+                                <div class="row">
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">IFSC കോഡ് <br><span class="small"> IFSC Code </span></label>
+                                        <input type="text" value="{{ old('ifsc_code') }}" class="form-control" placeholder="IFSC കോഡ്" name="ifsc_code" id="ifsc_code" required />
+                                        @error('ifsc_code')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+        
+                                    <div class="col-md-6 mb-6">
+                                        <label class="form-label">പാസ്‌ബുക്ക് (Pdf/ചിത്രം പരമാവധി 2 MB) <br><span class="small"> Passbook (Pdf/Image Max Size: 2 MB) </span></label>
+                                        <input type="file" class="form-control" name="passbook" id="passbook" required />
+                                        @error('passbook')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+        
+                                <br>
+
                                 <div class="row">
                                     <div class="col-md-12 mb-12">
                                         <input type="checkbox" id="wifeCheckbox" name="agree" value="Yes" required  {{ old('agree') == 'Yes' ? 'checked' : '' }}>
@@ -535,6 +576,8 @@
                                 </div><br>
                             </div>
                         </div>
+     
+
                         <div class="row">
                             
                             <div class="col-md-12 mb-12">
@@ -931,5 +974,7 @@ $(document).ready(function() {
 
 
   </script>
+
+
 <!-- main-content-body -->
 @endsection

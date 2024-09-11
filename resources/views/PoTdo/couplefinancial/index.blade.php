@@ -137,7 +137,7 @@
             
                                     @csrf
                                     <div class="text-center">
-                                        <h5>Reason for Approve</h5>
+                                        <h5>Reason forrejection-popupremove Approve</h5>
                                         <textarea class="form-control" name="approve_reason" id="approve_reason" requred></textarea>
                                         <span id="rejection"></span>
                                     </div>

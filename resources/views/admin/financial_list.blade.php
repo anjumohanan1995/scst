@@ -32,22 +32,36 @@
                         {{ $message }}
                     </div>
                 @endif
+
                 <!-- row -->
                 <div class="row row-sm">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card">
                             <div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
-<<<<<<< HEAD
-                               
-                            <div class="panel panel-primary">
-                                <div class=" tab-menu-heading">
-                                    <div class="tabs-menu1">
-                                        <ul class="nav panel-tabs">
-                                            <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
-                                            <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned">Returned</a></li>
-                                           </ul>
-=======
+                                {{-- <div>
+                                    <form id="filterForm">
+                                        <div class="form-row">
+                                            <!-- Date Filter -->
+                                            <div class="form-group col-md-4">
+                                                <label for="filterfromDate">From Date</label>
+                                                <input type="date" class="form-control" id="filterfromDate" name="filterfromDate">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="filtertoDate">To Date</label>
+                                                <input type="date" class="form-control" id="filtertoDate" name="filtertoDate">
+                                            </div>
+                                            <!-- Case Number Filter -->
+                                            <div class="form-group col-md-4">
+                                                <label for="filterCaseNumber">Case Number</label>
+                                                <input type="text" class="form-control" id="filterCaseNumber" name="filterCaseNumber" placeholder="Enter Case Number">
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button -->
+                                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                                    </form>
+                                </div> --}}
+                                
 
                                 <div class="panel panel-primary">
                                     <div class=" tab-menu-heading">
@@ -59,7 +73,6 @@
                                                         data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
                                             </ul>
                                         </div>
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
                                     </div>
                                     <div class="panel-body tabs-menu-body">
                                         <div class="tab-content">
@@ -70,6 +83,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Sl No</th>
+                                                                <th>Case Number</th>
                                                                 <th>Husband Name </th>
                                                                 <th>Wife Name </th>
                                                                 {{-- <th>Marriage Registration Details </th>
@@ -91,25 +105,6 @@
                                                     </table>
                                                 </div>
                                             </div>
-<<<<<<< HEAD
-                                        </div>
-                                        <div class="tab-pane" id="tabReturned">
-                                            <div class="table-responsive">
-                                                <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sl No</th>
-                                                            <th>Husband Name </th>
-                                                            <th>Wife Name </th>
-                                                            <th>Husband Caste</th>
-                                                            <th>Wife Caste</th> 
-                                                            <th>Date & Time</th> 
-                                                            <th>Applied Date</th>
-                                                            <th >Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-=======
                                             <div class="tab-pane" id="tabReturned">
                                                 <div class="table-responsive">
                                                     <table id="example1" class="table table-striped table-bordered"
@@ -117,6 +112,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Sl No</th>
+                                                                <th>Case Number</th>
                                                                 <th>Husband Name </th>
                                                                 <th>Wife Name </th>
                                                                 <th>Husband Caste</th>
@@ -128,7 +124,6 @@
                                                         </thead>
                                                     </table>
                                                 </div>
->>>>>>> f0017c8fd1f4ffb0c888383630cc78f3f86b2870
                                             </div>
 
 
@@ -363,6 +358,10 @@
                             "role": $("#role").val(),
                             //"from_date": $("#datepicker").val(),
                             "delete_ctm": $("#delete_ctm").val(),
+                            // Pass the new filter values
+                            // "filterfromDate": $("#filterfromDate").val(),
+                            // "filtertoDate": $("#filtertoDate").val(),
+                            // "filterCaseNumber": $("#filterCaseNumber").val(),
 
 
                         });
@@ -371,6 +370,9 @@
 
                 columns: [{
                         data: 'sl_no'
+                    },
+                    {
+                        data: 'case_id'
                     },
                     {
                         data: 'husband_name'
@@ -406,6 +408,12 @@
 
 
             table.draw();
+
+            // Handle filter form submission
+            $('#filterForm').on('submit', function(e) {
+                e.preventDefault();
+                table.ajax.reload(); // Reload the DataTable with new filter values
+            });
 
             $('#submit').click(function() {
 
@@ -463,6 +471,9 @@
 
                 columns: [{
                         data: 'sl_no'
+                    },
+                    {
+                        data: 'case_id'
                     },
                     {
                         data: 'husband_name'

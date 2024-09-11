@@ -815,6 +815,7 @@ class JsSeoController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
             $register_details = $record->register_details;
@@ -830,12 +831,14 @@ class JsSeoController extends Controller
 
             $edit = '';
 
-            $edit = '<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
+            $edit = '<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+            // &nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a>
 
 
             $data_arr[] = array(
                 "sl_no" => $i,
                 "id" => $id,
+                "case_id" => $case_id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
                 "register_details" => $register_details,
@@ -951,6 +954,7 @@ class JsSeoController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
             $register_details = $record->register_details;
@@ -970,7 +974,8 @@ class JsSeoController extends Controller
             } else if ($status == 2) {
                 $edit = '<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->JsSeo_status_reason . '</span></div>';
             } else if ($status == null) {
-                $edit = '<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit = '<div class="settings-main-icon"><a  href="' . route('couplefinancialJsSeoDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+                // &nbsp;&nbsp;<a class="rejectItem" data-id="' . $id . '"><i class="fa fa-ban bg-danger "></i></a>
             }
 
 
@@ -981,6 +986,7 @@ class JsSeoController extends Controller
 
             $data_arr[] = array(
                 "sl_no" => $i,
+                "case_id" => $case_id,
                 "id" => $id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,

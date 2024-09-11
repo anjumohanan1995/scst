@@ -263,6 +263,8 @@ class ApplicationController extends Controller
 
     public function financialHelpUpdate(Request $request)
     {
+
+        // dd($request);
         $validator = Validator::make(
             $request->all(),
             [
@@ -279,6 +281,15 @@ class ApplicationController extends Controller
         if ($validator->fails()) {
             // Captcha validation failed
             return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        if ($request->hasfile('passbook')) {
+            $file = $request->passbook;
+            $fileName = time() . rand(100, 999) . '.' . $file->extension();
+            $file->move(public_path('/passbooks'), $fileName);
+            $passbook = $fileName;
+        } else {
+            $passbook = @$data->passbook;
         }
 
         if ($request->hasfile('husband_sign')) {
@@ -396,6 +407,10 @@ class ApplicationController extends Controller
             'place' => @$data['place'],
             'husband_photo' => @$husband_photo,
             'wife_photo' => @$wife_photo,
+            'bank_name' => @$data['bank_name'],
+            'account_no' => @$data['account_no'],
+            'ifsc_code' => @$data['ifsc_code'],
+            'passbook' => @$passbook,
             'date' => date("d-m-Y"),
             'time' => date("H:i:s"),
             'status' => 0,
@@ -431,6 +446,10 @@ class ApplicationController extends Controller
                 'submitted_district' => 'required',
                 'submitted_teo' => 'required',
                 'wife_name' => 'required',
+                'bank_name' => 'required|string|max:255',
+                'account_no' => 'required|string|max:255',
+                'ifsc_code' => 'required|string|max:255',
+                'passbook' => 'required|file|mimes:pdf,jpeg,png,jpg|max:2048', // Max 2MB
 
             ]
 
@@ -438,6 +457,15 @@ class ApplicationController extends Controller
         if ($validator->fails()) {
             // Captcha validation failed
             return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        if ($request->hasfile('passbook')) {
+            $file = $request->passbook;
+            $fileName = time() . rand(100, 999) . '.' . $file->extension();
+            $file->move(public_path('/passbooks'), $fileName);
+            $passbook = $fileName;
+        } else {
+            $passbook = '';
         }
 
         if ($request->hasfile('husband_sign')) {
@@ -510,6 +538,7 @@ class ApplicationController extends Controller
         $formData['wife_sign'] = $wife_sign;
         $formData['husband_photo'] = $husband_photo;
         $formData['wife_photo'] = $wife_photo;
+        $formData['passbook'] = $passbook;
 
         $request->flash();
 
@@ -521,9 +550,12 @@ class ApplicationController extends Controller
         $data = json_decode($request->input('formData'), true);
         //dd($data );
 
+        // Generate a unique case ID
+        $caseId = 'CoupleFinancial-' . date('Ymd') . '-' . strtoupper(substr(md5(uniqid(rand(), true)), 0, 8));
 
 
         $datainsert = FinancialHelp::create([
+            'case_id' => $caseId, // Include the unique case ID
             'husband_address' => $data['husband_address'],
             'hus_district' => @$data['hus_district'],
             'hus_taluk' => @$data['hus_taluk'],
@@ -574,6 +606,10 @@ class ApplicationController extends Controller
             'status' => 0,
             'husband_panchayath' => @$data['husband_panchayath'],
             'wife_panchayath' => @$data['wife_panchayath'],
+            'bank_name' => @$data['bank_name'],
+            'account_no' => @$data['account_no'],
+            'ifsc_code' => @$data['ifsc_code'],
+            'passbook' => @$data['passbook'],
         ]);
 
         return redirect()->route('userCoupleFinanceList')->with('status', 'Application Submitted Successfully.');
@@ -685,6 +721,7 @@ class ApplicationController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
             $register_details = $record->register_details;
@@ -696,12 +733,15 @@ class ApplicationController extends Controller
             $time =  $record->time;
             $edit = " ";
             if ($role == "TEO") {
-                if ($record->teo_status == 1) {
+                // dd($record->teo_rejection_status);
+                if ($record->teo_rejection_status == 1) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } elseif ($record->teo_status == 1) {
                     $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
                 } else if ($record->teo_status == 2) {
                     $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
                 } else if ($record->teo_status == null) {
-                    $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
                 }
             } else {
                 $edit = '<div class="settings-main-icon"><a  href="' .  url('couple-application/' . $id) . '"><i class="fa fa-eye bg-info me-1"></i></a></div>';
@@ -709,6 +749,7 @@ class ApplicationController extends Controller
             $data_arr[] = array(
                 "sl_no" => $i,
                 "id" => $id,
+                'case_id' => $case_id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
                 "register_details" => $register_details,
@@ -834,6 +875,7 @@ class ApplicationController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
             $register_details = $record->register_details;
@@ -850,6 +892,7 @@ class ApplicationController extends Controller
             $data_arr[] = array(
                 "sl_no" => $i,
                 "id" => $id,
+                'case_id' => $case_id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
                 "register_details" => $register_details,
@@ -882,9 +925,9 @@ class ApplicationController extends Controller
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
 
-        $studentFund = FinancialHelp::find($id);
-        if ($studentFund->teo_view_status == null && Auth::user()->role == 'TEO') {
-            $studentFund->update([
+        $financialHelp = FinancialHelp::find($id);
+        if ($financialHelp->teo_view_status == null && Auth::user()->role == 'TEO') {
+            $financialHelp->update([
                 "teo_view_status" => 1,
                 "teo_view_id" => Auth::user()->id,
                 "teo_view_date" => $date . ' ' . $currenttime,

@@ -66,6 +66,7 @@
                                                         <thead>
                                                             <tr>                                                               
                                                                 <th>Sl No</th>
+                                                                <th>Case Number</th>
                                                                 <th>Husband Name </th>
                                                                 <th>Wife Name </th>
                                                                 {{-- <th>Marriage Registration Details </th>
@@ -91,6 +92,7 @@
                                                         <thead>
                                                             <tr>                                                               
                                                                 <th>Sl No</th>
+                                                                <th>Case Number</th>
                                                                 <th>Husband Name </th>
                                                                 <th>Wife Name </th>
                                                                 <th>Husband Caste</th>
@@ -219,6 +221,7 @@
 
              columns: [
                 { data: 'sl_no' },
+                { data: 'case_id' },
                 { data: 'husband_name' },
                 { data: 'wife_name' },
 				//{ data: 'register_details' },
@@ -296,6 +299,7 @@
 
              columns: [
                 { data: 'sl_no' },
+                { data: 'case_id' },
                 { data: 'husband_name' },
                 { data: 'wife_name' },
 				//{ data: 'register_details' },

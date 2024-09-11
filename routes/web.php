@@ -45,7 +45,7 @@ Route::get('/', function () {
 
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
-Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+// Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
@@ -55,8 +55,23 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 
 
 Auth::routes();
+// Display the login form
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/user-registration', [ApplicationController::class, 'userRegistration'])->name('userRegistration');
+
+// Handle sending OTP
+Route::post('login/send-otp', [AuthController::class, 'sendOtp'])->name('otp.send');
+
+// Display the OTP verification form
+Route::get('login/verify-otp', [AuthController::class, 'showOtpForm'])->name('otp.verify');
+
+// Handle OTP verification
+Route::post('login/verify-otp', [AuthController::class, 'verifyOtp'])->name('otp.verify.submit');
+
+// Route::post('/login', [AuthController::class, 'login'])->name('login');
+// Route::post('/login/send-otp', [AuthController::class, 'sendOtp'])->name('otp.send');
+// Route::get('/login/verify-otp', [AuthController::class, 'showOtpForm'])->name('otp.verify');
+// Route::get('/user-registration', [ApplicationController::class, 'userRegistration'])->name('userRegistration');
 Route::post('/user-store', [ApplicationController::class, 'userStore'])->name('userStore');
 Route::get('captcha', [ApplicationController::class, 'captcha'])->name('captcha');
 Route::post('/check-aadhar-number', [ApplicationController::class, 'checkAadharNumber']);
@@ -87,6 +102,8 @@ Route::get('/getCoupleList', [App\Http\Controllers\ApplicationController::class,
 Route::get('/couple-application/{id}', [App\Http\Controllers\ApplicationController::class, 'coupleApplicationView'])->name('coupleApplicationView');
 Route::post('/financial-teo/approve', [App\Http\Controllers\TeoController::class, 'coupleApplicationApprove'])->name('financial-teo.approve');
 Route::post('/financial-teo/reject', [App\Http\Controllers\TeoController::class, 'coupleApplicationReject'])->name('financial-teo.reject');
+// Route::post('/financial-teo/reject', [App\Http\Controllers\TeoController::class, 'coupleApplicationReject'])->name('financial-teo.reject');
+// Route::post('/couplefinancialRemoveOfficer','couplefinancialRemoveOfficer')->name('couplefinancial.officer.remove');
 
 
 Route::get('/getCoupleReturnList', [App\Http\Controllers\ApplicationController::class, 'getCoupleReturnList'])->name('getCoupleReturnList');

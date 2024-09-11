@@ -46,6 +46,9 @@
                         പട്ടികവർഗ്ഗ വികസന വകുപ്പിൽ നിന്നം സാമ്പത്തിക സഹായം<br>
                         അനുവദിക്കുന്നതിനുള്ള അപേക്ഷാഫോം
                      </h1>
+                     <h5 style="text-align: right;">
+                        Case Number: <span style="color: red;">{{ @$formData['case_id'] }}</span>
+                    </h5>
                      </div>
                      <div class="paper-1">
                         <div class="row">
@@ -637,7 +640,7 @@
                            <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
                            <div class="settings-icon">
                               <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                              &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                              {{-- &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a> --}}
                            </div>
                           
                         </li>
@@ -826,7 +829,7 @@
                                <p class="inputText badge bg-warning" style="font-size: 12px">Pending </p>
                                <div class="settings-icon">
                                  <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                                 &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
+                                 {{-- &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a> --}}
                               </div>
                             
                                 </li>

@@ -60,6 +60,7 @@ class FinancialHelp extends Eloquent
         'teo_status_date',
         'teo_status_reason',
         'date_received',
+        'teo_rejection_status',
 
         'clerk_view_status',
         'clerk_return_view_status',
@@ -109,7 +110,13 @@ class FinancialHelp extends Eloquent
         'return_userid',
         'return_reason',
         'return_status',
-        'rejection_status'
+        'rejection_status',
+
+        'bank_name',
+        'account_no',
+        'ifsc_code',
+        'passbook',
+        'case_id'
 
 
 

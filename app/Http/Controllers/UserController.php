@@ -69,25 +69,25 @@ class UserController extends Controller
 
          if($request->delete_ctm =='1'){
 
-             $totalRecord = User::where('deleted_at','!=',null);
+             $totalRecord = User::where('deleted_at','!=',null)->where('role', '!=', 'User');
 
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = User::where('deleted_at','!=',null);
+             $totalRecordswithFilte = User::where('deleted_at','!=',null)->where('role', '!=', 'User');
 
 
 
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = User::where('deleted_at','!=',null)->orderBy($columnName,$columnSortOrder);
+             $items = User::where('deleted_at','!=',null)->where('role', '!=', 'User')->orderBy($columnName,$columnSortOrder);
 
              $records = $items->skip($start)->take($rowperpage)->get();
          }else{
 
              // Total records
-             $totalRecord = User::where('deleted_at',null);
+             $totalRecord = User::where('deleted_at',null)->where('role', '!=', 'User');
              if($mobile != ""){
                  $totalRecord->where('mobile',$mobile);
              }
@@ -105,7 +105,7 @@ class UserController extends Controller
              $totalRecords = $totalRecord->select('count(*) as allcount')->count();
 
 
-             $totalRecordswithFilte = User::where('deleted_at',null);
+             $totalRecordswithFilte = User::where('deleted_at',null)->where('role', '!=', 'User');
 
              if($mobile != ""){
                  $totalRecordswithFilte->where('mobile',$mobile);
@@ -124,7 +124,7 @@ class UserController extends Controller
              $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
 
              // Fetch records
-             $items = User::where('deleted_at',null)->orderBy($columnName,$columnSortOrder);
+             $items = User::where('deleted_at',null)->where('role', '!=', 'User')->orderBy($columnName,$columnSortOrder);
              if($mobile != ""){
                  $items->where('mobile',$mobile);
              }

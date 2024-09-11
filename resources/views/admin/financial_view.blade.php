@@ -46,6 +46,9 @@
                                             അനുവദിക്കുന്നതിനുള്ള അപേക്ഷാഫോം
                                         </h1>
                                     </div>
+                                    <h5 style="text-align: right;">
+                                        Case Number: <span style="color: red;">{{ @$financialHelp['case_id'] }}</span>
+                                    </h5>
                                     <div class="paper-1">
                                         <div class="row">
                                             <div class="col-12">
@@ -65,8 +68,8 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label> {{ @$studentFund['husband_name'] }} <br>
-                                                        {{ @$studentFund['husband_address'] }}</label>
+                                                    <label> {{ @$financialHelp['husband_name'] }} <br>
+                                                        {{ @$financialHelp['husband_address'] }}</label>
                                                 </div>
                                             </div>
                                             <div class="row w-100">
@@ -77,8 +80,8 @@
                                                     <label> :</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['wife_name'] }} <br>
-                                                        {{ @$studentFund['wife_address'] }}
+                                                    <label>{{ @$financialHelp['wife_name'] }} <br>
+                                                        {{ @$financialHelp['wife_address'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -102,10 +105,10 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label> {{ @$studentFund['husband_address_old'] }} <br>
-                                                        {{ @$studentFund['hus_district_name'] }}
-                                                        {{ @$studentFund['hus_taluk_name'] }}
-                                                        {{ @$studentFund['hus_pincode'] }}</label>
+                                                    <label> {{ @$financialHelp['husband_address_old'] }} <br>
+                                                        {{ @$financialHelp['hus_district_name'] }}
+                                                        {{ @$financialHelp['hus_taluk_name'] }}
+                                                        {{ @$financialHelp['hus_pincode'] }}</label>
                                                 </div>
                                             </div>
                                             <div class="row w-100">
@@ -116,10 +119,10 @@
                                                     <label> :</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['wife_address_old'] }} <br>
-                                                        {{ @$studentFund['wife_district_name'] }}
-                                                        {{ @$studentFund['wife_taluk_name'] }}
-                                                        {{ @$studentFund['wife_pincode'] }}
+                                                    <label>{{ @$financialHelp['wife_address_old'] }} <br>
+                                                        {{ @$financialHelp['wife_district_name'] }}
+                                                        {{ @$financialHelp['wife_taluk_name'] }}
+                                                        {{ @$financialHelp['wife_pincode'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -143,7 +146,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label> {{ @$studentFund['husband_caste'] }}</label>
+                                                    <label> {{ @$financialHelp['husband_caste'] }}</label>
                                                 </div>
                                             </div>
                                             <div class="row w-100">
@@ -154,7 +157,7 @@
                                                     <label> :</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['wife_caste'] }}
+                                                    <label>{{ @$financialHelp['wife_caste'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -178,7 +181,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label> {{ @$studentFund['husband_panchayath'] }}</label>
+                                                    <label> {{ @$financialHelp['husband_panchayath'] }}</label>
                                                 </div>
                                             </div>
                                             <div class="row w-100">
@@ -189,7 +192,7 @@
                                                     <label> :</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['wife_panchayath'] }}
+                                                    <label>{{ @$financialHelp['wife_panchayath'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -213,8 +216,8 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['hus_work_before_marriage'] }} /
-                                                        {{ @$studentFund['hus_income_before_marriage'] }} </label>
+                                                    <label>{{ @$financialHelp['hus_work_before_marriage'] }} /
+                                                        {{ @$financialHelp['hus_income_before_marriage'] }} </label>
                                                 </div>
                                             </div>
                                             <div class="row w-100">
@@ -225,8 +228,8 @@
                                                     <label> :</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['wife_work_before_marriage'] }} /
-                                                        {{ @$studentFund['wife_income_before_marriage'] }}
+                                                    <label>{{ @$financialHelp['wife_work_before_marriage'] }} /
+                                                        {{ @$financialHelp['wife_income_before_marriage'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -250,8 +253,8 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['hus_work_after_marriage'] }} /
-                                                        {{ @$studentFund['hus_income_after_marriage'] }} </label>
+                                                    <label>{{ @$financialHelp['hus_work_after_marriage'] }} /
+                                                        {{ @$financialHelp['hus_income_after_marriage'] }} </label>
                                                 </div>
                                             </div>
                                             <div class="row w-100">
@@ -262,8 +265,8 @@
                                                     <label> :</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['wife_work_after_marriage'] }} /
-                                                        {{ @$studentFund['wife_income_after_marriage'] }}
+                                                    <label>{{ @$financialHelp['wife_work_after_marriage'] }} /
+                                                        {{ @$financialHelp['wife_income_after_marriage'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -287,7 +290,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['husband_age'] }}</label>
+                                                    <label>{{ @$financialHelp['husband_age'] }}</label>
                                                 </div>
                                             </div>
                                             <div class="row w-100">
@@ -298,7 +301,7 @@
                                                     <label> :</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['wife_age'] }}
+                                                    <label>{{ @$financialHelp['wife_age'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -316,10 +319,10 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>{{ @$studentFund['register_marriage'] }} -
-                                                        {{ @$studentFund['register_details'] }}
-                                                        {{ @$studentFund['register_date'] }}
-                                                        {{ @$studentFund['register_office_name'] }} </label>
+                                                    <label>{{ @$financialHelp['register_marriage'] }} -
+                                                        {{ @$financialHelp['register_details'] }}
+                                                        {{ @$financialHelp['register_date'] }}
+                                                        {{ @$financialHelp['register_office_name'] }} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -338,10 +341,10 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label>
-                                                        @if (@$studentFund['marriage_certificate'])
-                                                            <a href="{{ asset('marriage_certificate/' . @$studentFund['marriage_certificate']) }}"
+                                                        @if (@$financialHelp['marriage_certificate'])
+                                                            <a href="{{ asset('marriage_certificate/' . @$financialHelp['marriage_certificate']) }}"
                                                                 target="_blank">View</a>
-                                                            {{-- <iframe src="{{ asset('marriage_certificate/' . @$studentFund['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
+                                                            {{-- <iframe src="{{ asset('marriage_certificate/' . @$financialHelp['marriage_certificate']) }}" width="400" height="200"></iframe> --}}
                                                         @endif
                                                     </label>
                                                 </div>
@@ -362,13 +365,13 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label>
-                                                        {{ @$studentFund['apart_for_any_period'] }}
+                                                        {{ @$financialHelp['apart_for_any_period'] }}
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    @if (@$studentFund['apart_for_any_period'] == 'Yes')
+                                    @if (@$financialHelp['apart_for_any_period'] == 'Yes')
                                         <div class="paper-1">
                                             <div class="w-100">
                                                 <div class="row w-100">
@@ -380,7 +383,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label>{{ @$studentFund['duration'] }}</label>
+                                                        <label>{{ @$financialHelp['duration'] }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="row w-100">
@@ -391,7 +394,7 @@
                                                         <label> :</label>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label>{{ @$studentFund['reason'] }}
+                                                        <label>{{ @$financialHelp['reason'] }}
                                                         </label>
                                                     </div>
                                                 </div>
@@ -412,7 +415,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label>
-                                                        {{ @$studentFund['financial_assistance'] }}
+                                                        {{ @$financialHelp['financial_assistance'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -430,7 +433,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label>
-                                                        {{ @$studentFund['difficulties'] }}
+                                                        {{ @$financialHelp['difficulties'] }}
                                                     </label>
                                                 </div>
                                             </div>
@@ -454,7 +457,7 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <label> {{ @$studentFund['dist_name'] }} </label>
+                                                    <label> {{ @$financialHelp['dist_name'] }} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -467,34 +470,34 @@
                                                     <label> : </label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <label> {{ @$studentFund['teo_name'] }} </label>
+                                                    <label> {{ @$financialHelp['teo_name'] }} </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <br>
                                     <div>
-                                        <p>ശ്രീമാൻ {{ @$studentFund['husband_name'] }} ശ്രീമതി
-                                            {{ @$studentFund['wife_name'] }}
+                                        <p>ശ്രീമാൻ {{ @$financialHelp['husband_name'] }} ശ്രീമതി
+                                            {{ @$financialHelp['wife_name'] }}
                                             എന്നിവരായ ഞങ്ങൾ മുകളിൽ ചേർത്ത എല്ലാ വിവരങ്ങളും സത്യവും ശേരിയുമാണുന്ന
                                             ഇതിനാൽ പ്രതിജ്ഞ ചെയ്ത്‌കൊള്ളുന്നു
                                         </p>
                                     </div>
                                     <div class="text">
                                         <div>
-                                            <label>സ്ഥലം </label> : {{ @$studentFund['place'] }}
+                                            <label>സ്ഥലം </label> : {{ @$financialHelp['place'] }}
                                         </div>
                                         <div>
-                                            <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> : @if (@$studentFund['husband_photo'])
-                                                {{-- <iframe src="{{ asset('sign/huband/' . @$studentFund['husband_photo']) }}" width="400" height="200"></iframe> --}}
-                                                <img src="{{ asset('sign/huband/' . @$studentFund['husband_photo']) }}"
+                                            <label> ഭർത്താവിന്റെ ഫോട്ടോ </label> : @if (@$financialHelp['husband_photo'])
+                                                {{-- <iframe src="{{ asset('sign/huband/' . @$financialHelp['husband_photo']) }}" width="400" height="200"></iframe> --}}
+                                                <img src="{{ asset('sign/huband/' . @$financialHelp['husband_photo']) }}"
                                                     width="120px" height="60px">
                                             @endif
                                         </div>
                                         <div>
-                                            <label> ഭർത്താവിന്റെ ഒപ്പ് </label> : @if (@$studentFund['husband_sign'])
-                                                {{-- <iframe src="{{ asset('sign/huband/' . @$studentFund['husband_sign']) }}" width="400" height="200"></iframe> --}}
-                                                <img src="{{ asset('sign/huband/' . @$studentFund['husband_sign']) }}"
+                                            <label> ഭർത്താവിന്റെ ഒപ്പ് </label> : @if (@$financialHelp['husband_sign'])
+                                                {{-- <iframe src="{{ asset('sign/huband/' . @$financialHelp['husband_sign']) }}" width="400" height="200"></iframe> --}}
+                                                <img src="{{ asset('sign/huband/' . @$financialHelp['husband_sign']) }}"
                                                     width="120px" height="60px">
                                             @endif
                                         </div>
@@ -502,20 +505,20 @@
                                     <br>
                                     <div class="text">
                                         <div>
-                                            <label>തീയതി </label> : {{ @$studentFund['date'] }}
+                                            <label>തീയതി </label> : {{ @$financialHelp['date'] }}
                                         </div>
                                         <div>
-                                            <label> ഭാര്യയുടെ ഫോട്ടോ </label> : @if (@$studentFund['wife_photo'])
-                                                <img src="{{ asset('sign/wife/' . @$studentFund['wife_photo']) }}"
+                                            <label> ഭാര്യയുടെ ഫോട്ടോ </label> : @if (@$financialHelp['wife_photo'])
+                                                <img src="{{ asset('sign/wife/' . @$financialHelp['wife_photo']) }}"
                                                     width="120px" height="60px">
                                             @endif
                                         </div>
                                         <div class="text">
                                             <div>
                                                 <label> ഭാര്യയുടെ ഒപ്പ് </label>:
-                                                @if (@$studentFund['wife_sign'])
-                                                    {{-- <iframe src="{{ asset('sign/wife/' . @$studentFund['wife_sign']) }}" width="400" height="200"></iframe> --}}
-                                                    <img src="{{ asset('sign/wife/' . @$studentFund['wife_sign']) }}"
+                                                @if (@$financialHelp['wife_sign'])
+                                                    {{-- <iframe src="{{ asset('sign/wife/' . @$financialHelp['wife_sign']) }}" width="400" height="200"></iframe> --}}
+                                                    <img src="{{ asset('sign/wife/' . @$financialHelp['wife_sign']) }}"
                                                         width="120px" height="60px">
                                                 @endif
                                             </div>
@@ -536,59 +539,59 @@
                     </div>
 
 
-                    @if (auth::user()->role == 'TEO' && @$studentFund->teo_view_status == 1)
+                    @if (auth::user()->role == 'TEO' && @$financialHelp->teo_view_status == 1)
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                             <div class="pt-2 card overflow-hidden">
                                 <div class="card-body">
 
-                                    @if (@$studentFund->return_status == 1)
+                                    @if (@$financialHelp->return_status == 1)
                                         @php
                                             $role = DB::table('users')
-                                                ->where('_id', @$studentFund->return_userid)
+                                                ->where('_id', @$financialHelp->return_userid)
                                                 ->value('role');
 
                                         @endphp
                                         <p class="inputText badge bg-danger" style="font-size: 12px">Returned Application
-                                            - by {{ @$studentFund->returnUser->name }} ({{ @$role }})</p>
+                                            - by {{ @$financialHelp->returnUser->name }} ({{ @$role }})</p>
                                         <ul class="timeline-3">
-                                            @if (@$studentFund->teo_return == null)
+                                            @if (@$financialHelp->teo_return == null)
                                                 <li class="ApproveTimeline">
                                                     <a href="#!">TEO</a>
                                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                        {{ @$studentFund['teo_return_view_date'] }}</a>
+                                                        {{ @$financialHelp['teo_return_view_date'] }}</a>
                                                     <br>
                                                     <p class="inputText badge bg-success" style="font-size: 12px">Approved
                                                     </p>
 
                                                     <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
-                                                        @if (@$studentFund['teo_status_date'] != null)
-                                                            {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}
+                                                        @if (@$financialHelp['teo_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$financialHelp['teo_status_date'])->format('d-m-Y h:i a') }}
                                                         @endif
                                                     </p>
 
                                                 </li>
-                                                @if (@$studentFund->teo_return == null)
-                                                    @if (@$studentFund->clerk_return == null)
+                                                @if (@$financialHelp->teo_return == null)
+                                                    @if (@$financialHelp->clerk_return == null)
                                                         <li class="ApproveTimeline">
                                                             <a href="#!">Clerk</a>
                                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                                {{ @$studentFund['clerk_return_view_date'] }}</a>
+                                                                {{ @$financialHelp['clerk_return_view_date'] }}</a>
                                                             <p></p>
                                                             <p class="inputText badge bg-success" style="font-size: 12px">
                                                                 Approved </p>
                                                             <p class="mt-2"><span class= "spanclr"> Name :
-                                                                </span>{{ @$studentFund->clerkUser->name }}</p>
+                                                                </span>{{ @$financialHelp->clerkUser->name }}</p>
 
                                                             <p class="mt-2"><span class= "spanclr"> Approved Date :
                                                                 </span>
-                                                                @if (@$studentFund['clerk_status_date'] != null)
-                                                                    {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}
+                                                                @if (@$financialHelp['clerk_status_date'] != null)
+                                                                    {{ \Carbon\Carbon::parse(@$financialHelp['clerk_status_date'])->format('d-m-Y h:i a') }}
                                                                 @endif
                                                             </p>
                                                             <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                                </span>{{ @$studentFund->clerk_status_reason }}</p>
+                                                                </span>{{ @$financialHelp->clerk_status_reason }}</p>
                                                         </li>
-                                                    @elseif(@$studentFund->clerk_return == 1)
+                                                    @elseif(@$financialHelp->clerk_return == 1)
                                                         <li class="ApproveTimeline">
                                                             <a href="#!">Clerk</a>
                                                             <p></p>
@@ -600,28 +603,28 @@
                                                 @endif
 
 
-                                                @if (@$studentFund->clerk_return == null)
-                                                    @if (@$studentFund->JsSeo_return == null)
+                                                @if (@$financialHelp->clerk_return == null)
+                                                    @if (@$financialHelp->JsSeo_return == null)
                                                         <li class="ApproveTimeline">
                                                             <a href="#!">JS/ SEO</a>
                                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                                {{ @$studentFund['JsSeo_return_view_date'] }}</a>
+                                                                {{ @$financialHelp['JsSeo_return_view_date'] }}</a>
                                                             <p></p>
                                                             <p class="inputText badge bg-success" style="font-size: 12px">
                                                                 Approved </p>
                                                             <p class="mt-2"><span class= "spanclr"> Name :
-                                                                </span>{{ @$studentFund->JsSeoUser->name }}</p>
+                                                                </span>{{ @$financialHelp->JsSeoUser->name }}</p>
 
                                                             <p class="mt-2"><span class= "spanclr"> Approved Date :
                                                                 </span>
-                                                                @if (@$studentFund['JsSeo_status_date'] != null)
-                                                                    {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                                @if (@$financialHelp['JsSeo_status_date'] != null)
+                                                                    {{ \Carbon\Carbon::parse(@$financialHelp['JsSeo_status_date'])->format('d-m-Y h:i a') }}
                                                                 @endif
                                                             </p>
                                                             <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                                </span>{{ @$studentFund->JsSeo_status_reason }}</p>
+                                                                </span>{{ @$financialHelp->JsSeo_status_reason }}</p>
                                                         </li>
-                                                    @elseif(@$studentFund->JsSeo_return == 1)
+                                                    @elseif(@$financialHelp->JsSeo_return == 1)
                                                         <li class="ApproveTimeline">
                                                             <a href="#!">JS/ SEO</a>
                                                             <p></p>
@@ -632,28 +635,28 @@
                                                     @endif
                                                 @endif
 
-                                                @if (@$studentFund->JsSeo_return == null)
-                                                    @if (@$studentFund->assistant_return == null)
+                                                @if (@$financialHelp->JsSeo_return == null)
+                                                    @if (@$financialHelp->assistant_return == null)
                                                         <li class="ApproveTimeline">
                                                             <a href="#!">APO/ ATDO</a>
                                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                                {{ @$studentFund['assistant_return_view_date'] }}</a>
+                                                                {{ @$financialHelp['assistant_return_view_date'] }}</a>
                                                             <p></p>
                                                             <p class="inputText badge bg-success" style="font-size: 12px">
                                                                 Approved </p>
                                                             <p class="mt-2"><span class= "spanclr"> Name :
-                                                                </span>{{ @$studentFund->JsSeoUser->name }}</p>
+                                                                </span>{{ @$financialHelp->JsSeoUser->name }}</p>
 
                                                             <p class="mt-2"><span class= "spanclr"> Approved Date :
                                                                 </span>
-                                                                @if (@$studentFund['assistant_status_date'] != null)
-                                                                    {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}
+                                                                @if (@$financialHelp['assistant_status_date'] != null)
+                                                                    {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}
                                                                 @endif
                                                             </p>
                                                             <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                                </span>{{ @$studentFund->assistant_status_reason }}</p>
+                                                                </span>{{ @$financialHelp->assistant_status_reason }}</p>
                                                         </li>
-                                                    @elseif(@$studentFund->assistant_return == 1)
+                                                    @elseif(@$financialHelp->assistant_return == 1)
                                                         <li class="ApproveTimeline">
                                                             <a href="#!">APO/ ATDO</a>
                                                             <p></p>
@@ -664,50 +667,50 @@
                                                     @endif
                                                 @endif
 
-                                                @if (@$studentFund->rejection_status == 1)
+                                                @if (@$financialHelp->rejection_status == 1)
                                                     <li class="rejectTimeline">
                                                         <a href="#!">PO / TDO</a>
                                                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['officer_return_view_date'] }}</a>
+                                                            {{ @$financialHelp['officer_return_view_date'] }}</a>
                                                         <p></p>
                                                         <p class="inputText badge bg-danger" style="font-size: 12px">
                                                             Rejected </p>
                                                         <p class="mt-2"><span class= "spanclr"> Name :
-                                                            </span>{{ @$studentFund->officerUser->name }}</p>
+                                                            </span>{{ @$financialHelp->officerUser->name }}</p>
 
                                                         <p class="mt-2"><span class= "spanclr"> Rejection Date : </span>
-                                                            @if (@$studentFund['officer_status_date'] != null)
-                                                                {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                            @if (@$financialHelp['officer_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}
                                                             @endif
                                                         </p>
                                                         <p class="mt-2"><span class= "spanclr"> Rejection Reason :
-                                                            </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                            </span>{{ @$financialHelp->officer_status_reason }}</p>
                                                     </li>
                                                 @else
-                                                    @if (@$studentFund->assistant_return == null)
-                                                        @if (@$studentFund->officer_return == null)
+                                                    @if (@$financialHelp->assistant_return == null)
+                                                        @if (@$financialHelp->officer_return == null)
                                                             <li class="ApproveTimeline">
                                                                 <a href="#!">PO/ TDO</a>
                                                                 <a href="#!" class="float-end"><i
                                                                         class="fa fa-eye"></i>
-                                                                    {{ @$studentFund['officer_return_view_date'] }}</a>
+                                                                    {{ @$financialHelp['officer_return_view_date'] }}</a>
                                                                 <p></p>
                                                                 <p class="inputText badge bg-success"
                                                                     style="font-size: 12px">Approved </p>
                                                                 <p class="mt-2"><span class= "spanclr"> Name :
-                                                                    </span>{{ @$studentFund->JsSeoUser->name }}</p>
+                                                                    </span>{{ @$financialHelp->JsSeoUser->name }}</p>
 
                                                                 <p class="mt-2"><span class= "spanclr"> Approved Date :
                                                                     </span>
-                                                                    @if (@$studentFund['officer_status_date'] != null)
-                                                                        {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                                    @if (@$financialHelp['officer_status_date'] != null)
+                                                                        {{ \Carbon\Carbon::parse(@$financialHelp['JsSeo_status_date'])->format('d-m-Y h:i a') }}
                                                                     @endif
                                                                 </p>
                                                                 <p class="mt-2"><span class= "spanclr"> Approved Reason
-                                                                        : </span>{{ @$studentFund->officer_status_reason }}
+                                                                        : </span>{{ @$financialHelp->officer_status_reason }}
                                                                 </p>
                                                             </li>
-                                                        @elseif(@$studentFund->officer_return == 1)
+                                                        @elseif(@$financialHelp->officer_return == 1)
                                                             <li class="ApproveTimeline">
                                                                 <a href="#!">PO/ TDO</a>
                                                                 <p></p>
@@ -722,205 +725,172 @@
                                         </ul>
                                     @else
                                         <ul class="timeline-3">
+                                            @if(@$financialHelp->teo_rejection_status == 1)
+                                                <li class="rejectTimeline">
+                                                    <a href="#!">TEO</a>
+                                                    <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                        {{ @$financialHelp['teo_view_date'] }}</a>
+                                                    <br>
+                                                    <p class="inputText badge bg-danger" style="font-size: 12px">Rejected
+                                                    </p>
 
-                                            @if (@$studentFund->teo_status == null)
+                                                    <p class="mt-2"><span class= "spanclr"> Rejected Date : </span>
+                                                        @if (@$financialHelp['teo_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$financialHelp['teo_status_date'])->format('d-m-Y h:i a') }}
+                                                        @endif
+                                                    </p>
+                                                    <p class="mt-2"><span class= "spanclr"> Rejected Reason :
+                                                        </span>{{ @$financialHelp->teo_status_reason }}</p>
+
+                                                </li>    
+
+                                            @elseif (@$financialHelp->teo_status == null)
                                                 <li class="pendingTimeline">
                                                     <a href="#!">TEO</a>
                                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                        {{ @$studentFund['teo_view_date'] }}</a>
+                                                        {{ @$financialHelp['teo_view_date'] }}</a>
                                                     <br>
                                                     <p class="inputText badge bg-warning" style="font-size: 12px">Pending
                                                     </p>
                                                     <div class="settings-icon">
-                                                        <a class="approveItem" data-id="{{ @$studentFund->id }}"><i
+                                                        <a class="approveItem" data-id="{{ @$financialHelp->id }}"><i
                                                                 class="fa fa-check bg-success me-1"></i></a>
-                                                        {{-- &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$studentFund->id }}"><i class="fa fa-ban bg-danger "></i></a> --}}
+                                                        &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$financialHelp->id }}"><i class="fa fa-ban bg-danger "></i></a>
                                                     </div>
 
                                                 </li>
-                                            @elseif(@$studentFund->teo_status == 1)
+                                            @elseif(@$financialHelp->teo_status == 1)
                                                 <li class="ApproveTimeline">
                                                     <a href="#!">TEO</a>
                                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                        {{ @$studentFund['teo_view_date'] }}</a>
+                                                        {{ @$financialHelp['teo_view_date'] }}</a>
                                                     <br>
                                                     <p class="inputText badge bg-success" style="font-size: 12px">Approved
                                                     </p>
 
                                                     <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
-                                                        @if (@$studentFund['teo_status_date'] != null)
-                                                            {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}
+                                                        @if (@$financialHelp['teo_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$financialHelp['teo_status_date'])->format('d-m-Y h:i a') }}
                                                         @endif
                                                     </p>
                                                     <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                        </span>{{ @$studentFund->teo_status_reason }}</p>
+                                                        </span>{{ @$financialHelp->teo_status_reason }}</p>
 
                                                 </li>
-                                            @elseif(@$studentFund->teo_status == 2)
+                                            @elseif(@$financialHelp->teo_status == 2)
                                                 <li class="rejectTimeline">
                                                     <a href="#!">TEO</a>
                                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                        {{ @$studentFund['teo_view_date'] }}</a>
+                                                        {{ @$financialHelp['teo_view_date'] }}</a>
                                                     <br>
                                                     <p class="inputText badge bg-danger" style="font-size: 12px">Returned
                                                     </p>
 
                                                     <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
-                                                        @if (@$studentFund['teo_status_date'] != null)
-                                                            {{ \Carbon\Carbon::parse(@$studentFund['teo_status_date'])->format('d-m-Y h:i a') }}
+                                                        @if (@$financialHelp['teo_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$financialHelp['teo_status_date'])->format('d-m-Y h:i a') }}
                                                         @endif
                                                     </p>
                                                     <p class="mt-2"><span class= "spanclr"> Returned Reason :
-                                                        </span>{{ @$studentFund->teo_status_reason }}</p>
+                                                        </span>{{ @$financialHelp->teo_status_reason }}</p>
 
                                                 </li>
                                             @endif
-                                            @if (@$studentFund->teo_status == 1)
-                                                @if (@$studentFund->clerk_status == 1)
+                                            @if (@$financialHelp->teo_status == 1)
+                                                @if (@$financialHelp->clerk_status == 1)
                                                     <li class="ApproveTimeline">
                                                         <a href="#!">Clerk</a>
                                                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['clerk_view_date'] }}</a>
+                                                            {{ @$financialHelp['clerk_view_date'] }}</a>
                                                         <p></p>
                                                         <p class="inputText badge bg-success" style="font-size: 12px">
                                                             Approved </p>
                                                         <p class="mt-2"><span class= "spanclr"> Name :
-                                                            </span>{{ @$studentFund->clerkUser->name }}</p>
+                                                            </span>{{ @$financialHelp->clerkUser->name }}</p>
 
                                                         <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
-                                                            @if (@$studentFund['clerk_status_date'] != null)
-                                                                {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}
+                                                            @if (@$financialHelp['clerk_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$financialHelp['clerk_status_date'])->format('d-m-Y h:i a') }}
                                                             @endif
                                                         </p>
                                                         <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                            </span>{{ @$studentFund->clerk_status_reason }}</p>
+                                                            </span>{{ @$financialHelp->clerk_status_reason }}</p>
                                                     </li>
-                                                @elseif(@$studentFund->clerk_status == 2)
+                                                @elseif(@$financialHelp->clerk_status == 2)
                                                     <li class="rejectTimeline">
                                                         <a href="#!">Clerk</a>
                                                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['clerk_view_date'] }}</a>
+                                                            {{ @$financialHelp['clerk_view_date'] }}</a>
                                                         <p></p>
                                                         <p class="inputText badge bg-danger" style="font-size: 12px">
                                                             Returned </p>
                                                         <p class="mt-2"><span class= "spanclr"> Name :
-                                                            </span>{{ @$studentFund->clerkUser->name }}</p>
+                                                            </span>{{ @$financialHelp->clerkUser->name }}</p>
 
                                                         <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
-                                                            @if (@$studentFund['clerk_status_date'] != null)
-                                                                {{ \Carbon\Carbon::parse(@$studentFund['clerk_status_date'])->format('d-m-Y h:i a') }}
+                                                            @if (@$financialHelp['clerk_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$financialHelp['clerk_status_date'])->format('d-m-Y h:i a') }}
                                                             @endif
                                                         </p>
                                                         <p class="mt-2"><span class= "spanclr"> Returned Reason :
-                                                            </span>{{ @$studentFund->clerk_status_reason }}</p>
+                                                            </span>{{ @$financialHelp->clerk_status_reason }}</p>
                                                     </li>
-                                                @elseif(@$studentFund->clerk_status == null)
+                                                @elseif(@$financialHelp->clerk_status == null)
                                                     <li class="pendingTimeline">
                                                         <a href="#!">Clerk</a>
                                                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['clerk_view_date'] }}</a>
+                                                            {{ @$financialHelp['clerk_view_date'] }}</a>
                                                         <p></p>
                                                         <p class="inputText badge bg-warning" style="font-size: 12px">
                                                             Pending </p>
                                                     </li>
                                                 @endif
                                             @endif
-                                            @if (@$studentFund->clerk_status == 1)
+                                            @if (@$financialHelp->clerk_status == 1)
 
-                                                @if (@$studentFund->JsSeo_status == 1)
+                                                @if (@$financialHelp->JsSeo_status == 1)
                                                     <li class="ApproveTimeline">
                                                         <a href="#!">JS/ SEO</a>
                                                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['JsSeo_view_date'] }}</a>
+                                                            {{ @$financialHelp['JsSeo_view_date'] }}</a>
                                                         <p></p>
                                                         <p class="inputText badge bg-success" style="font-size: 12px">
                                                             Approved </p>
                                                         <p class="mt-2"><span class= "spanclr"> Name :
-                                                            </span>{{ @$studentFund->assistantUser->name }}</p>
+                                                            </span>{{ @$financialHelp->assistantUser->name }}</p>
 
                                                         <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
-                                                            @if (@$studentFund['JsSeo_status_date'] != null)
-                                                                {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                            @if (@$financialHelp['JsSeo_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$financialHelp['JsSeo_status_date'])->format('d-m-Y h:i a') }}
                                                             @endif
                                                         </p>
                                                         <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                            </span>{{ @$studentFund->JsSeo_status_reason }}</p>
+                                                            </span>{{ @$financialHelp->JsSeo_status_reason }}</p>
                                                     </li>
-                                                @elseif(@$studentFund->JsSeo_status == 2)
+                                                @elseif(@$financialHelp->JsSeo_status == 2)
                                                     <li class="rejectTimeline">
                                                         <a href="#!">JS/ SEO</a>
                                                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['JsSeo_view_date'] }}</a>
+                                                            {{ @$financialHelp['JsSeo_view_date'] }}</a>
                                                         <p></p>
                                                         <p class="inputText badge bg-danger" style="font-size: 12px">
                                                             Returned </p>
                                                         <p class="mt-2"><span class= "spanclr"> Name :
-                                                            </span>{{ @$studentFund->JsSeoUser->name }}</p>
+                                                            </span>{{ @$financialHelp->JsSeoUser->name }}</p>
 
                                                         <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
-                                                            @if (@$studentFund['JsSeo_status_date'] != null)
-                                                                {{ \Carbon\Carbon::parse(@$studentFund['JsSeo_status_date'])->format('d-m-Y h:i a') }}
+                                                            @if (@$financialHelp['JsSeo_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$financialHelp['JsSeo_status_date'])->format('d-m-Y h:i a') }}
                                                             @endif
                                                         </p>
                                                         <p class="mt-2"><span class= "spanclr"> Returned Reason :
-                                                            </span>{{ @$studentFund->JsSeo_status_reason }}</p>
+                                                            </span>{{ @$financialHelp->JsSeo_status_reason }}</p>
                                                     </li>
-                                                @elseif(@$studentFund->JsSeo_status == null)
+                                                @elseif(@$financialHelp->JsSeo_status == null)
                                                     <li class="pendingTimeline">
                                                         <a href="#!">JS/ SEO</a>
                                                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['JsSeo_view_date'] }}</a>
-                                                        <p></p>
-                                                        <p class="inputText badge bg-warning" style="font-size: 12px">
-                                                            Pending </p>
-                                                    </li>
-                                                @endif
-                                            @endif
-
-                                            @if (@$studentFund->JsSeo_status == 1)
-                                                @if (@$studentFund->assistant_status == 1)
-                                                    <li class="ApproveTimeline">
-                                                        <a href="#!">APO / ATDO</a>
-                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['assistant_view_date'] }}</a>
-                                                        <p></p>
-                                                        <p class="inputText badge bg-success" style="font-size: 12px">
-                                                            Approved </p>
-                                                        <p class="mt-2"><span class= "spanclr"> Name :
-                                                            </span>{{ @$studentFund->assistantUser->name }}</p>
-
-                                                        <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
-                                                            @if (@$studentFund['assistant_status_date'] != null)
-                                                                {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}
-                                                            @endif
-                                                        </p>
-                                                        <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                            </span>{{ @$studentFund->assistant_status_reason }}</p>
-                                                    </li>
-                                                @elseif(@$studentFund->assistant_status == 2)
-                                                    <li class="rejectTimeline">
-                                                        <a href="#!">APO / ATDO</a>
-                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['assistant_view_date'] }}</a>
-                                                        <p></p>
-                                                        <p class="inputText badge bg-danger" style="font-size: 12px">
-                                                            Returned </p>
-                                                        <p class="mt-2"><span class= "spanclr"> Name :
-                                                            </span>{{ @$studentFund->assistantUser->name }}</p>
-
-                                                        <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
-                                                            @if (@$studentFund['assistant_status_date'] != null)
-                                                                {{ \Carbon\Carbon::parse(@$studentFund['assistant_status_date'])->format('d-m-Y h:i a') }}
-                                                            @endif
-                                                        </p>
-                                                        <p class="mt-2"><span class= "spanclr"> Returned Reason :
-                                                            </span>{{ @$studentFund->assistant_status_reason }}</p>
-                                                    </li>
-                                                @elseif(@$studentFund->assistant_status == null)
-                                                    <li class="pendingTimeline">
-                                                        <a href="#!">APO / ATDO</a>
-                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                            {{ @$studentFund['assistant_view_date'] }}</a>
+                                                            {{ @$financialHelp['JsSeo_view_date'] }}</a>
                                                         <p></p>
                                                         <p class="inputText badge bg-warning" style="font-size: 12px">
                                                             Pending </p>
@@ -928,72 +898,123 @@
                                                 @endif
                                             @endif
 
-                                            @if (@$studentFund->rejection_status == 1)
+                                            @if (@$financialHelp->JsSeo_status == 1)
+                                                @if (@$financialHelp->assistant_status == 1)
+                                                    <li class="ApproveTimeline">
+                                                        <a href="#!">APO / ATDO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$financialHelp['assistant_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-success" style="font-size: 12px">
+                                                            Approved </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Name :
+                                                            </span>{{ @$financialHelp->assistantUser->name }}</p>
+
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Date : </span>
+                                                            @if (@$financialHelp['assistant_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}
+                                                            @endif
+                                                        </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Approved Reason :
+                                                            </span>{{ @$financialHelp->assistant_status_reason }}</p>
+                                                    </li>
+                                                @elseif(@$financialHelp->assistant_status == 2)
+                                                    <li class="rejectTimeline">
+                                                        <a href="#!">APO / ATDO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$financialHelp['assistant_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-danger" style="font-size: 12px">
+                                                            Returned </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Name :
+                                                            </span>{{ @$financialHelp->assistantUser->name }}</p>
+
+                                                        <p class="mt-2"><span class= "spanclr"> Returned Date : </span>
+                                                            @if (@$financialHelp['assistant_status_date'] != null)
+                                                                {{ \Carbon\Carbon::parse(@$financialHelp['assistant_status_date'])->format('d-m-Y h:i a') }}
+                                                            @endif
+                                                        </p>
+                                                        <p class="mt-2"><span class= "spanclr"> Returned Reason :
+                                                            </span>{{ @$financialHelp->assistant_status_reason }}</p>
+                                                    </li>
+                                                @elseif(@$financialHelp->assistant_status == null)
+                                                    <li class="pendingTimeline">
+                                                        <a href="#!">APO / ATDO</a>
+                                                        <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                                                            {{ @$financialHelp['assistant_view_date'] }}</a>
+                                                        <p></p>
+                                                        <p class="inputText badge bg-warning" style="font-size: 12px">
+                                                            Pending </p>
+                                                    </li>
+                                                @endif
+                                            @endif
+
+                                            @if (@$financialHelp->rejection_status == 1)
                                                 <li class="rejectTimeline">
                                                     <a href="#!">PO / TDO</a>
                                                     <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                        {{ @$studentFund['officer_view_date'] }}</a>
+                                                        {{ @$financialHelp['officer_view_date'] }}</a>
                                                     <p></p>
                                                     <p class="inputText badge bg-danger" style="font-size: 12px">Rejected
                                                     </p>
                                                     <p class="mt-2"><span class= "spanclr"> Name :
-                                                        </span>{{ @$studentFund->officerUser->name }}</p>
+                                                        </span>{{ @$financialHelp->officerUser->name }}</p>
 
                                                     <p class="mt-2"><span class= "spanclr"> Rejection Date : </span>
-                                                        @if (@$studentFund['officer_status_date'] != null)
-                                                            {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                        @if (@$financialHelp['officer_status_date'] != null)
+                                                            {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}
                                                         @endif
                                                     </p>
                                                     <p class="mt-2"><span class= "spanclr"> Rejection Reason :
-                                                        </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                        </span>{{ @$financialHelp->officer_status_reason }}</p>
                                                 </li>
                                             @else
-                                                @if (@$studentFund->assistant_status == 1)
-                                                    @if (@$studentFund->officer_status == 1)
+                                                @if (@$financialHelp->assistant_status == 1)
+                                                    @if (@$financialHelp->officer_status == 1)
                                                         <li class="ApproveTimeline">
                                                             <a href="#!">PO / TDO</a>
                                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                                {{ @$studentFund['officer_view_date'] }}</a>
+                                                                {{ @$financialHelp['officer_view_date'] }}</a>
                                                             <p></p>
                                                             <p class="inputText badge bg-success" style="font-size: 12px">
                                                                 Approved </p>
                                                             <p class="mt-2"><span class= "spanclr"> Name :
-                                                                </span>{{ @$studentFund->officerUser->name }}</p>
+                                                                </span>{{ @$financialHelp->officerUser->name }}</p>
 
                                                             <p class="mt-2"><span class= "spanclr"> Approved Date :
                                                                 </span>
-                                                                @if (@$studentFund['officer_status_date'] != null)
-                                                                    {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                                @if (@$financialHelp['officer_status_date'] != null)
+                                                                    {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}
                                                                 @endif
                                                             </p>
                                                             <p class="mt-2"><span class= "spanclr"> Approved Reason :
-                                                                </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                                </span>{{ @$financialHelp->officer_status_reason }}</p>
                                                         </li>
-                                                    @elseif(@$studentFund->officer_status == 2)
+                                                    @elseif(@$financialHelp->officer_status == 2)
                                                         <li class="rejectTimeline">
                                                             <a href="#!">PO / TDO</a>
                                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                                {{ @$studentFund['officer_view_date'] }}</a>
+                                                                {{ @$financialHelp['officer_view_date'] }}</a>
                                                             <p></p>
                                                             <p class="inputText badge bg-danger" style="font-size: 12px">
                                                                 Returned </p>
                                                             <p class="mt-2"><span class= "spanclr"> Name :
-                                                                </span>{{ @$studentFund->officerUser->name }}</p>
+                                                                </span>{{ @$financialHelp->officerUser->name }}</p>
 
                                                             <p class="mt-2"><span class= "spanclr"> Returned Date :
                                                                 </span>
-                                                                @if (@$studentFund['officer_status_date'] != null)
-                                                                    {{ \Carbon\Carbon::parse(@$studentFund['officer_status_date'])->format('d-m-Y h:i a') }}
+                                                                @if (@$financialHelp['officer_status_date'] != null)
+                                                                    {{ \Carbon\Carbon::parse(@$financialHelp['officer_status_date'])->format('d-m-Y h:i a') }}
                                                                 @endif
                                                             </p>
                                                             <p class="mt-2"><span class= "spanclr"> Returned Reason :
-                                                                </span>{{ @$studentFund->officer_status_reason }}</p>
+                                                                </span>{{ @$financialHelp->officer_status_reason }}</p>
                                                         </li>
-                                                    @elseif(@$studentFund->officer_status == null)
+                                                    @elseif(@$financialHelp->officer_status == null)
                                                         <li class="pendingTimeline">
                                                             <a href="#!">PO / TDO</a>
                                                             <a href="#!" class="float-end"><i class="fa fa-eye"></i>
-                                                                {{ @$studentFund['officer_view_date'] }}</a>
+                                                                {{ @$financialHelp['officer_view_date'] }}</a>
                                                             <p></p>
                                                             <p class="inputText badge bg-warning" style="font-size: 12px">
                                                                 Pending </p>

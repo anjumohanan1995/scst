@@ -798,6 +798,7 @@ class ClerkController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
             $register_details = $record->register_details;
@@ -820,6 +821,7 @@ class ClerkController extends Controller
             $data_arr[] = array(
                 "sl_no" => $i,
                 "id" => $id,
+                "case_id" => $case_id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
                 "register_details" => $register_details,
@@ -935,6 +937,7 @@ class ClerkController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $husband_name = $record->husband_name;
             $wife_name = $record->wife_name;
             $register_details = $record->register_details;
@@ -965,6 +968,7 @@ class ClerkController extends Controller
 
             $data_arr[] = array(
                 "sl_no" => $i,
+                "case_id" => $case_id,
                 "id" => $id,
                 "husband_name" => $husband_name,
                 "wife_name" => $wife_name,

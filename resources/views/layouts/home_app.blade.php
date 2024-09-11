@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="single_info">
                                     {{-- <button class="special-button" onclick="window.location.href = 'apply_form.html';">അപേക്ഷിക്കുക <i class="fa fa-angle-right"></i> <span class="button_icon"><i class="far fa-file-alt"></i></span></button> --}}
-                                    <button class="special-button" ><a href="{{ url('/user-registration') }}">അപേക്ഷിക്കുക <i class="fa fa-angle-right"></i> <span class="button_icon"><i class="far fa-file-alt"></i></span></a></button>
+                                    <button class="special-button" ><a href="{{ url('/login') }}">അപേക്ഷിക്കുക <i class="fa fa-angle-right"></i> <span class="button_icon"><i class="far fa-file-alt"></i></span></a></button>
 
                                 
                                 </div>
