@@ -311,6 +311,15 @@
                                     </li>
                                    
                                     <li class="slide">
+                                        <a class="side-menu__item {{ \Request::route()->getName() == 'scheme_amount.index' || \Request::route()->getName() == 'scheme_amount.create' || \Request::route()->getName() == 'scheme_amount.edit' ? 'active' : '' }}"
+                                            href="{{ url('scheme_amount') }}">
+                                            <i class="side-menu__icon fas fa-money-bill-wave"> </i>
+                                            <span class="side-menu__label">Scheme Amounts</span>
+
+                                        </a>
+
+                                    </li>
+                                    <li class="slide">
                                         <a class="side-menu__item {{ \Request::route()->getName() == 'institution.index' || \Request::route()->getName() == 'institution.create' || \Request::route()->getName() == 'institution.edit' ? 'active' : '' }}"
                                             href="{{ url('institution') }}">
                                             <i class="side-menu__icon fas fa-city"> </i>

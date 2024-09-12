@@ -21,6 +21,7 @@ use App\Http\Controllers\SingleIncomeEarnerController;
 use App\Http\Controllers\AnemiaFinanceController;
 use App\Http\Controllers\ApoTdoController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\SchemeAmountController;
 use App\Http\Controllers\MedEngStudentFundController;
 use App\Http\Controllers\PoTdoController;
 use App\Http\Controllers\TDOMasterController;
@@ -378,6 +379,14 @@ Route::post('/tuitionFee/teoReject', [App\Http\Controllers\TuitionFeeController:
 Route::get('/getTuitionFeeListReturn', [TuitionFeeController::class, 'getTuitionFeeListReturn'])->name('getTuitionFeeListReturn');
 Route::get('/tuitionfee-application-edit/{id}', [TuitionFeeController::class, 'tuitionFeeApplicationEdit'])->name('tuitionFeeApplicationEdit');
 Route::post('/tuitionFeeUpdate', [TuitionFeeController::class, 'tuitionFeeUpdate'])->name('tuitionFeeUpdate');
+
+
+//SchemeAmount
+Route::resource('/scheme_amount', SchemeAmountController::class);
+Route::get('/getSchemeAmount', [SchemeAmountController::class, 'getSchemeAmount'])->name('getSchemeAmount');
+// Route::get('/adminSchemeAmountList', [SchemeAmountController::class, 'adminSchemeAmountList'])->name('adminSchemeAmountList');
+// Route::get('/getAdminSchemeAmountList', [SchemeAmountController::class, 'getAdminSchemeAmountList'])->name('getAdminSchemeAmountList');
+// Route::post('/updateItiDetails/{id}', [SchemeAmountController::class, 'updateItiDetails'])->name('updateItiDetails');
 
 
 
