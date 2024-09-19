@@ -433,6 +433,10 @@ Route::controller(ClerkController::class)->group(function(){
     Route::post('/couplefinancialReject','couplefinancialReject')->name('couplefinancial.reject');
    
     Route::get('/getcouplefinancialListClerkReturned','getcouplefinancialListClerkReturned')->name('getcouplefinancialListClerkReturned');
+    Route::get('/getcouplefinancialListPoTdoApprove','getcouplefinancialListPoTdoApprove')->name('getcouplefinancialListPoTdoApprove');
+    Route::get('/filter-by-date','filterByDate')->name('filterByDate');
+
+
 
     
 	Route::get('/motherChildSchemeListClerk','motherChildSchemeListClerk')->name('motherChildSchemeListClerk');

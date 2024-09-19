@@ -31,6 +31,9 @@
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
                         ജനനി-ജനനി -ജന്മരക്ഷ <br> പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി <br> അപേക്ഷഫോറം
                      </h1>
+                     <h5 style="text-align: right;">
+                        Case Number: <span style="color: red;">{{ @$formData['case_id'] }}</span>
+                    </h5>
                         </div>
                      <form action="#" method="post" style="font-weight: 500;font-size: 12px;padding: 90px;">
                         <div class=" row paper-1">

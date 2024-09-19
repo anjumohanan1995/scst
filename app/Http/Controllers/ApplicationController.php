@@ -1539,10 +1539,15 @@ class ApplicationController extends Controller
 
     public function motherChildProtectionSchemeStore(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'submitted_district' => 'required',
             'submitted_teo' => 'required',
+            'bank_name' => 'required|string|max:255',
+            'account_no' => 'required|string|max:255',
+            'ifsc_code' => 'required|string|max:255',
+            'passbook' => 'required|file|mimes:pdf,jpeg,png,jpg|max:2048', // Max 2MB
 
             // Add more fields and their validation rules as needed
         ]);
@@ -1550,7 +1555,17 @@ class ApplicationController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $data = $request->all();
+      
+
+        if ($request->hasfile('passbook')) {
+            $file = $request->passbook;
+            $fileName = time() . rand(100, 999) . '.' . $file->extension();
+            $file->move(public_path('/passbooks'), $fileName);
+            $passbook = $fileName;
+        } else {
+            $passbook = '';
+        }
+
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
@@ -1574,7 +1589,7 @@ class ApplicationController extends Controller
             $applicant_photos = '';
         }
 
-        $formData = $data;
+        
         if ($request->district != '') {
             $dis = District::where('_id', $request->district)->first();
             $formData['district_name'] = $dis->name;
@@ -1583,8 +1598,11 @@ class ApplicationController extends Controller
             $taluk = Taluk::where('_id', $request->taluk)->first();
             $formData['taluk_name'] = $taluk->taluk_name;
         }
+        $data = $request->all();
+        $formData = $data;
         $formData['signature'] = $signature;
         $formData['applicant_photo'] = $applicant_photos;
+        $formData['passbook'] = $passbook;
         $request->flash();
         return view('application.mother_child_preview', compact('formData'));
     }
@@ -1592,9 +1610,14 @@ class ApplicationController extends Controller
     {
 
         $data = json_decode($request->input('formData'), true);
+        // dd($data);
 
+        // Generate a unique case ID
+        $caseId = 'MotherChild-' . date('Ymd') . '-' . strtoupper(substr(md5(uniqid(rand(), true)), 0, 8));
 
+// dd($caseId);
         $datainsert = MotherChildScheme::create([
+            'case_id' => $caseId, // Include the unique case ID
             'name' => $data['name'],
             'district' => $data['district'],
             'taluk' => $data['taluk'],
@@ -1615,7 +1638,11 @@ class ApplicationController extends Controller
             'signature' => @$data['signature'],
             'applicant_photo' => @$data['applicant_photo'],
             'user_id' => Auth::user()->id,
-            'status' => 0
+            'status' => 0,
+            'bank_name' => @$data['bank_name'],
+            'account_no' => @$data['account_no'],
+            'ifsc_code' => @$data['ifsc_code'],
+            'passbook' => @$data['passbook'],
         ]);
 
         return redirect()->route('userMotherChildList')->with('status', 'Application Submitted Successfully.');
@@ -1659,7 +1686,7 @@ class ApplicationController extends Controller
     public function motherChildSchemeReject(Request $request)
     {
 
-        // dd('holo');
+        // dd($request);
         $id = $request->id;
         $reason = $request->reason;
         //  $currentTime = Carbon::now();
@@ -1670,7 +1697,7 @@ class ApplicationController extends Controller
 
         if (Auth::user()->role == "TEO") {
             $houseGrant->update([
-                'teo_status' => 2,
+                'teo_rejection_status' => 1,
                 'teo_status_date' => $currenttime,
                 'teo_status_id' => Auth::user()->id,
                 'teo_status_reason' => $reason,
@@ -1807,6 +1834,7 @@ class ApplicationController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $address = $record->address;
             $age = $record->age;
@@ -1825,6 +1853,7 @@ class ApplicationController extends Controller
             $data_arr[] = array(
                 "sl_no" => $i,
                 "id" => $id,
+                'case_id' => $case_id,
                 "name" => $name,
                 "address" => $address,
                 "dob" => $age . '/' . $dob,
@@ -1873,6 +1902,16 @@ class ApplicationController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->all();
+
+        if ($request->hasfile('passbook')) {
+            $file = $request->passbook;
+            $fileName = time() . rand(100, 999) . '.' . $file->extension();
+            $file->move(public_path('/passbooks'), $fileName);
+            $passbook = $fileName;
+        } else {
+            $passbook = @$data->passbook;
+        }
+
         if ($request->hasfile('signature')) {
 
             $image = $request->signature;
@@ -1931,6 +1970,10 @@ class ApplicationController extends Controller
             'place' => $data['place'],
             'submitted_district' => $data['submitted_district'],
             'submitted_teo' => $data['submitted_teo'],
+            'bank_name' => @$data['bank_name'],
+            'account_no' => @$data['account_no'],
+            'ifsc_code' => @$data['ifsc_code'],
+            'passbook' => @$passbook,
             'date' => date('d-m-Y'),
             'signature' => @$signature,
             'applicant_photo' => @$applicant_photos,
@@ -2067,6 +2110,7 @@ class ApplicationController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $address = $record->address;
             $age = $record->age;
@@ -2106,12 +2150,14 @@ class ApplicationController extends Controller
 
 
             if ($role == "TEO") {
-                if ($record->teo_status == 1) {
+                if ($record->teo_rejection_status == 1) {
+                    $edit = '<div class="settings-main-icon"><a  href="' .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
+                } elseif ($record->teo_status == 1) {
                     $edit = '<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-success">Approved</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
                 } else if ($record->teo_status == 2) {
                     $edit = '<div class="settings-main-icon"><a  href="'  .  url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<div class="badge bg-danger">Rejected</div>&nbsp;&nbsp;<span>' . $record->teo_status_reason . '</span></div>';
                 } else if ($record->teo_status == null) {
-                    $edit = '<div class="settings-main-icon"><a  href="' .   url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+                    $edit = '<div class="settings-main-icon"><a  href="' .   url('motherChildScheme/' . $id . '/view') . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-times bg-danger "></i></a></div>';
                 }
             } else if ($role == "TDO" || $role == "Project Officer") {
 
@@ -2128,6 +2174,7 @@ class ApplicationController extends Controller
             $data_arr[] = array(
                 "sl_no" => $i,
                 "id" => $id,
+                'case_id' => $case_id,
                 "name" => $name,
                 "address" => $address,
                 "dob" => $age . '/' . $dob,

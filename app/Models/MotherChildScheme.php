@@ -110,7 +110,17 @@ class MotherChildScheme extends Eloquent
         'return_userid',
         'return_reason',
         'return_status',
-        'rejection_status'
+        'rejection_status',
+
+        'bank_name',
+        'account_no',
+        'ifsc_code',
+        'passbook',
+        'case_id',
+        'scheme_name',
+        'grand_amount',
+        'teo_rejection_status',
+        'scheme_status'
 
     ];
 

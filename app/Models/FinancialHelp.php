@@ -116,7 +116,10 @@ class FinancialHelp extends Eloquent
         'account_no',
         'ifsc_code',
         'passbook',
-        'case_id'
+        'case_id',
+        'scheme_name',
+        'grand_amount',
+        'scheme_status'
 
 
 

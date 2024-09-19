@@ -47,6 +47,7 @@
                                                    <thead>
                                                       <tr>
                                                          <th>Sl No</th>
+                                                         <th>Case Number</th>
                                                          <th>Name</th>
                                                          <th>Address</th>
                                                          <th>Age/DOB </th>
@@ -67,6 +68,7 @@
                                                       <thead>
                                                           <tr>                                                               
                                                             <th>Sl No</th>
+                                                            <th>Case Number</th>
                                                             <th>Name</th>
                                                             <th>Address</th>
                                                             <th>Age/DOB </th>
@@ -280,6 +282,7 @@
    
                columns: [
                   { data: 'sl_no' },
+                  { data: 'case_id' },
                   { data: 'name' },
                   { data: 'address' },
    			{ data: 'dob' },
@@ -356,6 +359,7 @@
 
      columns: [
         { data: 'sl_no' },
+        { data: 'case_id' },
         { data: 'name' },
         { data: 'address' },
   { data: 'dob' },

@@ -203,6 +203,63 @@
                                             <label> {{ @$formData['dependent_hospital'] }} </label>
                                         </div>
                                     </div>
+                                    <div class="paper-1">
+                                        <div class="w-100 row">
+                                            <!-- Bank Name -->
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>Bank Name</label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label>: </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>{{ $formData['bank_name'] }}</label>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Account Number -->
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>Account Number</label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label>: </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>{{ $formData['account_no'] }}</label>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- IFSC Code -->
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>IFSC Code</label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label>: </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>{{ $formData['ifsc_code'] }}</label>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Passbook -->
+                                            @if($formData['passbook'])
+                                            <div class="row w-100">
+                                                <div class="col-5">
+                                                    <label>Passbook</label><br>
+                                                </div>
+                                                <div class="col-1 w-100">
+                                                    <label>: </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label><a href="{{ asset('passbooks/' . $formData['passbook']) }}" target="_blank">View Passbook</a></label>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
 
                                     <div class="row mt-5">
                                         <div class="row d-flex flex-direction-row col-4">

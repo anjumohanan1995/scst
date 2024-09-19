@@ -851,6 +851,7 @@ class ApoTdoController extends Controller
          foreach($records as $record){
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $address = $record->address;
             $age = $record->age;
@@ -874,7 +875,7 @@ class ApoTdoController extends Controller
           
             }
             else if($status ==null){
-                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a>&nbsp;&nbsp;<a class="rejectItem" data-id="'.$id.'"><i class="fa fa-ban bg-danger "></i></a></div>';
+                $edit='<div class="settings-main-icon"><a  href="' . route('motherChildSchemeDetailsAssistant',$id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="'.$id.'"><i class="fa fa-check bg-success me-1"></i></a></div>';
             }
 
           
@@ -885,6 +886,7 @@ class ApoTdoController extends Controller
            
                 $data_arr[] = array(
                     "sl_no" => $i,
+                    "case_id" => $case_id,
                     "name" => $name,
                     "address" => $address,
                     "dob" => $age . '/' . $dob,
@@ -993,6 +995,7 @@ class ApoTdoController extends Controller
          foreach($records as $record){
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $address = $record->address;
             $age = $record->age;
@@ -1015,6 +1018,7 @@ class ApoTdoController extends Controller
            
                 $data_arr[] = array(
                     "sl_no" => $i,
+                    "case_id" =>$case_id,
                     "name" => $name,
                     "address" => $address,
                     "dob" => $age . '/' . $dob,

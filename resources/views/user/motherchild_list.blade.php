@@ -57,6 +57,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sl No</th>
+                                            <th>Case Number</th>
                                             <th>Name</th>
                                             <th>Address</th>
                                             <th>Age/DOB </th>
@@ -181,6 +182,7 @@
                     {
                         data: 'sl_no'
                     },
+                    { data: 'case_id' },
                     {
                         data: 'name'
                     },

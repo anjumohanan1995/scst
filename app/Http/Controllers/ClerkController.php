@@ -23,6 +23,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+use App\Exports\FinancialHelpExport;
+use Maatwebsite\Excel\Facades\Excel; // Import the Excel facade
+
+
 class ClerkController extends Controller
 {
 
@@ -717,6 +721,7 @@ class ClerkController extends Controller
 
     public function getcouplefinancialListClerkReturned(Request $request)
     {
+       
         $role =  Auth::user()->role;
         $district =  Auth::user()->district;
         $tdo = Auth::user()->po_tdo_office;
@@ -847,6 +852,332 @@ class ClerkController extends Controller
 
         return response()->json($response);
     }
+
+
+    public function getcouplefinancialListPoTdoApprove(Request $request)
+{
+            // Get the from_date and to_date from the request in Y-m-d format
+            $fromDate = $request->input('from_date'); // e.g., "2024-09-19"
+            $toDate = $request->input('to_date');     // e.g., "2024-09-19"
+
+            // Convert the from_date and to_date to Carbon instances
+            if ($fromDate && $toDate) {
+                $fromDateStart = Carbon::createFromFormat('Y-m-d', $fromDate)->startOfDay();
+                $toDateEnd = Carbon::createFromFormat('Y-m-d', $toDate)->endOfDay();
+
+                // Convert the dates to the format stored in MongoDB (excluding time)
+                $fromDateFormatted = $fromDateStart->format('d-m-Y'); // e.g., "19-09-2024"
+                $toDateFormatted = $toDateEnd->format('d-m-Y'); // e.g., "19-09-2024"
+            }
+
+            $role = Auth::user()->role;
+            $district = Auth::user()->district;
+            $tdo = Auth::user()->po_tdo_office;
+
+            $name = $request->name;
+            $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+            $teoIds = $teos->pluck('_id')->toArray();
+
+            // Read value
+            $draw = $request->get('draw');
+            $start = $request->get("start");
+            $rowperpage = $request->get("length"); // Rows display per page
+
+            $columnIndex_arr = $request->get('order');
+            $columnName_arr = $request->get('columns');
+            $order_arr = $request->get('order');
+            $search_arr = $request->get('search');
+
+            $columnIndex = $columnIndex_arr[0]['column']; // Column index
+            $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+            $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+            $searchValue = $search_arr['value']; // Search value
+
+            // Filter records
+            $query = FinancialHelp::where('deleted_at', null)
+                ->whereIn('submitted_teo', $teoIds)
+                ->where('submitted_district', $district)
+                ->where('scheme_status', 1);
+
+            if ($name != "") {
+                $query->where('name', 'like', "%" . $name . "%");
+            }
+
+            // Apply date filtering if both dates are present
+            if ($fromDate && $toDate) {
+                $query->whereRaw([
+                    '$expr' => [
+                        '$and' => [
+                            ['$gte' => [
+                                ['$substr' => ['$officer_status_date', 0, 10]], $fromDateFormatted
+                            ]],
+                            ['$lte' => [
+                                ['$substr' => ['$officer_status_date', 0, 10]], $toDateFormatted
+                            ]],
+                        ],
+                    ],
+                ]);
+            }
+
+            // Total records count
+            $totalRecords = $query->count();
+            // dd($totalRecords);
+
+            // Fetch filtered records with pagination
+            $records = $query->orderBy($columnName, $columnSortOrder)
+                ->skip($start)
+                ->take($rowperpage)
+                ->get();
+                // dd($records);
+
+                $data_arr = array();
+                $i = $start;
+
+                foreach ($records as $record) {
+                    $i++;
+                    $id = $record->id;
+                    $case_id = $record->case_id;
+                    $created_at =  $record->created_at;
+                    $date =  $record->date;
+                    $time =  $record->time;
+                    $status = $record->clerk_status;
+
+                    $teo_name = $record->teo->teo_name;
+
+                    $download = '';
+
+                    // $download = '<div class="settings-main-icon"><a href="' . route('downloadData', $id) . '"><i class="fa fa-download bg-primary me-1"></i></a></div>';
+                    $download = "print";
+
+                    $edit = '';
+
+                    $edit = '<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+
+
+
+                    $data_arr[] = array(
+                        "sl_no" => $i,
+                        "id" => $id,
+                        "case_id" => $case_id,
+                        "date" => $date . ' ' . $time,
+                        "created_at" => $created_at,
+
+                        "teo_name" => $teo_name,
+                        "download" => $download,
+
+                        "action" => $edit
+
+                    );
+                }
+
+                $response = array(
+                    "draw" => intval($draw),
+                    "iTotalRecords" => $totalRecords,
+                    "iTotalDisplayRecords" => $totalRecords,
+                    "aaData" => $data_arr
+                );
+
+                return response()->json($response);
+}
+
+
+//     public function getcouplefinancialListPoTdoApprove(Request $request)
+//     {
+//         // dd("hi");
+//                 // Get the from_date and to_date from the request in Y-m-d format
+//         $fromDate = $request->input('from_date'); // e.g., "2024-09-19"
+//         $toDate = $request->input('to_date');     // e.g., "2024-09-19"
+
+//         // Convert the from_date and to_date to Carbon instances
+//         $fromDateStart = Carbon::createFromFormat('Y-m-d', $fromDate)->startOfDay();
+//         $toDateEnd = Carbon::createFromFormat('Y-m-d', $toDate)->endOfDay();
+
+//         // Convert the dates to the format stored in MongoDB (excluding time)
+//         $fromDateFormatted = $fromDateStart->format('d-m-Y'); // e.g., "19-09-2024"
+//         $toDateFormatted = $toDateEnd->format('d-m-Y'); // e.g., "19-09-2024"
+
+//         // Debugging to check the formatted dates
+//         // dd($fromDateFormatted, $toDateFormatted);
+
+//         // Retrieve data within the date range using MongoDB query (ignoring time)
+//         $data = FinancialHelp::whereRaw([
+//             '$expr' => [
+//                 '$and' => [
+//                     ['$gte' => [
+//                         ['$substr' => ['$officer_status_date', 0, 10]], $fromDateFormatted
+//                     ]],
+//                     ['$lte' => [
+//                         ['$substr' => ['$officer_status_date', 0, 10]], $toDateFormatted
+//                     ]],
+//                 ],
+//             ],
+//         ])->where('scheme_status', 1) ->get();
+//         $role =  Auth::user()->role;
+//         $district =  Auth::user()->district;
+//         $tdo = Auth::user()->po_tdo_office;
+
+//         $name = $request->name;
+//         $teos = Teo::where('po_or_tdo', Auth::user()->po_tdo_office)->get();
+
+//         $teoIds = $teos->pluck('_id')->toArray();
+
+
+//         ## Read value
+//         $draw = $request->get('draw');
+//         $start = $request->get("start");
+//         $rowperpage = $request->get("length"); // Rows display per page
+
+//         $columnIndex_arr = $request->get('order');
+//         $columnName_arr = $request->get('columns');
+//         $order_arr = $request->get('order');
+//         $search_arr = $request->get('search');
+
+//         $columnIndex = $columnIndex_arr[0]['column']; // Column index
+//         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+//         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+//         $searchValue = $search_arr['value']; // Search value
+
+
+
+
+//         // Total records
+//         $totalRecord = FinancialHelp::where('deleted_at', null)
+//             ->whereIn('submitted_teo', $teoIds)
+//             ->where('submitted_district', $district)
+//             ->where('scheme_status', 1);
+
+//         if ($name != "") {
+//             $totalRecord->where('name', 'like', "%" . $name . "%");
+//         }
+//         $totalRecord->where('teo_return', null)->where('clerk_return', 1);
+
+//         $totalRecords = $totalRecord->select('count(*) as allcount')->count();
+
+
+//         $totalRecordswithFilte = FinancialHelp::where('deleted_at', null)
+//             ->whereIn('submitted_teo', $teoIds)
+//             ->where('submitted_district', $district)
+//             ->where('scheme_status', 1);
+
+
+//         if ($name != "") {
+//             $totalRecordswithFilte->where('name', 'like', "%" . $name . "%");
+//         }
+
+//         $totalRecordswithFilte->where('scheme_status', 1);
+
+//         $totalRecordswithFilter = $totalRecordswithFilte->select('count(*) as allcount')->count();
+
+//         // Fetch records
+
+
+//         $items = FinancialHelp::where('deleted_at', null)
+//             ->whereIn('submitted_teo', $teoIds)
+//             ->where('submitted_district', $district)
+//             ->where('scheme_status', 1)
+//             ->orderBy($columnName, $columnSortOrder);
+
+//         if ($name != "") {
+//             $items->where('name', 'like', "%" . $name . "%");
+//         }
+//         $items->where('scheme_status', 1);
+
+//         $records = $items->skip($start)->take($rowperpage)->get();
+
+
+// // dd($records);
+
+//         $data_arr = array();
+//         $i = $start;
+
+//         foreach ($records as $record) {
+//             $i++;
+//             $id = $record->id;
+//             $case_id = $record->case_id;
+//             $created_at =  $record->created_at;
+//             $date =  $record->date;
+//             $time =  $record->time;
+//             $status = $record->clerk_status;
+
+//             $teo_name = $record->teo->teo_name;
+
+//             $download = '';
+
+//             // $download = '<div class="settings-main-icon"><a href="' . route('downloadData', $id) . '"><i class="fa fa-download bg-primary me-1"></i></a></div>';
+//             $download = "print";
+
+//             $edit = '';
+
+//             $edit = '<div class="settings-main-icon"><a  href="' . route('couplefinancialDetails', $id) . '"><i class="fa fa-eye bg-info me-1"></i></a>&nbsp;&nbsp;<a class="approveItem" data-id="' . $id . '"><i class="fa fa-check bg-success me-1"></i></a></div>';
+
+
+
+//             $data_arr[] = array(
+//                 "sl_no" => $i,
+//                 "id" => $id,
+//                 "case_id" => $case_id,
+//                 "date" => $date . ' ' . $time,
+//                 "created_at" => $created_at,
+
+//                 "teo_name" => $teo_name,
+//                 "download" => $download,
+
+//                 "action" => $edit
+
+//             );
+//         }
+
+//         $response = array(
+//             "draw" => intval($draw),
+//             "iTotalRecords" => $totalRecords,
+//             "iTotalDisplayRecords" => $totalRecordswithFilter,
+//             "aaData" => $data_arr
+//         );
+
+//         return response()->json($response);
+//     }
+
+    public function filterByDate(Request $request)
+    {
+        // Get the from_date and to_date from the request in Y-m-d format
+        $fromDate = $request->input('from_date'); // e.g., "2024-09-19"
+        $toDate = $request->input('to_date');     // e.g., "2024-09-19"
+
+        // Convert the from_date and to_date to Carbon instances
+        $fromDateStart = Carbon::createFromFormat('Y-m-d', $fromDate)->startOfDay();
+        $toDateEnd = Carbon::createFromFormat('Y-m-d', $toDate)->endOfDay();
+
+        // Convert the dates to the format stored in MongoDB (excluding time)
+        $fromDateFormatted = $fromDateStart->format('d-m-Y'); // e.g., "19-09-2024"
+        $toDateFormatted = $toDateEnd->format('d-m-Y'); // e.g., "19-09-2024"
+
+        // Debugging to check the formatted dates
+        // dd($fromDateFormatted, $toDateFormatted);
+
+        // Retrieve data within the date range using MongoDB query (ignoring time)
+        $data = FinancialHelp::whereRaw([
+            '$expr' => [
+                '$and' => [
+                    ['$gte' => [
+                        ['$substr' => ['$officer_status_date', 0, 10]], $fromDateFormatted
+                    ]],
+                    ['$lte' => [
+                        ['$substr' => ['$officer_status_date', 0, 10]], $toDateFormatted
+                    ]],
+                ],
+            ],
+        ])->where('scheme_status', 1) ->get();
+
+        // Export the data as Excel
+        return Excel::download(new FinancialHelpExport($data), 'financial_help_data.xlsx');
+    
+        // Pass the filtered data to the view or return as JSON for an AJAX table
+        // return view('yourviewname', compact('data'));
+    }
+    
+
+
+
 
 
     public function couplefinancialListClerk()
@@ -1284,6 +1615,7 @@ class ClerkController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $address = $record->address;
             $age = $record->age;
@@ -1315,6 +1647,7 @@ class ClerkController extends Controller
 
             $data_arr[] = array(
                 "sl_no" => $i,
+                "case_id" => $case_id,
                 "name" => $name,
                 "address" => $address,
                 "dob" => $age . '/' . $dob,
@@ -1496,6 +1829,7 @@ class ClerkController extends Controller
         foreach ($records as $record) {
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $current_address = $record->current_address;
             $age = $record->age;
@@ -1513,6 +1847,7 @@ class ClerkController extends Controller
             $data_arr[] = array(
                 "sl_no" => $i,
                 "id" => $id,
+                "case_id" => $case_id,
                 "name" => $name,
                 "current_address" => $current_address,
                 "age" => $age,

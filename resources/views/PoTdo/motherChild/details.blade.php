@@ -31,6 +31,9 @@
                         style="text-align: center;color: rgb(0, 0, 0);font-size: medium; text-decoration: underline; padding: 20px;line-height: 32px;font-weight: 600;">
                         ജനനി-ജനനി -ജന്മരക്ഷ <br> പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി <br> അപേക്ഷഫോറം
                      </h1>
+                     <h5 style="text-align: right;">
+                        Case Number: <span style="color: red;">{{ @$formData['case_id'] }}</span>
+                    </h5>
                         </div>
                      <form action="#" method="post" style="font-weight: 500;font-size: 12px;padding: 90px;">
                         <div class=" row paper-1">
@@ -634,6 +637,46 @@
 
          <div class="modal fade" id="approve-popup" style="display: none">
             <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content country-select-modal border-0">
+                    <div class="modal-header offcanvas-header">
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body p-5">
+                        <div class="text-center">
+                            <h4>Report Section</h4>
+                        </div>
+                        <form id="ownForm">
+                            @csrf
+                            @foreach($schemes as $index => $scheme)
+                            <div class="form-group">
+                                <label for="schemeName">Scheme Name</label>
+                                <input type="text" class="form-control scheme_name" id="scheme_name_{{ $index }}" name="scheme_name" value="{{ $scheme->scheme_name }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="grandAmount">Grand Amount</label>
+                                <input type="number" class="form-control grand_amount" id="grand_amount_{{ $index }}" name="grand_amount" value="{{ $scheme->scheme_amount }}" readonly>
+                            </div>
+                            <div class="text-center">
+                                <h5>Reason for Approval</h5>
+                                <textarea class="form-control approve_reason" name="approve_reason" id="approve_reason_{{ $index }}" required></textarea>
+                                <span id="rejection"></span>
+                            </div>
+                        @endforeach
+                        
+        
+                            <input type="hidden" id="requestId" name="requestId" value="" />
+                            <div class="text-center">
+                                <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Submit</button>
+                                <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         {{-- <div class="modal fade" id="approve-popup" style="display: none">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                <div class="modal-content country-select-modal border-0">
                   <div class="modal-header offcanvas-header">
                      <h6 class="modal-title">Are you sure?</h6>
@@ -659,7 +702,7 @@
                   </div>
                </div>
             </div>
-         </div>
+         </div> --}}
          <div class="modal fade" id="rejection-popup">
             <div class="modal-dialog modal-dialog-centered" role="document">
                <div class="modal-content country-select-modal border-0">
@@ -737,15 +780,19 @@
            $('#remove-popup').modal('show');
            });
            function approve() {
-            var reason = $('#approve_reason').val();
-           var reqId = $('#requestId').val();
+            var reason = $('.approve_reason').val(); // Using class selector to get value
+            var scheme_name = $('.scheme_name').val(); // Using class selector
+            var grand_amount = $('.grand_amount').val(); // Using class selector
+            var reqId = $('#requestId').val();
    
        $.ajax({
                    url: "{{ route('motherChildScheme.officer.approve') }}",
                    type: "POST",
                    data: {
                        "id": reqId,
-                       "reason" :reason,
+                       "reason": reason,
+                       "scheme_name": scheme_name,
+                       "grand_amount": grand_amount,
                        "_token": "{{ csrf_token() }}"
                    },
                    success: function(response) {

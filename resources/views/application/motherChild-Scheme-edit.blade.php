@@ -193,6 +193,78 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
+
+                        <h5 class="heading">Bank Details / ബാങ്ക് വിശദാംശങ്ങൾ</h5>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-6">
+                                <label class="form-label">ബാങ്ക് നാമം <br><span class="small"> Bank Name </span></label>
+                                <input type="text" value="{{ @$datas->bank_name }}" class="form-control" placeholder="ബാങ്ക് നാമം" name="bank_name" id="bank_name" required />
+                                @error('bank_name')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-6">
+                                <label class="form-label">അക്കൗണ്ട് നമ്പർ <br><span class="small"> Account Number </span></label>
+                                <input type="text" value="{{ @$datas->account_no }}" class="form-control" placeholder="അക്കൗണ്ട് നമ്പർ" name="account_no" id="account_no" required />
+                                @error('account_no')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                        </div><br>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-6">
+                                <label class="form-label">IFSC കോഡ് <br><span class="small"> IFSC Code </span></label>
+                                <input type="text" value="{{ @$datas->ifsc_code }}" class="form-control" placeholder="IFSC കോഡ്" name="ifsc_code" id="ifsc_code" required />
+                                @error('ifsc_code')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">IFSC കോഡ് <br><span class="small"> IFSC Code </span></label>
+                                    <input type="text" value="{{ @$datas->ifsc_code }}" class="form-control" placeholder="IFSC കോഡ്" name="ifsc_code" id="ifsc_code" required />
+                                    @error('ifsc_code')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                            
+                                <div class="col-md-6 mb-6">
+                                    <label class="form-label">പാസ്‌ബുക്ക് (Pdf/ചിത്രം പരമാവധി 2 MB) <br><span class="small"> Passbook (Pdf/Image Max Size: 2 MB) </span></label>
+                                    <input type="file" class="form-control" name="passbook" id="passbook" />
+                                    
+                                    @if(isset($datas->passbook))
+                                        @php
+                                            $filePath = asset('passbooks/' . $datas->passbook); // Adjust the path as needed
+                                            $fileExtension = pathinfo($datas->passbook, PATHINFO_EXTENSION);
+                                        @endphp
+                            
+                                        @if(in_array($fileExtension, ['png', 'jpg', 'jpeg', 'gif']))
+                                            <div class="mt-2">
+                                                <img src="{{ $filePath }}" alt="Passbook Image" style="max-width: 100%; height: auto;">
+                                            </div>
+                                        @elseif($fileExtension === 'pdf')
+                                            <div class="mt-2">
+                                                <iframe src="{{ $filePath }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                                            </div>
+                                        @else
+                                            <div class="mt-2">
+                                                <p>Unsupported file type</p>
+                                            </div>
+                                        @endif
+                                    @endif
+                                    
+                                    @error('passbook')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                        </div>
 
                         <div class="card">
                             <div class="card-body">

@@ -5,10 +5,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="Description" content="SC/ST" />
+		<meta name="Description" content="ST" />
 		<meta name="Author" content="" />
 		<!-- Title -->
-		<title>SC/ST</title>
+		<title>ST</title>
 		<!--- Favicon --->
 		<link rel="icon" href="img//favicon.png" type="image/x-icon" />
 		<!-- Bootstrap css -->

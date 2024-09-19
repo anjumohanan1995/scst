@@ -44,7 +44,117 @@
 
                 @endif
                 <!-- row -->
+                <!-- row -->
                 <div class="row row-sm">
+                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
+                        <div class="card">
+                            <div class="card-body table-new">
+                                <div id="success_message" class="ajax_response" style="display: none;"></div>
+
+                                <div class="panel panel-primary">
+                                    <div class="tab-menu-heading">
+                                        <div class="tabs-menu1">
+                                            <ul class="nav panel-tabs">
+                                                <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
+                                                <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
+                                                <li><a href="#PoTdoApproveList" data-bs-toggle="tab" data-bs-target="#PoTdoApproveList" onclick="ownList();">Po/Tdo Approve List</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body tabs-menu-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tabNew">
+                                                <div class="table-responsive">
+                                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sl No</th>
+                                                                <th>Case Number</th>
+                                                                <th>Husband Name</th>
+                                                                <th>Wife Name</th>
+                                                                <th>Husband Caste</th>
+                                                                <th>Wife Caste</th>
+                                                                <th>TEO</th>
+                                                                <th>Date & Time</th>
+                                                                <th>Applied Date</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tabReturned">
+                                                <div class="table-responsive">
+                                                    <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sl No</th>
+                                                                <th>Case Number</th>
+                                                                <th>Husband Name</th>
+                                                                <th>Wife Name</th>
+                                                                <th>Husband Caste</th>
+                                                                <th>Wife Caste</th>
+                                                                <th>TEO</th>
+                                                                <th>Date & Time</th>
+                                                                <th>Applied Date</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="PoTdoApproveList">
+                                
+                                                        <!-- Date Filter Form -->
+                                            <form id="dateFilterForm">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label for="from_date">From Date</label>
+                                                        <input type="date" id="from_date" name="from_date" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="to_date">To Date</label>
+                                                        <input type="date" id="to_date" name="to_date" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="button" id="filterSubmit" class="btn btn-primary" style="margin-top: 32px;">Filter</button>&nbsp;&nbsp;
+                                                        <button type="button" id="downloadExcel" class="btn btn-success" style="margin-top: 32px;">Download Excel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            
+
+                                                <div class="table-responsive">
+                                                    <table id="poapprovelist" class="table table-striped table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sl No</th>
+                                                                <th>Case Number</th>
+                                                                <th>TEO</th>
+                                                                <th>Date & Time</th>
+                                                                <th>Applied Date</th>
+                                                                {{-- <th>Download Application</th> --}}
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="row row-sm">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 ">
                         <div class="card"><div class="card-body  table-new">
                                 <div id="success_message" class="ajax_response" style="display: none;"></div>
@@ -56,6 +166,7 @@
                                         <ul class="nav panel-tabs">
                                             <li><a href="#tabNew" class="active" data-bs-toggle="tab" data-bs-target="#tabNew">New</a></li>
                                             <li><a href="#tabReturned" data-bs-toggle="tab" data-bs-target="#tabReturned" onclick="ownList();">Returned</a></li>
+                                            <li><a href="#PoTdoApproveList" data-bs-toggle="tab" data-bs-target="#PoTdoApproveList" onclick="ownList();">Po/Tdo Approve List</a></li>
                                            </ul>
                                     </div>
                                 </div>
@@ -111,6 +222,28 @@
                                                 </table>
                                             </div>
                                         </div>
+
+                                        <div class="tab-pane active" id="PoTdoApproveList">
+                                            <div class="table-responsive">
+                                                <table id="poapprovelist" class="table table-striped table-bordered" style="width:100%">
+                                                    <thead>
+                                                        <tr>                                                           
+                                                            <th>Sl No</th>
+                                                            <th>Case Number</th>
+                                                            <th>TEO</th>
+                                                             <th>Date & Time</th> 
+                                                            <th>Applied Date</th>
+                                                             <th>Download Application</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                
+                                                    <tbody>
+                
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                      
                                        
         
@@ -128,7 +261,7 @@
 
 
 
-                </div>
+                </div> --}}
                 <!-- /row -->
                 <div class="modal fade" id="approve-popup">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -195,168 +328,367 @@
 <script type="text/javascript">
 
 
+$(document).ready(function(){
+    // Initialize the New tab table
+    var table = $('#example').DataTable({
+        processing: true,
+        serverSide: true,
+        buttons: [
+            'copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5'
+        ],
+        ajax: {
+            url: "{{ route('getcouplefinancialListClerk') }}",
+            data: function (d) {
+                return $.extend({}, d, {
+                    mobile: $("#mobile").val(),
+                    name: $("#name").val(),
+                    role: $("#role").val(),
+                    delete_ctm: $("#delete_ctm").val(),
+                });
+            }
+        },
+        columns: [
+            { data: 'sl_no' },
+            { data: 'case_id' },
+            { data: 'husband_name' },
+            { data: 'wife_name' },
+            { data: 'husband_caste' },
+            { data: 'wife_caste' },
+            { data: 'teo_name' },
+            { data: 'created_at', visible: false },
+            { data: 'date' },
+            { data: 'action' }
+        ],
+        order: [[7, 'desc']],
+        ordering: true
+    });
+    
+    // Initialize the Returned tab table
+    var table1 = $('#example1').DataTable({
+        processing: true,
+        serverSide: true,
+        buttons: [
+            'copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5'
+        ],
+        ajax: {
+            url: "{{ route('getcouplefinancialListClerkReturned') }}",
+            data: function (d) {
+                return $.extend({}, d, {
+                    mobile: $("#mobile").val(),
+                    name: $("#name").val(),
+                    role: $("#role").val(),
+                    delete_ctm: $("#delete_ctm").val(),
+                });
+            }
+        },
+        columns: [
+            { data: 'sl_no' },
+            { data: 'case_id' },
+            { data: 'husband_name' },
+            { data: 'wife_name' },
+            { data: 'husband_caste' },
+            { data: 'wife_caste' },
+            { data: 'teo_name' },
+            { data: 'created_at', visible: false },
+            { data: 'date' },
+            { data: 'action' }
+        ],
+        order: [[7, 'desc']],
+        ordering: true
+    });
+
+
+
+    // Initialize the PoTdo Approve List tab table
+    var poApproveTable = $('#poapprovelist').DataTable({
+        processing: true,
+        serverSide: true,
+        buttons: [
+            'copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5'
+        ],
+        ajax: {
+            url: "{{ route('getcouplefinancialListPoTdoApprove') }}",
+            data: function (d) {
+                return $.extend({}, d, {
+                    from_date: $('#from_date').val(),
+                    to_date: $('#to_date').val(),
+                });
+            }
+        },
+        columns: [
+            { data: 'sl_no' },
+            { data: 'case_id' },
+            { data: 'teo_name' },
+            { data: 'created_at', visible: false },
+            { data: 'date' },
+            // { data: 'download'},
+            { data: 'action' }
+        ],
+        order: [[3, 'desc']],
+        ordering: true
+    });
+
+    // Event handler for the filter button
+    $('#filterSubmit').click(function(){
+        if ($('#from_date').val() === '' || $('#to_date').val() === '') {
+            alert('Please select both From and To dates.');
+            return;
+        }
+
+        poApproveTable.ajax.reload();
+    });
+
+    // Handlers for draw and refresh
+    $('#submit').click(function(){
+        table.draw();
+        table1.draw();
+        poApproveTable.draw();
+    });
+
+    $('#refresh').click(function(){
+        $("#delete_ctm").val('');
+        table.draw();
+        table1.draw();
+        poApproveTable.draw();
+    });
+
+    $('#delete').click(function(){
+        $("#delete_ctm").val(1);
+        table.draw();
+        table1.draw();
+        poApproveTable.draw();
+    });
+});
+
+
 
         
 
 
-     $(document).ready(function(){
+    //  $(document).ready(function(){
 
-     	   var table = $('#example').DataTable({
-            processing: true,
-            serverSide: true,
+    //  	   var table = $('#example').DataTable({
+    //         processing: true,
+    //         serverSide: true,
 
-	        buttons: [
-	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5'
-	        ],
-             "ajax": {
+	//         buttons: [
+	//             'copyHtml5',
+	//             'excelHtml5',
+	//             'csvHtml5',
+	//             'pdfHtml5'
+	//         ],
+    //          "ajax": {
 
-			       	"url": "{{route('getcouplefinancialListClerk')}}",
-			       	// "data": { mobile: $("#mobile").val()}
-			       	"data": function ( d ) {
-			        	return $.extend( {}, d, {
-				            "mobile": $("#mobile").val(),
-				            "name": $("#name").val(),
-				            "role": $("#role").val(),
-				            //"from_date": $("#datepicker").val(),
-				            "delete_ctm": $("#delete_ctm").val(),
+	// 		       	"url": "{{route('getcouplefinancialListClerk')}}",
+	// 		       	// "data": { mobile: $("#mobile").val()}
+	// 		       	"data": function ( d ) {
+	// 		        	return $.extend( {}, d, {
+	// 			            "mobile": $("#mobile").val(),
+	// 			            "name": $("#name").val(),
+	// 			            "role": $("#role").val(),
+	// 			            //"from_date": $("#datepicker").val(),
+	// 			            "delete_ctm": $("#delete_ctm").val(),
 
 
-			          	});
-       				}
-       			},
+	// 		          	});
+    //    				}
+    //    			},
 
-             columns: [
-                { data: 'sl_no' },
-                { data: 'case_id' },
-                { data: 'husband_name' },
-                { data: 'wife_name' },
-				//{ data: 'register_details' },
-				//{ data: 'certificate_details' },
-                { data: 'husband_caste' },
-				{ data: 'wife_caste' },
+    //          columns: [
+    //             { data: 'sl_no' },
+    //             { data: 'case_id' },
+    //             { data: 'husband_name' },
+    //             { data: 'wife_name' },
+	// 			//{ data: 'register_details' },
+	// 			//{ data: 'certificate_details' },
+    //             { data: 'husband_caste' },
+	// 			{ data: 'wife_caste' },
                
              
-                { data: 'teo_name' },
-                { data: 'created_at', visible: false },
-                 { data: 'date' },
+    //             { data: 'teo_name' },
+    //             { data: 'created_at', visible: false },
+    //              { data: 'date' },
                
 
-                { data: 'action' }
+    //             { data: 'action' }
 
 
-			],
-            "order": [7, 'desc'],
-            'ordering': true,
-         });
-
-
-
-      	 table.draw();
-
-      	$('#submit').click(function(){
-
-        	table.draw();
-    	});
-    	$('#refresh').click(function(){
-      		$("#delete_ctm").val('');
-        	table.draw();
-    	});
+	// 		],
+    //         "order": [7, 'desc'],
+    //         'ordering': true,
+    //      });
 
 
 
+    //   	 table.draw();
 
-    	$('#delete').click(function(){
-    		$("#delete_ctm").val(1);
-        	table.draw();
-    	});
+    //   	$('#submit').click(function(){
+
+    //     	table.draw();
+    // 	});
+    // 	$('#refresh').click(function(){
+    //   		$("#delete_ctm").val('');
+    //     	table.draw();
+    // 	});
 
 
 
 
-
-         // DataTable
-
-
-
-         var table = $('#example1').DataTable({
-            processing: true,
-            serverSide: true,
-
-	        buttons: [
-	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5'
-	        ],
-             "ajax": {
-
-			       	"url": "{{route('getcouplefinancialListClerkReturned')}}",
-			       	// "data": { mobile: $("#mobile").val()}
-			       	"data": function ( d ) {
-			        	return $.extend( {}, d, {
-				            "mobile": $("#mobile").val(),
-				            "name": $("#name").val(),
-				            "role": $("#role").val(),
-				            //"from_date": $("#datepicker").val(),
-				            "delete_ctm": $("#delete_ctm").val(),
+    // 	$('#delete').click(function(){
+    // 		$("#delete_ctm").val(1);
+    //     	table.draw();
+    // 	});
 
 
-			          	});
-       				}
-       			},
 
-             columns: [
-                { data: 'sl_no' },
-                { data: 'case_id' },
-                { data: 'husband_name' },
-                { data: 'wife_name' },
-				//{ data: 'register_details' },
-				//{ data: 'certificate_details' },
-                { data: 'husband_caste' },
-				{ data: 'wife_caste' },
+
+
+    //      // DataTable
+
+
+
+    //      var table1 = $('#example1').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+
+	//         buttons: [
+	//             'copyHtml5',
+	//             'excelHtml5',
+	//             'csvHtml5',
+	//             'pdfHtml5'
+	//         ],
+    //          "ajax": {
+
+	// 		       	"url": "{{route('getcouplefinancialListClerkReturned')}}",
+	// 		       	// "data": { mobile: $("#mobile").val()}
+	// 		       	"data": function ( d ) {
+	// 		        	return $.extend( {}, d, {
+	// 			            "mobile": $("#mobile").val(),
+	// 			            "name": $("#name").val(),
+	// 			            "role": $("#role").val(),
+	// 			            //"from_date": $("#datepicker").val(),
+	// 			            "delete_ctm": $("#delete_ctm").val(),
+
+
+	// 		          	});
+    //    				}
+    //    			},
+
+    //          columns: [
+    //             { data: 'sl_no' },
+    //             { data: 'case_id' },
+    //             { data: 'husband_name' },
+    //             { data: 'wife_name' },
+	// 			//{ data: 'register_details' },
+	// 			//{ data: 'certificate_details' },
+    //             { data: 'husband_caste' },
+	// 			{ data: 'wife_caste' },
                
              
-                { data: 'teo_name' },
-                { data: 'created_at', visible: false },
-                 { data: 'date' },
+    //             { data: 'teo_name' },
+    //             { data: 'created_at', visible: false },
+    //              { data: 'date' },
                
 
-                { data: 'action' }
+    //             { data: 'action' }
 
 
-			],
-            "order": [7, 'desc'],
-            'ordering': true,
-         });
-
-
-
-      	 table.draw();
-
-      	$('#submit').click(function(){
-
-        	table.draw();
-    	});
-    	$('#refresh').click(function(){
-      		$("#delete_ctm").val('');
-        	table.draw();
-    	});
+	// 		],
+    //         "order": [7, 'desc'],
+    //         'ordering': true,
+    //      });
 
 
 
+    //   	 table1.draw();
 
-    	$('#delete').click(function(){
-    		$("#delete_ctm").val(1);
-        	table.draw();
-    	});
+    //   	$('#submit').click(function(){
+
+    //     	table1.draw();
+    // 	});
+    // 	$('#refresh').click(function(){
+    //   		$("#delete_ctm").val('');
+    //     	table1.draw();
+    // 	});
 
 
 
 
-      });
+    // 	$('#delete').click(function(){
+    // 		$("#delete_ctm").val(1);
+    //     	table1.draw();
+    // 	});
+
+
+    //              // PoTdo Approve List
+
+
+
+    //         var poApproveTable = $('#poapprovelist').DataTable({        
+    //         processing: true,
+    //         serverSide: true,
+
+	//         buttons: [
+	//             'copyHtml5',
+	//             'excelHtml5',
+	//             'csvHtml5',
+	//             'pdfHtml5'
+	//         ],
+    //          "ajax": {
+
+	// 		       	"url": "{{route('getcouplefinancialListPoTdoApprove')}}",
+	// 		       	// "data": { mobile: $("#mobile").val()}
+	// 		       	"data": function ( d ) {
+	// 		        	return $.extend( {}, d, {
+	// 			            // "mobile": $("#mobile").val(),
+	// 			            // "name": $("#name").val(),
+	// 			            // "role": $("#role").val(),
+	// 			            // //"from_date": $("#datepicker").val(),
+	// 			            // "delete_ctm": $("#delete_ctm").val(),
+
+
+	// 		          	});
+    //    				}
+    //    			},
+
+    //          columns: [
+    //             { data: 'sl_no' },
+    //             { data: 'case_id' },            
+    //             { data: 'teo_name' },
+    //             { data: 'created_at', visible: false },
+    //              { data: 'date' },
+               
+    //             { data: 'action' }
+
+
+	// 		],
+    //         "order": [3, 'desc'],
+    //         'ordering': true,
+    //      });
+
+    //      poApproveTable.draw();
+
+    //     $('#submit').click(function(){
+
+    //         poApproveTable.draw();
+    //     });
+    //     $('#refresh').click(function(){
+    //         $("#delete_ctm").val('');
+    //         poApproveTable.draw();
+    //     });
+
+
+
+
+    //     $('#delete').click(function(){
+    //     $("#delete_ctm").val(1);
+    //     table.draw();
+    //     });
+
+
+
+
+    //   });
 
       $(document).on("click",".approveItem",function() {
         var id =$(this).attr('data-id');
@@ -433,5 +765,34 @@
         }
       </script>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get today's date
+        const today = new Date().toISOString().split('T')[0];
+
+        // Set the value of the date inputs
+        document.getElementById('from_date').value = today;
+        document.getElementById('to_date').value = today;
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('downloadExcel').addEventListener('click', function() {
+            // Get values from the form
+            var fromDate = document.getElementById('from_date').value;
+            var toDate = document.getElementById('to_date').value;
+
+            if (fromDate && toDate) {
+                // Redirect to the URL with the query parameters
+                window.location.href = `/filter-by-date?from_date=${fromDate}&to_date=${toDate}`;
+            } else {
+                alert('Please select both dates.');
+            }
+        });
+    });
+</script>
 
 @endsection

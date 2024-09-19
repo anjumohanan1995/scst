@@ -26,7 +26,7 @@
             
             <div class="p-5 wd-md-50p"> 
                 <div class="main-signin-header"> 
-                    <h3 style="font-size: 18px;">Welcome to SC/ST</h3> 
+                    <h3 style="font-size: 18px;">Welcome to ST</h3> 
                     <h4>Please sign in to continue</h4> 
                     
                     <ul class="nav nav-tabs" role="tablist">

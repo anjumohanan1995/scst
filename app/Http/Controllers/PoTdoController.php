@@ -19,6 +19,7 @@ use App\Models\MotherChildScheme;
 use App\Models\TDOMaster;
 use App\Models\Teo;
 use App\Models\TuitionFee;
+use App\Models\SchemeAmount;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Auth;
@@ -507,6 +508,7 @@ class PoTdoController extends Controller
          foreach($records as $record){
             $i++;
              $id = $record->id;
+             $case_id = $record->case_id;
              $husband_name = $record->husband_name;
              $wife_name = $record->wife_name;
              $register_details = $record->register_details;
@@ -529,6 +531,7 @@ class PoTdoController extends Controller
                 $data_arr[] = array(
                     "sl_no" => $i,
                     "id" => $id,
+                    "case_id" => $case_id,
                     "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
                 "register_details" => $register_details,
@@ -556,7 +559,8 @@ class PoTdoController extends Controller
          return response()->json($response);
     }
     public function couplefinancialListOfficer(){
-        return view('PoTdo.couplefinancial.index');
+        $schemes = SchemeAmount::where('scheme_name', 'Couple Financial Applications')->get(); 
+        return view('PoTdo.couplefinancial.index',compact('schemes'));
     }
 
     public function getcouplefinancialListOfficer(Request $request){
@@ -647,6 +651,7 @@ class PoTdoController extends Controller
          foreach($records as $record){
             $i++;
              $id = $record->id;
+             $case_id = $record->case_id;
              $husband_name = $record->husband_name;
              $wife_name = $record->wife_name;
              $register_details = $record->register_details;
@@ -685,6 +690,7 @@ class PoTdoController extends Controller
                 $data_arr[] = array(
                     "sl_no" => $i,
                     "id" => $id,
+                    "case_id" => $case_id,
                     "husband_name" => $husband_name,
                 "wife_name" => $wife_name,
                 "register_details" => $register_details,
@@ -717,6 +723,8 @@ class PoTdoController extends Controller
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
+
+        $schemes = SchemeAmount::where('scheme_name', 'Couple Financial Applications')->get(); 
      
         $formData =FinancialHelp::find($id);
         if($formData->officer_view_status==null ){
@@ -735,14 +743,18 @@ class PoTdoController extends Controller
             ]);
         }
         
-        return view('PoTdo.couplefinancial.details',compact('formData'));
+        return view('PoTdo.couplefinancial.details',compact('formData','schemes'));
 
 
     }
     public function couplefinancialApproveOfficer (Request $request){
+        // dd($request);
         $marriage = FinancialHelp::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
+        $scheme_name = $request->scheme_name;
+        $grand_amount = $request->grand_amount;
+        // dd($grand_amount);
       //  $currentTime = Carbon::now();
       $currentTimeInKerala = now()->timezone('Asia/Kolkata');
       $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
@@ -754,6 +766,10 @@ class PoTdoController extends Controller
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
+            'scheme_name' => $scheme_name,
+            'grand_amount' => $grand_amount,
+            'scheme_status' => 1
+
         ]);
         return response()->json([
             'success' => 'Couple Financial Scheme Application Approved successfully.'
@@ -814,7 +830,8 @@ class PoTdoController extends Controller
 
 
     public function motherChildSchemeListOfficer(){
-        return view('PoTdo.motherChild.index');
+        $schemes = SchemeAmount::where('scheme_name', 'Mother Child Protection Scheme Applications')->get(); 
+        return view('PoTdo.motherChild.index',compact('schemes'));
     }
 
     public function getmotherChildSchemeListOfficer(Request $request){
@@ -902,6 +919,7 @@ class PoTdoController extends Controller
          foreach($records as $record){
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $address = $record->address;
             $age = $record->age;
@@ -940,6 +958,7 @@ class PoTdoController extends Controller
            
                 $data_arr[] = array(
                     "sl_no" => $i,
+                    "case_id" => $case_id,
                     "name" => $name,
                     "address" => $address,
                     "dob" => $age . '/' . $dob,
@@ -1048,6 +1067,7 @@ class PoTdoController extends Controller
          foreach($records as $record){
             $i++;
             $id = $record->id;
+            $case_id = $record->case_id;
             $name = $record->name;
             $address = $record->address;
             $age = $record->age;
@@ -1086,6 +1106,7 @@ class PoTdoController extends Controller
            
                 $data_arr[] = array(
                     "sl_no" => $i,
+                    "case_id" => $case_id,
                     "name" => $name,
                     "address" => $address,
                     "dob" => $age . '/' . $dob,
@@ -1114,6 +1135,8 @@ class PoTdoController extends Controller
         $date = $currentTime->format('d-m-Y');
         $currentTimeInKerala = now()->timezone('Asia/Kolkata');
         $currenttime = $currentTimeInKerala->format('h:i A');
+
+        $schemes = SchemeAmount::where('scheme_name', 'Mother Child Protection Scheme Applications')->get(); 
      
         $formData =MotherChildScheme::find($id);
         if($formData->officer_view_status==null ){
@@ -1131,14 +1154,17 @@ class PoTdoController extends Controller
             ]);
         }
         
-        return view('PoTdo.motherChild.details',compact('formData'));
+        return view('PoTdo.motherChild.details',compact('formData','schemes'));
 
 
     }
+
     public function motherChildSchemeApproveOfficer (Request $request){
         $motherChild = MotherChildScheme::where('_id', $request->id)->first();
         $id = $request->id;
         $reason =$request->reason;
+        $scheme_name = $request->scheme_name;
+        $grand_amount = $request->grand_amount;
       //  $currentTime = Carbon::now();
       $currentTimeInKerala = now()->timezone('Asia/Kolkata');
       $currenttime = $currentTimeInKerala->format('d-m-Y h:i a');
@@ -1150,6 +1176,9 @@ class PoTdoController extends Controller
             'officer_status_date' => $currenttime,
             'officer_status_id' => Auth::user()->id,
             'officer_status_reason' => $reason,
+            'scheme_name' => $scheme_name,
+            'grand_amount' => $grand_amount,
+            'scheme_status' => 1
         ]);
         return response()->json([
             'success' => 'Mother Child Scheme Application Approved Successfully.'

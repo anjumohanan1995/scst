@@ -32,6 +32,9 @@
                         ജനനി-ജനനി -ജന്മരക്ഷ <br> പ്രസവാനുകുല്യം - മാതൃശിശു സംരക്ഷണ പദ്ധതി <br> അപേക്ഷഫോറം
                      </h1>
                         </div>
+                        <h5 style="text-align: right;">
+                           Case Number: <span style="color: red;">{{ @$formData['case_id'] }}</span>
+                       </h5>
                      <form action="#" method="post" style="font-weight: 500;font-size: 12px;padding: 90px;">
                         <div class=" row paper-1">
                            <div class="col-5">
@@ -397,9 +400,27 @@
                      </ul>
                  @else
          
-                  <ul class="timeline-3">                                 
+                  <ul class="timeline-3"> 
+                     @if(@$formData->teo_rejection_status == 1)
+                     <li class="rejectTimeline">
+                         <a href="#!">TEO</a>
+                         <a href="#!" class="float-end"><i class="fa fa-eye"></i>
+                             {{ @$formData['teo_view_date'] }}</a>
+                         <br>
+                         <p class="inputText badge bg-danger" style="font-size: 12px">Rejected
+                         </p>
+
+                         <p class="mt-2"><span class= "spanclr"> Rejected Date : </span>
+                             @if (@$formData['teo_status_date'] != null)
+                                 {{ \Carbon\Carbon::parse(@$formData['teo_status_date'])->format('d-m-Y h:i a') }}
+                             @endif
+                         </p>
+                         <p class="mt-2"><span class= "spanclr"> Rejected Reason :
+                             </span>{{ @$formData->teo_status_reason }}</p>
+
+                     </li>                                    
                  
-                      @if( @$formData->teo_status == null)
+                      @elseif( @$formData->teo_status == null)
          
                       <li class="pendingTimeline">
                        <a href="#!">TEO</a>
@@ -408,7 +429,7 @@
                        <p class="inputText badge bg-warning" style="font-size: 12px">Pending</p>
                               <div class="settings-icon">
                                   <a class="approveItem" data-id="{{ @$formData->id }}"><i class="fa fa-check bg-success me-1"></i></a>
-                                  {{-- &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a> --}}
+                                  &nbsp;&nbsp;  <a class="rejectItem" data-id="{{ @$formData->id }}"><i class="fa fa-ban bg-danger "></i></a>
                                </div>
                              
                           </li>

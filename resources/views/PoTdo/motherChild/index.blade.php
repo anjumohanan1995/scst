@@ -47,6 +47,7 @@
                                                    <thead>
                                                       <tr>
                                                          <th>Sl No</th>
+                                                         <th>Case Number</th>
                                                          <th>Name</th>
                                                          <th>Address</th>
                                                          <th>Age/DOB </th>
@@ -67,6 +68,7 @@
                                                       <thead>
                                                           <tr>                                                               
                                                             <th>Sl No</th>
+                                                            <th>Case Number</th>
                                                             <th>Name</th>
                                                             <th>Address</th>
                                                             <th>Age/DOB </th>
@@ -96,8 +98,47 @@
 
               </div>
               <!-- /row -->
+              <div class="modal fade" id="approve-popup" style="display: none">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content country-select-modal border-0">
+                        <div class="modal-header offcanvas-header">
+                            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body p-5">
+                            <div class="text-center">
+                                <h4>Report Section</h4>
+                            </div>
+                            <form id="ownForm">
+                                @csrf
+                                @foreach($schemes as $index => $scheme)
+                                <div class="form-group">
+                                    <label for="schemeName">Scheme Name</label>
+                                    <input type="text" class="form-control scheme_name" id="scheme_name_{{ $index }}" name="scheme_name" value="{{ $scheme->scheme_name }}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="grandAmount">Grand Amount</label>
+                                    <input type="number" class="form-control grand_amount" id="grand_amount_{{ $index }}" name="grand_amount" value="{{ $scheme->scheme_amount }}" readonly>
+                                </div>
+                                <div class="text-center">
+                                    <h5>Reason for Approval</h5>
+                                    <textarea class="form-control approve_reason" name="approve_reason" id="approve_reason_{{ $index }}" required></textarea>
+                                    <span id="rejection"></span>
+                                </div>
+                            @endforeach
+                            
+            
+                                <input type="hidden" id="requestId" name="requestId" value="" />
+                                <div class="text-center">
+                                    <button type="button" onclick="approve()" class="btn btn-primary mt-4 mb-0 me-2">Submit</button>
+                                    <button class="btn btn-default mt-4 mb-0" data-bs-dismiss="modal" type="button">No</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                     <div class="modal fade" id="approve-popup" style="display: none">
+                     {{-- <div class="modal fade" id="approve-popup" style="display: none">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                            <div class="modal-content country-select-modal border-0">
                               <div class="modal-header offcanvas-header">
@@ -128,7 +169,7 @@
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </div> --}}
                      <div class="modal fade" id="rejection-popup">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                            <div class="modal-content country-select-modal border-0">
@@ -221,7 +262,9 @@
   });
 
        function approve() {
-            var reason = $('#approve_reason').val();
+        var reason = $('.approve_reason').val(); // Using class selector to get value
+            var scheme_name = $('.scheme_name').val(); // Using class selector
+            var grand_amount = $('.grand_amount').val(); // Using class selector
             var reqId = $('#requestId').val();
 
             $.ajax({
@@ -230,6 +273,8 @@
                 data: {
                     "id": reqId,
                     "reason": reason,
+                    "scheme_name": scheme_name,
+                    "grand_amount": grand_amount,
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function(response) {
@@ -348,6 +393,7 @@
    
                columns: [
                   { data: 'sl_no' },
+                  { data: 'case_id' },
                   { data: 'name' },
                   { data: 'address' },
    			{ data: 'dob' },
@@ -424,6 +470,7 @@
 
      columns: [
         { data: 'sl_no' },
+        { data: 'case_id' },
         { data: 'name' },
         { data: 'address' },
   { data: 'dob' },
